@@ -12,14 +12,16 @@ function Home() {
 			<div
 				style={{
 					height: '100vh',
-					backgroundImage: song.imageLinks ? `url(${song.imageLinks[0]})` : '',
+					background: `url(${song.imageLinks?.[0]}) no-repeat top left, url(${song.imageLinks?.[1]}) no-repeat top right, url(${song.imageLinks?.[2]}) repeat-x`,
 				}}
 			>
 				<p>
 					{song.title} - {song.artist}
 				</p>
 				{isSongFull(song) ? (
-					<p>タイトル:{song.animeTitle}</p>
+					<p>
+						{song.animeTitle} [{song.opOrEd}]
+					</p>
 				) : (
 					<p>情報取得失敗</p>
 				)}
