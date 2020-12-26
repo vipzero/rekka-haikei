@@ -1,0 +1,74 @@
+{
+	"name": "hello",
+	"version": "0.1.0",
+	"dependencies": {
+		"2ch-trip": "1.0.1",
+		"@material-ui/core": "4.11.2",
+		"@material-ui/icons": "4.11.2",
+		"@next/bundle-analyzer": "10.0.3",
+		"axios": "0.21.0",
+		"bluebird": "3.7.2",
+		"decimal.js": "10.2.1",
+		"emoji-toolkit": "6.0.1",
+		"history": "5.0.0",
+		"husky": "4.3.5",
+		"lint-staged": "10.5.3",
+		"lodash": "4.17.20",
+		"next": "10.0.3",
+		"noise": "0.0.0",
+		"noisejs": "2.1.0",
+		"prettier": "2.2.1",
+		"react": "17.0.1",
+		"react-dev-utils": "11.0.1",
+		"react-dom": "17.0.1",
+		"react-google-charts": "3.0.15",
+		"react-router-dom": "5.2.0",
+		"react-svg": "11.1.4",
+		"react-use": "15.3.4",
+		"styled-components": "5.2.1",
+		"superagent": "6.1.0",
+		"zdog": "1.1.2"
+	},
+	"devDependencies": {
+		"@types/bluebird": "3.5.33",
+		"@types/lodash": "4.14.165",
+		"@types/node": "14.14.13",
+		"@types/react": "17.0.0",
+		"@types/react-dom": "17.0.0",
+		"@types/react-helmet": "6.1.0",
+		"@types/react-router-dom": "5.1.6",
+		"@types/styled-components": "5.1.5",
+		"@zeit/next-source-maps": "0.0.3",
+		"babel-plugin-styled-components": "1.12.0",
+		"eslint": "7.15.0",
+		"eslint-config-nzap": "4.3.1",
+		"next-images": "1.6.2",
+		"typescript": "4.1.3",
+		"url-loader": "4.1.1",
+		"webpack": "5.10.1"
+	},
+	"homepage": "https://hello.vipper.dev",
+	"lint-staged": {
+		"src/**/*.js": [
+			"prettier --config ./.prettierrc --write",
+			"git add"
+		]
+	},
+	"private": true,
+	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"export": "next build && next export",
+		"start": "next start",
+		"lint": "eslint --ext ts,tsx src",
+		"coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+		"gen:env": "cp templates/temp.env .env.development.local && cp templates/temp.env .env.production.local",
+		"test": "jest"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	]
+}
