@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-
-export type SongFull = {
-	animeTitle: string
-	opOrEd: string
-	spInfo: string
-	songId: string
-	title: string
-	artist: string
-	imageLinks?: string[]
-}
-export type SongMiss = {
-	title: string
-	artist: string
-	imageLinks?: string[]
-}
-export type Song = SongFull | SongMiss
-export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song
+import { Song } from '../../types'
 
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
-	const [song, setSong] = useState<Song>({ title: '', artist: '' })
+	const [song, setSong] = useState<Song>({ icy: '' })
 
 	useEffect(() => {
 		const fdb = getFirestore()

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
+import { isSongFull } from '../../types'
 import Layout from '../components/Layout'
-import { isSongFull, useSongDb } from '../components/useSongDb'
+import { useSongDb } from '../components/useSongDb'
 
 function Home() {
 	const [loaded, song] = useSongDb()
@@ -15,7 +16,7 @@ function Home() {
 	return (
 		<Wrap>
 			<div
-				key={song.title}
+				key={song.icy}
 				style={{
 					height: '100vh',
 					background: `${song.imageLinks
@@ -24,12 +25,11 @@ function Home() {
 					backgroundSize: 'contain',
 				}}
 			>
-				<p>
-					{song.title} - {song.artist}
-				</p>
+				<p>{song.icy}</p>
 				{isSongFull(song) ? (
 					<p>
-						{song.animeTitle} [{song.opOrEd}]
+						{song.animeTitle} [{song.opOrEd}
+						{song.spInfo}]
 					</p>
 				) : (
 					<p>情報取得失敗</p>
