@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Layout from '../components/Layout'
 import { isSongFull, useSongDb } from '../components/useSongDb'
@@ -5,14 +6,22 @@ import { isSongFull, useSongDb } from '../components/useSongDb'
 function Home() {
 	const [loaded, song] = useSongDb()
 
+	useEffect(() => {
+		console.log('loaded')
+	}, [song])
+
 	if (!loaded) return <span>まってね</span>
 
 	return (
 		<Wrap>
 			<div
+				key={song.title}
 				style={{
 					height: '100vh',
-					background: `url(${song.imageLinks?.[0]}) no-repeat top left, url(${song.imageLinks?.[1]}) no-repeat top right, url(${song.imageLinks?.[2]}) repeat-x`,
+					background: `${song.imageLinks
+						?.map((v) => `url('${v}')`)
+						.join(', ')}`,
+					backgroundSize: 'contain',
 				}}
 			>
 				<p>
