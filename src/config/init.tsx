@@ -12,6 +12,12 @@ body {
   margin: 0;
   min-height: 100vh;
 }
+ul {
+		padding: none;
+}
+li {
+	list-style: none;
+}
 
 img {
 	width: 100%;

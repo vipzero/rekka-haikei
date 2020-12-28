@@ -7,18 +7,20 @@ import { useSongDb } from '../components/useSongDb'
 function Home() {
 	const [loaded, song] = useSongDb()
 	const [theme, setTheme] = useState<number>(0)
+	const [viewConfig, setViewConfig] = useState<boolean>(false)
+	const cycleTheme = () => setTheme((v) => (v + 1) % 4)
 
 	useEffect(() => {
 		console.log('loaded')
 	}, [song])
 
-	if (!loaded) return <span>まってね</span>
+	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
 
 	return (
 		<Wrap
 			data-theme={theme}
 			onClick={() => {
-				setTheme((v) => (v + 1) % 4)
+				setViewConfig((v) => !v)
 			}}
 		>
 			<Background
@@ -60,18 +62,64 @@ function Home() {
 						<p className="titles">{song.icy}</p>
 					</div>
 				)}
+				<Config
+					style={{ display: viewConfig ? 'block' : 'none' }}
+					onClick={(e) => {
+						e.stopPropagation()
+					}}
+				>
+					<div style={{ flex: 1 }}>
+						<button onClick={cycleTheme}>表示切り替え</button>
+						<button
+							className="confbtn"
+							onClick={(e) => {
+								setViewConfig((v) => !v)
+								e.stopPropagation()
+							}}
+						>
+							閉じる
+						</button>
+					</div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						{/* <span>アプデログ</span>
+						<textarea wrap="off" style={{ flex: 1, overflow: 'scroll' }}>
+							{`
+設定パーツ
+透過機能追加
+リリース日,アニメ情報追加
+背景作成
+`}
+						</textarea> */}
+					</div>
+				</Config>
 			</Background>
 		</Wrap>
 	)
 }
 
+const Config = styled.div`
+	height: 20vh;
+	width: 100%;
+	background: gray;
+	display: flex;
+	padding: 8px;
+	align-self: flex-end;
+`
+
 const Background = styled.div`
 	height: 100vh;
+	display: grid;
 	padding: 8px;
 `
 
 const Wrap = styled.div`
 	width: 100vw;
+	button {
+		border-radius: 4px;
+		padding: 8px 20px;
+		border: none;
+		margin: 4px;
+	}
 	p {
 		color: #ccc;
 		font-weight: bold;
@@ -101,10 +149,15 @@ const Wrap = styled.div`
 		margin-top: 8px;
 		padding: 4px;
 		border-radius: 4px;
+		align-self: flex-start;
+	}
+	.confbtn {
+		visibility: hidden;
 	}
 	&:hover {
-		border-right: solid 4px white;
-		border-bottom: solid 4px white;
+		.confbtn {
+			visibility: visible;
+		}
 	}
 	&[data-theme='1'] {
 		.content {
@@ -118,7 +171,7 @@ const Wrap = styled.div`
 	}
 	&[data-theme='3'] {
 		.content {
-			display: none;
+			visibility: hidden;
 		}
 	}
 `
