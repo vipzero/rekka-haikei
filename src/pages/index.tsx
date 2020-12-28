@@ -37,19 +37,23 @@ function Home() {
 						</p>
 						<div className="details">
 							<p>
-								<span className="animetitle">{`${song.animeTitle}`}</span>
-								<span className="subinfo">{` [${song.opOrEd}${
-									song.spInfo ? ` ${song.spInfo}` : ''
-								}]`}</span>
-								<span className="chapnum">
-									{song.chapNum && `全${song.chapNum}話`}
+								<span className="animetitle">song.animeTitle</span>
+								<span className="subinfo">
+									[{song.opOrEd}
+									{song.spInfo ? ` ${song.spInfo}` : ''}]
 								</span>
 							</p>
 							<p>{`${song.category} ${
 								song.gameType && ' ' + song.gameType
 							}`}</p>
+							<p>
+								<span className="date">{song.date}</span>
+								{song.chapNum && (
+									<span className="chapnum">全{song.chapNum}話</span>
+								)}
+							</p>
 						</div>
-						<p className="icy">icy: {song.icy}</p>
+						<p className="icy">icy_title: {song.icy}</p>
 					</div>
 				) : (
 					<div className="content">
@@ -79,10 +83,15 @@ const Wrap = styled.div`
 	.details {
 		p {
 			padding-top: 4px;
-			font-size: 0.8rem;
+			font-size: 0.9rem;
+		}
+		span:not(:first-child) {
+			margin-left: 0.5rem;
 		}
 	}
 	.icy {
+		margin-top: 1rem;
+		text-align: right;
 		font-size: 0.5rem;
 	}
 	.content {
@@ -96,12 +105,12 @@ const Wrap = styled.div`
 	}
 	&[data-theme='1'] {
 		.content {
-			background: rgba(0, 0, 0, 0.5);
+			background: rgba(255, 255, 255, 0.5);
 		}
 	}
 	&[data-theme='2'] {
 		.content {
-			background: rgba(255, 255, 255, 0.5);
+			background: rgba(0, 0, 0, 0.5);
 		}
 	}
 	&[data-theme='3'] {
