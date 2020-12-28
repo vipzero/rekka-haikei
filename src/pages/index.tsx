@@ -37,7 +37,7 @@ function Home() {
 						</p>
 						<div className="details">
 							<p>
-								<span className="animetitle">song.animeTitle</span>
+								<span className="animetitle">{song.animeTitle}</span>
 								<span className="subinfo">
 									[{song.opOrEd}
 									{song.spInfo ? ` ${song.spInfo}` : ''}]
@@ -84,6 +84,9 @@ const Wrap = styled.div`
 		p {
 			padding-top: 4px;
 			font-size: 0.9rem;
+		}
+		.animetitle {
+			font-size: 1rem;
 		}
 		span:not(:first-child) {
 			margin-left: 0.5rem;
