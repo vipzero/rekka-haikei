@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
 import { isSongFull } from '../../types'
@@ -17,72 +17,64 @@ function Home() {
 	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
 
 	return (
-		<Wrap
-			data-theme={theme}
-			onClick={() => {
-				setViewConfig((v) => !v)
-			}}
-		>
-			<AnimateOnChange>
-				<Background
-					key={song.icy}
-					style={{
-						background: `${song.imageLinks
-							?.map((v) => `url('${v}')`)
-							.join(', ')}`,
-						backgroundSize: 'contain',
+		<>
+			<BackgroundContainer images={song.imageLinks || []} />
+			<Wrap
+				data-theme={theme}
+				onClick={() => {
+					setViewConfig((v) => !v)
+				}}
+			>
+				{isSongFull(song) ? (
+					<div className="content">
+						<p className="titles">
+							{song.title} - {song.artist}
+						</p>
+						<div className="details">
+							<p>
+								<span className="animetitle">{song.animeTitle}</span>
+								<span className="subinfo">
+									[{song.opOrEd}
+									{song.spInfo ? ` ${song.spInfo}` : ''}]
+								</span>
+							</p>
+							<p>{`${song.category} ${
+								song.gameType && ' ' + song.gameType
+							}`}</p>
+							<p>
+								<span className="date">{song.date}</span>
+								{song.chapNum && (
+									<span className="chapnum">全{song.chapNum}話</span>
+								)}
+							</p>
+						</div>
+						<p className="icy">icy_title: {song.icy}</p>
+					</div>
+				) : (
+					<div className="content">
+						<p className="titles">{song.icy}</p>
+					</div>
+				)}
+				<Config
+					style={{ display: viewConfig ? 'block' : 'none' }}
+					onClick={(e) => {
+						e.stopPropagation()
 					}}
 				>
-					{isSongFull(song) ? (
-						<div className="content">
-							<p className="titles">
-								{song.title} - {song.artist}
-							</p>
-							<div className="details">
-								<p>
-									<span className="animetitle">{song.animeTitle}</span>
-									<span className="subinfo">
-										[{song.opOrEd}
-										{song.spInfo ? ` ${song.spInfo}` : ''}]
-									</span>
-								</p>
-								<p>{`${song.category} ${
-									song.gameType && ' ' + song.gameType
-								}`}</p>
-								<p>
-									<span className="date">{song.date}</span>
-									{song.chapNum && (
-										<span className="chapnum">全{song.chapNum}話</span>
-									)}
-								</p>
-							</div>
-							<p className="icy">icy_title: {song.icy}</p>
-						</div>
-					) : (
-						<div className="content">
-							<p className="titles">{song.icy}</p>
-						</div>
-					)}
-					<Config
-						style={{ display: viewConfig ? 'block' : 'none' }}
-						onClick={(e) => {
-							e.stopPropagation()
-						}}
-					>
-						<div style={{ flex: 1 }}>
-							<button onClick={cycleTheme}>表示切り替え</button>
-							<button
-								className="confbtn"
-								onClick={(e) => {
-									setViewConfig((v) => !v)
-									e.stopPropagation()
-								}}
-							>
-								閉じる
-							</button>
-						</div>
-						<div style={{ display: 'flex', flexDirection: 'column' }}>
-							{/* <span>アプデログ</span>
+					<div style={{ flex: 1 }}>
+						<button onClick={cycleTheme}>表示切り替え</button>
+						<button
+							className="confbtn"
+							onClick={(e) => {
+								setViewConfig((v) => !v)
+								e.stopPropagation()
+							}}
+						>
+							閉じる
+						</button>
+					</div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
+						{/* <span>アプデログ</span>
 						<textarea wrap="off" style={{ flex: 1, overflow: 'scroll' }}>
 							{`
 設定パーツ
@@ -91,11 +83,23 @@ function Home() {
 背景作成
 `}
 						</textarea> */}
-						</div>
-					</Config>
-				</Background>
-			</AnimateOnChange>
-		</Wrap>
+					</div>
+				</Config>
+			</Wrap>
+		</>
+	)
+}
+const BackgroundContainer = ({ images }: { images: string[] }) => {
+	return (
+		<AnimateOnChange>
+			<Background
+				key={images[0]}
+				style={{
+					background: `${images.map((v) => `url('${v}')`).join(', ')}`,
+					backgroundSize: 'contain',
+				}}
+			/>
+		</AnimateOnChange>
 	)
 }
 
@@ -110,12 +114,18 @@ const Config = styled.div`
 
 const Background = styled.div`
 	height: 100vh;
-	display: grid;
-	padding: 16px;
+	width: 100vw;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
 `
 
 const Wrap = styled.div`
 	width: 100vw;
+	height: 100vh;
+	display: grid;
+	padding: 16px;
 	button {
 		border-radius: 4px;
 		padding: 8px 20px;
