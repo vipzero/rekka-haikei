@@ -109,7 +109,7 @@ const Config = styled.div`
 const Background = styled.div`
 	height: 100vh;
 	display: grid;
-	padding: 8px;
+	padding: 16px;
 `
 
 const Wrap = styled.div`
@@ -146,18 +146,9 @@ const Wrap = styled.div`
 		font-size: 0.5rem;
 	}
 	.content {
-		margin-top: 8px;
-		padding: 4px;
+		padding: 12px;
 		border-radius: 4px;
 		align-self: flex-start;
-	}
-	.confbtn {
-		visibility: hidden;
-	}
-	&:hover {
-		.confbtn {
-			visibility: visible;
-		}
 	}
 	&[data-theme='1'] {
 		.content {
