@@ -6,6 +6,10 @@ export type SongFull = {
 	opOrEd: string
 	spInfo: string
 	songId: string
+	category: string
+	gameType: string
+	chapNum: number
+	date: string
 	imageLinks?: string[]
 }
 export type SongMiss = {
