@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-import { Song } from '../../types'
+import { isSongFull, Song } from '../../types'
 
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
@@ -15,7 +15,9 @@ export function useSongDb() {
 			.onSnapshot((snap) => {
 				const song = snap.data() as Song
 
-				song.imageLinks?.reverse()
+				if (isSongFull(song)) {
+					song.imageLinks?.reverse()
+				}
 				// while (song.imageLinks && song.imageLinks.length > 5) {
 				// 	song.imageLinks.pop()
 				// }
