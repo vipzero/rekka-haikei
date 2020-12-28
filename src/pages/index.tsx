@@ -27,6 +27,7 @@ function Home() {
 					background: `${song.imageLinks
 						?.map((v) => `url('${v}')`)
 						.join(', ')}`,
+					backgroundSize: 'contain',
 				}}
 			>
 				{isSongFull(song) ? (
@@ -63,7 +64,6 @@ function Home() {
 const Background = styled.div`
 	height: 100vh;
 	padding: 8px;
-	background-size: contain;
 `
 
 const Wrap = styled.div`
