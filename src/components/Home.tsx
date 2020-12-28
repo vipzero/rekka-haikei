@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
-import { isSongFull } from '../../types'
+import { isSongFull, Song } from '../../types'
 import { useSongDb } from './useSongDb'
 
-function Home() {
-	const [loaded, song] = useSongDb()
+type Props = {
+	song: Song
+	extraComp?: ReactNode
+}
+function Home({ song, extraComp }: Props) {
 	const [theme, setTheme] = useState<number>(0)
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
 	const cycleTheme = () => setTheme((v) => (v + 1) % 4)
-
-	useEffect(() => {
-		console.log('loaded')
-	}, [song])
-
-	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
+	const toggleConfig = () => setViewConfig((v) => !v)
 
 	return (
 		<>
 			<BackgroundContainer images={song.imageLinks || []} />
-			<Wrap
-				data-theme={theme}
-				onClick={() => {
-					setViewConfig((v) => !v)
-				}}
-			>
+			<Wrap data-theme={theme} onClick={toggleConfig}>
 				{isSongFull(song) ? (
 					<div className="content">
 						<p className="titles">
@@ -55,21 +48,21 @@ function Home() {
 						<p className="titles">{song.icy}</p>
 					</div>
 				)}
+				<div>{extraComp || null}</div>
 				<Config
-					style={{ display: viewConfig ? 'block' : 'none' }}
 					onClick={(e) => {
 						e.stopPropagation()
 					}}
 				>
-					<div style={{ flex: 1 }}>
+					<div
+						style={{
+							background: '#949494',
+							flex: 1,
+							display: viewConfig ? 'block' : 'none',
+						}}
+					>
 						<button onClick={cycleTheme}>表示切り替え</button>
-						<button
-							className="confbtn"
-							onClick={(e) => {
-								setViewConfig((v) => !v)
-								e.stopPropagation()
-							}}
-						>
+						<button className="confbtn" onClick={toggleConfig}>
 							閉じる
 						</button>
 					</div>
@@ -91,7 +84,7 @@ function Home() {
 }
 const BackgroundContainer = ({ images }: { images: string[] }) => {
 	return (
-		<AnimateOnChange>
+		<AnimateOnChange durationOut={1000} style={{ position: 'absolute' }}>
 			<Background
 				key={images[0]}
 				style={{
@@ -106,10 +99,8 @@ const BackgroundContainer = ({ images }: { images: string[] }) => {
 const Config = styled.div`
 	height: 20vh;
 	width: 100%;
-	background: gray;
 	display: flex;
 	padding: 8px;
-	align-self: flex-end;
 `
 
 const Background = styled.div`
@@ -125,6 +116,8 @@ const Wrap = styled.div`
 	width: 100vw;
 	height: 100vh;
 	display: grid;
+	overflow: hidden;
+	grid-template-rows: max-content 1fr max-content;
 	padding: 16px;
 	button {
 		border-radius: 4px;
@@ -160,7 +153,6 @@ const Wrap = styled.div`
 	.content {
 		padding: 12px;
 		border-radius: 4px;
-		align-self: flex-start;
 	}
 	&[data-theme='1'] {
 		.content {
@@ -179,4 +171,16 @@ const Wrap = styled.div`
 	}
 `
 
-export default Home
+function HomeContainer() {
+	const [loaded, song] = useSongDb()
+
+	useEffect(() => {
+		console.log('loaded')
+	}, [song])
+
+	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
+
+	return <Home song={song} />
+}
+
+export default HomeContainer
