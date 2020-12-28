@@ -15,9 +15,10 @@ export function useSongDb() {
 			.onSnapshot((snap) => {
 				const song = snap.data() as Song
 
-				while (song.imageLinks && song.imageLinks.length > 5) {
-					song.imageLinks.pop()
-				}
+				song.imageLinks?.reverse()
+				// while (song.imageLinks && song.imageLinks.length > 5) {
+				// 	song.imageLinks.pop()
+				// }
 				setSong(song)
 				setLoaded(true)
 			})

@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import { AnimateOnChange } from 'react-animation'
+// import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
 import { isSongFull, Song } from '../../types'
 import { useSongDb } from './useSongDb'
@@ -84,15 +84,15 @@ function Home({ song, extraComp }: Props) {
 }
 const BackgroundContainer = ({ images }: { images: string[] }) => {
 	return (
-		<AnimateOnChange durationOut={1000} style={{ position: 'absolute' }}>
-			<Background
-				key={images[0]}
-				style={{
-					background: `${images.map((v) => `url('${v}')`).join(', ')}`,
-					backgroundSize: 'contain',
-				}}
-			/>
-		</AnimateOnChange>
+		// <AnimateOnChange durationOut={1000} style={{ position: 'absolute' }}>
+		<Background
+			key={images[0]}
+			style={{
+				background: `${images.map((v) => `url('${v}')`).join(', ')}`,
+				backgroundSize: 'contain',
+			}}
+		/>
+		// </AnimateOnChange>
 	)
 }
 
