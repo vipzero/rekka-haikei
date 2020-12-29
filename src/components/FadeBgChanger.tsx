@@ -40,7 +40,7 @@ function FadeBgChanger({ urls }: { urls: string[] }) {
 					style={{
 						...defaultStyle,
 						...transitionStyles[state],
-						background: bgStyle,
+						backgroundImage: bgStyle,
 						backgroundSize: 'contain',
 					}}
 				/>
