@@ -4,6 +4,7 @@ import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
+import { useFavorites } from './useFavorites'
 
 type Props = {
 	song: Song
@@ -16,6 +17,7 @@ const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 
 function Home({ song, extraComp, histories }: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
+	const { favorites, toggleFavorites } = useFavorites()
 	const [themeCookie, setTheme] = useCookie('theme', '0')
 	const theme = Number(themeCookie)
 	const [viewRecent, setViewRecent] = useCookie('view-recent', 'off')
@@ -98,12 +100,25 @@ function Home({ song, extraComp, histories }: Props) {
 						<div>
 							<button onClick={cycleTheme}>表示切り替え</button>
 							<button onClick={toggleRecent}>簡易履歴</button>
-							<Link href="/history" passHref>
-								<button>履歴検索(携帯回線注意)</button>
-							</Link>
+							<button
+								data-active={favorites[song.icy]}
+								onClick={() => toggleFavorites(song.icy)}
+							>
+								{favorites[song.icy]
+									? 'お気に入り中'
+									: 'お気に入り登録しておく'}
+							</button>
 							<button className="confbtn" onClick={toggleConfig}>
 								閉じる
 							</button>
+						</div>
+						<div>
+							<Link href="/history" passHref>
+								<button>履歴検索(携帯回線注意)</button>
+							</Link>
+							<Link href="/favorites" passHref>
+								<button>お気に入りいリスト</button>
+							</Link>
 						</div>
 
 						<div>
