@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-import { isSongFull, Song } from '../../types'
+import { History, isSongFull, Song } from '../../types'
+import { formatDate } from '../util'
 
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
+	const [histories, setHistories] = useState<History[]>([])
 	const [song, setSong] = useState<Song>({ icy: '' })
 
 	useEffect(() => {
@@ -24,7 +26,29 @@ export function useSongDb() {
 				setSong(song)
 				setLoaded(true)
 			})
+
+		fdb
+			.collection('hist')
+			.doc('2020nematu')
+			.collection('songs')
+			.orderBy('time')
+			.limit(10)
+			.onSnapshot((snaps) => {
+				const histories = snaps.docs.map((snap) => {
+					const { time, title } = snap.data()
+					const timeStr = formatDate(time)
+
+					return {
+						title,
+						time,
+						timeStr,
+						timeCate: timeStr.substring(12, 13),
+					}
+				})
+
+				setHistories(histories)
+			})
 	}, [])
 
-	return [loaded, song] as const
+	return [loaded, song, histories] as const
 }

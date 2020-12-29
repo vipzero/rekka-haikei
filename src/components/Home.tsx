@@ -2,19 +2,24 @@ import React, { ReactNode, useEffect, useState } from 'react'
 // import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
 import Link from 'next/link'
-import { isSongFull, Song } from '../../types'
+import { History, isSongFull, Song } from '../../types'
 
 import { useSongDb } from './useSongDb'
 
 type Props = {
 	song: Song
 	extraComp?: ReactNode
+	histories: History[]
 }
-function Home({ song, extraComp }: Props) {
+const not = (v: boolean) => !v
+
+function Home({ song, extraComp, histories }: Props) {
 	const [theme, setTheme] = useState<number>(0)
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
+	const [viewRecent, setViewRecent] = useState<boolean>(false)
 	const cycleTheme = () => setTheme((v) => (v + 1) % 4)
-	const toggleConfig = () => setViewConfig((v) => !v)
+	const toggleRecent = () => setViewRecent(not)
+	const toggleConfig = () => setViewConfig(not)
 
 	return (
 		<>
@@ -51,18 +56,34 @@ function Home({ song, extraComp }: Props) {
 					</div>
 				)}
 				<div>{extraComp || null}</div>
-				<Config>
+				<div
+					className="recenthistory"
+					style={{
+						display: viewRecent ? 'block' : 'none',
+					}}
+				>
+					{histories.map((hist, i) => (
+						<p key={i}>
+							{hist.timeStr}: {hist.title}
+						</p>
+					))}
+				</div>
+				<Config
+					style={{
+						display: viewConfig ? 'block' : 'none',
+					}}
+				>
 					<div
 						style={{
 							background: '#949494',
 							flex: 1,
-							display: viewConfig ? 'block' : 'none',
 						}}
 						onClick={(e) => {
 							e.stopPropagation()
 						}}
 					>
 						<button onClick={cycleTheme}>表示切り替え</button>
+						<button onClick={toggleRecent}>簡易履歴</button>
 						<Link href="/history" passHref>
 							<button>履歴検索(携帯回線注意)</button>
 						</Link>
@@ -101,7 +122,7 @@ const BackgroundContainer = ({ images }: { images: string[] }) => {
 }
 
 const Config = styled.div`
-	height: 20vh;
+	/* height: 20vh; */
 	width: 100%;
 	display: flex;
 	padding: 8px;
@@ -137,26 +158,31 @@ const Wrap = styled.div`
 		margin: 0;
 		font-size: 28px;
 	}
-	.details {
-		p {
-			padding-top: 4px;
-			font-size: 0.9rem;
-		}
-		.animetitle {
-			font-size: 1rem;
-		}
-		span:not(:first-child) {
-			margin-left: 0.5rem;
-		}
-	}
-	.icy {
-		margin-top: 1rem;
-		text-align: right;
-		font-size: 0.5rem;
-	}
 	.content {
 		padding: 12px;
 		border-radius: 4px;
+		.details {
+			p {
+				padding-top: 4px;
+				font-size: 0.9rem;
+			}
+			.animetitle {
+				font-size: 1rem;
+			}
+			span:not(:first-child) {
+				margin-left: 0.5rem;
+			}
+		}
+		.icy {
+			margin-top: 1rem;
+			text-align: right;
+			font-size: 0.5rem;
+		}
+	}
+	.recenthistory {
+		p {
+			font-size: 0.8rem;
+		}
 	}
 	&[data-theme='1'] {
 		.content {
@@ -176,7 +202,7 @@ const Wrap = styled.div`
 `
 
 function HomeContainer() {
-	const [loaded, song] = useSongDb()
+	const [loaded, song, histories] = useSongDb()
 
 	useEffect(() => {
 		console.log('loaded')
@@ -184,7 +210,7 @@ function HomeContainer() {
 
 	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
 
-	return <Home song={song} />
+	return <Home song={song} histories={histories} />
 }
 
 export default HomeContainer

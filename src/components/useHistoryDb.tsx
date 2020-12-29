@@ -1,19 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { Count, History } from '../../types'
-
-function formatDate(time: number) {
-	const date = new Date(time)
-
-	const yyyy = date.getFullYear()
-	const mm = String(date.getMonth() + 1).padStart(2, '0')
-	const dd = String(date.getDate()).padStart(2, '0')
-	const h = String(date.getHours()).padStart(2, '0')
-	const m = String(date.getMinutes()).padStart(2, '0')
-	const s = String(date.getSeconds()).padStart(2, '0')
-
-	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
-}
+import { formatDate } from '../util'
 
 function makeCounts(histories: History[]) {
 	const o: Record<string, number[]> = {}
@@ -21,9 +9,6 @@ function makeCounts(histories: History[]) {
 	histories.forEach((history) => {
 		if (!o[history.title]) o[history.title] = []
 		o[history.title].push(history.time)
-
-		const [artist, songTitle] = history.title.split('-')
-		const key = songTitle || artist || 'none'
 	})
 	const ents = Object.entries(o)
 
