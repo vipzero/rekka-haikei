@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
-import styled from 'styled-components'
 import useCookie from 'react-use-cookie'
+import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
 
@@ -13,8 +13,6 @@ type Props = {
 
 const not = (v: boolean) => !v
 const notS = (s: string) => (s === 'on' ? 'off' : 'on')
-
-type SetState<S> = [S, (arg: S | ((arg: S) => S)) => void]
 
 function Home({ song, extraComp, histories }: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
