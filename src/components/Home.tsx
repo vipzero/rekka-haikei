@@ -1,9 +1,7 @@
-import React, { ReactNode, useEffect, useState } from 'react'
-import styled from 'styled-components'
 import Link from 'next/link'
+import React, { ReactNode, useState } from 'react'
+import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
-
-import { useSongDb } from './useSongDb'
 import FadeBgChanger from './FadeBgChanger'
 
 type Props = {
@@ -91,6 +89,11 @@ function Home({ song, extraComp, histories }: Props) {
 							閉じる
 						</button>
 					</div>
+					<p>
+						<a href="http://anison.info">
+							アニメ情報元(修正も募集中): Anison Generation
+						</a>
+					</p>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						{/* <span>アプデログ</span>
 						<textarea wrap="off" style={{ flex: 1, overflow: 'scroll' }}>
@@ -179,16 +182,4 @@ const Wrap = styled.div`
 	}
 `
 
-function HomeContainer() {
-	const [loaded, song, histories] = useSongDb()
-
-	useEffect(() => {
-		console.log('loaded')
-	}, [song])
-
-	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
-
-	return <Home song={song} histories={histories} />
-}
-
-export default HomeContainer
+export default Home

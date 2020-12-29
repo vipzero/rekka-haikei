@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Layout from '../components/Layout'
 
-const HomeDynamic = dynamic(async () => import('../components/Home'), {
+const HomeDynamic = dynamic(async () => import('../components/HomeContainer'), {
 	ssr: false,
 })
 const HomePage = () => (
