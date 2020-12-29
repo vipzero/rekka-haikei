@@ -24,6 +24,7 @@ export type History = {
 	title: string
 	time: number
 	timeStr: string
+	timeCate: string // for style (hour % 10)
 }
 
 export type Count = {

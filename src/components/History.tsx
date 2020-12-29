@@ -36,10 +36,10 @@ function Page() {
 								.filter(
 									(v) => search === '' || new RegExp(search).exec(v.title)
 								)
-								.map((count, i) => (
-									<tr key={i}>
-										<td>{count.timeStr}</td>
-										<td>{count.title}</td>
+								.map((reco, i) => (
+									<tr key={i} data-cate={reco.timeCate}>
+										<td>{reco.timeStr}</td>
+										<td>{reco.title}</td>
 									</tr>
 								))}
 						</tbody>
@@ -106,9 +106,23 @@ const Wrap = styled.div`
 	table {
 		width: 100%;
 	}
+	table td {
+		border-top: solid 1px;
+	}
 	table.hist {
 		td:first-child {
 			width: 144px;
+		}
+		tr {
+			&[data-cate='0'],
+			&[data-cate='2'],
+			&[data-cate='4'],
+			&[data-cate='6'],
+			&[data-cate='8'] {
+				td:first-child {
+					background: #dbf7ff;
+				}
+			}
 		}
 	}
 

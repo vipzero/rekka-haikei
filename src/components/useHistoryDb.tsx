@@ -51,12 +51,14 @@ export function useHistoryDb(eventId) {
 			.get()
 			.then((snaps) => {
 				const histories = snaps.docs.map((snap) => {
-					const v = snap.data()
+					const { time, title } = snap.data()
+					const timeStr = formatDate(time)
 
 					return {
-						title: v.title,
-						time: v.time,
-						timeStr: formatDate(v.time),
+						title,
+						time,
+						timeStr,
+						timeCate: timeStr.substring(12, 13),
 					}
 				})
 
