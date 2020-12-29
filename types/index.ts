@@ -17,4 +17,10 @@ export type SongMiss = {
 	imageLinks?: string[]
 }
 export type Song = SongFull | SongMiss
+
 export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song
+
+export type History = {
+	title: string
+	time: number
+}

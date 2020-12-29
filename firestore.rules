@@ -8,5 +8,8 @@ service cloud.firestore {
     match /song/{songId} {
       allow read: if true;
     }
+    match /hist/{eventId=**} {
+      allow read: if true;
+    }
   }
 }
