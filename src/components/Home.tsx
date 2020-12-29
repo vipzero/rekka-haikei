@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
 import styled from 'styled-components'
+import useCookie from 'react-use-cookie'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
 
@@ -9,15 +10,21 @@ type Props = {
 	extraComp?: ReactNode
 	histories: History[]
 }
+
 const not = (v: boolean) => !v
+const notS = (s: string) => (s === 'on' ? 'off' : 'on')
+
+type SetState<S> = [S, (arg: S | ((arg: S) => S)) => void]
 
 function Home({ song, extraComp, histories }: Props) {
-	const [theme, setTheme] = useState<number>(0)
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
-	const [viewRecent, setViewRecent] = useState<boolean>(false)
-	const cycleTheme = () => setTheme((v) => (v + 1) % 4)
-	const toggleRecent = () => setViewRecent(not)
-	const toggleConfig = () => setViewConfig(not)
+	const [themeCookie, setTheme] = useCookie('theme', '0')
+	const theme = Number(themeCookie)
+	const [viewRecent, setViewRecent] = useCookie('view-recent', 'off')
+
+	const cycleTheme = () => setTheme(String((theme + 1) % 4))
+	const toggleRecent = () => setViewRecent(notS(viewRecent))
+	const toggleConfig = () => setViewConfig(not(viewConfig))
 
 	return (
 		<>
@@ -57,7 +64,7 @@ function Home({ song, extraComp, histories }: Props) {
 				<div
 					className="recenthistory"
 					style={{
-						display: viewRecent ? 'block' : 'none',
+						display: viewRecent === 'on' ? 'block' : 'none',
 					}}
 				>
 					{histories.map((hist, i) => (
