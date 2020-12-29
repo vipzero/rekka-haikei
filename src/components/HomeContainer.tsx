@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { isSongFull } from '../../types'
 import Home from './Home'
 import { useSongDb } from './useSongDb'
 
@@ -20,7 +21,8 @@ function HomeContainer() {
 
 	useEffect(() => {
 		console.log('loaded')
-		if (song.icy.includes('のんのんびより')) {
+
+		if (isSongFull(song) && song.animeTitle.includes('のんのんびより')) {
 			setEx('nonnon')
 		} else {
 			setEx(false)

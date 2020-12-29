@@ -89,7 +89,7 @@ function Home({ song, extraComp, histories }: Props) {
 						<div>
 							<button onClick={cycleTheme}>表示切り替え</button>
 							<button onClick={toggleRecent}>
-								{viewRecent ? '☑' : '□'}
+								{viewRecent === 'on' ? '☑' : '□'}
 								簡易履歴表示
 							</button>
 							<button
