@@ -52,6 +52,12 @@ function Home({ song, extraComp, histories }: Props) {
 									<span className="chapnum">全{song.chapNum}話</span>
 								)}
 							</p>
+							{song.albumName && (
+								<p className="album">
+									{song.albumName} ({song.copyright}){' '}
+									<a href={song.itunesUrl}>iTunes</a>
+								</p>
+							)}
 						</div>
 						<p className="icy">icy_title: {song.icy}</p>
 					</div>
@@ -191,6 +197,12 @@ const Wrap = styled.div`
 		.content,
 		.recenthistory {
 			visibility: hidden;
+		}
+	}
+	a {
+		color: white;
+		&:blink {
+			color: white;
 		}
 	}
 `
