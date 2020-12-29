@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-// import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { History, isSongFull, Song } from '../../types'
 
 import { useSongDb } from './useSongDb'
+import FadeBgChanger from './FadeBgChanger'
 
 type Props = {
 	song: Song
@@ -23,7 +23,7 @@ function Home({ song, extraComp, histories }: Props) {
 
 	return (
 		<>
-			<BackgroundContainer images={song.imageLinks || []} />
+			<FadeBgChanger urls={song.imageLinks || []} />
 			<Wrap data-theme={theme} onClick={toggleConfig}>
 				{isSongFull(song) ? (
 					<div className="content">
@@ -107,34 +107,12 @@ function Home({ song, extraComp, histories }: Props) {
 		</>
 	)
 }
-const BackgroundContainer = ({ images }: { images: string[] }) => {
-	return (
-		// <AnimateOnChange durationOut={1000} style={{ position: 'absolute' }}>
-		<Background
-			key={images[0]}
-			style={{
-				background: `${images.map((v) => `url('${v}')`).join(', ')}`,
-				backgroundSize: 'contain',
-			}}
-		/>
-		// </AnimateOnChange>
-	)
-}
 
 const Config = styled.div`
 	/* height: 20vh; */
 	width: 100%;
 	display: flex;
 	padding: 8px;
-`
-
-const Background = styled.div`
-	height: 100vh;
-	width: 100vw;
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: -1;
 `
 
 const Wrap = styled.div`
