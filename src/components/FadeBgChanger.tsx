@@ -19,11 +19,8 @@ function FadeBgChanger({ urls }: { urls: string[] }) {
 	const [bgStyle, setBg] = useState<string>('')
 	const [anime, setAnime] = useState<boolean>(true)
 
-	console.log(urls)
-
 	useEffect(() => {
 		setAnime(false)
-		console.log('changed')
 	}, [urls[0]])
 	return (
 		<Transition

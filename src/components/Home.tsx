@@ -2,8 +2,6 @@ import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
 import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
-import CheckIcon from '@material-ui/icons/CheckBox'
-import CheckNonIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 
 import { Button } from '@material-ui/core'
 import { History, isSongFull, Song } from '../../types'
@@ -76,7 +74,6 @@ function Home({ song, extraComp, histories }: Props) {
 						<p className="titles">{song.icy}</p>
 					</div>
 				)}
-				<div>{extraComp || null}</div>
 				<Config
 					style={{
 						display: viewConfig ? 'block' : 'none',
@@ -91,7 +88,10 @@ function Home({ song, extraComp, histories }: Props) {
 					>
 						<div>
 							<button onClick={cycleTheme}>表示切り替え</button>
-							<button onClick={toggleRecent}>簡易履歴表示</button>
+							<button onClick={toggleRecent}>
+								{viewRecent ? '☑' : '□'}
+								簡易履歴表示
+							</button>
 							<button
 								style={{ float: 'right' }}
 								className="confbtn"
@@ -107,12 +107,10 @@ function Home({ song, extraComp, histories }: Props) {
 							>
 								{books[song.icy] ? '★ブックマーク中' : '☆ブックマークしておく'}
 							</button>
-							<Button
-								startIcon={viewBookmark ? <CheckIcon /> : <CheckNonIcon />}
-								onClick={toggleBookmark}
-							>
+							<button onClick={toggleBookmark}>
+								{viewBookmark ? '☑' : '□'}
 								ブックマーク表示
-							</Button>
+							</button>
 						</div>
 						<div>
 							<Link href="/history" passHref>
@@ -127,6 +125,7 @@ function Home({ song, extraComp, histories }: Props) {
 						</div>
 					</div>
 				</Config>
+				<div>{extraComp || null}</div>
 				<div
 					className="recenthistory"
 					onClick={(e) => e.stopPropagation()}
