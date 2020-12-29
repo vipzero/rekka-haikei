@@ -10,6 +10,10 @@ export type SongFull = {
 	gameType: string
 	chapNum: number
 	date: string
+	albumName?: string
+	copyright?: string
+	artworkUrl100?: string
+	itunesUrl?: string
 	imageLinks?: string[]
 }
 export type SongMiss = {

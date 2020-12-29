@@ -80,20 +80,23 @@ function Home({ song, extraComp, histories }: Props) {
 							e.stopPropagation()
 						}}
 					>
-						<button onClick={cycleTheme}>表示切り替え</button>
-						<button onClick={toggleRecent}>簡易履歴</button>
-						<Link href="/history" passHref>
-							<button>履歴検索(携帯回線注意)</button>
-						</Link>
-						<button className="confbtn" onClick={toggleConfig}>
-							閉じる
-						</button>
+						<div>
+							<button onClick={cycleTheme}>表示切り替え</button>
+							<button onClick={toggleRecent}>簡易履歴</button>
+							<Link href="/history" passHref>
+								<button>履歴検索(携帯回線注意)</button>
+							</Link>
+							<button className="confbtn" onClick={toggleConfig}>
+								閉じる
+							</button>
+						</div>
+
+						<div>
+							<a href="http://anison.info">
+								アニメ情報元(修正も募集中): Anison Generation
+							</a>
+						</div>
 					</div>
-					<p>
-						<a href="http://anison.info">
-							アニメ情報元(修正も募集中): Anison Generation
-						</a>
-					</p>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						{/* <span>アプデログ</span>
 						<textarea wrap="off" style={{ flex: 1, overflow: 'scroll' }}>
@@ -120,7 +123,7 @@ const Config = styled.div`
 
 const Wrap = styled.div`
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	display: grid;
 	overflow: hidden;
 	grid-template-rows: max-content 1fr max-content;
@@ -166,17 +169,20 @@ const Wrap = styled.div`
 		}
 	}
 	&[data-theme='1'] {
-		.content {
+		.content,
+		.recenthistory {
 			background: rgba(255, 255, 255, 0.5);
 		}
 	}
 	&[data-theme='2'] {
-		.content {
+		.content,
+		.recenthistory {
 			background: rgba(0, 0, 0, 0.5);
 		}
 	}
 	&[data-theme='3'] {
-		.content {
+		.content,
+		.recenthistory {
 			visibility: hidden;
 		}
 	}
