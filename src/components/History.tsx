@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
-import { Count, History } from '../../types'
+import { Count } from '../../types'
 import { useHistoryDb } from './useHistoryDb'
 
 function Page() {

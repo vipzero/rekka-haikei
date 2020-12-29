@@ -1,7 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 // import { AnimateOnChange } from 'react-animation'
 import styled from 'styled-components'
+import Link from 'next/link'
 import { isSongFull, Song } from '../../types'
+
 import { useSongDb } from './useSongDb'
 
 type Props = {
@@ -49,19 +51,21 @@ function Home({ song, extraComp }: Props) {
 					</div>
 				)}
 				<div>{extraComp || null}</div>
-				<Config
-					onClick={(e) => {
-						e.stopPropagation()
-					}}
-				>
+				<Config>
 					<div
 						style={{
 							background: '#949494',
 							flex: 1,
 							display: viewConfig ? 'block' : 'none',
 						}}
+						onClick={(e) => {
+							e.stopPropagation()
+						}}
 					>
 						<button onClick={cycleTheme}>表示切り替え</button>
+						<Link href="/history" passHref>
+							<button>履歴検索(携帯回線注意)</button>
+						</Link>
 						<button className="confbtn" onClick={toggleConfig}>
 							閉じる
 						</button>
