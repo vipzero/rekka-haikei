@@ -24,7 +24,7 @@ export const useFavorites = () => {
 			if (newFavorites[icy]) {
 				delete newFavorites[icy]
 			} else {
-				favorites[icy] = true
+				newFavorites[icy] = true
 			}
 			return newFavorites
 		})
