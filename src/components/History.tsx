@@ -10,58 +10,78 @@ type Props = {
 }
 function Page({ counts, histories }: Props) {
 	const [search, setSearch] = useState<string>('')
+	const [tab, setTab] = useState<number>(0)
+
+	console.log('render')
 
 	return (
 		<Wrap>
 			<div>
 				<input onChange={(e) => setSearch(e.target.value)}></input>
 			</div>
-			<div>
-				<h3>履歴</h3>
-				<table className="hist">
-					<thead>
-						<tr>
-							<th>タイトル</th>
-							<th>回数</th>
-						</tr>
-					</thead>
-					<tbody>
-						{histories.map((count, i) => (
-							<tr key={i}>
-								<td>{count.timeStr}</td>
-								<td>{count.title}</td>
+			<p>
+				<button onClick={() => setTab(0)}>履歴</button>
+				<button onClick={() => setTab(1)}>再生回数</button>
+				<button onClick={() => setTab(2)}>再生回数(曲名)</button>
+			</p>
+			{tab === 0 && (
+				<div>
+					<h3>履歴</h3>
+					<table className="hist">
+						<thead>
+							<tr>
+								<th>タイトル</th>
+								<th>回数</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-			<div>
-				<h3>再生回数</h3>
-				<table className="count">
-					<thead>
-						<tr>
-							<th>タイトル</th>
-							<th>回数</th>
-							<th>日付</th>
-						</tr>
-					</thead>
-					<tbody>
-						{counts.map((count, i) => (
-							<tr key={i}>
-								<td>{count.title}</td>
-								<td>{count.times.length}</td>
-								<td>
-									<ul>
-										{count.timesStr.map((s) => (
-											<li key={s}>{s}</li>
-										))}
-									</ul>
-								</td>
+						</thead>
+						<tbody>
+							{histories
+								.filter(
+									(v) => search === '' || new RegExp(search).exec(v.title)
+								)
+								.map((count, i) => (
+									<tr key={i}>
+										<td>{count.timeStr}</td>
+										<td>{count.title}</td>
+									</tr>
+								))}
+						</tbody>
+					</table>
+				</div>
+			)}
+			{tab === 1 && (
+				<div>
+					<h3>再生回数</h3>
+					<table className="count">
+						<thead>
+							<tr>
+								<th>タイトル</th>
+								<th>回数</th>
+								<th>日付</th>
 							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+						</thead>
+						<tbody>
+							{counts
+								.filter(
+									(v) => search === '' || new RegExp(search).exec(v.title)
+								)
+								.map((count, i) => (
+									<tr key={i}>
+										<td>{count.title}</td>
+										<td>{count.times.length}</td>
+										<td>
+											<ul>
+												{count.timesStr.map((s) => (
+													<li key={s}>{s}</li>
+												))}
+											</ul>
+										</td>
+									</tr>
+								))}
+						</tbody>
+					</table>
+				</div>
+			)}
 		</Wrap>
 	)
 }

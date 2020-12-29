@@ -40,6 +40,7 @@ export function useHistoryDb(eventId) {
 					}
 				})
 
+				histories.reverse()
 				setHistories(histories)
 				const o: Record<string, number[]> = {}
 
