@@ -31,7 +31,7 @@ export function useSongDb() {
 			.collection('hist')
 			.doc('2020nematu')
 			.collection('songs')
-			.orderBy('time')
+			.orderBy('time', 'desc')
 			.limit(10)
 			.onSnapshot((snaps) => {
 				const histories = snaps.docs.map((snap) => {
