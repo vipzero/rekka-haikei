@@ -16,9 +16,29 @@ function formatDate(time: number) {
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
 
+function makeCounts(histories: History[]) {
+	const o: Record<string, number[]> = {}
+
+	histories.forEach((history) => {
+		if (!o[history.title]) o[history.title] = []
+		o[history.title].push(history.time)
+
+		const [artist, songTitle] = history.title.split('-')
+		const key = songTitle || artist || 'none'
+	})
+	const ents = Object.entries(o)
+
+	ents.sort((a, b) => b[1].length - a[1].length)
+	return ents.map(([title, times]) => {
+		times.sort((a, b) => a - b)
+		return { title, times, timesStr: times.map(formatDate) }
+	})
+}
+
 export function useHistoryDb(eventId) {
 	const [histories, setHistories] = useState<History[]>([])
 	const [counts, setCounts] = useState<Count[]>([])
+	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
 		const fdb = getFirestore()
@@ -44,21 +64,20 @@ export function useHistoryDb(eventId) {
 				setHistories(histories)
 				const o: Record<string, number[]> = {}
 
-				histories.forEach((history) => {
-					if (!o[history.title]) o[history.title] = []
-					o[history.title].push(history.time)
-				})
-				const ents = Object.entries(o)
+				const counts = makeCounts(histories)
+				const countsSong = makeCounts(
+					histories.map((h) => {
+						const [artist, songTitle] = h.title.split('-')
+						const key = songTitle || artist || 'none'
 
-				ents.sort((a, b) => b[1].length - a[1].length)
-				const counts = ents.map(([title, times]) => {
-					times.sort((a, b) => a - b)
-					return { title, times, timesStr: times.map(formatDate) }
-				})
+						return { ...h, title: key }
+					})
+				)
 
 				setCounts(counts)
+				setCountsSong(countsSong)
 			})
 	}, [])
 
-	return [histories, counts] as const
+	return [histories, counts, countsSong] as const
 }
