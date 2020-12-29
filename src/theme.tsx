@@ -1,14 +1,8 @@
-import indigo from '@material-ui/core/colors/indigo'
-import orange from '@material-ui/core/colors/orange'
 import { createMuiTheme } from '@material-ui/core/styles'
 // import lime from '@material-ui/core/colors/lime'
 
 const theme = createMuiTheme({
-	palette: {
-		primary: { ...indigo, main: '#5C6BC0' },
-		error: orange,
-		// secondary: lime,
-	},
+	palette: {},
 	typography: {},
 	overrides: {
 		MuiPaper: {
@@ -27,6 +21,11 @@ const theme = createMuiTheme({
 			root: {
 				width: '100%',
 			},
+		},
+	},
+	props: {
+		MuiButton: {
+			variant: 'contained',
 		},
 	},
 })

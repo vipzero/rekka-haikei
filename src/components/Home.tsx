@@ -2,6 +2,10 @@ import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
 import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
+import CheckIcon from '@material-ui/icons/CheckBox'
+import CheckNonIcon from '@material-ui/icons/CheckBoxOutlineBlank'
+
+import { Button } from '@material-ui/core'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
 import { useFavorites } from './useFavorites'
@@ -18,7 +22,7 @@ const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 function Home({ song, extraComp, histories }: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
 	const [viewBookmark, setViewBookmark] = useState<boolean>(false)
-	const { favorites, toggleFavorites } = useFavorites()
+	const { favorites: books, toggleFavorites } = useFavorites()
 	const [themeCookie, setTheme] = useCookie('theme', '0')
 	const theme = Number(themeCookie)
 	const [viewRecent, setViewRecent] = useCookie('view-recent', 'off')
@@ -83,27 +87,32 @@ function Home({ song, extraComp, histories }: Props) {
 							background: '#949494',
 							flex: 1,
 						}}
-						onClick={(e) => {
-							e.stopPropagation()
-						}}
+						onClick={(e) => e.stopPropagation()}
 					>
 						<div>
 							<button onClick={cycleTheme}>表示切り替え</button>
 							<button onClick={toggleRecent}>簡易履歴表示</button>
-							<button className="confbtn" onClick={toggleConfig}>
+							<button
+								style={{ float: 'right' }}
+								className="confbtn"
+								onClick={toggleConfig}
+							>
 								閉じる
 							</button>
 						</div>
 						<div>
 							<button
-								data-active={favorites[song.icy]}
+								data-active={books[song.icy]}
 								onClick={() => toggleFavorites(song.icy)}
 							>
-								{favorites[song.icy]
-									? 'ブックマークリスト'
-									: 'お気に入り登録しておく'}
+								{books[song.icy] ? '★ブックマーク中' : '☆ブックマークしておく'}
 							</button>
-							<button onClick={toggleBookmark}>ブックマーク表示</button>
+							<Button
+								startIcon={viewBookmark ? <CheckIcon /> : <CheckNonIcon />}
+								onClick={toggleBookmark}
+							>
+								ブックマーク表示
+							</Button>
 						</div>
 						<div>
 							<Link href="/history" passHref>
@@ -120,13 +129,32 @@ function Home({ song, extraComp, histories }: Props) {
 				</Config>
 				<div
 					className="recenthistory"
-					style={{
-						display: viewRecent === 'on' ? 'block' : 'none',
-					}}
+					onClick={(e) => e.stopPropagation()}
+					style={{ display: viewRecent === 'on' ? 'block' : 'none' }}
 				>
+					<p>■履歴</p>
 					{histories.map((hist, i) => (
 						<p key={i}>
 							{hist.timeStr}: {hist.title}
+						</p>
+					))}
+				</div>
+				<div
+					className="bookmarks"
+					onClick={(e) => e.stopPropagation()}
+					style={{ display: viewBookmark ? 'block' : 'none' }}
+				>
+					<p>■ブックマーク</p>
+					{Object.keys(books).length === 0 && <p>ブックマークはまだないお</p>}
+					{Object.keys(books).map((icy, i) => (
+						<p key={i}>
+							<span>{icy}</span>
+							<span
+								style={{ float: 'right', cursor: 'pointer' }}
+								onClick={() => toggleFavorites(icy)}
+							>
+								[削除]
+							</span>
 						</p>
 					))}
 				</div>
@@ -147,7 +175,7 @@ const Wrap = styled.div`
 	min-height: 100vh;
 	display: grid;
 	/* overflow: hidden; */
-	grid-template-rows: max-content 1fr max-content;
+	grid-template-rows: max-content 1fr max-content max-content;
 	padding: 16px;
 	button {
 		border-radius: 4px;
@@ -184,26 +212,31 @@ const Wrap = styled.div`
 			font-size: 0.5rem;
 		}
 	}
-	.recenthistory {
+
+	.recenthistory,
+	.bookmarks {
 		p {
 			font-size: 0.8rem;
 		}
 	}
 	&[data-theme='1'] {
 		.content,
-		.recenthistory {
+		.recenthistory,
+		.bookmarks {
 			background: rgba(255, 255, 255, 0.5);
 		}
 	}
 	&[data-theme='2'] {
 		.content,
-		.recenthistory {
+		.recenthistory,
+		.bookmarks {
 			background: rgba(0, 0, 0, 0.5);
 		}
 	}
 	&[data-theme='3'] {
 		.content,
-		.recenthistory {
+		.recenthistory,
+		.bookmarks {
 			visibility: hidden;
 		}
 	}
