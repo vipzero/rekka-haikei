@@ -1,4 +1,3 @@
-import { padStart } from 'lodash'
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { Count, History } from '../../types'
@@ -64,7 +63,6 @@ export function useHistoryDb(eventId) {
 
 				histories.reverse()
 				setHistories(histories)
-				const o: Record<string, number[]> = {}
 
 				const counts = makeCounts(histories)
 				const countsSong = makeCounts(
