@@ -36,6 +36,7 @@ function Home({ song, extraComp, histories }: Props) {
 							{song.title} - {song.artist}
 						</p>
 						<div className="details">
+							{/* そろそろ汚えええええ */}
 							<p>
 								<span className="animetitle">{song.animeTitle}</span>
 								<span className="subinfo">
@@ -52,11 +53,14 @@ function Home({ song, extraComp, histories }: Props) {
 									<span className="chapnum">全{song.chapNum}話</span>
 								)}
 							</p>
-							{song.albumName && (
-								<p className="album">
-									{song.albumName} ({song.copyright}){' '}
-									<a href={song.itunesUrl}>iTunes</a>
-								</p>
+							{song.albumName && song.artworkUrl100 && (
+								<div className="album">
+									<p>
+										{song.albumName} ({song.copyright}){' '}
+										<a href={song.itunesUrl}>iTunes</a>
+									</p>
+									<img src={song.artworkUrl100} />
+								</div>
 							)}
 						</div>
 						<p className="icy">icy_title: {song.icy}</p>
@@ -197,6 +201,12 @@ const Wrap = styled.div`
 		.content,
 		.recenthistory {
 			visibility: hidden;
+		}
+	}
+	.album {
+		img {
+			margin-top: 12px;
+			width: 150px;
 		}
 	}
 	a {

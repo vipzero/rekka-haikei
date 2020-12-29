@@ -19,8 +19,4 @@ ul {
 li {
 	list-style: none;
 }
-
-img {
-	width: 100%;
-}
 `
