@@ -4,6 +4,15 @@ import styled from 'styled-components'
 import { Count } from '../../types'
 import { useHistoryDb } from './useHistoryDb'
 
+const searchFilter = (search: string, text: string) => {
+	if (search === '') return true
+	try {
+		return new RegExp(search, 'i').exec(text)
+	} catch (e) {
+		return text.toLowerCase().includes(search.toLowerCase())
+	}
+}
+
 function Page() {
 	const [histories, counts, countsSong] = useHistoryDb('2020nematu')
 	const [search, setSearch] = useState<string>('')
@@ -27,15 +36,13 @@ function Page() {
 					<table className="hist">
 						<thead>
 							<tr>
+								<th>日時</th>
 								<th>タイトル</th>
-								<th>回数</th>
 							</tr>
 						</thead>
 						<tbody>
 							{histories
-								.filter(
-									(v) => search === '' || new RegExp(search).exec(v.title)
-								)
+								.filter((v) => searchFilter(search, v.title))
 								.map((reco, i) => (
 									<tr key={i} data-cate={reco.timeCate}>
 										<td>{reco.timeStr}</td>
@@ -49,17 +56,13 @@ function Page() {
 			{tab === 1 && (
 				<CountTable
 					title="再生回数"
-					counts={counts.filter(
-						(v) => search === '' || new RegExp(search).exec(v.title)
-					)}
+					counts={counts.filter((v) => searchFilter(search, v.title))}
 				/>
 			)}
 			{tab === 2 && (
 				<CountTable
 					title="再生回数(曲名)"
-					counts={countsSong.filter(
-						(v) => search === '' || new RegExp(search).exec(v.title)
-					)}
+					counts={countsSong.filter((v) => searchFilter(search, v.title))}
 				/>
 			)}
 		</Wrap>
@@ -75,7 +78,7 @@ function CountTable({ counts, title }: { title: string; counts: Count[] }) {
 					<tr>
 						<th>タイトル</th>
 						<th>回数</th>
-						<th>日付</th>
+						<th>日時</th>
 					</tr>
 				</thead>
 				<tbody>

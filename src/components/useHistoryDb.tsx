@@ -31,7 +31,7 @@ export function useHistoryDb(eventId) {
 			.collection('hist')
 			.doc(eventId)
 			.collection('songs')
-			.orderBy('time')
+			.orderBy('time', 'desc')
 			.get()
 			.then((snaps) => {
 				const histories = snaps.docs.map((snap) => {
@@ -46,7 +46,6 @@ export function useHistoryDb(eventId) {
 					}
 				})
 
-				histories.reverse()
 				setHistories(histories)
 
 				const counts = makeCounts(histories)
