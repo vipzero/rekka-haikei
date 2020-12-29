@@ -23,4 +23,11 @@ export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song
 export type History = {
 	title: string
 	time: number
+	timeStr: string
+}
+
+export type Count = {
+	title: string
+	times: number[]
+	timesStr: string[]
 }

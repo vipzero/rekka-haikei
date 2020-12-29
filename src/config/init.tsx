@@ -13,7 +13,8 @@ body {
   min-height: 100vh;
 }
 ul {
-		padding: none;
+		margin: 0;
+		padding: 0;
 }
 li {
 	list-style: none;
