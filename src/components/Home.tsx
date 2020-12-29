@@ -142,7 +142,7 @@ const Wrap = styled.div`
 	width: 100vw;
 	min-height: 100vh;
 	display: grid;
-	overflow: hidden;
+	/* overflow: hidden; */
 	grid-template-rows: max-content 1fr max-content;
 	padding: 16px;
 	button {
