@@ -17,6 +17,7 @@ const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 
 function Home({ song, extraComp, histories }: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
+	const [viewBookmark, setViewBookmark] = useState<boolean>(false)
 	const { favorites, toggleFavorites } = useFavorites()
 	const [themeCookie, setTheme] = useCookie('theme', '0')
 	const theme = Number(themeCookie)
@@ -24,7 +25,8 @@ function Home({ song, extraComp, histories }: Props) {
 
 	const cycleTheme = () => setTheme(String((theme + 1) % 4))
 	const toggleRecent = () => setViewRecent(notS(viewRecent))
-	const toggleConfig = () => setViewConfig(not(viewConfig))
+	const toggleConfig = () => setViewConfig(not)
+	const toggleBookmark = () => setViewBookmark(not)
 
 	return (
 		<>
@@ -71,18 +73,6 @@ function Home({ song, extraComp, histories }: Props) {
 					</div>
 				)}
 				<div>{extraComp || null}</div>
-				<div
-					className="recenthistory"
-					style={{
-						display: viewRecent === 'on' ? 'block' : 'none',
-					}}
-				>
-					{histories.map((hist, i) => (
-						<p key={i}>
-							{hist.timeStr}: {hist.title}
-						</p>
-					))}
-				</div>
 				<Config
 					style={{
 						display: viewConfig ? 'block' : 'none',
@@ -99,25 +89,25 @@ function Home({ song, extraComp, histories }: Props) {
 					>
 						<div>
 							<button onClick={cycleTheme}>表示切り替え</button>
-							<button onClick={toggleRecent}>簡易履歴</button>
-							<button
-								data-active={favorites[song.icy]}
-								onClick={() => toggleFavorites(song.icy)}
-							>
-								{favorites[song.icy]
-									? 'お気に入り中'
-									: 'お気に入り登録しておく'}
-							</button>
+							<button onClick={toggleRecent}>簡易履歴表示</button>
 							<button className="confbtn" onClick={toggleConfig}>
 								閉じる
 							</button>
 						</div>
 						<div>
+							<button
+								data-active={favorites[song.icy]}
+								onClick={() => toggleFavorites(song.icy)}
+							>
+								{favorites[song.icy]
+									? 'ブックマークリスト'
+									: 'お気に入り登録しておく'}
+							</button>
+							<button onClick={toggleBookmark}>ブックマーク表示</button>
+						</div>
+						<div>
 							<Link href="/history" passHref>
 								<button>履歴検索(携帯回線注意)</button>
-							</Link>
-							<Link href="/favorites" passHref>
-								<button>お気に入りいリスト</button>
 							</Link>
 						</div>
 
@@ -127,18 +117,19 @@ function Home({ song, extraComp, histories }: Props) {
 							</a>
 						</div>
 					</div>
-					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						{/* <span>アプデログ</span>
-						<textarea wrap="off" style={{ flex: 1, overflow: 'scroll' }}>
-							{`
-設定パーツ
-透過機能追加
-リリース日,アニメ情報追加
-背景作成
-`}
-						</textarea> */}
-					</div>
 				</Config>
+				<div
+					className="recenthistory"
+					style={{
+						display: viewRecent === 'on' ? 'block' : 'none',
+					}}
+				>
+					{histories.map((hist, i) => (
+						<p key={i}>
+							{hist.timeStr}: {hist.title}
+						</p>
+					))}
+				</div>
 			</Wrap>
 		</>
 	)
