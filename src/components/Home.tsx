@@ -57,7 +57,7 @@ function Home({
 					<p className="titles">{titles}</p>
 					<div className="details">
 						<div style={{ display: 'flex' }}>
-							<div>
+							<div style={{ flex: 1 }}>
 								{/* そろそろ汚えええええ */}
 								{isSongFull(song) && (
 									<>
