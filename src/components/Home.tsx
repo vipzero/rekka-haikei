@@ -2,8 +2,6 @@ import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
 import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
-
-import { Button } from '@material-ui/core'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
 import { useFavorites } from './useFavorites'
@@ -19,7 +17,7 @@ const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
-	const [title, artist] = song.icy.split(' - ')
+	const [artist, title] = song.icy.split(' - ')
 
 	if (!artist) return song.icy
 	return `${title} - ${artist}`
@@ -189,7 +187,6 @@ const Wrap = styled.div`
 	padding: 16px;
 	button {
 		border-radius: 4px;
-		padding: 8px 20px;
 		border: none;
 		margin: 4px;
 	}
