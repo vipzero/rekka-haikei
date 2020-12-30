@@ -9,3 +9,11 @@
 - TypeScript
 - Next.js
 - FireBase
+
+## development setup
+
+edit .env
+
+```
+cp .env.sample .env
+```
