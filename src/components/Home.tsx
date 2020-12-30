@@ -105,7 +105,9 @@ function Home({ song, extraComp, histories }: Props) {
 								data-active={books[song.icy]}
 								onClick={() => toggleFavorites(song.icy)}
 							>
-								{books[song.icy] ? '★ブックマーク中' : '☆ブックマークしておく'}
+								{books[song.icy]
+									? '★ブックマーク中(β)'
+									: '☆ブックマークしておく(β) ブラウザに保存します'}
 							</button>
 							<button onClick={toggleBookmark}>
 								{viewBookmark ? '☑' : '□'}
