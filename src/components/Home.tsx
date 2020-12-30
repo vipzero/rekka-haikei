@@ -17,6 +17,14 @@ type Props = {
 const not = (v: boolean) => !v
 const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 
+function makeTitle(song: Song) {
+	if (isSongFull(song)) return `${song.title} - ${song.artist}`
+	const [title, artist] = song.icy.split(' - ')
+
+	if (!artist) return song.icy
+	return `${title} - ${artist}`
+}
+
 function Home({ song, extraComp, histories }: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
 	const [viewBookmark, setViewBookmark] = useState<boolean>(false)
@@ -30,50 +38,51 @@ function Home({ song, extraComp, histories }: Props) {
 	const toggleConfig = () => setViewConfig(not)
 	const toggleBookmark = () => setViewBookmark(not)
 
+	const titles = makeTitle(song)
+
 	return (
 		<>
-			<FadeBgChanger urls={song.imageLinks || []} />
+			<FadeBgChanger urls={song?.imageLinks || []} />
 			<Wrap data-theme={theme} onClick={toggleConfig}>
-				{isSongFull(song) ? (
-					<div className="content">
-						<p className="titles">
-							{song.title} - {song.artist}
-						</p>
-						<div className="details">
-							{/* そろそろ汚えええええ */}
-							<p>
-								<span className="animetitle">{song.animeTitle}</span>
-								<span className="subinfo">
-									[{song.opOrEd}
-									{song.spInfo ? ` ${song.spInfo}` : ''}]
-								</span>
-							</p>
-							<p>{`${song.category} ${
-								song.gameType && ' ' + song.gameType
-							}`}</p>
-							<p>
-								<span className="date">{song.date}</span>
-								{song.chapNum && (
-									<span className="chapnum">全{song.chapNum}話</span>
-								)}
-							</p>
-							{song.albumName && song.artworkUrl100 && (
-								<div className="album">
-									<p>
-										{song.albumName} ({song.copyright}){' '}
-										<a href={song.itunesUrl}>iTunes</a>
-									</p>
-									<img src={song.artworkUrl100} />
-								</div>
-							)}
-						</div>
-						<p className="icy">icy_title: {song.icy}</p>
+				<div className="content">
+					<p className="titles">{titles}</p>
+					<div className="details">
+						{/* そろそろ汚えええええ */}
+						{isSongFull(song) && (
+							<>
+								<p>
+									<span className="animetitle">{song.animeTitle}</span>
+									<span className="subinfo">
+										[{song.opOrEd}
+										{song.spInfo ? ` ${song.spInfo}` : ''}]
+									</span>
+								</p>
+								<p>{`${song.category} ${
+									song.gameType && ' ' + song.gameType
+								}`}</p>
+								<p>
+									<span className="date">{song.date}</span>
+									{song.chapNum && (
+										<span className="chapnum">全{song.chapNum}話</span>
+									)}
+								</p>
+							</>
+						)}
+						{song.singer && <p>歌手: {song.singer}</p>}
+						{song.composer && <p>作詞: {song.composer}</p>}
+						{song.writer && <p>作曲: {song.writer}</p>}
+						{song.albumName && song.artworkUrl100 && (
+							<div className="album">
+								<p>
+									{song.albumName} ({song.copyright}){' '}
+									<a href={song.itunesUrl}>iTunes</a>
+								</p>
+								<img src={song.artworkUrl100} />
+							</div>
+						)}
 					</div>
-				) : (
-					<div className="content">
-						<p className="titles">{song.icy}</p>
-					</div>
-				)}
+					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
+				</div>
 				<Config
 					style={{
 						display: viewConfig ? 'block' : 'none',

@@ -1,5 +1,15 @@
-export type SongFull = {
+export type SongMiss = {
 	icy: string
+	albumName?: string
+	copyright?: string
+	artworkUrl100?: string
+	itunesUrl?: string
+	imageLinks?: string[]
+	singer?: string
+	composer?: string
+	writer?: string
+}
+export type SongFull = SongMiss & {
 	title: string
 	artist: string
 	animeTitle: string
@@ -10,15 +20,6 @@ export type SongFull = {
 	gameType: string
 	chapNum: number
 	date: string
-	albumName?: string
-	copyright?: string
-	artworkUrl100?: string
-	itunesUrl?: string
-	imageLinks?: string[]
-}
-export type SongMiss = {
-	icy: string
-	imageLinks?: string[]
 }
 export type Song = SongFull | SongMiss
 
