@@ -99,24 +99,24 @@ function Home({
 					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
 				</div>
 				<LyricsBox
-					className="lyricsbox"
+					data-theme={theme}
 					style={{ display: showLyrics ? 'block' : 'none' }}
 				>
 					<pre>{lyrics}</pre>
 				</LyricsBox>
 				<Config
+					data-theme={theme}
 					className="config"
 					style={{ display: viewConfig ? 'block' : 'none' }}
 				>
 					<div
 						style={{
-							background: '#949494',
 							flex: 1,
 						}}
 						onClick={(e) => e.stopPropagation()}
 					>
 						<div>
-							<button onClick={cycleTheme}>表示切り替え</button>
+							<button onClick={cycleTheme}>テーマ({theme})</button>
 							<button onClick={toggleRecent}>
 								{viewRecent === 'on' ? '☑' : '□'}
 								簡易履歴表示
@@ -198,7 +198,12 @@ function Home({
 }
 
 const LyricsBox = styled.div`
-	background: rgba(255, 255, 255, 0.5);
+	padding: 0 8px;
+	background: rgba(255, 255, 255, 0.8);
+	&[data-theme='2'] {
+		background: rgba(0, 0, 0, 0.8);
+		color: white;
+	}
 `
 
 const Config = styled.div`
@@ -206,6 +211,9 @@ const Config = styled.div`
 	width: 100%;
 	display: flex;
 	padding: 8px;
+	> div {
+		background: #aaa;
+	}
 `
 
 const Wrap = styled.div`
@@ -259,6 +267,7 @@ const Wrap = styled.div`
 	&[data-theme='1'] {
 		.content,
 		.recenthistory,
+		.config > div,
 		.bookmarks {
 			background: rgba(255, 255, 255, 0.5);
 		}
@@ -266,6 +275,7 @@ const Wrap = styled.div`
 	&[data-theme='2'] {
 		.content,
 		.recenthistory,
+		.config > div,
 		.bookmarks {
 			background: rgba(0, 0, 0, 0.5);
 		}
