@@ -23,8 +23,6 @@ function HomeContainer() {
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
-		console.log('loaded')
-
 		if (isSongFull(song) && song.animeTitle.includes('のんのんびより')) {
 			setEx('nonnon')
 		} else {

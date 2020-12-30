@@ -1,8 +1,10 @@
 export type SongMiss = {
 	icy: string
+	time: number
 	albumName?: string
 	copyright?: string
 	artworkUrl100?: string
+	trackTimeMillis?: number
 	itunesUrl?: string
 	imageLinks?: string[]
 	singer?: string

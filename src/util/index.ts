@@ -13,3 +13,4 @@ export function formatDate(time: number) {
 
 export const sleep = (msec) =>
 	new Promise((resolve) => setTimeout(resolve, msec))
+export const between = (v, min, max) => Math.max(min, Math.min(max, v))

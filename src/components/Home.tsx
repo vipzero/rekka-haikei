@@ -1,9 +1,10 @@
 import Link from 'next/link'
-import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
+import TimeBar from './TimeBar'
 import { useFavorites } from './useFavorites'
 
 type Props = {
@@ -52,6 +53,7 @@ function Home({
 	return (
 		<>
 			<FadeBgChanger urls={song?.imageLinks || []} />
+			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap data-theme={theme} onClick={toggleConfig}>
 				<div className="content">
 					<p className="titles">{titles}</p>

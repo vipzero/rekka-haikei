@@ -27,7 +27,6 @@ function FadeBgChanger({ urls }: { urls: string[] }) {
 			in={anime}
 			onExited={() => {
 				setBg(urls.map((v) => `url('${v}')`).join(', '))
-				console.log('exited')
 				setAnime(true)
 			}}
 			timeout={duration}
