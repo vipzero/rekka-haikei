@@ -44,8 +44,10 @@ function Home({
 
 	const cycleTheme = () => setTheme(String((theme + 1) % 4))
 	const toggleRecent = () => setViewRecent(notS(viewRecent))
+	const closeRecent = () => setViewRecent('off')
 	const toggleConfig = () => setViewConfig(not)
 	const toggleBookmark = () => setViewBookmark(not)
+	const closeBookmark = () => setViewBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 
 	const titles = makeTitle(song)
@@ -84,7 +86,7 @@ function Home({
 								{song.writer && <p>作曲: {song.writer}</p>}
 								{song.albumName && (
 									<p>
-										{song.albumName} ({song.copyright}){' '}
+										{song.albumName.replace(' - Single', '')} ({song.copyright}){' '}
 										<a href={song.itunesUrl}>iTunes</a>
 									</p>
 								)}
@@ -168,7 +170,16 @@ function Home({
 					onClick={(e) => e.stopPropagation()}
 					style={{ display: viewRecent === 'on' ? 'block' : 'none' }}
 				>
-					<p>■履歴</p>
+					<p>
+						■履歴
+						<span
+							className="moc"
+							style={{ float: 'right' }}
+							onClick={closeRecent}
+						>
+							x
+						</span>
+					</p>
 					{histories.map((hist, i) => (
 						<p key={i}>
 							{hist.timeStr}: {hist.title}
@@ -180,7 +191,16 @@ function Home({
 					onClick={(e) => e.stopPropagation()}
 					style={{ display: viewBookmark ? 'block' : 'none' }}
 				>
-					<p>■ブックマーク</p>
+					<p>
+						■ブックマーク
+						<span
+							className="moc"
+							style={{ float: 'right' }}
+							onClick={closeBookmark}
+						>
+							x
+						</span>
+					</p>
 					{Object.keys(books).length === 0 && <p>ブックマークはまだないお</p>}
 					{Object.keys(books).map((icy, i) => (
 						<p key={i}>
@@ -260,8 +280,22 @@ const Wrap = styled.div`
 		}
 	}
 
+	.moc {
+		visibility: hidden;
+	}
+	.recenthistory:hover {
+		.moc {
+			visibility: visible;
+		}
+	}
+	.bookmarks:hover {
+		.moc {
+			visibility: visible;
+		}
+	}
 	.recenthistory,
 	.bookmarks {
+		padding: 0.4rem 0.4rem;
 		p {
 			font-size: 0.8rem;
 		}
