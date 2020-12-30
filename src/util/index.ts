@@ -10,3 +10,6 @@ export function formatDate(time: number) {
 
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
+
+export const sleep = (msec) =>
+	new Promise((resolve) => setTimeout(resolve, msec))

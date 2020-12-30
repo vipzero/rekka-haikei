@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { isSongFull } from '../../types'
 import Home from './Home'
+import { useLyricsDb } from './useLyricsDb'
 import { useSongDb } from './useSongDb'
 
 function getEx(ex: string | false) {
@@ -18,6 +19,8 @@ function getEx(ex: string | false) {
 function HomeContainer() {
 	const [loaded, song, histories] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
+	const [showLyrics, setShowLyrics] = useState<boolean>(false)
+	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
 		console.log('loaded')
@@ -33,7 +36,16 @@ function HomeContainer() {
 
 	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
 
-	return <Home song={song} histories={histories} extraComp={extraComp} />
+	return (
+		<Home
+			song={song}
+			histories={histories}
+			extraComp={extraComp}
+			lyrics={lyrics}
+			showLyrics={showLyrics}
+			setShowLyrics={(v) => setShowLyrics(v)}
+		/>
+	)
 }
 
 export default HomeContainer

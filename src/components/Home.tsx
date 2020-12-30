@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { ReactNode, useState } from 'react'
+import React, { Dispatch, ReactNode, SetStateAction, useState } from 'react'
 import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
@@ -10,6 +10,9 @@ type Props = {
 	song: Song
 	extraComp?: ReactNode
 	histories: History[]
+	lyrics: string
+	showLyrics: boolean
+	setShowLyrics: (v: boolean) => void
 }
 
 const not = (v: boolean) => !v
@@ -23,7 +26,14 @@ function makeTitle(song: Song) {
 	return `${title} - ${artist}`
 }
 
-function Home({ song, extraComp, histories }: Props) {
+function Home({
+	song,
+	extraComp,
+	histories,
+	lyrics,
+	showLyrics,
+	setShowLyrics,
+}: Props) {
 	const [viewConfig, setViewConfig] = useState<boolean>(false)
 	const [viewBookmark, setViewBookmark] = useState<boolean>(false)
 	const { favorites: books, toggleFavorites } = useFavorites()
@@ -35,6 +45,7 @@ function Home({ song, extraComp, histories }: Props) {
 	const toggleRecent = () => setViewRecent(notS(viewRecent))
 	const toggleConfig = () => setViewConfig(not)
 	const toggleBookmark = () => setViewBookmark(not)
+	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 
 	const titles = makeTitle(song)
 
@@ -45,46 +56,57 @@ function Home({ song, extraComp, histories }: Props) {
 				<div className="content">
 					<p className="titles">{titles}</p>
 					<div className="details">
-						{/* そろそろ汚えええええ */}
-						{isSongFull(song) && (
-							<>
-								<p>
-									<span className="animetitle">{song.animeTitle}</span>
-									<span className="subinfo">
-										[{song.opOrEd}
-										{song.spInfo ? ` ${song.spInfo}` : ''}]
-									</span>
-								</p>
-								<p>{`${song.category} ${
-									song.gameType && ' ' + song.gameType
-								}`}</p>
-								<p>
-									<span className="date">{song.date}</span>
-									{song.chapNum && (
-										<span className="chapnum">全{song.chapNum}話</span>
-									)}
-								</p>
-							</>
-						)}
-						{song.singer && <p>歌手: {song.singer}</p>}
-						{song.composer && <p>作詞: {song.composer}</p>}
-						{song.writer && <p>作曲: {song.writer}</p>}
-						{song.albumName && song.artworkUrl100 && (
-							<div className="album">
-								<p>
-									{song.albumName} ({song.copyright}){' '}
-									<a href={song.itunesUrl}>iTunes</a>
-								</p>
-								<img src={song.artworkUrl100} />
+						<div style={{ display: 'flex' }}>
+							<div>
+								{/* そろそろ汚えええええ */}
+								{isSongFull(song) && (
+									<>
+										<p>
+											<span className="animetitle">{song.animeTitle}</span>
+											<span className="subinfo">
+												[{song.opOrEd}
+												{song.spInfo ? ` ${song.spInfo}` : ''}] {song.category}
+												{song.gameType && ' ' + song.gameType}
+											</span>
+										</p>
+										<p>
+											<span className="date">{song.date}</span>
+											{song.chapNum && (
+												<span className="chapnum">全{song.chapNum}話</span>
+											)}
+										</p>
+									</>
+								)}
+								{song.singer && <p>歌手: {song.singer}</p>}
+								{song.composer && <p>作詞: {song.composer}</p>}
+								{song.writer && <p>作曲: {song.writer}</p>}
+								{song.albumName && (
+									<p>
+										{song.albumName} ({song.copyright}){' '}
+										<a href={song.itunesUrl}>iTunes</a>
+									</p>
+								)}
 							</div>
-						)}
+							<div>
+								{song.artworkUrl100 && (
+									<div className="album">
+										<img src={song.artworkUrl100} />
+									</div>
+								)}
+							</div>
+						</div>
 					</div>
 					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
 				</div>
+				<LyricsBox
+					className="lyricsbox"
+					style={{ display: showLyrics ? 'block' : 'none' }}
+				>
+					<pre>{lyrics}</pre>
+				</LyricsBox>
 				<Config
-					style={{
-						display: viewConfig ? 'block' : 'none',
-					}}
+					className="config"
+					style={{ display: viewConfig ? 'block' : 'none' }}
 				>
 					<div
 						style={{
@@ -119,6 +141,10 @@ function Home({ song, extraComp, histories }: Props) {
 							<button onClick={toggleBookmark}>
 								{viewBookmark ? '☑' : '□'}
 								ブックマーク表示
+							</button>
+							<button onClick={toggleShowLyrics}>
+								{showLyrics ? '☑' : '□'}
+								歌詞表示
 							</button>
 						</div>
 						<div>
@@ -170,6 +196,10 @@ function Home({ song, extraComp, histories }: Props) {
 		</>
 	)
 }
+
+const LyricsBox = styled.div`
+	background: rgba(255, 255, 255, 0.5);
+`
 
 const Config = styled.div`
 	/* height: 20vh; */
