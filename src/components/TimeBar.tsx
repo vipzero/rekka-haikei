@@ -10,13 +10,9 @@ function TimeBar({ startTime, size }: Props) {
 	const [p, setP] = useState<number>(0)
 
 	useEffect(() => {
-		console.log({ size })
 		if (!size) return
 		setP(0)
 		const t = setInterval(() => {
-			console.log(startTime)
-			console.log((Date.now() - startTime) / size)
-			console.log(Date.now() - startTime)
 			const newP = (Date.now() - startTime) / size
 
 			setP(between(newP, 0, 1))
@@ -40,9 +36,9 @@ function TimeBar({ startTime, size }: Props) {
 				background: '#222',
 			}}
 		>
-			<div style={{ background: '#ddd', width: `${100 * p}vw`, height: '4px' }}>
-				a
-			</div>
+			<div
+				style={{ background: '#ddd', width: `${100 * p}vw`, height: '4px' }}
+			></div>
 		</div>
 	)
 }
