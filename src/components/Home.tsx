@@ -4,8 +4,10 @@ import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
 import FadeBgChanger from './FadeBgChanger'
+import Player from './Player'
 import TimeBar from './TimeBar'
 import { useFavorites } from './useFavorites'
+import { useLocalStorage } from './useLocalStorage'
 
 type Props = {
 	song: Song
@@ -41,6 +43,7 @@ function Home({
 	const [themeCookie, setTheme] = useCookie('theme', '0')
 	const theme = Number(themeCookie)
 	const [viewRecent, setViewRecent] = useCookie('view-recent', 'off')
+	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 
 	const cycleTheme = () => setTheme(String((theme + 1) % 4))
 	const toggleRecent = () => setViewRecent(notS(viewRecent))
@@ -102,6 +105,14 @@ function Home({
 					</div>
 					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
 				</div>
+				<div
+					style={{
+						display: streamUrl !== '' ? 'block' : 'none',
+					}}
+				>
+					<Player src={streamUrl}></Player>
+				</div>
+
 				<LyricsBox
 					data-theme={theme}
 					style={{ display: showLyrics ? 'block' : 'none' }}
@@ -122,8 +133,7 @@ function Home({
 						<div>
 							<button onClick={cycleTheme}>テーマ({theme})</button>
 							<button onClick={toggleRecent}>
-								{viewRecent === 'on' ? '☑' : '□'}
-								簡易履歴表示
+								{viewRecent === 'on' ? '☑' : '□'}簡易履歴表示
 							</button>
 							<button
 								style={{ float: 'right' }}
@@ -156,7 +166,11 @@ function Home({
 								<button>履歴検索(携帯回線注意)</button>
 							</Link>
 						</div>
-
+						StreamURL:
+						<input
+							name="streaming-url"
+							onChange={(e) => setStreamUrl(e.target.value)}
+						/>
 						<div>
 							<a href="http://anison.info">
 								アニメ情報元(修正も募集中): Anison Generation

@@ -18,6 +18,7 @@
 		"next": "10.0.3",
 		"prettier": "2.2.1",
 		"react": "17.0.1",
+		"react-audio-player": "^0.14.0",
 		"react-dev-utils": "11.0.1",
 		"react-dom": "17.0.1",
 		"react-google-charts": "3.0.15",
