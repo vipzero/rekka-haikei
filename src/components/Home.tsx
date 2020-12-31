@@ -37,20 +37,22 @@ function Home({
 	showLyrics,
 	setShowLyrics,
 }: Props) {
-	const [viewConfig, setViewConfig] = useState<boolean>(false)
-	const [viewBookmark, setViewBookmark] = useState<boolean>(false)
+	const [showConfig, setShowConfig] = useState<boolean>(false)
+	const [showBookmark, setShowBookmark] = useState<boolean>(false)
 	const { favorites: books, toggleFavorites } = useFavorites()
-	const [themeCookie, setTheme] = useCookie('theme', '0')
-	const theme = Number(themeCookie)
-	const [viewRecent, setViewRecent] = useCookie('view-recent', 'off')
+	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
+	const [showHistory, setShowHistory] = useLocalStorage<boolean>(
+		'show-history',
+		false
+	)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 
-	const cycleTheme = () => setTheme(String((theme + 1) % 4))
-	const toggleRecent = () => setViewRecent(notS(viewRecent))
-	const closeRecent = () => setViewRecent('off')
-	const toggleConfig = () => setViewConfig(not)
-	const toggleBookmark = () => setViewBookmark(not)
-	const closeBookmark = () => setViewBookmark(false)
+	const cycleTheme = () => setTheme((theme + 1) % 4)
+	const toggleRecent = () => setShowHistory(not)
+	const closeRecent = () => setShowHistory(false)
+	const toggleConfig = () => setShowConfig(not)
+	const toggleBookmark = () => setShowBookmark(not)
+	const closeBookmark = () => setShowBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 
 	const titles = makeTitle(song)
@@ -122,7 +124,7 @@ function Home({
 				<Config
 					data-theme={theme}
 					className="config"
-					style={{ display: viewConfig ? 'block' : 'none' }}
+					style={{ display: showConfig ? 'block' : 'none' }}
 				>
 					<div
 						style={{
@@ -133,7 +135,7 @@ function Home({
 						<div>
 							<button onClick={cycleTheme}>テーマ({theme})</button>
 							<button onClick={toggleRecent}>
-								{viewRecent === 'on' ? '☑' : '□'}簡易履歴表示
+								{showHistory ? '☑' : '□'}簡易履歴表示
 							</button>
 							<button
 								style={{ float: 'right' }}
@@ -153,7 +155,7 @@ function Home({
 									: '☆ブックマークしておく(β) ブラウザに保存します'}
 							</button>
 							<button onClick={toggleBookmark}>
-								{viewBookmark ? '☑' : '□'}
+								{showBookmark ? '☑' : '□'}
 								ブックマーク表示
 							</button>
 							<button onClick={toggleShowLyrics}>
@@ -169,6 +171,7 @@ function Home({
 						StreamURL:
 						<input
 							name="streaming-url"
+							value={streamUrl}
 							onChange={(e) => setStreamUrl(e.target.value)}
 						/>
 						<div>
@@ -182,7 +185,7 @@ function Home({
 				<div
 					className="recenthistory"
 					onClick={(e) => e.stopPropagation()}
-					style={{ display: viewRecent === 'on' ? 'block' : 'none' }}
+					style={{ display: showHistory ? 'block' : 'none' }}
 				>
 					<p>
 						■履歴
@@ -203,7 +206,7 @@ function Home({
 				<div
 					className="bookmarks"
 					onClick={(e) => e.stopPropagation()}
-					style={{ display: viewBookmark ? 'block' : 'none' }}
+					style={{ display: showBookmark ? 'block' : 'none' }}
 				>
 					<p>
 						■ブックマーク
