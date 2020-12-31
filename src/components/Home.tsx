@@ -171,12 +171,7 @@ function Home({
 							onChange={(e) => setStreamUrl(e.target.value)}
 						/>
 						{streamUrl.includes('http://') && (
-							<span style={{ color: 'red' }}>
-								http のURLを聞く場合は
-								<a href="http://rekka-haikei.vipper.dev">
-									こちらを使ってください
-								</a>
-							</span>
+							<span style={{ color: 'red' }}>https 非対応</span>
 						)}
 						<button onClick={removeStream}>x</button>
 						<div>

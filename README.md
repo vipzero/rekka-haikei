@@ -19,3 +19,7 @@ edit .env
 ```
 cp .env.sample .env
 ```
+
+## プレイヤーについて
+
+http でサイト設置しないと http 対応できない
