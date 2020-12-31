@@ -10,7 +10,9 @@ export type SongMiss = {
 	singer?: string
 	composer?: string
 	writer?: string
+	wordCounts: Record<string, number>
 }
+
 export type SongFull = SongMiss & {
 	title: string
 	artist: string
@@ -23,6 +25,7 @@ export type SongFull = SongMiss & {
 	chapNum: number
 	date: string
 }
+
 export type Song = SongFull | SongMiss
 
 export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song

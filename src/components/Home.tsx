@@ -19,7 +19,6 @@ type Props = {
 }
 
 const not = (v: boolean) => !v
-const notS = (s: string) => (s === 'on' ? 'off' : 'on')
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -39,6 +38,7 @@ function Home({
 }: Props) {
 	const [showConfig, setShowConfig] = useState<boolean>(false)
 	const [showBookmark, setShowBookmark] = useState<boolean>(false)
+	const [showCounts, setShowCounts] = useState<boolean>(true)
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
 	const [showHistory, setShowHistory] = useLocalStorage<boolean>(
@@ -52,6 +52,7 @@ function Home({
 	const closeRecent = () => setShowHistory(false)
 	const toggleConfig = () => setShowConfig(not)
 	const toggleBookmark = () => setShowBookmark(not)
+	const toggleCounts = () => setShowCounts(not)
 	const closeBookmark = () => setShowBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 	const removeStream = () => setStreamUrl('')
@@ -95,6 +96,22 @@ function Home({
 									<p>
 										{song.albumName.replace(' - Single', '')} ({song.copyright}){' '}
 										<a href={song.itunesUrl}>iTunes</a>
+									</p>
+								)}
+								<p>
+									{song.wordCounts[song.icy] === 1
+										? '(初)'
+										: `${song.wordCounts[song.icy]}回目`}
+								</p>
+								{showCounts && (
+									<p className="tags">
+										{Object.entries(song.wordCounts)
+											.filter(([k]) => k !== song.icy)
+											.map(([k, v], i) => (
+												<span key={i}>
+													[{k} ({v} 回目)]
+												</span>
+											))}
 									</p>
 								)}
 							</div>
@@ -157,6 +174,10 @@ function Home({
 							<button onClick={toggleShowLyrics}>
 								{showLyrics ? '☑' : '□'}
 								歌詞表示
+							</button>
+							<button onClick={toggleCounts}>
+								{showCounts ? '☑' : '□'}
+								カウント表示
 							</button>
 						</div>
 						<div>
@@ -261,7 +282,7 @@ const Wrap = styled.div`
 	min-height: 100vh;
 	display: grid;
 	/* overflow: hidden; */
-	/* grid-template-rows: max-content max-content 1fr max-content max-content; */
+	grid-template-rows: repeat(5, max-content);
 	padding: 16px;
 	button {
 		border-radius: 4px;
@@ -275,6 +296,11 @@ const Wrap = styled.div`
 			2px -2px 2px #000;
 		margin: 0;
 		font-size: 28px;
+	}
+	.tags {
+		span {
+			font-size: 10px;
+		}
 	}
 	.content {
 		padding: 12px;

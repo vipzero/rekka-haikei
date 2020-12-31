@@ -6,7 +6,7 @@ import { formatDate } from '../util'
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [histories, setHistories] = useState<History[]>([])
-	const [song, setSong] = useState<Song>({ icy: '', time: 1 })
+	const [song, setSong] = useState<Song>({ icy: '', time: 1, wordCounts: {} })
 
 	useEffect(() => {
 		const fdb = getFirestore()
