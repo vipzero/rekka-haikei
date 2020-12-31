@@ -11,8 +11,15 @@ function getEx(ex: string | false) {
 				<iframe style={{ width: '100%' }} src="https://nyanpass.com/" />
 			</div>
 		)
-	} else {
-		return null
+	} else if (ex === 'mia') {
+		return (
+			<div style={{ height: '100%' }}>
+				<iframe
+					style={{ width: '100%', height: '100%' }}
+					src="https://click.abyss.fun/"
+				/>
+			</div>
+		)
 	}
 }
 
@@ -23,8 +30,12 @@ function HomeContainer() {
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
-		if (isSongFull(song) && song.animeTitle.includes('のんのんびより')) {
-			setEx('nonnon')
+		if (isSongFull(song)) {
+			if (song.animeTitle.includes('のんのんびより')) {
+				setEx('nonnon')
+			} else if (song.animeTitle.includes('メイドインアビス')) {
+				setEx('mia')
+			}
 		} else {
 			setEx(false)
 		}

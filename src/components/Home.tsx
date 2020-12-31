@@ -258,7 +258,7 @@ const Wrap = styled.div`
 	min-height: 100vh;
 	display: grid;
 	/* overflow: hidden; */
-	grid-template-rows: max-content 1fr max-content max-content;
+	/* grid-template-rows: max-content max-content 1fr max-content max-content; */
 	padding: 16px;
 	button {
 		border-radius: 4px;
