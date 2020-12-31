@@ -32,9 +32,12 @@ jobs:
       - run: yarn export
         env:
           GITHUB_ENV: 'true'
+      - name: add nojekyll
+        run: touch ./out/.nojekyll
+
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./out
