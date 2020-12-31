@@ -29,7 +29,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - run: yarn
-      - run: yarn export:github
+      - run: yarn export
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
           FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
