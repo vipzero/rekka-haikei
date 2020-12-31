@@ -54,8 +54,10 @@ function Home({
 	const toggleBookmark = () => setShowBookmark(not)
 	const closeBookmark = () => setShowBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
+	const removeStream = () => setStreamUrl('')
 
 	const titles = makeTitle(song)
+	const visible = (b: boolean) => (b ? {} : { display: 'none' })
 
 	return (
 		<>
@@ -107,24 +109,17 @@ function Home({
 					</div>
 					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
 				</div>
-				<div
-					style={{
-						display: streamUrl !== '' ? 'block' : 'none',
-					}}
-				>
+				<div style={{ ...visible(!!streamUrl) }}>
 					<Player src={streamUrl}></Player>
 				</div>
 
-				<LyricsBox
-					data-theme={theme}
-					style={{ display: showLyrics ? 'block' : 'none' }}
-				>
+				<LyricsBox data-theme={theme} style={{ ...visible(showLyrics) }}>
 					<pre>{lyrics}</pre>
 				</LyricsBox>
 				<Config
 					data-theme={theme}
 					className="config"
-					style={{ display: showConfig ? 'block' : 'none' }}
+					style={{ ...visible(showConfig) }}
 				>
 					<div
 						style={{
@@ -175,6 +170,7 @@ function Home({
 							value={streamUrl}
 							onChange={(e) => setStreamUrl(e.target.value)}
 						/>
+						<button onClick={removeStream}>x</button>
 						<div>
 							<a href="http://anison.info">
 								アニメ情報元(修正も募集中): Anison Generation
@@ -250,8 +246,9 @@ const Config = styled.div`
 	/* height: 20vh; */
 	width: 100%;
 	display: flex;
-	padding: 8px;
 	> div {
+		padding: 8px;
+		color: white;
 		background: #aaa;
 	}
 `
