@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
-import useCookie from 'react-use-cookie'
 import styled from 'styled-components'
 import { History, isSongFull, Song } from '../../types'
+import { isObjEmpty } from '../util'
 import FadeBgChanger from './FadeBgChanger'
 import Player from './Player'
 import TimeBar from './TimeBar'
@@ -157,6 +157,7 @@ function Home({
 							<button onClick={toggleBookmark}>
 								{showBookmark ? '☑' : '□'}
 								ブックマーク表示
+								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
 							</button>
 							<button onClick={toggleShowLyrics}>
 								{showLyrics ? '☑' : '□'}
