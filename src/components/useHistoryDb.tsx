@@ -51,7 +51,7 @@ export function useHistoryDb(eventId) {
 				const counts = makeCounts(histories)
 				const countsSong = makeCounts(
 					histories.map((h) => {
-						const [artist, songTitle] = h.title.split('-')
+						const [artist, songTitle] = h.title.split(' - ')
 						const key = songTitle || artist || 'none'
 
 						return { ...h, title: key }
