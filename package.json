@@ -57,7 +57,6 @@
 		"dev": "next",
 		"build": "next build",
 		"export": "next build && next export",
-		"export:github": "GITHUB_ENV=true next build && next export",
 		"deploy": "firebase deploy --only hosting",
 		"start": "next start",
 		"lint": "eslint --ext ts,tsx src",

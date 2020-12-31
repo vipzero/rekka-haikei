@@ -25,9 +25,5 @@ module.exports = withBundleAnalyzer(
 			config.plugins.push(new webpack.DefinePlugin(env))
 			return config
 		},
-		assetPrefix:
-			process.env.NODE_ENV === 'production' && process.env.GITHUB_ENV === 'true'
-				? '/rekka-haikei'
-				: '',
 	})
 )
