@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import _ from 'lodash'
 import { getFirestore } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
 import { formatDate } from '../util'
@@ -6,7 +7,12 @@ import { formatDate } from '../util'
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [histories, setHistories] = useState<History[]>([])
-	const [song, setSong] = useState<Song>({ icy: '', time: 1, wordCounts: {} })
+	const [song, setSong] = useState<Song>({
+		icy: '',
+		time: 1,
+		wordCounts: {},
+		wordCountsAna: [],
+	})
 
 	useEffect(() => {
 		const fdb = getFirestore()
@@ -20,6 +26,19 @@ export function useSongDb() {
 				if (isSongFull(song)) {
 					song.imageLinks?.reverse()
 				}
+				const [title] = song.icy.split(' - ')
+
+				_.sortBy(
+					(song.wordCountsAna = Object.entries(song.wordCounts)
+						.filter(([k]) => k !== song.icy)
+						.map(([name, count]) => ({
+							name,
+							count,
+							label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
+						}))),
+					[(o) => o.name === title, (o) => o.count]
+				)
+
 				// while (song.imageLinks && song.imageLinks.length > 5) {
 				// 	song.imageLinks.pop()
 				// }

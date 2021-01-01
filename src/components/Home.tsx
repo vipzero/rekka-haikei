@@ -98,18 +98,13 @@ function Home({
 										<a href={song.itunesUrl}>iTunes</a>
 									</p>
 								)}
-								<p>
-									{song.wordCounts[song.icy] === 1
-										? '(初)'
-										: `${song.wordCounts[song.icy]}回目`}
-								</p>
 								{showCounts && (
 									<p className="tags">
 										{Object.entries(song.wordCounts)
 											.filter(([k]) => k !== song.icy)
 											.map(([k, v], i) => (
 												<span key={i}>
-													[{k} ({v} 回目)]
+													[{k} ({v === 1 ? '初' : `${v} 回目`})]
 												</span>
 											))}
 									</p>
@@ -311,7 +306,7 @@ const Wrap = styled.div`
 				font-size: 0.9rem;
 			}
 			.animetitle {
-				font-size: 1rem;
+				font-size: 1.3rem;
 			}
 			span:not(:first-child) {
 				margin-left: 0.5rem;

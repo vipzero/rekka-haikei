@@ -11,6 +11,7 @@ export type SongMiss = {
 	composer?: string
 	writer?: string
 	wordCounts: Record<string, number>
+	wordCountsAna: { name: string; label: string; count: number }[]
 }
 
 export type SongFull = SongMiss & {
