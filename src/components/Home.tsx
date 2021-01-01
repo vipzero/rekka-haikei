@@ -245,7 +245,7 @@ function Home({
 							<span>{icy}</span>
 							<span
 								style={{ float: 'right', cursor: 'pointer' }}
-								onClick={() => toggleFavorites(icy)}
+								onClick={() => confirm('削除する') && toggleFavorites(icy)}
 							>
 								[削除]
 							</span>
