@@ -28,14 +28,14 @@ export function useSongDb() {
 				}
 				const [title] = song.icy.split(' - ')
 
-				_.sortBy(
-					(song.wordCountsAna = Object.entries(song.wordCounts)
+				song.wordCountsAna = _.sortBy(
+					Object.entries(song.wordCounts)
 						.filter(([k]) => k !== song.icy)
 						.map(([name, count]) => ({
 							name,
 							count,
 							label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
-						}))),
+						})),
 					[(o) => o.name === title, (o) => o.count]
 				)
 

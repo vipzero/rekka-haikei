@@ -191,9 +191,9 @@ function Home({
 						)}
 						<button onClick={removeStream}>x</button>
 						<div>
-							<a href="http://anison.info">
-								アニメ情報元(修正も募集中): Anison Generation
-							</a>
+							<a href="http://anison.info">アニメ情報元: Anison Generation</a>
+							{'　'}
+							<a href="https://github.com/vipzero/rekka-haikei">コード</a>
 						</div>
 					</div>
 				</Config>
