@@ -149,7 +149,7 @@ function Home({
 							</div>
 						</div>
 					</div>
-					{!isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
+					{isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
 				</div>
 				<div style={{ ...visible(!!streamUrl) }}>
 					<Player src={streamUrl}></Player>
@@ -340,6 +340,17 @@ const Config = styled.div`
 		padding: 8px;
 		background: #aaa;
 	}
+	a,
+	label {
+		color: white !important;
+	}
+	&[data-theme='1'] {
+		color: black !important;
+		a,
+		label {
+			color: black !important;
+		}
+	}
 `
 
 const Wrap = styled.div`
@@ -416,19 +427,14 @@ const Wrap = styled.div`
 		}
 	}
 	a {
-		color: white;
+		color: #ccc;
 		&:blink {
-			color: white;
+			color: #ccc;
 		}
 	}
 	color: white;
 
 	&[data-theme='1'] {
-		color: black;
-		a,
-		label {
-			color: black;
-		}
 		.content,
 		.recenthistory,
 		.config > div,

@@ -15,11 +15,14 @@ async function waitLoadLyrics(): Promise<string> {
 
 export function useLyricsDb(icy, reading) {
 	const [lyric, setLyric] = useState<string>('loading')
+	const [last, setLast] = useState<string>('')
 
 	useEffect(() => {
 		if (!reading) return
+		if (last === icy) return
 		waitLoadLyrics().then((text) => {
 			setLyric(text)
+			setLast(icy)
 		})
 	}, [icy, reading])
 
