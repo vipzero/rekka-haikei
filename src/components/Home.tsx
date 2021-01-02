@@ -54,6 +54,7 @@ function Home({
 	const [showCounts, setShowCounts] = useState<boolean>(true)
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
+	const [side, setSide] = useLocalStorage<boolean>('side-mode', false)
 	const [showHistory, setShowHistory] = useLocalStorage<boolean>(
 		'show-history',
 		false
@@ -87,13 +88,16 @@ function Home({
 	)
 
 	return (
-		<>
-			<FadeBgChanger urls={song?.imageLinks || []} />
+		<div onClick={toggleConfig}>
+			<FadeBgChanger
+				urls={song?.imageLinks || []}
+				px={side ? 'right' : 'center'}
+			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap
 				data-theme={theme}
-				onClick={toggleConfig}
 				className={theme === 2 ? 'dark-theme' : 'light-theme'}
+				style={{ width: side ? '50vw' : '100%' }}
 			>
 				<div className="content">
 					<p className="titles">{titles}</p>
@@ -174,6 +178,11 @@ function Home({
 							>
 								閉じる
 							</button>
+						</div>
+						<div>
+							<ToggleButton checked={side} onClick={() => setSide(not)}>
+								ハーフモード
+							</ToggleButton>
 						</div>
 						<div>
 							<ToggleButton
@@ -319,7 +328,7 @@ function Home({
 					))}
 				</div>
 			</Wrap>
-		</>
+		</div>
 	)
 }
 

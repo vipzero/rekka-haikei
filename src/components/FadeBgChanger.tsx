@@ -15,7 +15,11 @@ const defaultStyle = {
 	opacity: 0,
 }
 
-function FadeBgChanger({ urls }: { urls: string[] }) {
+type Props = {
+	urls: string[]
+	px: 'right' | 'center' | 'left'
+}
+function FadeBgChanger({ urls, px }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 	const [anime, setAnime] = useState<boolean>(true)
 
@@ -38,6 +42,8 @@ function FadeBgChanger({ urls }: { urls: string[] }) {
 						...transitionStyles[state],
 						backgroundImage: bgStyle,
 						backgroundSize: 'contain',
+						backgroundPositionX: px,
+						backgroundPositionY: 'center',
 					}}
 				/>
 			)}
