@@ -10,6 +10,19 @@ export function formatDate(time: number) {
 
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
+export function imgCheck(url: string) {
+	return new Promise((resolve, reject) => {
+		const bgImg = new Image()
+
+		bgImg.onload = () => {
+			resolve(true)
+		}
+		bgImg.onerror = () => {
+			reject()
+		}
+		bgImg.src = url
+	})
+}
 
 export const sleep = (msec) =>
 	new Promise((resolve) => setTimeout(resolve, msec))
