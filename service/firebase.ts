@@ -19,6 +19,12 @@ const init = () => {
 	}
 }
 
+export const addFeedback = (message: string) => {
+	const fdb = getFirestore()
+
+	return fdb.collection('feedback').add({ message })
+}
+
 export const getFirestore = () => {
 	init()
 	return firebase.firestore()

@@ -1,6 +1,8 @@
+import { set } from 'lodash'
 import Link from 'next/link'
 import React, { ReactNode, useState } from 'react'
 import styled from 'styled-components'
+import { addFeedback } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
 import { isObjEmpty } from '../util'
 import FadeBgChanger from './FadeBgChanger'
@@ -46,6 +48,7 @@ function Home({
 		false
 	)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
+	const [feedBack, setFeedBack] = useState<string>('')
 
 	const cycleTheme = () => setTheme((theme + 1) % 4)
 	const toggleRecent = () => setShowHistory(not)
@@ -177,14 +180,14 @@ function Home({
 						</div>
 						<div>
 							<Link href="/history" passHref>
-								<button>履歴検索(携帯回線注意)</button>
+								<a>履歴検索(携帯回線注意)</a>
 							</Link>
 						</div>
 						StreamURL:
 						<input
 							name="streaming-url"
 							value={streamUrl}
-							onChange={(e) => setStreamUrl(e.target.value)}
+							onChange={(e) => setStreamUrl(e.target.value || '')}
 						/>
 						{streamUrl.includes('http://') && (
 							<span style={{ color: 'red' }}>https 非対応</span>
@@ -194,6 +197,49 @@ function Home({
 							<a href="http://anison.info">アニメ情報元: Anison Generation</a>
 							{'　'}
 							<a href="https://github.com/vipzero/rekka-haikei">コード</a>
+						</div>
+						<div>
+							<button
+								onClick={() =>
+									setFeedBack(
+										feedBack
+											? ''
+											: `${song.icy}\nsize: ${window.innerWidth},${
+													window.innerHeight
+											  }\nword: ${song.wordCountsAna
+													.map((v) => v.name)
+													.join(',')}\n`
+									)
+								}
+							>
+								レポート
+							</button>
+							{!!feedBack && (
+								<div
+									style={{
+										display: 'grid',
+										gridTemplateColumns: 'min-content',
+									}}
+								>
+									歌詞の分割ミス・表示崩れなどあれば
+									<textarea
+										rows={4}
+										style={{ width: '60vw' }}
+										value={feedBack}
+										onChange={(e) => setFeedBack(e.target.value)}
+									></textarea>
+									<button
+										onClick={() => {
+											addFeedback(feedBack).then(() => {
+												alert('フィードバックサンクスb')
+												setFeedBack('')
+											})
+										}}
+									>
+										送信
+									</button>
+								</div>
+							)}
 						</div>
 					</div>
 				</Config>

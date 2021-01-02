@@ -11,5 +11,8 @@ service cloud.firestore {
     match /hist/{eventId=**} {
       allow read: if true;
     }
+    match /feedback/{feedbackId=**} {
+      allow write: if true;
+    }
   }
 }
