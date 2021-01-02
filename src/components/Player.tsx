@@ -13,8 +13,6 @@ function isHTMLMediaElement(e: object): e is HTMLMediaElement {
 function Player({ src }: Props) {
 	const [volume, setVolume] = useLocalStorage<number>('player-volume', 0.5)
 
-	console.log({ volume })
-
 	return (
 		<ReactAudioPlayer
 			src={src}

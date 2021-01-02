@@ -1,4 +1,3 @@
-import { set } from 'lodash'
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
 import styled from 'styled-components'
@@ -36,7 +35,7 @@ type TBProps = {
 }
 const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
 	<button onClick={onClick}>
-		<input type="checkbox" checked={checked} />
+		<input type="checkbox" checked={checked || false} onChange={() => {}} />
 		{children}
 	</button>
 )
@@ -79,6 +78,7 @@ function Home({
 		<>
 			<input
 				checked={theme === tid}
+				onChange={() => {}}
 				id={`theme${tid}`}
 				type="radio"
 				onClick={() => setTheme(tid)}
