@@ -1,6 +1,6 @@
 import { set } from 'lodash'
 import Link from 'next/link'
-import React, { ReactNode, useState } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 import styled from 'styled-components'
 import { addFeedback } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
@@ -29,6 +29,17 @@ function makeTitle(song: Song) {
 	if (!artist) return song.icy
 	return `${title} - ${artist}`
 }
+
+type TBProps = {
+	checked: boolean
+	onClick: () => void
+}
+const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
+	<button onClick={onClick}>
+		<input type="checkbox" checked={checked} />
+		{children}
+	</button>
+)
 
 function Home({
 	song,
@@ -63,11 +74,27 @@ function Home({
 	const titles = makeTitle(song)
 	const visible = (b: boolean) => (b ? {} : { display: 'none' })
 
+	const ThemeButton = ({ tid, label }: { tid: number; label: string }) => (
+		<>
+			<input
+				checked={theme === tid}
+				id={`theme${tid}`}
+				type="radio"
+				onClick={() => setTheme(tid)}
+			/>
+			<label htmlFor={`theme${tid}`}>{label}</label>
+		</>
+	)
+
 	return (
 		<>
 			<FadeBgChanger urls={song?.imageLinks || []} />
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
-			<Wrap data-theme={theme} onClick={toggleConfig}>
+			<Wrap
+				data-theme={theme}
+				onClick={toggleConfig}
+				className={theme === 2 ? 'dark-theme' : 'light-theme'}
+			>
 				<div className="content">
 					<p className="titles">{titles}</p>
 					<div className="details">
@@ -127,26 +154,19 @@ function Home({
 				<div style={{ ...visible(!!streamUrl) }}>
 					<Player src={streamUrl}></Player>
 				</div>
-
-				<LyricsBox data-theme={theme} style={{ ...visible(showLyrics) }}>
-					<pre>{lyrics}</pre>
-				</LyricsBox>
 				<Config
 					data-theme={theme}
 					className="config"
 					style={{ ...visible(showConfig) }}
 				>
-					<div
-						style={{
-							flex: 1,
-						}}
-						onClick={(e) => e.stopPropagation()}
-					>
+					<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 						<div>
 							<button onClick={cycleTheme}>テーマ({theme})</button>
-							<button onClick={toggleRecent}>
-								{showHistory ? '☑' : '□'}簡易履歴表示
-							</button>
+							<ThemeButton tid={0} label="CLEAR" />
+							<ThemeButton tid={1} label="WHITE" />
+							<ThemeButton tid={2} label="BLACK" />
+							<ThemeButton tid={3} label="EMPTY" />
+
 							<button
 								style={{ float: 'right' }}
 								className="confbtn"
@@ -156,43 +176,49 @@ function Home({
 							</button>
 						</div>
 						<div>
-							<button
-								data-active={books[song.icy]}
+							<ToggleButton
+								checked={!!books[song.icy]}
 								onClick={() => toggleFavorites(song.icy)}
 							>
 								{books[song.icy]
 									? '★ブックマーク中(β)'
 									: '☆ブックマークしておく(β) ブラウザに保存します'}
-							</button>
-							<button onClick={toggleBookmark}>
-								{showBookmark ? '☑' : '□'}
-								ブックマーク表示
-								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
-							</button>
-							<button onClick={toggleShowLyrics}>
-								{showLyrics ? '☑' : '□'}
-								歌詞表示
-							</button>
-							<button onClick={toggleCounts}>
-								{showCounts ? '☑' : '□'}
+							</ToggleButton>
+						</div>
+						<div
+							style={{ display: 'grid', gridTemplateColumns: 'max-content' }}
+						>
+							<ToggleButton checked={showCounts} onClick={toggleCounts}>
 								カウント表示
-							</button>
+							</ToggleButton>
+							<ToggleButton checked={showLyrics} onClick={toggleShowLyrics}>
+								歌詞表示
+							</ToggleButton>
+							<ToggleButton checked={showHistory} onClick={toggleRecent}>
+								簡易履歴表示
+							</ToggleButton>
+
+							<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
+								ブックマーク表示{' '}
+								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
+							</ToggleButton>
 						</div>
+						<Link href="/history" passHref>
+							<a>履歴検索(携帯回線注意)</a>
+						</Link>
+
 						<div>
-							<Link href="/history" passHref>
-								<a>履歴検索(携帯回線注意)</a>
-							</Link>
+							StreamURL:
+							<input
+								name="streaming-url"
+								value={streamUrl}
+								onChange={(e) => setStreamUrl(e.target.value || '')}
+							/>
+							{streamUrl.includes('http://') && (
+								<span style={{ color: 'red' }}>https 非対応</span>
+							)}
+							<button onClick={removeStream}>x</button>
 						</div>
-						StreamURL:
-						<input
-							name="streaming-url"
-							value={streamUrl}
-							onChange={(e) => setStreamUrl(e.target.value || '')}
-						/>
-						{streamUrl.includes('http://') && (
-							<span style={{ color: 'red' }}>https 非対応</span>
-						)}
-						<button onClick={removeStream}>x</button>
 						<div>
 							<a href="http://anison.info">アニメ情報元: Anison Generation</a>
 							{'　'}
@@ -215,12 +241,7 @@ function Home({
 								レポート
 							</button>
 							{!!feedBack && (
-								<div
-									style={{
-										display: 'grid',
-										gridTemplateColumns: 'min-content',
-									}}
-								>
+								<div style={{}}>
 									歌詞の分割ミス・表示崩れなどあれば
 									<textarea
 										rows={4}
@@ -243,6 +264,10 @@ function Home({
 						</div>
 					</div>
 				</Config>
+
+				<LyricsBox data-theme={theme} style={{ ...visible(showLyrics) }}>
+					<pre>{lyrics}</pre>
+				</LyricsBox>
 				<div>{extraComp || null}</div>
 				<div
 					className="recenthistory"
@@ -313,7 +338,6 @@ const Config = styled.div`
 	display: flex;
 	> div {
 		padding: 8px;
-		color: white;
 		background: #aaa;
 	}
 `
@@ -385,7 +409,26 @@ const Wrap = styled.div`
 			font-size: 0.8rem;
 		}
 	}
+	.album {
+		img {
+			margin-top: 12px;
+			width: 150px;
+		}
+	}
+	a {
+		color: white;
+		&:blink {
+			color: white;
+		}
+	}
+	color: white;
+
 	&[data-theme='1'] {
+		color: black;
+		a,
+		label {
+			color: black;
+		}
 		.content,
 		.recenthistory,
 		.config > div,
@@ -394,6 +437,10 @@ const Wrap = styled.div`
 		}
 	}
 	&[data-theme='2'] {
+		button {
+			background: black;
+			color: white;
+		}
 		.content,
 		.recenthistory,
 		.config > div,
@@ -406,18 +453,6 @@ const Wrap = styled.div`
 		.recenthistory,
 		.bookmarks {
 			visibility: hidden;
-		}
-	}
-	.album {
-		img {
-			margin-top: 12px;
-			width: 150px;
-		}
-	}
-	a {
-		color: white;
-		&:blink {
-			color: white;
 		}
 	}
 `
