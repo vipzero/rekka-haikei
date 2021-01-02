@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { isSongFull } from '../../types'
 import Home from './Home'
 import { useLyricsDb } from './useLyricsDb'
@@ -46,14 +47,19 @@ function HomeContainer() {
 	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
 
 	return (
-		<Home
-			song={song}
-			histories={histories}
-			extraComp={extraComp}
-			lyrics={lyrics}
-			showLyrics={showLyrics}
-			setShowLyrics={(v) => setShowLyrics(v)}
-		/>
+		<>
+			<Helmet>
+				<title>{song.icy}</title>
+			</Helmet>
+			<Home
+				song={song}
+				histories={histories}
+				extraComp={extraComp}
+				lyrics={lyrics}
+				showLyrics={showLyrics}
+				setShowLyrics={(v) => setShowLyrics(v)}
+			/>
+		</>
 	)
 }
 
