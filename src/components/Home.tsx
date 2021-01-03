@@ -336,6 +336,7 @@ function Home({
 const LyricsBox = styled.div`
 	padding: 0 8px;
 	background: rgba(255, 255, 255, 0.8);
+	color: black;
 	&[data-theme='2'] {
 		background: rgba(0, 0, 0, 0.8);
 		color: white;
