@@ -128,7 +128,8 @@ function Home({
 								{song.writer && <p>作曲: {song.writer}</p>}
 								{song.albumName && (
 									<p>
-										{song.albumName.replace(' - Single', '')} ({song.copyright}){' '}
+										{song.albumName.replace(' - Single', '')}
+										{song.copyright && ` (${song.copyright})`}{' '}
 										<a href={song.itunesUrl}>iTunes</a>
 									</p>
 								)}
