@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import _ from 'lodash'
+import _, { isFunction } from 'lodash'
 import { getFirestore } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
 import { formatDate } from '../util'
@@ -26,18 +26,23 @@ export function useSongDb() {
 				if (isSongFull(song)) {
 					song.imageLinks?.reverse()
 				}
-				const [title] = song.icy.split(' - ')
 
-				song.wordCountsAna = _.sortBy(
-					Object.entries(song.wordCounts)
-						.filter(([k]) => k !== song.icy)
-						.map(([name, count]) => ({
-							name,
-							count,
-							label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
-						})),
-					[(o) => o.name === title, (o) => o.count]
-				)
+				const wordCountsAna = Object.entries(song.wordCounts)
+					.filter(([k]) => k !== song.icy)
+					.map(([name, count]) => ({
+						name,
+						count,
+						label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
+					}))
+
+				// タイトル・番組名はソートせず先頭に
+				// const heads: typeof wordCountsAna = [wordCountsAna.shift() || ]
+
+				// if (isSongFull(song) && song.animeTitle) {
+				// 	heads.push(wordCountsAna.shift())
+				// }
+
+				song.wordCountsAna = _.sortBy(wordCountsAna, ['count'])
 
 				// while (song.imageLinks && song.imageLinks.length > 5) {
 				// 	song.imageLinks.pop()
