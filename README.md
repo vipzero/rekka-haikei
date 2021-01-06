@@ -10,7 +10,7 @@
 - React
 - TypeScript
 - Next.js
-- FireBase
+- Firebase
 
 ## development setup
 
