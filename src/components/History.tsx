@@ -14,7 +14,7 @@ const searchFilter = (search: string, text: string) => {
 }
 
 function Page() {
-	const [histories, counts, countsSong] = useHistoryDb('2020nematu')
+	const [histories, counts, countsSong] = useHistoryDb('2021gw')
 	const [search, setSearch] = useState<string>('')
 	const [tab, setTab] = useState<number>(0)
 

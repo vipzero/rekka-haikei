@@ -53,7 +53,7 @@ export function useSongDb() {
 
 		fdb
 			.collection('hist')
-			.doc('2020nematu')
+			.doc('2021gw')
 			.collection('songs')
 			.orderBy('time', 'desc')
 			.limit(10)
