@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
+import config from '../config'
 import { formatDate } from '../util'
 
 export function useSongDb() {
@@ -53,7 +54,7 @@ export function useSongDb() {
 
 		fdb
 			.collection('hist')
-			.doc('2021gw')
+			.doc(config.eventId)
 			.collection('songs')
 			.orderBy('time', 'desc')
 			.limit(10)

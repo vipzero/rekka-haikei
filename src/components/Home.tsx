@@ -214,7 +214,7 @@ function Home({
 							</ToggleButton>
 						</div>
 						<Link href="/history" passHref>
-							<a>履歴検索(携帯回線注意)</a>
+							<a>履歴</a>
 						</Link>
 
 						<div>
