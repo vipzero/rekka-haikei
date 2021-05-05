@@ -34,7 +34,7 @@ type TBProps = {
 	onClick: () => void
 }
 const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
-	<button onClick={onClick}>
+	<button onClick={onClick} style={{ textAlign: 'left' }}>
 		<input type="checkbox" checked={checked || false} onChange={() => {}} />
 		{children}
 	</button>
