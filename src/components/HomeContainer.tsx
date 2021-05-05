@@ -8,13 +8,13 @@ import { useSongDb } from './useSongDb'
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
 		return (
-			<div style={{ height: '100%' }}>
+			<div style={{ height: '50vh' }}>
 				<iframe style={{ width: '100%' }} src="https://nyanpass.com/" />
 			</div>
 		)
 	} else if (ex === 'mia') {
 		return (
-			<div style={{ height: '100%' }}>
+			<div style={{ height: '50vh' }}>
 				<iframe
 					style={{ width: '100%', height: '100%' }}
 					src="https://click.abyss.fun/"
@@ -22,6 +22,7 @@ function getEx(ex: string | false) {
 			</div>
 		)
 	}
+	return null
 }
 
 function HomeContainer() {
@@ -31,12 +32,13 @@ function HomeContainer() {
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
-		if (isSongFull(song)) {
-			if (song.animeTitle.includes('のんのんびより')) {
-				setEx('nonnon')
-			} else if (song.animeTitle.includes('メイドインアビス')) {
-				setEx('mia')
-			}
+		if (!isSongFull(song)) {
+			return setEx(false)
+		}
+		if (song.animeTitle.includes('のんのんびより')) {
+			setEx('nonnon')
+		} else if (song.animeTitle.includes('修羅場')) {
+			setEx('mia')
 		} else {
 			setEx(false)
 		}
