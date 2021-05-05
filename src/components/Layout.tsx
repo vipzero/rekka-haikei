@@ -1,9 +1,7 @@
-import { CssBaseline, MuiThemeProvider } from '@material-ui/core'
 import Head from 'next/head'
 import { FC } from 'react'
 import styled from 'styled-components'
 import { GlobalStyle } from '../config/init'
-import theme from '../theme'
 
 type Props = {
 	title?: string
@@ -21,19 +19,17 @@ const Layout: FC<Props> = ({
 			<meta charSet="utf-8" />
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		</Head>
-		<CssBaseline />
 		<GlobalStyle />
-		<MuiThemeProvider theme={theme}>
-			{hasNavbar ? (
-				<Screen>
-					<div>
-						<main>{children}</main>
-					</div>
-				</Screen>
-			) : (
-				<main>{children}</main>
-			)}
-		</MuiThemeProvider>
+
+		{hasNavbar ? (
+			<Screen>
+				<div>
+					<main>{children}</main>
+				</div>
+			</Screen>
+		) : (
+			<main>{children}</main>
+		)}
 	</div>
 )
 

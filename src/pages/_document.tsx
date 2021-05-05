@@ -48,7 +48,12 @@ class Document extends NextDocument<Props> {
 	render() {
 		return (
 			<Html lang={'ja'}>
-				<Head />
+				<Head>
+					<link
+						rel="stylesheet"
+						href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+					/>
+				</Head>
 
 				<body>
 					<Main />
