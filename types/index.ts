@@ -43,3 +43,8 @@ export type Count = {
 	times: number[]
 	timesStr: string[]
 }
+
+export type BookCount = {
+	icy: string
+	count: number
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Count } from '../../types'
+import config from '../config'
 import { useHistoryDb } from './useHistoryDb'
 
 const searchFilter = (search: string, text: string) => {
@@ -13,7 +14,7 @@ const searchFilter = (search: string, text: string) => {
 }
 
 function Page() {
-	const [histories, counts, countsSong] = useHistoryDb('2021gw')
+	const [histories, counts, countsSong] = useHistoryDb(config.eventId)
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)

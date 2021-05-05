@@ -216,6 +216,9 @@ function Home({
 						<Link href="/history" passHref>
 							<a>履歴</a>
 						</Link>
+						<Link href="/popular" passHref>
+							<a>人気統計</a>
+						</Link>
 
 						<div>
 							StreamURL:
