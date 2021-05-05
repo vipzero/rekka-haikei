@@ -1,6 +1,16 @@
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
 import styled from 'styled-components'
+import {
+	faHistory,
+	faBookmark,
+	faStar,
+	faColumns,
+	faStopwatch,
+	faMusic,
+} from '@fortawesome/free-solid-svg-icons'
+import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { addFeedback } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
 import { isObjEmpty } from '../util'
@@ -185,9 +195,10 @@ function Home({
 								checked={!!books[song.icy]}
 								onClick={() => toggleFavorites(song.icy)}
 							>
+								<FontAwesomeIcon icon={books[song.icy] ? faStar : faStarFill} />
 								{books[song.icy]
-									? '★ブックマーク中'
-									: '☆ブックマークしておく(ブラウザ保存)'}
+									? 'ブックマーク中'
+									: 'ブックマークしておく(ブラウザ保存)'}
 							</ToggleButton>
 						</div>
 						<div
@@ -197,19 +208,24 @@ function Home({
 							}}
 						>
 							<ToggleButton checked={showLyrics} onClick={toggleShowLyrics}>
+								<FontAwesomeIcon icon={faMusic} />
 								歌詞表示
 							</ToggleButton>
 							<ToggleButton checked={showCounts} onClick={toggleCounts}>
+								<FontAwesomeIcon icon={faStopwatch} />
 								カウント表示
 							</ToggleButton>
 							<ToggleButton checked={showHistory} onClick={toggleRecent}>
+								<FontAwesomeIcon icon={faHistory} />
 								簡易履歴表示
 							</ToggleButton>
 							<ToggleButton checked={side} onClick={() => setSide(not)}>
+								<FontAwesomeIcon icon={faColumns} />
 								ハーフモード
 							</ToggleButton>
 
 							<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
+								<FontAwesomeIcon icon={faBookmark} />
 								ブックマーク表示
 								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
 							</ToggleButton>
