@@ -71,7 +71,7 @@ function Home({
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [feedBack, setFeedBack] = useState<string>('')
 
-	const cycleTheme = () => setTheme((theme + 1) % 4)
+	const cycleTheme = () => setTheme((theme + 1) % 5)
 	const toggleRecent = () => setShowHistory(not)
 	const closeRecent = () => setShowHistory(false)
 	const toggleConfig = () => setShowConfig(not)
@@ -181,6 +181,7 @@ function Home({
 							<ThemeButton tid={1} label="WHITE" />
 							<ThemeButton tid={2} label="BLACK" />
 							<ThemeButton tid={3} label="EMPTY" />
+							<ThemeButton tid={4} label="SINGL" />
 
 							<button
 								style={{ float: 'right' }}
@@ -492,6 +493,21 @@ const Wrap = styled.div`
 		.recenthistory,
 		.bookmarks {
 			visibility: hidden;
+		}
+	}
+	.titles-single {
+		display: none;
+	}
+	&[data-theme='4'] {
+		.recenthistory,
+		.bookmarks {
+			visibility: hidden;
+		}
+		.content > * {
+			visibility: hidden;
+		}
+		.content > .titles {
+			visibility: visible;
 		}
 	}
 `
