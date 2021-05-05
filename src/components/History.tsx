@@ -16,14 +16,18 @@ const searchFilter = (search: string, text: string) => {
 function Page() {
 	const [histories, counts, countsSong] = useHistoryDb('2021gw')
 	const [search, setSearch] = useState<string>('')
+	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 
-	console.log('render')
+	const filteredHistories = histories
+		.filter((v) => searchFilter(search, v.title))
+		.slice(0, viewAll ? 10000 : 100)
 
 	return (
 		<Wrap>
 			<div>
-				正規表現検索 <input onChange={(e) => setSearch(e.target.value)}></input>
+				検索(正規表現)
+				<input onChange={(e) => setSearch(e.target.value)}></input>
 			</div>
 			<p>
 				<button onClick={() => setTab(0)}>履歴</button>
@@ -41,16 +45,20 @@ function Page() {
 							</tr>
 						</thead>
 						<tbody>
-							{histories
-								.filter((v) => searchFilter(search, v.title))
-								.map((reco, i) => (
-									<tr key={i} data-cate={reco.timeCate}>
-										<td>{reco.timeStr}</td>
-										<td>{reco.title}</td>
-									</tr>
-								))}
+							{filteredHistories.map((reco, i) => (
+								<tr key={i} data-cate={reco.timeCate}>
+									<td>{reco.timeStr}</td>
+									<td>{reco.title}</td>
+								</tr>
+							))}
 						</tbody>
 					</table>
+					{histories.length >= 100 && (
+						<p>{histories.length}中100件のみ表示しています</p>
+					)}
+					<button onClick={() => setViewAll((v) => !v)}>
+						{viewAll ? '隠す' : '全表示する'}
+					</button>
 				</div>
 			)}
 			{tab === 1 && (
@@ -82,7 +90,7 @@ function CountTable({ counts, title }: { title: string; counts: Count[] }) {
 					</tr>
 				</thead>
 				<tbody>
-					{counts.map((count, i) => (
+					{counts.slice(0, 100).map((count, i) => (
 						<tr key={i}>
 							<td>{count.title}</td>
 							<td>{count.times.length}</td>
@@ -97,6 +105,7 @@ function CountTable({ counts, title }: { title: string; counts: Count[] }) {
 					))}
 				</tbody>
 			</table>
+			{counts.length >= 100 && <p>100件までのみ表示しています</p>}
 		</div>
 	)
 }
