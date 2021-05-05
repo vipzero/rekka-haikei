@@ -21,6 +21,8 @@ function getEx(ex: string | false) {
 				/>
 			</div>
 		)
+	} else if (ex === 'sakurasou') {
+		return null
 	}
 	return null
 }
@@ -39,6 +41,8 @@ function HomeContainer() {
 			setEx('nonnon')
 		} else if (song.animeTitle.includes('修羅場')) {
 			setEx('mia')
+		} else if (song.animeTitle.includes('さくら荘')) {
+			setEx('sakurasou')
 		} else {
 			setEx(false)
 		}
