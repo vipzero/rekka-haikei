@@ -181,44 +181,48 @@ function Home({
 							</button>
 						</div>
 						<div>
-							<ToggleButton checked={side} onClick={() => setSide(not)}>
-								ハーフモード
-							</ToggleButton>
-						</div>
-						<div>
 							<ToggleButton
 								checked={!!books[song.icy]}
 								onClick={() => toggleFavorites(song.icy)}
 							>
 								{books[song.icy]
-									? '★ブックマーク中(β)'
-									: '☆ブックマークしておく(β) ブラウザに保存します'}
+									? '★ブックマーク中'
+									: '☆ブックマークしておく(ブラウザ保存)'}
 							</ToggleButton>
 						</div>
 						<div
-							style={{ display: 'grid', gridTemplateColumns: 'max-content' }}
+							style={{
+								display: 'grid',
+								gridTemplateColumns: 'max-content max-content',
+							}}
 						>
-							<ToggleButton checked={showCounts} onClick={toggleCounts}>
-								カウント表示
-							</ToggleButton>
 							<ToggleButton checked={showLyrics} onClick={toggleShowLyrics}>
 								歌詞表示
+							</ToggleButton>
+							<ToggleButton checked={showCounts} onClick={toggleCounts}>
+								カウント表示
 							</ToggleButton>
 							<ToggleButton checked={showHistory} onClick={toggleRecent}>
 								簡易履歴表示
 							</ToggleButton>
+							<ToggleButton checked={side} onClick={() => setSide(not)}>
+								ハーフモード
+							</ToggleButton>
 
 							<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
-								ブックマーク表示{' '}
+								ブックマーク表示
 								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
 							</ToggleButton>
 						</div>
-						<Link href="/history" passHref>
-							<a>履歴</a>
-						</Link>
-						<Link href="/popular" passHref>
-							<a>人気統計</a>
-						</Link>
+
+						<div style={{ display: 'flex', gap: '4px' }}>
+							<Link href="/history" passHref>
+								<a>履歴</a>
+							</Link>
+							<Link href="/popular" passHref>
+								<a>人気統計</a>
+							</Link>
+						</div>
 
 						<div>
 							StreamURL:
@@ -232,9 +236,8 @@ function Home({
 							)}
 							<button onClick={removeStream}>x</button>
 						</div>
-						<div>
+						<div style={{ display: 'flex', gap: '8px' }}>
 							<a href="http://anison.info">アニメ情報元: Anison Generation</a>
-							{'　'}
 							<a href="https://github.com/vipzero/rekka-haikei">コード</a>
 						</div>
 						<div>
