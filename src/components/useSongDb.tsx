@@ -1,5 +1,5 @@
+import _ from 'lodash'
 import { useEffect, useState } from 'react'
-import _, { isFunction } from 'lodash'
 import { getFirestore } from '../../service/firebase'
 import { History, isSongFull, Song } from '../../types'
 import { formatDate } from '../util'

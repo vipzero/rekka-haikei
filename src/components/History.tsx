@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import styled from 'styled-components'
 import { Count } from '../../types'
 import { useHistoryDb } from './useHistoryDb'
@@ -8,7 +7,7 @@ const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
 	try {
 		return new RegExp(search, 'i').exec(text)
-	} catch (e) {
+	} catch (_e) {
 		return text.toLowerCase().includes(search.toLowerCase())
 	}
 }
