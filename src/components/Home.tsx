@@ -243,7 +243,7 @@ function Home({
 								<a>履歴</a>
 							</Link>
 							<Link href="/popular" passHref>
-								<a>人気統計</a>
+								<a>ブクマ数統計</a>
 							</Link>
 						</div>
 
