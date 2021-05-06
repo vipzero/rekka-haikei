@@ -74,6 +74,16 @@ export function useSongDb() {
 				setHistories(histories)
 			})
 	}, [])
+	const setBg = (url) => {
+		const fdb = getFirestore()
 
-	return [loaded, song, histories] as const
+		fdb
+			.collection('song')
+			.doc('current')
+			.update({
+				imageLinks: [url, ...(song?.imageLinks || [])],
+			})
+	}
+
+	return [loaded, song, histories, setBg] as const
 }

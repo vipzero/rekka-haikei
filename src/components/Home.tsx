@@ -245,6 +245,9 @@ function Home({
 							<Link href="/popular" passHref>
 								<a>ブクマ数統計</a>
 							</Link>
+							<Link href="/choice" passHref>
+								<a>背景補正</a>
+							</Link>
 						</div>
 
 						<div>
