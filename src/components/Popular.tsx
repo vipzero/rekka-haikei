@@ -26,7 +26,7 @@ function CountTable({ counts, title }: { title: string; counts: BookCount[] }) {
 					</tr>
 				</thead>
 				<tbody>
-					{counts.slice(0, 100).map((count, i) => (
+					{counts.slice(0, config.visibleRecordLimit).map((count, i) => (
 						<tr key={i}>
 							<td>{count.icy}</td>
 							<td>{count.count}</td>

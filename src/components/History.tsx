@@ -21,7 +21,7 @@ function Page() {
 
 	const filteredHistories = histories
 		.filter((v) => searchFilter(search, v.title))
-		.slice(0, viewAll ? 10000 : 100)
+		.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
 
 	return (
 		<Wrap>
@@ -90,7 +90,7 @@ function CountTable({ counts, title }: { title: string; counts: Count[] }) {
 					</tr>
 				</thead>
 				<tbody>
-					{counts.slice(0, 100).map((count, i) => (
+					{counts.slice(0, config.visibleRecordLimit).map((count, i) => (
 						<tr key={i}>
 							<td>{count.title}</td>
 							<td>{count.times.length}</td>
