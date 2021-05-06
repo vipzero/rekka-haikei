@@ -7,11 +7,7 @@
 		"predeploy": "yarn build && yarn export",
 		"public": "out",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-		"rewrites": [
-			{
-				"source": "**",
-				"destination": "/index.html"
-			}
-		]
+		"rewrites": [],
+		"cleanUrls": true
 	}
 }
