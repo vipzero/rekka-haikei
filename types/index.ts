@@ -48,3 +48,8 @@ export type BookCount = {
 	icy: string
 	count: number
 }
+
+export type Theme = {
+	id: number
+	key: string
+}

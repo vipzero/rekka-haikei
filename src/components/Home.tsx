@@ -12,13 +12,21 @@ import {
 import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { addFeedback } from '../../service/firebase'
-import { History, isSongFull, Song } from '../../types'
+import { History, isSongFull, Song, Theme } from '../../types'
 import { isObjEmpty } from '../util'
 import FadeBgChanger from './FadeBgChanger'
 import Player from './Player'
 import TimeBar from './TimeBar'
 import { useFavorites } from './useFavorites'
 import { useLocalStorage } from './useLocalStorage'
+
+const themes: Theme[] = [
+	{ id: 0, key: 'CLEAR' },
+	{ id: 1, key: 'WHITE' },
+	{ id: 2, key: 'BLACK' },
+	{ id: 3, key: 'EMPTY' },
+	{ id: 4, key: 'SINGL' },
+]
 
 type Props = {
 	song: Song
@@ -71,7 +79,7 @@ function Home({
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [feedBack, setFeedBack] = useState<string>('')
 
-	const cycleTheme = () => setTheme((theme + 1) % 5)
+	const cycleTheme = () => setTheme((theme + 1) % themes.length)
 	const toggleRecent = () => setShowHistory(not)
 	const closeRecent = () => setShowHistory(false)
 	const toggleConfig = () => setShowConfig(not)
@@ -177,11 +185,9 @@ function Home({
 					<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 						<div>
 							<button onClick={cycleTheme}>テーマ({theme})</button>
-							<ThemeButton tid={0} label="CLEAR" />
-							<ThemeButton tid={1} label="WHITE" />
-							<ThemeButton tid={2} label="BLACK" />
-							<ThemeButton tid={3} label="EMPTY" />
-							<ThemeButton tid={4} label="SINGL" />
+							{themes.map((t) => (
+								<ThemeButton key={t.key} tid={t.id} label={t.key} />
+							))}
 
 							<button
 								style={{ float: 'right' }}
