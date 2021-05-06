@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { isSongFull } from '../../types'
+import { FloatingBox } from '.'
 import Home from './Home'
 import { useLyricsDb } from './useLyricsDb'
 import { useSongDb } from './useSongDb'
@@ -22,7 +23,15 @@ function getEx(ex: string | false) {
 			</div>
 		)
 	} else if (ex === 'sakurasou') {
-		return null
+		return (
+			<div style={{ height: '30vh' }}>
+				<FloatingBox>
+					<a href="http://sakurasou.tv/" target="_blanck">
+						<img src="/maid-chan.png"></img>
+					</a>
+				</FloatingBox>
+			</div>
+		)
 	}
 	return null
 }
@@ -34,17 +43,15 @@ function HomeContainer() {
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
-		if (!isSongFull(song)) {
-			return setEx(false)
-		}
+		setEx(false)
+		if (!isSongFull(song)) return
+
 		if (song.animeTitle.includes('のんのんびより')) {
 			setEx('nonnon')
 		} else if (song.animeTitle.includes('修羅場')) {
 			setEx('mia')
 		} else if (song.animeTitle.includes('さくら荘')) {
 			setEx('sakurasou')
-		} else {
-			setEx(false)
 		}
 	}, [song])
 
