@@ -5,7 +5,7 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    match /song/current {
+    match /song/{infoId=**} {
       allow read, write: if true;
     }
     match /hist/{eventId=**} {
