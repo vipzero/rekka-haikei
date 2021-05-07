@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Count } from '../../types'
+import { Count, WordCount } from '../../types'
 import config from '../config'
+import { useCountDb } from './useCountDb'
 import { useHistoryDb } from './useHistoryDb'
 
 const searchFilter = (search: string, text: string) => {
@@ -33,6 +34,7 @@ function Page() {
 				<button onClick={() => setTab(0)}>履歴</button>
 				<button onClick={() => setTab(1)}>再生回数</button>
 				<button onClick={() => setTab(2)}>再生回数(曲名)</button>
+				<button onClick={() => setTab(3)}>タグカウント</button>
 			</p>
 			{tab === 0 && (
 				<div>
@@ -73,7 +75,26 @@ function Page() {
 					counts={countsSong.filter((v) => searchFilter(search, v.title))}
 				/>
 			)}
+			{tab === 3 && <WordCountTable />}
 		</Wrap>
+	)
+}
+
+function WordCountTable() {
+	const [counts] = useCountDb(config.eventId)
+
+	return (
+		<div>
+			<h3>タグカウント</h3>
+			<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
+				{counts.map((v, i) => (
+					<div key={i}>
+						<span>{v.word}</span>
+						<span>({v.count})</span>
+					</div>
+				))}
+			</div>
+		</div>
 	)
 }
 
