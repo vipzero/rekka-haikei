@@ -74,14 +74,21 @@ export function useSongDb() {
 				setHistories(histories)
 			})
 	}, [])
-	const setBg = (url) => {
+	const setBg = async (url) => {
 		const fdb = getFirestore()
+		const song = (
+			await fdb.collection('song').doc('current').get()
+		).data() as Song
+		const imageLinks = song.imageLinks || []
+
+		// song cahnged guard
+		if (imageLinks[0] === url || !imageLinks.includes(url)) return
 
 		fdb
 			.collection('song')
 			.doc('current')
 			.update({
-				imageLinks: [url, ...(song?.imageLinks || [])],
+				imageLinks: [url, ...imageLinks.filter((v) => v !== url)],
 			})
 	}
 
