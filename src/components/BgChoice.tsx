@@ -9,9 +9,9 @@ function Page() {
 
 	return (
 		<Wrap>
-			{song.imageLinks?.map((link, i) => (
+			{song.imageLinks?.map((link) => (
 				<div
-					key={i}
+					key={link}
 					onClick={() => {
 						if (!confirm('背景を変更しますか？')) return
 						setBg(link)
