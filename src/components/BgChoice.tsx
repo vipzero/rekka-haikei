@@ -13,6 +13,7 @@ function Page() {
 				<div
 					key={i}
 					onClick={() => {
+						if (!confirm('背景を変更しますか？')) return
 						setBg(link)
 					}}
 				>
