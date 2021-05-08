@@ -9,10 +9,11 @@ function Page() {
 
 	return (
 		<Wrap>
-			{song.imageLinks?.map((link) => (
+			{song.imageLinks?.map((link, i) => (
 				<div
-					key={link}
+					key={`${song.time}_${link}`}
 					onClick={() => {
+						if (i === 0) return
 						if (!confirm('背景を変更しますか？')) return
 						setBg(link)
 					}}
@@ -34,6 +35,7 @@ const Wrap = styled.div`
 		cursor: pointer;
 		&:first-child {
 			border-color: red;
+			cursor: auto;
 		}
 		margin: 4px;
 		padding: 2px;
