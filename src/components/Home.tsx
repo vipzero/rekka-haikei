@@ -6,6 +6,7 @@ import {
 	faBookmark,
 	faStar,
 	faColumns,
+	faLock,
 	faStopwatch,
 	faMusic,
 } from '@fortawesome/free-solid-svg-icons'
@@ -77,6 +78,7 @@ function Home({
 	const [showConfig, setShowConfig] = useState<boolean>(false)
 	const [showBookmark, setShowBookmark] = useState<boolean>(false)
 	const [showCounts, setShowCounts] = useState<boolean>(true)
+	const [changable, setChangable] = useState<boolean>(true)
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
 	const [side, setSide] = useLocalStorage<boolean>('side-mode', false)
@@ -89,6 +91,7 @@ function Home({
 
 	const cycleTheme = () => setTheme((theme + 1) % themes.length)
 	const toggleRecent = () => setShowHistory(not)
+	const toggleChangable = () => setChangable(not)
 	const closeRecent = () => setShowHistory(false)
 	const toggleConfig = () => setShowConfig(not)
 	const toggleBookmark = () => setShowBookmark(not)
@@ -116,7 +119,9 @@ function Home({
 	return (
 		<div onClick={toggleConfig}>
 			<FadeBgChanger
+				sid={song.time}
 				urls={song?.imageLinks || []}
+				lockCount={changable ? 10 : 2}
 				px={side ? 'right' : 'center'}
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
@@ -243,6 +248,11 @@ function Home({
 								<FontAwesomeIcon icon={faBookmark} />
 								ブックマーク表示
 								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
+							</ToggleButton>
+
+							<ToggleButton checked={changable} onClick={toggleChangable}>
+								<FontAwesomeIcon icon={faLock} />
+								背景変更2回以上許可
 							</ToggleButton>
 						</div>
 

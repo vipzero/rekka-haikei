@@ -29,24 +29,36 @@ async function enableUrl(urls: string[]) {
 
 type Props = {
 	urls: string[]
+	sid: number
+	lockCount: number
 	px: 'right' | 'center' | 'left'
 }
-function FadeBgChanger({ urls, px }: Props) {
+function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 	const [anime, setAnime] = useState<boolean>(true)
 	const [url, setUrl] = useState<string>('')
+	const [lock, setLock] = useState<number>(lockCount)
 	const divRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		setLock(lockCount)
+	}, [sid, lockCount])
+
+	const locked = lock === 0
+
+	useEffect(() => {
+		if (locked) return
+
 		enableUrl(urls)
 			.then((url) => {
 				if (url) {
 					setUrl(url)
 					setAnime(false)
+					setLock((v) => v - 1)
 				}
 			})
 			.catch(() => {})
-	}, [urls[0]])
+	}, [urls[0], locked])
 
 	return (
 		<Transition
