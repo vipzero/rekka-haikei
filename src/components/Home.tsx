@@ -51,11 +51,19 @@ type TBProps = {
 	checked: boolean
 	onClick: () => void
 }
+
+const ToggleButtonWrap = styled.button`
+	text-align: left;
+	> * {
+		padding-right: 4px;
+	}
+`
+
 const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
-	<button onClick={onClick} style={{ textAlign: 'left' }}>
+	<ToggleButtonWrap onClick={onClick}>
 		<input type="checkbox" checked={checked || false} onChange={() => {}} />
 		{children}
-	</button>
+	</ToggleButtonWrap>
 )
 
 function Home({
