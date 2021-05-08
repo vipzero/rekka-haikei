@@ -121,7 +121,7 @@ function Home({
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
-				lockCount={changable ? 10 : 2}
+				lockCount={changable ? 10 : 1}
 				px={side ? 'right' : 'center'}
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
@@ -252,7 +252,7 @@ function Home({
 
 							<ToggleButton checked={changable} onClick={toggleChangable}>
 								<FontAwesomeIcon icon={faLock} />
-								背景変更2回以上許可
+								背景変更許可
 							</ToggleButton>
 						</div>
 
