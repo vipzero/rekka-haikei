@@ -1,23 +1,45 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BookCount } from '../../types'
 import config from '../config'
 import { useBookDb } from '../hooks/useBookDb'
+import { useFavorites, useSyncFavorite } from '../hooks/useFavorites'
 
 function Page() {
-	const [books] = useBookDb(config.eventId)
+	// const lastTime = useIsLastTime()
+
+	// if (!lastTime) return <p>23時までまってね...</p>
 
 	return (
 		<Wrap>
-			<CountTable title={'人気ブックマーク'} counts={books} />
+			<CountTable />
 		</Wrap>
 	)
 }
 
-function CountTable({ counts, title }: { title: string; counts: BookCount[] }) {
+function CountTable() {
+	const [books] = useBookDb(config.eventId)
+	const { favorites } = useFavorites()
+	const [synced, doSync] = useSyncFavorite()
+
+	if (!favorites) return <p>loading</p>
+
 	return (
 		<div>
-			<h3>{title}</h3>
+			<h3>人気ブックマーク</h3>
+			{!synced && (
+				<p>
+					自分のブックマーク({Object.keys(favorites).length}) 件を投票しますか？
+					<button
+						onClick={() => {
+							doSync(favorites).then(() => {
+								alert('投票しました')
+							})
+						}}
+					>
+						送信する(1回のみ)
+					</button>
+				</p>
+			)}
 			<table className="count">
 				<thead>
 					<tr>
@@ -26,7 +48,7 @@ function CountTable({ counts, title }: { title: string; counts: BookCount[] }) {
 					</tr>
 				</thead>
 				<tbody>
-					{counts.slice(0, config.visibleRecordLimit).map((count, i) => (
+					{books.slice(0, config.visibleRecordLimit).map((count, i) => (
 						<tr key={i}>
 							<td>{count.icy}</td>
 							<td>{count.count}</td>
@@ -34,7 +56,7 @@ function CountTable({ counts, title }: { title: string; counts: BookCount[] }) {
 					))}
 				</tbody>
 			</table>
-			{counts.length >= 100 && <p>100件までのみ表示しています</p>}
+			{books.length >= 100 && <p>100件までのみ表示しています</p>}
 		</div>
 	)
 }

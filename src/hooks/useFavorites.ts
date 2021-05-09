@@ -3,17 +3,17 @@ import { useLocalStorage } from './useLocalStorage'
 
 export function useSyncFavorite() {
 	const [synced, setSynced] = useLocalStorage<boolean>(
-		'synced-favorite-songs-new',
+		'synced-favorite-0',
 		false
 	)
-	const doSync = (favorites) => {
+	const doSync = async (favorites: Record<string, boolean>) => {
 		if (synced) return
 
-		incFavoritesAll(Object.keys(favorites))
 		setSynced(true)
+		await incFavoritesAll(Object.keys(favorites))
 	}
 
-	return [synced, doSync]
+	return [synced, doSync] as const
 }
 
 export const useFavorites = () => {

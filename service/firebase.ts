@@ -48,12 +48,12 @@ export const incFavorites = async (icy: string, count = 1) => {
 
 export const decFavorites = (icy: string) => incFavorites(icy, -1)
 
-export const incFavoritesAll = (icys: string[]) => {
+export const incFavoritesAll = async (icys: string[]) => {
 	const fdb = getFirestore()
 	const books = fdb.collection('book').doc(config.eventId).collection('books')
 	const batch = fdb.batch()
 
-	icys.forEach(async (icy) => {
+	for (const icy of icys.slice(0, 450)) {
 		const snaps = await books.where('icy', '==', icy).get()
 
 		if (snaps.size === 0) {
@@ -65,8 +65,12 @@ export const incFavoritesAll = (icys: string[]) => {
 				})
 			)
 		}
+	}
+
+	batch.update(fdb.collection('book').doc(config.eventId), {
+		postCount: firebase.firestore.FieldValue.increment(1),
 	})
-	batch.commit()
+	await batch.commit()
 }
 
 export function getBooks(eventId) {
