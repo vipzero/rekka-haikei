@@ -17,7 +17,7 @@ function Page() {
 }
 
 function CountTable() {
-	const [books] = useBookDb(config.eventId)
+	const [books, postCount] = useBookDb(config.eventId)
 	const { favorites } = useFavorites()
 	const [synced, doSync] = useSyncFavorite()
 
@@ -40,6 +40,7 @@ function CountTable() {
 					</button>
 				</p>
 			)}
+			<p>投票数: {postCount}</p>
 			<table className="count">
 				<thead>
 					<tr>
