@@ -17,5 +17,9 @@ service cloud.firestore {
     match /book/{bookId=**} {
       allow read, write: if true;
     }
+    match /vote/{voteId=**} {
+
+      allow read, write: if true;
+    }
   }
 }

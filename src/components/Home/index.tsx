@@ -21,6 +21,7 @@ import TimeBar from '../TimeBar'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useIsLastTime } from '../../hooks/useLastTime'
+import config from '../../config'
 
 const themes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },
@@ -89,7 +90,6 @@ function Home({
 	)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [feedBack, setFeedBack] = useState<string>('')
-	const lastTime = useIsLastTime()
 
 	const cycleTheme = () => setTheme((theme + 1) % themes.length)
 	const toggleRecent = () => setShowHistory(not)
@@ -104,6 +104,7 @@ function Home({
 
 	const titles = makeTitle(song)
 	const visible = (b: boolean) => (b ? {} : { display: 'none' })
+	const lastTime = +new Date() > config.lastTime
 
 	const ThemeButton = ({ tid, label }: { tid: number; label: string }) => (
 		<>
