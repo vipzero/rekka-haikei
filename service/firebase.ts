@@ -31,9 +31,9 @@ export const getFirestore = () => {
 	return firebase.firestore()
 }
 
-export const incFavorites = async (icy: string, count = 1) => {
+export const _incFavorites = async (icy: string, count = 1) => {
 	const fdb = getFirestore()
-	const books = fdb.collection('book').doc(config.eventId).collection('books')
+	const books = fdb.collection('vote').doc(config.eventId).collection('books')
 
 	const snaps = await books.where('icy', '==', icy).get()
 
@@ -46,11 +46,11 @@ export const incFavorites = async (icy: string, count = 1) => {
 	}
 }
 
-export const decFavorites = (icy: string) => incFavorites(icy, -1)
+export const _decFavorites = (icy: string) => _incFavorites(icy, -1)
 
 export const incFavoritesAll = async (icys: string[]) => {
 	const fdb = getFirestore()
-	const books = fdb.collection('book').doc(config.eventId).collection('books')
+	const books = fdb.collection('vote').doc(config.eventId).collection('books')
 	const batch = fdb.batch()
 
 	for (const icy of icys.slice(0, 450)) {
@@ -67,7 +67,7 @@ export const incFavoritesAll = async (icys: string[]) => {
 		}
 	}
 
-	batch.update(fdb.collection('book').doc(config.eventId), {
+	batch.update(fdb.collection('vote').doc(config.eventId), {
 		postCount: firebase.firestore.FieldValue.increment(1),
 	})
 	await batch.commit()
@@ -75,12 +75,17 @@ export const incFavoritesAll = async (icys: string[]) => {
 
 export function getBooks(eventId) {
 	const fdb = getFirestore()
-	const booksRef = fdb.collection('book').doc(eventId).collection('books')
+	const booksRef = fdb.collection('vote').doc(eventId).collection('books')
 
 	return booksRef
 		.orderBy('count', 'desc')
 		.limit(config.visibleRecordLimit)
 		.get()
+}
+export function getBooksPostCount(eventId) {
+	const fdb = getFirestore()
+
+	return fdb.collection('vote').doc(eventId).get()
 }
 
 export function getHistories(eventId) {

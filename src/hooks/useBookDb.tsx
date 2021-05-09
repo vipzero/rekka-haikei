@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { getBooks } from '../../service/firebase'
+import { getBooks, getBooksPostCount } from '../../service/firebase'
 import { BookCount } from '../../types'
 
 export function useBookDb(eventId) {
 	const [books, setBooks] = useState<BookCount[]>([])
+	const [postCount, setPostCount] = useState<number>(-1)
 
 	useEffect(() => {
 		getBooks(eventId).then((snaps) => {
@@ -11,7 +12,10 @@ export function useBookDb(eventId) {
 
 			setBooks(books)
 		})
+		getBooksPostCount(eventId).then((snap) => {
+			setPostCount((snap.data() as { postCount: number }).postCount)
+		})
 	}, [eventId])
 
-	return [books] as const
+	return [books, postCount] as const
 }
