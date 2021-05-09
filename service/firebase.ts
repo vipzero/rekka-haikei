@@ -68,3 +68,36 @@ export const incFavoritesAll = (icys: string[]) => {
 	})
 	batch.commit()
 }
+
+export function getBooks(eventId) {
+	const fdb = getFirestore()
+	const booksRef = fdb.collection('book').doc(eventId).collection('books')
+
+	return booksRef
+		.orderBy('count', 'desc')
+		.limit(config.visibleRecordLimit)
+		.get()
+}
+
+export function getHistories(eventId) {
+	const fdb = getFirestore()
+
+	return fdb
+		.collection('hist')
+		.doc(eventId)
+		.collection('songs')
+		.orderBy('time', 'desc')
+		.get()
+}
+
+export function getCounts(eventId) {
+	const fdb = getFirestore()
+
+	return fdb
+		.collection('hist')
+		.doc(eventId)
+		.collection('counts')
+		.orderBy('count', 'desc')
+		.limit(200)
+		.get()
+}

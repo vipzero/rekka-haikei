@@ -1,25 +1,16 @@
 import { useEffect, useState } from 'react'
-import { getFirestore } from '../../service/firebase'
+import { getBooks } from '../../service/firebase'
 import { BookCount } from '../../types'
-import config from '../config'
 
 export function useBookDb(eventId) {
 	const [books, setBooks] = useState<BookCount[]>([])
 
 	useEffect(() => {
-		const fdb = getFirestore()
+		getBooks(eventId).then((snaps) => {
+			const books = snaps.docs.map((snap) => snap.data() as BookCount)
 
-		const booksRef = fdb.collection('book').doc(eventId).collection('books')
-
-		booksRef
-			.orderBy('count', 'desc')
-			.limit(config.visibleRecordLimit)
-			.get()
-			.then((snaps) => {
-				const books = snaps.docs.map((snap) => snap.data() as BookCount)
-
-				setBooks(books)
-			})
+			setBooks(books)
+		})
 	}, [eventId])
 
 	return [books] as const

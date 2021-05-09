@@ -1,27 +1,26 @@
-import { useEffect } from 'react'
-import {
-	incFavoritesAll,
-	incFavorites,
-	decFavorites,
-} from '../../service/firebase'
+import { incFavoritesAll } from '../../service/firebase'
 import { useLocalStorage } from './useLocalStorage'
+
+export function useSyncFavorite() {
+	const [synced, setSynced] = useLocalStorage<boolean>(
+		'synced-favorite-songs-new',
+		false
+	)
+	const doSync = (favorites) => {
+		if (synced) return
+
+		incFavoritesAll(Object.keys(favorites))
+		setSynced(true)
+	}
+
+	return [synced, doSync]
+}
 
 export const useFavorites = () => {
 	const [favorites, setFavortes] = useLocalStorage<Record<string, boolean>>(
 		'favorite-songs',
 		{}
 	)
-	const [synced, setSynced] = useLocalStorage<boolean>(
-		'synced-favorite-songs',
-		false
-	)
-
-	useEffect(() => {
-		if (synced) return
-
-		incFavoritesAll(Object.keys(favorites))
-		setSynced(true)
-	}, [synced])
 
 	const toggleFavorites = (icy) => {
 		setFavortes((data) => {
@@ -29,10 +28,8 @@ export const useFavorites = () => {
 
 			if (newFavorites[icy]) {
 				delete newFavorites[icy]
-				decFavorites(icy)
 			} else {
 				newFavorites[icy] = true
-				incFavorites(icy)
 			}
 			return newFavorites
 		})
