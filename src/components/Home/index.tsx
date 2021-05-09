@@ -20,6 +20,7 @@ import Player from '../Player'
 import TimeBar from '../TimeBar'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useIsLastTime } from '../../hooks/useLastTime'
 
 const themes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },
@@ -88,6 +89,7 @@ function Home({
 	)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [feedBack, setFeedBack] = useState<string>('')
+	const lastTime = useIsLastTime()
 
 	const cycleTheme = () => setTheme((theme + 1) % themes.length)
 	const toggleRecent = () => setShowHistory(not)
@@ -261,7 +263,7 @@ function Home({
 								<a>履歴</a>
 							</Link>
 							<Link href="/popular" passHref>
-								<a>ブクマ数統計</a>
+								<a data-important={lastTime}>ブクマ数統計</a>
 							</Link>
 							<Link href="/choice" passHref>
 								<a>背景補正</a>
@@ -535,6 +537,21 @@ const Wrap = styled.div`
 		}
 		.content > .titles {
 			visibility: visible;
+		}
+	}
+
+	[data-important='true'] {
+		animation: flash 1s linear infinite;
+	}
+	@keyframes flash {
+		0% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
 		}
 	}
 `
