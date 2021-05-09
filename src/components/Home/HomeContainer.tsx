@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { isSongFull } from '../../types'
-import { FloatingBox } from '.'
-import Home from './Home'
-import { useLyricsDb } from './useLyricsDb'
-import { useSongDb } from './useSongDb'
+import { FloatingBox } from '..'
+import { isSongFull } from '../../../types'
+import { useLyricsDb } from '../../hooks/useLyricsDb'
+import { useSongDb } from '../../hooks/useSongDb'
+import Home from '.'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -48,7 +48,7 @@ function HomeContainer() {
 
 		if (song.animeTitle.includes('のんのんびより')) {
 			setEx('nonnon')
-		} else if (song.animeTitle.includes('修羅場')) {
+		} else if (song.animeTitle.includes('アビス')) {
 			setEx('mia')
 		} else if (song.animeTitle.includes('さくら荘')) {
 			setEx('sakurasou')

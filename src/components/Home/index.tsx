@@ -12,14 +12,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { addFeedback } from '../../service/firebase'
-import { History, isSongFull, Song, Theme } from '../../types'
-import { isObjEmpty } from '../util'
-import FadeBgChanger from './FadeBgChanger'
-import Player from './Player'
-import TimeBar from './TimeBar'
-import { useFavorites } from './useFavorites'
-import { useLocalStorage } from './useLocalStorage'
+import { addFeedback } from '../../../service/firebase'
+import { History, isSongFull, Song, Theme } from '../../../types'
+import { isObjEmpty } from '../../util'
+import FadeBgChanger from '../FadeBgChanger'
+import Player from '../Player'
+import TimeBar from '../TimeBar'
+import { useFavorites } from '../../hooks/useFavorites'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
 
 const themes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },

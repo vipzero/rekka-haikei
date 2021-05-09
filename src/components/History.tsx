@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Count, WordCount } from '../../types'
 import config from '../config'
-import { useCountDb } from './useCountDb'
-import { useHistoryDb } from './useHistoryDb'
+import { useCountDb } from '../hooks/useCountDb'
+import { useHistoryDb } from '../hooks/useHistoryDb'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactAudioPlayer from 'react-audio-player'
-import { useLocalStorage } from './useLocalStorage'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 type Props = {
 	src: string

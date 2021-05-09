@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { BookCount } from '../../types'
 import config from '../config'
-import { useBookDb } from './useBookDb'
+import { useBookDb } from '../hooks/useBookDb'
 
 function Page() {
 	const [books] = useBookDb(config.eventId)

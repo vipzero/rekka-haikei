@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useSongDb } from './useSongDb'
+import { useSongDb } from '../hooks/useSongDb'
 
 function Page() {
 	const [loaded, song, , setBg] = useSongDb()
