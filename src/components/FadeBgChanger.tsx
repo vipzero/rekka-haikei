@@ -20,25 +20,15 @@ async function enableUrl(urls: string[]) {
 	for (const url of urls) {
 		const ok = await imgCheck(url).catch(() => false)
 
-		if (ok) {
-			return url
-		}
+		if (ok) return url
 	}
 	return false
 }
 
-type Props = {
-	urls: string[]
-	sid: number
-	lockCount: number
-	px: 'right' | 'center' | 'left'
-}
-function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
-	const [bgStyle, setBg] = useState<string>('')
+function useBgs(urls: string[], sid: number, lockCount: number) {
 	const [anime, setAnime] = useState<boolean>(true)
 	const [url, setUrl] = useState<string>('')
 	const [lock, setLock] = useState<number>(lockCount)
-	const divRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
 		setLock(lockCount)
@@ -59,6 +49,19 @@ function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
 			})
 			.catch(() => {})
 	}, [urls[0], locked])
+	return { anime, url, setAnime }
+}
+
+type Props = {
+	urls: string[]
+	sid: number
+	lockCount: number
+	px: 'right' | 'center' | 'left'
+}
+function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
+	const [bgStyle, setBg] = useState<string>('')
+	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
+	const divRef = useRef<HTMLDivElement>(null)
 
 	return (
 		<Transition
