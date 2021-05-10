@@ -1,27 +1,27 @@
+import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
+import {
+	faBookmark,
+	faColumns,
+	faHistory,
+	faLock,
+	faMusic,
+	faStar,
+	faStopwatch,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { FC, ReactNode, useState } from 'react'
 import styled from 'styled-components'
-import {
-	faHistory,
-	faBookmark,
-	faStar,
-	faColumns,
-	faLock,
-	faStopwatch,
-	faMusic,
-} from '@fortawesome/free-solid-svg-icons'
-import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { addFeedback } from '../../../service/firebase'
 import { History, isSongFull, Song, Theme } from '../../../types'
-import { isObjEmpty } from '../../util'
+import config from '../../config'
+import { useFavorites } from '../../hooks/useFavorites'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { isObjEmpty, not } from '../../util'
 import FadeBgChanger from '../FadeBgChanger'
 import Player from '../Player'
 import TimeBar from '../TimeBar'
-import { useFavorites } from '../../hooks/useFavorites'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { useIsLastTime } from '../../hooks/useLastTime'
-import config from '../../config'
+import { RadioButton } from './RadioButton'
 
 const themes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },
@@ -39,8 +39,7 @@ type Props = {
 	showLyrics: boolean
 	setShowLyrics: (v: boolean) => void
 }
-
-const not = (v: boolean) => !v
+const flip = not
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -92,12 +91,12 @@ function Home({
 	const [feedBack, setFeedBack] = useState<string>('')
 
 	const cycleTheme = () => setTheme((theme + 1) % themes.length)
-	const toggleRecent = () => setShowHistory(not)
-	const toggleChangable = () => setChangable(not)
+	const toggleRecent = () => setShowHistory(flip)
+	const toggleChangable = () => setChangable(flip)
 	const closeRecent = () => setShowHistory(false)
-	const toggleConfig = () => setShowConfig(not)
-	const toggleBookmark = () => setShowBookmark(not)
-	const toggleCounts = () => setShowCounts(not)
+	const toggleConfig = () => setShowConfig(flip)
+	const toggleBookmark = () => setShowBookmark(flip)
+	const toggleCounts = () => setShowCounts(flip)
 	const closeBookmark = () => setShowBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 	const removeStream = () => setStreamUrl('')
@@ -105,19 +104,6 @@ function Home({
 	const titles = makeTitle(song)
 	const visible = (b: boolean) => (b ? {} : { display: 'none' })
 	const lastTime = +new Date() > config.lastTime
-
-	const ThemeButton = ({ tid, label }: { tid: number; label: string }) => (
-		<>
-			<input
-				checked={theme === tid}
-				onChange={() => {}}
-				id={`theme${tid}`}
-				type="radio"
-				onClick={() => setTheme(tid)}
-			/>
-			<label htmlFor={`theme${tid}`}>{label}</label>
-		</>
-	)
 
 	return (
 		<div onClick={toggleConfig}>
@@ -202,7 +188,13 @@ function Home({
 						<div>
 							<button onClick={cycleTheme}>テーマ({theme})</button>
 							{themes.map((t) => (
-								<ThemeButton key={t.key} tid={t.id} label={t.key} />
+								<RadioButton
+									key={t.key}
+									value={t.id}
+									current={theme}
+									onClick={() => setTheme(t.id)}
+									label={t.key}
+								/>
 							))}
 
 							<button
@@ -242,7 +234,7 @@ function Home({
 								<FontAwesomeIcon icon={faHistory} />
 								簡易履歴表示
 							</ToggleButton>
-							<ToggleButton checked={side} onClick={() => setSide(not)}>
+							<ToggleButton checked={side} onClick={() => setSide(flip)}>
 								<FontAwesomeIcon icon={faColumns} />
 								ハーフモード
 							</ToggleButton>
