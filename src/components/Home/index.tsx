@@ -21,6 +21,7 @@ import { isObjEmpty, not } from '../../util'
 import FadeBgChanger from '../FadeBgChanger'
 import Player from '../Player'
 import TimeBar from '../TimeBar'
+import { BookmarkList } from './BookmarkList'
 import { RadioButton } from './RadioButton'
 
 const themes: Theme[] = [
@@ -80,6 +81,7 @@ function Home({
 	const [showBookmark, setShowBookmark] = useState<boolean>(false)
 	const [showCounts, setShowCounts] = useState<boolean>(true)
 	const [changable, setChangable] = useState<boolean>(true)
+
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
 	const [side, setSide] = useLocalStorage<boolean>('side-mode', false)
@@ -97,7 +99,6 @@ function Home({
 	const toggleConfig = () => setShowConfig(flip)
 	const toggleBookmark = () => setShowBookmark(flip)
 	const toggleCounts = () => setShowCounts(flip)
-	const closeBookmark = () => setShowBookmark(false)
 	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
 	const removeStream = () => setStreamUrl('')
 
@@ -345,34 +346,12 @@ function Home({
 						</p>
 					))}
 				</div>
-				<div
-					className="bookmarks"
-					onClick={(e) => e.stopPropagation()}
-					style={{ display: showBookmark ? 'block' : 'none' }}
-				>
-					<p>
-						■ブックマーク
-						<span
-							className="moc"
-							style={{ float: 'right' }}
-							onClick={closeBookmark}
-						>
-							x
-						</span>
-					</p>
-					{Object.keys(books).length === 0 && <p>ブックマークはまだないお</p>}
-					{Object.keys(books).map((icy, i) => (
-						<p key={i}>
-							<span>{icy}</span>
-							<span
-								style={{ float: 'right', cursor: 'pointer' }}
-								onClick={() => confirm('削除する') && toggleFavorites(icy)}
-							>
-								[削除]
-							</span>
-						</p>
-					))}
-				</div>
+				<BookmarkList
+					books={books}
+					visible={showBookmark}
+					onClickClose={() => setShowBookmark(false)}
+					onToggleBook={(icy) => toggleFavorites(icy)}
+				/>
 			</Wrap>
 		</div>
 	)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Count, WordCount } from '../../types'
+import { Count } from '../../types'
 import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
