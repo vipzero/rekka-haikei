@@ -32,3 +32,11 @@ export const isObjEmpty = (obj: object) => Object.keys(obj).length === 0
 export const not = (v: boolean) => !v
 
 export const toggle = <T>(v: T, key: keyof T): T => ({ ...v, [key]: !v[key] })
+export const isValidUrl = (url: string) => {
+	try {
+		new URL(url)
+	} catch (_e) {
+		return false
+	}
+	return true
+}

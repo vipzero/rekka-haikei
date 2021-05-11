@@ -32,8 +32,6 @@ function Home({ song, extraComp, lyrics }: Props) {
 
 	const toggleConfig = () => setSetting((v) => toggle(v, 'showConfig'))
 
-	const visibleStyle = (b: boolean) => (b ? {} : { display: 'none' })
-
 	return (
 		<div onClick={toggleConfig}>
 			<FadeBgChanger
@@ -49,7 +47,7 @@ function Home({ song, extraComp, lyrics }: Props) {
 				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
 				<SongInfo song={song} showCounts={showCounts}></SongInfo>
-				<div style={{ ...visibleStyle(!!streamUrl) }}>
+				<div data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
 				</div>
 				<ConfigForm
@@ -96,39 +94,13 @@ const Wrap = styled.div`
 		border: none;
 		margin: 4px;
 	}
-	p:not(.plain) {
+	p {
 		color: #ccc;
 		font-weight: bold;
 		text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, -2px 2px 2px #000,
 			2px -2px 2px #000;
 		margin: 0;
 		font-size: 28px;
-	}
-	.tags {
-		span {
-			font-size: 10px;
-		}
-	}
-	.content {
-		padding: 12px;
-		border-radius: 4px;
-		.details {
-			p {
-				padding-top: 4px;
-				font-size: 0.9rem;
-			}
-			.animetitle {
-				font-size: 1.3rem;
-			}
-			span:not(:first-child) {
-				margin-left: 0.5rem;
-			}
-		}
-		.icy {
-			margin-top: 1rem;
-			text-align: right;
-			font-size: 0.5rem;
-		}
 	}
 
 	.moc {

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactAudioPlayer from 'react-audio-player'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { isValidUrl } from '../util'
 
 type Props = {
 	src: string
@@ -12,6 +13,8 @@ function isHTMLMediaElement(e: object): e is HTMLMediaElement {
 
 function Player({ src }: Props) {
 	const [volume, setVolume] = useLocalStorage<number>('player-volume', 0.5)
+
+	if (!isValidUrl(src)) return null
 
 	return (
 		<ReactAudioPlayer
