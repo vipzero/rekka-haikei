@@ -30,3 +30,5 @@ export const between = (v, min, max) => Math.max(min, Math.min(max, v))
 
 export const isObjEmpty = (obj: object) => Object.keys(obj).length === 0
 export const not = (v: boolean) => !v
+
+export const toggle = <T>(v: T, key: keyof T): T => ({ ...v, [key]: !v[key] })

@@ -53,7 +53,19 @@ export type BookCount = {
 	count: number
 }
 
+export type ThemeId = number
 export type Theme = {
-	id: number
+	id: ThemeId
 	key: string
+}
+
+export type Setting = {
+	showConfig: boolean
+	showBookmark: boolean
+	showCounts: boolean
+	showHistory: boolean
+	showLyrics: boolean
+	sideMode: boolean
+	lockBg: boolean
+	feedBackText: string
 }

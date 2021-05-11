@@ -1,17 +1,16 @@
 import React from 'react'
+import { useSetRecoilState } from 'recoil'
+import { settingState } from '../../atom/SettingAtom'
 
 type Props = {
 	visible: boolean
 	books: Record<string, boolean>
-	onClickClose: () => void
-	onToggleBook: (icy: string) => void
+	toggleFavorites: (icy: string) => void
 }
-export function BookmarkList({
-	books,
-	visible,
-	onClickClose,
-	onToggleBook: toggleFavorites,
-}: Props) {
+export function BookmarkList({ books, visible, toggleFavorites }: Props) {
+	const setSetting = useSetRecoilState(settingState)
+	const closeBookmark = () => setSetting((v) => ({ ...v, showBookmark: false }))
+
 	return (
 		<div
 			className="bookmarks"
@@ -20,7 +19,11 @@ export function BookmarkList({
 		>
 			<p>
 				■ブックマーク
-				<span className="moc" style={{ float: 'right' }} onClick={onClickClose}>
+				<span
+					className="moc"
+					style={{ float: 'right' }}
+					onClick={closeBookmark}
+				>
 					x
 				</span>
 			</p>

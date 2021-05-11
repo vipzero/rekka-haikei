@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
+import { RecoilRoot, useRecoilValue } from 'recoil'
 import { FloatingBox } from '..'
 import { isSongFull } from '../../../types'
 import { useLyricsDb } from '../../hooks/useLyricsDb'
 import { useSongDb } from '../../hooks/useSongDb'
+import { settingState } from '../../atom/SettingAtom'
 import Home from '.'
 
 function getEx(ex: string | false) {
@@ -39,7 +41,7 @@ function getEx(ex: string | false) {
 function HomeContainer() {
 	const [loaded, song, histories] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
-	const [showLyrics, setShowLyrics] = useState<boolean>(false)
+	const { showLyrics } = useRecoilValue(settingState)
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
@@ -69,11 +71,15 @@ function HomeContainer() {
 				histories={histories}
 				extraComp={extraComp}
 				lyrics={lyrics}
-				showLyrics={showLyrics}
-				setShowLyrics={(v) => setShowLyrics(v)}
 			/>
 		</>
 	)
 }
 
-export default HomeContainer
+const RecoilHome = () => (
+	<RecoilRoot>
+		<HomeContainer />
+	</RecoilRoot>
+)
+
+export default RecoilHome

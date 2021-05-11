@@ -1,327 +1,75 @@
-import { faStar as faStarFill } from '@fortawesome/free-regular-svg-icons'
-import {
-	faBookmark,
-	faColumns,
-	faHistory,
-	faLock,
-	faMusic,
-	faStar,
-	faStopwatch,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from 'next/link'
-import React, { FC, ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { addFeedback } from '../../../service/firebase'
-import { History, isSongFull, Song, Theme } from '../../../types'
-import config from '../../config'
+import { History, Song } from '../../../types'
+import { settingState } from '../../atom/SettingAtom'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { isObjEmpty, not } from '../../util'
+import { toggle } from '../../util'
 import FadeBgChanger from '../FadeBgChanger'
 import Player from '../Player'
 import TimeBar from '../TimeBar'
 import { BookmarkList } from './BookmarkList'
-import { RadioButton } from './RadioButton'
-
-const themes: Theme[] = [
-	{ id: 0, key: 'CLEAR' },
-	{ id: 1, key: 'WHITE' },
-	{ id: 2, key: 'BLACK' },
-	{ id: 3, key: 'EMPTY' },
-	{ id: 4, key: 'SINGL' },
-]
+import ConfigForm from './ConfigForm'
+import SongInfo from './SongInfo'
 
 type Props = {
 	song: Song
 	extraComp?: ReactNode
 	histories: History[]
 	lyrics: string
-	showLyrics: boolean
-	setShowLyrics: (v: boolean) => void
 }
-const flip = not
+function Home({ song, extraComp, histories, lyrics }: Props) {
+	const {
+		showCounts,
+		showBookmark,
+		showLyrics,
+		showHistory,
+		sideMode,
+		lockBg,
+	} = useRecoilValue(settingState)
 
-function makeTitle(song: Song) {
-	if (isSongFull(song)) return `${song.title} - ${song.artist}`
-	const [artist, title] = song.icy.split(' - ')
-
-	if (!artist) return song.icy
-	return `${title} - ${artist}`
-}
-
-type TBProps = {
-	checked: boolean
-	onClick: () => void
-}
-
-const ToggleButtonWrap = styled.button`
-	text-align: left;
-	> * {
-		padding-right: 4px;
-	}
-`
-
-const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
-	<ToggleButtonWrap onClick={onClick}>
-		<input type="checkbox" checked={checked || false} onChange={() => {}} />
-		{children}
-	</ToggleButtonWrap>
-)
-
-function Home({
-	song,
-	extraComp,
-	histories,
-	lyrics,
-	showLyrics,
-	setShowLyrics,
-}: Props) {
-	const [showConfig, setShowConfig] = useState<boolean>(false)
-	const [showBookmark, setShowBookmark] = useState<boolean>(false)
-	const [showCounts, setShowCounts] = useState<boolean>(true)
-	const [changable, setChangable] = useState<boolean>(true)
+	const setSetting = useSetRecoilState(settingState)
+	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
 
 	const { favorites: books, toggleFavorites } = useFavorites()
-	const [theme, setTheme] = useLocalStorage<number>('theme', 0)
-	const [side, setSide] = useLocalStorage<boolean>('side-mode', false)
-	const [showHistory, setShowHistory] = useLocalStorage<boolean>(
-		'show-history',
-		false
-	)
+	const [themeId, setTheme] = useLocalStorage<number>('theme', 0)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
-	const [feedBack, setFeedBack] = useState<string>('')
 
-	const cycleTheme = () => setTheme((theme + 1) % themes.length)
-	const toggleRecent = () => setShowHistory(flip)
-	const toggleChangable = () => setChangable(flip)
-	const closeRecent = () => setShowHistory(false)
-	const toggleConfig = () => setShowConfig(flip)
-	const toggleBookmark = () => setShowBookmark(flip)
-	const toggleCounts = () => setShowCounts(flip)
-	const toggleShowLyrics = () => setShowLyrics(!showLyrics)
-	const removeStream = () => setStreamUrl('')
+	const toggleConfig = () => setSetting((v) => toggle(v, 'showConfig'))
 
-	const titles = makeTitle(song)
-	const visible = (b: boolean) => (b ? {} : { display: 'none' })
-	const lastTime = +new Date() > config.lastTime
+	const visibleStyle = (b: boolean) => (b ? {} : { display: 'none' })
 
 	return (
 		<div onClick={toggleConfig}>
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
-				lockCount={changable ? 10 : 1}
-				px={side ? 'right' : 'center'}
+				lockCount={lockBg ? 1 : 10}
+				px={sideMode ? 'right' : 'center'}
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap
-				data-theme={theme}
-				className={theme === 2 ? 'dark-theme' : 'light-theme'}
-				style={{ width: side ? '50vw' : '100%' }}
+				data-theme={themeId}
+				className={themeId === 2 ? 'dark-theme' : 'light-theme'}
+				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
-				<div className="content">
-					<p className="titles">{titles}</p>
-					<div className="details">
-						<div style={{ display: 'flex' }}>
-							<div style={{ flex: 1 }}>
-								{/* そろそろ汚えええええ */}
-								{isSongFull(song) && (
-									<>
-										<p>
-											<span className="animetitle">{song.animeTitle}</span>
-											<span className="subinfo">
-												[{song.opOrEd}
-												{song.spInfo ? ` ${song.spInfo}` : ''}] {song.category}
-												{song.gameType && ' ' + song.gameType}
-											</span>
-										</p>
-										<p>
-											<span className="date">{song.date}</span>
-											{song.chapNum && (
-												<span className="chapnum">全{song.chapNum}話</span>
-											)}
-										</p>
-									</>
-								)}
-								{song.singer && <p>歌手: {song.singer}</p>}
-								{song.composer && <p>作詞: {song.composer}</p>}
-								{song.writer && <p>作曲: {song.writer}</p>}
-								{song.albumName && (
-									<p>
-										{song.albumName.replace(' - Single', '')}
-										{song.copyright && ` (${song.copyright})`}{' '}
-										<a href={song.itunesUrl}>iTunes</a>
-									</p>
-								)}
-								{showCounts && (
-									<p className="tags">
-										{Object.entries(song.wordCounts)
-											.filter(([k]) => k !== song.icy)
-											.map(([k, v], i) => (
-												<span key={i}>
-													[{k} ({v === 1 ? '初' : `${v} 回目`})]
-												</span>
-											))}
-									</p>
-								)}
-							</div>
-							<div>
-								{song.artworkUrl100 && (
-									<div className="album">
-										<img src={song.artworkUrl100} />
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
-					{isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
-				</div>
-				<div style={{ ...visible(!!streamUrl) }}>
+				<SongInfo song={song} showCounts={showCounts}></SongInfo>
+				<div style={{ ...visibleStyle(!!streamUrl) }}>
 					<Player src={streamUrl}></Player>
 				</div>
-				<Config
-					data-theme={theme}
-					className="config"
-					style={{ ...visible(showConfig) }}
-				>
-					<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
-						<div>
-							<button onClick={cycleTheme}>テーマ({theme})</button>
-							{themes.map((t) => (
-								<RadioButton
-									key={t.key}
-									value={t.id}
-									current={theme}
-									onClick={() => setTheme(t.id)}
-									label={t.key}
-								/>
-							))}
+				<ConfigForm
+					song={song}
+					themeId={themeId}
+					streamUrl={streamUrl}
+					setStreamUrl={setStreamUrl}
+					favorited={books[song.icy]}
+					toggleFavorited={() => toggleFavorites(song.icy)}
+					favCount={Object.keys(books).length}
+					setTheme={setTheme}
+				/>
 
-							<button
-								style={{ float: 'right' }}
-								className="confbtn"
-								onClick={toggleConfig}
-							>
-								閉じる
-							</button>
-						</div>
-						<div>
-							<ToggleButton
-								checked={!!books[song.icy]}
-								onClick={() => toggleFavorites(song.icy)}
-							>
-								<FontAwesomeIcon icon={books[song.icy] ? faStar : faStarFill} />
-								{books[song.icy]
-									? 'ブックマーク中'
-									: 'ブックマークしておく(ブラウザ保存)'}
-							</ToggleButton>
-						</div>
-						<div
-							style={{
-								display: 'grid',
-								gridTemplateColumns: 'max-content max-content',
-							}}
-						>
-							<ToggleButton checked={showLyrics} onClick={toggleShowLyrics}>
-								<FontAwesomeIcon icon={faMusic} />
-								歌詞表示
-							</ToggleButton>
-							<ToggleButton checked={showCounts} onClick={toggleCounts}>
-								<FontAwesomeIcon icon={faStopwatch} />
-								カウント表示
-							</ToggleButton>
-							<ToggleButton checked={showHistory} onClick={toggleRecent}>
-								<FontAwesomeIcon icon={faHistory} />
-								簡易履歴表示
-							</ToggleButton>
-							<ToggleButton checked={side} onClick={() => setSide(flip)}>
-								<FontAwesomeIcon icon={faColumns} />
-								ハーフモード
-							</ToggleButton>
-
-							<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
-								<FontAwesomeIcon icon={faBookmark} />
-								ブックマーク表示
-								{!isObjEmpty(books) && `(${Object.keys(books).length})`}
-							</ToggleButton>
-
-							<ToggleButton checked={changable} onClick={toggleChangable}>
-								<FontAwesomeIcon icon={faLock} />
-								背景変更許可
-							</ToggleButton>
-						</div>
-
-						<div style={{ display: 'flex', gap: '4px' }}>
-							<Link href="/history" passHref>
-								<a>履歴</a>
-							</Link>
-							<Link href="/popular" passHref>
-								<a data-important={lastTime}>ブクマ数統計</a>
-							</Link>
-							<Link href="/choice" passHref>
-								<a>背景補正</a>
-							</Link>
-						</div>
-
-						<div>
-							StreamURL:
-							<input
-								name="streaming-url"
-								value={streamUrl}
-								onChange={(e) => setStreamUrl(e.target.value || '')}
-							/>
-							{streamUrl.includes('http://') && (
-								<span style={{ color: 'red' }}>https 非対応</span>
-							)}
-							<button onClick={removeStream}>x</button>
-						</div>
-						<div style={{ display: 'flex', gap: '8px' }}>
-							<a href="http://anison.info">アニメ情報元: Anison Generation</a>
-							<a href="https://github.com/vipzero/rekka-haikei">コード</a>
-						</div>
-						<div>
-							<button
-								onClick={() =>
-									setFeedBack(
-										feedBack
-											? ''
-											: `${song.icy}\nsize: ${window.innerWidth},${
-													window.innerHeight
-											  }\nword: ${song.wordCountsAna
-													.map((v) => v.name)
-													.join(',')}\n`
-									)
-								}
-							>
-								レポート
-							</button>
-							{!!feedBack && (
-								<div style={{}}>
-									歌詞の分割ミス・表示崩れなどあれば
-									<textarea
-										rows={4}
-										style={{ width: '60vw' }}
-										value={feedBack}
-										onChange={(e) => setFeedBack(e.target.value)}
-									></textarea>
-									<button
-										onClick={() => {
-											addFeedback(feedBack).then(() => {
-												alert('フィードバックサンクスb')
-												setFeedBack('')
-											})
-										}}
-									>
-										送信
-									</button>
-								</div>
-							)}
-						</div>
-					</div>
-				</Config>
-
-				<LyricsBox data-theme={theme} style={{ ...visible(showLyrics) }}>
+				<LyricsBox data-theme={themeId} style={{ ...visibleStyle(showLyrics) }}>
 					<pre>{lyrics}</pre>
 				</LyricsBox>
 				<div>{extraComp || null}</div>
@@ -335,7 +83,7 @@ function Home({
 						<span
 							className="moc"
 							style={{ float: 'right' }}
-							onClick={closeRecent}
+							onClick={closeHistory}
 						>
 							x
 						</span>
@@ -349,8 +97,7 @@ function Home({
 				<BookmarkList
 					books={books}
 					visible={showBookmark}
-					onClickClose={() => setShowBookmark(false)}
-					onToggleBook={(icy) => toggleFavorites(icy)}
+					toggleFavorites={toggleFavorites}
 				/>
 			</Wrap>
 		</div>
@@ -364,27 +111,6 @@ const LyricsBox = styled.div`
 	&[data-theme='2'] {
 		background: rgba(0, 0, 0, 0.8);
 		color: white;
-	}
-`
-
-const Config = styled.div`
-	/* height: 20vh; */
-	width: 100%;
-	display: flex;
-	> div {
-		padding: 8px;
-		background: #aaa;
-	}
-	a,
-	label {
-		color: white !important;
-	}
-	&[data-theme='1'] {
-		color: black !important;
-		a,
-		label {
-			color: black !important;
-		}
 	}
 `
 
@@ -525,6 +251,9 @@ const Wrap = styled.div`
 		100% {
 			opacity: 1;
 		}
+	}
+	[data-visible='false'] {
+		display: 'none';
 	}
 `
 
