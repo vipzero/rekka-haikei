@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getBooks, getBooksPostCount } from '../../service/firebase'
-import { BookCount } from '../../types'
+import { BookCount } from '../types'
 
 export function useBookDb(eventId) {
 	const [books, setBooks] = useState<BookCount[]>([])

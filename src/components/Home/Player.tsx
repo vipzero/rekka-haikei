@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactAudioPlayer from 'react-audio-player'
-import { useLocalStorage } from '../hooks/useLocalStorage'
-import { isValidUrl } from '../util'
+import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { isValidUrl } from '../../util'
 
 type Props = {
 	src: string

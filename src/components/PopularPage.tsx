@@ -75,8 +75,8 @@ const Wrap = styled.div`
 	}
 `
 
-function PopularContainer() {
+function PopularPage() {
 	return <Page />
 }
 
-export default PopularContainer
+export default PopularPage

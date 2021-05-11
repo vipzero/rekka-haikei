@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import React, { useState, useEffect, useRef } from 'react'
 import { Transition } from 'react-transition-group'
-import { imgCheck } from '../util'
+import { imgCheck } from '../../util'
 
 const duration = 1000
 const transitionStyles = {

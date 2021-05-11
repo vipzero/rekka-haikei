@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { isSongFull, Song } from '../../../types'
+import { isSongFull, Song } from '../../types'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -101,6 +101,12 @@ const Wrap = styled.div`
 		margin-top: 1rem;
 		text-align: right;
 		font-size: 0.5rem;
+	}
+	.album {
+		img {
+			margin-top: 12px;
+			width: 150px;
+		}
 	}
 `
 

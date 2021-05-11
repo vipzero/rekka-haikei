@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Count } from '../../types'
+import { Count } from '../types'
 import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
@@ -14,7 +14,7 @@ const searchFilter = (search: string, text: string) => {
 	}
 }
 
-function Page() {
+function HistoryPage() {
 	const [histories, counts, countsSong] = useHistoryDb(config.eventId)
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
@@ -166,8 +166,4 @@ const Wrap = styled.div`
 	}
 `
 
-function HistoryContainer() {
-	return <Page />
-}
-
-export default HistoryContainer
+export default HistoryPage

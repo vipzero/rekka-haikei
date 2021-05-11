@@ -1,5 +1,5 @@
 import Layout from '../components/Layout'
-import History from '../components/History'
+import History from '../components/HistoryPage'
 
 const HomePage = () => (
 	<Layout title="履歴 - vipstream">

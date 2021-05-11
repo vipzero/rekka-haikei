@@ -1,10 +1,10 @@
 import Layout from '../components/Layout'
-import Popular from '../components/Popular'
+import Popular from '../components/PopularPage'
 
-const HomePage = () => (
+const Page = () => (
 	<Layout title="ブクマ数統計 - vipstream">
 		<Popular />
 	</Layout>
 )
 
-export default HomePage
+export default Page

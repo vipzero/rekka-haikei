@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { RecoilRoot, useRecoilValue } from 'recoil'
-import { FloatingBox } from '..'
-import { isSongFull } from '../../../types'
-import { settingState } from '../../atom/SettingAtom'
-import { useLyricsDb } from '../../hooks/useLyricsDb'
-import { useSongDb } from '../../hooks/useSongDb'
-import Home from '.'
+import { isSongFull } from '../types'
+import { settingState } from '../atom/SettingAtom'
+import { useLyricsDb } from '../hooks/useLyricsDb'
+import { useSongDb } from '../hooks/useSongDb'
+import { FloatingBox } from '.'
+import Home from './Home'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -38,7 +38,7 @@ function getEx(ex: string | false) {
 	return null
 }
 
-function HomeContainer() {
+function HomePage() {
 	const [loaded, song] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
 	const { showLyrics } = useRecoilValue(settingState)
@@ -73,7 +73,7 @@ function HomeContainer() {
 
 const RecoilHome = () => (
 	<RecoilRoot>
-		<HomeContainer />
+		<HomePage />
 	</RecoilRoot>
 )
 

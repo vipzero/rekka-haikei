@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getHistories } from '../../service/firebase'
-import { Count, History } from '../../types'
+import { Count, History } from '../types'
 import { formatDate } from '../util'
 
 function makeCounts(histories: History[]) {

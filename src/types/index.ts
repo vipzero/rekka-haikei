@@ -64,7 +64,7 @@ export type Theme = {
 }
 
 export type Setting = {
-	showConfig: boolean
+	showSetting: boolean
 	showBookmark: boolean
 	showCounts: boolean
 	showHistory: boolean

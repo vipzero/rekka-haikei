@@ -1,4 +1,4 @@
-import { Theme } from '../../types'
+import { Theme } from '../types'
 
 const { NODE_ENV } = process.env
 

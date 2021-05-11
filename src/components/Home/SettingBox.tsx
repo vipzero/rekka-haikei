@@ -14,7 +14,7 @@ import React, { FC, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { addFeedback } from '../../../service/firebase'
-import { Song, ThemeId } from '../../../types'
+import { Song, ThemeId } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
 import config, { themes } from '../../config'
 import { toggle } from '../../util'
@@ -32,7 +32,7 @@ type Props = {
 	song: Song
 }
 
-function ConfigForm({
+function SettingBox({
 	themeId,
 	setTheme,
 	favorited,
@@ -44,7 +44,7 @@ function ConfigForm({
 }: Props) {
 	const [
 		{
-			showConfig: visible,
+			showSetting: visible,
 			showCounts,
 			showBookmark,
 			showLyrics,
@@ -61,7 +61,7 @@ function ConfigForm({
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleLyrics = () => setSetting((v) => toggle(v, 'showLyrics'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
-	const closeConfig = () => setSetting((v) => ({ ...v, showConfig: false }))
+	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const isLastTime = +new Date() > config.lastTime
@@ -85,7 +85,7 @@ function ConfigForm({
 					<button
 						style={{ float: 'right' }}
 						className="confbtn"
-						onClick={closeConfig}
+						onClick={closeSetting}
 					>
 						閉じる
 					</button>
@@ -237,4 +237,4 @@ const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
 	</ToggleButtonWrap>
 )
 
-export default ConfigForm
+export default SettingBox

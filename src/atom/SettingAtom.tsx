@@ -1,10 +1,10 @@
 import { atom } from 'recoil'
-import { Setting } from '../../types'
+import { Setting } from '../types'
 
 export const settingState = atom<Setting>({
 	key: 'setting',
 	default: {
-		showConfig: false,
+		showSetting: false,
 		showBookmark: false,
 		showCounts: true,
 		showHistory: false,

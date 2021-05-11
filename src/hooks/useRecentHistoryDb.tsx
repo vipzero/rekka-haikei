@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-import { History, HistoryRaw } from '../../types'
+import { History, HistoryRaw } from '../types'
 import { formatDate } from '../util'
 
 function toHistory({ title, time }: HistoryRaw): History {

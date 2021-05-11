@@ -1,16 +1,16 @@
 import React, { ReactNode } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { Song } from '../../../types'
+import { Song } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { toggle } from '../../util'
-import FadeBgChanger from '../FadeBgChanger'
-import Player from '../Player'
-import TimeBar from '../TimeBar'
+import FadeBgChanger from './FadeBgChanger'
+import Player from './Player'
+import TimeBar from './TimeBar'
 import { BookmarkList } from './BookmarkList'
-import ConfigForm from './ConfigForm'
+import SettingBox from './SettingBox'
 import RecentHistoryList from './RecentHistoryList'
 import SongInfo from './SongInfo'
 
@@ -30,10 +30,10 @@ function Home({ song, extraComp, lyrics }: Props) {
 	const [themeId, setTheme] = useLocalStorage<number>('theme', 0)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 
-	const toggleConfig = () => setSetting((v) => toggle(v, 'showConfig'))
+	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return (
-		<div onClick={toggleConfig}>
+		<div onClick={toggleSetting}>
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
@@ -50,7 +50,7 @@ function Home({ song, extraComp, lyrics }: Props) {
 				<div data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
 				</div>
-				<ConfigForm
+				<SettingBox
 					song={song}
 					themeId={themeId}
 					streamUrl={streamUrl}
@@ -89,6 +89,8 @@ const Wrap = styled.div`
 	/* overflow: hidden; */
 	grid-template-rows: repeat(5, max-content);
 	padding: 16px;
+	color: white;
+
 	button {
 		border-radius: 4px;
 		border: none;
@@ -123,19 +125,12 @@ const Wrap = styled.div`
 			font-size: 0.8rem;
 		}
 	}
-	.album {
-		img {
-			margin-top: 12px;
-			width: 150px;
-		}
-	}
 	a {
 		color: #ccc;
 		&:blink {
 			color: #ccc;
 		}
 	}
-	color: white;
 
 	&[data-theme='1'] {
 		.content,

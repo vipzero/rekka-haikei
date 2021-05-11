@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-import { isSongFull, Song } from '../../types'
+import { isSongFull, Song } from '../types'
 
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
