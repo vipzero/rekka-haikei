@@ -11,7 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React, { FC, useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { addFeedback } from '../../../service/firebase'
 import { Song, ThemeId } from '../../../types'
@@ -42,16 +42,18 @@ function ConfigForm({
 	favCount,
 	song,
 }: Props) {
-	const {
-		showConfig: visible,
-		showCounts,
-		showBookmark,
-		showLyrics,
-		showHistory,
-		sideMode,
-		lockBg,
-	} = useRecoilValue(settingState)
-	const setSetting = useSetRecoilState(settingState)
+	const [
+		{
+			showConfig: visible,
+			showCounts,
+			showBookmark,
+			showLyrics,
+			showHistory,
+			sideMode,
+			lockBg,
+		},
+		setSetting,
+	] = useRecoilState(settingState)
 
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
