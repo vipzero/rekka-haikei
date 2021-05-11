@@ -1,13 +1,13 @@
 import React from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { settingState } from '../../atom/SettingAtom'
 
 type Props = {
-	visible: boolean
 	books: Record<string, boolean>
 	toggleFavorites: (icy: string) => void
 }
-export function BookmarkList({ books, visible, toggleFavorites }: Props) {
+export function BookmarkList({ books, toggleFavorites }: Props) {
+	const { showBookmark: visible } = useRecoilValue(settingState)
 	const setSetting = useSetRecoilState(settingState)
 	const closeBookmark = () => setSetting((v) => ({ ...v, showBookmark: false }))
 

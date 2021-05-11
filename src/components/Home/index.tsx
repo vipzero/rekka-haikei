@@ -22,7 +22,6 @@ type Props = {
 function Home({ song, extraComp, histories, lyrics }: Props) {
 	const {
 		showCounts,
-		showBookmark,
 		showLyrics,
 		showHistory,
 		sideMode,
@@ -94,11 +93,7 @@ function Home({ song, extraComp, histories, lyrics }: Props) {
 						</p>
 					))}
 				</div>
-				<BookmarkList
-					books={books}
-					visible={showBookmark}
-					toggleFavorites={toggleFavorites}
-				/>
+				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
 		</div>
 	)
@@ -126,7 +121,7 @@ const Wrap = styled.div`
 		border: none;
 		margin: 4px;
 	}
-	p {
+	p:not(.plain) {
 		color: #ccc;
 		font-weight: bold;
 		text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, -2px 2px 2px #000,
@@ -253,7 +248,7 @@ const Wrap = styled.div`
 		}
 	}
 	[data-visible='false'] {
-		display: 'none';
+		display: none;
 	}
 `
 

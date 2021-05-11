@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { isSongFull, Song } from '../../../types'
 
 function makeTitle(song: Song) {
@@ -15,7 +16,7 @@ function SongInfo({ song, showCounts }: Props) {
 	const titles = makeTitle(song)
 
 	return (
-		<div className="content">
+		<Wrap className="content">
 			<p className="titles">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
@@ -71,8 +72,36 @@ function SongInfo({ song, showCounts }: Props) {
 				</div>
 			</div>
 			{isSongFull(song) && <p className="icy">icy_title: {song.icy}</p>}
-		</div>
+		</Wrap>
 	)
 }
+
+const Wrap = styled.div`
+	padding: 12px;
+	border-radius: 4px;
+	.details {
+		p {
+			padding-top: 4px;
+			font-size: 0.9rem;
+		}
+		.animetitle {
+			font-size: 1.3rem;
+		}
+		span:not(:first-child) {
+			margin-left: 0.5rem;
+		}
+	}
+
+	.tags {
+		span {
+			font-size: 10px;
+		}
+	}
+	.icy {
+		margin-top: 1rem;
+		text-align: right;
+		font-size: 0.5rem;
+	}
+`
 
 export default SongInfo

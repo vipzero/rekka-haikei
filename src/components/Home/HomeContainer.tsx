@@ -3,9 +3,9 @@ import { Helmet } from 'react-helmet'
 import { RecoilRoot, useRecoilValue } from 'recoil'
 import { FloatingBox } from '..'
 import { isSongFull } from '../../../types'
+import { settingState } from '../../atom/SettingAtom'
 import { useLyricsDb } from '../../hooks/useLyricsDb'
 import { useSongDb } from '../../hooks/useSongDb'
-import { settingState } from '../../atom/SettingAtom'
 import Home from '.'
 
 function getEx(ex: string | false) {

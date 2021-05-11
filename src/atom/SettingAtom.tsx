@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil'
+import { atom } from 'recoil'
 import { Setting } from '../../types'
 
 export const settingState = atom<Setting>({
@@ -14,8 +14,3 @@ export const settingState = atom<Setting>({
 		feedBackText: '',
 	},
 })
-
-// export const settingSelector = selector<Setting>({
-// 	key: 'setting',
-// 	get: ({ get }) => get(settingState),
-// })

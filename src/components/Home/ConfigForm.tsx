@@ -185,8 +185,8 @@ function FeedBackForm({ song }: { song: Song }) {
 		<div>
 			<button onClick={onClickReport}>レポート</button>
 
-			<div hidden={!!feedBack}>
-				歌詞の分割ミス・表示崩れなどあれば
+			<div data-visible={!!feedBack}>
+				<p className="plain">歌詞の分割ミス・表示崩れなどあれば</p>
 				<textarea
 					rows={4}
 					style={{ width: '60vw' }}
