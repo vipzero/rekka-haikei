@@ -39,7 +39,7 @@ function getEx(ex: string | false) {
 }
 
 function HomeContainer() {
-	const [loaded, song, histories] = useSongDb()
+	const [loaded, song] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
 	const { showLyrics } = useRecoilValue(settingState)
 	const [lyrics] = useLyricsDb(song.icy, showLyrics)
@@ -66,12 +66,7 @@ function HomeContainer() {
 			<Helmet>
 				<title>{song.icy}</title>
 			</Helmet>
-			<Home
-				song={song}
-				histories={histories}
-				extraComp={extraComp}
-				lyrics={lyrics}
-			/>
+			<Home song={song} extraComp={extraComp} lyrics={lyrics} />
 		</>
 	)
 }

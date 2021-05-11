@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { History, Song } from '../../../types'
+import { Song } from '../../../types'
 import { settingState } from '../../atom/SettingAtom'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -11,25 +11,20 @@ import Player from '../Player'
 import TimeBar from '../TimeBar'
 import { BookmarkList } from './BookmarkList'
 import ConfigForm from './ConfigForm'
+import RecentHistoryList from './RecentHistoryList'
 import SongInfo from './SongInfo'
 
 type Props = {
 	song: Song
 	extraComp?: ReactNode
-	histories: History[]
 	lyrics: string
 }
-function Home({ song, extraComp, histories, lyrics }: Props) {
-	const {
-		showCounts,
-		showLyrics,
-		showHistory,
-		sideMode,
-		lockBg,
-	} = useRecoilValue(settingState)
+function Home({ song, extraComp, lyrics }: Props) {
+	const { showCounts, showLyrics, sideMode, lockBg } = useRecoilValue(
+		settingState
+	)
 
 	const setSetting = useSetRecoilState(settingState)
-	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
 
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [themeId, setTheme] = useLocalStorage<number>('theme', 0)
@@ -68,31 +63,11 @@ function Home({ song, extraComp, histories, lyrics }: Props) {
 					setTheme={setTheme}
 				/>
 
-				<LyricsBox data-theme={themeId} style={{ ...visibleStyle(showLyrics) }}>
+				<LyricsBox data-theme={themeId} data-visible={showLyrics}>
 					<pre>{lyrics}</pre>
 				</LyricsBox>
 				<div>{extraComp || null}</div>
-				<div
-					className="recenthistory"
-					onClick={(e) => e.stopPropagation()}
-					style={{ display: showHistory ? 'block' : 'none' }}
-				>
-					<p>
-						■履歴
-						<span
-							className="moc"
-							style={{ float: 'right' }}
-							onClick={closeHistory}
-						>
-							x
-						</span>
-					</p>
-					{histories.map((hist, i) => (
-						<p key={i}>
-							{hist.timeStr}: {hist.title}
-						</p>
-					))}
-				</div>
+				<RecentHistoryList />
 				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
 		</div>

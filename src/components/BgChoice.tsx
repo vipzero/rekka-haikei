@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useSongDb } from '../hooks/useSongDb'
 
 function Page() {
-	const [loaded, song, , setBg] = useSongDb()
+	const [loaded, song, setBg] = useSongDb()
 
 	if (!loaded) return <p>ちょっとまってね</p>
 
