@@ -4,6 +4,7 @@ import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { Count } from '../types'
+import Suponcers from './HistoryPage/Suponcers'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -76,6 +77,7 @@ function HistoryPage() {
 				/>
 			)}
 			{tab === 3 && <WordCountTable />}
+			<Suponcers />
 		</Wrap>
 	)
 }
@@ -136,13 +138,11 @@ const Wrap = styled.div`
 	display: grid;
 	padding: 16px;
 
-	table {
-		width: 100%;
-	}
-	table td {
-		border-top: solid 1px;
-	}
 	table.hist {
+		width: 100%;
+		td {
+			border-top: solid 1px;
+		}
 		td:first-child {
 			width: 144px;
 		}
