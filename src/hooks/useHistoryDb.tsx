@@ -24,6 +24,7 @@ export function useHistoryDb() {
 	const [histories, setHistories] = useState<History[]>([])
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
+
 	const eventId = useQeuryEid()
 
 	useEffect(() => {

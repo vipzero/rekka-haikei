@@ -19,7 +19,6 @@ function TimeBar({ startTime, size }: Props) {
 		}, 1000)
 
 		return () => {
-			console.log('close')
 			clearInterval(t)
 		}
 	}, [startTime, size])

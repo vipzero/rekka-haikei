@@ -10,18 +10,20 @@ function toHistory({ title, time }: HistoryRaw): History {
 	return { title, time, timeStr, timeCate }
 }
 
-export function useRecentHistoryDb(eventId: string) {
+export function useRecentHistoryDb(eventId: string, enabled: boolean) {
 	const [histories, setHistories] = useState<History[]>([])
 
 	useEffect(() => {
-		const fdb = getFirestore()
+		if (!enabled) return
 
-		fdb
+		const fdb = getFirestore()
+		const si = fdb
 			.collection('hist')
 			.doc(eventId)
 			.collection('songs')
 			.orderBy('time', 'desc')
 			.limit(10)
+
 			.onSnapshot((snaps) => {
 				const histories = snaps.docs.map((snap) =>
 					toHistory(snap.data() as HistoryRaw)
@@ -29,6 +31,8 @@ export function useRecentHistoryDb(eventId: string) {
 
 				setHistories(histories)
 			})
-	})
+
+		return () => si()
+	}, [enabled])
 	return histories
 }

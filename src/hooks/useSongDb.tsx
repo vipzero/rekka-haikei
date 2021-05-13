@@ -16,15 +16,11 @@ export function useSongDb() {
 	useEffect(() => {
 		const fdb = getFirestore()
 
-		fdb
+		const si = fdb
 			.collection('song')
 			.doc('current')
 			.onSnapshot((snap) => {
 				const song = snap.data() as Song
-
-				if (isSongFull(song)) {
-					song.imageLinks?.reverse()
-				}
 
 				const wordCountsAna = Object.entries(song.wordCounts)
 					.filter(([k]) => k !== song.icy)
@@ -39,6 +35,8 @@ export function useSongDb() {
 				setSong(song)
 				setLoaded(true)
 			})
+
+		return () => si()
 	}, [])
 	const setBg = async (url) => {
 		const fdb = getFirestore()

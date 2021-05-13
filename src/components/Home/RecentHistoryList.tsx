@@ -8,7 +8,7 @@ function RecentHistoryList() {
 	const [{ showHistory: visible }, setSetting] = useRecoilState(settingState)
 	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
 	const eventId = useQeuryEid()
-	const histories = useRecentHistoryDb(eventId)
+	const histories = useRecentHistoryDb(eventId, visible)
 
 	if (!histories) return <p>loading</p>
 
@@ -32,4 +32,5 @@ function RecentHistoryList() {
 		</div>
 	)
 }
+
 export default RecentHistoryList

@@ -13,7 +13,7 @@ export function useCountDb() {
 
 			setCounts(counts)
 		})
-	}, [])
+	}, [eventId])
 
 	return [counts] as const
 }

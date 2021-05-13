@@ -18,6 +18,7 @@ import { Song, ThemeId } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
 import config, { events, themes } from '../../config'
 import { toggle } from '../../util'
+import { useQeuryEid } from '../../hooks/useQueryEid'
 import { RadioButton } from './RadioButton'
 
 type Props = {
@@ -54,6 +55,7 @@ function SettingBox({
 		},
 		setSetting,
 	] = useRecoilState(settingState)
+	const eid = useQeuryEid()
 
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
@@ -133,13 +135,13 @@ function SettingBox({
 				</div>
 
 				<div style={{ display: 'flex', gap: '4px' }}>
-					<Link href="history" passHref>
+					<Link href={`${eid}/history`} passHref>
 						<a>履歴</a>
 					</Link>
-					<Link href="popular" passHref>
+					<Link href={`${eid}/popular`} passHref>
 						<a data-important={isLastTime}>ブクマ数統計</a>
 					</Link>
-					<Link href="choice" passHref>
+					<Link href={`${eid}/choice`} passHref>
 						<a>背景補正</a>
 					</Link>
 				</div>
