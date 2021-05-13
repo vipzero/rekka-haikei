@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Count } from '../types'
 import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
+import { Count } from '../types'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -15,7 +15,7 @@ const searchFilter = (search: string, text: string) => {
 }
 
 function HistoryPage() {
-	const [histories, counts, countsSong] = useHistoryDb(config.eventId)
+	const [histories, counts, countsSong] = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
@@ -81,7 +81,7 @@ function HistoryPage() {
 }
 
 function WordCountTable() {
-	const [counts] = useCountDb(config.eventId)
+	const [counts] = useCountDb()
 
 	return (
 		<div>

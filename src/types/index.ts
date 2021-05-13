@@ -73,3 +73,8 @@ export type Setting = {
 	lockBg: boolean
 	feedBackText: string
 }
+
+export type Event = {
+	id: string
+	label: string
+}

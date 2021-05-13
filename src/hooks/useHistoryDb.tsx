@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getHistories } from '../../service/firebase'
 import { Count, History } from '../types'
 import { formatDate } from '../util'
+import { useQeuryEid } from './useQueryEid'
 
 function makeCounts(histories: History[]) {
 	const o: Record<string, number[]> = {}
@@ -19,10 +20,11 @@ function makeCounts(histories: History[]) {
 	})
 }
 
-export function useHistoryDb(eventId) {
+export function useHistoryDb() {
 	const [histories, setHistories] = useState<History[]>([])
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
+	const eventId = useQeuryEid()
 
 	useEffect(() => {
 		getHistories(eventId).then((snaps) => {
@@ -53,7 +55,7 @@ export function useHistoryDb(eventId) {
 			setCounts(counts)
 			setCountsSong(countsSong)
 		})
-	}, [])
+	}, [eventId])
 
 	return [histories, counts, countsSong] as const
 }

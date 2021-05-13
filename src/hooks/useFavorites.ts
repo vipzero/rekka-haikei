@@ -1,7 +1,9 @@
 import { incFavoritesAll } from '../../service/firebase'
 import { useLocalStorage } from './useLocalStorage'
+import { useQeuryEid } from './useQueryEid'
 
 export function useSyncFavorite() {
+	const eventId = useQeuryEid()
 	const [synced, setSynced] = useLocalStorage<boolean>(
 		'synced-favorite-0',
 		false
@@ -10,7 +12,7 @@ export function useSyncFavorite() {
 		if (synced) return
 
 		setSynced(true)
-		await incFavoritesAll(Object.keys(favorites))
+		await incFavoritesAll(eventId, Object.keys(favorites))
 	}
 
 	return [synced, doSync] as const

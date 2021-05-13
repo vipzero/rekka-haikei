@@ -16,7 +16,7 @@ import styled from 'styled-components'
 import { addFeedback } from '../../../service/firebase'
 import { Song, ThemeId } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
-import config, { themes } from '../../config'
+import config, { events, themes } from '../../config'
 import { toggle } from '../../util'
 import { RadioButton } from './RadioButton'
 
@@ -133,15 +133,22 @@ function SettingBox({
 				</div>
 
 				<div style={{ display: 'flex', gap: '4px' }}>
-					<Link href="/history" passHref>
+					<Link href="history" passHref>
 						<a>履歴</a>
 					</Link>
-					<Link href="/popular" passHref>
+					<Link href="popular" passHref>
 						<a data-important={isLastTime}>ブクマ数統計</a>
 					</Link>
-					<Link href="/choice" passHref>
+					<Link href="choice" passHref>
 						<a>背景補正</a>
 					</Link>
+				</div>
+				<div style={{ display: 'flex', gap: '4px' }}>
+					{events.map((e) => (
+						<Link key={e.id} href={`${e.id}/bg`} passHref>
+							<a>{e.label}</a>
+						</Link>
+					))}
 				</div>
 
 				<div>

@@ -31,9 +31,13 @@ export const getFirestore = () => {
 	return firebase.firestore()
 }
 
-export const _incFavorites = async (icy: string, count = 1) => {
+export const _incFavorites = async (
+	eventId: string,
+	icy: string,
+	count = 1
+) => {
 	const fdb = getFirestore()
-	const books = fdb.collection('vote').doc(config.eventId).collection('books')
+	const books = fdb.collection('vote').doc(eventId).collection('books')
 
 	const snaps = await books.where('icy', '==', icy).get()
 
@@ -46,11 +50,12 @@ export const _incFavorites = async (icy: string, count = 1) => {
 	}
 }
 
-export const _decFavorites = (icy: string) => _incFavorites(icy, -1)
+export const _decFavorites = (eventId: string, icy: string) =>
+	_incFavorites(eventId, icy, -1)
 
-export const incFavoritesAll = async (icys: string[]) => {
+export const incFavoritesAll = async (eventId: string, icys: string[]) => {
 	const fdb = getFirestore()
-	const books = fdb.collection('vote').doc(config.eventId).collection('books')
+	const books = fdb.collection('vote').doc(eventId).collection('books')
 	const batch = fdb.batch()
 
 	for (const icy of icys.slice(0, 450)) {

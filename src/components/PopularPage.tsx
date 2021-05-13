@@ -17,7 +17,7 @@ function Page() {
 }
 
 function CountTable() {
-	const [books, postCount] = useBookDb(config.eventId)
+	const [books, postCount] = useBookDb()
 	const { favorites } = useFavorites()
 	const [synced, doSync] = useSyncFavorite()
 

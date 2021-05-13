@@ -2,8 +2,6 @@
 const withImages = require('next-images')
 const webpack = require('webpack')
 
-const eventId = process.env.EVENT_ID
-
 require('dotenv')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
@@ -30,7 +28,7 @@ module.exports = withBundleAnalyzer(
 			return config
 		},
 		async rewrites() {
-			return [{ source: '/:eid/:path*', destination: `/:path*` }]
+			return [{ source: '/:eid/:path*', destination: `/:path*?eid=:eid` }]
 		},
 	})
 )

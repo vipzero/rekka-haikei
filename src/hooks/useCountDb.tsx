@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { getCounts } from '../../service/firebase'
 import { WordCount } from '../types'
+import { useQeuryEid } from './useQueryEid'
 
-export function useCountDb(eventId) {
+export function useCountDb() {
+	const eventId = useQeuryEid()
 	const [counts, setCounts] = useState<WordCount[]>([])
 
 	useEffect(() => {
