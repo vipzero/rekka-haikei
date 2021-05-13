@@ -1,14 +1,12 @@
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { settingState } from '../../atom/SettingAtom'
-import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useRecentHistoryDb } from '../../hooks/useRecentHistoryDb'
 
 function RecentHistoryList() {
 	const [{ showHistory: visible }, setSetting] = useRecoilState(settingState)
 	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
-	const eventId = useQeuryEid()
-	const histories = useRecentHistoryDb(eventId, visible)
+	const histories = useRecentHistoryDb(visible)
 
 	if (!histories) return <p>loading</p>
 

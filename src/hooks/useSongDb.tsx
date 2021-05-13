@@ -1,11 +1,12 @@
 import _ from 'lodash'
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
-import { isSongFull, Song } from '../types'
+import { Song } from '../types'
+import { useQeuryEid } from './useQueryEid'
 
 export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
-
+	const eventId = useQeuryEid()
 	const [song, setSong] = useState<Song>({
 		icy: '',
 		time: 1,
@@ -18,7 +19,7 @@ export function useSongDb() {
 
 		const si = fdb
 			.collection('song')
-			.doc('current')
+			.doc(eventId)
 			.onSnapshot((snap) => {
 				const song = snap.data() as Song
 
@@ -37,11 +38,11 @@ export function useSongDb() {
 			})
 
 		return () => si()
-	}, [])
+	}, [eventId])
 	const setBg = async (url) => {
 		const fdb = getFirestore()
 		const song = (
-			await fdb.collection('song').doc('current').get()
+			await fdb.collection('song').doc(eventId).get()
 		).data() as Song
 		const imageLinks = song.imageLinks || []
 
@@ -50,7 +51,7 @@ export function useSongDb() {
 
 		fdb
 			.collection('song')
-			.doc('current')
+			.doc(eventId)
 			.update({
 				imageLinks: [url, ...imageLinks.filter((v) => v !== url)],
 			})

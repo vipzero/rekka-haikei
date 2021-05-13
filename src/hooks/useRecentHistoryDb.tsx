@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { History, HistoryRaw } from '../types'
 import { formatDate } from '../util'
+import { useQeuryEid } from './useQueryEid'
 
 function toHistory({ title, time }: HistoryRaw): History {
 	const timeStr = formatDate(time)
@@ -10,8 +11,9 @@ function toHistory({ title, time }: HistoryRaw): History {
 	return { title, time, timeStr, timeCate }
 }
 
-export function useRecentHistoryDb(eventId: string, enabled: boolean) {
+export function useRecentHistoryDb(enabled: boolean) {
 	const [histories, setHistories] = useState<History[]>([])
+	const eventId = useQeuryEid()
 
 	useEffect(() => {
 		if (!enabled) return
@@ -33,6 +35,6 @@ export function useRecentHistoryDb(eventId: string, enabled: boolean) {
 			})
 
 		return () => si()
-	}, [enabled])
+	}, [eventId, enabled])
 	return histories
 }
