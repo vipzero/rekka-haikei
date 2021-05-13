@@ -27,8 +27,5 @@ module.exports = withBundleAnalyzer(
 			config.plugins.push(new webpack.DefinePlugin(env))
 			return config
 		},
-		async rewrites() {
-			return [{ source: '/:eid/:path*', destination: `/:path*?eid=:eid` }]
-		},
 	})
 )

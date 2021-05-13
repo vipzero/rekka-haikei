@@ -135,19 +135,23 @@ function SettingBox({
 				</div>
 
 				<div style={{ display: 'flex', gap: '4px' }}>
-					<Link href={`${eid}/history`} passHref>
+					<Link href={{ pathname: `/[eid]/history`, query: { eid } }} passHref>
 						<a>履歴</a>
 					</Link>
-					<Link href={`${eid}/popular`} passHref>
+					<Link href={{ pathname: `/[eid]/popular`, query: { eid } }} passHref>
 						<a data-important={isLastTime}>ブクマ数統計</a>
 					</Link>
-					<Link href={`${eid}/choice`} passHref>
+					<Link href={{ pathname: `/[eid]/choice`, query: { eid } }} passHref>
 						<a>背景補正</a>
 					</Link>
 				</div>
 				<div style={{ display: 'flex', gap: '4px' }}>
 					{events.map((e) => (
-						<Link key={e.id} href={`${e.id}/bg`} passHref>
+						<Link
+							key={e.id}
+							href={{ pathname: `/[eid]/bg`, query: { eid: e.id } }}
+							passHref
+						>
 							<a>{e.label}</a>
 						</Link>
 					))}

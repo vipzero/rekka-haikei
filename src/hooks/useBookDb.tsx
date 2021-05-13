@@ -15,7 +15,11 @@ export function useBookDb() {
 			setBooks(books)
 		})
 		getBooksPostCount(eventId).then((snap) => {
-			setPostCount((snap.data() as { postCount: number }).postCount)
+			if (snap.exists) {
+				setPostCount((snap.data() as { postCount: number }).postCount)
+			} else {
+				setPostCount(0)
+			}
 		})
 	}, [eventId])
 
