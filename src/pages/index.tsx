@@ -1,3 +1,3 @@
-import HomePage from './[eid]'
+import HomePage from './[eid]/bg'
 
 export default HomePage

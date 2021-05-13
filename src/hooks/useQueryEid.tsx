@@ -5,6 +5,8 @@ export function useQeuryEid() {
 	const router = useRouter()
 	const { eid } = router.query
 
+	console.log(eid)
+
 	if (typeof eid === 'object') return eid[0]
 
 	return eid || config.eventId
