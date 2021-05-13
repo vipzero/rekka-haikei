@@ -1,0 +1,1 @@
+_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[12],{fS7J:function(_,n,w){(window.__NEXT_P=window.__NEXT_P||[]).push(["/[eid]/bg",function(){return w("RHoj")}])}},[["fS7J",1,0,2,3,9]]]);
