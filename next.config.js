@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const withImages = require('next-images')
 const webpack = require('webpack')
+
+const eventId = process.env.EVENT_ID
+
 require('dotenv')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
@@ -24,6 +28,9 @@ module.exports = withBundleAnalyzer(
 
 			config.plugins.push(new webpack.DefinePlugin(env))
 			return config
+		},
+		async rewrites() {
+			return [{ source: '/:eid/:path*', destination: `/:path*` }]
 		},
 	})
 )
