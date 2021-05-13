@@ -1,0 +1,1 @@
+_N_E=(window.webpackJsonp_N_E=window.webpackJsonp_N_E||[]).push([[19],{"4JYB":function(n,i,r){(window.__NEXT_P=window.__NEXT_P||[]).push(["/_error",function(){return r("LixI")}])},LixI:function(n,i,r){"use strict";r.r(i);var o=r("nKUr"),t=r("soUV");i.default=function(){return Object(o.jsx)(t.a,{title:"404",children:Object(o.jsx)("h2",{children:"404 orz"})})}}},[["4JYB",1,0,3]]]);
