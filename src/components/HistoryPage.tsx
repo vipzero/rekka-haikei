@@ -4,7 +4,7 @@ import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { Count } from '../types'
-import Suponcers from './HistoryPage/Suponcers'
+import Address from './HistoryPage/Address'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -77,7 +77,7 @@ function HistoryPage() {
 				/>
 			)}
 			{tab === 3 && <WordCountTable />}
-			<Suponcers />
+			<Address />
 		</Wrap>
 	)
 }
