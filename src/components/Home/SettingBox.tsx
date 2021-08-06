@@ -130,7 +130,6 @@ function SettingBox({
 						<a>背景補正</a>
 					</Link>
 				</div>
-				<EventLinksLine />
 
 				<div>
 					StreamURL:

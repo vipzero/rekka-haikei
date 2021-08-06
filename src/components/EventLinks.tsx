@@ -30,7 +30,7 @@ export const EventLinks = () => (
 )
 
 export const EventLinksLine = () => (
-	<div style={{ display: 'flex', gap: '4px' }}>
+	<div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
 		{events.map((e) => (
 			<Link
 				key={e.id}

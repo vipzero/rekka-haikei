@@ -12,11 +12,11 @@ const App = ({ Component, pageProps }: AppProps) => (
 			<meta name="theme-color" content="#000" key="themeColor" />
 			<link rel="manifest" href="/manifest.json" />
 			<link
-				href="https://fonts.googleapis.com/css?family=Nova+Mono"
+				href="https://fonts.googleapis.com/css?family=Nova+Mono&display=optional"
 				rel="stylesheet"
 			/>
 			<link
-				href="https://fonts.googleapis.com/css?family=Major+Mono+Display"
+				href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=optional"
 				rel="stylesheet"
 			/>
 			<title>vipstream</title>

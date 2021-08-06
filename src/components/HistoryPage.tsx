@@ -5,6 +5,7 @@ import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { Count } from '../types'
 import Address from './HistoryPage/Address'
+import ResetWorkerButton from './ResetWorkerButton'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -78,6 +79,7 @@ function HistoryPage() {
 			)}
 			{tab === 3 && <WordCountTable />}
 			<Address />
+			<ResetWorkerButton />
 		</Wrap>
 	)
 }

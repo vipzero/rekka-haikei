@@ -6,6 +6,8 @@
 		"no-restricted-globals": "off",
 		"react-hooks/exhaustive-deps": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
+		"@next/next/no-img-element": "off",
+		"jsx-a11y/alt-text": "off",
 		"react/react-in-jsx-scope": "off"
 	}
 }
