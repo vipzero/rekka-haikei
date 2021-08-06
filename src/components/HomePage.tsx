@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { RecoilRoot, useRecoilValue } from 'recoil'
-import { isSongFull } from '../types'
-import { settingState } from '../atom/SettingAtom'
-import { useLyricsDb } from '../hooks/useLyricsDb'
+import { RecoilRoot } from 'recoil'
 import { useSongDb } from '../hooks/useSongDb'
+import { isSongFull } from '../types'
 import { FloatingBox } from '.'
 import Home from './Home'
 
@@ -41,8 +39,6 @@ function getEx(ex: string | false) {
 function HomePage() {
 	const [loaded, song] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
-	const { showLyrics } = useRecoilValue(settingState)
-	const [lyrics] = useLyricsDb(song.icy, showLyrics)
 
 	useEffect(() => {
 		setEx(false)
@@ -66,7 +62,7 @@ function HomePage() {
 			<Helmet>
 				<title>{song.icy}</title>
 			</Helmet>
-			<Home song={song} extraComp={extraComp} lyrics={lyrics} />
+			<Home song={song} extraComp={extraComp} />
 		</>
 	)
 }

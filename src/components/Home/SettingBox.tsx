@@ -48,7 +48,6 @@ function SettingBox({
 			showSetting: visible,
 			showCounts,
 			showBookmark,
-			showLyrics,
 			showHistory,
 			sideMode,
 			lockBg,
@@ -61,7 +60,6 @@ function SettingBox({
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
 	const toggleLockBg = () => setSetting((v) => toggle(v, 'lockBg'))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
-	const toggleLyrics = () => setSetting((v) => toggle(v, 'showLyrics'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 
@@ -106,10 +104,6 @@ function SettingBox({
 						gridTemplateColumns: 'max-content max-content',
 					}}
 				>
-					<ToggleButton checked={showLyrics} onClick={toggleLyrics}>
-						<FontAwesomeIcon icon={faMusic} />
-						歌詞表示
-					</ToggleButton>
 					<ToggleButton checked={showCounts} onClick={toggleCounts}>
 						<FontAwesomeIcon icon={faStopwatch} />
 						カウント表示

@@ -17,12 +17,9 @@ import SongInfo from './SongInfo'
 type Props = {
 	song: Song
 	extraComp?: ReactNode
-	lyrics: string
 }
-function Home({ song, extraComp, lyrics }: Props) {
-	const { showCounts, showLyrics, sideMode, lockBg } = useRecoilValue(
-		settingState
-	)
+function Home({ song, extraComp }: Props) {
+	const { showCounts, sideMode, lockBg } = useRecoilValue(settingState)
 
 	const setSetting = useSetRecoilState(settingState)
 
@@ -61,9 +58,6 @@ function Home({ song, extraComp, lyrics }: Props) {
 					setTheme={setTheme}
 				/>
 
-				<LyricsBox data-theme={themeId} data-visible={showLyrics}>
-					<pre>{lyrics}</pre>
-				</LyricsBox>
 				<div>{extraComp || null}</div>
 				<RecentHistoryList />
 				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
@@ -71,16 +65,6 @@ function Home({ song, extraComp, lyrics }: Props) {
 		</div>
 	)
 }
-
-const LyricsBox = styled.div`
-	padding: 0 8px;
-	background: rgba(255, 255, 255, 0.8);
-	color: black;
-	&[data-theme='2'] {
-		background: rgba(0, 0, 0, 0.8);
-		color: white;
-	}
-`
 
 const Wrap = styled.div`
 	width: 100vw;

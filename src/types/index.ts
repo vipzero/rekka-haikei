@@ -68,7 +68,6 @@ export type Setting = {
 	showBookmark: boolean
 	showCounts: boolean
 	showHistory: boolean
-	showLyrics: boolean
 	sideMode: boolean
 	lockBg: boolean
 	feedBackText: string

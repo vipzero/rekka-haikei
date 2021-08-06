@@ -10,7 +10,6 @@ export const settingState = atom<Setting>({
 		showHistory: false,
 		sideMode: false,
 		lockBg: false,
-		showLyrics: false,
 		feedBackText: '',
 	},
 })
