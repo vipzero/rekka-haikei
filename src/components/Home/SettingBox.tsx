@@ -18,7 +18,7 @@ import config, { themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { Song, ThemeId } from '../../types'
 import { toggle } from '../../util'
-import { EventLinks } from '../EventLinks'
+import { EventLinks, EventLinksLine } from '../EventLinks'
 
 type Props = {
 	themeId: ThemeId
@@ -130,7 +130,7 @@ function SettingBox({
 						<a>背景補正</a>
 					</Link>
 				</div>
-				<EventLinks />
+				<EventLinksLine />
 
 				<div>
 					StreamURL:

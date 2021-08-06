@@ -77,4 +77,5 @@ export type Setting = {
 export type Event = {
 	id: string
 	label: string
+	current?: true
 }
