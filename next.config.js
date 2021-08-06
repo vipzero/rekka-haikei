@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const withImages = require('next-images')
-const webpack = require('webpack')
+const withPWA = require('next-pwa')
 
-require('dotenv')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-})
-
-module.exports = withBundleAnalyzer(
+module.exports = withPWA(
 	withImages({
 		webpack(config) {
 			config.module.rules.push({
@@ -19,13 +14,12 @@ module.exports = withBundleAnalyzer(
 					},
 				},
 			})
-			const env = Object.keys(process.env).reduce((acc, curr) => {
-				acc[`process.env.${curr}`] = JSON.stringify(process.env[curr])
-				return acc
-			}, {})
 
-			config.plugins.push(new webpack.DefinePlugin(env))
 			return config
+		},
+		pwa: {
+			dest: 'public',
+			// runtimeCaching: []
 		},
 	})
 )
