@@ -21,6 +21,11 @@ export function useSongDb() {
 			.collection('song')
 			.doc(eventId)
 			.onSnapshot((snap) => {
+				if (!snap.exists) {
+					console.warn('no stream setup')
+
+					return
+				}
 				const song = snap.data() as Song
 
 				const wordCountsAna = Object.entries(song.wordCounts)

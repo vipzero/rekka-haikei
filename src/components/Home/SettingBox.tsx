@@ -4,7 +4,6 @@ import {
 	faColumns,
 	faHistory,
 	faLock,
-	faMusic,
 	faStar,
 	faStopwatch,
 } from '@fortawesome/free-solid-svg-icons'
@@ -14,11 +13,12 @@ import React, { FC, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { addFeedback } from '../../../service/firebase'
-import { Song, ThemeId } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
-import config, { events, themes } from '../../config'
-import { toggle } from '../../util'
+import config, { themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
+import { Song, ThemeId } from '../../types'
+import { toggle } from '../../util'
+import { EventLinks } from '../EventLinks'
 import { RadioButton } from './RadioButton'
 
 type Props = {
@@ -139,17 +139,7 @@ function SettingBox({
 						<a>背景補正</a>
 					</Link>
 				</div>
-				<div style={{ display: 'flex', gap: '4px' }}>
-					{events.map((e) => (
-						<Link
-							key={e.id}
-							href={{ pathname: `/[eid]/bg`, query: { eid: e.id } }}
-							passHref
-						>
-							<a>{e.label}</a>
-						</Link>
-					))}
-				</div>
+				<EventLinks />
 
 				<div>
 					StreamURL:

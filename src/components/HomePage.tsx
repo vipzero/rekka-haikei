@@ -5,6 +5,7 @@ import { useSongDb } from '../hooks/useSongDb'
 import { isSongFull } from '../types'
 import { FloatingBox } from '.'
 import Home from './Home'
+import Address from './HistoryPage/Address'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -55,7 +56,13 @@ function HomePage() {
 
 	const extraComp = getEx(ex)
 
-	if (!loaded) return <span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
+	if (!loaded)
+		return (
+			<div>
+				<span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
+				<Address />
+			</div>
+		)
 
 	return (
 		<>
