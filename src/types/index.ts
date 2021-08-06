@@ -70,6 +70,7 @@ export type Setting = {
 	showHistory: boolean
 	sideMode: boolean
 	lockBg: boolean
+	showHelp: boolean
 	feedBackText: string
 }
 

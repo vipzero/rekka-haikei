@@ -5,6 +5,7 @@ const { NODE_ENV } = process.env
 const isDev = NODE_ENV === 'development'
 
 export const events: Event[] = [
+	{ id: 'christmashimanaraunnun', label: 'クリスマス暇なら云々' },
 	{ id: '2021obon_pre', label: '2021盆pre' },
 	{ id: '2021gw', label: '2021GW' },
 	{ id: '2020nematu', label: '2020冬' },

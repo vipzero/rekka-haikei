@@ -79,6 +79,7 @@ const Wrap = styled.div`
 		border-radius: 4px;
 		border: none;
 		margin: 4px;
+		--checked-bg: #999;
 	}
 	p {
 		color: #ccc;
@@ -126,6 +127,7 @@ const Wrap = styled.div`
 	}
 	&[data-theme='2'] {
 		button {
+			--checked-bg: #333;
 			background: black;
 			color: white;
 		}

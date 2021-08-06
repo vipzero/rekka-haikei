@@ -4,6 +4,7 @@ import {
 	faColumns,
 	faHistory,
 	faLock,
+	faQuestion,
 	faStar,
 	faStopwatch,
 } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +19,6 @@ import { useQeuryEid } from '../../hooks/useQueryEid'
 import { Song, ThemeId } from '../../types'
 import { toggle } from '../../util'
 import { EventLinks } from '../EventLinks'
-import { RadioButton } from './RadioButton'
 
 type Props = {
 	themeId: ThemeId
@@ -50,6 +50,7 @@ function SettingBox({
 			showHistory,
 			sideMode,
 			lockBg,
+			showHelp,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -60,6 +61,7 @@ function SettingBox({
 	const toggleLockBg = () => setSetting((v) => toggle(v, 'lockBg'))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
+	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
@@ -70,16 +72,7 @@ function SettingBox({
 		<Wrap data-theme={themeId} className="config" data-visible={visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<div>
-					<button onClick={cycleTheme}>テーマ({themeId})</button>
-					{themes.map((t) => (
-						<RadioButton
-							key={t.key}
-							value={t.id}
-							current={themeId}
-							onClick={() => setTheme(t.id)}
-							label={t.key}
-						/>
-					))}
+					<button onClick={cycleTheme}>テーマ({themes[themeId].key})</button>
 
 					<button
 						style={{ float: 'right' }}
@@ -97,33 +90,32 @@ function SettingBox({
 							: 'ブックマークしておく(ブラウザ保存)'}
 					</ToggleButton>
 				</div>
-				<div
-					style={{
-						display: 'grid',
-						gridTemplateColumns: 'max-content max-content',
-					}}
-				>
+				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+					<ToggleButton checked={showHelp} onClick={toggleShowHelp}>
+						<FontAwesomeIcon icon={faQuestion} />
+						{showHelp && 'ヘルプ'}
+					</ToggleButton>
 					<ToggleButton checked={showCounts} onClick={toggleCounts}>
 						<FontAwesomeIcon icon={faStopwatch} />
-						カウント表示
+						{showHelp && 'カウント表示'}
 					</ToggleButton>
 					<ToggleButton checked={showHistory} onClick={toggleHistory}>
 						<FontAwesomeIcon icon={faHistory} />
-						簡易履歴表示
+						{showHelp && '簡易履歴表示'}
 					</ToggleButton>
 					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
 						<FontAwesomeIcon icon={faColumns} />
-						ハーフモード
+						{showHelp && 'ハーフモード'}
 					</ToggleButton>
 
 					<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
 						<FontAwesomeIcon icon={faBookmark} />
-						ブックマーク表示({favCount})
+						{showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
 					<ToggleButton checked={lockBg} onClick={toggleLockBg}>
 						<FontAwesomeIcon icon={faLock} />
-						背景変更許可
+						{showHelp && '背景変更許可'}
 					</ToggleButton>
 				</div>
 
@@ -181,18 +173,24 @@ const Wrap = styled.div`
 		}
 	}
 `
+
 const ToggleButtonWrap = styled.button`
 	text-align: left;
 	> * {
-		padding-right: 4px;
+		padding: 0 2px;
+	}
+	&[data-checked='true'] {
+		background: var(--checked-bg) !important;
+		> * {
+			padding: 2px 2px;
+		}
 	}
 `
 
 type TBProps = { checked: boolean; onClick: () => void }
 
 const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
-	<ToggleButtonWrap onClick={onClick}>
-		<input type="checkbox" checked={checked || false} onChange={() => {}} />
+	<ToggleButtonWrap onClick={onClick} data-checked={checked}>
 		{children}
 	</ToggleButtonWrap>
 )
