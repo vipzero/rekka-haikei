@@ -25,3 +25,8 @@ out/
 
 .firebase/
 service_account/
+
+public/sw.js
+public/workbox-*
+.env
+.envrc

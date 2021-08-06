@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import sortBy from 'lodash/sortBy'
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { Song } from '../types'
@@ -36,7 +36,7 @@ export function useSongDb() {
 						label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
 					}))
 
-				song.wordCountsAna = _.sortBy(wordCountsAna, ['count'])
+				song.wordCountsAna = sortBy(wordCountsAna, ['count'])
 
 				setSong(song)
 				setLoaded(true)
