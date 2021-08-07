@@ -6,11 +6,6 @@ function ResetWorkerButton() {
 					// @ts-ignore
 					registration.unregister()
 				})
-				const channel = new MessageChannel()
-				// @ts-ignore
-				navigator.serviceWorker.controller.postMessage('update', [
-					channel.port2,
-				])
 			}}
 		>
 			いろいろ修正ボタン

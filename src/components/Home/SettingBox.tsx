@@ -120,13 +120,25 @@ function SettingBox({
 				</div>
 
 				<div style={{ display: 'flex', gap: '4px' }}>
-					<Link href={{ pathname: `/[eid]/history`, query: { eid } }} passHref>
+					<Link
+						prefetch={false}
+						href={{ pathname: `/[eid]/history`, query: { eid } }}
+						passHref
+					>
 						<a>履歴</a>
 					</Link>
-					<Link href={{ pathname: `/[eid]/popular`, query: { eid } }} passHref>
+					<Link
+						prefetch={false}
+						href={{ pathname: `/[eid]/popular`, query: { eid } }}
+						passHref
+					>
 						<a data-important={isLastTime}>ブクマ数統計</a>
 					</Link>
-					<Link href={{ pathname: `/[eid]/choice`, query: { eid } }} passHref>
+					<Link
+						prefetch={false}
+						href={{ pathname: `/[eid]/choice`, query: { eid } }}
+						passHref
+					>
 						<a>背景補正</a>
 					</Link>
 				</div>
@@ -139,7 +151,7 @@ function SettingBox({
 						onChange={(e) => setStreamUrl(e.target.value || '')}
 					/>
 					{streamUrl.includes('http://') && (
-						<span style={{ color: 'red' }}>https 非対応</span>
+						<span style={{ color: 'red' }}>http 非対応</span>
 					)}
 					<button onClick={removeStream}>x</button>
 				</div>

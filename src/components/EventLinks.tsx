@@ -33,6 +33,7 @@ export const EventLinksLine = () => (
 	<div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
 		{events.map((e) => (
 			<Link
+				prefetch={false}
 				key={e.id}
 				href={{ pathname: `/[eid]/bg`, query: { eid: e.id } }}
 				passHref
