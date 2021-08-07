@@ -40,3 +40,17 @@ export const isValidUrl = (url: string) => {
 	}
 	return true
 }
+
+export const getIp = () =>
+	fetch('https://api.ipify.org').then((res) => res.text())
+
+export const getIp2 = async () => (await fetch('https://api.ipify.org')).text()
+
+export const makeHash = (str: string) => {
+	let hash = 5381
+	let i = str.length
+	while (i) {
+		hash = (hash * 33) ^ str.charCodeAt(--i)
+	}
+	return hash >>> 0
+}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../config'
+import { useBlock } from '../hooks/useBlock'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { Count } from '../types'
@@ -17,6 +18,7 @@ const searchFilter = (search: string, text: string) => {
 }
 
 function HistoryPage() {
+	useBlock()
 	const [histories, counts, countsSong] = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
