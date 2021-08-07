@@ -23,5 +23,4 @@ const config = withImages({
 	},
 })
 
-// module.exports = isProduction ? withPWA(config) : config
-module.exports = config
+module.exports = isProduction ? withPWA(config) : config
