@@ -6,7 +6,7 @@ import { isSongFull } from '../types'
 import { FloatingBox } from '.'
 import Home from './Home'
 import Address from './HistoryPage/Address'
-import { useBlock } from '../hooks/useBlock'
+import { useSugar } from '../hooks/useSugar'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -39,9 +39,9 @@ function getEx(ex: string | false) {
 }
 
 function HomePage() {
+	useSugar()
 	const [loaded, song] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
-	useBlock()
 
 	useEffect(() => {
 		setEx(false)
