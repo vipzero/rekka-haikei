@@ -1,3 +1,4 @@
+import { Schedule } from './../src/types/index'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -102,10 +103,15 @@ export function getHistories(eventId) {
 		.get()
 }
 
-export function getTable(eventId) {
+export function loadTable(eventId) {
 	const fdb = getFirestore()
 
 	return fdb.collection('table').doc(eventId).get()
+}
+
+export function saveTable(eventId, schedule: Schedule) {
+	const fdb = getFirestore()
+	return fdb.collection('table').doc(eventId).set(schedule)
 }
 
 export function getCounts(eventId) {

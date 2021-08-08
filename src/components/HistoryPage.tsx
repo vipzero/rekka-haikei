@@ -34,6 +34,7 @@ function HistoryPage() {
 			<div>
 				検索(正規表現)
 				<input onChange={(e) => setSearch(e.target.value)}></input>
+				<Schedule />
 			</div>
 			<p>
 				<button onClick={() => setTab(0)}>履歴</button>
@@ -44,7 +45,6 @@ function HistoryPage() {
 			{tab === 0 && (
 				<div>
 					<h3>履歴</h3>
-					<Schedule />
 					<table className="hist">
 						<thead>
 							<tr>

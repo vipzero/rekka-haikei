@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getHistories, getTable } from '../../service/firebase'
+import { getHistories, loadTable, saveTable } from '../../service/firebase'
 import { Count, History, Schedule } from '../types'
 import { formatDate } from '../util'
 import { useQeuryEid } from './useQueryEid'
@@ -62,20 +62,24 @@ export function useHistoryDb() {
 }
 
 export function useScheduleDb() {
-	const [schedule, setSchedule] = useState<Schedule>([])
+	const [schedule, setSchedule] = useState<Schedule>({ text: '' })
 
 	const eventId = useQeuryEid()
 
 	useEffect(() => {
-		getTable(eventId).then(async (snap) => {
+		loadTable(eventId).then(async (snap) => {
 			if (snap.exists) {
 				const schedule = snap.data() as Schedule
 				setSchedule(schedule)
 			} else {
-				setSchedule([])
+				setSchedule({ text: '' })
 			}
 		})
 	}, [eventId])
 
-	return { schedule, setSchedule } as const
+	const save = () => {
+		saveTable(eventId, schedule)
+	}
+
+	return { schedule, setSchedule, save } as const
 }
