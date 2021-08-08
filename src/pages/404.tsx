@@ -1,11 +1,5 @@
-import Layout from '../components/Layout'
-
 const Error = () => {
-	return (
-		<Layout title="404">
-			<h2>エラーorz</h2>
-		</Layout>
-	)
+	return <div>404</div>
 }
 
 export default Error

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { RecoilRoot } from 'recoil'
-import { useSongDb } from '../hooks/useSongDb'
-import { isSongFull } from '../types'
 import { FloatingBox } from '.'
-import Home from './Home'
+import { useSongDb } from '../hooks/useSongDb'
+import { useStart } from '../hooks/useStart'
+import { isSongFull } from '../types'
 import Address from './HistoryPage/Address'
-import { useSugar } from '../hooks/useSugar'
+import Home from './Home'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -39,7 +39,7 @@ function getEx(ex: string | false) {
 }
 
 function HomePage() {
-	useSugar()
+	useStart()
 	const [loaded, song] = useSongDb()
 	const [ex, setEx] = useState<string | false>('')
 

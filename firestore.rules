@@ -6,20 +6,22 @@ service cloud.firestore {
     }
 
     match /song/{infoId=**} {
-      allow read, write: if true;
+      allow read, write;
     }
     match /hist/{eventId=**} {
-      allow read: if true;
+      allow read;
     }
     match /feedback/{feedbackId=**} {
-      allow write: if true;
+      allow write;
     }
     match /book/{bookId=**} {
-      allow read, write: if true;
+      allow read, write;
     }
     match /vote/{voteId=**} {
-
-      allow read, write: if true;
+      allow read, write;
+    }
+    match /table/{eventId=**} {
+      allow read, write;
     }
   }
 }

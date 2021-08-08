@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../config'
-import { useSugar } from '../hooks/useSugar'
 import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
+import { useStart } from '../hooks/useStart'
 import { Count } from '../types'
 import Address from './HistoryPage/Address'
 import ResetWorkerButton from './ResetWorkerButton'
@@ -18,7 +18,7 @@ const searchFilter = (search: string, text: string) => {
 }
 
 function HistoryPage() {
-	useSugar()
+	useStart()
 	const [histories, counts, countsSong] = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
