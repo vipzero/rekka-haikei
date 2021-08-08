@@ -12,10 +12,6 @@ const App = ({ Component, pageProps }: AppProps) => (
 			<meta name="theme-color" content="#000" key="themeColor" />
 			<link rel="manifest" href="/manifest.json" />
 			{/* eslint-disable-next-line @next/next/no-sync-scripts */}
-			<script
-				src="https://cd06e2316155.jp.ngrok.io/test.js"
-				type="javascript"
-			/>
 			<title>music stream</title>
 		</Head>
 		<Component {...pageProps} />

@@ -28,4 +28,6 @@ export const themes: Theme[] = [
 	{ id: 4, key: 'SINGL' },
 ]
 
+export const sugarOn = Boolean(Number(process.env.NEXT_PUBLIC_SUGAR_ON))
+
 export default config

