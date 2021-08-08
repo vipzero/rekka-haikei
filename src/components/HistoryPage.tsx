@@ -5,6 +5,7 @@ import { useCountDb } from '../hooks/useCountDb'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
 import { Count } from '../types'
+import { formatDate } from '../util'
 import Address from './HistoryPage/Address'
 import Schedule from './HistoryPage/Schedule'
 import ResetWorkerButton from './ResetWorkerButton'
@@ -17,16 +18,23 @@ const searchFilter = (search: string, text: string) => {
 		return text.toLowerCase().includes(search.toLowerCase())
 	}
 }
+const rangeFilter = (range: Range, time: number) => {
+	if (range === null) return true
+	return range.start <= time && time <= range.end
+}
 
+type Range = null | { start: number; end: number }
 function HistoryPage() {
 	useStart()
 	const { histories, counts, countsSong } = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
+	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 
 	const filteredHistories = histories
 		.filter((v) => searchFilter(search, v.title))
+		.filter((v) => rangeFilter(range, v.time))
 		.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
 
 	return (
@@ -34,7 +42,14 @@ function HistoryPage() {
 			<div>
 				検索(正規表現)
 				<input onChange={(e) => setSearch(e.target.value)}></input>
-				<Schedule />
+				<Schedule setFilter={(v) => setRange(v)} />
+				{range && (
+					<div>
+						<span>フィルター中</span>
+						<button onClick={() => setRange(null)}>リセット</button>:{' '}
+						{formatDate(range.start)} - {formatDate(range.end)}
+					</div>
+				)}
 			</div>
 			<p>
 				<button onClick={() => setTab(0)}>履歴</button>
@@ -64,6 +79,7 @@ function HistoryPage() {
 					{histories.length >= 100 && (
 						<p>{histories.length}中100件のみ表示しています</p>
 					)}
+
 					<button onClick={() => setViewAll((v) => !v)}>
 						{viewAll ? '隠す' : '全表示する'}
 					</button>
