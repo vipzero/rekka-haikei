@@ -102,6 +102,12 @@ export function getHistories(eventId) {
 		.get()
 }
 
+export function getTable(eventId) {
+	const fdb = getFirestore()
+
+	return fdb.collection('table').doc(eventId).get()
+}
+
 export function getCounts(eventId) {
 	const fdb = getFirestore()
 

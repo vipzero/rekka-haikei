@@ -52,6 +52,12 @@ export type Count = {
 	timesStr: string[]
 }
 
+export type Schedule = {
+	name: string
+	start: string // YYYY-MM-DD HH:MM
+	end: string // YYYY-MM-DD HH:MM
+}[]
+
 export type BookCount = {
 	icy: string
 	count: number

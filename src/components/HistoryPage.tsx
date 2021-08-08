@@ -6,6 +6,7 @@ import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
 import { Count } from '../types'
 import Address from './HistoryPage/Address'
+import Schedule from './HistoryPage/Schedule'
 import ResetWorkerButton from './ResetWorkerButton'
 
 const searchFilter = (search: string, text: string) => {
@@ -19,7 +20,7 @@ const searchFilter = (search: string, text: string) => {
 
 function HistoryPage() {
 	useStart()
-	const [histories, counts, countsSong] = useHistoryDb()
+	const { histories, counts, countsSong } = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
@@ -43,6 +44,7 @@ function HistoryPage() {
 			{tab === 0 && (
 				<div>
 					<h3>履歴</h3>
+					<Schedule />
 					<table className="hist">
 						<thead>
 							<tr>

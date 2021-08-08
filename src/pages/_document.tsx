@@ -1,21 +1,9 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet as StyledComponentSheets } from 'styled-components'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 import React from 'react'
-import config from '../config'
+import { ServerStyleSheet as StyledComponentSheets } from 'styled-components'
 
 type Props = {}
-const GA_TAG = 'UA-49286104-12'
-const GA_URL = `https://www.googletagmanager.com/gtag/js?id=${GA_TAG}`
-const gaProps = {
-	__html: `
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${GA_TAG}');
-`,
-}
-
-class Document extends NextDocument<Props> {
+class NextDocument extends Document<Props> {
 	static async getInitialProps(ctx) {
 		const sheet = new StyledComponentSheets()
 		const originalRenderPage = ctx.renderPage
@@ -27,7 +15,7 @@ class Document extends NextDocument<Props> {
 						sheet.collectStyles(<App {...props} />),
 				})
 
-			const initialProps = await NextDocument.getInitialProps(ctx)
+			const initialProps = await Document.getInitialProps(ctx)
 
 			return {
 				...initialProps,
@@ -48,21 +36,23 @@ class Document extends NextDocument<Props> {
 	render() {
 		return (
 			<Html lang={'ja'}>
-				<Head />
-
+				<Head>
+					<link
+						href="https://fonts.googleapis.com/css?family=Nova+Mono&display=optional"
+						rel="stylesheet"
+					/>
+					<link
+						href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=optional"
+						rel="stylesheet"
+					/>
+				</Head>
 				<body>
 					<Main />
 					<NextScript />
-					{config.isDev && (
-						<>
-							<script async src={GA_URL} />
-							<script dangerouslySetInnerHTML={gaProps} />
-						</>
-					)}
 				</body>
 			</Html>
 		)
 	}
 }
 
-export default Document
+export default NextDocument
