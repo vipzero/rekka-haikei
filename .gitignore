@@ -30,3 +30,5 @@ public/sw.js
 public/workbox-*
 .env
 .envrc
+
+/tmp
