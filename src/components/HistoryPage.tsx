@@ -1,7 +1,9 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../config'
 import { useCountDb } from '../hooks/useCountDb'
+import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
 import { Count } from '../types'
@@ -9,6 +11,16 @@ import { formatDate } from '../util'
 import Address from './HistoryPage/Address'
 import Schedule from './HistoryPage/Schedule'
 import ResetWorkerButton from './ResetWorkerButton'
+import { faStar } from '@fortawesome/free-regular-svg-icons'
+import {
+	faBookmark,
+	faColumns,
+	faHistory,
+	faLock,
+	faQuestion,
+	faStar as faStarFill,
+	faStopwatch,
+} from '@fortawesome/free-solid-svg-icons'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -31,6 +43,7 @@ function HistoryPage() {
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
+	const { favorites, setFavortes, toggleFavorites } = useFavorites()
 
 	const filteredHistories = histories
 		.filter((v) => searchFilter(search, v.title))
@@ -65,6 +78,7 @@ function HistoryPage() {
 							<tr>
 								<th>日時</th>
 								<th>タイトル</th>
+								<th>ブックマーク</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -72,6 +86,12 @@ function HistoryPage() {
 								<tr key={i} data-cate={reco.timeCate}>
 									<td>{reco.timeStr}</td>
 									<td>{reco.title}</td>
+									<td>
+										<FontAwesomeIcon
+											icon={favorites[reco.title] ? faStarFill : faStar}
+											onClick={() => toggleFavorites(reco.title)}
+										/>
+									</td>
 								</tr>
 							))}
 						</tbody>
