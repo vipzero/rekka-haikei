@@ -3,6 +3,7 @@ import { getHistories, loadTable, saveTable } from '../../service/firebase'
 import { Count, History, Schedule } from '../types'
 import { formatDate } from '../util'
 import { useQeuryEid } from './useQueryEid'
+import { useLocalStorage } from './useLocalStorage'
 
 function makeCounts(histories: History[]) {
 	const o: Record<string, number[]> = {}
@@ -21,31 +22,35 @@ function makeCounts(histories: History[]) {
 }
 
 export function useHistoryDb() {
-	const [histories, setHistories] = useState<History[]>([])
+	const [histories, setHists] = useLocalStorage<History[]>('cache-hist', [])
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	const eventId = useQeuryEid()
 
 	useEffect(() => {
-		getHistories(eventId).then((snaps) => {
-			const histories = snaps.docs.map((snap) => {
-				const { time, title } = snap.data()
+		const histOld = histories.filter((h) => h.n !== null)
+
+		getHistories(eventId, histOld[0]?.time || 0).then((snaps) => {
+			const newHists = snaps.docs.map((snap) => {
+				const { time, title, n } = snap.data()
 				const timeStr = formatDate(time)
 
 				return {
 					title,
 					time,
+					n,
 					timeStr,
 					timeCate: timeStr.substring(12, 13),
 				}
 			})
 
-			setHistories(histories)
+			const hists = [...newHists, ...histOld]
+			setHists(hists)
 
-			const counts = makeCounts(histories)
+			const counts = makeCounts(hists)
 			const countsSong = makeCounts(
-				histories.map((h) => {
+				hists.map((h) => {
 					const [artist, songTitle] = h.title.split(' - ')
 					const key = songTitle || artist || 'none'
 

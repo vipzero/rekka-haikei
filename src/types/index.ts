@@ -37,6 +37,7 @@ export type HistoryRaw = {
 }
 export type History = {
 	title: string
+	n: number | null
 	time: number
 	timeStr: string
 	timeCate: string // for style (hour % 10)

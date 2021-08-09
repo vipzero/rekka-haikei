@@ -92,13 +92,14 @@ export function getBooksPostCount(eventId) {
 	return fdb.collection('vote').doc(eventId).get()
 }
 
-export function getHistories(eventId) {
+export function getHistories(eventId, from) {
 	const fdb = getFirestore()
 
 	return fdb
 		.collection('hist')
 		.doc(eventId)
 		.collection('songs')
+		.where('time', '>', from)
 		.orderBy('time', 'desc')
 		.get()
 }
