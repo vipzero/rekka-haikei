@@ -25,7 +25,9 @@ function SongInfo({ song, showCounts }: Props) {
 						{isSongFull(song) && (
 							<>
 								<p>
-									<span className="animetitle">{song.animeTitle}</span>
+									{song.animeTitle && (
+										<span className="animetitle">{song.animeTitle}</span>
+									)}
 									<span className="subinfo">
 										[{song.opOrEd}
 										{song.spInfo ? ` ${song.spInfo}` : ''}] {song.category}

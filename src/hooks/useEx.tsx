@@ -37,11 +37,11 @@ export function useEx(song: Song) {
 export function checkEx(song: Song): string | false {
 	if (!isSongFull(song)) return false
 
-	if (song.animeTitle.includes('のんのんびより')) {
+	if (song.animeTitle?.includes('のんのんびより')) {
 		return 'nonnon'
-	} else if (song.animeTitle.includes('アビス')) {
+	} else if (song.animeTitle?.includes('アビス')) {
 		return 'mia'
-	} else if (song.animeTitle.includes('さくら荘')) {
+	} else if (song.animeTitle?.includes('さくら荘')) {
 		return 'sakurasou'
 	}
 	return false
