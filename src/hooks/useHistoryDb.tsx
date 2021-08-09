@@ -31,7 +31,13 @@ export function useHistoryDb() {
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
-		const histOld = histories.filter((h) => h.n !== null)
+		const histOld = histories
+			.filter((h) => h.n !== null)
+			.map((h) => {
+				// migration
+				if (typeof h.timeCate === 'number') return h
+				return { ...h, timeCate: new Date(h.time).getHours() }
+			})
 
 		getHistories(eventId, histOld[0]?.time || 0).then((snaps) => {
 			const newHists = snaps.docs.map((snap) => {
@@ -43,7 +49,7 @@ export function useHistoryDb() {
 					time,
 					n,
 					timeStr,
-					timeCate: timeStr.substring(12, 13),
+					timeCate: Number(timeStr.substring(11, 13)),
 				}
 			})
 

@@ -1,12 +1,13 @@
+const pad2 = (num: number) => String(num).padStart(2, '0')
 export function formatDate(time: number) {
 	const date = new Date(time)
 
 	const yyyy = date.getFullYear()
-	const mm = String(date.getMonth() + 1).padStart(2, '0')
-	const dd = String(date.getDate()).padStart(2, '0')
-	const h = String(date.getHours()).padStart(2, '0')
-	const m = String(date.getMinutes()).padStart(2, '0')
-	const s = String(date.getSeconds()).padStart(2, '0')
+	const mm = pad2(date.getMonth() + 1)
+	const dd = pad2(date.getDate())
+	const h = pad2(date.getHours())
+	const m = pad2(date.getMinutes())
+	const s = pad2(date.getSeconds())
 
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }

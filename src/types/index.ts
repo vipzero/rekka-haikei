@@ -41,7 +41,7 @@ export type History = {
 	n: number | null
 	time: number
 	timeStr: string
-	timeCate: string // for style (hour % 10)
+	timeCate: number // for style (hour % 10)
 }
 export type WordCount = {
 	count: number

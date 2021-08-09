@@ -3,7 +3,7 @@ import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import config from '../config'
+import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
@@ -76,7 +76,7 @@ function HistoryPage() {
 						</thead>
 						<tbody>
 							{filteredHistories.map((reco, i) => (
-								<tr key={i} data-cate={reco.timeCate}>
+								<ColorTr key={i} h={reco.timeCate}>
 									<td>{reco.timeStr}</td>
 									<td>{reco.title}</td>
 									<td>
@@ -93,7 +93,7 @@ function HistoryPage() {
 									>
 										{reco.n || '-'}
 									</td>
-								</tr>
+								</ColorTr>
 							))}
 						</tbody>
 					</table>
@@ -119,7 +119,6 @@ function HistoryPage() {
 				/>
 			)}
 			{tab === 3 && <WordCountTable />}
-			{tab === 4 && <ManageFavorte />}
 			<Address />
 			<ResetWorkerButton />
 		</Wrap>
@@ -139,17 +138,6 @@ const Wrap = styled.div`
 		td:first-child {
 			width: 144px;
 		}
-		tr {
-			&[data-cate='0'],
-			&[data-cate='2'],
-			&[data-cate='4'],
-			&[data-cate='6'],
-			&[data-cate='8'] {
-				td:first-child {
-					background: #dbf7ff;
-				}
-			}
-		}
 	}
 
 	table.count {
@@ -158,6 +146,14 @@ const Wrap = styled.div`
 		}
 	}
 `
+
+const ColorTr = styled.tr<{ h: number }>`
+	td:first-child {
+		border-left: solid ${({ h }) => timeColorMap[h]};
+		background: ${({ h }) => ['#dbf7ff', '#ffeeff'][h % 2]};
+	}
+`
+console.log({ timeColorMap })
 
 type TabProps = {
 	n: number
