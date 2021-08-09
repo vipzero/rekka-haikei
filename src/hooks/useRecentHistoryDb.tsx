@@ -6,7 +6,7 @@ import { useQeuryEid } from './useQueryEid'
 
 function toHistory({ title, time, n }: HistoryRaw): History {
 	const timeStr = formatDate(time)
-	const timeCate = timeStr.substring(12, 13)
+	const timeCate = Number(timeStr.substring(11, 13))
 
 	return { title, time, timeStr, timeCate, n }
 }

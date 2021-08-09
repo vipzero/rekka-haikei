@@ -9,7 +9,9 @@ export type SongMiss = {
 	imageLinks?: string[]
 	singer?: string
 	composer?: string
+	arranger?: string
 	writer?: string
+	animeTitle?: string
 	wordCounts: Record<string, number>
 	wordCountsAna: { name: string; label: string; count: number }[]
 }
@@ -17,7 +19,6 @@ export type SongMiss = {
 export type SongFull = SongMiss & {
 	title: string
 	artist: string
-	animeTitle: string
 	opOrEd: string
 	spInfo: string
 	songId: string
@@ -29,7 +30,7 @@ export type SongFull = SongMiss & {
 
 export type Song = SongFull | SongMiss
 
-export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song
+export const isSongFull = (song: Song): song is SongFull => 'spInfo' in song
 
 export type HistoryRaw = {
 	title: string

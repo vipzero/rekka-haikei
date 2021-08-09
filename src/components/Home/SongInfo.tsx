@@ -42,6 +42,7 @@ function SongInfo({ song, showCounts }: Props) {
 						)}
 						{song.singer && <p>歌手: {song.singer}</p>}
 						{song.composer && <p>作詞: {song.composer}</p>}
+						{song.arranger && <p>編曲: {song.arranger}</p>}
 						{song.writer && <p>作曲: {song.writer}</p>}
 						{song.albumName && (
 							<p>
