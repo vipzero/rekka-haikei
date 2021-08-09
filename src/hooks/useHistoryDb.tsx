@@ -22,11 +22,13 @@ function makeCounts(histories: History[]) {
 }
 
 export function useHistoryDb() {
-	const [histories, setHists] = useLocalStorage<History[]>('cache-hist', [])
+	const eventId = useQeuryEid()
+	const [histories, setHists] = useLocalStorage<History[]>(
+		`hists__${eventId}`,
+		[]
+	)
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
-
-	const eventId = useQeuryEid()
 
 	useEffect(() => {
 		const histOld = histories.filter((h) => h.n !== null)

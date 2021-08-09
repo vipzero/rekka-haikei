@@ -1,26 +1,18 @@
+import { faStar } from '@fortawesome/free-regular-svg-icons'
+import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../config'
-import { useCountDb } from '../hooks/useCountDb'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
-import { Count } from '../types'
 import { formatDate } from '../util'
 import Address from './HistoryPage/Address'
+import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
+import { WordCountTable } from './HistoryPage/WordCountTable'
 import ResetWorkerButton from './ResetWorkerButton'
-import { faStar } from '@fortawesome/free-regular-svg-icons'
-import {
-	faBookmark,
-	faColumns,
-	faHistory,
-	faLock,
-	faQuestion,
-	faStar as faStarFill,
-	faStopwatch,
-} from '@fortawesome/free-solid-svg-icons'
 
 const searchFilter = (search: string, text: string) => {
 	if (search === '') return true
@@ -64,12 +56,12 @@ function HistoryPage() {
 					</div>
 				)}
 			</div>
-			<p>
-				<button onClick={() => setTab(0)}>履歴</button>
-				<button onClick={() => setTab(1)}>再生回数</button>
-				<button onClick={() => setTab(2)}>再生回数(曲名)</button>
-				<button onClick={() => setTab(3)}>タグカウント</button>
-			</p>
+			<Tabs>
+				<Tab n={0} cur={tab} label="履歴" setTab={setTab} />
+				<Tab n={1} cur={tab} label="再生回数" setTab={setTab} />
+				<Tab n={2} cur={tab} label="再生回数(曲名)" setTab={setTab} />
+				<Tab n={3} cur={tab} label="タグカウント" setTab={setTab} />
+			</Tabs>
 			{tab === 0 && (
 				<div>
 					<h3>履歴</h3>
@@ -78,7 +70,8 @@ function HistoryPage() {
 							<tr>
 								<th>日時</th>
 								<th>タイトル</th>
-								<th>ブックマーク</th>
+								<th>ブ</th>
+								<th style={{ width: '3rem' }}>N</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -91,6 +84,14 @@ function HistoryPage() {
 											icon={favorites[reco.title] ? faStarFill : faStar}
 											onClick={() => toggleFavorites(reco.title)}
 										/>
+									</td>
+									<td
+										style={{
+											background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
+											textAlign: 'right',
+										}}
+									>
+										{reco.n || '-'}
 									</td>
 								</tr>
 							))}
@@ -118,60 +119,10 @@ function HistoryPage() {
 				/>
 			)}
 			{tab === 3 && <WordCountTable />}
+			{tab === 4 && <ManageFavorte />}
 			<Address />
 			<ResetWorkerButton />
 		</Wrap>
-	)
-}
-
-function WordCountTable() {
-	const [counts] = useCountDb()
-
-	return (
-		<div>
-			<h3>タグカウント</h3>
-			<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
-				{counts.map((v, i) => (
-					<div key={i}>
-						<span>{v.word}</span>
-						<span>({v.count})</span>
-					</div>
-				))}
-			</div>
-		</div>
-	)
-}
-
-function CountTable({ counts, title }: { title: string; counts: Count[] }) {
-	return (
-		<div>
-			<h3>{title}</h3>
-			<table className="count">
-				<thead>
-					<tr>
-						<th>タイトル</th>
-						<th>回数</th>
-						<th>日時</th>
-					</tr>
-				</thead>
-				<tbody>
-					{counts.slice(0, config.visibleRecordLimit).map((count, i) => (
-						<tr key={i}>
-							<td>{count.title}</td>
-							<td>{count.times.length}</td>
-							<td>
-								<ul>
-									{count.timesStr.map((s) => (
-										<li key={s}>{s}</li>
-									))}
-								</ul>
-							</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
-			{counts.length >= 100 && <p>100件までのみ表示しています</p>}
-		</div>
 	)
 }
 
@@ -204,6 +155,33 @@ const Wrap = styled.div`
 	table.count {
 		td:nth-child(3) {
 			width: 144px;
+		}
+	}
+`
+
+type TabProps = {
+	n: number
+	cur: number
+	setTab: (id: number) => void
+	label: string
+}
+const Tab = ({ n, cur, setTab, label }: TabProps) => (
+	<button data-active={n === cur} onClick={() => setTab(n)}>
+		{label}
+	</button>
+)
+
+const Tabs = styled.div`
+	margin-top: 12px;
+	display: flex;
+	button {
+		border: solid 1px gray;
+		border-bottom: none;
+		border-radius: 4px 4px 0 0;
+		margin-left: 2px;
+		&[data-active='true'] {
+			cursor: default;
+			background: white;
 		}
 	}
 `

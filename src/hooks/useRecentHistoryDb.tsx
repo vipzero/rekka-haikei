@@ -4,11 +4,11 @@ import { History, HistoryRaw } from '../types'
 import { formatDate } from '../util'
 import { useQeuryEid } from './useQueryEid'
 
-function toHistory({ title, time }: HistoryRaw): History {
+function toHistory({ title, time, n }: HistoryRaw): History {
 	const timeStr = formatDate(time)
 	const timeCate = timeStr.substring(12, 13)
 
-	return { title, time, timeStr, timeCate }
+	return { title, time, timeStr, timeCate, n }
 }
 
 export function useRecentHistoryDb(enabled: boolean) {

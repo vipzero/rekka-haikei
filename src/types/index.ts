@@ -34,6 +34,7 @@ export const isSongFull = (song: Song): song is SongFull => 'animeTitle' in song
 export type HistoryRaw = {
 	title: string
 	time: number
+	n: number | null
 }
 export type History = {
 	title: string
