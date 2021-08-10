@@ -13,14 +13,17 @@ import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 import ResetWorkerButton from './ResetWorkerButton'
+import safe from 'safe-regex'
 
 const searchFilter = (search: string, text: string) => {
-	if (search === '') return true
+	let res = false
 	try {
-		return new RegExp(search, 'i').exec(text)
-	} catch (_e) {
-		return text.toLowerCase().includes(search.toLowerCase())
-	}
+		if (safe(search)) {
+			res = !!new RegExp(search, 'i').exec(text)
+		}
+	} catch (_e) {}
+	res = res || text.toLowerCase().includes(search.toLowerCase())
+	return res
 }
 const rangeFilter = (range: Range, time: number) => {
 	if (range === null) return true
@@ -44,18 +47,7 @@ function HistoryPage() {
 
 	return (
 		<Wrap>
-			<div>
-				検索(正規表現)
-				<input onChange={(e) => setSearch(e.target.value)}></input>
-				<Schedule setFilter={(v) => setRange(v)} />
-				{range && (
-					<div>
-						<span>フィルター中</span>
-						<button onClick={() => setRange(null)}>リセット</button>:{' '}
-						{formatDate(range.start)} - {formatDate(range.end)}
-					</div>
-				)}
-			</div>
+			<Schedule setFilter={(v) => setRange(v)} />
 			<Tabs>
 				<Tab n={0} cur={tab} label="履歴" setTab={setTab} />
 				<Tab n={1} cur={tab} label="再生回数" setTab={setTab} />
@@ -65,6 +57,22 @@ function HistoryPage() {
 			{tab === 0 && (
 				<div>
 					<h3>履歴</h3>
+					<div>
+						検索(正規表現)
+						<input onChange={(e) => setSearch(e.target.value)}></input>
+						{range && (
+							<div>
+								<span>フィルター中</span>
+								<button onClick={() => setRange(null)}>リセット</button>:{' '}
+								{formatDate(range.start)} - {formatDate(range.end)}
+							</div>
+						)}
+					</div>
+					{search && (
+						<p>
+							{search} の検索結果: {filteredHistories.length}件
+						</p>
+					)}
 					<table className="hist">
 						<thead>
 							<tr>
@@ -100,7 +108,6 @@ function HistoryPage() {
 					{histories.length >= 100 && (
 						<p>{histories.length}中100件のみ表示しています</p>
 					)}
-
 					<button onClick={() => setViewAll((v) => !v)}>
 						{viewAll ? '隠す' : '全表示する'}
 					</button>
