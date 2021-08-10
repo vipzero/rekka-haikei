@@ -6,8 +6,8 @@ const isDev = NODE_ENV === 'development'
 
 export const events: Event[] = [
 	{ id: '2021obon', label: '2021盆', current: true },
-	{ id: 'christmashimanaraunnun', label: 'クリスマス暇なら云々' },
-	{ id: '2021obon_pre', label: '2021盆pre' },
+	// { id: 'christmashimanaraunnun', label: 'クリスマス暇なら云々' },
+	// { id: '2021obon_pre', label: '2021盆pre' },
 	{ id: '2021gw', label: '2021GW' },
 	{ id: '2020nematu', label: '2020冬' },
 ]

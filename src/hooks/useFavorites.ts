@@ -19,8 +19,13 @@ export function useSyncFavorite() {
 }
 
 export const useFavorites = () => {
+	const eid = useQeuryEid()
+	return useFavoritesBase(eid)
+}
+
+export const useFavoritesBase = (eventId: string) => {
 	const [favorites, setFavortes] = useLocalStorage<Record<string, boolean>>(
-		'favorite-songs',
+		`bookmark_${eventId}`,
 		{}
 	)
 
