@@ -84,7 +84,7 @@ function HistoryPage() {
 						</thead>
 						<tbody>
 							{filteredHistories.map((reco, i) => (
-								<ColorTr key={i} h={reco.timeCate}>
+								<ColorTr key={reco.time} h={reco.timeCate}>
 									<td>{reco.timeStr}</td>
 									<td>{reco.title}</td>
 									<td>
@@ -160,7 +160,6 @@ const ColorTr = styled.tr<{ h: number }>`
 		background: ${({ h }) => ['#dbf7ff', '#ffeeff'][h % 2]};
 	}
 `
-console.log({ timeColorMap })
 
 type TabProps = {
 	n: number
