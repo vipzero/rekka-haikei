@@ -108,7 +108,7 @@ const Wrap = styled.div`
 	.album {
 		img {
 			margin-top: 12px;
-			width: 100px;
+			width: 150px;
 		}
 	}
 `

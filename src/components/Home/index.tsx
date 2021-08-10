@@ -80,6 +80,15 @@ const Wrap = styled.div`
 		border: none;
 		margin: 4px;
 		--checked-bg: #999;
+		height: 24px;
+		min-width: 36px;
+		text-align: center;
+		&.big {
+			min-width: 124px;
+		}
+		svg {
+			font-size: 1rem;
+		}
 	}
 	p {
 		color: #ccc;

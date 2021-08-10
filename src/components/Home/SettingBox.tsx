@@ -4,20 +4,20 @@ import {
 	faColumns,
 	faHistory,
 	faLock,
+	faLockOpen,
 	faQuestion,
 	faStar as faStarFill,
 	faStopwatch,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
-import React, { FC } from 'react'
-import { useRecoilState } from 'recoil'
+import React from 'react'
 import styled from 'styled-components'
-import { settingState } from '../../atom/SettingAtom'
 import config, { themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
+import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
-import { toggle } from '../../util'
+import ToggleButton from './ToggleButton'
 
 type Props = {
 	themeId: ThemeId
@@ -41,27 +41,24 @@ function SettingBox({
 	favCount,
 	song,
 }: Props) {
-	const [
-		{
-			showSetting: visible,
-			showCounts,
-			showBookmark,
-			showHistory,
-			sideMode,
-			lockBg,
-			showHelp,
-		},
-		setSetting,
-	] = useRecoilState(settingState)
-	const eid = useQeuryEid()
+	const {
+		visible,
+		showCounts,
+		showBookmark,
+		showHistory,
+		sideMode,
+		lockBg,
+		showHelp,
+		toggleCounts,
+		toggleBookmark,
+		toggleLockBg,
+		toggleHistory,
+		toggleSideMode,
+		toggleShowHelp,
+		closeSetting,
+	} = useSettings()
 
-	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
-	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
-	const toggleLockBg = () => setSetting((v) => toggle(v, 'lockBg'))
-	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
-	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
-	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
-	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
+	const eid = useQeuryEid()
 
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const isLastTime = +new Date() > config.lastTime
@@ -71,7 +68,13 @@ function SettingBox({
 		<Wrap data-theme={themeId} className="config" data-visible={visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<div>
-					<button onClick={cycleTheme}>テーマ({themes[themeId].key})</button>
+					<button onClick={cycleTheme} className="big">
+						テーマ({themes[themeId].key})
+					</button>
+					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
+						<FontAwesomeIcon icon={faColumns} />
+						{showHelp && 'ハーフ'}
+					</ToggleButton>
 
 					<button
 						style={{ float: 'right' }}
@@ -82,11 +85,16 @@ function SettingBox({
 					</button>
 				</div>
 				<div>
-					<ToggleButton checked={favorited} onClick={() => toggleFavorited()}>
+					<ToggleButton
+						checked={favorited}
+						onClick={() => toggleFavorited()}
+						big
+					>
 						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
-						{favorited
-							? 'ブックマーク中'
-							: 'ブックマークしておく(ブラウザ保存)'}
+						{showHelp &&
+							(favorited
+								? 'ブックマーク中'
+								: 'ブックマークしておく(ブラウザ保存)')}
 					</ToggleButton>
 				</div>
 				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -102,10 +110,6 @@ function SettingBox({
 						<FontAwesomeIcon icon={faHistory} />
 						{showHelp && '簡易履歴表示'}
 					</ToggleButton>
-					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
-						<FontAwesomeIcon icon={faColumns} />
-						{showHelp && 'ハーフモード'}
-					</ToggleButton>
 
 					<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
 						<FontAwesomeIcon icon={faBookmark} />
@@ -113,8 +117,8 @@ function SettingBox({
 					</ToggleButton>
 
 					<ToggleButton checked={lockBg} onClick={toggleLockBg}>
-						<FontAwesomeIcon icon={faLock} />
-						{showHelp && '背景変更許可'}
+						<FontAwesomeIcon icon={lockBg ? faLock : faLockOpen} />
+						{showHelp && '背景変更拒否'}
 					</ToggleButton>
 				</div>
 
@@ -183,26 +187,5 @@ const Wrap = styled.div`
 		}
 	}
 `
-
-const ToggleButtonWrap = styled.button`
-	text-align: left;
-	> * {
-		padding: 0 2px;
-	}
-	&[data-checked='true'] {
-		background: var(--checked-bg) !important;
-		> * {
-			padding: 2px 2px;
-		}
-	}
-`
-
-type TBProps = { checked: boolean; onClick: () => void }
-
-const ToggleButton: FC<TBProps> = ({ onClick, checked, children }) => (
-	<ToggleButtonWrap onClick={onClick} data-checked={checked}>
-		{children}
-	</ToggleButtonWrap>
-)
 
 export default SettingBox
