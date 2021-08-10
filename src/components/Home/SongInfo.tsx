@@ -85,10 +85,10 @@ const Wrap = styled.div`
 	.details {
 		p {
 			padding-top: 4px;
-			font-size: 0.9rem;
+			font-size: 0.6rem;
 		}
 		.animetitle {
-			font-size: 1.3rem;
+			font-size: 0.9rem;
 		}
 		span:not(:first-child) {
 			margin-left: 0.5rem;
@@ -108,7 +108,7 @@ const Wrap = styled.div`
 	.album {
 		img {
 			margin-top: 12px;
-			width: 150px;
+			width: 100px;
 		}
 	}
 `

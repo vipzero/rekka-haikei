@@ -87,7 +87,7 @@ const Wrap = styled.div`
 		text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, -2px 2px 2px #000,
 			2px -2px 2px #000;
 		margin: 0;
-		font-size: 28px;
+		font-size: 16px;
 	}
 
 	.moc {
