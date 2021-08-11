@@ -5,7 +5,7 @@ import { useQeuryEid } from './useQueryEid'
 export function useSyncFavorite() {
 	const eventId = useQeuryEid()
 	const [synced, setSynced] = useLocalStorage<boolean>(
-		'synced-favorite-0',
+		`synced-favorite_${eventId}`,
 		false
 	)
 	const doSync = async (favorites: Record<string, boolean>) => {

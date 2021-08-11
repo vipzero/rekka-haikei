@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import config from '../config'
 import { useBookDb } from '../hooks/useBookDb'
 import { useFavorites, useSyncFavorite } from '../hooks/useFavorites'
+import { useHistoryDb } from '../hooks/useHistoryDb'
 
 function Page() {
 	// const lastTime = useIsLastTime()
@@ -20,25 +21,41 @@ function CountTable() {
 	const [books, postCount] = useBookDb()
 	const { favorites } = useFavorites()
 	const [synced, doSync] = useSyncFavorite()
+	const { histories } = useHistoryDb()
 
-	if (!favorites) return <p>loading</p>
+	const histLib = useMemo(() => {
+		const lib: Record<string, boolean> = {}
+		histories.forEach((h) => {
+			lib[h.title] = true
+		})
+		return lib
+	}, [histories])
 
 	return (
 		<div>
 			<h3>人気ブックマーク</h3>
 			{!synced && (
-				<p>
-					自分のブックマーク({Object.keys(favorites).length}) 件を投票しますか？
-					<button
-						onClick={() => {
-							doSync(favorites).then(() => {
-								alert('投票しました')
-							})
-						}}
-					>
-						送信する(1回のみ)
-					</button>
-				</p>
+				<div>
+					<p>
+						自分のブックマーク({Object.keys(favorites).length})
+						件を投票しますか？
+						<button
+							onClick={() => {
+								doSync(favorites).then(() => {
+									alert('投票しました')
+								})
+							}}
+						>
+							送信する(1回のみ)
+						</button>
+					</p>
+					{Object.keys(favorites).map((id) => (
+						<p key={id} style={{ lineHeight: '1.0rem', margin: '8px' }}>
+							{id}
+							{histLib[id] || '(現行曲になし!!)'}
+						</p>
+					))}
+				</div>
 			)}
 			<p>投票数: {postCount}</p>
 			<table className="count">

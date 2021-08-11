@@ -1,19 +1,19 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
+import safe from 'safe-regex'
 import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useStart } from '../hooks/useStart'
-import { formatDate } from '../util'
+import { formatDate, not } from '../util'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 import ResetWorkerButton from './ResetWorkerButton'
-import safe from 'safe-regex'
 
 const searchFilter = (search: string, text: string) => {
 	let res = false
@@ -40,15 +40,26 @@ function HistoryPage() {
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
+	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
-	const { favorites, setFavortes, toggleFavorites } = useFavorites()
+	const { favorites, toggleFavorites } = useFavorites()
 
-	const filteredHistories = histories
-		.filter((v) => searchFilter(search, v.title))
-		.filter((v) => rangeFilter(range, v.time))
-		.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
+	const sortedHistories = useMemo(() => {
+		if (!nsort) return histories
+		const arr = [...histories].sort(
+			(a, b) => (b.n === null ? -1 : b.n) - (a.n === null ? -1 : a.n)
+		)
+		return arr.sort()
+	}, [nsort])
+
+	const filteredHistories = useMemo(() => {
+		return sortedHistories
+			.filter((v) => searchFilter(search, v.title))
+			.filter((v) => rangeFilter(range, v.time))
+			.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
+	}, [sortedHistories, search, range, viewAll, nsort])
 
 	return (
 		<Wrap>
@@ -84,7 +95,9 @@ function HistoryPageBase() {
 								<th>日時</th>
 								<th>タイトル</th>
 								<th>ブ</th>
-								<th style={{ width: '3rem' }}>N</th>
+								<th style={{ width: '3rem' }} className="link-like">
+									<div onClick={() => setNsort(not)}>N</div>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -104,7 +117,7 @@ function HistoryPageBase() {
 											textAlign: 'right',
 										}}
 									>
-										{reco.n || '-'}
+										{reco.n === null ? '-' : reco.n}
 									</td>
 								</ColorTr>
 							))}
@@ -156,6 +169,10 @@ const Wrap = styled.div`
 		td:nth-child(3) {
 			width: 144px;
 		}
+	}
+	.link-like {
+		text-decoration: underline;
+		cursor: pointer;
 	}
 `
 
