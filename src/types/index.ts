@@ -79,6 +79,7 @@ export type Setting = {
 	lockBg: boolean
 	showHelp: boolean
 	feedBackText: string
+	abyss: string // fade change background color
 }
 
 export type Event = {

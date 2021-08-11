@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import React, { useState, useEffect, useRef } from 'react'
 import { Transition } from 'react-transition-group'
 import { imgCheck } from '../../util'
+import { useSettings } from '../../hooks/useSettings'
 
 const duration = 1000
 const transitionStyles = {
@@ -62,32 +63,45 @@ function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
 	const divRef = useRef<HTMLDivElement>(null)
+	const { abyss } = useSettings()
 
 	return (
-		<Transition
-			in={anime}
-			onExited={() => {
-				setBg(`url('${url}')`)
-				setAnime(true)
-			}}
-			timeout={duration}
-		>
-			{(state) => (
-				<Background
-					ref={divRef}
-					style={{
-						...defaultStyle,
-						...transitionStyles[state],
-						backgroundImage: bgStyle,
-						backgroundSize: 'contain',
-						backgroundPositionX: px,
-						backgroundPositionY: 'center',
-					}}
-				/>
-			)}
-		</Transition>
+		<SuperBack style={{ backgroundColor: abyss }}>
+			<Transition
+				in={anime}
+				onExited={() => {
+					setBg(`url('${url}')`)
+					setAnime(true)
+				}}
+				timeout={duration}
+			>
+				{(state) => (
+					<Background
+						ref={divRef}
+						style={{
+							...defaultStyle,
+							...transitionStyles[state],
+
+							backgroundImage: bgStyle,
+							backgroundSize: 'contain',
+							backgroundPositionX: px,
+							backgroundPositionY: 'center',
+						}}
+					/>
+				)}
+			</Transition>
+		</SuperBack>
 	)
 }
+const SuperBack = styled.div`
+	height: 100vh;
+	width: 100vw;
+	pointer-events: none;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: -1;
+`
 
 const Background = styled.div`
 	height: 100vh;

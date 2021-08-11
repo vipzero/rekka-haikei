@@ -27,6 +27,14 @@ export const themes: Theme[] = [
 	{ id: 3, key: 'EMPTY' },
 	{ id: 4, key: 'SINGL' },
 ]
+export const abyssColors = {
+	'#fff': { label: '白', color: '#fff' },
+	'#000': { label: '黒', color: '#000' },
+	'#888': { label: '灰', color: '#888' },
+}
+const abyssList = Object.keys(abyssColors)
+const nextI = <T,>(a: T[], v: T): T => a[(a.indexOf(v) + 1) % a.length]
+export const nextAbyss = (abyss: string): string => nextI(abyssList, abyss)
 
 export const sugarOn = Boolean(Number(process.env.NEXT_PUBLIC_SUGAR_ON))
 

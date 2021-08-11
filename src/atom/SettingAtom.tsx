@@ -8,6 +8,7 @@ const defaultValue: Setting = {
 	showHistory: false,
 	sideMode: false,
 	lockBg: false,
+	abyss: '#fff', // TODO: change before deploy
 	showHelp: false,
 	feedBackText: '',
 }

@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import config, { themes } from '../../config'
+import config, { themes, abyssColors, nextAbyss } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
@@ -39,7 +39,6 @@ function SettingBox({
 	streamUrl,
 	setStreamUrl,
 	favCount,
-	song,
 }: Props) {
 	const {
 		visible,
@@ -49,6 +48,7 @@ function SettingBox({
 		sideMode,
 		lockBg,
 		showHelp,
+		abyss,
 		toggleCounts,
 		toggleBookmark,
 		toggleLockBg,
@@ -56,6 +56,7 @@ function SettingBox({
 		toggleSideMode,
 		toggleShowHelp,
 		closeSetting,
+		setAbyss,
 	} = useSettings()
 
 	const eid = useQeuryEid()
@@ -63,18 +64,22 @@ function SettingBox({
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const isLastTime = +new Date() > config.lastTime
 	const removeStream = () => setStreamUrl('')
+	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<div>
 					<button onClick={cycleTheme} className="big">
-						テーマ({themes[themeId].key})
+						テーマ: ({themes[themeId].key})
 					</button>
 					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
 						<FontAwesomeIcon icon={faColumns} />
 						{showHelp && 'ハーフ'}
 					</ToggleButton>
+					<button onClick={() => cycleAbyss()}>
+						Fade: {abyssColors[abyss]?.label || '???'}
+					</button>
 
 					<button
 						style={{ float: 'right' }}
