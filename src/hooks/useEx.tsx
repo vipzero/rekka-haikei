@@ -1,6 +1,8 @@
-import { useMemo } from 'react'
+import { useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { FloatingBox } from '../components'
 import { isSongFull, Song } from '../types'
+import { useSettings } from './useSettings'
 
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
@@ -32,7 +34,23 @@ function getEx(ex: string | false) {
 	return null
 }
 export function useEx(song: Song) {
-	return useMemo(() => getEx(checkEx(song)), [song])
+	const { abyss, setAbyss } = useSettings()
+	const [redMode, setRedmode] = useState<string | false>(false) // true (現在の設定保存)
+	return useMemo(() => {
+		const madness = ['ひぐらし', 'アビス'].some((k) =>
+			song.animeTitle?.includes(k)
+		)
+
+		if (madness) {
+			setAbyss('red')
+			setRedmode(abyss)
+		} else {
+			if (redMode) setAbyss(redMode)
+			setRedmode(false)
+		}
+
+		return getEx(checkEx(song))
+	}, [song])
 }
 export function checkEx(song: Song): string | false {
 	if (!isSongFull(song)) return false
