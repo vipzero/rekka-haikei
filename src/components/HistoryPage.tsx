@@ -32,7 +32,12 @@ const rangeFilter = (range: Range, time: number) => {
 
 type Range = null | { start: number; end: number }
 function HistoryPage() {
-	useStart()
+	const ready = useStart()
+
+	if (!ready) return null
+	return <HistoryPageBase />
+}
+function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
 	const [search, setSearch] = useState<string>('')
 	const [range, setRange] = useState<Range>(null)

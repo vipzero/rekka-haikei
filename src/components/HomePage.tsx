@@ -15,7 +15,13 @@ const LoadingView = () => (
 )
 
 function HomePage() {
-	useStart()
+	const ready = useStart()
+
+	if (!ready) return null
+	return <HomePageBase />
+}
+
+function HomePageBase() {
 	const [loaded, song] = useSongDb()
 
 	const extraComp = useEx(song)

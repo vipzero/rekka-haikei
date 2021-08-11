@@ -1,21 +1,28 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { History } from '../types'
 import { useLocalStorage } from './useLocalStorage'
-import { useQeuryEid } from './useQueryEid'
 import { useSugar } from './useSugar'
 
 export function useStart() {
 	useSugar()
-	useMigration()
+	const migReady = useMigration()
 	useEffect(() => {
 		killCache()
 	}, [])
+	return migReady
 }
 
 function useMigration() {
 	const [v, setV] = useLocalStorage<number>('version', 0)
+	const [ready, setReady] = useState<boolean>(false)
+
 	const [favorites, setFavortes] = useLocalStorage<Record<string, boolean>>(
 		`favorite-songs`,
 		{}
+	)
+	const [histories, setHists] = useLocalStorage<History[]>(
+		`hists__2021obon`,
+		[]
 	)
 	const [, setFavortes2] = useLocalStorage<Record<string, boolean>>(
 		`bookmark_2021obon`,
@@ -28,8 +35,13 @@ function useMigration() {
 				setFavortes2(favorites)
 			}
 		}
-		setV(1)
+		if (v < 2) {
+			setHists(histories.filter((h) => h.time < 1628511233991)) // 2020-08-09 00
+		}
+		setV(2)
+		setReady(true)
 	}, [])
+	return ready
 }
 
 export function killCache() {
