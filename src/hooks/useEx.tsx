@@ -35,32 +35,45 @@ function getEx(ex: string | false) {
 }
 export function useEx(song: Song) {
 	const { abyss, setAbyss } = useSettings()
-	const [redMode, setRedmode] = useState<string | false>(false) // true (現在の設定保存)
-	return useMemo(() => {
-		const madness = ['ひぐらし', 'アビス'].some((k) =>
-			song.animeTitle?.includes(k)
-		)
+	const [abyssStash, setAbyssStash] = useState<string | false>(false) // true (現在の設定保存)
+
+	const exkey = useMemo(() => checkEx(song), [song])
+
+	useEffect(() => {
+		const madness = exkey === 'higurashi' || exkey === 'mia'
 
 		if (madness) {
 			setAbyss('red')
-			setRedmode(abyss)
+			setAbyssStash(abyss)
+		} else if (exkey === 'sakurasou') {
+			setAbyss('#ffdae7')
+			setAbyssStash(abyss)
 		} else {
-			if (redMode) setAbyss(redMode)
-			setRedmode(false)
+			if (abyssStash) setAbyss(abyssStash)
+			setAbyssStash(false)
 		}
+	}, [exkey])
 
-		return getEx(checkEx(song))
-	}, [song])
+	return useMemo(() => getEx(exkey), [exkey])
 }
+
+const has = (q: string, song: Song) => song.animeTitle?.includes(q)
+const isNonnon = (s) => has('のんのんびより', s)
+const isMaidInAbyss = (s) => has('アビス', s)
+const isSakuraso = (s) => has('さくら荘', s)
+const isHigurashi = (s) => has('ひぐらしの', s)
+
 export function checkEx(song: Song): string | false {
 	if (!isSongFull(song)) return false
 
-	if (song.animeTitle?.includes('のんのんびより')) {
+	if (isNonnon(song)) {
 		return 'nonnon'
-	} else if (song.animeTitle?.includes('アビス')) {
+	} else if (isMaidInAbyss(song)) {
 		return 'mia'
-	} else if (song.animeTitle?.includes('さくら荘')) {
+	} else if (isSakuraso(song)) {
 		return 'sakurasou'
+	} else if (isHigurashi(song)) {
+		return 'higurashi'
 	}
 	return false
 }
