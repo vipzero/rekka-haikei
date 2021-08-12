@@ -23,7 +23,6 @@ function HomePage() {
 
 function HomePageBase() {
 	const [loaded, song] = useSongDb()
-
 	const extraComp = useEx(song)
 
 	if (!loaded) return <LoadingView />

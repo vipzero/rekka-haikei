@@ -71,7 +71,7 @@ function SettingBox({
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<div>
 					<button onClick={cycleTheme} className="big">
-						テーマ: ({themes[themeId].key})
+						テーマ: {themes[themeId].key}
 					</button>
 					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
 						<FontAwesomeIcon icon={faColumns} />
