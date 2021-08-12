@@ -1,0 +1,22 @@
+name: export-test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+          cache: 'yarn'
+
+      - run: yarn
+      - run: echo "${{ secrets.ENV_BODY }}" > .env
+      - run: yarn export
