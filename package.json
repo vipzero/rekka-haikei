@@ -32,7 +32,7 @@
 		"@types/styled-components": "5.1.12",
 		"@zeit/next-source-maps": "0.0.3",
 		"babel-plugin-styled-components": "1.13.2",
-		"eslint": "^7.32.0",
+		"eslint": "7.32.0",
 		"eslint-config-next": "^11.0.1",
 		"husky": "7.0.1",
 		"lint-staged": "11.1.2",
