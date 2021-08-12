@@ -113,7 +113,7 @@ const Wrap = styled.div`
 		a {
 			font-size: 10px;
 			text-decoration: none;
-			background: #00000033;
+			/* background: #00000033; */
 			padding: 0px 2px;
 		}
 	}

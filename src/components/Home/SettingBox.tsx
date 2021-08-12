@@ -7,13 +7,13 @@ import {
 	faLockOpen,
 	faQuestion,
 	faStar as faStarFill,
-	faStopwatch,
+	faTags,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
-import config, { themes, abyssColors, nextAbyss } from '../../config'
+import config, { abyssColors, nextAbyss, themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
@@ -108,7 +108,7 @@ function SettingBox({
 						{showHelp && 'ヘルプ'}
 					</ToggleButton>
 					<ToggleButton checked={showCounts} onClick={toggleCounts}>
-						<FontAwesomeIcon icon={faStopwatch} />
+						<FontAwesomeIcon icon={faTags} />
 						{showHelp && 'カウント表示'}
 					</ToggleButton>
 					<ToggleButton checked={showHistory} onClick={toggleHistory}>
@@ -174,8 +174,10 @@ function SettingBox({
 
 const Wrap = styled.div`
 	/* height: 20vh; */
-	width: 100%;
 	display: flex;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 	> div {
 		padding: 8px;
 		background: #aaa;
