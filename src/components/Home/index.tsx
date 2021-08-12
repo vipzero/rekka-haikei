@@ -96,7 +96,6 @@ const Wrap = styled.div`
 		text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, -1px 1px 1px #000,
 			1px -1px 1px #000;
 		margin: 0;
-		font-size: 16px;
 	}
 
 	.moc {
@@ -124,6 +123,9 @@ const Wrap = styled.div`
 		&:blink {
 			color: #ccc;
 		}
+	}
+	.titles {
+		font-size: 1.1rem;
 	}
 
 	&[data-theme='1'] {

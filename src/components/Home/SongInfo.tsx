@@ -113,7 +113,7 @@ const Wrap = styled.div`
 		flex-wrap: wrap;
 		gap: 2px;
 		a {
-			font-size: 10px;
+			font-size: 0.6rem;
 			text-decoration: none;
 			/* background: #00000033; */
 			padding: 0px 2px;
