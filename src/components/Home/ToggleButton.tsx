@@ -1,15 +1,14 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-type Props = { checked: boolean; onClick: () => void; big?: boolean }
+type Props = {
+	checked: boolean
+	onClick: () => void
+	className?: string
+}
 
-const ToggleButton: FC<Props> = ({
-	onClick,
-	checked,
-	children,
-	big = false,
-}) => (
-	<Wrap className={big ? 'big' : ''} onClick={onClick} data-checked={checked}>
+const ToggleButton: FC<Props> = ({ onClick, checked, children, className }) => (
+	<Wrap className={className} onClick={onClick} data-checked={checked}>
 		{children}
 	</Wrap>
 )

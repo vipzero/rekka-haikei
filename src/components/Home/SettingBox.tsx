@@ -1,4 +1,4 @@
-import { faStar } from '@fortawesome/free-regular-svg-icons'
+import { faStar, faTimesCircle } from '@fortawesome/free-regular-svg-icons'
 import {
 	faBookmark,
 	faColumns,
@@ -8,6 +8,7 @@ import {
 	faQuestion,
 	faStar as faStarFill,
 	faTags,
+	faTimes,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -69,63 +70,80 @@ function SettingBox({
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
-				<div>
-					<button onClick={cycleTheme} className="big">
+				<ButtonGrid>
+					<button onClick={cycleTheme} className="theme">
 						テーマ: {themes[themeId].key}
 					</button>
-					<ToggleButton checked={sideMode} onClick={toggleSideMode}>
+					<ToggleButton
+						checked={sideMode}
+						onClick={toggleSideMode}
+						className="half"
+					>
 						<FontAwesomeIcon icon={faColumns} />
 						{showHelp && 'ハーフ'}
 					</ToggleButton>
-					<button onClick={() => cycleAbyss()}>
+					<button onClick={() => cycleAbyss()} className="fade">
 						Fade: {abyssColors[abyss]?.label || '???'}
 					</button>
 
-					<button
-						style={{ float: 'right' }}
-						className="confbtn"
-						onClick={closeSetting}
-					>
-						閉じる
-					</button>
-				</div>
-				<div>
 					<ToggleButton
-						checked={favorited}
-						onClick={() => toggleFavorited()}
-						big
+						checked={showHelp}
+						onClick={toggleShowHelp}
+						className="help"
 					>
-						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
-						{showHelp &&
-							(favorited
-								? 'ブックマーク中'
-								: 'ブックマークしておく(ブラウザ保存)')}
-					</ToggleButton>
-				</div>
-				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-					<ToggleButton checked={showHelp} onClick={toggleShowHelp}>
 						<FontAwesomeIcon icon={faQuestion} />
 						{showHelp && 'ヘルプ'}
 					</ToggleButton>
-					<ToggleButton checked={showCounts} onClick={toggleCounts}>
-						<FontAwesomeIcon icon={faTags} />
-						{showHelp && 'カウント表示'}
+					<button onClick={closeSetting} className="close">
+						<FontAwesomeIcon icon={faTimes} />
+						{showHelp && '閉じる'}
+					</button>
+
+					<ToggleButton
+						checked={favorited}
+						onClick={() => toggleFavorited()}
+						className="book"
+					>
+						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
+						{showHelp &&
+							(favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)')}
 					</ToggleButton>
-					<ToggleButton checked={showHistory} onClick={toggleHistory}>
+
+					<ToggleButton
+						checked={showCounts}
+						onClick={toggleCounts}
+						className="tags"
+					>
+						<FontAwesomeIcon icon={faTags} />
+						{showHelp && 'タグ表示'}
+					</ToggleButton>
+					<ToggleButton
+						checked={showHistory}
+						onClick={toggleHistory}
+						className="hist"
+					>
 						<FontAwesomeIcon icon={faHistory} />
 						{showHelp && '簡易履歴表示'}
 					</ToggleButton>
 
-					<ToggleButton checked={showBookmark} onClick={toggleBookmark}>
+					<ToggleButton
+						checked={showBookmark}
+						onClick={toggleBookmark}
+						className="books"
+					>
 						<FontAwesomeIcon icon={faBookmark} />
 						{showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
-					<ToggleButton checked={lockBg} onClick={toggleLockBg}>
+					<ToggleButton
+						checked={lockBg}
+						onClick={toggleLockBg}
+						className="lock"
+					>
 						<FontAwesomeIcon icon={lockBg ? faLock : faLockOpen} />
 						{showHelp && '背景変更拒否'}
 					</ToggleButton>
-				</div>
+				</ButtonGrid>
 
 				<div style={{ display: 'flex', gap: '4px' }}>
 					<Link
@@ -161,7 +179,11 @@ function SettingBox({
 					{streamUrl.includes('http://') && (
 						<span style={{ color: 'red' }}>http 非対応</span>
 					)}
-					<button onClick={removeStream}>x</button>
+					{streamUrl && (
+						<button onClick={removeStream}>
+							<FontAwesomeIcon icon={faTimesCircle} size="xs" />
+						</button>
+					)}
 				</div>
 				<div style={{ display: 'flex', gap: '8px' }}>
 					<a href="http://anison.info">アニメ情報元: Anison Generation</a>
@@ -192,6 +214,46 @@ const Wrap = styled.div`
 		label {
 			color: black !important;
 		}
+	}
+`
+
+const ButtonGrid = styled.div`
+	display: grid;
+	grid-template-areas:
+		'th fd ha cl'
+		'tg lk lk hl'
+		'hi bk bk --'
+		'bl bk bk --';
+
+	.theme {
+		grid-area: th;
+	}
+	.half {
+		grid-area: ha;
+	}
+	.fade {
+		grid-area: fd;
+	}
+	.tags {
+		grid-area: tg;
+	}
+	.help {
+		grid-area: hl;
+	}
+	.close {
+		grid-area: cl;
+	}
+	.book {
+		grid-area: bk;
+	}
+	.hist {
+		grid-area: hi;
+	}
+	.lock {
+		grid-area: lk;
+	}
+	.books {
+		grid-area: bl;
 	}
 `
 
