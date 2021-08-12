@@ -1,4 +1,5 @@
 import { useRouter } from 'next/dist/client/router'
+import { ParsedUrlQuery } from 'querystring'
 import config from '../config'
 
 export function useQeuryEid() {
@@ -10,12 +11,17 @@ export function useQeuryEid() {
 	return eid || config.eventId
 }
 
+const getQuery = (query: ParsedUrlQuery, path: string, queryKey: string) => {
+	const q = query[queryKey]
+	if (q) {
+		if (typeof q === 'object') return q?.[0] || ''
+		return q
+	}
+	const mq = path.match(new RegExp(`[&?]${queryKey}=(.*)(&|$)`))
+	return mq ? decodeURIComponent(mq[1]) : undefined
+}
+
 export function useQeurySearch() {
 	const router = useRouter()
-	const { q } = router.query
-	console.log({ q })
-
-	if (typeof q === 'object') return q[0]
-
-	return q
+	return getQuery(router.query, router.asPath, 'q')
 }
