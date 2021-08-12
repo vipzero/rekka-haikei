@@ -112,7 +112,7 @@ function ScheduleTable({
 							{row.items.map((item, i) => {
 								switch (item) {
 									case 'emp':
-										return <td className="emp"></td>
+										return <td key={i} className="emp"></td>
 									case 'skip':
 										return null
 									default:

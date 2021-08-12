@@ -60,18 +60,16 @@ function SongInfo({ song, showCounts }: Props) {
 							<p className="tags">
 								{Object.entries(song.wordCounts)
 									.filter(([k]) => k !== song.icy)
-									.map(([k, v], i) => (
+									.map(([tag, v], i) => (
 										<Link
 											prefetch={false}
-											href={{
-												pathname: `/[eid]/history`,
-												query: { eid, q: k },
-											}}
+											href="/[eid]/history"
+											as={{ pathname: `/${eid}/history`, query: { q: tag } }}
 											key={i}
 											passHref
 										>
 											<a>
-												{k}({v === 1 ? '初' : `${v}回目`})
+												{tag}({v === 1 ? '初' : `${v}回目`})
 											</a>
 										</Link>
 									))}

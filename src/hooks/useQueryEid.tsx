@@ -13,6 +13,7 @@ export function useQeuryEid() {
 export function useQeurySearch() {
 	const router = useRouter()
 	const { q } = router.query
+	console.log({ q })
 
 	if (typeof q === 'object') return q[0]
 

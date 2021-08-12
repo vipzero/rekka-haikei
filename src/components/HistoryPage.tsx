@@ -1,9 +1,7 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRouter } from 'next/dist/client/router'
-import React, { useMemo, useState } from 'react'
-import { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import safe from 'safe-regex'
 import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
@@ -43,8 +41,7 @@ function HistoryPage() {
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
 	const q = useQeurySearch()
-	const router = useRouter()
-	const [search, setSearch] = useState<string>(q || '')
+	const [search, setSearch] = useState<string>('')
 	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
@@ -52,9 +49,8 @@ function HistoryPageBase() {
 	const { favorites, toggleFavorites } = useFavorites()
 
 	useEffect(() => {
-		if (q) router.replace(router.pathname)
-		console.log(router.pathname)
-	}, [])
+		if (q) setSearch(q)
+	}, [q])
 
 	const sortedHistories = useMemo(() => {
 		if (!nsort) return histories
@@ -85,7 +81,7 @@ function HistoryPageBase() {
 					<h3>履歴</h3>
 					<div>
 						検索(正規表現)
-						<input onChange={(e) => setSearch(e.target.value)}></input>
+						<input value={search} onChange={(e) => setSearch(e.target.value)} />
 						{range && (
 							<div>
 								<span>フィルター中</span>
