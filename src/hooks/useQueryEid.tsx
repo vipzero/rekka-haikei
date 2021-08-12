@@ -9,3 +9,12 @@ export function useQeuryEid() {
 
 	return eid || config.eventId
 }
+
+export function useQeurySearch() {
+	const router = useRouter()
+	const { q } = router.query
+
+	if (typeof q === 'object') return q[0]
+
+	return q
+}

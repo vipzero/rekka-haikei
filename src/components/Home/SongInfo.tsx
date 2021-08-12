@@ -1,5 +1,7 @@
+import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
+import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
 
 function makeTitle(song: Song) {
@@ -14,6 +16,7 @@ type Props = { song: Song; showCounts: boolean }
 
 function SongInfo({ song, showCounts }: Props) {
 	const titles = makeTitle(song)
+	const eid = useQeuryEid()
 
 	return (
 		<Wrap className="content">
@@ -58,9 +61,19 @@ function SongInfo({ song, showCounts }: Props) {
 								{Object.entries(song.wordCounts)
 									.filter(([k]) => k !== song.icy)
 									.map(([k, v], i) => (
-										<span key={i}>
-											[{k} ({v === 1 ? '初' : `${v} 回目`})]
-										</span>
+										<Link
+											prefetch={false}
+											href={{
+												pathname: `/[eid]/history`,
+												query: { eid, q: k },
+											}}
+											key={i}
+											passHref
+										>
+											<a>
+												{k}({v === 1 ? '初' : `${v}回目`})
+											</a>
+										</Link>
 									))}
 							</p>
 						)}
@@ -96,8 +109,14 @@ const Wrap = styled.div`
 	}
 
 	.tags {
-		span {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2px;
+		a {
 			font-size: 10px;
+			text-decoration: none;
+			background: #00000033;
+			padding: 0px 2px;
 		}
 	}
 	.icy {

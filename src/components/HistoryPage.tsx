@@ -1,12 +1,15 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useRouter } from 'next/dist/client/router'
 import React, { useMemo, useState } from 'react'
+import { useEffect } from 'react'
 import safe from 'safe-regex'
 import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
+import { useQeurySearch } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
 import Address from './HistoryPage/Address'
@@ -39,12 +42,19 @@ function HistoryPage() {
 }
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
-	const [search, setSearch] = useState<string>('')
+	const q = useQeurySearch()
+	const router = useRouter()
+	const [search, setSearch] = useState<string>(q || '')
 	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 	const { favorites, toggleFavorites } = useFavorites()
+
+	useEffect(() => {
+		if (q) router.replace(router.pathname)
+		console.log(router.pathname)
+	}, [])
 
 	const sortedHistories = useMemo(() => {
 		if (!nsort) return histories

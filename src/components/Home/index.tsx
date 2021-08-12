@@ -93,8 +93,8 @@ const Wrap = styled.div`
 	p {
 		color: #ccc;
 		font-weight: bold;
-		text-shadow: 2px 2px 2px #000, -2px -2px 2px #000, -2px 2px 2px #000,
-			2px -2px 2px #000;
+		text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, -1px 1px 1px #000,
+			1px -1px 1px #000;
 		margin: 0;
 		font-size: 16px;
 	}
