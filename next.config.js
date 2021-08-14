@@ -1,8 +1,14 @@
 const withImages = require('next-images')
-const withPWA = require('next-pwa')
-const isProduction = process.env.NODE_ENV === 'production'
+// const withPWA = require('next-pwa')
+// const isProduction = process.env.NODE_ENV === 'production'
+const withTM = require('next-transpile-modules')
+const transpileModules = [
+	'@material-ui/core',
+	'@fortawesome/free-regular-svg-icons',
+	'@fortawesome/free-solid-svg-icons',
+]
 
-const config = withImages({
+const opt = {
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.(png|jpeg|jpg|gif|svg)$/,
@@ -20,6 +26,10 @@ const config = withImages({
 		dest: 'public',
 		runtimeCaching: [],
 	},
-})
+	transpileModules,
+}
+//
+//
+const config = withTM(transpileModules)(withImages(opt))
 
 module.exports = config
