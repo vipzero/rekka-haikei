@@ -1,4 +1,4 @@
-const pad2 = (num: number) => String(num).padStart(2, '0')
+export const pad2 = (num: number) => String(num).padStart(2, '0')
 export function formatDate(time: number) {
 	const date = new Date(time)
 
@@ -11,6 +11,8 @@ export function formatDate(time: number) {
 
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
+export const formatTime = (time: number) => formatDate(time).split(' ')[1]
+
 export function imgCheck(url: string) {
 	return new Promise((resolve, reject) => {
 		const bgImg = new Image()

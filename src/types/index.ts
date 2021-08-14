@@ -77,6 +77,7 @@ export type Setting = {
 	showHistory: boolean
 	sideMode: boolean
 	lockBg: boolean
+	showTool: boolean
 	showHelp: boolean
 	feedBackText: string
 	abyss: string // fade change background color

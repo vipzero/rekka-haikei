@@ -9,6 +9,7 @@ import {
 	faStar as faStarFill,
 	faTags,
 	faTimes,
+	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
@@ -18,6 +19,7 @@ import config, { abyssColors, nextAbyss, themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
+import Time from './Time'
 import ToggleButton from './ToggleButton'
 
 type Props = {
@@ -40,6 +42,7 @@ function SettingBox({
 	streamUrl,
 	setStreamUrl,
 	favCount,
+	song,
 }: Props) {
 	const {
 		visible,
@@ -49,6 +52,7 @@ function SettingBox({
 		sideMode,
 		lockBg,
 		showHelp,
+		showTool,
 		abyss,
 		toggleCounts,
 		toggleBookmark,
@@ -56,6 +60,7 @@ function SettingBox({
 		toggleHistory,
 		toggleSideMode,
 		toggleShowHelp,
+		toggleTool,
 		closeSetting,
 		setAbyss,
 	} = useSettings()
@@ -143,8 +148,22 @@ function SettingBox({
 						<FontAwesomeIcon icon={lockBg ? faLock : faLockOpen} />
 						{showHelp && '背景変更拒否'}
 					</ToggleButton>
+
+					<ToggleButton
+						checked={showTool}
+						onClick={toggleTool}
+						className="tool"
+					>
+						<FontAwesomeIcon icon={faToolbox} />
+						{showHelp && 'ツール'}
+					</ToggleButton>
 				</ButtonGrid>
 
+				{showTool && (
+					<div>
+						<Time song={song} />
+					</div>
+				)}
 				<div style={{ display: 'flex', gap: '4px' }}>
 					<Link
 						prefetch={false}
@@ -223,7 +242,7 @@ const ButtonGrid = styled.div`
 		'th fd ha cl'
 		'tg lk lk hl'
 		'hi bk bk --'
-		'bl bk bk --';
+		'bl bk bk tl';
 
 	.theme {
 		grid-area: th;
@@ -254,6 +273,9 @@ const ButtonGrid = styled.div`
 	}
 	.books {
 		grid-area: bl;
+	}
+	.tool {
+		grid-area: tl;
 	}
 `
 

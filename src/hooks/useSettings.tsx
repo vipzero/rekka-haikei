@@ -13,6 +13,7 @@ export const useSettings = () => {
 			abyss,
 			lockBg,
 			showHelp,
+			showTool,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -23,6 +24,7 @@ export const useSettings = () => {
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
+	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
 	const setAbyss = (abyss: string) => setSetting((v) => ({ ...v, abyss }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	return {
@@ -35,6 +37,7 @@ export const useSettings = () => {
 		lockBg,
 		showHelp,
 		fadeAbyssColor: abyss,
+		showTool,
 		setAbyss,
 		toggleCounts,
 		toggleBookmark,
@@ -43,5 +46,6 @@ export const useSettings = () => {
 		toggleSideMode,
 		toggleShowHelp,
 		closeSetting,
+		toggleTool,
 	}
 }
