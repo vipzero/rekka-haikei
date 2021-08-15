@@ -58,7 +58,8 @@ function HistoryPageBase() {
 			setSearch([q])
 			const trimedQueryPath = router.asPath.split('?')[0]
 
-			router.push(trimedQueryPath)
+			// router.push(trimedQueryPath, undefined, { shallow: true })
+			router.replace(trimedQueryPath)
 		}
 	}, [q])
 
