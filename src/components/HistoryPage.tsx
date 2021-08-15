@@ -1,7 +1,7 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { stringify } from 'querystring'
+import { useRouter } from 'next/router'
 import React, { useEffect, useMemo, useState } from 'react'
 import safe from 'safe-regex'
 import styled from 'styled-components'
@@ -50,9 +50,16 @@ function HistoryPageBase() {
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 	const { favorites, toggleFavorites } = useFavorites()
+	const router = useRouter()
 
 	useEffect(() => {
-		if (q) setSearchPre(q)
+		if (q) {
+			setSearchPre(q)
+			setSearch([q])
+			const trimedQueryPath = router.asPath.split('?')[0]
+
+			router.push(trimedQueryPath)
+		}
 	}, [q])
 
 	const sortedHists = useMemo(() => {
@@ -100,37 +107,51 @@ function HistoryPageBase() {
 				<div>
 					<h3>履歴</h3>
 					<div>
-						<textarea
-							rows={multiMode ? 8 : 1}
-							name="rekka-search-word"
-							value={searchPre}
-							autoComplete="on"
-							onChange={(e) => setSearchPre(e.target.value)}
-						/>
-						<label>
-							<input
-								type="checkbox"
-								onChange={(e) => setMultiMode(e.target.checked)}
+						<form>
+							<textarea
+								rows={multiMode ? 8 : 1}
+								name="rekka-search-word"
+								value={searchPre}
+								autoComplete="on"
+								onChange={(e) =>
+									setSearchPre(
+										multiMode ? e.target.value : e.target.value.split('\n')[0]
+									)
+								}
 							/>
-							複数
-						</label>
-						<button
-							onClick={(e) =>
-								setSearch(searchPre.trim().split('\n').filter(Boolean))
-							}
-						>
-							検索(正規表現)
-						</button>
-						{searchs.length > 0 && (
+							<label>
+								<input
+									type="checkbox"
+									onChange={(e) => {
+										const multiMode = e.target.checked
+										setMultiMode(multiMode)
+										if (!multiMode) {
+											setSearchPre(searchPre.replace(/\n/g, ' '))
+										}
+									}}
+								/>
+								複数
+							</label>
 							<button
-								onClick={() => {
-									setSearch([])
-									setSearchPre('')
+								onClick={(e) => {
+									e.preventDefault()
+									setSearch(searchPre.trim().split('\n').filter(Boolean))
 								}}
 							>
-								リセット
+								検索(正規表現)
 							</button>
-						)}
+							{searchs.length > 0 && (
+								<button
+									onClick={(e) => {
+										e.preventDefault()
+										setSearch([])
+										setSearchPre('')
+									}}
+								>
+									リセット
+								</button>
+							)}
+						</form>
 					</div>
 					<div className="search-result">
 						{searchResult && (
