@@ -1,6 +1,7 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { stringify } from 'querystring'
 import React, { useEffect, useMemo, useState } from 'react'
 import safe from 'safe-regex'
 import styled from 'styled-components'
@@ -16,11 +17,11 @@ import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 import ResetWorkerButton from './ResetWorkerButton'
 
-const searchFilter = (search: string, text: string) => {
+const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false
 	try {
 		if (safe(search)) {
-			res = !!new RegExp(search, 'i').exec(text)
+			res = !!r.exec(text)
 		}
 	} catch (_e) {}
 	res = res || text.toLowerCase().includes(search.toLowerCase())
@@ -41,7 +42,9 @@ function HistoryPage() {
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
 	const q = useQeurySearch()
-	const [search, setSearch] = useState<string>('')
+	const [searchPre, setSearchPre] = useState<string>('')
+	const [searchs, setSearch] = useState<string[]>([])
+	const [multiMode, setMultiMode] = useState<boolean>(false)
 	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
@@ -49,10 +52,10 @@ function HistoryPageBase() {
 	const { favorites, toggleFavorites } = useFavorites()
 
 	useEffect(() => {
-		if (q) setSearch(q)
+		if (q) setSearchPre(q)
 	}, [q])
 
-	const sortedHistories = useMemo(() => {
+	const sortedHists = useMemo(() => {
 		if (!nsort) return histories
 		const arr = [...histories].sort(
 			(a, b) => (b.n === null ? -1 : b.n) - (a.n === null ? -1 : a.n)
@@ -60,12 +63,29 @@ function HistoryPageBase() {
 		return arr.sort()
 	}, [nsort])
 
-	const filteredHistories = useMemo(() => {
-		return sortedHistories
-			.filter((v) => searchFilter(search, v.title))
-			.filter((v) => rangeFilter(range, v.time))
-			.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
-	}, [sortedHistories, search, range, viewAll, nsort])
+	const [filteredHists, searchResult] = useMemo(() => {
+		if (searchs.length === 0) return [sortedHists, null]
+		const result: Record<string, number> = {}
+		const rangeFiltered = sortedHists.filter((v) => rangeFilter(range, v.time))
+		const searchParts = searchs.map((s) => {
+			result[s] = 0
+			return [s, new RegExp(s, 'i')] as const
+		})
+		const histories = rangeFiltered.filter((v) => {
+			const hits = searchParts.map(([s, r]) => {
+				const hit = searchFilter(s, v.title, r)
+				result[s] += hit ? 1 : 0
+				return hit
+			})
+			return hits.some(Boolean)
+		})
+
+		return [histories, result]
+	}, [sortedHists, searchs, range])
+
+	const viewHists = useMemo(() => {
+		return filteredHists.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
+	}, [viewAll, filteredHists])
 
 	return (
 		<Wrap>
@@ -80,21 +100,61 @@ function HistoryPageBase() {
 				<div>
 					<h3>履歴</h3>
 					<div>
-						検索(正規表現)
-						<input value={search} onChange={(e) => setSearch(e.target.value)} />
+						<textarea
+							rows={multiMode ? 8 : 1}
+							name="rekka-search-word"
+							value={searchPre}
+							autoComplete="on"
+							onChange={(e) => setSearchPre(e.target.value)}
+						/>
+						<label>
+							<input
+								type="checkbox"
+								onChange={(e) => setMultiMode(e.target.checked)}
+							/>
+							複数
+						</label>
+						<button
+							onClick={(e) =>
+								setSearch(searchPre.trim().split('\n').filter(Boolean))
+							}
+						>
+							検索(正規表現)
+						</button>
+						{searchs.length > 0 && (
+							<button
+								onClick={() => {
+									setSearch([])
+									setSearchPre('')
+								}}
+							>
+								リセット
+							</button>
+						)}
+					</div>
+					<div className="search-result">
+						{searchResult && (
+							<>
+								<h4>検索結果</h4>
+								{searchs.map((search) => (
+									<p key={search}>
+										{search} の検索結果: {searchResult[search]}件
+									</p>
+								))}
+							</>
+						)}
 						{range && (
-							<div>
-								<span>フィルター中</span>
-								<button onClick={() => setRange(null)}>リセット</button>:{' '}
-								{formatDate(range.start)} - {formatDate(range.end)}
+							<div style={{ marginTop: '8px' }}>
+								<div style={{ display: 'flex' }}>
+									<h4>フィルター中</h4>
+									<button onClick={() => setRange(null)}>リセット</button>
+								</div>
+								<p>
+									{formatDate(range.start)} - {formatDate(range.end)}
+								</p>
 							</div>
 						)}
 					</div>
-					{search && (
-						<p>
-							{search} の検索結果: {filteredHistories.length}件
-						</p>
-					)}
 					<table className="hist">
 						<thead>
 							<tr>
@@ -107,7 +167,7 @@ function HistoryPageBase() {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredHistories.map((reco, i) => (
+							{viewHists.map((reco, i) => (
 								<ColorTr key={reco.time} h={reco.timeCate}>
 									<td>{reco.timeStr}</td>
 									<td>{reco.title}</td>
@@ -137,18 +197,8 @@ function HistoryPageBase() {
 					</button>
 				</div>
 			)}
-			{tab === 1 && (
-				<CountTable
-					title="再生回数"
-					counts={counts.filter((v) => searchFilter(search, v.title))}
-				/>
-			)}
-			{tab === 2 && (
-				<CountTable
-					title="再生回数(曲名)"
-					counts={countsSong.filter((v) => searchFilter(search, v.title))}
-				/>
-			)}
+			{tab === 1 && <CountTable title="再生回数" counts={counts} />}
+			{tab === 2 && <CountTable title="再生回数(曲名)" counts={countsSong} />}
 			{tab === 3 && <WordCountTable />}
 			<Address />
 			<ResetWorkerButton />
@@ -179,6 +229,16 @@ const Wrap = styled.div`
 	.link-like {
 		text-decoration: underline;
 		cursor: pointer;
+	}
+
+	.search-result {
+		p {
+			margin: 0;
+			padding: 0;
+		}
+		h4 {
+			margin: 0;
+		}
 	}
 `
 
