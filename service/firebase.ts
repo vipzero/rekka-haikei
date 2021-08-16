@@ -71,7 +71,7 @@ export const incFavoritesAll = async (eventId: string, icys: string[]) => {
 		}
 	}
 
-	batch.update(fdb.collection('vote').doc(config.eventId), {
+	batch.update(fdb.collection('vote').doc(eventId), {
 		postCount: firebase.firestore.FieldValue.increment(1),
 	})
 	await batch.commit()
