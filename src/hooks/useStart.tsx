@@ -38,7 +38,11 @@ function useMigration() {
 		if (v < 2) {
 			setHists(histories.filter((h) => h.time < 1628511233991)) // 2020-08-09 00
 		}
-		setV(2)
+		if (v < 3) {
+			localStorage.removeItem('hists__2021gw')
+			localStorage.removeItem('hists__2020nematu')
+		}
+		setV(3)
 		setReady(true)
 	}, [])
 	return ready

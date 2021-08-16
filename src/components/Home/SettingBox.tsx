@@ -165,27 +165,13 @@ function SettingBox({
 					</div>
 				)}
 				<div style={{ display: 'flex', gap: '4px' }}>
-					<Link
-						prefetch={false}
-						href={{ pathname: `/[eid]/history`, query: { eid } }}
-						passHref
-					>
-						<a>履歴</a>
-					</Link>
-					<Link
-						prefetch={false}
-						href={{ pathname: `/[eid]/popular`, query: { eid } }}
-						passHref
-					>
-						<a data-important={isLastTime}>ブクマ数統計</a>
-					</Link>
-					<Link
-						prefetch={false}
-						href={{ pathname: `/[eid]/choice`, query: { eid } }}
-						passHref
-					>
-						<a>背景補正</a>
-					</Link>
+					<a href={`/${eid}/history`}>履歴</a>
+					<a href={`/${eid}/popular`} data-important={isLastTime}>
+						ブクマ数統計
+					</a>
+					<a href={`/${eid}/choise`} data-important={isLastTime}>
+						背景補正
+					</a>
 				</div>
 
 				<div>

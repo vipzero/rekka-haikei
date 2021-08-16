@@ -27,12 +27,23 @@ export function useHistoryDb() {
 		`hists__${eventId}`,
 		[]
 	)
+	useEffect(() => {
+		console.log({ eventId })
+		console.log(histories.length)
+	}, [])
+
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
+		let any = false
 		const histOld = histories
-			.filter((h) => h.n !== null)
+			.filter((h) => {
+				if (any) return true
+				const b = h.n !== null
+				any = b
+				return b
+			})
 			.map((h) => {
 				// migration
 				if (typeof h.timeCate === 'number') return h
@@ -54,6 +65,8 @@ export function useHistoryDb() {
 				}
 			})
 
+			console.log(newHists.length)
+
 			const hists = [...newHists, ...histOld]
 			setHists(hists)
 
@@ -70,7 +83,7 @@ export function useHistoryDb() {
 			setCounts(counts)
 			setCountsSong(countsSong)
 		})
-	}, [eventId])
+	}, [])
 
 	return { histories, counts, countsSong } as const
 }

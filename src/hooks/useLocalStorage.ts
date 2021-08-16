@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useState, useEffect } from 'react'
 
 export function useLocalStorage<T = unknown>(
 	key: string,
@@ -28,6 +28,11 @@ export function useLocalStorage<T = unknown>(
 			console.log(error)
 		}
 	}
+	useEffect(() => {
+		return () => {
+			setStoredValue(initialValue)
+		}
+	}, [key])
 
 	return [storedValue, setValue]
 }
