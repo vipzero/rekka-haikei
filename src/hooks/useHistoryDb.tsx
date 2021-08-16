@@ -38,6 +38,7 @@ export function useHistoryDb() {
 				if (typeof h.timeCate === 'number') return h
 				return { ...h, timeCate: new Date(h.time).getHours() }
 			})
+		console.log(histOld[0])
 
 		getHistories(eventId, histOld[0]?.time || 0).then((snaps) => {
 			const newHists = snaps.docs.map((snap) => {

@@ -69,17 +69,22 @@ function HistoryPageBase() {
 			(a, b) => (b.n === null ? -1 : b.n) - (a.n === null ? -1 : a.n)
 		)
 		return arr.sort()
-	}, [nsort])
+	}, [histories, nsort])
+
+	const [rangedHists] = useMemo(() => {
+		const rangeFiltered = sortedHists.filter((v) => rangeFilter(range, v.time))
+
+		return [rangeFiltered]
+	}, [sortedHists, range])
 
 	const [filteredHists, searchResult] = useMemo(() => {
-		if (searchs.length === 0) return [sortedHists, null]
+		if (searchs.length === 0) return [rangedHists, null]
 		const result: Record<string, number> = {}
-		const rangeFiltered = sortedHists.filter((v) => rangeFilter(range, v.time))
 		const searchParts = searchs.map((s) => {
 			result[s] = 0
 			return [s, new RegExp(s, 'i')] as const
 		})
-		const histories = rangeFiltered.filter((v) => {
+		const histories = rangedHists.filter((v) => {
 			const hits = searchParts.map(([s, r]) => {
 				const hit = searchFilter(s, v.title, r)
 				result[s] += hit ? 1 : 0
@@ -89,7 +94,7 @@ function HistoryPageBase() {
 		})
 
 		return [histories, result]
-	}, [sortedHists, searchs, range])
+	}, [rangedHists, searchs])
 
 	const viewHists = useMemo(() => {
 		return filteredHists.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
