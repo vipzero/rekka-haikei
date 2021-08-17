@@ -15,8 +15,8 @@ export const events: Event[] = [
 const config = {
 	isDev,
 	eventId: process.env.EVENT_ID || events[0].id,
-	finishTime: +new Date('2021-08-16T15:00:00.000Z'),
-	lastTime: +new Date('2021-08-16T10:00:00.000Z'),
+	finishTime: +new Date('2022-01-02T15:00:00.000Z'),
+	lastTime: +new Date('2022-01-02T12:00:00.000Z'),
 	visibleRecordLimit: 100,
 }
 
