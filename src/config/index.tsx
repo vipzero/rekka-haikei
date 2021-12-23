@@ -4,8 +4,12 @@ const { NODE_ENV } = process.env
 
 const isDev = NODE_ENV === 'development'
 
+const finishTime = +new Date('2022-01-02T15:00:00.000Z') // +9:00
+const lastspurtTime = +new Date('2022-01-02T12:00:00.000Z')
+
 export const events: Event[] = [
-	{ id: '2021obon', label: '2021盆', current: true },
+	{ id: '2021winter', label: '2021冬', current: true },
+	{ id: '2021obon', label: '2021盆' },
 	// { id: 'christmashimanaraunnun', label: 'クリスマス暇なら云々' },
 	// { id: '2021obon_pre', label: '2021盆pre' },
 	{ id: '2021gw', label: '2021GW' },
@@ -15,8 +19,8 @@ export const events: Event[] = [
 const config = {
 	isDev,
 	eventId: process.env.EVENT_ID || events[0].id,
-	finishTime: +new Date('2022-01-02T15:00:00.000Z'),
-	lastTime: +new Date('2022-01-02T12:00:00.000Z'),
+	finishTime,
+	lastspurtTime,
 	visibleRecordLimit: 100,
 }
 

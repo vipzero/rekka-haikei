@@ -7,7 +7,7 @@ export function useIsLastTime() {
 	useEffect(() => {
 		if (last) return
 		const t = setInterval(() => {
-			if (+new Date() < config.lastTime) {
+			if (+new Date() < config.lastspurtTime) {
 				setLast(true)
 				clearInterval(t)
 			}

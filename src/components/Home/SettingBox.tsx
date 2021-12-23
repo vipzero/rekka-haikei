@@ -68,7 +68,7 @@ function SettingBox({
 	const eid = useQeuryEid()
 
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
-	const isLastTime = +new Date() > config.lastTime
+	const isLastTime = +new Date() > config.lastspurtTime
 	const removeStream = () => setStreamUrl('')
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 

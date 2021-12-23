@@ -6,10 +6,6 @@ import { useFavorites, useSyncFavorite } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 
 function Page() {
-	// const lastTime = useIsLastTime()
-
-	// if (!lastTime) return <p>23時までまってね...</p>
-
 	return (
 		<Wrap>
 			<CountTable />
