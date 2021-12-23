@@ -11,7 +11,7 @@
 		"redirects": [
 			{
 				"source": "/",
-				"destination": "/2021obon/bg",
+				"destination": "/2021winter/bg",
 				"type": 301
 			}
 		],
