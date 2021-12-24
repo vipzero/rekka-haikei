@@ -169,7 +169,7 @@ function SettingBox({
 					<a href={`/${eid}/popular`} data-important={isLastTime}>
 						ブクマ数統計
 					</a>
-					<a href={`/${eid}/choise`}>背景補正</a>
+					<a href={`/${eid}/choice`}>背景補正</a>
 				</div>
 
 				<div>
