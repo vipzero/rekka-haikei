@@ -12,7 +12,7 @@
 			{
 				"source": "/",
 				"destination": "/2021winter/bg",
-				"type": 301
+				"type": 302
 			}
 		],
 		"headers": [
