@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
-	'2021-12-26': 'ボタン変更・説明追加',
+	'2021-12-26:20': 'スケジュールにラベル追加',
+	'2021-12-26:19': 'ボタン変更・説明追加',
 }
 
 function Address() {
