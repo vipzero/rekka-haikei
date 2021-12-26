@@ -1,4 +1,9 @@
-import { faStar, faTimesCircle } from '@fortawesome/free-regular-svg-icons'
+import {
+	faEye,
+	faEyeSlash,
+	faStar,
+	faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons'
 import {
 	faBookmark,
 	faColumns,
@@ -120,6 +125,7 @@ function SettingBox({
 						className="tags"
 					>
 						<FontAwesomeIcon icon={faTags} />
+						<FontAwesomeIcon icon={showCounts ? faEye : faEyeSlash} />
 						{showHelp && 'タグ表示'}
 					</ToggleButton>
 					<ToggleButton
@@ -128,6 +134,7 @@ function SettingBox({
 						className="hist"
 					>
 						<FontAwesomeIcon icon={faHistory} />
+						<FontAwesomeIcon icon={showHistory ? faEye : faEyeSlash} />
 						{showHelp && '簡易履歴表示'}
 					</ToggleButton>
 
@@ -137,6 +144,7 @@ function SettingBox({
 						className="books"
 					>
 						<FontAwesomeIcon icon={faBookmark} />
+						<FontAwesomeIcon icon={showBookmark ? faEye : faEyeSlash} />
 						{showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
@@ -146,7 +154,7 @@ function SettingBox({
 						className="lock"
 					>
 						<FontAwesomeIcon icon={lockBg ? faLock : faLockOpen} />
-						{showHelp && '背景変更拒否'}
+						{showHelp && '背景変更1回まで'}
 					</ToggleButton>
 
 					<ToggleButton

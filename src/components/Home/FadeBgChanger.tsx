@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
-import { imgCheck } from '../../util'
+import styled from 'styled-components'
 import { useSettings } from '../../hooks/useSettings'
+import { useBgs } from './useBgs'
 
 const duration = 1000
 const transitionStyles = {
@@ -15,42 +15,6 @@ const transitionStyles = {
 const defaultStyle = {
 	transition: `opacity ${duration}ms ease-in-out`,
 	opacity: 0,
-}
-
-async function enableUrl(urls: string[]) {
-	for (const url of urls) {
-		const ok = await imgCheck(url).catch(() => false)
-
-		if (ok) return url
-	}
-	return false
-}
-
-function useBgs(urls: string[], sid: number, lockCount: number) {
-	const [anime, setAnime] = useState<boolean>(true)
-	const [url, setUrl] = useState<string>('')
-	const [lock, setLock] = useState<number>(lockCount)
-
-	useEffect(() => {
-		setLock(lockCount)
-	}, [sid, lockCount])
-
-	const locked = lock === 0
-
-	useEffect(() => {
-		if (locked) return
-
-		enableUrl(urls)
-			.then((url) => {
-				if (url) {
-					setUrl(url)
-					setAnime(false)
-					setLock((v) => v - 1)
-				}
-			})
-			.catch(() => {})
-	}, [urls[0], locked])
-	return { anime, url, setAnime }
 }
 
 type Props = {
