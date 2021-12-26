@@ -41,7 +41,7 @@ const fills: Record<number, boolean> = [...Array(24).keys()].reduce(
 	{}
 )
 
-type FillCell = { start: Date; end: Date; hn: number }
+type FillCell = { start: Date; end: Date; hn: number; memo: string }
 type ScheduleCell = FillCell | 'skip' | 'emp'
 type ScheduleRow = {
 	day: string
@@ -69,7 +69,7 @@ function ScheduleTable({
 					if (!rows[day]) rows[day] = { day, items: [] }
 					const hn = Number(e) - Number(s)
 
-					rows[day].items.push({ start, end, hn })
+					rows[day].items.push({ start, end, hn, memo })
 				})
 			const rows2: Record<string, ScheduleRow> = {}
 			const empCells: ScheduleCell[] = Object.values(fills).map(
@@ -126,7 +126,7 @@ function ScheduleTable({
 													setFilter({ start: +item.start, end: +item.end })
 												}
 											>
-												◆
+												{item.memo.substring(0, 8)}
 											</td>
 										)
 								}
@@ -140,13 +140,21 @@ function ScheduleTable({
 }
 const Table = styled.table`
 	font-size: 0.5rem;
+	width: 100%;
+	table-layout: fixed;
 	th {
 		width: 4%;
+		&:first-child {
+			width: 7%;
+		}
 	}
 	td {
 		text-align: center;
+		padding: 2px;
 		&.filled {
 			border: solid 1px;
+			overflow: hidden;
+			white-space: nowrap;
 			&:hover {
 				cursor: pointer;
 				background: rgba(0, 0, 0, 0.3);
