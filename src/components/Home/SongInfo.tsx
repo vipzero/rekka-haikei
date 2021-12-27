@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
-import { utanetSearchUrl } from '../../util'
+import { formatCount, utanetSearchUrl } from '../../util'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -81,7 +81,7 @@ function SongInfo({ song, showCounts }: Props) {
 											passHref
 										>
 											<a>
-												{tag}({v === 1 ? '初' : `${v}回目`})
+												{tag}({formatCount(v)})
 											</a>
 										</Link>
 									))}

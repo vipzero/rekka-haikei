@@ -14,6 +14,8 @@ export function formatDate(time: number, toHour: boolean = false) {
 }
 export const formatTime = (time: number) => formatDate(time).split(' ')[1]
 
+export const formatCount = (n: number) => (n === 1 ? '初' : `${n}回目`)
+
 export function imgCheck(url: string) {
 	return new Promise((resolve, reject) => {
 		const bgImg = new Image()

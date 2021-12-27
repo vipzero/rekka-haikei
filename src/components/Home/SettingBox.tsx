@@ -50,68 +50,49 @@ function SettingBox({
 	favCount,
 	song,
 }: Props) {
-	const {
-		visible,
-		showCounts,
-		showBookmark,
-		showHistory,
-		sideMode,
-		lockBg,
-		showHelp,
-		showTool,
-		abyss,
-		toggleCounts,
-		toggleBookmark,
-		toggleLockBg,
-		toggleHistory,
-		toggleSideMode,
-		toggleShowHelp,
-		toggleTool,
-		closeSetting,
-		setAbyss,
-	} = useSettings()
+	const s = useSettings()
 
 	const eid = useQeuryEid()
 
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const isLastTime = +new Date() > config.lastspurtTime
 	const removeStream = () => setStreamUrl('')
-	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
+	const cycleAbyss = () => s.setAbyss(nextAbyss(s.abyss))
 
 	return (
-		<Wrap data-theme={themeId} className="config" data-visible={visible}>
+		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid>
 					<ConfButton onClick={cycleTheme} className="theme">
 						<FontAwesomeIcon icon={faPalette} />
-						{showHelp && 'テーマ: '}
+						{s.showHelp && 'テーマ: '}
 						{themes[themeId].key}
 					</ConfButton>
 					<ToggleButton
-						checked={sideMode}
-						onClick={toggleSideMode}
+						checked={s.sideMode}
+						onClick={s.toggleSideMode}
 						className="half"
 					>
 						<FontAwesomeIcon icon={faColumns} />
-						{showHelp && 'ハーフ'}
+						{s.showHelp && 'ハーフ'}
 					</ToggleButton>
 					<ConfButton onClick={() => cycleAbyss()} className="fade">
 						<FontAwesomeIcon icon={faLightbulb} />
-						{showHelp && '切替背景色: '}
-						{abyssColors[abyss]?.label || '???'}
+						{s.showHelp && '切替背景色: '}
+						{abyssColors[s.abyss]?.label || '???'}
 					</ConfButton>
 
 					<ToggleButton
-						checked={showHelp}
-						onClick={toggleShowHelp}
+						checked={s.showHelp}
+						onClick={s.toggleShowHelp}
 						className="help"
 					>
 						<FontAwesomeIcon icon={faQuestion} />
-						{showHelp && 'ヘルプ'}
+						{s.showHelp && 'ヘルプ'}
 					</ToggleButton>
-					<ConfButton onClick={closeSetting} className="close">
+					<ConfButton onClick={s.closeSetting} className="close">
 						<FontAwesomeIcon icon={faTimes} />
-						{showHelp && '閉じる'}
+						{s.showHelp && '閉じる'}
 					</ConfButton>
 
 					<ToggleButton
@@ -120,59 +101,59 @@ function SettingBox({
 						className="book"
 					>
 						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
-						{showHelp &&
+						{s.showHelp &&
 							(favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)')}
 					</ToggleButton>
 
 					<ToggleButton
-						checked={showCounts}
-						onClick={toggleCounts}
+						checked={s.showCounts}
+						onClick={s.toggleCounts}
 						className="tags"
 					>
 						<FontAwesomeIcon icon={faTags} />
-						<FontAwesomeIcon icon={showCounts ? faEye : faEyeSlash} />
-						{showHelp && 'タグ表示'}
+						<FontAwesomeIcon icon={s.showCounts ? faEye : faEyeSlash} />
+						{s.showHelp && 'タグ表示'}
 					</ToggleButton>
 					<ToggleButton
-						checked={showHistory}
-						onClick={toggleHistory}
+						checked={s.showHistory}
+						onClick={s.toggleHistory}
 						className="hist"
 					>
 						<FontAwesomeIcon icon={faHistory} />
-						<FontAwesomeIcon icon={showHistory ? faEye : faEyeSlash} />
-						{showHelp && '簡易履歴表示'}
+						<FontAwesomeIcon icon={s.showHistory ? faEye : faEyeSlash} />
+						{s.showHelp && '簡易履歴表示'}
 					</ToggleButton>
 
 					<ToggleButton
-						checked={showBookmark}
-						onClick={toggleBookmark}
+						checked={s.showBookmark}
+						onClick={s.toggleBookmark}
 						className="books"
 					>
 						<FontAwesomeIcon icon={faBookmark} />
-						<FontAwesomeIcon icon={showBookmark ? faEye : faEyeSlash} />
-						{showHelp && `ブックマーク表示(${favCount})`}
+						<FontAwesomeIcon icon={s.showBookmark ? faEye : faEyeSlash} />
+						{s.showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
 					<ToggleButton
-						checked={lockBg}
-						onClick={toggleLockBg}
+						checked={s.lockBg}
+						onClick={s.toggleLockBg}
 						className="lock"
 					>
-						<FontAwesomeIcon icon={lockBg ? faLock : faLockOpen} />
-						{showHelp && '背景変更1回まで'}
+						<FontAwesomeIcon icon={s.lockBg ? faLock : faLockOpen} />
+						{s.showHelp && '背景変更1回まで'}
 					</ToggleButton>
 
 					<ToggleButton
-						checked={showTool}
-						onClick={toggleTool}
+						checked={s.showTool}
+						onClick={s.toggleTool}
 						className="tool"
 					>
 						<FontAwesomeIcon icon={faToolbox} />
-						{showHelp && 'デバッグ'}
+						{s.showHelp && 'デバッグ'}
 					</ToggleButton>
 				</ButtonGrid>
 
-				{showTool && (
+				{s.showTool && (
 					<div>
 						<Time song={song} />
 					</div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../service/firebase'
 import { Song } from '../types'
+import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
 
 export function useSongDb() {
@@ -32,7 +33,7 @@ export function useSongDb() {
 					.map(([name, count]) => ({
 						name,
 						count,
-						label: `[${name} (${count === 1 ? '初' : `${count} 回目`})]`,
+						label: `[${name} (${formatCount(count)})]`,
 					}))
 
 				song.wordCountsAna = [...wordCountsAna].sort(
