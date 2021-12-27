@@ -58,3 +58,8 @@ export const makeHash = (str: string) => {
 	}
 	return hash >>> 0
 }
+
+export const searchUrl = (q: string) =>
+	`https://www.google.co.jp/search?q=${encodeURI(q)}`
+export const utanetSearchUrl = (keyword: string) =>
+	searchUrl(`${keyword} site:uta-net.com`)

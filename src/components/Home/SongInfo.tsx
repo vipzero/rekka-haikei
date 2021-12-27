@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
+import { utanetSearchUrl } from '../../util'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -51,13 +52,22 @@ function SongInfo({ song, showCounts }: Props) {
 							{song.arranger && <span>編曲: {song.arranger}</span>}
 							{song.writer && <span>作曲: {song.writer}</span>}
 						</p>
-						{song.albumName && (
-							<p>
-								{song.albumName.replace(' - Single', '')}
-								{song.copyright && ` (${song.copyright})`}{' '}
-								<a href={song.itunesUrl}>iTunes</a>
-							</p>
-						)}
+						<p>
+							{song.albumName && (
+								<>
+									{song.albumName.replace(' - Single', '')}
+									{song.copyright && ` (${song.copyright})`}{' '}
+									<a href={song.itunesUrl}>iTunes</a>{' '}
+								</>
+							)}
+							<a
+								href={utanetSearchUrl(song.icy)}
+								target="_blank"
+								rel="noreferrer"
+							>
+								歌詞検索
+							</a>
+						</p>
 						{showCounts && (
 							<p className="tags">
 								{Object.entries(song.wordCounts)
