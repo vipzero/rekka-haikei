@@ -8,8 +8,10 @@ import {
 	faBookmark,
 	faColumns,
 	faHistory,
+	faLightbulb,
 	faLock,
 	faLockOpen,
+	faPalette,
 	faQuestion,
 	faStar as faStarFill,
 	faTags,
@@ -17,7 +19,6 @@ import {
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
 import config, { abyssColors, nextAbyss, themes } from '../../config'
@@ -26,7 +27,6 @@ import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
-import { faPalette } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
 	themeId: ThemeId
@@ -96,7 +96,9 @@ function SettingBox({
 						{showHelp && 'ハーフ'}
 					</ToggleButton>
 					<ConfButton onClick={() => cycleAbyss()} className="fade">
-						Fade: {abyssColors[abyss]?.label || '???'}
+						<FontAwesomeIcon icon={faLightbulb} />
+						{showHelp && '切替背景色: '}
+						{abyssColors[abyss]?.label || '???'}
 					</ConfButton>
 
 					<ToggleButton
