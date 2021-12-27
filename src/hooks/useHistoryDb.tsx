@@ -17,7 +17,7 @@ function makeCounts(histories: History[]) {
 	ents.sort((a, b) => b[1].length - a[1].length)
 	return ents.map(([title, times]) => {
 		times.sort((a, b) => a - b)
-		return { title, times, timesStr: times.map(formatDate) }
+		return { title, times, timesStr: times.map((t) => formatDate(t)) }
 	})
 }
 
