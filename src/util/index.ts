@@ -1,5 +1,5 @@
 export const pad2 = (num: number) => String(num).padStart(2, '0')
-export function formatDate(time: number) {
+export function formatDate(time: number, toHour: boolean = false) {
 	const date = new Date(time)
 
 	const yyyy = date.getFullYear()
@@ -9,6 +9,7 @@ export function formatDate(time: number) {
 	const m = pad2(date.getMinutes())
 	const s = pad2(date.getSeconds())
 
+	if (toHour) return `${mm}月${dd}日${h}時`
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
 export const formatTime = (time: number) => formatDate(time).split(' ')[1]

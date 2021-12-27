@@ -161,24 +161,25 @@ function HistoryPageBase() {
 					</div>
 					<div className="search-result">
 						{searchResult && (
-							<>
+							<div className="option-box">
 								<h4>検索結果</h4>
 								{searchs.map((search) => (
 									<p key={search}>
 										{search} の検索結果: {searchResult[search]}件
 									</p>
 								))}
-							</>
+							</div>
 						)}
 						{range && (
-							<div style={{ marginTop: '8px' }}>
-								<div style={{ display: 'flex' }}>
-									<h4>フィルター中</h4>
-									<button onClick={() => setRange(null)}>リセット</button>
-								</div>
+							<div className="option-box">
+								<h4>期間</h4>
 								<p>
-									{formatDate(range.start)} - {formatDate(range.end)}
+									{`${formatDate(range.start, true)} 〜 ${formatDate(
+										range.end,
+										true
+									)}`}
 								</p>
+								<button onClick={() => setRange(null)}>リセット</button>
 							</div>
 						)}
 					</div>
@@ -257,6 +258,12 @@ const Wrap = styled.div`
 		text-decoration: underline;
 		cursor: pointer;
 	}
+	form {
+		display: flex;
+		> :not(button) {
+			margin-top: 4px;
+		}
+	}
 
 	.search-result {
 		p {
@@ -265,6 +272,18 @@ const Wrap = styled.div`
 		}
 		h4 {
 			margin: 0;
+		}
+		.option-box {
+			margin-top: 8px;
+			display: flex;
+			gap: 0.5rem;
+			padding: 2px;
+			border: solid 1px orange;
+			background: #fefedd;
+
+			> :not(button) {
+				margin-top: 4px;
+			}
 		}
 	}
 `
