@@ -25,7 +25,8 @@ import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
 import Time from './Time'
-import ToggleButton from './ToggleButton'
+import ToggleButton, { ConfButton } from './ToggleButton'
+import { faPalette } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
 	themeId: ThemeId
@@ -81,9 +82,11 @@ function SettingBox({
 		<Wrap data-theme={themeId} className="config" data-visible={visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid>
-					<button onClick={cycleTheme} className="theme">
-						テーマ: {themes[themeId].key}
-					</button>
+					<ConfButton onClick={cycleTheme} className="theme">
+						<FontAwesomeIcon icon={faPalette} />
+						{showHelp && 'テーマ: '}
+						{themes[themeId].key}
+					</ConfButton>
 					<ToggleButton
 						checked={sideMode}
 						onClick={toggleSideMode}
@@ -92,9 +95,9 @@ function SettingBox({
 						<FontAwesomeIcon icon={faColumns} />
 						{showHelp && 'ハーフ'}
 					</ToggleButton>
-					<button onClick={() => cycleAbyss()} className="fade">
+					<ConfButton onClick={() => cycleAbyss()} className="fade">
 						Fade: {abyssColors[abyss]?.label || '???'}
-					</button>
+					</ConfButton>
 
 					<ToggleButton
 						checked={showHelp}
@@ -104,10 +107,10 @@ function SettingBox({
 						<FontAwesomeIcon icon={faQuestion} />
 						{showHelp && 'ヘルプ'}
 					</ToggleButton>
-					<button onClick={closeSetting} className="close">
+					<ConfButton onClick={closeSetting} className="close">
 						<FontAwesomeIcon icon={faTimes} />
 						{showHelp && '閉じる'}
-					</button>
+					</ConfButton>
 
 					<ToggleButton
 						checked={favorited}
@@ -163,7 +166,7 @@ function SettingBox({
 						className="tool"
 					>
 						<FontAwesomeIcon icon={faToolbox} />
-						{showHelp && 'ツール'}
+						{showHelp && 'デバッグ'}
 					</ToggleButton>
 				</ButtonGrid>
 

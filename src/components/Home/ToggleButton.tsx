@@ -8,21 +8,22 @@ type Props = {
 }
 
 const ToggleButton: FC<Props> = ({ onClick, checked, children, className }) => (
-	<Wrap className={className} onClick={onClick} data-checked={checked}>
+	<ConfButton className={className} onClick={onClick} data-checked={checked}>
 		{children}
-	</Wrap>
+	</ConfButton>
 )
 
-const Wrap = styled.button`
-	text-align: left;
-	> * {
-		padding: 0 2px;
+export const ConfButton = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	svg {
+		padding: 2px 0;
 	}
+
 	&[data-checked='true'] {
 		background: var(--checked-bg) !important;
-		> * {
-			padding: 2px 2px;
-		}
 	}
 `
 
