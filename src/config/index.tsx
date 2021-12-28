@@ -38,11 +38,11 @@ const gray = '#888'
 const pink = '#fde'
 const red = '#f00'
 
-const abyssListConf = [white, black, gray] as const
-const abyssListEx = [pink, red] as const
-const abyssList = [...abyssListConf, ...abyssListEx]
-
+const abyssList = [white, black, gray, pink, red]
 export type Abyss = typeof abyssList[number]
+
+const abyssListConf: Abyss[] = [white, black, gray]
+const abyssListEx: Abyss[] = [pink, red]
 
 type AbyssColor = { label: string; color: Abyss }
 const abyssColorsList: AbyssColor[] = [
@@ -65,8 +65,11 @@ const keyBy = (obj: AbyssColor[]): Record<Abyss, AbyssColor> =>
 export const abyssColors = keyBy(abyssColorsList)
 export const abyssColorsEx = keyBy(abyssColorsExList)
 
+type A = typeof abyssListConf
+type B = A[number]
+
 const nextI = <T,>(a: T[], v: T): T => a[(a.indexOf(v) + 1) % a.length]
-export const nextAbyss = (abyss: Abyss): Abyss => nextI(abyssList, abyss)
+export const nextAbyss = (abyss: Abyss): Abyss => nextI(abyssListConf, abyss)
 
 export const sugarOn = Boolean(Number(process.env.NEXT_PUBLIC_SUGAR_ON))
 
