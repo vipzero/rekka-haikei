@@ -32,18 +32,28 @@ export const themes: Theme[] = [
 	{ id: 4, key: 'SINGL' },
 ]
 
-export type Abyss = '#fff' | '#000' | '#888' | '#f00' | '#fde'
-const abyssList: Abyss[] = ['#fff', '#000', '#888']
+const white = '#fff'
+const black = '#000'
+const gray = '#888'
+const pink = '#fde'
+const red = '#f00'
+
+const abyssListConf = [white, black, gray] as const
+const abyssListEx = [pink, red] as const
+const abyssList = [...abyssListConf, ...abyssListEx]
+
+export type Abyss = typeof abyssList[number]
+
 type AbyssColor = { label: string; color: Abyss }
 const abyssColorsList: AbyssColor[] = [
-	{ label: '白', color: '#fff' },
-	{ label: '黒', color: '#000' },
-	{ label: '灰', color: '#888' },
+	{ label: '白', color: white },
+	{ label: '黒', color: black },
+	{ label: '灰', color: gray },
 ]
 const abyssColorsExList: AbyssColor[] = [
 	...abyssColorsList,
-	{ label: '血', color: '#f00' },
-	{ label: '桜', color: '#fde' },
+	{ label: '血', color: red },
+	{ label: '桜', color: pink },
 ]
 
 const keyBy = (obj: AbyssColor[]): Record<Abyss, AbyssColor> =>
