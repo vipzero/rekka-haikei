@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useMemo, useState } from 'react'
 import { FloatingBox } from '../components'
+import { Abyss, abyssColors, abyssColorsEx } from '../config'
 import { isSongFull, Song } from '../types'
 import { useSettings } from './useSettings'
 
@@ -33,9 +34,10 @@ function getEx(ex: string | false) {
 	}
 	return null
 }
+export function calcAbyss() {}
 export function useEx(song: Song) {
 	const { abyss, setAbyss } = useSettings()
-	const [abyssStash, setAbyssStash] = useState<string | false>(false) // true (現在の設定保存)
+	const [abyssStash, setAbyssStash] = useState<Abyss | false>(false) // true (現在の設定保存)
 
 	const exkey = useMemo(() => checkEx(song), [song])
 
@@ -43,11 +45,15 @@ export function useEx(song: Song) {
 		const madness = exkey === 'higurashi' || exkey === 'mia'
 
 		if (madness) {
-			setAbyss('red')
-			setAbyssStash(abyss)
+			setAbyss('#f00')
+			if (Object.keys(abyssColors).includes(abyss)) {
+				setAbyssStash(abyss)
+			}
 		} else if (exkey === 'sakurasou') {
-			setAbyss('#ffdae7')
-			setAbyssStash(abyss)
+			setAbyss('#fde')
+			if (Object.keys(abyssColors).includes(abyss)) {
+				setAbyssStash(abyss)
+			}
 		} else {
 			if (abyssStash) setAbyss(abyssStash)
 			setAbyssStash(false)

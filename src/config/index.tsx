@@ -31,14 +31,32 @@ export const themes: Theme[] = [
 	{ id: 3, key: 'EMPTY' },
 	{ id: 4, key: 'SINGL' },
 ]
-export const abyssColors = {
-	'#fff': { label: '白', color: '#fff' },
-	'#000': { label: '黒', color: '#000' },
-	'#888': { label: '灰', color: '#888' },
-}
-const abyssList = Object.keys(abyssColors)
+
+export type Abyss = '#fff' | '#000' | '#888' | '#f00' | '#fde'
+const abyssList: Abyss[] = ['#fff', '#000', '#888']
+type AbyssColor = { label: string; color: Abyss }
+const abyssColorsList: AbyssColor[] = [
+	{ label: '白', color: '#fff' },
+	{ label: '黒', color: '#000' },
+	{ label: '灰', color: '#888' },
+]
+const abyssColorsExList: AbyssColor[] = [
+	...abyssColorsList,
+	{ label: '血', color: '#f00' },
+	{ label: '桜', color: '#fde' },
+]
+
+const keyBy = (obj: AbyssColor[]): Record<Abyss, AbyssColor> =>
+	obj.reduce(
+		(p, c) => ({ ...p, [c.color]: c }),
+		{} as Record<Abyss, AbyssColor>
+	)
+
+export const abyssColors = keyBy(abyssColorsList)
+export const abyssColorsEx = keyBy(abyssColorsExList)
+
 const nextI = <T,>(a: T[], v: T): T => a[(a.indexOf(v) + 1) % a.length]
-export const nextAbyss = (abyss: string): string => nextI(abyssList, abyss)
+export const nextAbyss = (abyss: Abyss): Abyss => nextI(abyssList, abyss)
 
 export const sugarOn = Boolean(Number(process.env.NEXT_PUBLIC_SUGAR_ON))
 

@@ -1,5 +1,6 @@
 import { useRecoilState } from 'recoil'
 import { settingState } from '../atom/SettingAtom'
+import { Abyss } from '../config'
 import { toggle } from '../util'
 
 export const useSettings = () => {
@@ -25,7 +26,7 @@ export const useSettings = () => {
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
-	const setAbyss = (abyss: string) => setSetting((v) => ({ ...v, abyss }))
+	const setAbyss = (abyss: Abyss) => setSetting((v) => ({ ...v, abyss }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	return {
 		abyss,

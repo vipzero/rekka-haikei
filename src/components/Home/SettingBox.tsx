@@ -21,7 +21,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import styled from 'styled-components'
-import config, { abyssColors, nextAbyss, themes } from '../../config'
+import config, {
+	abyssColors,
+	abyssColorsEx,
+	nextAbyss,
+	themes,
+} from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
@@ -79,7 +84,7 @@ function SettingBox({
 					<ConfButton onClick={() => cycleAbyss()} className="fade">
 						<FontAwesomeIcon icon={faLightbulb} />
 						{s.showHelp && '切替背景色: '}
-						{abyssColors[s.abyss]?.label || '???'}
+						{abyssColorsEx[s.abyss]?.label || '???'}
 					</ConfButton>
 
 					<ToggleButton

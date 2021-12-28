@@ -1,3 +1,4 @@
+import { Abyss } from './../config/index'
 export type SongMiss = {
 	icy: string
 	time: number
@@ -80,7 +81,7 @@ export type Setting = {
 	showTool: boolean
 	showHelp: boolean
 	feedBackText: string
-	abyss: string // fade change background color
+	abyss: Abyss // fade change background color: ;
 }
 
 export type Event = {
