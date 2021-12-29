@@ -75,9 +75,12 @@ const isLain = (s) => has('experiments lain', s)
 const isCodeGeass = (s) => has('コードギアス', s)
 const isKokaku = (s) => has('攻殻機動隊', s)
 const isSpin = (s) =>
-	hasIcy('回レ', s) || has('廻る', s) || hasTitle('スクランブル', s)
+	hasIcy('回レ', s) || hasTitle('ノルニル', s) || hasTitle('スクランブル', s)
 
 export function checkEx(song: Song): string | false {
+	if (isSpin(song)) {
+		return 'spin'
+	}
 	if (!isSongFull(song)) return false
 
 	if (isNonnon(song)) {
@@ -94,8 +97,6 @@ export function checkEx(song: Song): string | false {
 		return 'kokaku'
 	} else if (isCodeGeass(song)) {
 		return 'codegeass'
-	} else if (isSpin(song)) {
-		return 'spin'
 	}
 	return false
 }
