@@ -31,7 +31,8 @@ function Home({ song, extraComp, exkey }: Props) {
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return (
-		<div onClick={toggleSetting}>
+		<Master onClick={toggleSetting} data-ex={exkey}>
+			<Mask id="mask" />
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
@@ -40,7 +41,6 @@ function Home({ song, extraComp, exkey }: Props) {
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap
-				data-ex={exkey}
 				data-theme={themeId}
 				className={themeId === 2 ? 'dark-theme' : 'light-theme'}
 				style={{ width: sideMode ? '50vw' : '100%' }}
@@ -64,7 +64,7 @@ function Home({ song, extraComp, exkey }: Props) {
 				<RecentHistoryList />
 				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
-		</div>
+		</Master>
 	)
 }
 
@@ -201,7 +201,9 @@ const Wrap = styled.div`
 	[data-visible='false'] {
 		display: none;
 	}
+`
 
+const Master = styled.div`
 	&[data-ex='lain'],
 	&[data-ex='kokaku'] {
 		* {
@@ -212,11 +214,21 @@ const Wrap = styled.div`
 				rgba(20, 0, 0, 0)
 			) !important;
 			color: lime !important;
+			width: max-content;
 		}
 		@keyframes noise {
 			0% {
 				opacity: 0.5;
 				transform: rotate(-1deg);
+			}
+			50% {
+				opacity: 0.75;
+			}
+			51% {
+				opacity: 0;
+			}
+			52% {
+				opacity: 0.75;
 			}
 			100% {
 				opacity: 1;
@@ -251,10 +263,35 @@ const Wrap = styled.div`
 		}
 	}
 	&[data-ex='rakupro'] {
-		.content {
-			background: rgba(255, 200, 200, 0.5) !important;
+		@keyframes bggradient {
+			0% {
+				background-position: 0% 75%;
+			}
+			100% {
+				background-position: 100% 25%;
+			}
+		}
+		#mask {
+			display: block;
+			opacity: 0.5;
+			background: linear-gradient(45deg, #e700fc, #fffa, #e700fc, #fffa)
+				repeat-x;
+
+			background-size: 400% 400%;
+			animation: bggradient 5s linear infinite;
 		}
 	}
+`
+
+const Mask = styled.div`
+	display: none;
+	background: #cccc;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+	z-index: -1;
 `
 
 export default Home

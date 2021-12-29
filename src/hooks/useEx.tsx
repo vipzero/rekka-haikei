@@ -79,7 +79,6 @@ const isSpin = (icy: string) =>
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 
 export function checkEx(song: Song): string | false {
-	return 'rakupro'
 	const { icy } = song
 
 	if (!icy) return false
