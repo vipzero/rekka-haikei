@@ -195,11 +195,45 @@ const Wrap = styled.div`
 	&[data-ex='lain'] {
 		* {
 			background: linear-gradient(
+				rgba(0, 0, 0, 0),
+				rgba(20, 0, 0, 0.5),
 				rgba(0, 0, 0, 0.5),
-				rgba(20, 0, 0, 0.5)
+				rgba(20, 0, 0, 0)
 			) !important;
 			color: lime !important;
 		}
+		@keyframes noise {
+			0% {
+				opacity: 0.5;
+				transform: rotate(-1deg);
+			}
+			100% {
+				opacity: 1;
+				transform: rotate(1deg);
+			}
+		}
+		span,
+		p {
+			animation-name: noise;
+			animation-direction: alternate;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: infinite;
+			animation-duration: 10s;
+		}
+
+		${() => {
+			console.log('generated')
+
+			return [...Array(100).keys()]
+				.map(
+					(i) => `
+			span:nth-of-type(${i + 1}),p:nth-of-type(${i + 1}) {
+				animation-delay: ${(i * 7) % 10}s;
+			}
+			`
+				)
+				.join('\n')
+		}}
 	}
 `
 
