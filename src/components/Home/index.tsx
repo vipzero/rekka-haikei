@@ -265,6 +265,8 @@ const Master = styled.div`
 				animation-name: noiseBlink;
 				/* background: #1008 !important; */
 			}
+
+			cursor: url(/static/sac-min.png) 25 25, auto;
 		}
 
 		${randAnimsCss}
