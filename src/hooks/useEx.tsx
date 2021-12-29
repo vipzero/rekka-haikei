@@ -5,22 +5,16 @@ import { Abyss, abyssColors, abyssColorsEx } from '../config'
 import { isSongFull, Song } from '../types'
 import { useSettings } from './useSettings'
 
+const EmbedWindow = ({ url }: { url: string }) => (
+	<div style={{ height: '50vh' }}>
+		<iframe style={{ width: '100%', height: '100%' }} src={url} />
+	</div>
+)
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
-		return (
-			<div style={{ height: '50vh' }}>
-				<iframe style={{ width: '100%' }} src="https://nyanpass.com/" />
-			</div>
-		)
+		return <EmbedWindow url="https://nyanpass.com/" />
 	} else if (ex === 'mia') {
-		return (
-			<div style={{ height: '50vh' }}>
-				<iframe
-					style={{ width: '100%', height: '100%' }}
-					src="https://click.abyss.fun/"
-				/>
-			</div>
-		)
+		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
