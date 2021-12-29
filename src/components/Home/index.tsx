@@ -68,7 +68,7 @@ function Home({ song, extraComp, exkey }: Props) {
 	)
 }
 
-const randAnimsCss = [...Array(100).keys()]
+const randAnimsCss = [...Array(20).keys()]
 	.map(
 		(i) => `
 			span:nth-of-type(${i + 1}),p:nth-of-type(${i + 1}) {
@@ -206,15 +206,8 @@ const Wrap = styled.div`
 const Master = styled.div`
 	&[data-ex='lain'],
 	&[data-ex='kokaku'] {
-		* {
-			background: linear-gradient(
-				rgba(0, 0, 0, 0),
-				rgba(20, 0, 0, 0.5),
-				rgba(0, 0, 0, 0.5),
-				rgba(20, 0, 0, 0)
-			) !important;
-			color: lime !important;
-			width: max-content;
+		div {
+			/* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
 		}
 		@keyframes noise {
 			0% {
@@ -235,13 +228,43 @@ const Master = styled.div`
 				transform: rotate(1deg);
 			}
 		}
+		@keyframes noiseBlink {
+			0% {
+				opacity: 1;
+			}
+			99% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
 		span,
 		p {
+			width: max-content;
 			animation-name: noise;
 			animation-direction: alternate;
 			animation-timing-function: ease-in-out;
 			animation-iteration-count: infinite;
 			animation-duration: 10s;
+		}
+		&[data-ex='lain'] {
+			* {
+				color: red !important;
+			}
+		}
+
+		&[data-ex='kokaku'] {
+			div {
+				border-bottom: solid 1px #0385f4;
+				background: #ffffff33;
+			}
+			span,
+			p {
+				color: #0385f4 !important;
+				animation-name: noiseBlink;
+				/* background: #1008 !important; */
+			}
 		}
 
 		${randAnimsCss}
