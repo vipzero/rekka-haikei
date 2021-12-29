@@ -7,6 +7,7 @@ import {
 import {
 	faBookmark,
 	faColumns,
+	faDownload,
 	faHistory,
 	faLightbulb,
 	faLock,
@@ -60,6 +61,7 @@ function SettingBox({
 	)
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const removeStream = () => setStreamUrl('')
+	const handleDownload = () => {}
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
@@ -145,6 +147,10 @@ function SettingBox({
 						{s.showHelp && '背景変更1回まで'}
 					</ToggleButton>
 
+					<ConfButton onClick={handleDownload} className="download">
+						<FontAwesomeIcon icon={faDownload} />
+					</ConfButton>
+
 					<ToggleButton
 						checked={s.showTool}
 						onClick={s.toggleTool}
@@ -220,43 +226,24 @@ const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
 		'th fd ha cl'
-		'tg lk lk hl'
-		'hi bk bk --'
-		'bl bk bk tl';
-
-	.theme {
-		grid-area: th;
-	}
-	.half {
-		grid-area: ha;
-	}
-	.fade {
-		grid-area: fd;
-	}
-	.tags {
-		grid-area: tg;
-	}
-	.help {
-		grid-area: hl;
-	}
-	.close {
-		grid-area: cl;
-	}
-	.book {
-		grid-area: bk;
-	}
-	.hist {
-		grid-area: hi;
-	}
-	.lock {
-		grid-area: lk;
-	}
-	.books {
-		grid-area: bl;
-	}
-	.tool {
-		grid-area: tl;
-	}
+		'tg lk lk cl'
+		'hi bk bk cl'
+		'bl bk bk hl'
+		'-- dl dl tl';
+	${`
+	.theme { grid-area: th; }
+	.half { grid-area: ha; }
+	.fade { grid-area: fd; }
+	.tags { grid-area: tg; }
+	.help { grid-area: hl; }
+	.close { grid-area: cl; }
+	.book { grid-area: bk; }
+	.hist { grid-area: hi; }
+	.lock { grid-area: lk; }
+	.books { grid-area: bl; }
+	.tool { grid-area: tl; }
+	.download { grid-area: dl; }
+`}
 `
 
 export default SettingBox
