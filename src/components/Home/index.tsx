@@ -205,6 +205,7 @@ const Wrap = styled.div`
 
 const Master = styled.div`
 	&[data-ex='lain'],
+	&[data-ex='psychopass'],
 	&[data-ex='kokaku'] {
 		div {
 			/* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
@@ -230,13 +231,28 @@ const Master = styled.div`
 				border-bottom: solid 1px #0385f4;
 				background: #00aaaa33;
 			}
-			span {
+			p,
+			span,
+			a {
 				color: #0385f4 !important;
 				animation-name: noiseBlink;
 				/* background: #1008 !important; */
 			}
 
 			cursor: url(/static/sac-min.png) 25 25, auto;
+		}
+
+		&[data-ex='psychopass'] {
+			div {
+				border-bottom: solid 1px #12e0ad;
+				background: #092b0933;
+			}
+			p,
+			span,
+			a {
+				color: #12e0ad !important;
+				animation-name: noiseBlink;
+			}
 		}
 
 		${randAnimsCss}
