@@ -60,7 +60,7 @@ const isHigurashi = (s) => has('ひぐらしの', s)
 const isLain = (s) => has('experiments lain', s)
 const isCodeGeass = (s) => has('コードギアス', s)
 const isKokaku = (s) => has('攻殻機動隊', s)
-const isPsychoPass = (s) => has('サイコパス', s)
+const isPsychoPass = (s) => has('PSYCHO-PASS', s)
 
 const isSpin = (icy: string) =>
 	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
