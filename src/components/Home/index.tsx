@@ -192,7 +192,8 @@ const Wrap = styled.div`
 		display: none;
 	}
 
-	&[data-ex='lain'] {
+	&[data-ex='lain'],
+	&[data-ex='kokaku'] {
 		* {
 			background: linear-gradient(
 				rgba(0, 0, 0, 0),

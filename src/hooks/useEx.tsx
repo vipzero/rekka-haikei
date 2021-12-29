@@ -70,9 +70,9 @@ const isSakuraso = (s) => has('さくら荘', s)
 const isHigurashi = (s) => has('ひぐらしの', s)
 const isLain = (s) => has('experiments lain', s)
 const isCodeGeass = (s) => has('コードギアス', s)
+const isKokaku = (s) => has('攻殻機動隊', s)
 
 export function checkEx(song: Song): string | false {
-	return 'lain'
 	if (!isSongFull(song)) return false
 
 	if (isNonnon(song)) {
@@ -85,6 +85,8 @@ export function checkEx(song: Song): string | false {
 		return 'higurashi'
 	} else if (isLain(song)) {
 		return 'lain'
+	} else if (isKokaku(song)) {
+		return 'kokaku'
 	} else if (isCodeGeass(song)) {
 		return 'codegeass'
 	}
