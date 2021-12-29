@@ -64,8 +64,7 @@ export function useEx(song: Song) {
 }
 
 const has = (q: string, song: Song) => song.animeTitle?.includes(q)
-const hasIcy = (q: string, song: Song) => song.icy?.includes(q)
-const hasTitle = (q: string, song: Song) => song.icy?.split(' - ').includes(q)
+const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
 const isNonnon = (s) => has('のんのんびより', s)
 const isMaidInAbyss = (s) => has('アビス', s)
@@ -74,12 +73,18 @@ const isHigurashi = (s) => has('ひぐらしの', s)
 const isLain = (s) => has('experiments lain', s)
 const isCodeGeass = (s) => has('コードギアス', s)
 const isKokaku = (s) => has('攻殻機動隊', s)
-const isSpin = (s) =>
-	hasIcy('回レ', s) || hasTitle('ノルニル', s) || hasTitle('スクランブル', s)
+
+const isSpin = (icy: string) =>
+	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
+const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 
 export function checkEx(song: Song): string | false {
-	if (isSpin(song)) {
+	const { icy } = song
+	if (!icy) return false
+	if (isSpin(icy)) {
 		return 'spin'
+	} else if (isRakupro(icy)) {
+		return 'rakupro'
 	}
 	if (!isSongFull(song)) return false
 
