@@ -19,14 +19,9 @@ import {
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import config, {
-	abyssColors,
-	abyssColorsEx,
-	nextAbyss,
-	themes,
-} from '../../config'
+import config, { abyssColorsEx, themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
@@ -59,10 +54,12 @@ function SettingBox({
 
 	const eid = useQeuryEid()
 
+	const isLastTime = useMemo(
+		() => +new Date() > config.lastspurtTime,
+		[config.lastspurtTime, song]
+	)
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
-	const isLastTime = +new Date() > config.lastspurtTime
 	const removeStream = () => setStreamUrl('')
-	const cycleAbyss = () => s.setAbyss(nextAbyss(s.abyss))
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
@@ -81,7 +78,7 @@ function SettingBox({
 						<FontAwesomeIcon icon={faColumns} />
 						{s.showHelp && 'ハーフ'}
 					</ToggleButton>
-					<ConfButton onClick={() => cycleAbyss()} className="fade">
+					<ConfButton onClick={() => s.cycleAbyss()} className="fade">
 						<FontAwesomeIcon icon={faLightbulb} />
 						{s.showHelp && '切替背景色: '}
 						{abyssColorsEx[s.abyss]?.label || '???'}

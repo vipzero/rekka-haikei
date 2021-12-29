@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { settingState } from '../atom/SettingAtom'
-import { Abyss } from '../config'
+import { Abyss, nextAbyss } from '../config'
 import { toggle } from '../util'
 
 export const useSettings = () => {
@@ -35,6 +35,7 @@ export const useSettings = () => {
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
+	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 
 	return {
 		abyss: abyssEx || abyss,
@@ -49,6 +50,7 @@ export const useSettings = () => {
 		showTool,
 		setAbyss,
 		setAbyssEx,
+		cycleAbyss,
 		toggleCounts,
 		toggleBookmark,
 		toggleLockBg,
