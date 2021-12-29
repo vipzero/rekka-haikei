@@ -26,6 +26,8 @@ import config, { abyssColorsEx, themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
+import { downloadImg } from '../../util'
+import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
 
@@ -39,6 +41,7 @@ type Props = {
 	setStreamUrl: (url: string) => void
 	favCount: number
 	song: Song
+	url: string
 }
 
 function SettingBox({
@@ -50,6 +53,7 @@ function SettingBox({
 	setStreamUrl,
 	favCount,
 	song,
+	url,
 }: Props) {
 	const s = useSettings()
 
@@ -61,7 +65,9 @@ function SettingBox({
 	)
 	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const removeStream = () => setStreamUrl('')
-	const handleDownload = () => {}
+	const handleDownload = () => {
+		downloadImg(url, song.icy)
+	}
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
@@ -148,7 +154,7 @@ function SettingBox({
 					</ToggleButton>
 
 					<ConfButton onClick={handleDownload} className="download">
-						<FontAwesomeIcon icon={faDownload} />
+						<DownloadButton url={url} filename={`${song.icy}.png`} />
 					</ConfButton>
 
 					<ToggleButton

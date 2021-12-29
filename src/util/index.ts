@@ -30,6 +30,29 @@ export function imgCheck(url: string) {
 	})
 }
 
+export function imgLoad(url: string) {
+	return new Promise<XMLHttpRequest>((resolve, reject) => {
+		let xhr = new XMLHttpRequest()
+		xhr.open('GET', url, true)
+		xhr.responseType = 'blob'
+		xhr.onload = () => resolve(xhr)
+		xhr.onerror = reject
+		xhr.send()
+	})
+}
+export const downloadImg = async (url: string, filename: string) => {
+	const img = await imgLoad(url)
+	let dlLink = document.createElement('a')
+
+	const dataUrl = URL.createObjectURL(img.response)
+	dlLink.href = dataUrl
+
+	dlLink.download = filename
+
+	dlLink.click()
+	dlLink.remove()
+}
+
 export const sleep = (msec) =>
 	new Promise((resolve) => setTimeout(resolve, msec))
 export const between = (v, min, max) => Math.max(min, Math.min(max, v))

@@ -18,6 +18,7 @@ export const ConfButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	gap: 2px;
+	cursor: pointer;
 	svg {
 		padding: 2px 0;
 	}

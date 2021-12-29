@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
 import { Song } from '../../types'
@@ -27,6 +27,7 @@ function Home({ song, extraComp, exkey }: Props) {
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [themeId, setTheme] = useLocalStorage<number>('theme', 0)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
+	const [url, setUrl] = useState<string>('')
 
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
@@ -37,6 +38,7 @@ function Home({ song, extraComp, exkey }: Props) {
 				sid={song.time}
 				urls={song?.imageLinks || []}
 				lockCount={lockBg ? 1 : 10}
+				changedUrl={setUrl}
 				px={sideMode ? 'right' : 'center'}
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
@@ -58,6 +60,7 @@ function Home({ song, extraComp, exkey }: Props) {
 					toggleFavorited={() => toggleFavorites(song.icy)}
 					favCount={Object.keys(books).length}
 					setTheme={setTheme}
+					url={url}
 				/>
 
 				<div>{extraComp || null}</div>

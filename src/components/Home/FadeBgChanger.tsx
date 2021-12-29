@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 import { useSettings } from '../../hooks/useSettings'
@@ -22,12 +22,17 @@ type Props = {
 	sid: number
 	lockCount: number
 	px: 'right' | 'center' | 'left'
+	changedUrl: (url: string) => void
 }
-function FadeBgChanger({ sid, urls, px, lockCount }: Props) {
+function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
+
 	const divRef = useRef<HTMLDivElement>(null)
 	const { abyss } = useSettings()
+	useEffect(() => {
+		changedUrl(url)
+	}, [url])
 
 	return (
 		<SuperBack style={{ backgroundColor: abyss }}>
