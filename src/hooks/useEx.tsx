@@ -28,30 +28,23 @@ function getEx(ex: string | false) {
 	}
 	return null
 }
+function exKeyToColor(exkey: string | false) {
+	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
+	if (exkey === 'sakurasou') return '#fde'
+	return null
+}
+
 export function calcAbyss() {}
+
 export function useEx(song: Song) {
-	const { abyss, setAbyss } = useSettings()
-	const [abyssStash, setAbyssStash] = useState<Abyss | false>(false) // true (現在の設定保存)
+	const { setAbyssEx } = useSettings()
 
 	const exkey = useMemo(() => checkEx(song), [song])
 
 	useEffect(() => {
-		const madness = exkey === 'higurashi' || exkey === 'mia'
+		const exColor = exKeyToColor(exkey)
 
-		if (madness) {
-			setAbyss('#f00')
-			if (Object.keys(abyssColors).includes(abyss)) {
-				setAbyssStash(abyss)
-			}
-		} else if (exkey === 'sakurasou') {
-			setAbyss('#fde')
-			if (Object.keys(abyssColors).includes(abyss)) {
-				setAbyssStash(abyss)
-			}
-		} else {
-			if (abyssStash) setAbyss(abyssStash)
-			setAbyssStash(false)
-		}
+		setAbyssEx(exColor)
 	}, [exkey])
 
 	return [useMemo(() => getEx(exkey), [exkey]), exkey] as const

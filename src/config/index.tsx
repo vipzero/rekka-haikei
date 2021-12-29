@@ -38,7 +38,7 @@ const gray = '#888'
 const pink = '#fde'
 const red = '#f00'
 
-const abyssList = [white, black, gray, pink, red]
+const abyssList = [white, black, gray, pink, red] as const
 export type Abyss = typeof abyssList[number]
 
 const abyssListConf: Abyss[] = [white, black, gray]

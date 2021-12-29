@@ -82,6 +82,7 @@ export type Setting = {
 	showHelp: boolean
 	feedBackText: string
 	abyss: Abyss // fade change background color: ;
+	abyssEx: Abyss | null
 }
 
 export type Event = {

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { settingState } from '../atom/SettingAtom'
 import { Abyss } from '../config'
@@ -15,6 +16,7 @@ export const useSettings = () => {
 			lockBg,
 			showHelp,
 			showTool,
+			abyssEx,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -26,10 +28,16 @@ export const useSettings = () => {
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
-	const setAbyss = (abyss: Abyss) => setSetting((v) => ({ ...v, abyss }))
+	const setAbyss = (abyss: Abyss) => {
+		setAbyssEx(null)
+		setSetting((v) => ({ ...v, abyss }))
+	}
+	const setAbyssEx = (abyssEx: Abyss | null) =>
+		setSetting((v) => ({ ...v, abyssEx }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
+
 	return {
-		abyss,
+		abyss: abyssEx || abyss,
 		visible,
 		showCounts,
 		showBookmark,
@@ -40,6 +48,7 @@ export const useSettings = () => {
 		fadeAbyssColor: abyss,
 		showTool,
 		setAbyss,
+		setAbyssEx,
 		toggleCounts,
 		toggleBookmark,
 		toggleLockBg,

@@ -10,6 +10,7 @@ const defaultValue: Setting = {
 	lockBg: false,
 	showTool: false,
 	abyss: '#fff', // TODO: change before deploy
+	abyssEx: null,
 	showHelp: false,
 	feedBackText: '',
 }
