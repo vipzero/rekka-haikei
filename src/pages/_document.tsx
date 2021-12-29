@@ -45,6 +45,11 @@ class NextDocument extends Document<Props> {
 						href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=optional"
 						rel="stylesheet"
 					/>
+					<link
+						rel="stylesheet"
+						type="text/css"
+						href="https://csshake.surge.sh/csshake.min.css"
+					/>
 				</Head>
 				<body>
 					<Main />

@@ -17,8 +17,9 @@ import SongInfo from './SongInfo'
 type Props = {
 	song: Song
 	extraComp?: ReactNode
+	exkey: string | false
 }
-function Home({ song, extraComp }: Props) {
+function Home({ song, extraComp, exkey }: Props) {
 	const { showCounts, sideMode, lockBg } = useRecoilValue(settingState)
 
 	const setSetting = useSetRecoilState(settingState)
@@ -39,6 +40,7 @@ function Home({ song, extraComp }: Props) {
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap
+				data-ex={exkey}
 				data-theme={themeId}
 				className={themeId === 2 ? 'dark-theme' : 'light-theme'}
 				style={{ width: sideMode ? '50vw' : '100%' }}
@@ -188,6 +190,16 @@ const Wrap = styled.div`
 	}
 	[data-visible='false'] {
 		display: none;
+	}
+
+	&[data-ex='lain'] {
+		* {
+			background: linear-gradient(
+				rgba(0, 0, 0, 0.5),
+				rgba(20, 0, 0, 0.5)
+			) !important;
+			color: lime !important;
+		}
 	}
 `
 

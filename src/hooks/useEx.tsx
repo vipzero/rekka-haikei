@@ -60,7 +60,7 @@ export function useEx(song: Song) {
 		}
 	}, [exkey])
 
-	return useMemo(() => getEx(exkey), [exkey])
+	return [useMemo(() => getEx(exkey), [exkey]), exkey] as const
 }
 
 const has = (q: string, song: Song) => song.animeTitle?.includes(q)
@@ -68,8 +68,11 @@ const isNonnon = (s) => has('のんのんびより', s)
 const isMaidInAbyss = (s) => has('アビス', s)
 const isSakuraso = (s) => has('さくら荘', s)
 const isHigurashi = (s) => has('ひぐらしの', s)
+const isLain = (s) => has('experiments lain', s)
+const isCodeGeass = (s) => has('コードギアス', s)
 
 export function checkEx(song: Song): string | false {
+	return 'lain'
 	if (!isSongFull(song)) return false
 
 	if (isNonnon(song)) {
@@ -80,6 +83,10 @@ export function checkEx(song: Song): string | false {
 		return 'sakurasou'
 	} else if (isHigurashi(song)) {
 		return 'higurashi'
+	} else if (isLain(song)) {
+		return 'lain'
+	} else if (isCodeGeass(song)) {
+		return 'codegeass'
 	}
 	return false
 }
