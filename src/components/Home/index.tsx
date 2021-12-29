@@ -68,6 +68,16 @@ function Home({ song, extraComp, exkey }: Props) {
 	)
 }
 
+const randAnimsCss = [...Array(100).keys()]
+	.map(
+		(i) => `
+			span:nth-of-type(${i + 1}),p:nth-of-type(${i + 1}) {
+				animation-delay: ${(i * 7) % 10}s;
+			}
+			`
+	)
+	.join('\n')
+
 const Wrap = styled.div`
 	width: 100vw;
 	min-height: 100vh;
@@ -222,19 +232,7 @@ const Wrap = styled.div`
 			animation-duration: 10s;
 		}
 
-		${() => {
-			console.log('generated')
-
-			return [...Array(100).keys()]
-				.map(
-					(i) => `
-			span:nth-of-type(${i + 1}),p:nth-of-type(${i + 1}) {
-				animation-delay: ${(i * 7) % 10}s;
-			}
-			`
-				)
-				.join('\n')
-		}}
+		${randAnimsCss}
 	}
 	&[data-ex='spin'] {
 		@keyframes spin {
@@ -250,6 +248,11 @@ const Wrap = styled.div`
 			&:hover {
 				animation-name: none;
 			}
+		}
+	}
+	&[data-ex='rakupro'] {
+		.content {
+			background: rgba(255, 200, 200, 0.5) !important;
 		}
 	}
 `
