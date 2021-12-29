@@ -71,7 +71,7 @@ function Home({ song, extraComp, exkey }: Props) {
 const randAnimsCss = [...Array(20).keys()]
 	.map(
 		(i) => `
-			span:nth-of-type(${i + 1}),p:nth-of-type(${i + 1}) {
+			span:nth-of-type(${i + 1}),a:nth-of-type(${i + 1}) {
 				animation-delay: ${(i * 7) % 10}s;
 			}
 			`
@@ -209,44 +209,15 @@ const Master = styled.div`
 		div {
 			/* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
 		}
-		@keyframes noise {
-			0% {
-				opacity: 0.5;
-				transform: rotate(-1deg);
-			}
-			50% {
-				opacity: 0.75;
-			}
-			51% {
-				opacity: 0;
-			}
-			52% {
-				opacity: 0.75;
-			}
-			100% {
-				opacity: 1;
-				transform: rotate(1deg);
-			}
-		}
-		@keyframes noiseBlink {
-			0% {
-				opacity: 1;
-			}
-			99% {
-				opacity: 1;
-			}
-			100% {
-				opacity: 0;
-			}
-		}
+
 		span,
-		p {
+		a {
 			width: max-content;
 			animation-name: noise;
 			animation-direction: alternate;
 			animation-timing-function: ease-in-out;
 			animation-iteration-count: infinite;
-			animation-duration: 10s;
+			animation-duration: 8s;
 		}
 		&[data-ex='lain'] {
 			* {
@@ -257,10 +228,9 @@ const Master = styled.div`
 		&[data-ex='kokaku'] {
 			div {
 				border-bottom: solid 1px #0385f4;
-				background: #ffffff33;
+				background: #00aaaa33;
 			}
-			span,
-			p {
+			span {
 				color: #0385f4 !important;
 				animation-name: noiseBlink;
 				/* background: #1008 !important; */

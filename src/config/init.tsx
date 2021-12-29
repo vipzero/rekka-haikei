@@ -19,4 +19,44 @@ ul {
 li {
 	list-style: none;
 }
+
+
+@keyframes noise {
+	0% {
+		opacity: 0.5;
+		transform: rotate(-5deg) translate(-10%,5%);
+	}
+  25% {
+		transform: rotate(1deg);
+  }
+	50% {
+		opacity: 0.75;
+	}
+	51% {
+		opacity: 0;
+	}
+	52% {
+		opacity: 0.75 ;
+    transform: translate(5%,0%);
+	}
+  75% {
+		transform: rotate(-2deg);
+  }
+	100% {
+		opacity: 1;
+		transform: rotate(5deg) translate(0%,-10%);
+	}
+}
+
+@keyframes noiseBlink {
+	0% {
+		opacity: 1;
+	}
+	99% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
 `
