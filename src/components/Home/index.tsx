@@ -236,6 +236,22 @@ const Wrap = styled.div`
 				.join('\n')
 		}}
 	}
+	&[data-ex='spin'] {
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+		.album img {
+			animation: spin 5s linear infinite;
+			&:hover {
+				animation-name: none;
+			}
+		}
+	}
 `
 
 export default Home
