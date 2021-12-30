@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
-import { useQeurySearch } from '../hooks/useQueryEid'
+import { useQueryInit, useQuerySearch } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
 import Address from './HistoryPage/Address'
@@ -41,7 +41,6 @@ function HistoryPage() {
 }
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
-	const q = useQeurySearch()
 	const [searchPre, setSearchPre] = useState<string>('')
 	const [searchs, setSearch] = useState<string[]>([])
 	const [multiMode, setMultiMode] = useState<boolean>(false)
@@ -50,18 +49,11 @@ function HistoryPageBase() {
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 	const { favorites, toggleFavorites } = useFavorites()
-	const router = useRouter()
 
-	useEffect(() => {
-		if (q) {
-			setSearchPre(q)
-			setSearch([q])
-			const trimedQueryPath = router.asPath.split('?')[0]
-
-			// router.push(trimedQueryPath, undefined, { shallow: true })
-			router.replace(trimedQueryPath)
-		}
-	}, [q])
+	useQueryInit((q) => {
+		setSearchPre(q)
+		setSearch([q])
+	})
 
 	const sortedHists = useMemo(() => {
 		if (!nsort) return histories

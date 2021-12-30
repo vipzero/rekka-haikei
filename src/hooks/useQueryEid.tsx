@@ -21,7 +21,18 @@ const getQuery = (query: ParsedUrlQuery, path: string, queryKey: string) => {
 	return mq ? decodeURIComponent(mq[1]) : undefined
 }
 
-export function useQeurySearch() {
+export function useQuerySearch() {
 	const router = useRouter()
 	return getQuery(router.query, router.asPath, 'q')
+}
+
+export const useQueryInit = (detected: (q: string) => void) => {
+	const q = useQuerySearch()
+	const router = useRouter()
+	if (!q) return
+	detected(q)
+	const trimedQueryPath = router.asPath.split('?')[0]
+
+	// router.push(trimedQueryPath, undefined, { shallow: true })
+	router.replace(trimedQueryPath)
 }
