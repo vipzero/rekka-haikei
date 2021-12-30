@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2021-12-30:01': 'feat 履歴コピペモード',
 	'2021-12-29:00': 'feat ダウンロードボタン',
 	'2021-12-27:14': 'feat 歌詞検索リンク',
 	'2021-12-27:13': 'styl 検索変更',
@@ -47,8 +48,12 @@ function Address() {
 }
 
 const List = styled.div`
+	max-height: 20vh;
+	overflow: scroll;
+	border: solid gray 1px;
+	padding: 4px;
 	p {
-		margin-top: 4px;
+		margin-top: 1px;
 		margin-bottom: 0;
 	}
 	code {
