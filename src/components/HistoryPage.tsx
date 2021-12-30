@@ -161,7 +161,7 @@ function HistoryPageBase() {
 					</div>
 					<div className="search-result">
 						{searchResult && (
-							<div className="option-box">
+							<div className="option-box-word">
 								<h4>検索結果</h4>
 								{searchs.map((search) => (
 									<p key={search}>
@@ -273,14 +273,19 @@ const Wrap = styled.div`
 		h4 {
 			margin: 0;
 		}
-		.option-box {
+		.option-box,
+		.option-box-word {
 			margin-top: 8px;
 			display: flex;
 			gap: 0.5rem;
 			padding: 2px;
 			border: solid 1px orange;
 			background: #fefedd;
-
+		}
+		.option-box-word {
+			flex-direction: column;
+		}
+		.option-box {
 			> :not(button) {
 				margin-top: 4px;
 			}
