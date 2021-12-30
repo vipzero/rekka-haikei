@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo } from 'react'
 import { FloatingBox } from '../components'
-import { Abyss, abyssColors, abyssColorsEx } from '../config'
 import { isSongFull, Song } from '../types'
 import { useSettings } from './useSettings'
 
@@ -10,11 +8,21 @@ const EmbedWindow = ({ url }: { url: string }) => (
 		<iframe style={{ width: '100%', height: '100%' }} src={url} />
 	</div>
 )
+const MasshiroEx = () => (
+	<div id="mashiros">
+		<div>
+			<img id="mashiro-a" src="/static/mashiro-a.png" />
+			<img id="mashiro-b" src="/static/mashiro-b.png" />
+		</div>
+	</div>
+)
 function getEx(ex: string | false) {
 	if (ex === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
 	} else if (ex === 'mia') {
 		return <EmbedWindow url="https://click.abyss.fun/" />
+	} else if (ex === 'masshiro') {
+		return <MasshiroEx />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -66,6 +74,7 @@ const isSpinAnim = (s) => has('廻って', s)
 const isSpin = (icy: string) =>
 	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
+const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
 
 export function checkEx(song: Song): string | false {
 	const { icy } = song
@@ -75,6 +84,8 @@ export function checkEx(song: Song): string | false {
 		return 'spin'
 	} else if (isRakupro(icy)) {
 		return 'rakupro'
+	} else if (isMasshiro(icy)) {
+		return 'masshiro'
 	}
 	if (!isSongFull(song)) return false
 

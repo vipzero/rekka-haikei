@@ -295,6 +295,31 @@ const Master = styled.div`
 			animation: bggradient 5s linear infinite;
 		}
 	}
+	&[data-ex='masshiro'] {
+		#mashiros {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 20vw;
+			animation: skipping-move 10s linear infinite alternate;
+			> div {
+				position: relative;
+			}
+		}
+		#mashiro-a,
+		#mashiro-b {
+			width: 100%;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+		}
+		#mashiro-a {
+			animation: skipping 2s linear infinite;
+		}
+		#mashiro-b {
+			animation: skipping-back 2s linear infinite;
+		}
+	}
 `
 
 const Mask = styled.div`
