@@ -44,6 +44,7 @@ function HistoryPageBase() {
 	const [searchPre, setSearchPre] = useState<string>('')
 	const [searchs, setSearch] = useState<string[]>([])
 	const [multiMode, setMultiMode] = useState<boolean>(false)
+	const [copyMode, setCopyMode] = useState<boolean>(false)
 	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
@@ -175,7 +176,17 @@ function HistoryPageBase() {
 							</div>
 						)}
 					</div>
-					<table className="hist">
+
+					<div data-copy-mode={copyMode}>
+						<label>
+							<input
+								type="checkbox"
+								onChange={(e) => setCopyMode(e.target.checked)}
+							/>
+							コピペモード(2列にする)
+						</label>
+					</div>
+					<table className="hist" data-copy-mode={copyMode}>
 						<thead>
 							<tr>
 								<th>日時</th>
@@ -231,6 +242,16 @@ const Wrap = styled.div`
 	display: grid;
 	padding: 16px;
 
+	div[data-copy-mode] {
+		width: max-content;
+		padding: 2px;
+		border: solid 1px white;
+		&[data-copy-mode='true'] {
+			border: solid 1px orange;
+			background: #fefedd;
+		}
+	}
+
 	table.hist {
 		width: 100%;
 		td {
@@ -238,6 +259,14 @@ const Wrap = styled.div`
 		}
 		td:first-child {
 			width: 144px;
+		}
+		&[data-copy-mode='true'] {
+			th,
+			td {
+				&:nth-child(n + 3) {
+					display: none;
+				}
+			}
 		}
 	}
 
