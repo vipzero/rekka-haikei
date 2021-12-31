@@ -172,7 +172,7 @@ function SettingBox({
 						<Time song={song} />
 					</div>
 				)}
-				<div style={{ display: 'flex', gap: '4px' }}>
+				<div style={{ display: 'flex' }}>
 					<a href={`/${eid}/history`}>履歴</a>
 					<a href={`/${eid}/popular`} data-important={isLastTime}>
 						ブクマ数統計
@@ -181,7 +181,7 @@ function SettingBox({
 				</div>
 
 				<div>
-					StreamURL:
+					StreamURL{' '}
 					<input
 						name="streaming-url"
 						value={streamUrl}
@@ -218,6 +218,9 @@ const Wrap = styled.div`
 	a,
 	label {
 		color: white !important;
+	}
+	a {
+		margin: 4px 8px 4px 0;
 	}
 	&[data-theme='1'] {
 		color: black !important;
