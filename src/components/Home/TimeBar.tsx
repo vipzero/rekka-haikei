@@ -31,6 +31,7 @@ function TimeBar({ startTime, size }: Props) {
 
 	return (
 		<div
+			id="timebar"
 			style={{
 				position: 'absolute',
 				width: '100vw',
@@ -38,9 +39,11 @@ function TimeBar({ startTime, size }: Props) {
 				background: '#222',
 			}}
 		>
-			<div
-				style={{ background: '#ddd', width: `${100 * p}vw`, height: '4px' }}
-			></div>
+			<div>
+				<div
+					style={{ background: '#ddd', width: `${100 * p}vw`, height: '4px' }}
+				></div>
+			</div>
 		</div>
 	)
 }

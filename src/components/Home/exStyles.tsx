@@ -117,6 +117,7 @@ export const exStyles = css`
 			animation: skipping-back 2s linear infinite;
 		}
 	}
+
 	@keyframes noise {
 		0% {
 			opacity: 0.5;
@@ -196,6 +197,22 @@ export const exStyles = css`
 		}
 		100% {
 			left: 60%;
+		}
+	}
+
+	&[data-ex='steinsgate'] {
+		#timebar > div {
+			transform-origin: 0 0;
+			animation: spin-y 10s cubic-bezier(0.28, 1.61, 0.7, -0.71) infinite
+				alternate;
+		}
+	}
+	@keyframes spin-y {
+		0% {
+			transform: rotateY(90deg);
+		}
+		100% {
+			transform: rotateY(0deg);
 		}
 	}
 `

@@ -41,6 +41,7 @@ export function useSongDb() {
 				)
 
 				setSong(song)
+				setSong({ ...song })
 				setLoaded(true)
 			})
 
