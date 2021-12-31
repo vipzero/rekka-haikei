@@ -23,5 +23,8 @@ service cloud.firestore {
     match /table/{eventId=**} {
       allow read, write;
     }
+    match /cvote/{animeId=**} {
+      allow read, write;
+    }
   }
 }

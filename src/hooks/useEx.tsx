@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { FloatingBox } from '../components'
+import CVote from '../components/Home/Cvote'
 import { isSongFull, Song } from '../types'
 import { useSettings } from './useSettings'
 
@@ -23,6 +24,19 @@ function getEx(ex: string | false) {
 		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (ex === 'masshiro') {
 		return <MasshiroEx />
+	} else if (ex === 'gotoyome') {
+		return (
+			<CVote
+				animeId="gotoyome"
+				chars={[
+					{ id: '1', name: '一花', color: '#E4A9B0' },
+					{ id: '2', name: '二乃', color: '#DC6A79' },
+					{ id: '3', name: '三玖', color: '#CF5A4A' },
+					{ id: '4', name: '四葉', color: '#CD5B3D' },
+					{ id: '5', name: '五月', color: '#D15D4D' },
+				]}
+			/>
+		)
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -72,6 +86,7 @@ const titleExPatterns: [string, string][] = [
 	['PSYCHO-PASS', 'psychopass'],
 	['廻って', 'spin'],
 	['Steins;Gate', 'steinsgate'],
+	['五等分の花嫁', 'gotoyome'],
 ]
 
 const isSpin = (icy: string) =>
