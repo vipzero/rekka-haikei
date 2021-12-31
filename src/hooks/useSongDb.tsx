@@ -12,6 +12,7 @@ export function useSongDb() {
 		time: 1,
 		wordCounts: {},
 		wordCountsAna: [],
+		imageSearchWord: '',
 	})
 
 	useEffect(() => {
