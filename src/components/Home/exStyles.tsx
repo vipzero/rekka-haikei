@@ -85,11 +85,10 @@ export const exStyles = css`
 		#mask {
 			display: block;
 			opacity: 0.5;
-			background: linear-gradient(45deg, #e700fc, #fffa, #e700fc, #fffa)
-				repeat-x;
+			background: linear-gradient(45deg, #e700fc, #fffa, #e700fc, #ffaa);
 
 			background-size: 400% 400%;
-			animation: bggradient 5s linear infinite;
+			animation: bggradient 1.5s linear infinite;
 		}
 	}
 	&[data-ex='masshiro'] {
@@ -213,6 +212,14 @@ export const exStyles = css`
 		}
 		100% {
 			transform: rotateY(0deg);
+		}
+	}
+	@keyframes bggradient {
+		0% {
+			background-position: 0% 75%;
+		}
+		100% {
+			background-position: 100% 25%;
 		}
 	}
 `
