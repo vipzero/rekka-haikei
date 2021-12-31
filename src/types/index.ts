@@ -15,6 +15,7 @@ export type SongMiss = {
 	animeTitle?: string
 	wordCounts: Record<string, number>
 	wordCountsAna: { name: string; label: string; count: number }[]
+	imageSearchWord: string
 }
 
 export type SongFull = SongMiss & {

@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
-import { formatCount, utanetSearchUrl } from '../../util'
+import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -60,12 +60,21 @@ function SongInfo({ song, showCounts }: Props) {
 									<a href={song.itunesUrl}>iTunes</a>{' '}
 								</>
 							)}
+						</p>
+						<p style={{ display: 'flex', gap: '4px' }}>
 							<a
 								href={utanetSearchUrl(song.icy)}
 								target="_blank"
 								rel="noreferrer"
 							>
 								歌詞検索
+							</a>
+							<a
+								href={searchImageUrl(song.imageSearchWord)}
+								target="_blank"
+								rel="noreferrer"
+							>
+								画像検索
 							</a>
 						</p>
 						{showCounts && (

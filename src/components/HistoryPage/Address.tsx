@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
-	'2021-12-29:01': 'fixd タグ直接検索修正',
+	'2021-12-31:02': 'feat 画像検索リンク',
+	'2021-12-31:01': 'fixd タグ直接検索修正',
 	'2021-12-30:01': 'feat 履歴コピペモード',
 	'2021-12-29:00': 'feat ダウンロードボタン',
 	'2021-12-27:14': 'feat 歌詞検索リンク',

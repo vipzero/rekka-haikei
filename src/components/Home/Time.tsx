@@ -66,6 +66,7 @@ const Time = ({ song }: Props) => {
 					<div>現在</div>
 					<div>曲終了</div>
 					<div>次のHour</div>
+					<div>クエリ</div>
 				</div>
 				<div>
 					<div>
@@ -82,6 +83,15 @@ const Time = ({ song }: Props) => {
 					<div>
 						{nextHour}:00:00
 						<span>(-{diff})</span>
+					</div>
+					<div
+						style={{
+							wordWrap: 'break-word',
+							maxWidth: '212px',
+							fontSize: '0.6rem',
+						}}
+					>
+						{song.imageSearchWord}
 					</div>
 				</div>
 			</div>
