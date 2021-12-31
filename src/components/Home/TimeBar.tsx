@@ -5,8 +5,7 @@ type Props = {
 	startTime: number
 	size?: number
 }
-
-function TimeBar({ startTime, size }: Props) {
+const useTimeBar = (startTime: number, size?: number) => {
 	const [p, setP] = useState<number>(0)
 
 	useEffect(() => {
@@ -22,9 +21,13 @@ function TimeBar({ startTime, size }: Props) {
 			clearInterval(t)
 		}
 	}, [startTime, size])
-	if (!size) {
-		return null
-	}
+	return [p] as const
+}
+
+function TimeBar({ startTime, size }: Props) {
+	const [p] = useTimeBar(startTime, size)
+
+	if (!size) return null
 
 	return (
 		<div
