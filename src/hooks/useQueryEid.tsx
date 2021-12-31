@@ -33,7 +33,7 @@ export const useQueryInit = (detected: (q: string) => void) => {
 
 	useEffect(() => {
 		if (!q) return
-		detected(q)
+		detected(decodeURI(q))
 		const trimedQueryPath = router.asPath.split('?')[0]
 
 		// router.push(trimedQueryPath, undefined, { shallow: true })
