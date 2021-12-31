@@ -62,21 +62,26 @@ const Time = ({ song }: Props) => {
 		<Style>
 			<div className="mirror-table">
 				<div>
+					<div>曲開始</div>
 					<div>現在</div>
-					<div>次の時間</div>
 					<div>曲終了</div>
+					<div>次のHour</div>
 				</div>
 				<div>
-					<div>{cur}</div>
 					<div>
-						{nextHour}:00:00
-						<span>(-{diff})</span>
+						{formatTime(time)}
+						<span></span>
 					</div>
+					<div>{cur}</div>
 					<div>
 						{songEnd}
 						<span>
-							(-{songDiff}){!currentSongEnd && '曲情報取得失敗'}
+							(-{songDiff}){!time && '曲情報取得失敗'}
 						</span>
+					</div>
+					<div>
+						{nextHour}:00:00
+						<span>(-{diff})</span>
 					</div>
 				</div>
 			</div>
