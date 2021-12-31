@@ -1,14 +1,13 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRouter } from 'next/router'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import safe from 'safe-regex'
 import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
-import { useQueryInit, useQuerySearch } from '../hooks/useQueryEid'
+import { useQueryInit } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
 import Address from './HistoryPage/Address'
@@ -52,6 +51,8 @@ function HistoryPageBase() {
 	const { favorites, toggleFavorites } = useFavorites()
 
 	useQueryInit((q) => {
+		console.log({ q })
+
 		setSearchPre(q)
 		setSearch([q])
 	})

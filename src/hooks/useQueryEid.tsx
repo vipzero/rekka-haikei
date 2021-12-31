@@ -1,5 +1,6 @@
 import { useRouter } from 'next/dist/client/router'
 import { ParsedUrlQuery } from 'querystring'
+import { useEffect } from 'react'
 import config from '../config'
 
 export function useQeuryEid() {
@@ -29,10 +30,13 @@ export function useQuerySearch() {
 export const useQueryInit = (detected: (q: string) => void) => {
 	const q = useQuerySearch()
 	const router = useRouter()
-	if (!q) return
-	detected(q)
-	const trimedQueryPath = router.asPath.split('?')[0]
 
-	// router.push(trimedQueryPath, undefined, { shallow: true })
-	router.replace(trimedQueryPath)
+	useEffect(() => {
+		if (!q) return
+		detected(q)
+		const trimedQueryPath = router.asPath.split('?')[0]
+
+		// router.push(trimedQueryPath, undefined, { shallow: true })
+		router.replace(trimedQueryPath)
+	}, [q])
 }
