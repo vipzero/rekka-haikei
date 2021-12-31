@@ -1,8 +1,7 @@
-import { unstable_createMuiStrictModeTheme } from '@material-ui/core'
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Song } from '../../types'
-import { pad2, formatTime } from '../../util'
+import { formatTime, pad2 } from '../../util'
 
 type Props = {
 	song: Song
