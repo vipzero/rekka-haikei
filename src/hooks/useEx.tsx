@@ -37,6 +37,21 @@ function getEx(ex: string | false) {
 				]}
 			/>
 		)
+	} else if (ex === 'oreimo') {
+		return (
+			<CVote
+				animeId="oreimo"
+				chars={[
+					{ id: 'ki', name: '桐乃', color: '#D6A883' },
+					{ id: 'ku', name: '黒猫', color: '#262433' },
+					{ id: 'ay', name: 'あやせ', color: '#424B65' },
+					{ id: 'ba', name: 'バジ', color: '#515C6B' },
+					{ id: 'ka', name: '加奈子', color: '#A35D4D' },
+					{ id: 'ma', name: '真奈美', color: '#5F503C' },
+					{ id: 'se', name: '瀬菜', color: '#85555D' },
+				]}
+			/>
+		)
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -87,6 +102,7 @@ const titleExPatterns: [string, string][] = [
 	['廻って', 'spin'],
 	['Steins;Gate', 'steinsgate'],
 	['五等分の花嫁', 'gotoyome'],
+	['俺の妹がこんなに', 'oreimo'],
 ]
 
 const isSpin = (icy: string) =>

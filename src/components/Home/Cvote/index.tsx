@@ -22,15 +22,13 @@ function CVote({ animeId, chars }: Props) {
 				<button
 					key={`char-${id}`}
 					data-voted={voted === id}
-					onClick={() => {
-						vote(id)
-					}}
+					onClick={() => vote(id)}
 					style={{ borderColor: color }}
 				>
 					<div>
 						<div className="symbol" style={{ background: color }}></div>
 						<div>
-							{name}[{votes[id] || 0}]
+							{name}: {votes[id] || 0}
 						</div>
 					</div>
 				</button>
@@ -40,22 +38,34 @@ function CVote({ animeId, chars }: Props) {
 }
 const Container = styled.div`
 	display: flex;
-	button > div {
-		display: grid;
-		justify-content: center;
-		place-items: center;
-		padding: 4px 2px;
-	}
-	&[data-voteend='true'] {
-	}
-	button[data-voted='true'] {
-		border: solid;
+	padding: 0;
+
+	button {
+		width: 72px;
+		padding: 0;
+		text-align: center;
+
+		&[data-voted='true'] {
+			border-style: solid;
+		}
+		&[data-voted='false'] {
+			margin: 3px;
+		}
+		@keyframes jump {
+			100% {
+				transform: translateY(-20px);
+			}
+		}
+
+		&:focus {
+			animation: jump 0.3s alternate ease-in-out;
+		}
 	}
 	.symbol {
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
+		width: 100%;
+		height: 1rem;
 	}
+
 	&[data-voteend='false'] {
 		button {
 			cursor: pointer;
