@@ -38,7 +38,7 @@ function CVote({ animeId, chars, sid }: Props) {
 
 	const charVotes = useMemo(
 		() => chars.map((c) => toCharVote(c, votedChar, votes, votesNorm)),
-		[chars, voted]
+		[chars, votes, votedChar]
 	)
 
 	if (!loaded) return null
@@ -80,14 +80,27 @@ const Container = styled.div`
 
 		&[data-voted='true'] {
 			border-style: double;
-			animation: jump 0.3s alternate ease-in-out;
+			animation: bound-anim 1s;
 		}
 		&[data-voted='false'] {
 			margin: 3px;
 		}
-		@keyframes jump {
+
+		@keyframes bound-anim {
+			0%,
 			100% {
-				transform: translateY(-20px);
+				transform: scale(1), translateY(0);
+			}
+			30% {
+				top: -60%;
+				transform: scale(0.96, 1.04) translateY(-20px);
+			}
+			60% {
+				transform: scale(1);
+			}
+			90% {
+				top: 0;
+				transform: scale(1.15, 0.9);
 			}
 		}
 	}
