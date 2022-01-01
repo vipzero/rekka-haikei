@@ -14,7 +14,7 @@ function Page() {
 }
 
 function CountTable() {
-	const [books, postCount] = useBookDb()
+	const [books, postCount, wordCounts] = useBookDb()
 	const { favorites } = useFavorites()
 	const [synced, doSync] = useSyncFavorite()
 	const { histories } = useHistoryDb()
@@ -71,6 +71,24 @@ function CountTable() {
 				</tbody>
 			</table>
 			{books.length >= 100 && <p>100件までのみ表示しています</p>}
+
+			<h3>人気タグ</h3>
+			<table className="count">
+				<thead>
+					<tr>
+						<th>タグ</th>
+						<th>pt</th>
+					</tr>
+				</thead>
+				<tbody>
+					{wordCounts.slice(0, config.visibleRecordLimit).map((count, i) => (
+						<tr key={i}>
+							<td>{count.word}</td>
+							<td>{count.count}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	)
 }

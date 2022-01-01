@@ -1,19 +1,6 @@
+import { BookCount } from '../types'
+
 export type Counts = Record<string, number>
-
-export function anaCounts(icy: string, countsOld: Counts) {
-	const entries = parseCountWords(icy)
-	const counts = { ...countsOld }
-	const entriesNoms = entries.map(textNormalize)
-
-	entriesNoms.forEach((v) => {
-		counts[v] = (countsOld[v] || 0) + 1
-	})
-
-	const wordCounts: Counts = {}
-	// 参照は normalize 保存は元の文字
-	entries.forEach((ent) => (wordCounts[ent] = counts[textNormalize(ent)]))
-	return { wordCounts, counts }
-}
 
 export function textNormalize(s: string) {
 	return s
@@ -56,4 +43,20 @@ export const parseCountWords = (icy: string) => {
 	const entries = uniqo(words)
 
 	return entries
+}
+
+export const countWordsIcys = (books: BookCount[]) => {
+	const counts: Counts = {}
+
+	books.forEach(({ icy, count }) => {
+		const entries = parseCountWords(icy)
+		const entriesNoms = entries.map(textNormalize)
+
+		entriesNoms.forEach((v) => {
+			counts[v] = (counts[v] || 0) + count
+		})
+	})
+	return Object.entries(counts)
+		.sort((a, b) => b[1] - a[1])
+		.map(([word, count]) => ({ word, count }))
 }
