@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import { getFirestore } from '../../../../service/firebase'
 import firebase from 'firebase/app'
+import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
 type AnimeVotes = Record<string, number>
 
-export function useCvoteDb(animeId: string) {
+export function useCvoteDb(animeId: string, sid: string) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
-	const [voted, setVoted] = useState<string | false>(false)
+	const [[lastVote, votedChar], setLastVote] = useLocalStorage<
+		[string, string]
+	>('last-cvote', ['-', '-'])
+	const voted = sid === lastVote
 
 	useEffect(() => {
 		const fdb = getFirestore()
@@ -28,7 +32,7 @@ export function useCvoteDb(animeId: string) {
 		if (voted) return
 		const fdb = getFirestore()
 
-		setVoted(charId)
+		setLastVote([sid, charId])
 		await fdb
 			.collection('cvote')
 			.doc(animeId)
@@ -37,5 +41,5 @@ export function useCvoteDb(animeId: string) {
 			})
 	}
 
-	return { loaded, votes, vote, voted }
+	return { loaded, votes, vote, voted, votedChar }
 }

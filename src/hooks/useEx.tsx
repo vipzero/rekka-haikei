@@ -17,7 +17,7 @@ const MasshiroEx = () => (
 		</div>
 	</div>
 )
-function getEx(ex: string | false) {
+function getEx(ex: string | false, sid: string) {
 	if (ex === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
 	} else if (ex === 'mia') {
@@ -28,6 +28,7 @@ function getEx(ex: string | false) {
 		return (
 			<CVote
 				animeId="gotoyome"
+				sid={sid}
 				chars={[
 					{ id: '1', name: '一花', color: '#E4A9B0' },
 					{ id: '2', name: '二乃', color: '#DC6A79' },
@@ -41,6 +42,7 @@ function getEx(ex: string | false) {
 		return (
 			<CVote
 				animeId="oreimo"
+				sid={sid}
 				chars={[
 					{ id: 'ki', name: '桐乃', color: '#D6A883' },
 					{ id: 'ku', name: '黒猫', color: '#262433' },
@@ -75,6 +77,7 @@ export function calcAbyss() {}
 
 export function useEx(song: Song) {
 	const { setAbyssEx } = useSettings()
+	const sid = String(song.time)
 
 	const exkey = useMemo(() => checkEx(song), [song])
 
@@ -84,7 +87,7 @@ export function useEx(song: Song) {
 		setAbyssEx(exColor)
 	}, [exkey])
 
-	return [useMemo(() => getEx(exkey), [exkey]), exkey] as const
+	return [useMemo(() => getEx(exkey, sid), [exkey, sid]), exkey] as const
 }
 
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)
@@ -111,6 +114,7 @@ const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
 
 export function checkEx(song: Song): string | false {
+	return 'gotoyome'
 	const { icy } = song
 
 	if (!icy) return false

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useLocalStorage } from '../../../hooks/useLocalStorage'
 import { useCvoteDb } from './useCvoteDb'
 
 type Char = {
@@ -8,11 +9,12 @@ type Char = {
 }
 type Props = {
 	animeId: string
+	sid: string
 	chars: Char[]
 }
 
-function CVote({ animeId, chars }: Props) {
-	const { loaded, votes, vote, voted } = useCvoteDb(animeId)
+function CVote({ animeId, chars, sid }: Props) {
+	const { loaded, votes, vote, voted, votedChar } = useCvoteDb(animeId, sid)
 
 	if (!loaded) return null
 
@@ -21,7 +23,7 @@ function CVote({ animeId, chars }: Props) {
 			{chars.map(({ id, name, color }) => (
 				<button
 					key={`char-${id}`}
-					data-voted={voted === id}
+					data-voted={votedChar === id}
 					onClick={() => vote(id)}
 					style={{ borderColor: color }}
 				>
@@ -46,7 +48,7 @@ const Container = styled.div`
 		text-align: center;
 
 		&[data-voted='true'] {
-			border-style: solid;
+			border-style: double;
 		}
 		&[data-voted='false'] {
 			margin: 3px;
