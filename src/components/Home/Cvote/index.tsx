@@ -49,6 +49,7 @@ const Container = styled.div`
 
 		&[data-voted='true'] {
 			border-style: double;
+			animation: jump 0.3s alternate ease-in-out;
 		}
 		&[data-voted='false'] {
 			margin: 3px;
@@ -57,10 +58,6 @@ const Container = styled.div`
 			100% {
 				transform: translateY(-20px);
 			}
-		}
-
-		&:focus {
-			animation: jump 0.3s alternate ease-in-out;
 		}
 	}
 	.symbol {
