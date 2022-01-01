@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2022-01-01:02': 'feat ホバーでプレイヤー表示',
 	'2022-01-01:01': 'feat 人気タグカウント',
 	'2021-12-31:02': 'feat 画像検索リンク',
 	'2021-12-31:01': 'fixd タグ直接検索修正',

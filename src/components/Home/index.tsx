@@ -50,7 +50,7 @@ function Home({ song, extraComp, exkey }: Props) {
 				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
 				<SongInfo song={song} showCounts={showCounts}></SongInfo>
-				<div data-visible={!!streamUrl}>
+				<div id="player-box" data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
 				</div>
 				<SettingBox
@@ -161,6 +161,11 @@ const Wrap = styled.div`
 
 const Master = styled.div`
 	${exStyles}
+	&:not(:hover) {
+		#player-box {
+			display: none;
+		}
+	}
 `
 
 const Mask = styled.div`
