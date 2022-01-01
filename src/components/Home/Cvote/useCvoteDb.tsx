@@ -3,11 +3,20 @@ import { getFirestore } from '../../../../service/firebase'
 import firebase from 'firebase/app'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
-type AnimeVotes = Record<string, number>
+export type AnimeVotes = Record<string, number>
+const normalizeVotes = (votes: AnimeVotes) => {
+	const normalized = {} as AnimeVotes
+	const max = Object.values(votes).reduce((a, b) => Math.max(a, b))
+	Object.keys(votes).forEach((id) => {
+		normalized[id] = votes[id] / max
+	})
+	return normalized
+}
 
 export function useCvoteDb(animeId: string, sid: string) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
+	const [votesNorm, setVotesNorm] = useState<AnimeVotes>({})
 	const [[lastVote, votedChar], setLastVote] = useLocalStorage<
 		[string, string]
 	>('last-cvote', ['-', '-'])
@@ -21,7 +30,9 @@ export function useCvoteDb(animeId: string, sid: string) {
 			.doc(animeId)
 			.onSnapshot((snap) => {
 				if (!snap.exists) return
-				setVotes(snap.data() as AnimeVotes)
+				const votes = snap.data() as AnimeVotes
+				setVotes(votes)
+				setVotesNorm(normalizeVotes(votes))
 				setLoaded(true)
 			})
 
@@ -41,5 +52,5 @@ export function useCvoteDb(animeId: string, sid: string) {
 			})
 	}
 
-	return { loaded, votes, vote, voted, votedChar }
+	return { loaded, votes, vote, voted, votedChar, votesNorm }
 }
