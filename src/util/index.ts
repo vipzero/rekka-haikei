@@ -12,6 +12,14 @@ export function formatDate(time: number, toHour: boolean = false) {
 	if (toHour) return `${mm}月${dd}日${h}時`
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
 }
+
+export function formatYmdSlash(time: number) {
+	const date = new Date(time)
+	const yyyy = date.getFullYear()
+	const mm = pad2(date.getMonth() + 1)
+	const dd = pad2(date.getDate())
+	return `${yyyy}/${mm}/${dd}`
+}
 export const formatTime = (time: number) => formatDate(time).split(' ')[1]
 
 export const formatCount = (n: number) => (n === 1 ? '初' : `${n}回目`)
