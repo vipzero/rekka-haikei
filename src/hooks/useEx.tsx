@@ -1,6 +1,11 @@
 import { useEffect, useMemo } from 'react'
 import { FloatingBox } from '../components'
 import CVote from '../components/Home/Cvote'
+import {
+	GOTOYOME_CHARS,
+	OREIMO_CHARS,
+	TITLE_EX_PATTERNS,
+} from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
 import { useSettings } from './useSettings'
 
@@ -25,35 +30,9 @@ function getEx(ex: string | false, sid: string) {
 	} else if (ex === 'masshiro') {
 		return <MasshiroEx />
 	} else if (ex === 'gotoyome') {
-		return (
-			<CVote
-				animeId="gotoyome"
-				sid={sid}
-				chars={[
-					{ id: '1', name: '一花', color: '#E4A9B0' },
-					{ id: '2', name: '二乃', color: '#DC6A79' },
-					{ id: '3', name: '三玖', color: '#CF5A4A' },
-					{ id: '4', name: '四葉', color: '#CD5B3D' },
-					{ id: '5', name: '五月', color: '#D15D4D' },
-				]}
-			/>
-		)
+		return <CVote animeId="gotoyome" sid={sid} chars={GOTOYOME_CHARS} />
 	} else if (ex === 'oreimo') {
-		return (
-			<CVote
-				animeId="oreimo"
-				sid={sid}
-				chars={[
-					{ id: 'ki', name: '桐乃', color: '#D6A883' },
-					{ id: 'ku', name: '黒猫', color: '#262433' },
-					{ id: 'ay', name: 'あやせ', color: '#424B65' },
-					{ id: 'ba', name: 'バジ', color: '#515C6B' },
-					{ id: 'ka', name: '加奈子', color: '#A35D4D' },
-					{ id: 'ma', name: '真奈美', color: '#5F503C' },
-					{ id: 'se', name: '瀬菜', color: '#85555D' },
-				]}
-			/>
-		)
+		return <CVote animeId="oreimo" sid={sid} chars={OREIMO_CHARS} />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -93,21 +72,6 @@ export function useEx(song: Song) {
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)
 const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
-const titleExPatterns: [string, string][] = [
-	['のんのんびより', 'nonnon'],
-	['アビス', 'mia'],
-	['さくら荘', 'sakurasou'],
-	['ひぐらしの', 'higurashi'],
-	['experiments lain', 'lain'],
-	['コードギアス', 'codegeass'],
-	['攻殻機動隊', 'kokaku'],
-	['PSYCHO-PASS', 'psychopass'],
-	['廻って', 'spin'],
-	['Steins;Gate', 'steinsgate'],
-	['五等分の花嫁', 'gotoyome'],
-	['俺の妹がこんなに', 'oreimo'],
-]
-
 const isSpin = (icy: string) =>
 	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
@@ -126,7 +90,7 @@ export function checkEx(song: Song): string | false {
 	}
 	if (!isSongFull(song)) return false
 
-	const hit = titleExPatterns.find(([q, ex]) => hasTitle(q, song))
+	const hit = TITLE_EX_PATTERNS.find(([q, ex]) => hasTitle(q, song))
 
 	return hit?.[1] || false
 }

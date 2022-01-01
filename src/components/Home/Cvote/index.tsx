@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
 import styled from 'styled-components'
-import { useLocalStorage } from '../../../hooks/useLocalStorage'
 import { AnimeVotes, useCvoteDb } from './useCvoteDb'
 
-type Char = {
+export type Char = {
 	id: string
 	name: string
 	color: string
