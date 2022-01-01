@@ -9,10 +9,19 @@ type Props = {
 function ScheduleComp(props: Props) {
 	const { schedule, setSchedule, save } = useScheduleDb()
 
+	const rows = useMemo(() => {
+		try {
+			return makeRows(schedule.text)
+		} catch (e) {
+			console.log(e)
+		}
+		return {}
+	}, [schedule.text])
+
 	return (
 		<div>
 			<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-				<ScheduleTable schedule={schedule} setFilter={props.setFilter} />
+				<ScheduleTable rows={rows} setFilter={props.setFilter} />
 				<div>
 					<textarea
 						style={{ width: '100%' }}
@@ -47,54 +56,49 @@ type ScheduleRow = {
 	day: string
 	items: ScheduleCell[]
 }
+
+function makeRows(text: string) {
+	const rows: Record<string, ScheduleRow> = {}
+
+	text
+		.trim()
+		.split('\n')
+		.filter(Boolean)
+		.forEach((line) => {
+			const [day, s, e, name, memo] = line.split(',')
+			const start = new Date(`${day} ${s}:00:00`)
+			const end = new Date(`${day} ${e}:00:00`)
+			if (!rows[day]) rows[day] = { day, items: [] }
+			const hn = Number(e) - Number(s)
+
+			rows[day].items.push({ start, end, hn, memo })
+		})
+	const rows2: Record<string, ScheduleRow> = {}
+	const empCells: ScheduleCell[] = Object.values(fills).map(
+		() => 'emp' as const
+	)
+
+	for (const [day, row] of Object.entries(rows)) {
+		const cells = [...empCells]
+		row.items.forEach((item) => {
+			if (item === 'emp' || item === 'skip') return
+			cells[item.start.getHours()] = item
+			for (let i = item.start.getHours() + 1; i < item.end.getHours(); i++) {
+				cells[i] = 'skip'
+			}
+		})
+		rows2[day] = { day, items: cells }
+	}
+	return rows2
+}
+
 function ScheduleTable({
-	schedule,
+	rows,
 	setFilter,
 }: {
-	schedule: Schedule
+	rows: Record<string, ScheduleRow>
 	setFilter?: (range: { start: number; end: number }) => void
 }) {
-	const rows = useMemo(() => {
-		const rows: Record<string, ScheduleRow> = {}
-
-		try {
-			schedule.text
-				.trim()
-				.split('\n')
-				.filter(Boolean)
-				.forEach((line) => {
-					const [day, s, e, name, memo] = line.split(',')
-					const start = new Date(`${day} ${s}:00:00`)
-					const end = new Date(`${day} ${e}:00:00`)
-					if (!rows[day]) rows[day] = { day, items: [] }
-					const hn = Number(e) - Number(s)
-
-					rows[day].items.push({ start, end, hn, memo })
-				})
-			const rows2: Record<string, ScheduleRow> = {}
-			const empCells: ScheduleCell[] = Object.values(fills).map(
-				() => 'emp' as const
-			)
-
-			for (const [day, row] of Object.entries(rows)) {
-				const cells = [...empCells]
-				row.items.forEach((item) => {
-					if (item === 'emp' || item === 'skip') return
-					cells[item.start.getHours()] = item
-					for (
-						let i = item.start.getHours() + 1;
-						i < item.end.getHours();
-						i++
-					) {
-						cells[i] = 'skip'
-					}
-				})
-				rows2[day] = { day, items: cells }
-			}
-			return rows2
-		} catch (e) {}
-		return {}
-	}, [schedule.text])
 	return (
 		<div>
 			<Table>
@@ -126,7 +130,7 @@ function ScheduleTable({
 													setFilter({ start: +item.start, end: +item.end })
 												}
 											>
-												{item.memo.substring(0, 8)}
+												{item.memo?.substring(0, 8)}
 											</td>
 										)
 								}
