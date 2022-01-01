@@ -2,11 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { FloatingBox } from '../components'
 import CVote from '../components/Home/Cvote'
 import {
-	GOTOYOME_CHARS,
-	MONOGATARI_CHARS,
-	OREGAIRU_CHARS,
-	OREIMO_CHARS,
-	SAEKANO_CHARS,
+	CVOTE_PROFILES,
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
@@ -26,22 +22,17 @@ const MasshiroEx = () => (
 	</div>
 )
 function getEx(ex: string | false, sid: string) {
+	if (!ex) return null
+	const cvote = CVOTE_PROFILES.find((p) => p.id === ex)
+	if (cvote) {
+		return <CVote animeId={ex} sid={sid} chars={cvote.chars} />
+	}
 	if (ex === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
 	} else if (ex === 'mia') {
 		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (ex === 'masshiro') {
 		return <MasshiroEx />
-	} else if (ex === 'gotoyome') {
-		return <CVote animeId="gotoyome" sid={sid} chars={GOTOYOME_CHARS} />
-	} else if (ex === 'oreimo') {
-		return <CVote animeId="oreimo" sid={sid} chars={OREIMO_CHARS} />
-	} else if (ex === 'oregairu') {
-		return <CVote animeId="oregairu" sid={sid} chars={OREGAIRU_CHARS} />
-	} else if (ex === 'saekano') {
-		return <CVote animeId="saekano" sid={sid} chars={SAEKANO_CHARS} />
-	} else if (ex === 'monogatari') {
-		return <CVote animeId="monogatari" sid={sid} chars={MONOGATARI_CHARS} />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
