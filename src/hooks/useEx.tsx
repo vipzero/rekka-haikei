@@ -3,7 +3,10 @@ import { FloatingBox } from '../components'
 import CVote from '../components/Home/Cvote'
 import {
 	GOTOYOME_CHARS,
+	MONOGATARI_CHARS,
+	OREGAIRU_CHARS,
 	OREIMO_CHARS,
+	SAEKANO_CHARS,
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
@@ -33,6 +36,12 @@ function getEx(ex: string | false, sid: string) {
 		return <CVote animeId="gotoyome" sid={sid} chars={GOTOYOME_CHARS} />
 	} else if (ex === 'oreimo') {
 		return <CVote animeId="oreimo" sid={sid} chars={OREIMO_CHARS} />
+	} else if (ex === 'oregairu') {
+		return <CVote animeId="oregairu" sid={sid} chars={OREGAIRU_CHARS} />
+	} else if (ex === 'saekano') {
+		return <CVote animeId="saekano" sid={sid} chars={SAEKANO_CHARS} />
+	} else if (ex === 'monogatari') {
+		return <CVote animeId="monogatari" sid={sid} chars={MONOGATARI_CHARS} />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>

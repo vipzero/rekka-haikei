@@ -69,6 +69,7 @@ const Container = styled.div`
 	display: flex;
 	padding: 0;
 	margin-top: 8px;
+	flex-wrap: wrap;
 
 	button {
 		margin: 0;
