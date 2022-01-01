@@ -84,11 +84,13 @@ export const exStyles = css`
 	&[data-ex='rakupro'] {
 		#mask {
 			display: block;
-			opacity: 0.5;
-			background: linear-gradient(45deg, #e700fc, #fffa, #e700fc, #ffaa);
+			animation: aurora-anim 20s linear infinite alternate;
+		}
 
-			background-size: 400% 400%;
-			animation: bggradient 1.5s linear infinite;
+		/* background-size: 400% 400%; */
+		#mask2 {
+			/* background: linear-gradient(to top, #e700fcaa, transparent); */
+			/* background: linear-gradient(to top, #fffa, transparent); */
 		}
 	}
 	&[data-ex='masshiro'] {
@@ -214,12 +216,24 @@ export const exStyles = css`
 			transform: rotateY(0deg);
 		}
 	}
-	@keyframes bggradient {
+	@keyframes aurora-anim {
 		0% {
-			background-position: 0% 75%;
+			background: #e700fc88;
+		}
+		20% {
+			background: transparent;
+		}
+		40% {
+			background: #ffa8;
+		}
+		60% {
+			background: transparent;
+		}
+		80% {
+			background: #fff8;
 		}
 		100% {
-			background-position: 100% 25%;
+			background: transparent;
 		}
 	}
 `

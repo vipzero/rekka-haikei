@@ -35,7 +35,9 @@ function Home({ song, extraComp, exkey }: Props) {
 
 	return (
 		<Master onClick={toggleSetting} data-ex={exkey}>
-			<Mask id="mask" />
+			<Mask id="mask">
+				<Mask id="mask2" />
+			</Mask>
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
