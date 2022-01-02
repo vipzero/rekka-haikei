@@ -27,7 +27,7 @@ const toCharVote = (
 	...char,
 	count: votes[char.id] || 0,
 	voteNorm: voteNorm[char.id] || 0,
-	selected: votedChars[char.id],
+	selected: !!votedChars[char.id],
 })
 
 function CVote({ animeId, chars, sid, disabled }: Props) {
@@ -38,7 +38,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 
 	const charVotes = useMemo(
 		() => chars.map((c) => toCharVote(c, votedChars, votes, votesNorm)),
-		[chars, votes, votedChars]
+		[chars, votes, votedChars, votesNorm]
 	)
 
 	if (!loaded) return null
@@ -75,10 +75,11 @@ const Container = styled.div`
 
 	button {
 		margin: 0;
-		width: 72px;
+		width: 56px;
 		height: min-content;
 		padding: 0;
 		text-align: center;
+		font-size: 0.6rem;
 
 		&[data-voted='true'] {
 			border-style: double;
@@ -86,6 +87,7 @@ const Container = styled.div`
 		}
 		&[data-voted='false'] {
 			margin: 3px;
+			border-style: solid !important;
 		}
 
 		@keyframes bound-anim {
@@ -108,7 +110,7 @@ const Container = styled.div`
 	}
 	.symbol {
 		width: 100%;
-		height: 1rem;
+		height: 0.5rem;
 	}
 
 	&[data-voteend='false'] {
