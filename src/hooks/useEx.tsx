@@ -84,7 +84,7 @@ function exKeyToColor(exkey: Eekey) {
 export function calcAbyss() {}
 
 export function useEx(song: Song) {
-	const { setAbyssEx } = useSettings()
+	const { setAbyssEx, memEe } = useSettings()
 	const sid = String(song.time)
 	const exkey = useMemo(() => checkEx(song), [song])
 
@@ -92,6 +92,9 @@ export function useEx(song: Song) {
 		const exColor = exKeyToColor(exkey)
 
 		setAbyssEx(exColor)
+		if (exkey) {
+			memEe(exkey)
+		}
 	}, [exkey])
 
 	return [
