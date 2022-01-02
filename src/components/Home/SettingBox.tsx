@@ -72,7 +72,7 @@ function SettingBox({
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
-				<ButtonGrid>
+				<ButtonGrid id="button-grid-panel">
 					<ConfButton onClick={cycleTheme} className="theme">
 						<FontAwesomeIcon icon={faPalette} />
 						{s.showHelp && 'テーマ: '}

@@ -36,16 +36,11 @@ export const exStyles = css`
 			animation-iteration-count: infinite;
 			animation-duration: 8s;
 		}
-		&[data-ex='lain'] {
-			* {
-				color: red !important;
-			}
-		}
 
 		&[data-ex='kokaku'] {
 			div {
 				border-bottom: solid 1px #0385f4;
-				background: #00aaaa33;
+				background: #a2c0c033;
 			}
 			p,
 			span,

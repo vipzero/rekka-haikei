@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from 'react'
+import { createGlobalStyle } from 'styled-components'
 import { FloatingBox } from '../components'
 import CVote from '../components/Home/Cvote'
 import {
@@ -6,6 +7,7 @@ import {
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
+import { uaHash } from '../util'
 import { useSettings } from './useSettings'
 
 const EmbedWindow = ({ url }: { url: string }) => (
@@ -21,7 +23,31 @@ const MasshiroEx = () => (
 		</div>
 	</div>
 )
-function getEx(ex: string | false, sid: string) {
+
+export const Lain = createGlobalStyle<{ r256: number }>`
+* {
+	color: hsla(${(p) => p.r256},50%,50%) !important;
+}
+#button-grid-panel {
+	grid-template-areas:
+	'bk bk bk bk th th th'
+	'bk bk bk bk bl lk lk'
+	'bk bk bk bk bl lk lk'
+	'hl hl hl -- bl ha ha' // hl
+	'tg tg tg -- cl ha ha'
+	'tg tg tg dl dl dl dl'
+	'fd hi hi hi tl tl tl' !important
+}
+#bg > div {
+transform: rotate(90deg)
+}
+/* *:focus {
+	background: red !important;
+	border: solid blue 8px !important;
+} */
+`
+
+function getEx(ex: string | false, sid: string, rand: number) {
 	if (!ex) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === ex)
 	if (cvote) {
@@ -33,6 +59,8 @@ function getEx(ex: string | false, sid: string) {
 		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (ex === 'masshiro') {
 		return <MasshiroEx />
+	} else if (ex === 'lain') {
+		return <Lain r256={Math.floor(uaHash() % 256)} />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -57,7 +85,6 @@ export function calcAbyss() {}
 export function useEx(song: Song) {
 	const { setAbyssEx } = useSettings()
 	const sid = String(song.time)
-
 	const exkey = useMemo(() => checkEx(song), [song])
 
 	useEffect(() => {
@@ -66,7 +93,10 @@ export function useEx(song: Song) {
 		setAbyssEx(exColor)
 	}, [exkey])
 
-	return [useMemo(() => getEx(exkey, sid), [exkey, sid]), exkey] as const
+	return [
+		useMemo(() => getEx(exkey, sid, Math.random()), [exkey, sid]),
+		exkey,
+	] as const
 }
 
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)

@@ -97,3 +97,8 @@ export const searchUrl = (q: string) =>
 export const searchImageUrl = (q: string) => `${searchUrl(q)}&tbm=isch`
 export const utanetSearchUrl = (keyword: string) =>
 	searchUrl(`${keyword} site:uta-net.com`)
+
+export const uaHash = () => {
+	if (typeof navigator === 'undefined') return 0
+	return makeHash(navigator.userAgent)
+}

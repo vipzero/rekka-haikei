@@ -35,7 +35,7 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 	}, [url])
 
 	return (
-		<SuperBack style={{ backgroundColor: abyss }}>
+		<SuperBack id="bg" style={{ backgroundColor: abyss }}>
 			<Transition
 				in={anime}
 				onExited={() => {
@@ -70,6 +70,7 @@ const SuperBack = styled.div`
 	left: 0;
 	top: 0;
 	z-index: -10;
+	overflow: hidden;
 `
 
 const Background = styled.div`
