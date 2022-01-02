@@ -15,7 +15,7 @@ function Page() {
 					onClick={() => {
 						if (i === 0) return
 						if (!confirm('背景を変更しますか？')) return
-						setBg(link)
+						setBg(link, song.time)
 					}}
 				>
 					<img src={link} />

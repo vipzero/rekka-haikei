@@ -42,28 +42,29 @@ export function useSongDb() {
 				)
 
 				setSong(song)
-				setSong({ ...song })
 				setLoaded(true)
 			})
 
 		return () => si()
 	}, [eventId])
-	const setBg = async (url) => {
+
+	const setBg = async (url, sid) => {
 		const fdb = getFirestore()
-		const song = (
-			await fdb.collection('song').doc(eventId).get()
-		).data() as Song
-		const imageLinks = song.imageLinks || []
+		const songRef = fdb.collection('song').doc(eventId)
 
-		// song cahnged guard
-		if (imageLinks[0] === url || !imageLinks.includes(url)) return
+		fdb.runTransaction((transaction) => {
+			// This code may get re-run multiple times if there are conflicts.
+			return transaction.get(songRef).then((doc) => {
+				const song = doc.data() as Song
+				const imageLinks = song.imageLinks || []
 
-		fdb
-			.collection('song')
-			.doc(eventId)
-			.update({
-				imageLinks: [url, ...imageLinks.filter((v) => v !== url)],
+				// song changed guard
+				if (song.time !== sid) return
+				transaction.update(songRef, {
+					imageLinks: [url, ...imageLinks.filter((v) => v !== url)],
+				})
 			})
+		})
 	}
 
 	return [loaded, song, setBg] as const
