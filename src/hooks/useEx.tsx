@@ -112,7 +112,7 @@ export function checkEx(song: Song): Eekey {
 	} else if (isMasshiro(icy)) {
 		return 'masshiro'
 	}
-	if (!isSongFull(song)) return false
+
 	if (matchTitle('人生', song)) return 'jinsei'
 
 	const hit = TITLE_EX_PATTERNS.find(([q, ex]) => hasTitle(q, song))
