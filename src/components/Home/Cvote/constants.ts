@@ -119,11 +119,12 @@ export const eekeys = [
 	'monogatari',
 	'oreshura',
 	'jinsei',
+	'toaru',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
 
-export const TITLE_EX_PATTERNS: [string, Eekey][] = [
+export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],
 	['アビス', 'mia'],
 	['さくら荘', 'sakurasou'],
@@ -146,4 +147,5 @@ export const TITLE_EX_PATTERNS: [string, Eekey][] = [
 	['暦物語', 'monogatari'],
 	['憑物語', 'monogatari'],
 	['が修羅場すぎ', 'oreshura'],
+	[/とある(魔術|科学)の/, 'toaru'],
 ]

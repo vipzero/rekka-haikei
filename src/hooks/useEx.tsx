@@ -90,8 +90,8 @@ export function useEx(song: Song) {
 	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
 }
 
-const hasTitle = (q: string, song: Song) =>
-	song.animeTitle?.includes(q) || song.albumName?.includes(q)
+const hasTitle = (q: string | RegExp, song: Song) =>
+	[song.animeTitle, song.albumName].some((v) => new RegExp(q).exec(v || ''))
 
 const matchTitle = (q: string, song: Song) => song.animeTitle === q
 const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
@@ -115,7 +115,7 @@ export function checkEx(song: Song): Eekey {
 
 	if (matchTitle('人生', song)) return 'jinsei'
 
-	const hit = TITLE_EX_PATTERNS.find(([q, ex]) => hasTitle(q, song))
+	const hit = TITLE_EX_PATTERNS.find(([q]) => hasTitle(q, song))
 
 	return hit?.[1] || false
 }
