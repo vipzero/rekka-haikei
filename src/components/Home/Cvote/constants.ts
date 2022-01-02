@@ -145,5 +145,5 @@ export const TITLE_EX_PATTERNS: [string, Eekey][] = [
 	['終物語', 'monogatari'],
 	['暦物語', 'monogatari'],
 	['憑物語', 'monogatari'],
-	['幼馴染と彼女が修羅場', 'oreshura'],
+	['が修羅場すぎ', 'oreshura'],
 ]
