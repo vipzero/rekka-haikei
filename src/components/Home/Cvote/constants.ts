@@ -105,5 +105,5 @@ export const TITLE_EX_PATTERNS: [string, string][] = [
 	['終物語', 'monogatari'],
 	['暦物語', 'monogatari'],
 	['憑物語', 'monogatari'],
-	['幼馴染が修羅場', 'oreshura'],
+	['幼馴染と彼女が修羅場', 'oreshura'],
 ]
