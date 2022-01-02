@@ -80,4 +80,10 @@ export const TITLE_EX_PATTERNS: [string, string][] = [
 	['やはり俺の青春ラブコメは', 'oregairu'],
 	['冴えない彼女の育てかた', 'saekano'],
 	['化物語', 'monogatari'],
+	['猫物語', 'monogatari'],
+	['傷物語', 'monogatari'],
+	['偽物語', 'monogatari'],
+	['終物語', 'monogatari'],
+	['暦物語', 'monogatari'],
+	['憑物語', 'monogatari'],
 ]
