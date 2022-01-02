@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getFirestore } from '../../../../service/firebase'
 import firebase from 'firebase/app'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
@@ -17,10 +17,14 @@ export function useCvoteDb(animeId: string, sid: string) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
 	const [votesNorm, setVotesNorm] = useState<AnimeVotes>({})
-	const [[lastVote, votedChar], setLastVote] = useLocalStorage<
-		[string, string]
-	>('last-cvote', ['-', '-'])
-	const voted = sid === lastVote
+	const [[lastVote, votedChars], setLastVote] = useLocalStorage<
+		[string, Record<string, boolean>]
+	>('last-cvote', ['-', {}])
+
+	useEffect(() => {
+		if (lastVote === sid) return
+		setLastVote([sid, {}])
+	}, [sid])
 
 	useEffect(() => {
 		const fdb = getFirestore()
@@ -40,10 +44,10 @@ export function useCvoteDb(animeId: string, sid: string) {
 	}, [animeId])
 
 	const vote = async (charId: string) => {
-		if (voted) return
+		if (votedChars[charId]) return
 		const fdb = getFirestore()
 
-		setLastVote([sid, charId])
+		setLastVote(([sid, vc]) => [sid, { ...vc, [charId]: true }])
 		await fdb
 			.collection('cvote')
 			.doc(animeId)
@@ -52,5 +56,5 @@ export function useCvoteDb(animeId: string, sid: string) {
 			})
 	}
 
-	return { loaded, votes, vote, voted, votedChar, votesNorm }
+	return { loaded, votes, vote, votedChars, votesNorm }
 }

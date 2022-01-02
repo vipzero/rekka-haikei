@@ -20,36 +20,36 @@ type Props = {
 }
 const toCharVote = (
 	char: Char,
-	votedChar: string,
+	votedChars: Record<string, boolean>,
 	votes: AnimeVotes,
 	voteNorm: AnimeVotes
 ): CharVote => ({
 	...char,
 	count: votes[char.id] || 0,
 	voteNorm: voteNorm[char.id] || 0,
-	selected: char.id === votedChar,
+	selected: votedChars[char.id],
 })
 
 function CVote({ animeId, chars, sid, disabled }: Props) {
-	const { loaded, votes, vote, voted, votedChar, votesNorm } = useCvoteDb(
+	const { loaded, votes, vote, votedChars, votesNorm } = useCvoteDb(
 		animeId,
 		sid
 	)
 
 	const charVotes = useMemo(
-		() => chars.map((c) => toCharVote(c, votedChar, votes, votesNorm)),
-		[chars, votes, votedChar]
+		() => chars.map((c) => toCharVote(c, votedChars, votes, votesNorm)),
+		[chars, votes, votedChars]
 	)
 
 	if (!loaded) return null
 
 	return (
-		<Container data-voteend={disabled || !!voted}>
+		<Container data-voteend={disabled}>
 			{charVotes.map((char) => (
 				<button
 					key={`char-${char.id}`}
 					data-voted={char.selected}
-					disabled={disabled}
+					disabled={disabled || char.selected}
 					onClick={() => vote(char.id)}
 					style={{
 						borderColor: char.color,
