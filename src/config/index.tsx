@@ -4,8 +4,8 @@ const { NODE_ENV } = process.env
 
 const isDev = NODE_ENV === 'development'
 
-const finishTime = +new Date('2022-01-02T15:00:00.000Z') // +9:00
-const lastspurtTime = +new Date('2022-01-02T12:00:00.000Z')
+const finishTime = +new Date('2022-01-03T15:00:00.000Z') // +9:00
+const lastspurtTime = +new Date('2022-01-03T12:00:00.000Z')
 
 export const events: Event[] = [
 	{ id: '2021winter', label: '2021冬', current: true },
