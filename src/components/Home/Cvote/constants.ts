@@ -81,6 +81,17 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'bi', name: '美術', color: '#ECD6E0' },
 		],
 	},
+	{
+		id: 'steinsgate',
+		chars: [
+			{ id: 'kr', name: '紅莉栖', color: '#724B2E' },
+			{ id: 'my', name: 'まゆり', color: '#1E211A' },
+			{ id: 'sz', name: '鈴羽', color: '#968169' },
+			{ id: 'fe', name: 'フェ', color: '#BE8274' },
+			{ id: 'rk', name: 'ルカ子', color: '#323D3A' },
+			{ id: 'me', name: '萌郁', color: '#E7C087' },
+		],
+	},
 ]
 
 export const eekeys = [
