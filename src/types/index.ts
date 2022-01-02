@@ -84,6 +84,7 @@ export type Setting = {
 	feedBackText: string
 	abyss: Abyss // fade change background color: ;
 	abyssEx: Abyss | null
+	ee: Record<string, true>
 }
 
 export type Event = {

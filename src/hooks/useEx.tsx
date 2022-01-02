@@ -4,6 +4,7 @@ import { FloatingBox } from '../components'
 import CVote from '../components/Home/Cvote'
 import {
 	CVOTE_PROFILES,
+	Eekey,
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
@@ -47,7 +48,7 @@ transform: rotate(90deg)
 } */
 `
 
-function getEx(ex: string | false, sid: string, rand: number) {
+function getEx(ex: Eekey, sid: string, rand: number) {
 	if (!ex) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === ex)
 	if (cvote) {
@@ -74,7 +75,7 @@ function getEx(ex: string | false, sid: string, rand: number) {
 	}
 	return null
 }
-function exKeyToColor(exkey: string | false) {
+function exKeyToColor(exkey: Eekey) {
 	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
 	if (exkey === 'sakurasou') return '#fde'
 	return null
@@ -108,7 +109,7 @@ const isSpin = (icy: string) =>
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
 
-export function checkEx(song: Song): string | false {
+export function checkEx(song: Song): Eekey {
 	const { icy } = song
 
 	if (!icy) return false

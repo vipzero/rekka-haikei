@@ -1,7 +1,7 @@
 import { Char } from './index'
 
 type CvoteProfile = {
-	id: string
+	id: Eekey
 	chars: Char[]
 }
 export const CVOTE_PROFILES: CvoteProfile[] = [
@@ -83,7 +83,34 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 ]
 
-export const TITLE_EX_PATTERNS: [string, string][] = [
+const eekeys = [
+	'nonnon',
+	'mia',
+	'sakurasou',
+	'higurashi',
+	'lain',
+	'codegeass',
+	'kokaku',
+	'psychopass',
+	'spin',
+	'steinsgate',
+	'gotoyome',
+	'oreimo',
+	'oregairu',
+	'saekano',
+	'monogatari',
+
+	'jinsei',
+
+	'oreshura',
+	'masshiro',
+	'rakupro',
+	'spin',
+] as const
+
+export type Eekey = typeof eekeys[number] | false
+
+export const TITLE_EX_PATTERNS: [string, Eekey][] = [
 	['のんのんびより', 'nonnon'],
 	['アビス', 'mia'],
 	['さくら荘', 'sakurasou'],
