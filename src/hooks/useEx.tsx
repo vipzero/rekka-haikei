@@ -85,7 +85,6 @@ export function useEx(song: Song) {
 	useEffect(() => {
 		const eeKey = checkEx(song)
 		setEekey(eeKey)
-		console.log({ eeKey })
 	}, [song])
 
 	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
