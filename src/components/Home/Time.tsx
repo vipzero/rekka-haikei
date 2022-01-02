@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
+import { eekeys } from './Cvote/constants'
 
 type Props = {
 	song: Song
@@ -94,7 +95,20 @@ const Time = ({ song, eeSaw }: Props) => {
 					>
 						{song.imageSearchWord}
 					</div>
-					<div>{eeSaw.map((b) => (b ? '*' : '-')).join('')}</div>
+					<div>
+						{eeSaw.map((b, i) => (
+							<span
+								key={i}
+								onClick={() => {
+									if (!b) return
+
+									console.log(eekeys[i])
+								}}
+							>
+								{b ? '*' : '-'}
+							</span>
+						))}
+					</div>
 				</div>
 			</div>
 		</Style>

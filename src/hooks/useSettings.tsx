@@ -40,7 +40,7 @@ export const useSettings = () => {
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 	const memEe = (key: Eekey) => {
 		if (key === false) return
-		setSetting((v) => ({ ...v, ee: { ...ee, [key]: true } }))
+		setSetting((v) => ({ ...v, ee: { ...v.ee, [key]: true } }))
 	}
 
 	return {

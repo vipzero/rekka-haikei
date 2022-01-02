@@ -7,7 +7,6 @@ import {
 import {
 	faBookmark,
 	faColumns,
-	faDownload,
 	faHistory,
 	faLightbulb,
 	faLock,
@@ -69,9 +68,7 @@ function SettingBox({
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
-	const eeSaw = useMemo(() => {
-		return eekeys.map((key) => s.ee[key])
-	}, [s.ee])
+	const eeSaw = useMemo(() => eekeys.map((key) => s.ee?.[key] || false), [s.ee])
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
