@@ -90,7 +90,9 @@ export function useEx(song: Song) {
 	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
 }
 
-const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)
+const hasTitle = (q: string, song: Song) =>
+	song.animeTitle?.includes(q) || song.albumName?.includes(q)
+
 const matchTitle = (q: string, song: Song) => song.animeTitle === q
 const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
