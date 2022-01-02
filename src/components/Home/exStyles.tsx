@@ -75,6 +75,17 @@ export const exStyles = css`
 				animation-name: none;
 			}
 		}
+
+		&[data-has-art='true'] {
+			#bg > div {
+				animation: ${spin} 3000s linear infinite;
+			}
+		}
+		&[data-has-art='false'] {
+			#bg > div {
+				animation: ${spin} 60s linear infinite;
+			}
+		}
 	}
 	&[data-ex='rakupro'] {
 		#mask {

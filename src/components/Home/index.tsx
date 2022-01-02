@@ -33,7 +33,11 @@ function Home({ song, extraComp }: Props) {
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return (
-		<Master onClick={toggleSetting} data-ex={eeKey}>
+		<Master
+			onClick={toggleSetting}
+			data-ex={eeKey}
+			data-has-art={!!song.artworkUrl100}
+		>
 			<Mask id="mask">
 				<Mask id="mask2" />
 			</Mask>
