@@ -16,6 +16,7 @@ type Props = {
 	animeId: string
 	sid: string
 	chars: Char[]
+	disabled: boolean
 }
 const toCharVote = (
 	char: Char,
@@ -29,7 +30,7 @@ const toCharVote = (
 	selected: char.id === votedChar,
 })
 
-function CVote({ animeId, chars, sid }: Props) {
+function CVote({ animeId, chars, sid, disabled }: Props) {
 	const { loaded, votes, vote, voted, votedChar, votesNorm } = useCvoteDb(
 		animeId,
 		sid
@@ -43,11 +44,12 @@ function CVote({ animeId, chars, sid }: Props) {
 	if (!loaded) return null
 
 	return (
-		<Container data-voteend={!!voted}>
+		<Container data-voteend={disabled || !!voted}>
 			{charVotes.map((char) => (
 				<button
 					key={`char-${char.id}`}
 					data-voted={char.selected}
+					disabled={disabled}
 					onClick={() => vote(char.id)}
 					style={{
 						borderColor: char.color,

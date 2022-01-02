@@ -106,7 +106,7 @@ const Time = ({ song }: Props) => {
 						key={i}
 						onClick={() => {
 							if (!b) return
-							setEekey(eekeys[i])
+							setEekey(eekeys[i], true)
 						}}
 					>
 						{b ? '*' : '-'}

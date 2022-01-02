@@ -4,6 +4,12 @@ import { Eekey } from '../components/Home/Cvote/constants'
 import { Abyss, nextAbyss } from '../config'
 import { toggle } from '../util'
 
+function exKeyToColor(exkey: Eekey) {
+	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
+	if (exkey === 'sakurasou') return '#fde'
+	return null
+}
+
 export const useSettings = () => {
 	const [
 		{
@@ -19,6 +25,7 @@ export const useSettings = () => {
 			abyssEx,
 			ee,
 			eeKey,
+			eeSim,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -37,9 +44,14 @@ export const useSettings = () => {
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
-	const setEekey = (eeKey: Eekey) => {
-		setSetting((v) => ({ ...v, eeKey }))
+	const setEekey = (eeKey: Eekey, eeSim = false) => {
+		const exColor = exKeyToColor(eeKey)
+
+		setAbyssEx(exColor)
+
+		setSetting((v) => ({ ...v, eeKey, eeSim }))
 		if (eeKey === false) return
+
 		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
 	}
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
@@ -57,8 +69,8 @@ export const useSettings = () => {
 		showTool,
 		ee,
 		eeKey,
+		eeSim,
 		setAbyss,
-		setAbyssEx,
 		cycleAbyss,
 		toggleCounts,
 		toggleBookmark,

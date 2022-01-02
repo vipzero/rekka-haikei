@@ -87,6 +87,7 @@ export type Setting = {
 	abyssEx: Abyss | null
 	ee: Record<string, true>
 	eeKey: Eekey
+	eeSim: boolean
 }
 
 export type Event = {

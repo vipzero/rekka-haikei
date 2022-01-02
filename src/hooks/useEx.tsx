@@ -49,11 +49,11 @@ transform: rotate(90deg)
 } */
 `
 
-function getEx(ex: Eekey, sid: string, rand: number) {
+function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 	if (!ex) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === ex)
 	if (cvote) {
-		return <CVote animeId={ex} sid={sid} chars={cvote.chars} />
+		return <CVote animeId={ex} sid={sid} chars={cvote.chars} disabled={eeSim} />
 	}
 	if (ex === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
@@ -76,28 +76,19 @@ function getEx(ex: Eekey, sid: string, rand: number) {
 	}
 	return null
 }
-function exKeyToColor(exkey: Eekey) {
-	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
-	if (exkey === 'sakurasou') return '#fde'
-	return null
-}
-
 export function calcAbyss() {}
 
 export function useEx(song: Song) {
-	const { setAbyssEx, setEekey, eeKey } = useSettings()
+	const { setEekey, eeKey, eeSim } = useSettings()
 	const sid = String(song.time)
 
 	useEffect(() => {
 		const eeKey = checkEx(song)
-		const exColor = exKeyToColor(eeKey)
-
-		setAbyssEx(exColor)
 		setEekey(eeKey)
 		console.log({ eeKey })
 	}, [song])
 
-	return useMemo(() => getEx(eeKey, sid, Math.random()), [eeKey, sid])
+	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
 }
 
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)

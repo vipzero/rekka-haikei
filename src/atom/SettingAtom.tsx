@@ -13,6 +13,7 @@ const defaultValue: Setting = {
 	abyssEx: null,
 	showHelp: false,
 	eeKey: false,
+	eeSim: false,
 	ee: {},
 	feedBackText: '',
 }
