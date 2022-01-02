@@ -27,6 +27,7 @@ import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { Song, ThemeId } from '../../types'
 import { downloadImg } from '../../util'
+import { eekeys } from './Cvote/constants'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
@@ -68,6 +69,9 @@ function SettingBox({
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
+	const eeSaw = useMemo(() => {
+		return eekeys.map((key) => s.ee[key])
+	}, [s.ee])
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
@@ -169,7 +173,7 @@ function SettingBox({
 
 				{s.showTool && (
 					<div>
-						<Time song={song} />
+						<Time song={song} eeSaw={eeSaw} />
 					</div>
 				)}
 				<div style={{ display: 'flex' }}>

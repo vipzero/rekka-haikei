@@ -83,29 +83,31 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 ]
 
-const eekeys = [
+export const eekeys = [
 	'nonnon',
 	'mia',
-	'sakurasou',
 	'higurashi',
-	'lain',
-	'codegeass',
+	'rakupro',
+
+	'sakurasou',
+	'masshiro',
+
+	// 'codegeass',
 	'kokaku',
 	'psychopass',
-	'spin',
+	'lain',
+
 	'steinsgate',
+
+	'spin',
+
 	'gotoyome',
 	'oreimo',
 	'oregairu',
 	'saekano',
 	'monogatari',
-
-	'jinsei',
-
 	'oreshura',
-	'masshiro',
-	'rakupro',
-	'spin',
+	'jinsei',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -116,7 +118,7 @@ export const TITLE_EX_PATTERNS: [string, Eekey][] = [
 	['さくら荘', 'sakurasou'],
 	['ひぐらしの', 'higurashi'],
 	['experiments lain', 'lain'],
-	['コードギアス', 'codegeass'],
+	// ['コードギアス', 'codegeass'],
 	['攻殻機動隊', 'kokaku'],
 	['PSYCHO-PASS', 'psychopass'],
 	['廻って', 'spin'],

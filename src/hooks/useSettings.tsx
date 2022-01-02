@@ -54,6 +54,7 @@ export const useSettings = () => {
 		showHelp,
 		fadeAbyssColor: abyss,
 		showTool,
+		ee,
 		setAbyss,
 		setAbyssEx,
 		cycleAbyss,

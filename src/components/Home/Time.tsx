@@ -5,6 +5,7 @@ import { formatTime, pad2 } from '../../util'
 
 type Props = {
 	song: Song
+	eeSaw: boolean[]
 }
 
 const useTick = () => {
@@ -20,7 +21,7 @@ const useTick = () => {
 	return now
 }
 
-const Time = ({ song }: Props) => {
+const Time = ({ song, eeSaw }: Props) => {
 	const now = useTick()
 	const { time, trackTimeMillis } = song
 
@@ -66,6 +67,7 @@ const Time = ({ song }: Props) => {
 					<div>曲終了</div>
 					<div>次のHour</div>
 					<div>クエリ</div>
+					<div>ee</div>
 				</div>
 				<div>
 					<div>
@@ -92,6 +94,7 @@ const Time = ({ song }: Props) => {
 					>
 						{song.imageSearchWord}
 					</div>
+					<div>{eeSaw.map((b) => (b ? '*' : '-')).join('')}</div>
 				</div>
 			</div>
 		</Style>
