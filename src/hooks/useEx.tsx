@@ -70,6 +70,7 @@ export function useEx(song: Song) {
 }
 
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)
+const matchTitle = (q: string, song: Song) => song.animeTitle === q
 const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
 const isSpin = (icy: string) =>
@@ -89,6 +90,7 @@ export function checkEx(song: Song): string | false {
 		return 'masshiro'
 	}
 	if (!isSongFull(song)) return false
+	if (matchTitle('人生', song)) return 'jinsei'
 
 	const hit = TITLE_EX_PATTERNS.find(([q, ex]) => hasTitle(q, song))
 

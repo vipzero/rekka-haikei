@@ -62,6 +62,25 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'oi', name: '老倉育', color: '#E0E0E0' },
 		],
 	},
+	{
+		id: 'oreshura',
+		chars: [
+			{ id: 'hr', name: '春咲', color: '#F2AE56' },
+			{ id: 'nt', name: '夏川', color: '#5CA8DC' },
+			{ id: 'ak', name: '秋篠', color: '#A3C940' },
+			{ id: 'fy', name: '冬海', color: '#EC5CA5' },
+		],
+	},
+	{
+		id: 'jinsei',
+		chars: [
+			{ id: 'ri', name: '理系', color: '#887C7B' },
+			{ id: 'bu', name: '文系', color: '#F3EBD9' },
+			{ id: 'ta', name: '体育', color: '#BF908E' },
+			{ id: 'si', name: '新聞', color: '#E3ECEE' },
+			{ id: 'bi', name: '美術', color: '#ECD6E0' },
+		],
+	},
 ]
 
 export const TITLE_EX_PATTERNS: [string, string][] = [
@@ -86,4 +105,5 @@ export const TITLE_EX_PATTERNS: [string, string][] = [
 	['終物語', 'monogatari'],
 	['暦物語', 'monogatari'],
 	['憑物語', 'monogatari'],
+	['幼馴染が修羅場', 'oreshura'],
 ]
