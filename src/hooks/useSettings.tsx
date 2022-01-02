@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { settingState } from '../atom/SettingAtom'
 import { Eekey } from '../components/Home/Cvote/constants'
@@ -19,6 +18,7 @@ export const useSettings = () => {
 			showTool,
 			abyssEx,
 			ee,
+			eeKey,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -37,11 +37,12 @@ export const useSettings = () => {
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
-	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
-	const memEe = (key: Eekey) => {
-		if (key === false) return
-		setSetting((v) => ({ ...v, ee: { ...v.ee, [key]: true } }))
+	const setEekey = (eeKey: Eekey) => {
+		setSetting((v) => ({ ...v, eeKey }))
+		if (eeKey === false) return
+		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
 	}
+	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 
 	return {
 		abyss: abyssEx || abyss,
@@ -55,6 +56,7 @@ export const useSettings = () => {
 		fadeAbyssColor: abyss,
 		showTool,
 		ee,
+		eeKey,
 		setAbyss,
 		setAbyssEx,
 		cycleAbyss,
@@ -66,6 +68,6 @@ export const useSettings = () => {
 		toggleShowHelp,
 		closeSetting,
 		toggleTool,
-		memEe,
+		setEekey,
 	}
 }

@@ -23,7 +23,7 @@ function HomePage() {
 
 function HomePageBase() {
 	const [loaded, song] = useSongDb()
-	const [extraComp, exkey] = useEx(song)
+	const extraComp = useEx(song)
 
 	if (!loaded) return <LoadingView />
 
@@ -32,7 +32,7 @@ function HomePageBase() {
 			<Helmet>
 				<title>{song.icy}</title>
 			</Helmet>
-			<Home song={song} extraComp={extraComp} exkey={exkey} />
+			<Home song={song} extraComp={extraComp} />
 		</>
 	)
 }

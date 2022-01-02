@@ -12,6 +12,7 @@ const defaultValue: Setting = {
 	abyss: '#fff', // TODO: change before deploy
 	abyssEx: null,
 	showHelp: false,
+	eeKey: false,
 	ee: {},
 	feedBackText: '',
 }

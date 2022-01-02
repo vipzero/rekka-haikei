@@ -5,6 +5,7 @@ import CVote from '../components/Home/Cvote'
 import {
 	CVOTE_PROFILES,
 	Eekey,
+	eekeys,
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
 import { isSongFull, Song } from '../types'
@@ -84,23 +85,19 @@ function exKeyToColor(exkey: Eekey) {
 export function calcAbyss() {}
 
 export function useEx(song: Song) {
-	const { setAbyssEx, memEe } = useSettings()
+	const { setAbyssEx, setEekey, eeKey } = useSettings()
 	const sid = String(song.time)
-	const exkey = useMemo(() => checkEx(song), [song])
 
 	useEffect(() => {
-		const exColor = exKeyToColor(exkey)
+		const eeKey = checkEx(song)
+		const exColor = exKeyToColor(eeKey)
 
 		setAbyssEx(exColor)
-		if (exkey) {
-			memEe(exkey)
-		}
-	}, [exkey])
+		setEekey(eeKey)
+		console.log({ eeKey })
+	}, [song])
 
-	return [
-		useMemo(() => getEx(exkey, sid, Math.random()), [exkey, sid]),
-		exkey,
-	] as const
+	return useMemo(() => getEx(eeKey, sid, Math.random()), [eeKey, sid])
 }
 
 const hasTitle = (q: string, song: Song) => song.animeTitle?.includes(q)

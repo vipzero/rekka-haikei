@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { useSettings } from '../../hooks/useSettings'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
 import { eekeys } from './Cvote/constants'
 
 type Props = {
 	song: Song
-	eeSaw: boolean[]
 }
 
 const useTick = () => {
@@ -22,9 +22,12 @@ const useTick = () => {
 	return now
 }
 
-const Time = ({ song, eeSaw }: Props) => {
+const Time = ({ song }: Props) => {
 	const now = useTick()
 	const { time, trackTimeMillis } = song
+	const { ee, setEekey } = useSettings()
+
+	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
 
 	const currentSongEnd: null | number = trackTimeMillis
 		? time + trackTimeMillis
@@ -68,7 +71,6 @@ const Time = ({ song, eeSaw }: Props) => {
 					<div>曲終了</div>
 					<div>次のHour</div>
 					<div>クエリ</div>
-					<div>ee</div>
 				</div>
 				<div>
 					<div>
@@ -95,21 +97,21 @@ const Time = ({ song, eeSaw }: Props) => {
 					>
 						{song.imageSearchWord}
 					</div>
-					<div>
-						{eeSaw.map((b, i) => (
-							<span
-								key={i}
-								onClick={() => {
-									if (!b) return
-
-									console.log(eekeys[i])
-								}}
-							>
-								{b ? '*' : '-'}
-							</span>
-						))}
-					</div>
 				</div>
+			</div>
+			<div style={{ display: 'flex' }}>
+				<div>ee:</div>
+				{eeSaw.map((b, i) => (
+					<div
+						key={i}
+						onClick={() => {
+							if (!b) return
+							setEekey(eekeys[i])
+						}}
+					>
+						{b ? '*' : '-'}
+					</div>
+				))}
 			</div>
 		</Style>
 	)

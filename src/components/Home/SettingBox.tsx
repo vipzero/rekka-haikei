@@ -68,7 +68,6 @@ function SettingBox({
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
-	const eeSaw = useMemo(() => eekeys.map((key) => s.ee?.[key] || false), [s.ee])
 
 	return (
 		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
@@ -170,7 +169,7 @@ function SettingBox({
 
 				{s.showTool && (
 					<div>
-						<Time song={song} eeSaw={eeSaw} />
+						<Time song={song} />
 					</div>
 				)}
 				<div style={{ display: 'flex' }}>

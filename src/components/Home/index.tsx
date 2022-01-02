@@ -19,10 +19,9 @@ import { themeStyles } from './themeStyles'
 type Props = {
 	song: Song
 	extraComp?: ReactNode
-	exkey: string | false
 }
-function Home({ song, extraComp, exkey }: Props) {
-	const { showCounts, sideMode, lockBg } = useRecoilValue(settingState)
+function Home({ song, extraComp }: Props) {
+	const { showCounts, sideMode, lockBg, eeKey } = useRecoilValue(settingState)
 
 	const setSetting = useSetRecoilState(settingState)
 
@@ -34,7 +33,7 @@ function Home({ song, extraComp, exkey }: Props) {
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return (
-		<Master onClick={toggleSetting} data-ex={exkey}>
+		<Master onClick={toggleSetting} data-ex={eeKey}>
 			<Mask id="mask">
 				<Mask id="mask2" />
 			</Mask>
