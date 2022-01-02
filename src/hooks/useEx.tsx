@@ -102,6 +102,7 @@ const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
 
 export function checkEx(song: Song): Eekey {
+	return 'toaru'
 	const { icy } = song
 
 	if (!icy) return false
