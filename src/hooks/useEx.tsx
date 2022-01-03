@@ -25,9 +25,9 @@ const MasshiroEx = () => (
 	</div>
 )
 
-export const Lain = createGlobalStyle<{ r256: number }>`
+export const Lain = createGlobalStyle<{ r: number }>`
 * {
-	color: hsla(${(p) => p.r256},50%,50%) !important;
+	color: hsla(${(p) => p.r % 256},50%,50%) !important;
 }
 #button-grid-panel {
 	grid-template-areas:
@@ -40,7 +40,12 @@ export const Lain = createGlobalStyle<{ r256: number }>`
 	'fd hi hi hi tl tl tl' !important
 }
 #bg > div {
-transform: rotate(90deg)
+	transform: rotate(${(p) => p.r % 360}deg)
+
+}
+#mask {
+	display: block;
+	background: hsla(${(p) => p.r % 256},50%,50%,0.4);
 }
 /* *:focus {
 	background: red !important;
@@ -69,7 +74,7 @@ function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 			</RainbowFont>
 		)
 	} else if (ex === 'lain') {
-		return <Lain r256={Math.floor(uaHash() % 256)} />
+		return <Lain r={uaHash()} />
 	} else if (ex === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
