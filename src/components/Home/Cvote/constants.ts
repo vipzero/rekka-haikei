@@ -168,6 +168,19 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'br', name: '薔薇水', color: '#cab8d9' },
 		],
 	},
+	{
+		id: 'amagami',
+		chars: [
+			{ id: 'ay', name: '絢辻', color: '#82cddd' },
+			{ id: 'rh', name: '梨穂子', color: '#ed6d35' },
+			{ id: 'ko', name: '薫', color: '#9fc24d' },
+			{ id: 'nk', name: '中多', color: '#f3a68c' },
+			{ id: 'nn', name: '七咲', color: '#4496d3' },
+			{ id: 'mr', name: '森島', color: '#a4a8d4' },
+			{ id: 'my', name: '美也', color: '#ffdc00' },
+			{ id: 'kz', name: '上崎', color: '#dc6b9a' },
+		],
+	},
 ]
 
 export const eekeys = [
@@ -199,6 +212,7 @@ export const eekeys = [
 	'jojo',
 	'bobo',
 	'rozen',
+	'amagami',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
