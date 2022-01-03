@@ -47,3 +47,24 @@ export const FloatingBox = styled.div`
 		}
 	}
 `
+
+export const RainbowFont = styled.div`
+	> a {
+		color: #acb6e5;
+
+		background: linear-gradient(
+			-45deg,
+			red,
+			orange,
+			yellow,
+			green,
+			aqua,
+			blue,
+			purple
+		);
+		font-size: 1.5rem;
+
+		-webkit-background-clip: text;
+		color: transparent !important;
+	}
+`

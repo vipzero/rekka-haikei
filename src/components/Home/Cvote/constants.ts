@@ -213,6 +213,7 @@ export const eekeys = [
 	'bobo',
 	'rozen',
 	'amagami',
+	'halowa',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -238,4 +239,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ジョジョの奇妙な冒険', 'jojo'],
 	['ボーボボ', 'bobo'],
 	['ローゼンメイデン', 'rozen'],
+	['労働歌', 'halowa'],
 ]

@@ -1,14 +1,13 @@
 import { useEffect, useMemo } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { FloatingBox } from '../components'
+import { FloatingBox, RainbowFont } from '../components'
 import CVote from '../components/Home/Cvote'
 import {
 	CVOTE_PROFILES,
 	Eekey,
-	eekeys,
 	TITLE_EX_PATTERNS,
 } from '../components/Home/Cvote/constants'
-import { isSongFull, Song } from '../types'
+import { Song } from '../types'
 import { uaHash } from '../util'
 import { useSettings } from './useSettings'
 
@@ -61,6 +60,12 @@ function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (ex === 'masshiro') {
 		return <MasshiroEx />
+	} else if (ex === 'halowa') {
+		return (
+			<RainbowFont>
+				<a href="https://www.hellowork.go.jp/">https://www.hellowork.go.jp/</a>
+			</RainbowFont>
+		)
 	} else if (ex === 'lain') {
 		return <Lain r256={Math.floor(uaHash() % 256)} />
 	} else if (ex === 'sakurasou') {
