@@ -30,6 +30,9 @@ function Address() {
 	return (
 		<div>
 			<p>
+				<a href="https://forms.gle/SqABcPbFsTTpRsuR7">投票リクエスト</a>
+			</p>
+			<p>
 				<a href="https://forms.gle/fBQnrAxMnKNhmFA16">使用リクエスト</a>
 			</p>
 			<EventLinks />
