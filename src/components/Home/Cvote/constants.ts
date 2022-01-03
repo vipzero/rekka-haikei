@@ -132,6 +132,20 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'oth', name: '他', color: '#fff' },
 		],
 	},
+	{
+		id: 'jojo',
+		chars: [
+			{ id: 's1', name: '1部', color: '#B8A2D2' },
+			{ id: 's2', name: '2部', color: '#7C308C' },
+			{ id: 's3', name: '3部', color: '#C7E249' },
+			{ id: 's4', name: '4部', color: '#EC5C9F' },
+			{ id: 's5', name: '5部', color: '#E7AB3C' },
+			{ id: 's6', name: '6部', color: '#53B8B7' },
+			{ id: 's7', name: '7部', color: '#CD645B' },
+			{ id: 's8', name: '8部', color: '#B27492' },
+			// { id: 's9', name: '9部', color: '#B0C270' },
+		],
+	},
 ]
 
 export const eekeys = [
@@ -160,6 +174,7 @@ export const eekeys = [
 	'oreshura',
 	'jinsei',
 	'toaru',
+	'jojo',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -182,4 +197,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	[/[化猫傷偽終暦憑]物語/, 'monogatari'],
 	['が修羅場すぎ', 'oreshura'],
 	[/とある(魔術|科学)の/, 'toaru'],
+	['ジョジョの奇妙な冒険', 'jojo'],
 ]
