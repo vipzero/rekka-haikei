@@ -156,6 +156,18 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			// { id: 's9', name: '9部', color: '#B0C270' },
 		],
 	},
+	{
+		id: 'rozen',
+		chars: [
+			{ id: 'sg', name: '水銀燈', color: '#c0c0c0' },
+			{ id: 'ki', name: '金糸雀', color: '#ffff00' },
+			{ id: 'ss', name: '翠星石', color: '#008000' },
+			{ id: 'as', name: '蒼星石', color: '#0000cd' },
+			{ id: 'mk', name: '真紅', color: '#d70035' },
+			{ id: 'hi', name: '雛苺', color: '#ff66cc' },
+			{ id: 'br', name: '薔薇水', color: '#cab8d9' },
+		],
+	},
 ]
 
 export const eekeys = [
@@ -186,6 +198,7 @@ export const eekeys = [
 	'toaru',
 	'jojo',
 	'bobo',
+	'rozen',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -210,4 +223,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	[/とある(魔術|科学)の/, 'toaru'],
 	['ジョジョの奇妙な冒険', 'jojo'],
 	['ボーボボ', 'bobo'],
+	['ローゼンメイデン', 'rozen'],
 ]
