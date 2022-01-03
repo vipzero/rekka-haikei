@@ -133,6 +133,16 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 		],
 	},
 	{
+		id: 'bobo',
+		chars: [
+			{ id: 's1', name: 'ﾎﾞｰﾎﾞﾎﾞ', color: '#fe5' },
+			{ id: 's2', name: 'ﾎﾞｰﾎﾞﾎﾞ', color: '#fe5' },
+			{ id: 's3', name: 'ﾎﾞｰﾎﾞﾎﾞ', color: '#fe5' },
+			{ id: 's4', name: 'ﾎﾞｰﾎﾞﾎﾞ', color: '#fe5' },
+			{ id: 's5', name: 'ﾎﾞｰﾎﾞﾎﾞ', color: '#fe5' },
+		],
+	},
+	{
 		id: 'jojo',
 		chars: [
 			{ id: 's1', name: '1部', color: '#B8A2D2' },
@@ -175,6 +185,7 @@ export const eekeys = [
 	'jinsei',
 	'toaru',
 	'jojo',
+	'bobo',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -198,4 +209,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['が修羅場すぎ', 'oreshura'],
 	[/とある(魔術|科学)の/, 'toaru'],
 	['ジョジョの奇妙な冒険', 'jojo'],
+	['ボーボボ', 'bobo'],
 ]
