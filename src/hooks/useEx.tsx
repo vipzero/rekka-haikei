@@ -63,7 +63,9 @@ function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 	} else if (ex === 'halowa') {
 		return (
 			<RainbowFont>
-				<a href="https://www.hellowork.go.jp/">https://www.hellowork.go.jp/</a>
+				<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html">
+					https://www.hellowork.go.jp/
+				</a>
 			</RainbowFont>
 		)
 	} else if (ex === 'lain') {
