@@ -181,6 +181,37 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'kz', name: '上崎', color: '#dc6b9a' },
 		],
 	},
+	{
+		id: 'shanimas',
+		chars: [
+			{ id: 'mn', name: '真乃', color: '#ffbad6' },
+			{ id: 'as', name: '灯織', color: '#144384' },
+			{ id: 'mg', name: 'めぐる', color: '#ffe012' },
+			{ id: 'rn', name: '恋鐘', color: '#f84cad' },
+			{ id: 'mm', name: '摩美々', color: '#a846fb' },
+			{ id: 'st', name: '咲耶 ', color: '#006047' },
+			{ id: 'yk', name: '結華', color: '#3b91c4' },
+			{ id: 'kk', name: '霧子', color: '#d9f2ff' },
+			{ id: 'rh', name: '果穂', color: '#e5461c' },
+			{ id: 'ty', name: '智代子', color: '#f93b90' },
+			{ id: 'jr', name: '樹里', color: '#ffc602' },
+			{ id: 'rs', name: '凛世', color: '#89c3eb' },
+			{ id: 'nh', name: '夏葉', color: '#90e667' },
+			{ id: 'an', name: '甘奈', color: '#ff699e' },
+			{ id: 'kh', name: '甜花', color: '#e75bec' },
+			{ id: 'cy', name: '千雪', color: '#fafafa' },
+			{ id: 'ah', name: 'あさひ', color: '#f30100' },
+			{ id: 'hy', name: '冬優子', color: '#5aff19' },
+			{ id: 'ai', name: '愛依', color: '#ff00ff' },
+			{ id: 'to', name: '透', color: '#50d0d0' },
+			{ id: 'md', name: '円香', color: '#be1e3e' },
+			{ id: 'ki', name: '小糸', color: '#7967c3' },
+			{ id: 'hn', name: '雛菜', color: '#ffc639' },
+			{ id: 'nt', name: 'にちか', color: '#a6cdb6' },
+			{ id: 'mk', name: '美琴', color: '#760f10' },
+			{ id: 'rk', name: 'ルカ', color: '#23120c' },
+		],
+	},
 ]
 
 export const eekeys = [
@@ -191,6 +222,7 @@ export const eekeys = [
 
 	'sakurasou',
 	'masshiro',
+	'halowa',
 
 	// 'codegeass',
 	'kokaku',
@@ -213,7 +245,7 @@ export const eekeys = [
 	'bobo',
 	'rozen',
 	'amagami',
-	'halowa',
+	'shanimas',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -240,4 +272,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ボーボボ', 'bobo'],
 	['ローゼンメイデン', 'rozen'],
 	['労働歌', 'halowa'],
+	[/アイドルマスター.*シャイニーカラーズ/, 'shanimas'],
 ]
