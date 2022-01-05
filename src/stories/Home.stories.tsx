@@ -1,15 +1,40 @@
+import { CssBaseline } from '@material-ui/core'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
 import Home from '../components/Home'
+import { eekeys } from '../components/Home/Cvote/constants'
+import { GlobalStyle } from '../config/init'
 
 export default {
 	title: 'Home',
 	component: Home,
 	argTypes: {
-		backgroundColor: { control: 'color' },
+		ex: {
+			control: {
+				type: 'select',
+				options: eekeys,
+			},
+		},
+		// backgroundColor: { control: 'color' },
 	},
-	decorators: [(storyFn) => <RecoilRoot>{storyFn()}</RecoilRoot>],
+	decorators: [
+		(s) => <RecoilRoot>{s()}</RecoilRoot>,
+		(s) => (
+			<>
+				<GlobalStyle />
+				<CssBaseline />
+				{s()}
+			</>
+		),
+	],
+	parameters: {
+		nextRouter: {
+			path: '/[eid]/bg',
+			asPath: '/2000winter/bg',
+			query: { id: '2000winter' },
+		},
+	},
 } as ComponentMeta<typeof Home>
 
 const Template: ComponentStory<typeof Home> = (args) => <Home {...args} />
