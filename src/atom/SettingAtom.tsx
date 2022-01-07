@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 import { Setting } from '../types'
 
-const defaultValue: Setting = {
+export const defaultValue: Setting = {
 	showSetting: false,
 	showBookmark: false,
 	showCounts: true,
