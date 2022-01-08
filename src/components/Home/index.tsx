@@ -1,26 +1,26 @@
-import React, { ReactNode, useState } from 'react'
+import React, { useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { Song } from '../../types'
 import { settingState } from '../../atom/SettingAtom'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { Song } from '../../types'
 import { toggle } from '../../util'
+import { BookmarkList } from './BookmarkList'
+import { exStyles } from './exStyles'
+import { ExtraComp } from './ExtraComp'
 import FadeBgChanger from './FadeBgChanger'
 import Player from './Player'
-import TimeBar from './TimeBar'
-import { BookmarkList } from './BookmarkList'
-import SettingBox from './SettingBox'
 import RecentHistoryList from './RecentHistoryList'
+import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
-import { exStyles } from './exStyles'
 import { themeStyles } from './themeStyles'
+import TimeBar from './TimeBar'
 
 type Props = {
 	song: Song
-	extraComp?: ReactNode
 }
-function Home({ song, extraComp }: Props) {
+function Home({ song }: Props) {
 	const { showCounts, sideMode, lockBg, eeKey } = useRecoilValue(settingState)
 
 	const setSetting = useSetRecoilState(settingState)
@@ -70,7 +70,7 @@ function Home({ song, extraComp }: Props) {
 					url={url}
 				/>
 
-				<div>{extraComp || null}</div>
+				<ExtraComp sid={`${song.time}`} />
 				<RecentHistoryList />
 				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>

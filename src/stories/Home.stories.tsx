@@ -86,7 +86,6 @@ const Template: ComponentStory<typeof HomeRecoil> = (args) => (
 export const Full = Template.bind({})
 Full.args = {
 	song,
-	extraComp: null,
 	setting,
 }
 
