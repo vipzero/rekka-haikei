@@ -48,14 +48,22 @@ export const Lain = createGlobalStyle<{ r: number }>`
 } */
 `
 
-export const SteinsCss = createGlobalStyle`
-
-`
 function SteinsBg() {
 	return (
 		<>
-			<SteinsCss />
-			<div id="gear1" />
+			<div id="gear1">
+				<img src="/static/cog.svg" />
+			</div>
+			<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+				<filter id="noiseFilter">
+					<feTurbulence
+						type="fractalNoise"
+						baseFrequency="0.65"
+						numOctaves="3"
+						stitchTiles="stitch"
+					/>
+				</filter>
+			</svg>
 		</>
 	)
 }

@@ -242,4 +242,25 @@ export const exStyles = css`
 			background: transparent;
 		}
 	}
+	#gear1 {
+		position: absolute;
+		width: 400vmax;
+		height: 400vmax;
+		top: -40vmax;
+		left: -140vmax;
+
+		border: solid 1px black;
+
+		animation: spin 300s linear infinite;
+		z-index: -1;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(-360deg);
+		}
+	}
 `
