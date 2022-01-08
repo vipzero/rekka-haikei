@@ -242,17 +242,50 @@ export const exStyles = css`
 			background: transparent;
 		}
 	}
-	#gear1 {
+	.cog {
 		position: absolute;
-		width: 400vmax;
-		height: 400vmax;
-		top: -40vmax;
-		left: -140vmax;
 
-		border: solid 1px black;
+		/* border: solid 1px black; */
+		background: url(/static/cog.svg);
 
-		animation: spin 300s linear infinite;
 		z-index: -1;
+		&#cog1 {
+			width: 400vmax;
+			height: 400vmax;
+			top: -40vmax;
+			left: -140vmax;
+			animation: spin 300s linear infinite;
+		}
+		&#cog2 {
+			width: 40vmax;
+			height: 40vmax;
+			top: -10vmax;
+			right: -20vmax;
+			animation: spin 10s linear infinite;
+		}
+		&#cog3 {
+			width: 100vmax;
+			height: 100vmax;
+			bottom: 50vmax;
+			left: 0vmax;
+			animation: spin 100s linear infinite;
+		}
+		&#cog4 {
+			width: 100vmax;
+			height: 100vmax;
+			top: 50vmax;
+			left: -50vmax;
+			animation: spin 100s linear infinite;
+			opacity: 0.5;
+		}
+		&#cog5 {
+			width: 150vmax;
+			height: 150vmax;
+			top: 25vmax;
+			left: -75vmax;
+			animation: spin 50s linear infinite reverse;
+			opacity: 0.5;
+		}
 	}
 
 	@keyframes spin {

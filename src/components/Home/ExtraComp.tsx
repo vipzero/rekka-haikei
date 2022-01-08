@@ -51,19 +51,11 @@ export const Lain = createGlobalStyle<{ r: number }>`
 function SteinsBg() {
 	return (
 		<>
-			<div id="gear1">
-				<img src="/static/cog.svg" />
-			</div>
-			<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-				<filter id="noiseFilter">
-					<feTurbulence
-						type="fractalNoise"
-						baseFrequency="0.65"
-						numOctaves="3"
-						stitchTiles="stitch"
-					/>
-				</filter>
-			</svg>
+			<div id="cog1" className="cog" />
+			<div id="cog2" className="cog" />
+			<div id="cog3" className="cog" />
+			<div id="cog4" className="cog" />
+			<div id="cog5" className="cog" />
 		</>
 	)
 }
