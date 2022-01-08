@@ -48,19 +48,28 @@ export const Lain = createGlobalStyle<{ r: number }>`
 } */
 `
 
-function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
-	if (!ex) return null
-	const cvote = CVOTE_PROFILES.find((p) => p.id === ex)
-	if (cvote) {
-		return <CVote animeId={ex} sid={sid} chars={cvote.chars} disabled={eeSim} />
-	}
-	if (ex === 'nonnon') {
+export const SteinsCss = createGlobalStyle`
+
+`
+function SteinsBg() {
+	return (
+		<>
+			<SteinsCss />
+			<div id="gear1" />
+		</>
+	)
+}
+
+function ExCompMain({ eeKey }: { eeKey: Eekey }) {
+	if (eeKey === 'steinsgate') {
+		return <SteinsBg />
+	} else if (eeKey === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
-	} else if (ex === 'mia') {
+	} else if (eeKey === 'mia') {
 		return <EmbedWindow url="https://click.abyss.fun/" />
-	} else if (ex === 'masshiro') {
+	} else if (eeKey === 'masshiro') {
 		return <MasshiroEx />
-	} else if (ex === 'halowa') {
+	} else if (eeKey === 'halowa') {
 		return (
 			<RainbowFont>
 				<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html">
@@ -68,9 +77,9 @@ function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 				</a>
 			</RainbowFont>
 		)
-	} else if (ex === 'lain') {
+	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
-	} else if (ex === 'sakurasou') {
+	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
 				<FloatingBox>
@@ -82,6 +91,19 @@ function getEx(ex: Eekey, sid: string, rand: number, eeSim: boolean) {
 		)
 	}
 	return null
+}
+function getEx(eeKey: Eekey, sid: string, rand: number, eeSim: boolean) {
+	if (!eeKey) return null
+	const cvote = CVOTE_PROFILES.find((p) => p.id === eeKey)
+
+	return (
+		<>
+			{cvote && (
+				<CVote animeId={eeKey} sid={sid} chars={cvote.chars} disabled={eeSim} />
+			)}
+			<ExCompMain eeKey={eeKey} />
+		</>
+	)
 }
 type Props = {
 	sid: string
