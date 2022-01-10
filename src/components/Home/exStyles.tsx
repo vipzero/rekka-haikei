@@ -250,7 +250,8 @@ export const exStyles = css`
 		height: 100vh;
 		overflow: hidden;
 		opacity: 0;
-		animation: appear-anim 1s linear 60s both;
+		animation: appear-anim 1s linear
+			${() => (process.env.NODE_ENV === 'development' ? '6s' : '60s')} both;
 		z-index: -3;
 	}
 	.cog {
@@ -259,6 +260,7 @@ export const exStyles = css`
 		/* border: solid 1px black; */
 		background: url(/static/cog.svg);
 		pointer-events: none;
+		opacity: 0.7;
 
 		&#cog1 {
 			width: 400vmax;
@@ -266,6 +268,7 @@ export const exStyles = css`
 			top: -40vmax;
 			left: -140vmax;
 			animation: spin 300s linear infinite;
+			opacity: 1;
 		}
 		&#cog2 {
 			width: 40vmax;
@@ -273,6 +276,7 @@ export const exStyles = css`
 			top: -10vmax;
 			right: -20vmax;
 			animation: spin 10s ease-in-out infinite;
+			background: url(/static/cog2.svg);
 		}
 		&#cog3 {
 			width: 100vmax;
@@ -280,6 +284,7 @@ export const exStyles = css`
 			top: -80vmax;
 			left: 0vmax;
 			animation: spin 100s linear infinite;
+			background: url(/static/cog2.svg);
 		}
 		&#cog4 {
 			width: 100vmax;
@@ -287,7 +292,7 @@ export const exStyles = css`
 			top: 50vmax;
 			left: -50vmax;
 			animation: spin 100s ease-in-out infinite;
-			opacity: 0.5;
+			background: url(/static/cog3.svg);
 		}
 		&#cog5 {
 			width: 150vmax;
@@ -295,7 +300,7 @@ export const exStyles = css`
 			top: 25vmax;
 			left: -75vmax;
 			animation: spin 50s linear infinite reverse;
-			opacity: 0.5;
+			background: url(/static/cog3.svg);
 		}
 		animation-delay: ;
 	}
