@@ -4,7 +4,7 @@ const duration = 0.2
 const frequency = 10
 const interval = duration / frequency
 const range = (n: number) => [...Array(n).keys()]
-const rand = (a, b) => Math.random() * (b - a) + a
+const rand = (a, b) => Math.floor((Math.random() * (b - a) + a) * 100) / 100
 
 const spin = keyframes`
 0% {
