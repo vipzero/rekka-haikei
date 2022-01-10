@@ -50,10 +50,7 @@ export const Lain = createGlobalStyle<{ r: number }>`
 
 function SteinsBg() {
 	return (
-		<div className="glitch">
-			<div className="channel r"></div>
-			<div className="channel g"></div>
-			<div className="channel b"></div>
+		<>
 			<div id="cog-box">
 				<div id="cog1" className="cog" />
 				<div id="cog2" className="cog" />
@@ -61,7 +58,7 @@ function SteinsBg() {
 				<div id="cog4" className="cog" />
 				<div id="cog5" className="cog" />
 			</div>
-		</div>
+		</>
 	)
 }
 

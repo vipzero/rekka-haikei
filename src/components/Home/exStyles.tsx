@@ -1,5 +1,11 @@
 import { css, keyframes } from 'styled-components'
 
+const duration = 0.2
+const frequency = 10
+const interval = duration / frequency
+const range = (n: number) => [...Array(n).keys()]
+const rand = (a, b) => Math.random() * (b - a) + a
+
 const spin = keyframes`
 0% {
 	transform: rotate(0deg);
@@ -374,306 +380,57 @@ export const exStyles = css`
 			animation-delay: ${animStart - 3}s;
 		}
 	}
-	@keyframes glitch-before {
-		0% {
-			clip-path: polygon(
-				0% 47.038511849%,
-				100% 47.038511849%,
-				100% 51.254650439%,
-				0% 51.254650439%
-			);
-			transform: translate(-4.2216264996%, 0.1989512247%);
-		}
-		2% {
-			clip-path: polygon(
-				0% 14.0862284363%,
-				100% 14.0862284363%,
-				100% 23.7804946193%,
-				0% 23.7804946193%
-			);
-			transform: translate(0.5319544663%, -0.1670048037%);
-		}
-		4% {
-			clip-path: polygon(
-				0% 55.9114114584%,
-				100% 55.9114114584%,
-				100% 58.830823819%,
-				0% 58.830823819%
-			);
-			transform: translate(3.1212064652%, -0.2880821595%);
-		}
-		6% {
-			clip-path: polygon(
-				0% 50.5761948778%,
-				100% 50.5761948778%,
-				100% 53.1131055475%,
-				0% 53.1131055475%
-			);
-			transform: translate(-2.2125530768%, -0.1782644813%);
-		}
-		8% {
-			clip-path: polygon(
-				0% 5.2698433493%,
-				100% 5.2698433493%,
-				100% 12.9134196002%,
-				0% 12.9134196002%
-			);
-			transform: translate(-3.117269545%, 0.1664145405%);
-		}
-		10% {
-			clip-path: polygon(
-				0% 29.3892293425%,
-				100% 29.3892293425%,
-				100% 36.6173919336%,
-				0% 36.6173919336%
-			);
-			transform: translate(2.9458337841%, 0.4535629647%);
-		}
-		12% {
-			clip-path: polygon(
-				0% 71.2148012183%,
-				100% 71.2148012183%,
-				100% 77.3616681453%,
-				0% 77.3616681453%
-			);
-			transform: translate(-7.9487393487%, 0.2982833827%);
-		}
-		14% {
-			clip-path: polygon(
-				0% 42.9684489052%,
-				100% 42.9684489052%,
-				100% 48.4146875463%,
-				0% 48.4146875463%
-			);
-			transform: translate(-2.2589695483%, -0.0592603285%);
-		}
-		16% {
-			clip-path: polygon(
-				0% 63.6300940787%,
-				100% 63.6300940787%,
-				100% 65.678719627%,
-				0% 65.678719627%
-			);
-			transform: translate(7.9643179644%, 0.4468598444%);
-		}
-		18% {
-			clip-path: polygon(
-				0% 32.6738475345%,
-				100% 32.6738475345%,
-				100% 35.580721758%,
-				0% 35.580721758%
-			);
-			transform: translate(6.8037577127%, -0.3461978446%);
-		}
-		20%,
-		100% {
-			clip-path: none;
-			transform: none;
-		}
-	}
-	@keyframes glitch-after {
-		0% {
-			clip-path: polygon(
-				0% 0.8270248202%,
-				100% 0.8270248202%,
-				100% 5.4939340464%,
-				0% 5.4939340464%
-			);
-			transform: translate(-7.1916191058%, -0.1380443312%);
-		}
-		2% {
-			clip-path: polygon(
-				0% 89.1769768176%,
-				100% 89.1769768176%,
-				100% 94.3318042413%,
-				0% 94.3318042413%
-			);
-			transform: translate(7.4237584863%, -0.3166234875%);
-		}
-		4% {
-			clip-path: polygon(
-				0% 22.0045627452%,
-				100% 22.0045627452%,
-				100% 25.9181608462%,
-				0% 25.9181608462%
-			);
-			transform: translate(5.1594881935%, -0.4591250969%);
-		}
-		6% {
-			clip-path: polygon(
-				0% 4.7639447506%,
-				100% 4.7639447506%,
-				100% 13.6636703227%,
-				0% 13.6636703227%
-			);
-			transform: translate(2.6963086584%, -0.2645536103%);
-		}
-		8% {
-			clip-path: polygon(
-				0% 52.4635820467%,
-				100% 52.4635820467%,
-				100% 62.0395911029%,
-				0% 62.0395911029%
-			);
-			transform: translate(7.3100348879%, -0.1260783259%);
-		}
-		10% {
-			clip-path: polygon(
-				0% 5.1816914487%,
-				100% 5.1816914487%,
-				100% 14.7829249101%,
-				0% 14.7829249101%
-			);
-			transform: translate(-0.494793877%, -0.2340290804%);
-		}
-		12% {
-			clip-path: polygon(
-				0% 58.064048749%,
-				100% 58.064048749%,
-				100% 62.7163317906%,
-				0% 62.7163317906%
-			);
-			transform: translate(1.8799712425%, 0.4567037882%);
-		}
-		14% {
-			clip-path: polygon(
-				0% 24.7593123521%,
-				100% 24.7593123521%,
-				100% 31.0296461651%,
-				0% 31.0296461651%
-			);
-			transform: translate(-5.0921859964%, -0.0587072616%);
-		}
-		16% {
-			clip-path: polygon(
-				0% 1.5216960549%,
-				100% 1.5216960549%,
-				100% 6.482918601%,
-				0% 6.482918601%
-			);
-			transform: translate(-4.002265371%, -0.1352225457%);
-		}
-		18% {
-			clip-path: polygon(
-				0% 17.1644138008%,
-				100% 17.1644138008%,
-				100% 18.9188413823%,
-				0% 18.9188413823%
-			);
-			transform: translate(4.292726286%, -0.3047630935%);
-		}
-		20%,
-		100% {
-			clip-path: none;
-			transform: none;
-		}
-	}
-	@keyframes rgb-shift-r {
-		0% {
-			transform: translate(0.7585343931%, -0.2109878944%);
-		}
-		2% {
-			transform: translate(0.9206386872%, 0.0267665935%);
-		}
-		4% {
-			transform: translate(-0.0802672972%, -0.4118534426%);
-		}
-		6% {
-			transform: translate(-0.5487193155%, 0.1275117299%);
-		}
-		8% {
-			transform: translate(-0.0328829258%, 0.306989083%);
-		}
-		10% {
-			transform: translate(-1.2839166547%, 0.2283543764%);
-		}
-		12% {
-			transform: translate(0.7143636832%, 0.2680444509%);
-		}
-		14% {
-			transform: translate(-0.4849653061%, 0.3796902026%);
-		}
-		16% {
-			transform: translate(1.6994583253%, -0.291757438%);
-		}
-		18% {
-			transform: translate(1.8923736225%, -0.3616740782%);
-		}
-		20%,
-		100% {
-			transform: none;
-		}
-	}
-	@keyframes rgb-shift-g {
-		0% {
-			transform: translate(-1.3509405686%, -0.4813110341%);
-		}
-		2% {
-			transform: translate(-1.9759167791%, -0.4054291111%);
-		}
-		4% {
-			transform: translate(0.1454875785%, 0.1720477629%);
-		}
-		6% {
-			transform: translate(0.3691080564%, 0.0190589127%);
-		}
-		8% {
-			transform: translate(-0.7339261724%, -0.3888581052%);
-		}
-		10% {
-			transform: translate(1.7481156884%, 0.2400228654%);
-		}
-		12% {
-			transform: translate(0.8476399866%, 0.1702532325%);
-		}
-		14% {
-			transform: translate(-1.3371385489%, -0.0525643884%);
-		}
-		16% {
-			transform: translate(-0.8436379081%, 0.4597279789%);
-		}
-		18% {
-			transform: translate(0.0648447193%, 0.1267576003%);
-		}
-		20%,
-		100% {
-			transform: none;
-		}
-	}
-	@keyframes rgb-shift-b {
-		0% {
-			transform: translate(1.1873673524%, -0.4186032299%);
-		}
-		2% {
-			transform: translate(-0.0963989962%, 0.153563236%);
-		}
-		4% {
-			transform: translate(0.0425526428%, 0.436543678%);
-		}
-		6% {
-			transform: translate(-0.7953652732%, 0.0687284708%);
-		}
-		8% {
-			transform: translate(-1.4650845551%, 0.3647511521%);
-		}
-		10% {
-			transform: translate(-0.8599325574%, -0.3613046752%);
-		}
-		12% {
-			transform: translate(1.1325257477%, -0.3908610418%);
-		}
-		14% {
-			transform: translate(1.0393944104%, 0.3239251429%);
-		}
-		16% {
-			transform: translate(0.2292569257%, 0.1178513479%);
-		}
-		18% {
-			transform: translate(-1.6738748469%, -0.0844500211%);
-		}
-		20%,
-		100% {
-			transform: none;
-		}
-	}
+
+	${['r', 'g', 'b'].map((k) => genAnimationRgbShift(k))}
+	${genAnimationGlitch('before')}
+	${genAnimationGlitch('after')}
 `
+
+function genAnimationRgbShift(name) {
+	return css`
+		@keyframes rgb-shift-${name} {
+			${range(frequency).map(
+				(p) => css`
+					${p * interval * 100}% {
+						transform: translate(${rand(-2, 2)}%, ${rand(-0.5, 0.5)}%);
+					}
+				`
+			)}
+
+			${duration * 100}%,
+			100% {
+				transform: none;
+			}
+		}
+	`
+}
+
+function genAnimationGlitch(name: string) {
+	return css`
+		@keyframes glitch-${name} {
+			${range(frequency).map((p) => {
+				const left = 0
+				const right = 100
+				const top = rand(0, 90)
+				const bottom = top + rand(1, 10)
+				return css`
+					${p * interval * 100}% {
+						clip-path: polygon(
+							${left}% ${top}%,
+							${right}% ${top}%,
+							${right}% ${bottom}%,
+							${left}% ${bottom}%
+						);
+						transform: translate(${rand(-8, 8)}%, ${rand(-0.5, 0.5)}%);
+					}
+				`
+			})}
+
+			${duration * 100}%,
+			100% {
+				clip-path: none;
+				transform: none;
+			}
+		}
+	`
+}
