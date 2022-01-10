@@ -90,6 +90,7 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'fe', name: 'フェ', color: '#BE8274' },
 			{ id: 'rk', name: 'ルカ子', color: '#323D3A' },
 			{ id: 'me', name: '萌郁', color: '#E7C087' },
+			{ id: 'mh', name: '真帆', color: '#323529' },
 		],
 	},
 	{

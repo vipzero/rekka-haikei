@@ -250,7 +250,7 @@ export const exStyles = css`
 		height: 100vh;
 		overflow: hidden;
 		opacity: 0;
-		animation: appear-anim 1s linear 6s both;
+		animation: appear-anim 1s linear 60s both;
 		z-index: -3;
 	}
 	.cog {
