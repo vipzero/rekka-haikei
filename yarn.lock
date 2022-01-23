@@ -1072,7 +1072,7 @@
     core-js-pure "^3.19.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.8", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.5", "@babel/runtime@^7.16.7", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.14.0", "@babel/runtime@^7.14.8", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.7", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.16.7.tgz#03ff99f64106588c9c403c6ecb8c3bafbbdff1fa"
   integrity sha512-9E9FJowqAsytyOY6LG+1KuueckRL+aQW+mKvXRXnuFGyRAyepJPmEo9vgMfXUA6O9u3IeEdv9MAkppFcaQwogQ==
@@ -2817,12 +2817,12 @@
     magic-string "^0.25.0"
     string.prototype.matchall "^4.0.6"
 
-"@tanem/svg-injector@^10.1.14":
-  version "10.1.14"
-  resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-10.1.14.tgz#e42f5defb524551770c1a583f950d4bc89e6fd73"
-  integrity sha512-VjcuoKb2jCyx7FeOoz+p3LfH+V2HYXpPPVbTqWdHNV4R8d6DtHYNfQWPivSVcNi0cAtkLnDuEE+2c714YA2l5A==
+"@tanem/svg-injector@^10.1.15":
+  version "10.1.15"
+  resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-10.1.15.tgz#b254eca61491ba111b824d7fa61392f0a3d98a9b"
+  integrity sha512-dR6iN4Ha6w9qcfEEgp3l8jcQHi2TDRjvfD38B6BJGBFObHbO8++/NujVUPlhM6ds5X8Lu5R1+MCig5LIw3bMrw==
   dependencies:
-    "@babel/runtime" "^7.16.5"
+    "@babel/runtime" "^7.16.7"
     content-type "^1.0.4"
     tslib "^2.3.1"
 
@@ -9606,13 +9606,13 @@ react-sizeme@^3.0.1:
     shallowequal "^1.1.0"
     throttle-debounce "^3.0.1"
 
-react-svg@14.1.7:
-  version "14.1.7"
-  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.7.tgz#19da63b9dae0a7513993926e0d89a135b4137869"
-  integrity sha512-iAwLHQAX6rk6ysuB8YCMfxPuze+17YDmH1Ww2OFNT/+YiHRnZuX5ddpZOGb5R5/Wv7AEmeuxFAe+4XLWuo/ZCA==
+react-svg@14.1.9:
+  version "14.1.9"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.9.tgz#50f00eea5beccf9838b589d7971e361d7a64b6d7"
+  integrity sha512-bppSZlXzRKOx3urMBwtCbcKaXS9zjM2epx9rLCJ9q4ONbc13KMavy5tZxtR72XSirNA3By4josvEQSmd3bxWhg==
   dependencies:
     "@babel/runtime" "^7.16.7"
-    "@tanem/svg-injector" "^10.1.14"
+    "@tanem/svg-injector" "^10.1.15"
     "@types/prop-types" "^15.7.4"
     prop-types "^15.8.1"
 
@@ -11164,10 +11164,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.5.4:
-  version "4.5.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.4.tgz#a17d3a0263bf5c8723b9c52f43c5084edf13c2e8"
-  integrity sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==
+typescript@4.5.5:
+  version "4.5.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
+  integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
 
 uglify-js@^3.1.4:
   version "3.14.5"
