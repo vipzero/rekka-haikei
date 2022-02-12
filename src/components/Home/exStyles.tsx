@@ -393,12 +393,14 @@ function genAnimationRgbShift(name) {
 				(p) => css`
 					${p * interval * 100}% {
 						transform: translate(${rand(-2, 2)}%, ${rand(-0.5, 0.5)}%);
+						opacity: 1;
 					}
 				`
 			)}
 
 			${duration * 100}%,
 			100% {
+				opacity: 0;
 				transform: none;
 			}
 		}
