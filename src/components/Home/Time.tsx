@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { useSettings } from '../../hooks/useSettings'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
-import { eekeys } from './Cvote/constants'
+import { EeSelector } from './EeSelector'
 
 type Props = {
 	song: Song
@@ -25,9 +24,6 @@ const useTick = () => {
 const Time = ({ song }: Props) => {
 	const now = useTick()
 	const { time, trackTimeMillis } = song
-	const { ee, setEekey } = useSettings()
-
-	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
 
 	const currentSongEnd: null | number = trackTimeMillis
 		? time + trackTimeMillis
@@ -99,20 +95,7 @@ const Time = ({ song }: Props) => {
 					</div>
 				</div>
 			</div>
-			<div style={{ display: 'flex' }}>
-				<div>ee:</div>
-				{eeSaw.map((b, i) => (
-					<div
-						key={i}
-						onClick={() => {
-							if (!b) return
-							setEekey(eekeys[i], true)
-						}}
-					>
-						{b ? '*' : '-'}
-					</div>
-				))}
-			</div>
+			<EeSelector />
 		</Style>
 	)
 }
