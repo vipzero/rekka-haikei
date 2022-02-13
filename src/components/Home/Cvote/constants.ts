@@ -231,6 +231,7 @@ export const eekeys = [
 	'lain',
 
 	'steinsgate',
+	'gkgurashi',
 
 	'spin',
 
@@ -273,5 +274,6 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ボーボボ', 'bobo'],
 	['ローゼンメイデン', 'rozen'],
 	['労働歌', 'halowa'],
+	['がっこうぐらし', 'gkgurashi'],
 	[/アイドルマスター.*シャイニーカラーズ/, 'shanimas'],
 ]

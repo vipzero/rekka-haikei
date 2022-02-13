@@ -214,6 +214,21 @@ export const exStyles = css`
 		}
 	}
 
+	@keyframes trip-color {
+		0% {
+			filter: hue-rotate(0deg);
+		}
+		100% {
+			filter: hue-rotate(90deg);
+		}
+	}
+
+	&[data-ex='gkgurashi'] {
+		#bg {
+			animation: trip-color 120s linear both;
+		}
+	}
+
 	&[data-ex='steinsgate'] {
 		#timebar > div {
 			transform-origin: 0 0;

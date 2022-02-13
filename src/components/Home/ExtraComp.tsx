@@ -22,7 +22,7 @@ const MasshiroEx = () => (
 
 export const Lain = createGlobalStyle<{ r: number }>`
 * {
-	color: hsla(${(p) => p.r % 256},50%,50%) !important;
+	color: hsla(0,50%,50%) !important;
 }
 #button-grid-panel {
 	grid-template-areas:
