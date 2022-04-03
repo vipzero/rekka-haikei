@@ -9530,10 +9530,10 @@ react-sizeme@^3.0.1:
     shallowequal "^1.1.0"
     throttle-debounce "^3.0.1"
 
-react-svg@14.1.16:
-  version "14.1.16"
-  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.16.tgz#0febf9725036e77ea9ea810db6e20d432d0336fe"
-  integrity sha512-5VzQajm5BYYTxfqYk4EtWUrf8Chzl26b47KYrpCxnGnPfE4hL41V1e0GXdmq7GtaT/kIYrDGxlrj2gccPmIejw==
+react-svg@14.1.17:
+  version "14.1.17"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.17.tgz#4ae97be85750547f3ab1cc075fdc95d94054c80f"
+  integrity sha512-GPrPayKctk4U7taDGW0+cl0xX77OhNyJow7eTfT/xmUEoQKedfsPg60X6vUuw/ukW+GExuKMR61c4Dg40F6tqA==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@tanem/svg-injector" "^10.1.21"
@@ -9660,10 +9660,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-recoil@0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.6.1.tgz#6fdf1ba6cb20b5a2e54ec4abcbdaa287e8a03fa2"
-  integrity sha512-J7oT3LZl2vpyFClgSUpOQjpykz84VSX/NJE/PavAtR8n7Z+whEdVBPUtwc2TEWjONeL/lJmiac2XQ+qEOQA52Q==
+recoil@0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.0.tgz#de19c6fb9816c172b0dae92cf8fe94c2c90a23ab"
+  integrity sha512-NYG79ZciSILFIu6Zo3aoqPOIU0Ok+dIwA9DM4NdxIx0tKXKenAZWxsalyRQyGVfxR3cVynsgVu7XCAdKNa957A==
   dependencies:
     hamt_plus "1.0.2"
 

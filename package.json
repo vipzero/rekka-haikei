@@ -18,10 +18,10 @@
 		"react-google-charts": "3.0.15",
 		"react-helmet": "6.1.0",
 		"react-router-dom": "6.2.2",
-		"react-svg": "14.1.16",
+		"react-svg": "14.1.17",
 		"react-transition-group": "4.4.2",
 		"react-use": "17.3.2",
-		"recoil": "0.6.1",
+		"recoil": "0.7.0",
 		"safe-regex": "2.1.1",
 		"styled-components": "5.3.5"
 	},
