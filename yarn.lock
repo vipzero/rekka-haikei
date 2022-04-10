@@ -3756,7 +3756,7 @@ babel-loader@8.2.3:
     make-dir "^3.1.0"
     schema-utils "^2.6.5"
 
-babel-loader@^8.0.0, babel-loader@^8.2.3:
+babel-loader@^8.0.0, babel-loader@^8.2.4:
   version "8.2.4"
   resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-8.2.4.tgz#95f5023c791b2e9e2ca6f67b0984f39c82ff384b"
   integrity sha512-8dytA3gcvPPPv4Grjhnt8b5IIiTcq/zeXOPk4iTYI0SVXcsmuGg7JtBRDp8S9X+gJfhQ8ektjXZlDu1Bb33U8A==
@@ -3884,7 +3884,18 @@ babel-plugin-react-docgen@^4.2.1:
     lodash "^4.17.15"
     react-docgen "^5.0.0"
 
-babel-plugin-styled-components@2.0.6, "babel-plugin-styled-components@>= 1.12.0":
+babel-plugin-styled-components@2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.7.tgz#c81ef34b713f9da2b7d3f5550df0d1e19e798086"
+  integrity sha512-i7YhvPgVqRKfoQ66toiZ06jPNA3p6ierpfUuEWxNF+fV27Uv5gxBkf8KZLHUCc1nFA9j6+80pYoIpqCeyW3/bA==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.16.0"
+    "@babel/helper-module-imports" "^7.16.0"
+    babel-plugin-syntax-jsx "^6.18.0"
+    lodash "^4.17.11"
+    picomatch "^2.3.0"
+
+"babel-plugin-styled-components@>= 1.12.0":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-2.0.6.tgz#6f76c7f7224b7af7edc24a4910351948c691fc90"
   integrity sha512-Sk+7o/oa2HfHv3Eh8sxoz75/fFvEdHsXV4grdeHufX0nauCmymlnN0rGhIvfpMQSJMvGutJ85gvCGea4iqmDpg==
@@ -8284,17 +8295,17 @@ next-images@1.8.4:
     file-loader "^6.2.0"
     url-loader "^4.1.0"
 
-next-pwa@5.4.6:
-  version "5.4.6"
-  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.4.6.tgz#67db147631e67076e2767555ab07324e60f4e7cf"
-  integrity sha512-cJVxfn4a1DqwKGP+zhqE9QikqFuUhCYi7wiaucxhFLeShC6DVX1Gy5Qh3HAs1i6VHQcEOnaOwfk0Q9Z08yRkCg==
+next-pwa@5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/next-pwa/-/next-pwa-5.5.0.tgz#6b5e95e90fed1bc47702ee8692ac23515c0ef9f4"
+  integrity sha512-+u07p3I3depUzFHUFd379Fwo0HYP+0YPTYpZ57naUO5O1uepq0P+N/L+5Y4aA5XTlDGkbD+E5Th5J1br2TW5fw==
   dependencies:
-    babel-loader "^8.2.3"
+    babel-loader "^8.2.4"
     clean-webpack-plugin "^4.0.0"
     globby "^11.0.4"
     terser-webpack-plugin "^5.3.1"
-    workbox-webpack-plugin "^6.5.1"
-    workbox-window "^6.5.1"
+    workbox-webpack-plugin "^6.5.2"
+    workbox-window "^6.5.2"
 
 next-transpile-modules@9.0.0:
   version "9.0.0"
@@ -9530,10 +9541,10 @@ react-sizeme@^3.0.1:
     shallowequal "^1.1.0"
     throttle-debounce "^3.0.1"
 
-react-svg@14.1.17:
-  version "14.1.17"
-  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.17.tgz#4ae97be85750547f3ab1cc075fdc95d94054c80f"
-  integrity sha512-GPrPayKctk4U7taDGW0+cl0xX77OhNyJow7eTfT/xmUEoQKedfsPg60X6vUuw/ukW+GExuKMR61c4Dg40F6tqA==
+react-svg@14.1.18:
+  version "14.1.18"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-14.1.18.tgz#fb664e836d355f575de4900cecee7c70d960a7ea"
+  integrity sha512-WnSx0uB07y+CD637WGVrX+MN3DvemPSp1Ch+/S1VeCfjZ7AuhCAdLAe9wi4HRILqpByi9zytYWuuezRbwjho4w==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@tanem/svg-injector" "^10.1.21"
@@ -11762,7 +11773,7 @@ workbox-sw@6.5.2:
   resolved "https://registry.yarnpkg.com/workbox-sw/-/workbox-sw-6.5.2.tgz#2f5dca0e96c61a450fccf0405095ddf1b6f43bc7"
   integrity sha512-2KhlYqtkoqlnPdllj2ujXUKRuEFsRDIp6rdE4l1PsxiFHRAFaRTisRQpGvRem5yxgXEr+fcEKiuZUW2r70KZaw==
 
-workbox-webpack-plugin@^6.5.1:
+workbox-webpack-plugin@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/workbox-webpack-plugin/-/workbox-webpack-plugin-6.5.2.tgz#0cf6e1d23d5107a88fd8502fd4f534215e1dd298"
   integrity sha512-StrJ7wKp5tZuGVcoKLVjFWlhDy+KT7ZWsKnNcD6F08wA9Cpt6JN+PLIrplcsTHbQpoAV8+xg6RvcG0oc9z+RpQ==
@@ -11773,7 +11784,7 @@ workbox-webpack-plugin@^6.5.1:
     webpack-sources "^1.4.3"
     workbox-build "6.5.2"
 
-workbox-window@6.5.2, workbox-window@^6.5.1:
+workbox-window@6.5.2, workbox-window@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/workbox-window/-/workbox-window-6.5.2.tgz#46d6412cd57039bdf3d5dd914ad21fb3f98fe980"
   integrity sha512-2kZH37r9Wx8swjEOL4B8uGM53lakMxsKkQ7mOKzGA/QAn/DQTEZGrdHWtypk2tbhKY5S0jvPS+sYDnb2Z3378A==
