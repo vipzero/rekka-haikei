@@ -23,6 +23,8 @@ function makeCounts(histories: History[]) {
 
 export function useHistoryDb() {
 	const eventId = useQeuryEid()
+	console.log(eventId)
+
 	const [histories, setHists] = useLocalStorage<History[]>(
 		`hists__${eventId}`,
 		[]
@@ -83,7 +85,7 @@ export function useHistoryDb() {
 			setCounts(counts)
 			setCountsSong(countsSong)
 		})
-	}, [])
+	}, [eventId])
 
 	return { histories, counts, countsSong } as const
 }
