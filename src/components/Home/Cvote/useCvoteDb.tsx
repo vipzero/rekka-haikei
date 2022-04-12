@@ -29,6 +29,10 @@ export function useCvoteDb(animeId: string, sid: string) {
 		const si = readCvote(animeId, (votes) => {
 			setVotes(votes)
 			setVotesNorm(normalizeVotes(votes))
+			const firstLoad = !loaded
+			if (firstLoad) {
+				//
+			}
 			setLoaded(true)
 		})
 
