@@ -96,6 +96,9 @@ function HistoryPageBase() {
 
 	return (
 		<Wrap>
+			<p>
+				<a href="./bg">戻る</a>
+			</p>
 			<Schedule setFilter={(v) => setRange(v)} />
 			<Tabs>
 				<Tab n={0} cur={tab} label="履歴" setTab={setTab} />
