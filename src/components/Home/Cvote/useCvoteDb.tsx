@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { getFirestore } from '../../../../service/firebase'
-import firebase from 'firebase/app'
+import { useEffect, useState } from 'react'
+import { readCvote, voteChar } from '../../../../service/firebase'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
 export type AnimeVotes = Record<string, number>
@@ -27,33 +26,23 @@ export function useCvoteDb(animeId: string, sid: string) {
 	}, [sid])
 
 	useEffect(() => {
-		const fdb = getFirestore()
-
-		const si = fdb
-			.collection('cvote')
-			.doc(animeId)
-			.onSnapshot((snap) => {
-				if (!snap.exists) return
-				const votes = snap.data() as AnimeVotes
-				setVotes(votes)
-				setVotesNorm(normalizeVotes(votes))
-				setLoaded(true)
-			})
+		const si = readCvote(animeId, (votes) => {
+			setVotes(votes)
+			setVotesNorm(normalizeVotes(votes))
+			setLoaded(true)
+		})
 
 		return () => si()
 	}, [animeId])
 
 	const vote = async (charId: string) => {
-		if (votedChars[charId]) return
-		const fdb = getFirestore()
+		if (votedChars[charId]) {
+			console.warn('no stream setup')
+			return
+		}
 
 		setLastVote(([sid, vc]) => [sid, { ...vc, [charId]: true }])
-		await fdb
-			.collection('cvote')
-			.doc(animeId)
-			.update({
-				[charId]: firebase.firestore.FieldValue.increment(1),
-			})
+		await voteChar(animeId, charId)
 	}
 
 	return { loaded, votes, vote, votedChars, votesNorm }
