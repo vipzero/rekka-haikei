@@ -21,7 +21,8 @@ import {
 } from 'firebase/firestore'
 import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
 import config from '../src/config'
-import { Schedule, Song } from './../src/types/index'
+import { formatDate } from '../src/util'
+import { HistoryRaw, Schedule, Song, History } from './../src/types'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -134,3 +135,24 @@ export const saveSongBg = async (url: string, eid: string, time: number) => {
 		})
 	})
 }
+
+function toHistory({ title, time, n }: HistoryRaw): History {
+	const timeStr = formatDate(time)
+	const timeCate = Number(timeStr.substring(11, 13))
+
+	return { title, time, timeStr, timeCate, n }
+}
+
+export const readRecentHistory = (
+	eventId: string,
+	onNext: (histories: History[]) => void
+) =>
+	onSnapshot(
+		query(songsCol(eventId), orderBy('time', 'desc'), limit(10)),
+		(snaps) => {
+			const histories = snaps.docs.map((snap) =>
+				toHistory(snap.data() as HistoryRaw)
+			)
+			onNext(histories)
+		}
+	)
