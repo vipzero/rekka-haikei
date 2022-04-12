@@ -49,19 +49,17 @@ function useMigration() {
 }
 
 export function killCache() {
-	if (navigator.serviceWorker) {
-		navigator.serviceWorker.getRegistrations().then(function (registrations) {
-			for (let registration of registrations) {
-				registration.unregister()
-			}
-		})
-	}
-
+	// if (navigator.serviceWorker) {
+	// 	navigator.serviceWorker.getRegistrations().then(function (registrations) {
+	// 		for (let registration of registrations) {
+	// 			registration.unregister()
+	// 		}
+	// 	})
+	// }
 	// self.addEventListener('install', function (event) {
 	// 	// @ts-ignore
 	// 	event.waitUntil(skipWaiting())
 	// })
-
 	// self.addEventListener('activate', function (event) {
 	// 	// @ts-ignore
 	// 	event.waitUntil(self.clients.claim())

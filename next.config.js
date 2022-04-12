@@ -2,6 +2,8 @@ const withImages = require('next-images')
 // const withPWA = require('next-pwa')
 // const isProduction = process.env.NODE_ENV === 'production'
 const withTM = require('next-transpile-modules')
+const runtimeCaching = require('next-pwa/cache')
+
 const transpileModules = [
 	'@material-ui/core',
 	'@fortawesome/free-regular-svg-icons',
@@ -24,7 +26,9 @@ const opt = {
 	},
 	pwa: {
 		dest: 'public',
-		runtimeCaching: [],
+		runtimeCaching,
+		disable: process.env.NODE_ENV === 'development',
+		register: true,
 	},
 	transpileModules,
 }
