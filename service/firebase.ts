@@ -113,7 +113,7 @@ export const readCvote = (
 	})
 
 export const readSong = (animeId: string, onNext: (song: Song) => void) =>
-	onSnapshot(animeDoc(animeId), (snap) => {
+	onSnapshot(songDoc(animeId), (snap) => {
 		if (!snap.exists()) return
 
 		onNext(snap.data() as Song)

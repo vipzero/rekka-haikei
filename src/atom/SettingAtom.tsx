@@ -34,5 +34,5 @@ const localStorageEffect =
 export const settingState = atom<Setting>({
 	key: 'setting',
 	default: defaultValue,
-	effects_UNSTABLE: [localStorageEffect('setting')],
+	effects: [localStorageEffect('setting')],
 })
