@@ -1,4 +1,3 @@
-import { CssBaseline } from '@material-ui/core'
 import Head from 'next/head'
 import { FC } from 'react'
 import styled from 'styled-components'
@@ -21,7 +20,6 @@ const Layout: FC<Props> = ({
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 		</Head>
 		<GlobalStyle />
-		<CssBaseline />
 
 		{hasNavbar ? (
 			<Screen>

@@ -5,7 +5,6 @@ const withTM = require('next-transpile-modules')
 const runtimeCaching = require('next-pwa/cache')
 
 const transpileModules = [
-	'@material-ui/core',
 	'@fortawesome/free-regular-svg-icons',
 	'@fortawesome/free-solid-svg-icons',
 ]

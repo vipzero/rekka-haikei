@@ -1,4 +1,3 @@
-import { CssBaseline } from '@material-ui/core'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React, { ComponentProps } from 'react'
 import { RecoilRoot } from 'recoil'
@@ -26,7 +25,6 @@ export default {
 		(s) => (
 			<>
 				<GlobalStyle />
-				<CssBaseline />
 				<RecoilRoot
 					initializeState={({ set }) => {
 						set(settingState, {
