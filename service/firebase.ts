@@ -1,8 +1,24 @@
-import { Schedule } from './../src/types/index'
-import firebase from 'firebase/app'
+import { initializeApp } from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	getFirestore,
+	increment,
+	limit,
+	orderBy,
+	query,
+	setDoc,
+	updateDoc,
+	where,
+	writeBatch,
+} from 'firebase/firestore'
 import config from '../src/config'
+import { Schedule } from './../src/types/index'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,39 +29,38 @@ const firebaseConfig = {
 	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const init = () => {
-	if (firebase.apps.length === 0) {
-		firebase.initializeApp(firebaseConfig)
-	}
+const app = initializeApp(firebaseConfig)
+const fdb = getFirestore(app)
+
+const path = {
+	feedback: 'feedback',
+	vote: 'vote',
+	books: 'books',
+	songs: 'songs',
+	table: 'table',
+	hist: 'hist',
+	counts: 'counts',
 }
 
 export const addFeedback = (message: string) => {
-	const fdb = getFirestore()
-
-	return fdb.collection('feedback').add({ message })
+	return addDoc(collection(fdb, path.feedback), { message })
 }
-
-export const getFirestore = () => {
-	init()
-	return firebase.firestore()
-}
+const icyIs = (icy: string) => where('icy', '==', icy)
 
 export const _incFavorites = async (
 	eventId: string,
 	icy: string,
 	count = 1
 ) => {
-	const fdb = getFirestore()
-	const books = fdb.collection('vote').doc(eventId).collection('books')
+	const books = collection(fdb, path.vote, eventId, 'books')
+	const q = query(books, icyIs(icy))
 
-	const snaps = await books.where('icy', '==', icy).get()
+	const snaps = await getDocs(q)
 
 	if (snaps.size === 0) {
-		books.add({ icy, count: 1 })
+		addDoc(books, { icy, count: 1 })
 	} else {
-		snaps.forEach((doc) =>
-			doc.ref.update({ count: firebase.firestore.FieldValue.increment(count) })
-		)
+		snaps.forEach((doc) => updateDoc(doc.ref, { count: increment(count) }))
 	}
 }
 
@@ -53,76 +68,62 @@ export const _decFavorites = (eventId: string, icy: string) =>
 	_incFavorites(eventId, icy, -1)
 
 export const incFavoritesAll = async (eventId: string, icys: string[]) => {
-	const fdb = getFirestore()
-	const books = fdb.collection('vote').doc(eventId).collection('books')
-	const batch = fdb.batch()
+	const books = collection(fdb, path.vote, eventId, path.books)
+	const batch = writeBatch(fdb)
 
 	for (const icy of icys.slice(0, 450)) {
-		const snaps = await books.where('icy', '==', icy).get()
+		const snaps = await getDocs(query(books, icyIs(icy)))
 
 		if (snaps.size === 0) {
-			books.add({ icy, count: 1 })
+			addDoc(books, { icy, count: 1 }) // batch.add が無いので一旦 addDoc で追加
 		} else {
-			snaps.forEach((doc) =>
-				doc.ref.update({
-					count: firebase.firestore.FieldValue.increment(1),
-				})
-			)
+			snaps.forEach((doc) => batch.update(doc.ref, { count: increment(1) }))
 		}
 	}
 
-	batch.update(fdb.collection('vote').doc(eventId), {
-		postCount: firebase.firestore.FieldValue.increment(1),
-	})
+	batch.update(doc(fdb, path.vote, eventId), { postCount: increment(1) })
 	await batch.commit()
 }
 
-export function getBooks(eventId) {
-	const fdb = getFirestore()
-	const booksRef = fdb.collection('vote').doc(eventId).collection('books')
+const getbooksCols = (eid: string) =>
+	collection(fdb, path.vote, eid, path.books)
 
-	return booksRef
-		.orderBy('count', 'desc')
-		.limit(config.visibleRecordLimit)
-		.get()
+const orderByCountTop = orderBy('count', 'desc')
+export function getBooks(eventId) {
+	const booksRef = getbooksCols(eventId)
+
+	return getDocs(
+		query(booksRef, orderByCountTop, limit(config.visibleRecordLimit))
+	)
 }
 export function getBooksPostCount(eventId) {
-	const fdb = getFirestore()
-
-	return fdb.collection('vote').doc(eventId).get()
+	return getDoc(doc(fdb, path.vote, eventId))
 }
 
 export function getHistories(eventId, from) {
-	const fdb = getFirestore()
-
-	return fdb
-		.collection('hist')
-		.doc(eventId)
-		.collection('songs')
-		.where('time', '>', from)
-		.orderBy('time', 'desc')
-		.get()
+	return getDocs(
+		query(
+			collection(fdb, path.hist, eventId, path.songs),
+			where('time', '>', from),
+			orderBy('time', 'desc')
+		)
+	)
 }
 
-export function loadTable(eventId) {
-	const fdb = getFirestore()
+const tableCols = collection(fdb, path.table)
+const tableDoc = (eid: string) => doc(fdb, path.table, eid)
 
-	return fdb.collection('table').doc(eventId).get()
+export function loadTable(eventId) {
+	return getDoc(tableDoc(eventId))
 }
 
 export function saveTable(eventId, schedule: Schedule) {
-	const fdb = getFirestore()
-	return fdb.collection('table').doc(eventId).set(schedule)
+	return setDoc(tableDoc(eventId), schedule)
 }
 
-export function getCounts(eventId) {
-	const fdb = getFirestore()
+const histCols = () => collection(fdb, path.hist)
+const countCols = (eid: string) => collection(fdb, path.hist, eid, path.counts)
 
-	return fdb
-		.collection('hist')
-		.doc(eventId)
-		.collection('counts')
-		.orderBy('count', 'desc')
-		.limit(200)
-		.get()
+export function getCounts(eventId, limitNum = 200) {
+	return query(countCols(eventId), orderByCountTop, limit(limitNum))
 }
