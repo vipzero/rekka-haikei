@@ -15,6 +15,7 @@ const normalizeVotes = (votes: AnimeVotes) => {
 export function useCvoteDb(animeId: string, sid: string) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
+	const [initVotes, setInitVotes] = useState<AnimeVotes>({})
 	const [votesNorm, setVotesNorm] = useState<AnimeVotes>({})
 	const [[lastVote, votedChars], setLastVote] = useLocalStorage<
 		[string, Record<string, boolean>]
@@ -30,9 +31,8 @@ export function useCvoteDb(animeId: string, sid: string) {
 			setVotes(votes)
 			setVotesNorm(normalizeVotes(votes))
 			const firstLoad = !loaded
-			if (firstLoad) {
-				//
-			}
+			if (firstLoad) setInitVotes(votes)
+
 			setLoaded(true)
 		})
 
@@ -49,5 +49,5 @@ export function useCvoteDb(animeId: string, sid: string) {
 		await voteChar(animeId, charId)
 	}
 
-	return { loaded, votes, vote, votedChars, votesNorm }
+	return { loaded, votes, vote, votedChars, votesNorm, initVotes }
 }

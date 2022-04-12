@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { AnimeVotes, useCvoteDb } from './useCvoteDb'
 
@@ -9,6 +9,7 @@ export type Char = {
 }
 type CharVote = Char & {
 	count: number
+	newCount: number
 	voteNorm: number
 	selected: boolean
 }
@@ -22,22 +23,30 @@ const toCharVote = (
 	char: Char,
 	votedChars: Record<string, boolean>,
 	votes: AnimeVotes,
-	voteNorm: AnimeVotes
-): CharVote => ({
-	...char,
-	count: votes[char.id] || 0,
-	voteNorm: voteNorm[char.id] || 0,
-	selected: !!votedChars[char.id],
-})
+	voteNorm: AnimeVotes,
+	initVotes: AnimeVotes
+): CharVote => {
+	const count = votes[char.id] || 0
+	const newCount = (initVotes[char.id] || 0) - count
+	return {
+		...char,
+		count,
+		newCount,
+		voteNorm: voteNorm[char.id] || 0,
+		selected: !!votedChars[char.id],
+	}
+}
 
 function CVote({ animeId, chars, sid, disabled }: Props) {
-	const { loaded, votes, vote, votedChars, votesNorm } = useCvoteDb(
+	const { loaded, votes, vote, votedChars, votesNorm, initVotes } = useCvoteDb(
 		animeId,
 		sid
 	)
+	const [countMode, setCountMode] = useState<boolean>(false)
 
 	const charVotes = useMemo(
-		() => chars.map((c) => toCharVote(c, votedChars, votes, votesNorm)),
+		() =>
+			chars.map((c) => toCharVote(c, votedChars, votes, votesNorm, initVotes)),
 		[chars, votes, votedChars, votesNorm]
 	)
 
@@ -59,11 +68,14 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					<div>
 						<div className="symbol" style={{ background: char.color }}></div>
 						<div>
-							{char.name}: {char.count}
+							{char.name}: {countMode ? char.count : `+${char.newCount}`}
 						</div>
 					</div>
 				</button>
 			))}
+			<button onClick={() => setCountMode(!countMode)}>
+				{countMode ? 'Total' : 'Show'}
+			</button>
 		</Container>
 	)
 }
