@@ -98,7 +98,7 @@ export const saveTable = (eventId, schedule: Schedule) =>
 	setDoc(tableDoc(eventId), schedule)
 
 export const getCounts = (eventId, limitNum = 200) =>
-	query(countsCol(eventId), orderByCountTop, limit(limitNum))
+	getDocs(query(countsCol(eventId), orderByCountTop, limit(limitNum)))
 
 export const voteChar = (animeId: string, charId: string) =>
 	updateDoc(animeDoc(animeId), { [charId]: increment(1) })
