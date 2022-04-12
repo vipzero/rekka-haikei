@@ -95,7 +95,7 @@ export function useScheduleDb() {
 
 	useEffect(() => {
 		loadTable(eventId).then(async (snap) => {
-			if (snap.exists) {
+			if (snap.exists()) {
 				const schedule = snap.data() as Schedule
 				setSchedule(schedule)
 			} else {

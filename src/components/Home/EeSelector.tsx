@@ -8,7 +8,6 @@ type Props = {}
 export const EeSelector = (props: Props) => {
 	const { ee, eeKey, setEekey } = useSettings()
 	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
-	console.log(eeKey)
 
 	return (
 		<Style>
