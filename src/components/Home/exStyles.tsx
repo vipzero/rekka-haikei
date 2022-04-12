@@ -289,7 +289,7 @@ export const exStyles = css`
 			height: 400vmax;
 			top: -40vmax;
 			left: -140vmax;
-			animation: spin 300s linear infinite;
+			animation: cog-spin 300s linear infinite;
 			opacity: 1;
 		}
 		&#cog2 {
@@ -297,7 +297,7 @@ export const exStyles = css`
 			height: 40vmax;
 			top: -10vmax;
 			right: -20vmax;
-			animation: spin 10s ease-in-out infinite;
+			animation: cog-spin 10s ease-in-out infinite;
 			background: url(/static/cog2.svg);
 		}
 		&#cog3 {
@@ -305,7 +305,7 @@ export const exStyles = css`
 			height: 100vmax;
 			top: -80vmax;
 			left: 0vmax;
-			animation: spin 100s linear infinite;
+			animation: cog-spin 100s linear infinite;
 			background: url(/static/cog2.svg);
 		}
 		&#cog4 {
@@ -313,7 +313,7 @@ export const exStyles = css`
 			height: 100vmax;
 			top: 50vmax;
 			left: -50vmax;
-			animation: spin 100s ease-in-out infinite;
+			animation: cog-spin 100s ease-in-out infinite;
 			background: url(/static/cog3.svg);
 		}
 		&#cog5 {
@@ -321,7 +321,7 @@ export const exStyles = css`
 			height: 150vmax;
 			top: 25vmax;
 			left: -75vmax;
-			animation: spin 50s linear infinite reverse;
+			animation: cog-spin 50s linear infinite reverse;
 			background: url(/static/cog3.svg);
 		}
 	}
@@ -334,11 +334,16 @@ export const exStyles = css`
 			opacity: 1;
 		}
 	}
-	@keyframes spin {
+	@keyframes cog-spin {
 		0% {
+			opacity: 0.3;
 			transform: rotate(0deg);
 		}
+		50% {
+			opacity: 0.8;
+		}
 		100% {
+			opacity: 0.3;
 			transform: rotate(-360deg);
 		}
 	}

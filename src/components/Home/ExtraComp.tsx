@@ -52,7 +52,7 @@ function SteinsBg() {
 	return (
 		<>
 			<div id="cog-box">
-				<div id="cog1" className="cog" />
+				{/* <div id="cog1" className="cog" /> */}
 				<div id="cog2" className="cog" />
 				<div id="cog3" className="cog" />
 				<div id="cog4" className="cog" />
