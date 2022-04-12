@@ -27,7 +27,7 @@ const toCharVote = (
 	initVotes: AnimeVotes
 ): CharVote => {
 	const count = votes[char.id] || 0
-	const newCount = (initVotes[char.id] || 0) - count
+	const newCount = count - (initVotes[char.id] || 0)
 	return {
 		...char,
 		count,
@@ -47,7 +47,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 	const charVotes = useMemo(
 		() =>
 			chars.map((c) => toCharVote(c, votedChars, votes, votesNorm, initVotes)),
-		[chars, votes, votedChars, votesNorm]
+		[chars, votes, votedChars, votesNorm, initVotes]
 	)
 
 	if (!loaded) return null

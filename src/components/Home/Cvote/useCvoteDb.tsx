@@ -27,16 +27,21 @@ export function useCvoteDb(animeId: string, sid: string) {
 	}, [sid])
 
 	useEffect(() => {
+		if (loaded) setInitVotes(votes)
+	}, [animeId, loaded])
+
+	useEffect(() => {
 		const si = readCvote(animeId, (votes) => {
 			setVotes(votes)
 			setVotesNorm(normalizeVotes(votes))
-			const firstLoad = !loaded
-			if (firstLoad) setInitVotes(votes)
 
 			setLoaded(true)
 		})
 
-		return () => si()
+		return () => {
+			setLoaded(false)
+			si()
+		}
 	}, [animeId])
 
 	const vote = async (charId: string) => {
