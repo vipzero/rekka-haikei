@@ -242,7 +242,6 @@ function HistoryPageBase() {
 }
 
 const Wrap = styled.div`
-	width: 100vw;
 	display: grid;
 	padding: 16px;
 
@@ -262,7 +261,7 @@ const Wrap = styled.div`
 			border-top: solid 1px;
 		}
 		td:first-child {
-			width: 144px;
+			width: 180px;
 		}
 		&[data-copy-mode='true'] {
 			th,

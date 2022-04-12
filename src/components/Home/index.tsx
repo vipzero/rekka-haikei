@@ -99,7 +99,9 @@ const Wrap = styled.div`
 			min-width: 124px;
 		}
 		svg {
-			font-size: 1rem;
+			font-size: 0.8rem;
+			margin-right: 2px;
+			margin-left: 2px;
 		}
 	}
 	p {

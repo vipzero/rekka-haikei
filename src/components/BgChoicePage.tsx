@@ -8,25 +8,29 @@ function Page() {
 	if (!loaded) return <p>ちょっとまってね</p>
 
 	return (
-		<Wrap>
-			{song.imageLinks?.map((link, i) => (
-				<div
-					key={`${song.time}_${link}`}
-					onClick={() => {
-						if (i === 0) return
-						if (!confirm('背景を変更しますか？')) return
-						setBg(link, song.time)
-					}}
-				>
-					<img src={link} />
-				</div>
-			))}
-		</Wrap>
+		<>
+			<p>
+				<a href="./bg">戻る</a>
+			</p>
+			<Wrap>
+				{song.imageLinks?.map((link, i) => (
+					<div
+						key={`${song.time}_${link}`}
+						onClick={() => {
+							if (i === 0) return
+							if (!confirm('背景を変更しますか？')) return
+							setBg(link, song.time)
+						}}
+					>
+						<img src={link} />
+					</div>
+				))}
+			</Wrap>
+		</>
 	)
 }
 
 const Wrap = styled.div`
-	width: 100vw;
 	padding: 16px;
 	display: flex;
 	flex-wrap: wrap;

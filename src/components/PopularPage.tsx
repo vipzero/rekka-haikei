@@ -30,6 +30,9 @@ function CountTable() {
 	return (
 		<div>
 			<h3>人気ブックマーク</h3>
+			<p>
+				<a href="./bg">戻る</a>
+			</p>
 			{!synced && (
 				<div>
 					<p>
@@ -94,7 +97,6 @@ function CountTable() {
 }
 
 const Wrap = styled.div`
-	width: 100vw;
 	display: grid;
 	padding: 16px;
 
