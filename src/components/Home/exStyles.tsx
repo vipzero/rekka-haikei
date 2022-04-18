@@ -229,6 +229,21 @@ export const exStyles = css`
 		}
 	}
 
+	@keyframes disap-color {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+
+	&[data-ex='issyuukanfr'] {
+		#bg {
+			animation: disap-color 120s linear both;
+		}
+	}
+
 	&[data-ex='steinsgate'] {
 		#timebar > div {
 			transform-origin: 0 0;
