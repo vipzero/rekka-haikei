@@ -213,6 +213,15 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'rk', name: 'ルカ', color: '#23120c' },
 		],
 	},
+	{
+		id: 'gabudoro',
+		chars: [
+			{ id: 'gb', name: 'ガヴ', color: '#F5DD9B' },
+			{ id: 'vi', name: 'ヴィ', color: '#544D6D' },
+			{ id: 'st', name: 'サタ', color: '#BE8274' },
+			{ id: 'rf', name: 'ラフィ', color: '#E8E7F7' },
+		],
+	},
 ]
 
 export const eekeys = [
@@ -249,6 +258,7 @@ export const eekeys = [
 	'rozen',
 	'amagami',
 	'shanimas',
+	'gabudoro',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -276,6 +286,7 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ローゼンメイデン', 'rozen'],
 	['労働歌', 'halowa'],
 	['がっこうぐらし', 'gkgurashi'],
+	['ガヴドロ', 'gabudoro'],
 	[/アイドルマスター.*シャイニーカラーズ/, 'shanimas'],
 	['一週間フレンズ', 'issyuukanfr'],
 ]
