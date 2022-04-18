@@ -53,7 +53,7 @@ const Style = styled.div`
 		position: absolute;
 		left: 50%;
 		transform: translateX(-50%);
-		bottom: -30px;
+		bottom: -60px;
 		display: inline-block;
 		padding: 4px;
 		white-space: nowrap;

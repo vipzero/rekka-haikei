@@ -215,18 +215,18 @@ const Wrap = styled.div`
 		padding: 8px;
 		background: #aaa;
 	}
+	color: black !important;
 	a,
 	label {
-		color: white !important;
+		color: black !important;
 	}
 	a {
 		margin: 4px 8px 4px 0;
 	}
-	&[data-theme='1'] {
-		color: black !important;
+	&[data-theme='2'] {
 		a,
 		label {
-			color: black !important;
+			color: white !important;
 		}
 	}
 `

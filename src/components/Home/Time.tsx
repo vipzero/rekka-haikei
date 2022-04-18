@@ -102,6 +102,7 @@ const Time = ({ song }: Props) => {
 const Style = styled.div`
 	font-family: monospace;
 	background: #6b6b6b;
+	color: #fff;
 	.mirror-table {
 		display: flex;
 		gap: 4px;
