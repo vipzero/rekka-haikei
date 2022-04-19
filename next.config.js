@@ -10,6 +10,7 @@ const transpileModules = [
 ]
 
 const opt = {
+	swcMinify: true,
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.(png|jpeg|jpg|gif|svg)$/,

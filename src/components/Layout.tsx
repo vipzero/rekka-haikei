@@ -1,18 +1,14 @@
 import Head from 'next/head'
-import { FC } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { GlobalStyle } from '../config/init'
 
 type Props = {
 	title?: string
-	hasNavbar?: false
+	children?: ReactNode
 }
 
-const Layout: FC<Props> = ({
-	children,
-	title = 'This is the default title',
-	hasNavbar = true,
-}) => (
+const Layout = ({ children, title = 'This is the default title' }: Props) => (
 	<div>
 		<Head>
 			<title>{title}</title>
@@ -21,15 +17,11 @@ const Layout: FC<Props> = ({
 		</Head>
 		<GlobalStyle />
 
-		{hasNavbar ? (
-			<Screen>
-				<div>
-					<main>{children}</main>
-				</div>
-			</Screen>
-		) : (
-			<main>{children}</main>
-		)}
+		<Screen>
+			<div>
+				<main>{children}</main>
+			</div>
+		</Screen>
 	</div>
 )
 

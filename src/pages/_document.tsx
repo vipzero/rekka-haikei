@@ -1,39 +1,14 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
-import React from 'react'
-import { ServerStyleSheet as StyledComponentSheets } from 'styled-components'
+import Document, {
+	DocumentContext,
+	Head,
+	Html,
+	Main,
+	NextScript,
+} from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
 
-type Props = {}
-class NextDocument extends Document<Props> {
-	static async getInitialProps(ctx) {
-		const sheet = new StyledComponentSheets()
-		const originalRenderPage = ctx.renderPage
-
-		try {
-			ctx.renderPage = () =>
-				originalRenderPage({
-					enhanceApp: (App) => (props) =>
-						sheet.collectStyles(<App {...props} />),
-				})
-
-			const initialProps = await Document.getInitialProps(ctx)
-
-			return {
-				...initialProps,
-				styles: (
-					<>
-						{initialProps.styles}
-						{sheet.getStyleElement()}
-					</>
-				),
-			}
-		} finally {
-			sheet.seal()
-		}
-	}
-	setGoogleTags() {
-		return
-	}
-	render() {
+class NextDocument extends Document {
+	override render() {
 		return (
 			<Html lang={'ja'}>
 				<Head>
@@ -57,6 +32,32 @@ class NextDocument extends Document<Props> {
 				</body>
 			</Html>
 		)
+	}
+
+	static override async getInitialProps(ctx: DocumentContext) {
+		const sheet = new ServerStyleSheet()
+		const originalRenderPage = ctx.renderPage
+
+		try {
+			ctx.renderPage = () =>
+				originalRenderPage({
+					enhanceApp: (App) => (props) =>
+						sheet.collectStyles(<App {...props} />),
+				})
+			const initialProps = await Document.getInitialProps(ctx)
+			// const styles = () => (
+			// <div>
+			// 	{initialProps.styles}
+			// 		{}
+			// 	</div>
+			// )
+			return {
+				...initialProps,
+				styles: sheet.getStyleElement(),
+			}
+		} finally {
+			sheet.seal()
+		}
 	}
 }
 
