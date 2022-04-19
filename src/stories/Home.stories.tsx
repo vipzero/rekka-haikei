@@ -102,3 +102,7 @@ Kokaku.args = { setting: { ...setting, eeKey: 'kokaku' } }
 export const Psychopass = Template.bind({})
 
 Psychopass.args = { setting: { ...setting, eeKey: 'psychopass' } }
+
+export const Patema = Template.bind({})
+
+Patema.args = { setting: { ...setting, eeKey: 'patema' } }

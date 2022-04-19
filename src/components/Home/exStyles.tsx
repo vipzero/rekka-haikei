@@ -75,6 +75,9 @@ export const exStyles = css`
 
 		${randAnimsCss}
 	}
+	&[data-ex='patema'] {
+		transform: rotateX(180deg);
+	}
 	&[data-ex='spin'] {
 		.album img {
 			animation: ${spin} 5s linear infinite;

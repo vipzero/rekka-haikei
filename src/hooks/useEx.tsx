@@ -20,6 +20,7 @@ const hasTitle = (q: string | RegExp, song: Song) =>
 const matchTitle = (q: string, song: Song) => song.animeTitle === q
 const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
+const isSakasa = (icy: string) => icy.includes('逆さま')
 const isSpin = (icy: string) =>
 	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
@@ -35,6 +36,8 @@ export function checkEx(song: Song): Eekey {
 		return 'rakupro'
 	} else if (isMasshiro(icy)) {
 		return 'masshiro'
+	} else if (isSakasa(icy)) {
+		return 'patema'
 	}
 
 	if (matchTitle('人生', song)) return 'jinsei'
