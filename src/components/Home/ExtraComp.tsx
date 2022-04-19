@@ -20,9 +20,6 @@ const MasshiroEx = () => (
 	</div>
 )
 
-export const Patema = createGlobalStyle`
-body
-`
 export const Lain = createGlobalStyle<{ r: number }>`
 * {
 	color: hsla(0,50%,50%) !important;
@@ -82,8 +79,6 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 				</a>
 			</RainbowFont>
 		)
-		// } else if (eeKey === 'patema') {
-		// 	return <Patema />
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
 	} else if (eeKey === 'sakurasou') {
