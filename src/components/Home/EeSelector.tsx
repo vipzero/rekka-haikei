@@ -5,6 +5,9 @@ import { eekeys } from './Cvote/constants'
 
 type Props = {}
 
+const range = (start: number, end: number) =>
+	Array.from({ length: end - start }, (_, i) => i + start)
+
 export const EeSelector = (props: Props) => {
 	const { ee, eeKey, setEekey } = useSettings()
 	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
@@ -23,7 +26,9 @@ export const EeSelector = (props: Props) => {
 					}}
 				>
 					<div className="tooltip-text">
-						{b ? eekeys[i] : eekeys[i].replace(/./g, '.')}
+						{b
+							? eekeys[i]
+							: eekeys[i][0] + eekeys[i].substring(1).replace(/./g, '.')}
 					</div>
 					{b ? '*' : '-'}
 				</div>

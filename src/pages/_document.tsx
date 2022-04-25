@@ -5,10 +5,12 @@ import Document, {
 	Main,
 	NextScript,
 } from 'next/document'
+import { ReactFragment } from 'react'
 import { ServerStyleSheet } from 'styled-components'
 
+// @ts-ignore
 class NextDocument extends Document {
-	override render() {
+	render() {
 		return (
 			<Html lang={'ja'}>
 				<Head>
@@ -25,6 +27,13 @@ class NextDocument extends Document {
 						type="text/css"
 						href="https://csshake.surge.sh/csshake.min.css"
 					/>
+					<link
+						rel="stylesheet"
+						href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+						integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+						crossOrigin="anonymous"
+						referrerPolicy="no-referrer"
+					/>
 				</Head>
 				<body>
 					<Main />
@@ -34,7 +43,7 @@ class NextDocument extends Document {
 		)
 	}
 
-	static override async getInitialProps(ctx: DocumentContext) {
+	static async getInitialProps(ctx: DocumentContext) {
 		const sheet = new ServerStyleSheet()
 		const originalRenderPage = ctx.renderPage
 
@@ -44,16 +53,16 @@ class NextDocument extends Document {
 					enhanceApp: (App) => (props) =>
 						sheet.collectStyles(<App {...props} />),
 				})
+
 			const initialProps = await Document.getInitialProps(ctx)
-			// const styles = () => (
-			// <div>
-			// 	{initialProps.styles}
-			// 		{}
-			// 	</div>
-			// )
 			return {
 				...initialProps,
-				styles: sheet.getStyleElement(),
+				styles: (
+					<>
+						{initialProps.styles}
+						{sheet.getStyleElement()}
+					</>
+				),
 			}
 		} finally {
 			sheet.seal()

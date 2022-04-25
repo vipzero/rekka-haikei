@@ -10,6 +10,10 @@ const transpileModules = [
 ]
 
 const opt = {
+	reactStrictMode: true,
+	compiler: {
+		styledComponents: true,
+	},
 	swcMinify: true,
 	webpack(config) {
 		config.module.rules.push({
