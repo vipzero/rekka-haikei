@@ -14,7 +14,6 @@ import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
-import ResetWorkerButton from './ResetWorkerButton'
 
 const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false
@@ -236,7 +235,7 @@ function HistoryPageBase() {
 			{tab === 2 && <CountTable title="再生回数(曲名)" counts={countsSong} />}
 			{tab === 3 && <WordCountTable />}
 			<Address />
-			<ResetWorkerButton />
+			{/* <ResetWorkerButton /> */}
 		</Wrap>
 	)
 }

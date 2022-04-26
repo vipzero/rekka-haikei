@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React, { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
@@ -36,6 +37,9 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 
 	return (
 		<SuperBack id="bg" style={{ backgroundColor: abyss }}>
+			<Head>
+				<meta name="theme-color" content={abyss} />
+			</Head>
 			<Transition
 				in={anime}
 				onExited={() => {
