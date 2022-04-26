@@ -109,7 +109,7 @@ function HistoryPageBase() {
 				<div>
 					<h3>履歴</h3>
 					<div>
-						<form>
+						<form className="search-box">
 							<textarea
 								rows={multiMode ? 8 : 1}
 								name="rekka-search-word"
@@ -189,40 +189,39 @@ function HistoryPageBase() {
 							コピペモード(2列にする)
 						</label>
 					</div>
-					<table className="hist" data-copy-mode={copyMode}>
-						<thead>
-							<tr>
-								<th>日時</th>
-								<th>タイトル</th>
-								<th>ブ</th>
-								<th style={{ width: '3rem' }} className="link-like">
-									<div onClick={() => setNsort(not)}>N</div>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{viewHists.map((reco, i) => (
-								<ColorTr key={reco.time} h={reco.timeCate}>
-									<td>{reco.timeStr}</td>
-									<td>{reco.title}</td>
-									<td>
-										<FontAwesomeIcon
-											icon={favorites[reco.title] ? faStarFill : faStar}
-											onClick={() => toggleFavorites(reco.title)}
-										/>
-									</td>
-									<td
-										style={{
-											background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
-											textAlign: 'right',
-										}}
-									>
-										{reco.n === null ? '-' : reco.n}
-									</td>
-								</ColorTr>
-							))}
-						</tbody>
-					</table>
+					<div className="hist" data-copy-mode={copyMode}>
+						<div className="hist-head">
+							<div>日時</div>
+							<div>タイトル</div>
+							<div className="non-copy">ブ</div>
+							<div className="non-copy">
+								<div className="link-like" onClick={() => setNsort(not)}>
+									N
+								</div>
+							</div>
+						</div>
+
+						{viewHists.map((reco, i) => (
+							<ColorTr key={reco.time} h={reco.timeCate} className="hist-row">
+								<div>{reco.timeStr}</div>
+								<div>{reco.title}</div>
+								<div>
+									<FontAwesomeIcon
+										icon={favorites[reco.title] ? faStarFill : faStar}
+										onClick={() => toggleFavorites(reco.title)}
+									/>
+								</div>
+								<div
+									style={{
+										background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
+										textAlign: 'right',
+									}}
+								>
+									{reco.n === null ? '-' : reco.n}
+								</div>
+							</ColorTr>
+						))}
+					</div>
 					{histories.length >= 100 && (
 						<p>{histories.length}中100件のみ表示しています</p>
 					)}
@@ -253,19 +252,33 @@ const Wrap = styled.div`
 			background: #fefedd;
 		}
 	}
-
-	table.hist {
+	.hist {
 		width: 100%;
-		td {
-			border-top: solid 1px;
+
+		.hist-head,
+		.hist-row {
+			width: 96vw;
+			display: grid;
+			grid-template-columns: 184px 1fr 1.5rem 3rem;
 		}
-		td:first-child {
-			width: 180px;
+
+		.hist-row {
+			padding: 2px;
+			border-top: solid 1px;
+			font-family: ui-monospace monospace;
+			> div:first-child {
+				font-size: 16px;
+			}
+			> div:nth-child(2) {
+				overflow: scroll;
+				white-space: nowrap;
+			}
 		}
 		&[data-copy-mode='true'] {
-			th,
-			td {
-				&:nth-child(n + 3) {
+			.hist-head,
+			.hist-row {
+				grid-template-columns: 184px 1fr;
+				.non-copy {
 					display: none;
 				}
 			}
@@ -274,7 +287,9 @@ const Wrap = styled.div`
 
 	table.count {
 		td:nth-child(3) {
-			width: 144px;
+			width: 166px;
+			font-family: ui-monospace monospace;
+			font-size: 14px;
 		}
 	}
 	.link-like {
@@ -283,6 +298,7 @@ const Wrap = styled.div`
 	}
 	form {
 		display: flex;
+		gap: 8px;
 		> :not(button) {
 			margin-top: 4px;
 		}
@@ -316,9 +332,9 @@ const Wrap = styled.div`
 	}
 `
 
-const ColorTr = styled.tr<{ h: number }>`
-	td:first-child {
-		border-left: solid ${({ h }) => timeColorMap[h]};
+const ColorTr = styled.div<{ h: number }>`
+	> div:first-child {
+		border-left: solid ${({ h }) => timeColorMap[h]} 8px;
 		background: ${({ h }) => ['#dbf7ff', '#ffeeff'][h % 2]};
 	}
 `
