@@ -81,5 +81,6 @@ export const useSettings = () => {
 		closeSetting,
 		toggleTool,
 		setEekey,
+		setSetting,
 	}
 }

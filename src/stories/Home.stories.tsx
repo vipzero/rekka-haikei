@@ -1,24 +1,21 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React, { ComponentProps } from 'react'
+import React, { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 import { defaultValue as setting, settingState } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { eekeys } from '../components/Home/Cvote/constants'
 import { GlobalStyle } from '../config/init'
+import { useSettings } from '../hooks/useSettings'
 import { Setting } from '../types'
 
 type Props = ComponentProps<typeof Home> & { setting: Setting }
 
 const HomeRecoil = ({ setting, ...props }: Props) => {
-	return (
-		<RecoilRoot
-			initializeState={({ set }) => {
-				set(settingState, setting)
-			}}
-		>
-			<Home {...props} />
-		</RecoilRoot>
-	)
+	const { setSetting } = useSettings()
+	useEffect(() => {
+		setSetting(setting)
+	}, [])
+	return <Home {...props} />
 }
 
 const song = {
@@ -47,7 +44,7 @@ const song = {
 
 export default {
 	title: 'Home',
-	component: Home,
+	component: HomeRecoil,
 	argTypes: {
 		['setting.eeKey']: {
 			control: {
@@ -61,7 +58,7 @@ export default {
 		(s) => (
 			<>
 				<GlobalStyle />
-				{s()}
+				<RecoilRoot>{s()}</RecoilRoot>
 			</>
 		),
 	],
