@@ -19,6 +19,7 @@ export const events: Event[] = [
 	{ id: '2021gw', label: '2021GW' },
 	{ id: '2020nematu', label: '2020冬' },
 ]
+export const currentEvent = events.find((v) => v.current)
 
 const config = {
 	isDev,

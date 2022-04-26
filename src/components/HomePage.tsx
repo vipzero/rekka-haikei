@@ -2,12 +2,12 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
+import { useSettings } from '../hooks/useSettings'
 import { useSongDb } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
+import { EventLinks } from './EventLinks'
 import Address from './HistoryPage/Address'
 import Home from './Home'
-import { useSettings } from '../hooks/useSettings'
-import Head from 'next/head'
 
 const LoadingView = () => (
 	<div>
@@ -28,8 +28,6 @@ function HomePageBase() {
 	const { abyss } = useSettings()
 
 	useEx(song)
-
-	if (!loaded) return <LoadingView />
 
 	return (
 		<>

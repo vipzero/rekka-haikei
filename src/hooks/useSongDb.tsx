@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { readSong, saveSongBg } from '../../service/firebase'
+import { currentEvent, events } from '../config'
 import { Song } from '../types'
 import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
@@ -8,7 +9,7 @@ export function useSongDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()
 	const [song, setSong] = useState<Song>({
-		icy: '',
+		icy: currentEvent?.label || '',
 		time: 1,
 		wordCounts: {},
 		wordCountsAna: [],
