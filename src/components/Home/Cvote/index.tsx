@@ -66,7 +66,6 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					}}
 				>
 					<div>
-						<div className="symbol" style={{ background: char.color }}></div>
 						<div>
 							{char.name}: {countMode ? char.count : `+${char.newCount}`}
 						</div>
@@ -85,13 +84,14 @@ const Container = styled.div`
 	margin-top: 8px;
 	flex-wrap: wrap;
 
-	button {
+	> button {
 		margin: 0;
 		width: 56px;
 		height: min-content;
 		padding: 0;
 		text-align: center;
 		font-size: 0.6rem;
+		border-top-width: 8px !important;
 
 		&[data-voted='true'] {
 			border-style: double;
@@ -119,10 +119,6 @@ const Container = styled.div`
 				transform: scale(1.15, 0.9);
 			}
 		}
-	}
-	.symbol {
-		width: 100%;
-		height: 0.5rem;
 	}
 
 	&[data-voteend='false'] {
