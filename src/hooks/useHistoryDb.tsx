@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getHistories, loadTable, saveTable } from '../../service/firebase'
 import { Count, History, Schedule } from '../types'
 import { formatDate } from '../util'
@@ -20,25 +20,30 @@ function makeCounts(histories: History[]) {
 		return { title, times, timesStr: times.map((t) => formatDate(t)) }
 	})
 }
+function useEventHisotry(eventId: string) {
+	const [historiesBase, setHistsBase] = useLocalStorage<{
+		[eid: string]: History[]
+	}>(`hists_v2`, {})
+	const setHists = useCallback(
+		(hits: History[]) => {
+			setHistsBase((v) => ({ ...v, [eventId]: hits }))
+		},
+		[eventId]
+	)
+
+	return { histories: historiesBase[eventId] || [], setHists }
+}
 
 export function useHistoryDb() {
 	const eventId = useQeuryEid()
-	console.log(eventId)
-
-	const [histories, setHists] = useLocalStorage<History[]>(
-		`hists__${eventId}`,
-		[]
-	)
-	useEffect(() => {
-		console.log({ eventId })
-		console.log(histories.length)
-	}, [])
+	const { histories, setHists } = useEventHisotry(eventId)
 
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
 		let any = false
+		console.log(histories.length)
 		const histOld = histories
 			.filter((h) => {
 				if (any) return true
@@ -67,9 +72,10 @@ export function useHistoryDb() {
 				}
 			})
 
-			console.log(newHists.length)
+			console.log(`nl:${newHists.length}`)
 
 			const hists = [...newHists, ...histOld]
+
 			setHists(hists)
 
 			const counts = makeCounts(hists)

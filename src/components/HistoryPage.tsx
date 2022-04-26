@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
-import { useQueryInit } from '../hooks/useQueryEid'
+import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
 import Address from './HistoryPage/Address'
@@ -39,6 +39,8 @@ function HistoryPage() {
 }
 function HistoryPageBase() {
 	const { histories, counts, countsSong } = useHistoryDb()
+	const eid = useQeuryEid()
+
 	const [searchPre, setSearchPre] = useState<string>('')
 	const [searchs, setSearch] = useState<string[]>([])
 	const [multiMode, setMultiMode] = useState<boolean>(false)
@@ -50,8 +52,6 @@ function HistoryPageBase() {
 	const { favorites, toggleFavorites } = useFavorites()
 
 	useQueryInit((q) => {
-		console.log({ q })
-
 		setSearchPre(q)
 		setSearch([q])
 	})
@@ -95,6 +95,7 @@ function HistoryPageBase() {
 
 	return (
 		<Wrap>
+			<h3>{eid}</h3>
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
