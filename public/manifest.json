@@ -3,7 +3,7 @@
 	"name": "Rekka Haikei",
 	"icons": [
 		{
-			"src": "/icons/icon-192x192.png",
+			"src": "/icons/icon-maskable-192x192.png",
 			"sizes": "192x192",
 			"type": "image/png",
 			"purpose": "maskable"

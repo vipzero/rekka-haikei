@@ -32,7 +32,7 @@ const App = ({ Component, pageProps }: AppProps<{}>) => (
 			<link
 				rel="apple-touch-icon"
 				sizes="192x192"
-				href="/icons/icon-192x192.png"
+				href="/icons/icon-maskable-192x192.png"
 			/>
 		</Head>
 		<Component {...pageProps} />
