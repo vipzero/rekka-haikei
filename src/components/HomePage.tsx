@@ -6,6 +6,8 @@ import { useSongDb } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Address from './HistoryPage/Address'
 import Home from './Home'
+import { useSettings } from '../hooks/useSettings'
+import Head from 'next/head'
 
 const LoadingView = () => (
 	<div>
@@ -23,6 +25,8 @@ function HomePage() {
 
 function HomePageBase() {
 	const [loaded, song] = useSongDb()
+	const { abyss } = useSettings()
+
 	useEx(song)
 
 	if (!loaded) return <LoadingView />
@@ -31,6 +35,7 @@ function HomePageBase() {
 		<>
 			<Helmet>
 				<title>{song.icy}</title>
+				<meta name="theme-color" content={abyss} />
 			</Helmet>
 			<Home song={song} />
 		</>

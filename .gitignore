@@ -27,8 +27,10 @@ out/
 service_account/
 
 public/sw.js
+public/sw.js.map
 public/workbox-*
 .env
 .envrc
 
 /tmp
+public/fallback-development.js

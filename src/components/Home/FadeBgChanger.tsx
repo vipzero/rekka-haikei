@@ -37,9 +37,6 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 
 	return (
 		<SuperBack id="bg" style={{ backgroundColor: abyss }}>
-			<Head>
-				<meta name="theme-color" content={abyss} />
-			</Head>
 			<Transition
 				in={anime}
 				onExited={() => {
