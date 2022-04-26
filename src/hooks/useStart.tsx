@@ -20,10 +20,6 @@ function useMigration() {
 		`favorite-songs`,
 		{}
 	)
-	const [histories, setHists] = useLocalStorage<History[]>(
-		`hists__2021obon`,
-		[]
-	)
 	const [, setFavortes2] = useLocalStorage<Record<string, boolean>>(
 		`bookmark_2021obon`,
 		{}
@@ -35,14 +31,14 @@ function useMigration() {
 				setFavortes2(favorites)
 			}
 		}
-		if (v < 2) {
-			setHists(histories.filter((h) => h.time < 1628511233991)) // 2020-08-09 00
-		}
-		if (v < 3) {
+		if (v < 5) {
+			localStorage.removeItem('hists__2022gw')
+			localStorage.removeItem('hists__2021winter')
+			localStorage.removeItem('hists__2021obon')
 			localStorage.removeItem('hists__2021gw')
 			localStorage.removeItem('hists__2020nematu')
 		}
-		setV(3)
+		setV(5)
 		setReady(true)
 	}, [])
 	return ready
