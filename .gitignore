@@ -33,4 +33,4 @@ public/workbox-*
 .envrc
 
 /tmp
-public/fallback-development.js
+public/fallback-*
