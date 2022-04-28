@@ -24,6 +24,7 @@ const isSakasa = (icy: string) => icy.includes('逆さま')
 const isSpin = (icy: string) =>
 	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
+const isShanimas = (icy: string) => icyHit('シャイニーカラーズ', icy)
 const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
 
 export function checkEx(song: Song): Eekey {
@@ -38,6 +39,8 @@ export function checkEx(song: Song): Eekey {
 		return 'masshiro'
 	} else if (isSakasa(icy)) {
 		return 'patema'
+	} else if (isShanimas(icy)) {
+		return 'shanimas'
 	}
 
 	if (matchTitle('人生', song)) return 'jinsei'

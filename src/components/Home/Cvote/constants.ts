@@ -296,7 +296,6 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['労働歌', 'halowa'],
 	['がっこうぐらし', 'gkgurashi'],
 	['ガヴドロ', 'gabudoro'],
-	[/アイドルマスター.*シャイニーカラーズ/, 'shanimas'],
 	['一週間フレンズ', 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],
