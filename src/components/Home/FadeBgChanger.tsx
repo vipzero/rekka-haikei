@@ -1,8 +1,7 @@
-import Head from 'next/head'
 import React, { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
-import { useSettings } from '../../hooks/useSettings'
+import { useSettingsEe } from '../../hooks/useSettings'
 import { useBgs } from './useBgs'
 
 const duration = 1000
@@ -30,7 +29,7 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
 
 	const divRef = useRef<HTMLDivElement>(null)
-	const { abyss } = useSettings()
+	const { abyss } = useSettingsEe()
 	useEffect(() => {
 		changedUrl(url)
 	}, [url])
