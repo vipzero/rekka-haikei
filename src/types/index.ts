@@ -67,13 +67,14 @@ export type BookCount = {
 	count: number
 }
 
-export type ThemeId = number
+export type ThemeId = number | string
 export type Theme = {
 	id: ThemeId
 	key: string
 }
 
 export type Setting = {
+	theme: ThemeId
 	showSetting: boolean
 	showBookmark: boolean
 	showCounts: boolean

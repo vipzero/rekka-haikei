@@ -21,12 +21,12 @@ type Props = {
 	song: Song
 }
 function Home({ song }: Props) {
-	const { showCounts, sideMode, lockBg, eeKey } = useRecoilValue(settingState)
+	const { theme, showCounts, sideMode, lockBg, eeKey } =
+		useRecoilValue(settingState)
 
 	const setSetting = useSetRecoilState(settingState)
 
 	const { favorites: books, toggleFavorites } = useFavorites()
-	const [themeId, setTheme] = useLocalStorage<number>('theme', 0)
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [url, setUrl] = useState<string>('')
 
@@ -50,8 +50,8 @@ function Home({ song }: Props) {
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
 			<Wrap
-				data-theme={themeId}
-				className={themeId === 2 ? 'dark-theme' : 'light-theme'}
+				data-theme={theme}
+				className={theme === 2 ? 'dark-theme' : 'light-theme'}
 				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
 				<SongInfo song={song} showCounts={showCounts}></SongInfo>
@@ -60,13 +60,11 @@ function Home({ song }: Props) {
 				</div>
 				<SettingBox
 					song={song}
-					themeId={themeId}
 					streamUrl={streamUrl}
 					setStreamUrl={setStreamUrl}
 					favorited={books[song.icy]}
 					toggleFavorited={() => toggleFavorites(song.icy)}
 					favCount={Object.keys(books).length}
-					setTheme={setTheme}
 					url={url}
 				/>
 

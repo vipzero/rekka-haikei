@@ -32,9 +32,6 @@ import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
 
 type Props = {
-	themeId: ThemeId
-
-	setTheme: (themeId: ThemeId) => void
 	favorited: boolean
 	toggleFavorited: () => void
 	streamUrl: string
@@ -45,8 +42,6 @@ type Props = {
 }
 
 function SettingBox({
-	themeId,
-	setTheme,
 	favorited,
 	toggleFavorited,
 	streamUrl,
@@ -56,27 +51,25 @@ function SettingBox({
 	url,
 }: Props) {
 	const s = useSettings()
-
 	const eid = useQeuryEid()
 
 	const isLastTime = useMemo(
 		() => +new Date() > config.lastspurtTime,
 		[config.lastspurtTime, song]
 	)
-	const cycleTheme = () => setTheme((themeId + 1) % themes.length)
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
 
 	return (
-		<Wrap data-theme={themeId} className="config" data-visible={s.visible}>
+		<Wrap data-theme={s.theme} className="config" data-visible={s.visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
-					<ConfButton onClick={cycleTheme} className="theme">
+					<ConfButton onClick={s.cycleTheme} className="theme">
 						<FontAwesomeIcon icon={faPalette} />
 						{s.showHelp && 'テーマ: '}
-						{themes[themeId].key}
+						{themes[s.theme].key}
 					</ConfButton>
 					<ToggleButton
 						checked={s.sideMode}

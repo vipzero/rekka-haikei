@@ -1,7 +1,8 @@
 import { useRecoilState } from 'recoil'
 import { settingState } from '../atom/SettingAtom'
 import { Eekey } from '../components/Home/Cvote/constants'
-import { Abyss, nextAbyss } from '../config'
+import { Abyss, nextAbyss, themes } from '../config'
+import { ThemeId } from '../types'
 import { toggle } from '../util'
 
 function exKeyToColor(exkey: Eekey) {
@@ -13,6 +14,7 @@ function exKeyToColor(exkey: Eekey) {
 export const useSettings = () => {
 	const [
 		{
+			theme,
 			showSetting: visible,
 			showCounts,
 			showBookmark,
@@ -55,8 +57,13 @@ export const useSettings = () => {
 		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
 	}
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
+	const nextTheme = (v: ThemeId) =>
+		typeof v !== 'number' ? 0 : (v + 1) % themes.length
+	const cycleTheme = () =>
+		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
 
 	return {
+		theme,
 		abyss: abyssEx || abyss,
 		visible,
 		showCounts,
@@ -82,5 +89,6 @@ export const useSettings = () => {
 		toggleTool,
 		setEekey,
 		setSetting,
+		cycleTheme,
 	}
 }
