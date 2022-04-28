@@ -1,5 +1,5 @@
+import Head from 'next/head'
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
 import { useSettingsEe } from '../hooks/useSettings'
@@ -30,10 +30,10 @@ function HomePageBase() {
 
 	return (
 		<>
-			<Helmet>
+			<Head>
 				<title>{song.icy}</title>
 				<meta name="theme-color" content={abyss} />
-			</Helmet>
+			</Head>
 			<Home song={song} />
 		</>
 	)
