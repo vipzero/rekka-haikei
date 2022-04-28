@@ -12,7 +12,11 @@ export const themeStyles = css`
 	&[data-theme='2'] {
 		button {
 			--checked-bg: #333;
+			color: white;
 			background: black;
+			color: white;
+		}
+		.typography {
 			color: white;
 		}
 		.content,

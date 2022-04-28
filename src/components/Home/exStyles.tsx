@@ -422,6 +422,22 @@ export const exStyles = css`
 	${['r', 'g', 'b'].map((k) => genAnimationRgbShift(k))}
 	${genAnimationGlitch('before')}
 	${genAnimationGlitch('after')}
+
+	&[data-ex='sao'] {
+		/* .config,
+		.config * {
+			cursor: none;
+		} */
+		.link-sao {
+			display: block !important;
+			text-decoration: underline;
+			cursor: not-allowed;
+			color: #888;
+		}
+		.link-hist {
+			display: none;
+		}
+	}
 `
 
 function genAnimationRgbShift(name) {

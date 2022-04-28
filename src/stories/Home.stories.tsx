@@ -78,3 +78,7 @@ Psychopass.args = { setting: { ...setting, eeKey: 'psychopass' } }
 export const Patema = Template.bind({})
 
 Patema.args = { setting: { ...setting, eeKey: 'patema' } }
+
+export const Sao = Template.bind({})
+
+Sao.args = { setting: { ...setting, eeKey: 'sao' } }

@@ -245,6 +245,7 @@ export const eekeys = [
 
 	'spin',
 	'patema',
+	'sao',
 
 	'gotoyome',
 	'oreimo',
@@ -291,4 +292,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	[/アイドルマスター.*シャイニーカラーズ/, 'shanimas'],
 	['一週間フレンズ', 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
+	['ソードアート・オンライン', 'sao'],
 ]

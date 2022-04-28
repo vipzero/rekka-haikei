@@ -173,7 +173,12 @@ function SettingBox({
 					</div>
 				)}
 				<div style={{ display: 'flex' }}>
-					<a href={`/${eid}/history`}>履歴</a>
+					<a style={{ display: 'none' }} className="link-sao">
+						Logout
+					</a>
+					<a href={`/${eid}/history`} className="link-hist">
+						履歴
+					</a>
 					<a href={`/${eid}/popular`} data-important={isLastTime}>
 						ブクマ数統計
 					</a>
@@ -181,7 +186,7 @@ function SettingBox({
 				</div>
 
 				<div>
-					StreamURL{' '}
+					<span className="typography">StreamURL </span>
 					<input
 						name="streaming-url"
 						value={streamUrl}
