@@ -68,3 +68,15 @@ export const RainbowFont = styled.div`
 		color: transparent !important;
 	}
 `
+
+export const RainbowFontCool = styled.div`
+	> a {
+		color: #acb6e5;
+
+		background: linear-gradient(45deg, aqua, blue, blue, purple);
+		font-size: 1.5rem;
+
+		-webkit-background-clip: text;
+		color: transparent !important;
+	}
+`

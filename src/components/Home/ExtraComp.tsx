@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { FloatingBox, RainbowFont } from '../'
+import { FloatingBox, RainbowFont, RainbowFontCool } from '../'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
@@ -62,6 +62,18 @@ function SteinsBg() {
 	)
 }
 
+const workLinks: ([string] | [string, string])[] = [
+	[
+		'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html',
+		'https://www.hellowork.go.jp/',
+	],
+	['https://www.green-japan.com/'],
+	['https://jp.indeed.com/'],
+	['https://www.bizreach.jp/lp/bizreach-07/pc', 'https://www.bizreach.jp'],
+	['https://www.r-agent.com/entry/ts/', 'https://www.r-agent.com'],
+	['https://mynavi-job20s.jp/lp/fm/', 'https://mynavi-job20s.jp'],
+]
+
 function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 	if (eeKey === 'steinsgate') {
 		return <SteinsBg />
@@ -73,11 +85,15 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 		return <MasshiroEx />
 	} else if (eeKey === 'halowa') {
 		return (
-			<RainbowFont>
-				<a href="https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html">
-					https://www.hellowork.go.jp/
-				</a>
-			</RainbowFont>
+			<div style={{ display: 'grid' }}>
+				{workLinks.map(([link, label]) => (
+					<RainbowFontCool key={link}>
+						<a href={link} target="_blank" rel="noreferrer">
+							{label || link}
+						</a>
+					</RainbowFontCool>
+				))}
+			</div>
 		)
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
