@@ -30,7 +30,7 @@ export const Lain = createGlobalStyle<{ r: number }>`
 	'bk bk bk bk bl lk lk'
 	'bk bk bk bk bl lk lk'
 	'hl hl hl -- bl ha ha' // hl
-	'tg tg tg -- cl ha ha'
+	'tg tg tg aw cl ha ha'
 	'tg tg tg dl dl dl dl'
 	'fd hi hi hi tl tl tl' !important
 }
