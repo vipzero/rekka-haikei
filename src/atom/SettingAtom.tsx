@@ -4,6 +4,7 @@ import { Setting } from '../types'
 export const defaultSetting: Setting = {
 	theme: 0,
 	showSetting: false,
+	showArtwork: true,
 	showBookmark: false,
 	showCounts: true,
 	showHistory: false,

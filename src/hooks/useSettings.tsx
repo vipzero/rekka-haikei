@@ -20,6 +20,7 @@ export const useSettings = () => {
 		{
 			theme,
 			showSetting: visible,
+			showArtwork,
 			showCounts,
 			showBookmark,
 			showHistory,
@@ -32,6 +33,7 @@ export const useSettings = () => {
 	] = useSettingsBase()
 
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
+	const toggleArtwork = () => setSetting((v) => toggle(v, 'showArtwork'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
 	const toggleLockBg = () => setSetting((v) => toggle(v, 'lockBg'))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
@@ -48,12 +50,14 @@ export const useSettings = () => {
 		theme,
 		visible,
 		showCounts,
+		showArtwork,
 		showBookmark,
 		showHistory,
 		sideMode,
 		lockBg,
 		showHelp,
 		showTool,
+		toggleArtwork,
 		toggleCounts,
 		toggleBookmark,
 		toggleLockBg,

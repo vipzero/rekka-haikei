@@ -29,6 +29,7 @@ import { downloadImg } from '../../util'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
+import { faCompactDisc } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
 	favorited: boolean
@@ -117,6 +118,17 @@ function SettingBox({
 						<FontAwesomeIcon icon={s.showCounts ? faEye : faEyeSlash} />
 						{s.showHelp && 'タグ表示'}
 					</ToggleButton>
+
+					<ToggleButton
+						checked={s.showArtwork}
+						onClick={s.toggleArtwork}
+						className="artw"
+					>
+						<FontAwesomeIcon icon={faCompactDisc} />
+						<FontAwesomeIcon icon={s.showArtwork ? faEye : faEyeSlash} />
+						{s.showHelp && 'アートワーク表示'}
+					</ToggleButton>
+
 					<ToggleButton
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
@@ -233,10 +245,10 @@ const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
 		'th fd ha cl'
-		'tg lk lk cl'
-		'hi bk bk cl'
-		'bl bk bk hl'
-		'-- dl dl tl';
+		'aw lk lk cl'
+		'tg bk bk cl'
+		'hi bk bk hl'
+		'bl dl dl tl';
 	${`
 	.theme { grid-area: th; }
 	.half { grid-area: ha; }
@@ -249,6 +261,7 @@ const ButtonGrid = styled.div`
 	.lock { grid-area: lk; }
 	.books { grid-area: bl; }
 	.tool { grid-area: tl; }
+	.artw { grid-area: aw; }
 	.download { grid-area: dl; }
 `}
 `

@@ -77,6 +77,7 @@ export type Setting = {
 	theme: ThemeId
 	showSetting: boolean
 	showBookmark: boolean
+	showArtwork: boolean
 	showCounts: boolean
 	showHistory: boolean
 	sideMode: boolean

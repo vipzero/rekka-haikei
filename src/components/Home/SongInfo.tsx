@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
 import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
+import { useSettings } from '../../hooks/useSettings'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -18,6 +19,7 @@ type Props = { song: Song; showCounts: boolean }
 function SongInfo({ song, showCounts }: Props) {
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
+	const { showArtwork } = useSettings()
 
 	return (
 		<Wrap className="content">
@@ -98,7 +100,7 @@ function SongInfo({ song, showCounts }: Props) {
 						)}
 					</div>
 					<div>
-						{song.artworkUrl100 && (
+						{showArtwork && song.artworkUrl100 && (
 							<div className="album">
 								<img src={song.artworkUrl100} />
 							</div>
