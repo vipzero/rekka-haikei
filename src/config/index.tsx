@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { Event, Theme } from '../types'
+import { eekeysThemetic } from '../components/Home/Cvote/constants'
+import { Event, Theme, ThemeId } from '../types'
 
 const { NODE_ENV } = process.env
 
@@ -29,13 +30,25 @@ const config = {
 	visibleRecordLimit: 100,
 }
 
-export const themes: Theme[] = [
+export const normalThemes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },
 	{ id: 1, key: 'WHITE' },
 	{ id: 2, key: 'BLACK' },
 	{ id: 3, key: 'EMPTY' },
 	{ id: 4, key: 'SINGL' },
 ]
+
+export type ExTheme = Theme & { id: typeof eekeysThemetic[number] }
+export const extThemes: ExTheme[] = [
+	{ id: 'kokaku', key: 'KOKAK' },
+	{ id: 'lain', key: 'LAIN_' },
+	{ id: 'psychopass', key: 'PSYCH' },
+]
+export const allThemes: Theme[] = [...normalThemes, ...extThemes]
+export const allThemesById = allThemes.reduce(
+	(p, c) => ({ ...p, [c.id]: c }),
+	{} as Record<ThemeId, Theme>
+)
 
 const white = '#fff'
 const black = '#000'

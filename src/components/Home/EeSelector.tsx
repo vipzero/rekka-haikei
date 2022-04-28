@@ -9,7 +9,7 @@ const range = (start: number, end: number) =>
 	Array.from({ length: end - start }, (_, i) => i + start)
 
 export const EeSelector = (props: Props) => {
-	const { ee, eeKey, setEekey } = useSettingsEe()
+	const { ee, eeKey, setEekeySimulate } = useSettingsEe()
 	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
 
 	return (
@@ -22,7 +22,7 @@ export const EeSelector = (props: Props) => {
 					data-active={eeKey === eekeys[i]}
 					onClick={() => {
 						if (!b) return
-						setEekey(eekeys[i], true)
+						setEekeySimulate(eekeys[i])
 					}}
 				>
 					<div className="tooltip-text">

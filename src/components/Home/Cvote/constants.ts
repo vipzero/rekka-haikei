@@ -1,3 +1,4 @@
+import { ThemeId } from '../../../types'
 import { Char } from './index'
 
 type CvoteProfile = {
@@ -224,6 +225,7 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 ]
 
+export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
 export const eekeys = [
 	'nonnon',
 	'mia',
@@ -235,6 +237,8 @@ export const eekeys = [
 	'halowa',
 
 	// 'codegeass',
+	...eekeysThemetic,
+
 	'kokaku',
 	'psychopass',
 	'lain',
@@ -264,7 +268,9 @@ export const eekeys = [
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
-export const themeEeKeys: Eekey[] = ['kokaku', 'psychopass']
+export type ExThemeKey = typeof eekeysThemetic[number]
+export const isExTheme = (theme: string): theme is ExThemeKey =>
+	eekeysThemetic.includes(theme as ExThemeKey)
 
 export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],

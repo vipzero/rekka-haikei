@@ -21,7 +21,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import config, { abyssColorsEx, themes } from '../../config'
+import config, { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { Song } from '../../types'
@@ -69,7 +69,7 @@ function SettingBox({
 					<ConfButton onClick={s.cycleTheme} className="theme">
 						<FontAwesomeIcon icon={faPalette} />
 						{s.showHelp && 'テーマ: '}
-						{themes[s.theme]?.key || themes[0].key}
+						{allThemesById[s.theme]?.key || allThemes[0].key}
 					</ConfButton>
 					<ToggleButton
 						checked={s.sideMode}

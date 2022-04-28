@@ -1,7 +1,11 @@
 import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
-import { Eekey } from '../components/Home/Cvote/constants'
-import { Abyss, nextAbyss, themes } from '../config'
+import {
+	Eekey,
+	eekeysThemetic,
+	isExTheme,
+} from '../components/Home/Cvote/constants'
+import { Abyss, extThemes, nextAbyss, normalThemes } from '../config'
 import { Setting, ThemeId } from '../types'
 import { toggle } from '../util'
 
@@ -36,7 +40,7 @@ export const useSettings = () => {
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	const nextTheme = (v: ThemeId) =>
-		typeof v !== 'number' ? 0 : (v + 1) % themes.length
+		typeof v !== 'number' ? 0 : (v + 1) % normalThemes.length
 	const cycleTheme = () =>
 		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
 
@@ -72,22 +76,29 @@ const useSettingsBase = () => {
 export const useSettingsEe = () => {
 	const [{ abyss, abyssEx, ee, eeKey, eeSim }, setSetting] = useSettingsBase()
 
+	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
+
 	const setAbyss = (abyss: Abyss) => {
 		setAbyssEx(null)
 		setSetting((v) => ({ ...v, abyss }))
 	}
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
-	const setEekey = (eeKey: Eekey, eeSim = false) => {
+	const setEekey = (eeKey: Eekey, simulate = false) => {
 		const exColor = exKeyToColor(eeKey)
 
 		setAbyssEx(exColor)
 
-		setSetting((v) => ({ ...v, eeKey, eeSim }))
+		setSetting((v) => ({ ...v, eeKey, eeSim: simulate }))
 		if (eeKey === false) return
 
 		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
+
+		if (simulate && isExTheme(eeKey)) {
+			setTheme(eeKey)
+		}
 	}
+	const setEekeySimulate = (eeKey: Eekey) => setEekey(eeKey, true)
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 
 	return {
@@ -99,6 +110,7 @@ export const useSettingsEe = () => {
 		setAbyss,
 		cycleAbyss,
 		setEekey,
+		setEekeySimulate,
 		setSetting,
 	}
 }

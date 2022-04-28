@@ -35,7 +35,7 @@ function Home({ song }: Props) {
 	return (
 		<Master
 			onClick={toggleSetting}
-			data-ex={eeKey}
+			data-ex={eeKey || theme}
 			data-has-art={!!song.artworkUrl100}
 		>
 			<Mask id="mask">
