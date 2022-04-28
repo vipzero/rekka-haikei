@@ -10,9 +10,9 @@ const transpileModules = [
 
 const opt = {
 	reactStrictMode: true,
-	// compiler: {
-	// 	styledComponents: true,
-	// },
+	compiler: {
+		styledComponents: true,
+	},
 	// webpack(config) {
 	// 	config.module.rules.push({
 	// 		test: /\.(png|jpeg|jpg|gif|svg)$/,
