@@ -38,7 +38,10 @@ function useMigration() {
 			localStorage.removeItem('hists__2021gw')
 			localStorage.removeItem('hists__2020nematu')
 		}
-		setV(5)
+		if (v < 6) {
+			localStorage.removeItem('theme')
+		}
+		setV(6)
 		setReady(true)
 	}, [])
 	return ready
