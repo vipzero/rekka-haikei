@@ -20,14 +20,9 @@ export const useSettings = () => {
 			showBookmark,
 			showHistory,
 			sideMode,
-			abyss,
 			lockBg,
 			showHelp,
 			showTool,
-			abyssEx,
-			ee,
-			eeKey,
-			eeSim,
 		},
 		setSetting,
 	] = useRecoilState(settingState)
@@ -39,13 +34,45 @@ export const useSettings = () => {
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
+	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
+	const nextTheme = (v: ThemeId) =>
+		typeof v !== 'number' ? 0 : (v + 1) % themes.length
+	const cycleTheme = () =>
+		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
+
+	return {
+		theme,
+		visible,
+		showCounts,
+		showBookmark,
+		showHistory,
+		sideMode,
+		lockBg,
+		showHelp,
+		showTool,
+		toggleCounts,
+		toggleBookmark,
+		toggleLockBg,
+		toggleHistory,
+		toggleSideMode,
+		toggleShowHelp,
+		closeSetting,
+		toggleTool,
+		setSetting,
+		cycleTheme,
+	}
+}
+
+export const useSettingsEe = () => {
+	const [{ abyss, abyssEx, ee, eeKey, eeSim }, setSetting] =
+		useRecoilState(settingState)
+
 	const setAbyss = (abyss: Abyss) => {
 		setAbyssEx(null)
 		setSetting((v) => ({ ...v, abyss }))
 	}
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
-	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	const setEekey = (eeKey: Eekey, eeSim = false) => {
 		const exColor = exKeyToColor(eeKey)
 
@@ -57,38 +84,28 @@ export const useSettings = () => {
 		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
 	}
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
-	const nextTheme = (v: ThemeId) =>
-		typeof v !== 'number' ? 0 : (v + 1) % themes.length
-	const cycleTheme = () =>
-		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
 
 	return {
-		theme,
 		abyss: abyssEx || abyss,
-		visible,
-		showCounts,
-		showBookmark,
-		showHistory,
-		sideMode,
-		lockBg,
-		showHelp,
 		fadeAbyssColor: abyss,
-		showTool,
 		ee,
 		eeKey,
 		eeSim,
 		setAbyss,
 		cycleAbyss,
-		toggleCounts,
-		toggleBookmark,
-		toggleLockBg,
-		toggleHistory,
-		toggleSideMode,
-		toggleShowHelp,
-		closeSetting,
-		toggleTool,
 		setEekey,
 		setSetting,
-		cycleTheme,
 	}
+}
+
+export const useSettingsShowHistory = () => {
+	const [{ showHistory: visible }, setSetting] = useRecoilState(settingState)
+	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
+	return { closeHistory, visible }
+}
+
+export const useSettingsShowBookmark = () => {
+	const [{ showBookmark: visible }, setSetting] = useRecoilState(settingState)
+	const closeBookmark = () => setSetting((v) => ({ ...v, showBookmark: false }))
+	return { closeBookmark, visible }
 }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { FloatingBox, RainbowFont } from '../'
-import { useSettings } from '../../hooks/useSettings'
+import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
 import { CVOTE_PROFILES, Eekey } from '../Home/Cvote/constants'
@@ -111,7 +111,7 @@ type Props = {
 	sid: string
 }
 export function ExtraComp({ sid }: Props) {
-	const { eeKey, eeSim } = useSettings()
+	const { eeKey, eeSim } = useSettingsEe()
 
 	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
 }

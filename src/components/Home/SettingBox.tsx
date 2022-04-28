@@ -23,10 +23,9 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import config, { abyssColorsEx, themes } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
-import { useSettings } from '../../hooks/useSettings'
-import { Song, ThemeId } from '../../types'
+import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import { Song } from '../../types'
 import { downloadImg } from '../../util'
-import { eekeys } from './Cvote/constants'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
@@ -51,6 +50,7 @@ function SettingBox({
 	url,
 }: Props) {
 	const s = useSettings()
+	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()
 
 	const isLastTime = useMemo(
@@ -79,10 +79,10 @@ function SettingBox({
 						<FontAwesomeIcon icon={faColumns} />
 						{s.showHelp && 'ハーフ'}
 					</ToggleButton>
-					<ConfButton onClick={() => s.cycleAbyss()} className="fade">
+					<ConfButton onClick={cycleAbyss} className="fade">
 						<FontAwesomeIcon icon={faLightbulb} />
 						{s.showHelp && '切替背景色: '}
-						{abyssColorsEx[s.abyss]?.label || '???'}
+						{abyssColorsEx[abyss]?.label || '???'}
 					</ConfButton>
 
 					<ToggleButton

@@ -264,6 +264,7 @@ export const eekeys = [
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
+export const themeEeKeys: Eekey[] = ['kokaku', 'psychopass']
 
 export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],

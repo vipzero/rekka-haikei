@@ -1,11 +1,10 @@
 import React from 'react'
-import { useRecoilState } from 'recoil'
-import { settingState } from '../../atom/SettingAtom'
 import { useRecentHistoryDb } from '../../hooks/useRecentHistoryDb'
+import { useSettingsShowHistory } from '../../hooks/useSettings'
 
 function RecentHistoryList() {
-	const [{ showHistory: visible }, setSetting] = useRecoilState(settingState)
-	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
+	const { visible, closeHistory } = useSettingsShowHistory()
+
 	const histories = useRecentHistoryDb(visible)
 
 	if (!histories) return <p>loading</p>

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { useSettings } from '../../hooks/useSettings'
+import { useSettingsEe } from '../../hooks/useSettings'
 import { eekeys } from './Cvote/constants'
 
 type Props = {}
@@ -9,7 +9,7 @@ const range = (start: number, end: number) =>
 	Array.from({ length: end - start }, (_, i) => i + start)
 
 export const EeSelector = (props: Props) => {
-	const { ee, eeKey, setEekey } = useSettings()
+	const { ee, eeKey, setEekey } = useSettingsEe()
 	const eeSaw = useMemo(() => eekeys.map((key) => ee?.[key] || false), [ee])
 
 	return (

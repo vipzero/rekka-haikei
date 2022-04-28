@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { Eekey, TITLE_EX_PATTERNS } from '../components/Home/Cvote/constants'
 import { Song } from '../types'
-import { useSettings } from './useSettings'
+import { useSettingsEe } from './useSettings'
 
 export function calcAbyss() {}
 
 export function useEx(song: Song) {
-	const { setEekey } = useSettings()
+	const { setEekey } = useSettingsEe()
 
 	useEffect(() => {
 		const eeKey = checkEx(song)
