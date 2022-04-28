@@ -7,10 +7,7 @@
 		"predeploy": "yarn export",
 		"public": "out",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-		"rewrites": [
-			{ "source": "/sugar", "function": "sugar" },
-			{ "source": "/", "destination": "/2022gw/bg" }
-		],
+		"rewrites": [{ "source": "/", "destination": "/2022gw/bg" }],
 		"headers": [
 			{
 				"source": "/sw.js",

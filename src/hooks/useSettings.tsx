@@ -1,8 +1,8 @@
 import { useRecoilState } from 'recoil'
-import { settingState } from '../atom/SettingAtom'
+import { defaultSetting, settingState } from '../atom/SettingAtom'
 import { Eekey } from '../components/Home/Cvote/constants'
 import { Abyss, nextAbyss, themes } from '../config'
-import { ThemeId } from '../types'
+import { Setting, ThemeId } from '../types'
 import { toggle } from '../util'
 
 function exKeyToColor(exkey: Eekey) {
@@ -25,7 +25,7 @@ export const useSettings = () => {
 			showTool,
 		},
 		setSetting,
-	] = useRecoilState(settingState)
+	] = useSettingsBase()
 
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
@@ -62,10 +62,15 @@ export const useSettings = () => {
 		cycleTheme,
 	}
 }
+const useSettingsBase = () => {
+	const [settingRaw, setSetting] = useRecoilState(settingState)
+	const setting: Setting = { ...defaultSetting, ...settingRaw }
+
+	return [setting, setSetting] as const
+}
 
 export const useSettingsEe = () => {
-	const [{ abyss, abyssEx, ee, eeKey, eeSim }, setSetting] =
-		useRecoilState(settingState)
+	const [{ abyss, abyssEx, ee, eeKey, eeSim }, setSetting] = useSettingsBase()
 
 	const setAbyss = (abyss: Abyss) => {
 		setAbyssEx(null)
@@ -99,13 +104,13 @@ export const useSettingsEe = () => {
 }
 
 export const useSettingsShowHistory = () => {
-	const [{ showHistory: visible }, setSetting] = useRecoilState(settingState)
+	const [{ showHistory: visible }, setSetting] = useSettingsBase()
 	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))
 	return { closeHistory, visible }
 }
 
 export const useSettingsShowBookmark = () => {
-	const [{ showBookmark: visible }, setSetting] = useRecoilState(settingState)
+	const [{ showBookmark: visible }, setSetting] = useSettingsBase()
 	const closeBookmark = () => setSetting((v) => ({ ...v, showBookmark: false }))
 	return { closeBookmark, visible }
 }

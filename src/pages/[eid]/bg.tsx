@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import ErrorBoundary from '../../components/ErrorBoundary'
 import Layout from '../../components/Layout'
 import { events } from '../../config'
 
@@ -8,6 +9,7 @@ const HomeDynamic = dynamic(async () => import('../../components/HomePage'), {
 const HomePage = () => {
 	return (
 		<Layout title="vipstream">
+			<ErrorBoundary></ErrorBoundary>
 			<HomeDynamic />
 		</Layout>
 	)

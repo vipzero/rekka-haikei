@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React, { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
-import { defaultValue as setting, settingState } from '../atom/SettingAtom'
+import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { eekeys } from '../components/Home/Cvote/constants'
 import { GlobalStyle } from '../config/init'

@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { History } from '../types'
 import { useLocalStorage } from './useLocalStorage'
-import { useSugar } from './useSugar'
 
 export function useStart() {
-	useSugar()
+	// useSugar()
 	const migReady = useMigration()
 	useEffect(() => {
 		killCache()

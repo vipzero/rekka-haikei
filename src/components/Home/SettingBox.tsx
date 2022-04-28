@@ -69,7 +69,7 @@ function SettingBox({
 					<ConfButton onClick={s.cycleTheme} className="theme">
 						<FontAwesomeIcon icon={faPalette} />
 						{s.showHelp && 'テーマ: '}
-						{themes[s.theme].key}
+						{themes[s.theme]?.key || themes[0].key}
 					</ConfButton>
 					<ToggleButton
 						checked={s.sideMode}
