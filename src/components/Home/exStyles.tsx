@@ -45,6 +45,8 @@ export const exStyles = css`
 		}
 
 		&[data-ex='kokaku'] {
+			--back-color: #0385f4;
+			--font-color: white;
 			div {
 				border-bottom: solid 1px #0385f4;
 				background: #a2c0c033;
@@ -69,6 +71,8 @@ export const exStyles = css`
 		}
 
 		&[data-ex='psychopass'] {
+			--back-color: #12e0ad;
+			--font-color: white;
 			div {
 				border-bottom: solid 1px #12e0ad;
 				background: #092b0933;

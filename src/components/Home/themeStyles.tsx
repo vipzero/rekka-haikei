@@ -1,6 +1,10 @@
 import { css } from 'styled-components'
 
 export const themeStyles = css`
+	& {
+		--back-color: white;
+		--font-color: black;
+	}
 	&[data-theme='1'] {
 		.content,
 		.recenthistory,
@@ -10,6 +14,8 @@ export const themeStyles = css`
 		}
 	}
 	&[data-theme='2'] {
+		--back-color: black;
+		--font-color: white;
 		button {
 			--checked-bg: #333;
 			color: white;

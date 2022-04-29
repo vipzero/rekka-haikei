@@ -11,7 +11,7 @@ export const DownloadButton = ({
 }) => {
 	return (
 		<div style={{ width: '100%', height: '100%', position: 'relative' }}>
-			<a href={url} download={filename}>
+			<a href={url} download={filename} style={{ color: 'var(--font-color)' }}>
 				<FontAwesomeIcon icon={faDownload} />
 				<img
 					src={url}

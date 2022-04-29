@@ -102,6 +102,12 @@ const Style = styled.div`
 	font-family: monospace;
 	background: #6b6b6b;
 	color: #fff;
+	border: solid var(--back-color);
+	padding: 0 4px;
+	a {
+		color: white;
+	}
+
 	.mirror-table {
 		display: grid;
 		gap: 2px;

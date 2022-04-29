@@ -177,38 +177,40 @@ function SettingBox({
 						<Time song={song} />
 					</div>
 				)}
-				<div style={{ display: 'flex' }}>
-					<a style={{ display: 'none' }} className="link-sao">
-						Logout
-					</a>
-					<a href={`/${eid}/history`} className="link-hist">
-						履歴
-					</a>
-					<a href={`/${eid}/popular`} data-important={isLastTime}>
-						ブクマ数統計
-					</a>
-					<a href={`/${eid}/choice`}>背景補正</a>
-				</div>
+				<div className="footer">
+					<div style={{ display: 'flex' }}>
+						<a style={{ display: 'none' }} className="link-sao">
+							Logout
+						</a>
+						<a href={`/${eid}/history`} className="link-hist">
+							履歴
+						</a>
+						<a href={`/${eid}/popular`} data-important={isLastTime}>
+							ブクマ数統計
+						</a>
+						<a href={`/${eid}/choice`}>背景補正</a>
+					</div>
 
-				<div>
-					<span className="typography">StreamURL </span>
-					<input
-						name="streaming-url"
-						value={streamUrl}
-						onChange={(e) => setStreamUrl(e.target.value || '')}
-					/>
-					{streamUrl.includes('http://') && (
-						<span style={{ color: 'red' }}>http 非対応</span>
-					)}
-					{streamUrl && (
-						<button onClick={removeStream}>
-							<FontAwesomeIcon icon={faTimesCircle} size="xs" />
-						</button>
-					)}
-				</div>
-				<div style={{ display: 'flex', gap: '8px' }}>
-					<a href="http://anison.info">アニメ情報元: Anison Generation</a>
-					<a href="https://github.com/vipzero/rekka-haikei">コード</a>
+					<div>
+						<span className="typography">StreamURL </span>
+						<input
+							name="streaming-url"
+							value={streamUrl}
+							onChange={(e) => setStreamUrl(e.target.value || '')}
+						/>
+						{streamUrl.includes('http://') && (
+							<span style={{ color: 'red' }}>http 非対応</span>
+						)}
+						{streamUrl && (
+							<button onClick={removeStream}>
+								<FontAwesomeIcon icon={faTimesCircle} size="xs" />
+							</button>
+						)}
+					</div>
+					<div style={{ display: 'flex', gap: '8px' }}>
+						<a href="http://anison.info">アニメ情報元: Anison Generation</a>
+						<a href="https://github.com/vipzero/rekka-haikei">コード</a>
+					</div>
 				</div>
 			</div>
 		</Wrap>
@@ -225,18 +227,14 @@ const Wrap = styled.div`
 		padding: 8px;
 		background: #aaa;
 	}
-	color: black !important;
-	a,
-	label {
-		color: black !important;
-	}
+	color: black;
 	a {
 		margin: 4px 8px 4px 0;
 	}
-	&[data-theme='2'] {
+	.footer {
 		a,
 		label {
-			color: white !important;
+			color: var(--font-color);
 		}
 	}
 `
