@@ -1,11 +1,7 @@
 import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
-import {
-	Eekey,
-	eekeysThemetic,
-	isExTheme,
-} from '../components/Home/Cvote/constants'
-import { Abyss, extThemes, nextAbyss, normalThemes } from '../config'
+import { Eekey, isExTheme } from '../components/Home/Cvote/constants'
+import { Abyss, nextAbyss, normalThemes } from '../config'
 import { Setting, ThemeId } from '../types'
 import { toggle } from '../util'
 
@@ -47,6 +43,7 @@ export const useSettings = () => {
 		typeof v !== 'number' ? 0 : (v + 1) % normalThemes.length
 	const cycleTheme = () =>
 		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
+	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return {
 		theme,
@@ -59,6 +56,7 @@ export const useSettings = () => {
 		lockBg,
 		showHelp,
 		showTool,
+		toggleSetting,
 		toggleArtwork,
 		toggleCounts,
 		toggleBookmark,

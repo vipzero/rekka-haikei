@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styled from 'styled-components'
-import { settingState } from '../../atom/SettingAtom'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { Song } from '../../types'
-import { toggle } from '../../util'
 import { BookmarkList } from './BookmarkList'
 import { exStyles } from './exStyles'
 import { ExtraComp } from './ExtraComp'
@@ -21,16 +19,12 @@ type Props = {
 	song: Song
 }
 function Home({ song }: Props) {
-	const { theme, showCounts, sideMode, lockBg, eeKey } =
-		useRecoilValue(settingState)
-
-	const setSetting = useSetRecoilState(settingState)
+	const { theme, showCounts, sideMode, lockBg, toggleSetting } = useSettings()
+	const { eeKey } = useSettingsEe()
 
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [url, setUrl] = useState<string>('')
-
-	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return (
 		<Master
