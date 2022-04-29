@@ -57,7 +57,13 @@ export const exStyles = css`
 				/* background: #1008 !important; */
 			}
 
-			cursor: url(/static/sac-min.png) 25 25, auto;
+			/* cursor: url(/static/sac-min.png) 25 25, auto; */
+			cursor: none;
+
+			#kokaku-pointer {
+				pointer-events: none;
+				animation: ${spin} 10s linear infinite;
+			}
 		}
 
 		&[data-ex='psychopass'] {

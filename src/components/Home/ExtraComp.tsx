@@ -1,7 +1,8 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
-import { FloatingBox, RainbowFont, RainbowFontCool } from '../'
-import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import { FloatingBox, RainbowFontCool } from '../'
+import { useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
 import { CVOTE_PROFILES, Eekey } from '../Home/Cvote/constants'
@@ -19,6 +20,22 @@ const MasshiroEx = () => (
 		</div>
 	</div>
 )
+
+const KokakuEx = () => {
+	const mouse = useMouse()
+
+	return (
+		<img
+			id="kokaku-pointer"
+			style={{
+				position: 'absolute',
+				top: (mouse.pageY || -100) + Math.random() * 15 - 20,
+				left: (mouse.pageX || -100) + Math.random() * 20 - 20,
+			}}
+			src="/static/sac-min.png"
+		/>
+	)
+}
 
 export const Lain = createGlobalStyle<{ r: number }>`
 * {
@@ -83,6 +100,8 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 		return <EmbedWindow url="https://click.abyss.fun/" />
 	} else if (eeKey === 'masshiro') {
 		return <MasshiroEx />
+	} else if (eeKey === 'kokaku') {
+		return <KokakuEx />
 	} else if (eeKey === 'halowa') {
 		return (
 			<div style={{ display: 'grid' }}>
