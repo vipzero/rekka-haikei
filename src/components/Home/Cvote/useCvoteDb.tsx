@@ -3,11 +3,13 @@ import { readCvote, voteChar } from '../../../../service/firebase'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
 export type AnimeVotes = Record<string, number>
+export type AnaVotes = Record<string, { perAll: number; perTop: number }>
 const normalizeVotes = (votes: AnimeVotes) => {
-	const normalized = {} as AnimeVotes
-	const max = Object.values(votes).reduce((a, b) => Math.max(a, b))
+	const normalized = {} as AnaVotes
+	const top = Object.values(votes).reduce((a, b) => Math.max(a, b))
+	const total = Object.values(votes).reduce((a, b) => a + b)
 	Object.keys(votes).forEach((id) => {
-		normalized[id] = votes[id] / max
+		normalized[id] = { perTop: votes[id] / top, perAll: votes[id] / total }
 	})
 	return normalized
 }
@@ -16,7 +18,7 @@ export function useCvoteDb(animeId: string, sid: string) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
 	const [initVotes, setInitVotes] = useState<AnimeVotes>({})
-	const [votesNorm, setVotesNorm] = useState<AnimeVotes>({})
+	const [votesNorm, setVotesNorm] = useState<AnaVotes>({})
 	const [[lastVote, votedChars], setLastVote] = useLocalStorage<
 		[string, Record<string, boolean>]
 	>('last-cvote', ['-', {}])

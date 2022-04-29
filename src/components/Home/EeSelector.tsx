@@ -39,39 +39,4 @@ export const EeSelector = (props: Props) => {
 
 const Style = styled.div`
 	display: flex;
-
-	.tooltip {
-		position: relative;
-		cursor: pointer;
-		&:hover {
-			background: gray;
-			filter: invert(1);
-		}
-		&[data-active='true'] {
-			background: orange;
-		}
-	}
-
-	.tooltip-text {
-		opacity: 0;
-		visibility: hidden;
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-		bottom: -60px;
-		display: inline-block;
-		padding: 4px;
-		white-space: nowrap;
-		font-size: 0.8rem;
-		line-height: 1.3;
-		background: #333;
-		color: #fff;
-		border-radius: 4px;
-		transition: 0.3s ease-in;
-	}
-
-	.tooltip:hover .tooltip-text {
-		opacity: 1;
-		visibility: visible;
-	}
 `

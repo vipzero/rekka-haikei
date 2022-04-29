@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { AnimeVotes, useCvoteDb } from './useCvoteDb'
+import { AnaVotes, AnimeVotes, useCvoteDb } from './useCvoteDb'
 
 export type Char = {
 	id: string
@@ -12,6 +12,7 @@ type CharVote = Char & {
 	newCount: number
 	voteNorm: number
 	selected: boolean
+	votePer: number
 }
 type Props = {
 	animeId: string
@@ -23,7 +24,7 @@ const toCharVote = (
 	char: Char,
 	votedChars: Record<string, boolean>,
 	votes: AnimeVotes,
-	voteNorm: AnimeVotes,
+	voteNorm: AnaVotes,
 	initVotes: AnimeVotes
 ): CharVote => {
 	const count = votes[char.id] || 0
@@ -32,7 +33,8 @@ const toCharVote = (
 		...char,
 		count,
 		newCount,
-		voteNorm: voteNorm[char.id] || 0,
+		voteNorm: voteNorm[char.id]?.perTop || 0,
+		votePer: voteNorm[char.id]?.perAll || 0,
 		selected: !!votedChars[char.id],
 	}
 }
@@ -80,7 +82,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 			<div
 				className="votes"
 				data-voteend={disabled}
-				data-hide={mode === 'hide'}
+				data-util-hide={mode === 'hide'}
 			>
 				{charVotes.map((char) => (
 					<button
@@ -102,9 +104,30 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					</button>
 				))}
 			</div>
+			<div data-util-hide={mode === 'hide'}>
+				<Bar cvotes={charVotes}></Bar>
+			</div>
 		</Container>
 	)
 }
+
+const Bar = ({ cvotes }: { cvotes: CharVote[] }) => {
+	return (
+		<div style={{ display: 'flex', fontSize: '10px', color: 'transparent' }}>
+			{cvotes.map((cv) => (
+				<div
+					className="tooltip"
+					key={cv.id}
+					style={{ width: `${cv.votePer * 100}%`, background: cv.color }}
+				>
+					<div className="tooltip-text">{cv.name}</div>
+					{'.'}
+				</div>
+			))}
+		</div>
+	)
+}
+
 const Container = styled.div`
 	.btn-main {
 		font-size: 0.6rem;
@@ -117,9 +140,6 @@ const Container = styled.div`
 		padding: 0;
 		margin-top: 8px;
 		flex-wrap: wrap;
-		&[data-hide='true'] {
-			display: none;
-		}
 		> button {
 			margin: 0;
 			width: 56px;
