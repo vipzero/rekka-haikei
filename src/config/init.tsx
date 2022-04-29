@@ -66,6 +66,6 @@ li {
 }
 
 [data-util-hide='true'] {
-	display: none;
+	display: none !important;
 }
 `
