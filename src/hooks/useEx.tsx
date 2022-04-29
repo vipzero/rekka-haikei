@@ -22,7 +22,10 @@ const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
 
 const isSakasa = (icy: string) => icy.includes('逆さま')
 const isSpin = (icy: string) =>
-	icy.includes('回レ') || icyHit('ノルニル', icy) || icyHit('スクランブル', icy)
+	icy.includes('回レ') ||
+	icyHit('ノルニル', icy) ||
+	icyHit('スクランブル', icy) ||
+	icyHit('ぐるぐる', icy)
 const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
 const isShanimas = (icy: string) => icyHit('シャイニーカラーズ', icy)
 const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
