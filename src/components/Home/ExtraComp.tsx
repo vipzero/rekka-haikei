@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
 import { FloatingBox, RainbowFontCool } from '../'

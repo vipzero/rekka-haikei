@@ -185,8 +185,8 @@ function SettingBox({
 						<a href={`/${eid}/history`} className="link-hist">
 							履歴
 						</a>
-						<a href={`/${eid}/popular`} data-important={isLastTime}>
-							ブクマ数統計
+						<a href={`/${eid}/book`} data-important={isLastTime}>
+							ブクマ
 						</a>
 						<a href={`/${eid}/choice`}>背景補正</a>
 					</div>
