@@ -58,11 +58,13 @@ export const exStyles = css`
 			}
 
 			/* cursor: url(/static/sac-min.png) 25 25, auto; */
-			cursor: none;
+			&[data-ex-just='kokaku'] {
+				cursor: none;
 
-			#kokaku-pointer {
-				pointer-events: none;
-				animation: ${spin} 10s linear infinite;
+				#kokaku-pointer {
+					pointer-events: none;
+					animation: ${spin} 10s linear infinite;
+				}
 			}
 		}
 
