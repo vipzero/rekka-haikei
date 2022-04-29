@@ -16,7 +16,7 @@ export function useBgs(urls: string[], sid: number, lockCount: number) {
 	const [lock, setLock] = useState<number>(lockCount)
 
 	useEffect(() => {
-		setLock(lockCount)
+		setLock(lockCount + 1)
 	}, [sid, lockCount])
 
 	const locked = lock === 0
