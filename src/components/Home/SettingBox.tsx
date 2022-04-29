@@ -150,16 +150,16 @@ function SettingBox({
 					</ToggleButton>
 
 					<ToggleButton
-						checked={s.lockBg === 0}
+						checked={s.lockBgNum === 0}
 						onClick={s.toggleLockBg}
 						className="lock"
 					>
-						<FontAwesomeIcon icon={s.lockBg === 0 ? faLock : faLockOpen} />
+						<FontAwesomeIcon icon={s.lockBgNum === 0 ? faLock : faLockOpen} />
 						{s.showHelp
 							? { 0: `背景変更なし`, 1: `背景変更1回まで`, 10: `背景変更可` }[
-									s.lockBg
+									s.lockBgNum
 							  ]
-							: { 0: ``, 1: `1`, 10: `` }[s.lockBg]}
+							: { 0: ``, 1: `1`, 10: `` }[s.lockBgNum]}
 					</ToggleButton>
 
 					<ConfButton onClick={handleDownload} className="download">

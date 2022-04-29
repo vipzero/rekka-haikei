@@ -19,7 +19,8 @@ type Props = {
 	song: Song
 }
 function Home({ song }: Props) {
-	const { theme, showCounts, sideMode, lockBg, toggleSetting } = useSettings()
+	const { theme, showCounts, sideMode, lockBgNum, toggleSetting } =
+		useSettings()
 	const { eeKey } = useSettingsEe()
 
 	const { favorites: books, toggleFavorites } = useFavorites()
@@ -39,7 +40,7 @@ function Home({ song }: Props) {
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
-				lockCount={lockBg}
+				lockCount={lockBgNum}
 				changedUrl={setUrl}
 				px={sideMode ? 'right' : 'center'}
 			/>

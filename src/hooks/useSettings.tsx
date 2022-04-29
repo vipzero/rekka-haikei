@@ -21,7 +21,7 @@ export const useSettings = () => {
 			showBookmark,
 			showHistory,
 			sideMode,
-			lockBg,
+			lockBgNum,
 			showHelp,
 			showTool,
 		},
@@ -33,7 +33,7 @@ export const useSettings = () => {
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
 	const nextLockNum = (v: number) => (v === 0 ? 1 : v === 1 ? 10 : 0)
 	const toggleLockBg = () =>
-		setSetting((v) => ({ ...v, lockBg: nextLockNum(v.lockBg) }))
+		setSetting((v) => ({ ...v, lockBgNum: nextLockNum(v.lockBgNum) }))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
@@ -53,7 +53,7 @@ export const useSettings = () => {
 		showBookmark,
 		showHistory,
 		sideMode,
-		lockBg,
+		lockBgNum,
 		showHelp,
 		showTool,
 		toggleSetting,
@@ -70,6 +70,7 @@ export const useSettings = () => {
 		cycleTheme,
 	}
 }
+
 const useSettingsBase = () => {
 	const [settingRaw, setSetting] = useRecoilState(settingState)
 	const setting: Setting = { ...defaultSetting, ...settingRaw }

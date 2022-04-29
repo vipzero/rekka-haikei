@@ -81,7 +81,7 @@ export type Setting = {
 	showCounts: boolean
 	showHistory: boolean
 	sideMode: boolean
-	lockBg: boolean
+	lockBgNum: 0 | 1 | 10
 	showTool: boolean
 	showHelp: boolean
 	feedBackText: string

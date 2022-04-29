@@ -9,7 +9,7 @@ export const defaultSetting: Setting = {
 	showCounts: true,
 	showHistory: false,
 	sideMode: false,
-	lockBg: false,
+	lockBgNum: 10,
 	showTool: false,
 	abyss: '#fff', // TODO: change before deploy
 	abyssEx: null,
