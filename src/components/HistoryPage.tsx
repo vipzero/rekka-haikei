@@ -10,6 +10,7 @@ import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
+import { Tab, TabPanel, Tabs } from './common/Tab'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
@@ -106,7 +107,7 @@ function HistoryPageBase() {
 				<Tab n={2} cur={tab} label="再生回数(曲名)" setTab={setTab} />
 				<Tab n={3} cur={tab} label="タグカウント" setTab={setTab} />
 			</Tabs>
-			{tab === 0 && (
+			<TabPanel value={tab} index={0}>
 				<div>
 					<h3>履歴</h3>
 					<div>
@@ -230,10 +231,17 @@ function HistoryPageBase() {
 						{viewAll ? '隠す' : '全表示する'}
 					</button>
 				</div>
-			)}
-			{tab === 1 && <CountTable title="再生回数" counts={counts} />}
-			{tab === 2 && <CountTable title="再生回数(曲名)" counts={countsSong} />}
-			{tab === 3 && <WordCountTable />}
+			</TabPanel>
+			<TabPanel value={tab} index={2}>
+				<CountTable title="再生回数" counts={counts} />
+			</TabPanel>
+			<TabPanel value={tab} index={3}>
+				<CountTable title="再生回数(曲名)" counts={countsSong} />
+			</TabPanel>
+			<TabPanel value={tab} index={4}>
+				<WordCountTable />
+			</TabPanel>
+
 			<Address />
 			{/* <ResetWorkerButton /> */}
 		</Wrap>
@@ -337,33 +345,6 @@ const ColorTr = styled.div<{ h: number }>`
 	> div:first-child {
 		border-left: solid ${({ h }) => timeColorMap[h]} 8px;
 		background: ${({ h }) => ['#dbf7ff', '#ffeeff'][h % 2]};
-	}
-`
-
-type TabProps = {
-	n: number
-	cur: number
-	setTab: (id: number) => void
-	label: string
-}
-const Tab = ({ n, cur, setTab, label }: TabProps) => (
-	<button data-active={n === cur} onClick={() => setTab(n)}>
-		{label}
-	</button>
-)
-
-const Tabs = styled.div`
-	margin-top: 12px;
-	display: flex;
-	button {
-		border: solid 1px gray;
-		border-bottom: none;
-		border-radius: 4px 4px 0 0;
-		margin-left: 2px;
-		&[data-active='true'] {
-			cursor: default;
-			background: white;
-		}
 	}
 `
 
