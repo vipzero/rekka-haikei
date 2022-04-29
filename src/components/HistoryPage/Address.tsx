@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2022-04-30:01': 'styl デバッグパネル',
 	'2022-04-29:01': 'feat 回転許可',
 	'2022-04-29:00': 'feat アートワーク非表示ボタン',
 	'2022-04-26:19': 'feat アプリ化',
-	'2022-04-12:19': 'feat 投票の追加分表示',
+	'2022-04-12:19': 'feat 投票表示モード追加(追加分)',
 	'2022-04-12:17': 'feat 履歴移動バグ修正',
 	'2022-01-01:02': 'feat ホバーでプレイヤー表示',
 	'2022-01-01:01': 'feat 人気タグカウント',
