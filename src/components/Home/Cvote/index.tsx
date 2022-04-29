@@ -37,12 +37,25 @@ const toCharVote = (
 	}
 }
 
+const TOTL_MODE = 'totl'
+const PLUS_MODE = 'plus'
+const HIDE_MODE = 'hide'
+const modes = [TOTL_MODE, PLUS_MODE, HIDE_MODE] as const
+type Mode = typeof modes[number]
+const modeLabel: Record<Mode, string> = {
+	totl: '投票(合計)',
+	plus: '投票(差分)',
+	hide: '投票を開く',
+}
+
 function CVote({ animeId, chars, sid, disabled }: Props) {
 	const { loaded, votes, vote, votedChars, votesNorm, initVotes } = useCvoteDb(
 		animeId,
 		sid
 	)
-	const [countMode, setCountMode] = useState<boolean>(false)
+	const [mode, setMode] = useState<Mode>(modes[0])
+	const cycleMode = () =>
+		setMode((v) => modes[(modes.indexOf(v) + 1) % modes.length])
 
 	const charVotes = useMemo(
 		() =>
@@ -53,70 +66,94 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 	if (!loaded) return null
 
 	return (
-		<Container data-voteend={disabled}>
-			{charVotes.map((char) => (
-				<button
-					key={`char-${char.id}`}
-					data-voted={char.selected}
-					disabled={disabled || char.selected}
-					onClick={() => vote(char.id)}
-					style={{
-						borderColor: char.color,
-						marginTop: `${(1 - char.voteNorm) * 10}px`,
-					}}
-				>
-					<div>
-						<div>
-							{char.name}: {countMode ? char.count : `+${char.newCount}`}
-						</div>
-					</div>
-				</button>
-			))}
-			<button onClick={() => setCountMode(!countMode)}>
-				{countMode ? 'Total' : 'Show'}
+		<Container>
+			<button
+				className="btn-main"
+				onClick={(e) => {
+					cycleMode()
+					e.stopPropagation()
+				}}
+			>
+				{modeLabel[mode]}
 			</button>
+
+			<div
+				className="votes"
+				data-voteend={disabled}
+				data-hide={mode === 'hide'}
+			>
+				{charVotes.map((char) => (
+					<button
+						key={`char-${char.id}`}
+						data-voted={char.selected}
+						disabled={disabled || char.selected}
+						onClick={() => vote(char.id)}
+						style={{
+							borderColor: char.color,
+							marginTop: `${(1 - char.voteNorm) * 10}px`,
+						}}
+					>
+						<div>
+							<div>
+								{char.name}:{' '}
+								{mode === 'totl' ? char.count : `+${char.newCount}`}
+							</div>
+						</div>
+					</button>
+				))}
+			</div>
 		</Container>
 	)
 }
 const Container = styled.div`
-	display: flex;
-	padding: 0;
-	margin-top: 8px;
-	flex-wrap: wrap;
-
-	> button {
-		margin: 0;
-		width: 56px;
-		height: min-content;
-		padding: 0;
-		text-align: center;
+	.btn-main {
 		font-size: 0.6rem;
-		border-top-width: 8px !important;
+		border-bottom: solid 4px gray;
+		padding: 0 12px;
+	}
 
-		&[data-voted='true'] {
-			border-style: double;
-			animation: bound-anim 1s;
+	.votes {
+		display: flex;
+		padding: 0;
+		margin-top: 8px;
+		flex-wrap: wrap;
+		&[data-hide='true'] {
+			display: none;
 		}
-		&[data-voted='false'] {
-			margin: 3px;
-			border-style: solid !important;
-		}
+		> button {
+			margin: 0;
+			width: 56px;
+			height: min-content;
+			padding: 0;
+			text-align: center;
+			font-size: 0.6rem;
+			border-top-width: 8px !important;
 
-		@keyframes bound-anim {
-			0%,
-			100% {
-				transform: scale(1), translateY(0);
+			&[data-voted='true'] {
+				border-style: double;
+				animation: bound-anim 1s;
 			}
-			30% {
-				top: -60%;
-				transform: scale(0.96, 1.04) translateY(-20px);
+			&[data-voted='false'] {
+				margin: 3px;
+				border-style: solid !important;
 			}
-			60% {
-				transform: scale(1);
-			}
-			90% {
-				top: 0;
-				transform: scale(1.15, 0.9);
+
+			@keyframes bound-anim {
+				0%,
+				100% {
+					transform: scale(1), translateY(0);
+				}
+				30% {
+					top: -60%;
+					transform: scale(0.96, 1.04) translateY(-20px);
+				}
+				60% {
+					transform: scale(1);
+				}
+				90% {
+					top: 0;
+					transform: scale(1.15, 0.9);
+				}
 			}
 		}
 	}
