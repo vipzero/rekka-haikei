@@ -38,6 +38,7 @@ const KokakuEx = () => {
 }
 
 export const Lain = createGlobalStyle<{ r: number }>`
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 * {
 	color: hsla(0,50%,50%) !important;
 }

@@ -19,6 +19,8 @@ export const ConfButton = styled.button`
 	align-items: center;
 	justify-content: center;
 	gap: 2px;
+	font-family: 'Roboto Mono', monospace;
+
 	cursor: pointer;
 	svg {
 		padding: 2px 0;
