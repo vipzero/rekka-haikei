@@ -1,24 +1,24 @@
 import React from 'react'
 
-type Props = {
-	value: number
-	current: number
+type Props<T> = {
+	value: T
+	current: T
 	label: string
 	labelKey?: string
 	onClick: () => void
 }
 
-export const RadioButton = ({
+export const RadioButton = <T=number>({
 	value,
 	label,
 	current,
 	onClick,
 	labelKey,
-}: Props) => {
+}: Props<T>) => {
 	const id = `radio-${labelKey}-${value}`
 
 	return (
-		<>
+		<div>
 			<input
 				id={id}
 				checked={current === value}
@@ -27,7 +27,7 @@ export const RadioButton = ({
 				onClick={onClick}
 			/>
 			<label htmlFor={id}>{label}</label>
-		</>
+		</div>
 	)
 }
 

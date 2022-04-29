@@ -30,6 +30,10 @@ export const useFavoritesBase = (eventId: string) => {
 	)
 
 	const toggleFavorites = (icy) => {
+		console.log('toggleFavorites')
+
+		console.log({ icy })
+
 		setFavortes((data) => {
 			const newFavorites = { ...data }
 

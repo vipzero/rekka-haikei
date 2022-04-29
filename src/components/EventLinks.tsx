@@ -5,6 +5,7 @@ import { events } from '../config'
 const paths = [
 	{ path: 'bg', label: '背景' },
 	{ path: 'history', label: '履歴' },
+	{ path: 'book', label: 'ブクマ' },
 ]
 
 export const EventLinks = () => (

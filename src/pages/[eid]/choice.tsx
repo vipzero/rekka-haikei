@@ -1,8 +1,12 @@
 import Layout from '../../components/Layout'
-import BgChoice from '../../components/BgChoicePage'
+
 import { getStaticPaths, getStaticProps } from './bg'
+import dynamic from 'next/dynamic'
 
 export { getStaticPaths, getStaticProps }
+const BgChoice = dynamic(async () => import('../../components/BgChoicePage'), {
+	ssr: false,
+})
 
 const Page = () => (
 	<Layout title="背景補正 - vipstream">

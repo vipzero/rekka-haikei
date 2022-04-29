@@ -14,21 +14,7 @@ function useMigration() {
 	const [v, setV] = useLocalStorage<number>('version', 0)
 	const [ready, setReady] = useState<boolean>(false)
 
-	const [favorites, setFavortes] = useLocalStorage<Record<string, boolean>>(
-		`favorite-songs`,
-		{}
-	)
-	const [, setFavortes2] = useLocalStorage<Record<string, boolean>>(
-		`bookmark_2021obon`,
-		{}
-	)
 	useEffect(() => {
-		if (v < 1) {
-			if (Object.keys(favorites).length > 0) {
-				setFavortes({})
-				setFavortes2(favorites)
-			}
-		}
 		if (v < 5) {
 			localStorage.removeItem('hists__2022gw')
 			localStorage.removeItem('hists__2021winter')

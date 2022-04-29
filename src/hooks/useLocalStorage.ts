@@ -11,7 +11,6 @@ export function useLocalStorage<T = unknown>(
 
 			return item ? (JSON.parse(item) as T) : initialValue
 		} catch (error) {
-			console.log(error)
 			return initialValue
 		}
 	})
@@ -30,7 +29,8 @@ export function useLocalStorage<T = unknown>(
 	}
 	useEffect(() => {
 		return () => {
-			setStoredValue(initialValue)
+			// NOTE: read が上手く行かないパターンがあるので OFF
+			// setStoredValue(initialValue)
 		}
 	}, [key])
 
