@@ -10,6 +10,8 @@ body {
   'Noto Sans Japanese', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif;
   margin: 0;
   min-height: 100vh;
+  background: black;
+  z-index: -30;
 }
 ul {
 		margin: 0;
