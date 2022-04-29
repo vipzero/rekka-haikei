@@ -46,6 +46,7 @@ function HistoryPageBase() {
 	const [searchs, setSearch] = useState<string[]>([])
 	const [multiMode, setMultiMode] = useState<boolean>(false)
 	const [copyMode, setCopyMode] = useState<boolean>(false)
+	const [wrapMode, setWrapMode] = useState<boolean>(true)
 	const [nsort, setNsort] = useState<boolean>(false)
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
@@ -182,16 +183,31 @@ function HistoryPageBase() {
 						)}
 					</div>
 
-					<div data-copy-mode={copyMode}>
-						<label>
-							<input
-								type="checkbox"
-								onChange={(e) => setCopyMode(e.target.checked)}
-							/>
-							コピペモード(2列にする)
-						</label>
+					<div style={{ display: 'flex' }}>
+						<div data-copy-mode={copyMode}>
+							<label>
+								<input
+									type="checkbox"
+									onChange={(e) => setCopyMode(e.target.checked)}
+								/>
+								コピペモード(2列にする)
+							</label>
+						</div>
+						<div data-wrap-mode={wrapMode}>
+							<label>
+								<input
+									type="checkbox"
+									onChange={(e) => setWrapMode(e.target.checked)}
+								/>
+								折返し
+							</label>
+						</div>
 					</div>
-					<div className="hist" data-copy-mode={copyMode}>
+					<div
+						className="hist"
+						data-copy-mode={copyMode}
+						data-wrap-mode={wrapMode}
+					>
 						<div className="hist-head">
 							<div>日時</div>
 							<div>タイトル</div>
@@ -232,13 +248,13 @@ function HistoryPageBase() {
 					</button>
 				</div>
 			</TabPanel>
-			<TabPanel value={tab} index={2}>
+			<TabPanel value={tab} index={1}>
 				<CountTable title="再生回数" counts={counts} />
 			</TabPanel>
-			<TabPanel value={tab} index={3}>
+			<TabPanel value={tab} index={2}>
 				<CountTable title="再生回数(曲名)" counts={countsSong} />
 			</TabPanel>
-			<TabPanel value={tab} index={4}>
+			<TabPanel value={tab} index={3}>
 				<WordCountTable />
 			</TabPanel>
 
@@ -266,7 +282,7 @@ const Wrap = styled.div`
 
 		.hist-head,
 		.hist-row {
-			width: 96vw;
+			width: max(96vw, 600px);
 			display: grid;
 			grid-template-columns: 184px 1fr 1.5rem 3rem;
 		}
@@ -278,9 +294,13 @@ const Wrap = styled.div`
 			> div:first-child {
 				font-size: 16px;
 			}
-			> div:nth-child(2) {
-				overflow: scroll;
-				white-space: nowrap;
+		}
+		&[data-wrap-mode='true'] {
+			.hist-row {
+				> div:nth-child(2) {
+					overflow: scroll;
+					white-space: nowrap;
+				}
 			}
 		}
 		&[data-copy-mode='true'] {
