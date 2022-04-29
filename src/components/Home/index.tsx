@@ -45,7 +45,7 @@ function Home({ song }: Props) {
 			<FadeBgChanger
 				sid={song.time}
 				urls={song?.imageLinks || []}
-				lockCount={lockBg ? 1 : 10}
+				lockCount={lockBg}
 				changedUrl={setUrl}
 				px={sideMode ? 'right' : 'center'}
 			/>

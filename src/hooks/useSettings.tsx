@@ -35,7 +35,9 @@ export const useSettings = () => {
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
 	const toggleArtwork = () => setSetting((v) => toggle(v, 'showArtwork'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
-	const toggleLockBg = () => setSetting((v) => toggle(v, 'lockBg'))
+	const nextLockNum = (v: number) => (v === 0 ? 1 : v === 1 ? 10 : 0)
+	const toggleLockBg = () =>
+		setSetting((v) => ({ ...v, lockBg: nextLockNum(v.lockBg) }))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
