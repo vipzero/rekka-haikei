@@ -23,13 +23,13 @@ const useTick = () => {
 
 const Time = ({ song }: Props) => {
 	const now = useTick()
-	const { time, trackTimeMillis } = song
+	const { time: startTime, trackTimeMillis } = song
 
 	const currentSongEnd: null | number = trackTimeMillis
-		? time + trackTimeMillis
+		? startTime + trackTimeMillis
 		: null
 
-	const [cur, diff, nextHour] = useMemo(() => {
+	const [cur, leftHour, nextHour] = useMemo(() => {
 		if (!now) return ['--:--:--', '--:--', 0]
 
 		const cur = formatTime(+now)
@@ -41,8 +41,14 @@ const Time = ({ song }: Props) => {
 		return [cur, diff, now.getHours() + 1]
 	}, [now])
 
-	const [songEnd, songDiff] = useMemo(() => {
-		if (!now || !currentSongEnd) return ['--:--:--', '--:--']
+	const [songEndStr, songLeftStr, songElapsStr] = useMemo(() => {
+		if (!now) return ['--:--:--', '--:--', '--:--']
+		const elapsedTime = +now - startTime
+		const songElaps = `${pad2(Math.floor(elapsedTime / 60000))}:${pad2(
+			Math.floor((elapsedTime % 60000) / 1000)
+		)}`
+
+		if (!currentSongEnd) return ['--:--:--', '--:--', songElaps]
 		const songEnd = formatTime(+currentSongEnd)
 		const diff = currentSongEnd - +now
 
@@ -50,67 +56,117 @@ const Time = ({ song }: Props) => {
 			Math.floor((diff % 60000) / 1000)
 		)}`
 
-		return [songEnd, songDiff]
+		return [songEnd, songDiff, songElaps]
 	}, [now, currentSongEnd])
 
-	useMemo(() => {
-		return
-	}, [currentSongEnd])
 	if (!now) return null
 
 	return (
 		<Style>
 			<div className="mirror-table">
-				<div>
-					<div>曲開始</div>
-					<div>現在</div>
-					<div>曲終了</div>
-					<div>次のHour</div>
-					<div>クエリ</div>
-				</div>
-				<div>
-					<div>
-						{formatTime(time)}
-						<span></span>
-					</div>
-					<div>{cur}</div>
-					<div>
-						{songEnd}
-						<span>
-							(-{songDiff}){!time && '曲情報取得失敗'}
-						</span>
-					</div>
-					<div>
-						{nextHour}:00:00
-						<span>(-{diff})</span>
-					</div>
-					<div
-						style={{
-							wordWrap: 'break-word',
-							maxWidth: '212px',
-							fontSize: '0.6rem',
-						}}
-					>
-						{song.imageSearchWord}
-					</div>
+				<div className={'lst'}>曲開始</div>
+				<div className={'lcu'}>現在</div>
+				<div className={'len'}>曲終了</div>
+				<div className={'lnh'}>次のHour</div>
+
+				<div className={'tst'}>{formatTime(startTime)}</div>
+				<div className={'tcu'}>{cur}</div>
+				<div className={'ten'}>{songEndStr}</div>
+				<div className={'tnh'}>{nextHour}:00:00</div>
+
+				<div className={'del'}>+{songElapsStr}</div>
+				<div className={'dlf'}>-{songLeftStr}</div>
+				<div className={'dnh'}>-{leftHour}</div>
+			</div>
+			<div>
+				<div>画像検索クエリ</div>
+				<div
+					style={{
+						wordWrap: 'break-word',
+						maxWidth: '212px',
+						fontSize: '0.6rem',
+					}}
+				>
+					<a href="https://github.com/vipzero/haikei-server/blob/main/src/utils/makeSearchWord.ts">
+						改善案募集
+					</a>
+					{song.imageSearchWord}
 				</div>
 			</div>
 			<EeSelector />
 		</Style>
 	)
 }
+
 const Style = styled.div`
 	font-family: monospace;
 	background: #6b6b6b;
 	color: #fff;
 	.mirror-table {
-		display: flex;
-		gap: 4px;
-		> div:first-child {
+		display: grid;
+		gap: 2px;
+
+		grid-template-areas:
+			'lst lcu len lnh'
+			'tst tcu ten tnh'
+			'del --- dlf dnh';
+
+		.lst,
+		.del,
+		.del,
+		.tst {
+			text-align: left;
+		}
+
+		.lcu,
+		.tcu {
+			text-align: center;
+		}
+		.len,
+		.dlf,
+		.ten {
 			text-align: right;
 		}
-		> div:nth-of-type(2) {
-			text-align: left;
+		.dnh,
+		.lnh,
+		.tnh {
+			text-align: right;
+		}
+
+		.lst {
+			grid-area: lst;
+		}
+		.lcu {
+			grid-area: lcu;
+		}
+		.len {
+			grid-area: len;
+		}
+		.lnh {
+			grid-area: lnh;
+		}
+
+		.tst {
+			grid-area: tst;
+		}
+		.tcu {
+			grid-area: tcu;
+		}
+		.ten {
+			grid-area: ten;
+		}
+		.tnh {
+			grid-area: tnh;
+		}
+
+		.del {
+			grid-area: del;
+		}
+		.dlf {
+			grid-area: dlf;
+		}
+		.dnh {
+			grid-area: dnh;
 		}
 	}
 `
