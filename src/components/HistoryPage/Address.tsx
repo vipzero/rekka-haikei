@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2022-04-30:14': 'feat 検索保存',
 	'2022-04-30:12': 'styl UI',
 	'2022-04-30:00': 'feat ブックマークページ追加',
 	'2022-04-29:20': 'styl 背景ハードロック追加',

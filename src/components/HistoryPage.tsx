@@ -8,14 +8,16 @@ import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
+import { useSearch } from '../hooks/useSearch'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
 import { CheckBox } from './common/CheckBox'
-import { Tab, TabPanel, Tabs } from './common/Tab'
+import { TabPanel, Tabs } from './common/Tab'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false
@@ -53,6 +55,12 @@ function HistoryPageBase() {
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 	const { favorites, toggleFavorites } = useFavorites()
+	const {
+		searchs: searchHists,
+		addSearch,
+		delAllSearchs,
+		delSearch,
+	} = useSearch()
 
 	useQueryInit((q) => {
 		setSearchPre(q)
@@ -95,6 +103,9 @@ function HistoryPageBase() {
 	const viewHists = useMemo(() => {
 		return filteredHists.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
 	}, [viewAll, filteredHists])
+	const search = (text: string) => {
+		setSearch(text.trim().split('\n').filter(Boolean))
+	}
 
 	return (
 		<Wrap>
@@ -117,53 +128,92 @@ function HistoryPageBase() {
 					<h3>履歴</h3>
 					<div>
 						<form className="search-box">
-							<textarea
-								rows={multiMode ? 8 : 1}
-								name="rekka-search-word"
-								value={searchPre}
-								autoComplete="on"
-								onChange={(e) =>
-									setSearchPre(
-										multiMode ? e.target.value : e.target.value.split('\n')[0]
-									)
-								}
-							/>
-							<div style={{ margin: '4px' }}>
-								<label>
-									<CheckBox
-										onChange={(multiMode) => {
-											setMultiMode(multiMode)
-											if (!multiMode) {
-												setSearchPre(searchPre.replace(/\n/g, ' '))
-											}
+							<div>
+								<textarea
+									rows={multiMode ? 8 : 1}
+									name="rekka-search-word"
+									value={searchPre}
+									autoComplete="on"
+									onChange={(e) =>
+										setSearchPre(
+											multiMode ? e.target.value : e.target.value.split('\n')[0]
+										)
+									}
+								/>
+							</div>
+							<div className="search-control">
+								<CheckBox
+									onChange={(multiMode) => {
+										setMultiMode(multiMode)
+										if (!multiMode) {
+											setSearchPre(searchPre.replace(/\n/g, ' '))
+										}
+									}}
+									checked={multiMode}
+								>
+									複数
+								</CheckBox>
+								<button
+									style={{ minWidth: '100px' }}
+									onClick={(e) => {
+										e.preventDefault()
+										if (searchPre.trim() !== '')
+											addSearch({ q: searchPre, multi: multiMode })
+										search(searchPre)
+									}}
+								>
+									検索
+									<div>(正規表現)</div>
+								</button>
+								{searchs.length > 0 && (
+									<button
+										onClick={(e) => {
+											e.preventDefault()
+											setSearch([])
+											setSearchPre('')
 										}}
-										checked={multiMode}
 									>
-										複数
-									</CheckBox>
-								</label>
+										リセット
+									</button>
+								)}
 							</div>
 							<div>
-								<button
-									onClick={(e) => {
-										e.preventDefault()
-										setSearch(searchPre.trim().split('\n').filter(Boolean))
-									}}
-								>
-									検索(正規表現)
-								</button>
+								<div className="search-hist">
+									{searchHists.map((s, i) => (
+										<div key={i} className="del-btn">
+											<button
+												onClick={(e) => {
+													e.preventDefault()
+													setMultiMode(s.multi)
+													search(s.q)
+													setSearchPre(s.q)
+												}}
+											>
+												{s.q.substring(0, 10)}
+											</button>
+											<button
+												onClick={(e) => {
+													e.preventDefault()
+													delSearch(s)
+												}}
+											>
+												x
+											</button>
+										</div>
+									))}
+									{searchHists.length > 0 && (
+										<button
+											style={{ background: 'var(--gray-color)' }}
+											onClick={(e) => {
+												e.preventDefault()
+												delAllSearchs()
+											}}
+										>
+											<FontAwesomeIcon icon={faTrash} />
+										</button>
+									)}
+								</div>
 							</div>
-							{searchs.length > 0 && (
-								<button
-									onClick={(e) => {
-										e.preventDefault()
-										setSearch([])
-										setSearchPre('')
-									}}
-								>
-									リセット
-								</button>
-							)}
 						</form>
 					</div>
 					<div className="search-result">
@@ -223,13 +273,14 @@ function HistoryPageBase() {
 							<ColorTr key={reco.time} h={reco.timeCate} className="hist-row">
 								<div>{reco.timeStr}</div>
 								<div>{reco.title}</div>
-								<div>
+								<div className={'non-copy'}>
 									<FontAwesomeIcon
 										icon={favorites[reco.title] ? faStarFill : faStar}
 										onClick={() => toggleFavorites(reco.title)}
 									/>
 								</div>
 								<div
+									className={'non-copy'}
 									style={{
 										background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
 										textAlign: 'right',
@@ -356,6 +407,29 @@ const Wrap = styled.div`
 				margin-top: 4px;
 			}
 		}
+	}
+	.search-hist {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2px;
+		border-left: dotted var(--primary-color);
+		padding-left: 4px;
+	}
+	.del-btn {
+		button:first-child {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+		button:nth-of-type(2) {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			background: var(--gray-color);
+		}
+	}
+	.search-control {
+		display: grid;
+		grid-template-rows: auto 1fr;
+		gap: 3px;
 	}
 `
 
