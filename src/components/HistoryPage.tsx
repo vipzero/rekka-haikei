@@ -10,6 +10,7 @@ import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
 import { formatDate, not } from '../util'
+import { CheckBox } from './common/CheckBox'
 import { Tab, TabPanel, Tabs } from './common/Tab'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
@@ -127,27 +128,31 @@ function HistoryPageBase() {
 									)
 								}
 							/>
-							<label>
-								<input
-									type="checkbox"
-									onChange={(e) => {
-										const multiMode = e.target.checked
-										setMultiMode(multiMode)
-										if (!multiMode) {
-											setSearchPre(searchPre.replace(/\n/g, ' '))
-										}
+							<div style={{ margin: '4px' }}>
+								<label>
+									<CheckBox
+										onChange={(multiMode) => {
+											setMultiMode(multiMode)
+											if (!multiMode) {
+												setSearchPre(searchPre.replace(/\n/g, ' '))
+											}
+										}}
+										checked={multiMode}
+									>
+										複数
+									</CheckBox>
+								</label>
+							</div>
+							<div>
+								<button
+									onClick={(e) => {
+										e.preventDefault()
+										setSearch(searchPre.trim().split('\n').filter(Boolean))
 									}}
-								/>
-								複数
-							</label>
-							<button
-								onClick={(e) => {
-									e.preventDefault()
-									setSearch(searchPre.trim().split('\n').filter(Boolean))
-								}}
-							>
-								検索(正規表現)
-							</button>
+								>
+									検索(正規表現)
+								</button>
+							</div>
 							{searchs.length > 0 && (
 								<button
 									onClick={(e) => {
@@ -186,24 +191,16 @@ function HistoryPageBase() {
 						)}
 					</div>
 
-					<div style={{ display: 'flex' }}>
+					<div style={{ display: 'flex', margin: '4px' }}>
 						<div data-copy-mode={copyMode}>
-							<label>
-								<input
-									type="checkbox"
-									onChange={(e) => setCopyMode(e.target.checked)}
-								/>
+							<CheckBox checked={copyMode} onChange={setCopyMode}>
 								コピペモード(2列にする)
-							</label>
+							</CheckBox>
 						</div>
 						<div data-wrap-mode={wrapMode}>
-							<label>
-								<input
-									type="checkbox"
-									onChange={(e) => setWrapMode(e.target.checked)}
-								/>
+							<CheckBox checked={wrapMode} onChange={setWrapMode}>
 								折返し
-							</label>
+							</CheckBox>
 						</div>
 					</div>
 					<div
@@ -273,8 +270,6 @@ const Wrap = styled.div`
 
 	div[data-copy-mode] {
 		width: max-content;
-		padding: 2px;
-		border: solid 1px white;
 		&[data-copy-mode='true'] {
 			border: solid 1px orange;
 			background: #fefedd;
@@ -298,7 +293,7 @@ const Wrap = styled.div`
 				font-size: 16px;
 			}
 		}
-		&[data-wrap-mode='true'] {
+		&[data-wrap-mode='false'] {
 			.hist-row {
 				> div:nth-child(2) {
 					overflow: scroll;
@@ -319,7 +314,7 @@ const Wrap = styled.div`
 
 	table.count {
 		td:nth-child(3) {
-			width: 166px;
+			min-width: 166px;
 			font-family: ui-monospace monospace;
 			font-size: 14px;
 		}

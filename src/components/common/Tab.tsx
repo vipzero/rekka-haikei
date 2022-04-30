@@ -37,11 +37,12 @@ export const Tabs = ({
 					/>
 				))}
 			</div>
-			<div className="lamp" style={{ left: `${tab * 102}px` }} />
+			<div className="lamp" style={{ left: `${tab * (WIDTH + 2)}px` }} />
 		</Style>
 	)
 }
 
+const WIDTH = 140
 export const Style = styled.div`
 	.tab-line {
 		display: flex;
@@ -52,8 +53,8 @@ export const Style = styled.div`
 
 	button {
 		border-radius: 0;
-		width: 100px;
-		padding: 8px 0;
+		width: ${WIDTH}px;
+		padding: 6px 0;
 		border: none;
 		background: var(--gray-color);
 		&:hover {
@@ -68,7 +69,7 @@ export const Style = styled.div`
 	}
 	.lamp {
 		position: relative;
-		width: 100px;
+		width: ${WIDTH}px;
 		height: 2px;
 		background: #333;
 		display: block;

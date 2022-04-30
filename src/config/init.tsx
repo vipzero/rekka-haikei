@@ -20,6 +20,27 @@ button {
 		background: #aa83af;
 	}
 }
+
+table.count {
+  border: 1px solid #ddd;
+  text-align: left;
+  td, th {
+    padding: 4px;
+  }
+  thead tr th {
+    text-align: center;
+    font-weight: bold;
+  }
+  tfoot {
+    border-top: 1px solid #ddd;
+  }
+  tbody tr th {
+    font-weight: bold;
+  }
+  tbody tr:nth-of-type(2n) {
+    background: #f5f5f5;
+  }
+}
 `
 
 export const GlobalStyle = createGlobalStyle`
