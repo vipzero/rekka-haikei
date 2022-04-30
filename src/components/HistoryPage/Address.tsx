@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
@@ -44,8 +45,9 @@ function Address() {
 				<a href="./bg">戻る</a>
 			</p>
 			<p style={{ display: 'flex', gap: '4px' }}>
-				<a href="https://forms.gle/SqABcPbFsTTpRsuR7">投票リクエスト</a>
-				<a href="https://forms.gle/fBQnrAxMnKNhmFA16">使用リクエスト</a>
+				<a href={URL_TOHYO_REQ}>投票リクエスト</a>
+				<a href={URL_USE_REQ}>使用リクエスト</a>
+				<a href={URL_FEAT_REQ}>機能リクエスト</a>
 			</p>
 			<EventLinks />
 			<div>

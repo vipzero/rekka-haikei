@@ -127,5 +127,10 @@ export const timeColorMap = [
 	CD, // 24h // 念の為
 ]
 
-export const MAKE_SEARCH_CODE_LINK =
+export const URL_MAKE_SEARCH_CODE =
 	'https://github.com/vipzero/haikei-server/blob/main/src/utils/makeSearchWord.ts'
+
+export const URL_TOHYO_REQ = 'https://forms.gle/SqABcPbFsTTpRsuR7'
+export const URL_USE_REQ = 'https://forms.gle/fBQnrAxMnKNhmFA16'
+export const URL_FEAT_REQ =
+	'https://docs.google.com/forms/d/e/1FAIpQLSfVQE9W3DFNPG03x3rJumLAGZfQsuFpxJP2vTDg4g0ddU3V-w/viewform'

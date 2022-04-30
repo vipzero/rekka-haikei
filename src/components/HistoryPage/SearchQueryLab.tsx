@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MAKE_SEARCH_CODE_LINK } from '../../config'
+import { URL_MAKE_SEARCH_CODE } from '../../config'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useSongDb } from '../../hooks/useSongDb'
 import { searchImageUrl } from '../../util'
@@ -28,7 +28,7 @@ export function SearchQueryLab() {
 			<p>
 				アルゴリズムの改善募集中です。 背景用の画像は
 				Google検索(カスタムサーチAPI)で見つけています。
-				<a href={MAKE_SEARCH_CODE_LINK}>該当コード</a>
+				<a href={URL_MAKE_SEARCH_CODE}>該当コード</a>
 			</p>
 			<p>
 				下のツールでリンクを生成し、画像検索をテストできます。
