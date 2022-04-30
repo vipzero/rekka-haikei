@@ -10,6 +10,7 @@ export function useEx(song: Song) {
 
 	useEffect(() => {
 		const eeKey = checkEx(song)
+
 		setEekey(eeKey)
 	}, [song])
 }
@@ -18,7 +19,8 @@ const hasTitle = (q: string | RegExp, song: Song) =>
 	[song.animeTitle, song.albumName].some((v) => new RegExp(q).exec(v || ''))
 
 const matchTitle = (q: string, song: Song) => song.animeTitle === q
-const icyHit = (q: string, icy: string) => icy.split(' - ').includes(q)
+const icyHit = (q: string, icy: string) =>
+	icy.split(' - ').some((w) => w.trim().includes(q))
 
 const isSakasa = (icy: string) => icy.includes('逆さま')
 const isSpin = (icy: string) =>
@@ -34,6 +36,7 @@ export function checkEx(song: Song): Eekey {
 	const { icy } = song
 
 	if (!icy) return false
+
 	if (isSpin(icy)) {
 		return 'spin'
 	} else if (isRakupro(icy)) {
