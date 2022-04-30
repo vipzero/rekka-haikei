@@ -8,6 +8,10 @@ body {
 `
 
 export const SubPageTheme = createGlobalStyle`
+body {
+  background: white;
+  z-index: 0;
+}
 button {
 	background: #ffc3cf;
 	border: none;

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
 import { EeSelector } from './EeSelector'
+import { useQeuryEid } from '../../hooks/useQueryEid'
 
 type Props = {
 	song: Song
@@ -24,6 +25,7 @@ const useTick = () => {
 const Time = ({ song }: Props) => {
 	const now = useTick()
 	const { time: startTime, trackTimeMillis } = song
+	const eid = useQeuryEid()
 
 	const currentSongEnd: null | number = trackTimeMillis
 		? startTime + trackTimeMillis
@@ -87,10 +89,8 @@ const Time = ({ song }: Props) => {
 						fontSize: '0.6rem',
 					}}
 				>
-					<a href="https://github.com/vipzero/haikei-server/blob/main/src/utils/makeSearchWord.ts">
-						改善案募集
-					</a>
 					{song.imageSearchWord}
+					<a href={`/${eid}/history?tab=4`}>(改善案募集)</a>
 				</div>
 			</div>
 			<EeSelector />

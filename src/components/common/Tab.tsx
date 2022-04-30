@@ -14,13 +14,18 @@ export const Tab = ({ n, cur, setTab, label }: Props) => (
 )
 
 export const Tabs = ({
+	tab: upTab,
 	items,
 	onChange,
 }: {
 	onChange: (v: number) => void
 	items: { label: string }[]
+	tab?: number
 }) => {
 	const [tab, setTab] = React.useState<number>(0)
+	React.useEffect(() => {
+		if (upTab !== undefined && upTab !== tab) setTab(upTab)
+	}, [upTab])
 	return (
 		<Style>
 			<div className="tab-line">

@@ -26,14 +26,31 @@ export function useQuerySearch() {
 	const router = useRouter()
 	return getQuery(router.query, router.asPath, 'q')
 }
+export function useQueryChoise() {
+	const router = useRouter()
+	return getQuery(router.query, router.asPath, 'tab')
+}
 
-export const useQueryInit = (detected: (q: string) => void) => {
+export const useQueryInit = (
+	detected: (q: string) => void,
+	hasTab: (tab: number) => void
+) => {
 	const q = useQuerySearch()
+	const tab = useQueryChoise()
+	console.log({ q, tab })
+
 	const router = useRouter()
 
 	useEffect(() => {
-		if (!q) return
-		detected(decodeURI(q))
+		if (!q && !tab === undefined) return
+
+		if (q) {
+			detected(decodeURI(q))
+		}
+		if (tab !== undefined && Number(tab) >= 0) {
+			hasTab(Number(tab))
+		}
+
 		const trimedQueryPath = router.asPath.split('?')[0]
 
 		// router.push(trimedQueryPath, undefined, { shallow: true })

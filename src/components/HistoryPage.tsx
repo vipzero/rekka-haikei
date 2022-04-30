@@ -18,6 +18,7 @@ import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 
 const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false
@@ -62,10 +63,15 @@ function HistoryPageBase() {
 		delSearch,
 	} = useSearch()
 
-	useQueryInit((q) => {
-		setSearchPre(q)
-		setSearch([q])
-	})
+	useQueryInit(
+		(q) => {
+			setSearchPre(q)
+			setSearch([q])
+		},
+		(tab) => {
+			setTab(tab)
+		}
+	)
 
 	const sortedHists = useMemo(() => {
 		if (!nsort) return histories
@@ -115,11 +121,13 @@ function HistoryPageBase() {
 			</p>
 			<Schedule setFilter={(v) => setRange(v)} />
 			<Tabs
+				tab={tab}
 				items={[
 					{ label: '履歴' },
 					{ label: '再生回数' },
 					{ label: '再生回数(曲名)' },
 					{ label: 'タグカウント' },
+					{ label: '背景検索ラボ' },
 				]}
 				onChange={setTab}
 			/>
@@ -307,6 +315,9 @@ function HistoryPageBase() {
 			</TabPanel>
 			<TabPanel value={tab} index={3}>
 				<WordCountTable />
+			</TabPanel>
+			<TabPanel value={tab} index={4}>
+				<SearchQueryLab />
 			</TabPanel>
 
 			<Address />
