@@ -41,6 +41,12 @@ table.count {
     background: #f5f5f5;
   }
 }
+a {
+	color: var(--primary-color);
+	&:hover {
+		color: #aa83af;
+	}
+}
 `
 
 export const GlobalStyle = createGlobalStyle`

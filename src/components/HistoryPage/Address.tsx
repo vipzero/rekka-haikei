@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2022-04-30:12': 'styl UI',
 	'2022-04-30:00': 'feat ブックマークページ追加',
 	'2022-04-29:20': 'styl 背景ハードロック追加',
 	'2022-04-29:02': 'styl デバッグパネル',
@@ -40,7 +41,7 @@ function Address() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
-			<p>
+			<p style={{ display: 'flex', gap: '4px' }}>
 				<a href="https://forms.gle/SqABcPbFsTTpRsuR7">投票リクエスト</a>
 				<a href="https://forms.gle/fBQnrAxMnKNhmFA16">使用リクエスト</a>
 			</p>
