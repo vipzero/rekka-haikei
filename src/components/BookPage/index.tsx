@@ -38,10 +38,10 @@ function CountTable() {
 				<a href="./bg">戻る</a>
 			</p>
 
-			<Tabs>
-				<Tab n={0} cur={tab} label="リスト" setTab={setTab} />
-				<Tab n={1} cur={tab} label="投票" setTab={setTab} />
-			</Tabs>
+			<Tabs
+				items={[{ label: 'リスト' }, { label: '投票' }]}
+				onChange={setTab}
+			/>
 			<TabPanel value={tab} index={0}>
 				{!synced && (
 					<div>

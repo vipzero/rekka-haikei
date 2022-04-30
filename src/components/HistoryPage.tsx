@@ -102,12 +102,15 @@ function HistoryPageBase() {
 				<a href="./bg">戻る</a>
 			</p>
 			<Schedule setFilter={(v) => setRange(v)} />
-			<Tabs>
-				<Tab n={0} cur={tab} label="履歴" setTab={setTab} />
-				<Tab n={1} cur={tab} label="再生回数" setTab={setTab} />
-				<Tab n={2} cur={tab} label="再生回数(曲名)" setTab={setTab} />
-				<Tab n={3} cur={tab} label="タグカウント" setTab={setTab} />
-			</Tabs>
+			<Tabs
+				items={[
+					{ label: '履歴' },
+					{ label: '再生回数' },
+					{ label: '再生回数(曲名)' },
+					{ label: 'タグカウント' },
+				]}
+				onChange={setTab}
+			/>
 			<TabPanel value={tab} index={0}>
 				<div>
 					<h3>履歴</h3>

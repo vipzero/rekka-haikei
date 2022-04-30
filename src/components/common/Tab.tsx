@@ -13,7 +13,13 @@ export const Tab = ({ n, cur, setTab, label }: Props) => (
 	</button>
 )
 
-export const Tabs = ({ items }: { items: { label: string }[] }) => {
+export const Tabs = ({
+	items,
+	onChange,
+}: {
+	onChange: (v: number) => void
+	items: { label: string }[]
+}) => {
 	const [tab, setTab] = React.useState<number>(0)
 	return (
 		<Style>
@@ -24,7 +30,10 @@ export const Tabs = ({ items }: { items: { label: string }[] }) => {
 						key={i}
 						cur={tab}
 						label={item.label}
-						setTab={() => setTab(i)}
+						setTab={() => {
+							onChange(i)
+							setTab(i)
+						}}
 					/>
 				))}
 			</div>
