@@ -104,6 +104,16 @@ export const useSettingsEe = () => {
 		}
 	}
 	const setEekeySimulate = (eeKey: Eekey) => setEekey(eeKey, true)
+	const toggleEekeySimulate = (eeKeyNew: Eekey) => {
+		if (eeKeyNew === eeKey) {
+			setEekey(false)
+			if (isExTheme(eeKey)) {
+				setTheme(0)
+			}
+		} else {
+			setEekeySimulate(eeKeyNew)
+		}
+	}
 	const cycleAbyss = () => setAbyss(nextAbyss(abyss))
 
 	return {
@@ -115,7 +125,7 @@ export const useSettingsEe = () => {
 		setAbyss,
 		cycleAbyss,
 		setEekey,
-		setEekeySimulate,
+		toggleEekeySimulate,
 		setSetting,
 	}
 }

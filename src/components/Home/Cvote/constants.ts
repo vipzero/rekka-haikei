@@ -265,8 +265,9 @@ export const eekeys = [
 
 export type Eekey = typeof eekeys[number] | false
 export type ExThemeKey = typeof eekeysThemetic[number]
-export const isExTheme = (theme: string): theme is ExThemeKey =>
-	eekeysThemetic.includes(theme as ExThemeKey)
+export const isExTheme = (
+	theme: string | false | number
+): theme is ExThemeKey => eekeysThemetic.includes(theme as ExThemeKey)
 
 export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],
