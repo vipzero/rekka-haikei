@@ -6,6 +6,7 @@ import { useFavorites } from '../../hooks/useFavorites'
 import { useSettingsShowBookmark } from '../../hooks/useSettings'
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { RadioButton } from '../Home/RadioButton'
+import { CopyButton } from './CopyButton'
 
 type Props = {}
 export function BookmarkList() {
@@ -41,10 +42,7 @@ export function BookmarkList() {
 					<pre>
 						<code>{text}</code>
 					</pre>
-					<button onClick={() => copy(text)}>
-						<FontAwesomeIcon icon={faCopy} />
-						コピー
-					</button>
+					<CopyButton onClick={() => copy(text)} label={'コピー'} />
 				</div>
 			)}
 			{mode === 'normal' &&
@@ -54,9 +52,7 @@ export function BookmarkList() {
 						<div key={i} className="row">
 							<div>
 								<span>{icy}</span>
-								<button onClick={() => copy(icy)}>
-									<FontAwesomeIcon icon={faCopy} />
-								</button>
+								<CopyButton onClick={() => copy(icy)} />
 							</div>
 							<div />
 							<div />
@@ -74,21 +70,15 @@ export function BookmarkList() {
 						<div key={i} className="row">
 							<div>
 								<span>{icy}</span>
-								<button onClick={() => copy(icy)}>
-									<FontAwesomeIcon icon={faCopy} />
-								</button>
+								<CopyButton onClick={() => copy(icy)} />
 							</div>
 							<div>
 								<span>{icyA}</span>
-								<button onClick={() => copy(icyA)}>
-									<FontAwesomeIcon icon={faCopy} />
-								</button>
+								<CopyButton onClick={() => copy(icyA)} />
 							</div>
 							<div>
 								<span>{icyB}</span>
-								<button onClick={() => copy(icyB)}>
-									<FontAwesomeIcon icon={faCopy} />
-								</button>
+								<CopyButton onClick={() => copy(icyB)} />
 							</div>
 							<button
 								onClick={() => confirm('削除する') && toggleFavorites(icy)}

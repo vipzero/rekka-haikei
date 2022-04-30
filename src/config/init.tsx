@@ -7,6 +7,21 @@ body {
 }
 `
 
+export const SubPageTheme = createGlobalStyle`
+button {
+	background: #ffc3cf;
+	border: none;
+	border-radius:12px;
+	padding: 2px 12px;
+	&:hover {
+		background: #eea3af;
+	}
+	&:active {
+		background: #aa83af;
+	}
+}
+`
+
 export const GlobalStyle = createGlobalStyle`
 
 html {

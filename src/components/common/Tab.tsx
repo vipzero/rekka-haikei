@@ -51,6 +51,7 @@ export const Style = styled.div`
 	}
 
 	button {
+		border-radius: 0;
 		width: 100px;
 		padding: 8px 0;
 		border: none;

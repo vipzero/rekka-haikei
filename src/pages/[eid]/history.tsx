@@ -1,6 +1,7 @@
 import Layout from '../../components/Layout'
 import { getStaticPaths, getStaticProps } from './bg'
 import dynamic from 'next/dynamic'
+import { SubPageTheme } from '../../config/init'
 
 export { getStaticPaths, getStaticProps }
 const HistryPageDynamic = dynamic(
@@ -12,6 +13,7 @@ const HistryPageDynamic = dynamic(
 
 const HistoryPage = () => (
 	<Layout title="履歴 - vipstream">
+		<SubPageTheme />
 		<HistryPageDynamic />
 	</Layout>
 )
