@@ -261,9 +261,18 @@ function HistoryPageBase() {
 							</CheckBox>
 						</div>
 					</div>
+					{copyMode && (
+						<div data-copy-mode className="hist-copy">
+							{viewHists.map((reco) => (
+								<div key={reco.time}>
+									{reco.timeStr} {reco.title}
+								</div>
+							))}
+						</div>
+					)}
 					<div
 						className="hist"
-						data-copy-mode={copyMode}
+						data-util-hide={copyMode}
 						data-wrap-mode={wrapMode}
 					>
 						<div className="hist-head">
@@ -337,8 +346,12 @@ const Wrap = styled.div`
 			background: #fefedd;
 		}
 	}
+	.hist-copy {
+		font-family: 'Roboto Mono', monospace;
+	}
 	.hist {
 		width: 100%;
+		font-family: 'Roboto Mono', monospace;
 
 		.hist-head,
 		.hist-row {
