@@ -13,18 +13,56 @@ export const Tab = ({ n, cur, setTab, label }: Props) => (
 	</button>
 )
 
-export const Tabs = styled.div`
-	margin-top: 12px;
-	display: flex;
+export const Tabs = ({ items }: { items: { label: string }[] }) => {
+	const [tab, setTab] = React.useState<number>(0)
+	return (
+		<Style>
+			<div className="tab-line">
+				{items.map((item, i) => (
+					<Tab
+						n={i}
+						key={i}
+						cur={tab}
+						label={item.label}
+						setTab={() => setTab(i)}
+					/>
+				))}
+			</div>
+			<div className="lamp" style={{ left: `${tab * 102}px` }} />
+		</Style>
+	)
+}
+
+export const Style = styled.div`
+	.tab-line {
+		display: flex;
+		margin-top: 12px;
+		border-bottom: solid 1px #ddd;
+		gap: 2px;
+	}
+
 	button {
-		border: solid 1px gray;
-		border-bottom: none;
-		border-radius: 4px 4px 0 0;
-		margin-left: 2px;
+		width: 100px;
+		padding: 8px 0;
+		border: none;
+		background: var(--gray-color);
+		&:hover {
+			background: #ddd;
+		}
 		&[data-active='true'] {
 			cursor: default;
 			background: white;
+			border-color: var(--primary);
+			color: var(--primary);
 		}
+	}
+	.lamp {
+		position: relative;
+		width: 100px;
+		height: 2px;
+		background: #333;
+		display: block;
+		transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 	}
 `
 

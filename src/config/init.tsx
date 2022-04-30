@@ -17,6 +17,8 @@ body {
   'Noto Sans Japanese', 'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif;
   margin: 0;
   min-height: 100vh;
+	--primary-color: #e7627d;
+	--gray-color: #eee;
 }
 ul {
 		margin: 0;
@@ -68,4 +70,6 @@ li {
 [data-util-hide='true'] {
 	display: none !important;
 }
+
+
 `
