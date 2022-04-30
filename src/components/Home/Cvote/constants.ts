@@ -239,10 +239,6 @@ export const eekeys = [
 	// 'codegeass',
 	...eekeysThemetic,
 
-	'kokaku',
-	'psychopass',
-	'lain',
-
 	'steinsgate',
 	'gkgurashi',
 	'issyuukanfr',
