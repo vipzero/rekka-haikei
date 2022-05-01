@@ -40,6 +40,7 @@ export type HistoryRaw = {
 	time: number
 	n: number | null
 }
+
 export type History = {
 	title: string
 	n: number | null

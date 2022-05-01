@@ -25,7 +25,15 @@ function useMigration() {
 		if (v < 6) {
 			localStorage.removeItem('theme')
 		}
-		setV(6)
+		if (v < 7) {
+			const v = JSON.parse(localStorage.getItem('hists_v2') || '{}')
+			delete v['2020nematu']
+			delete v['2021gw']
+			delete v['2021obon']
+			delete v['2021winter']
+			localStorage.setItem('hists_v2', JSON.stringify(v))
+		}
+		setV(7)
 		setReady(true)
 	}, [])
 	return ready

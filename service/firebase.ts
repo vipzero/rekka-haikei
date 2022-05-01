@@ -20,9 +20,10 @@ import {
 	writeBatch,
 } from 'firebase/firestore'
 import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
-import config from '../src/config'
+import config, { currentEvent } from '../src/config'
 import { formatDate } from '../src/util'
 import { HistoryRaw, Schedule, Song, History } from './../src/types'
+import ky from 'ky'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -88,7 +89,13 @@ export const getBooks = (eventId) =>
 
 export const getBooksPostCount = (eventId) => getDoc(voteDoc(eventId))
 
-export const getHistories = (eventId, from) =>
+export const getHistoriesStorage = async (eventId) => {
+	const { url } = getArchiveUrl(eventId)
+	const res = ky.get(url)
+	return await res.text()
+}
+
+export const getHistoriesDb = (eventId, from) =>
 	getDocs(
 		query(songsCol(eventId), where('time', '>', from), orderBy('time', 'desc'))
 	)
@@ -156,3 +163,18 @@ export const readRecentHistory = (
 			onNext(histories)
 		}
 	)
+
+type StoragePaths = {
+	url: string
+	destination: string
+	filename: string
+	localFile: string
+}
+const distPath = 'archive'
+export const getArchiveUrl = (eid: string): StoragePaths => {
+	const localFile = `data/archvie_${eid}.csv`
+	const filename = `hist_${eid}.csv`
+	const destination = `${distPath}/${filename}`
+	const url = `${process.env.NEXT_PUBLIC_STRAGE_URL}${destination}`
+	return { url, destination, filename, localFile }
+}

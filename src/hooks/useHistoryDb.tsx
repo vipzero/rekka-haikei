@@ -1,9 +1,16 @@
 import { useCallback, useEffect, useState } from 'react'
-import { getHistories, loadTable, saveTable } from '../../service/firebase'
-import { Count, History, Schedule } from '../types'
+import {
+	getHistoriesDb,
+	getHistoriesStorage,
+	loadTable,
+	saveTable,
+} from '../../service/firebase'
+import { Count, History, HistoryRaw, Schedule } from '../types'
 import { formatDate } from '../util'
 import { useQeuryEid } from './useQueryEid'
 import { useLocalStorage } from './useLocalStorage'
+import { currentEvent } from '../config'
+import { parse } from 'csv-parse/sync'
 
 function makeCounts(histories: History[]) {
 	const o: Record<string, number[]> = {}
@@ -21,6 +28,8 @@ function makeCounts(histories: History[]) {
 	})
 }
 function useEventHisotry(eventId: string) {
+	const archivedEvent = currentEvent?.id !== eventId
+	const [fileHists, setFilehists] = useState<History[]>([])
 	const [historiesBase, setHistsBase] = useLocalStorage<{
 		[eid: string]: History[]
 	}>(`hists_v2`, {})
@@ -31,7 +40,36 @@ function useEventHisotry(eventId: string) {
 		[eventId]
 	)
 
-	return { histories: historiesBase[eventId] || [], setHists }
+	return archivedEvent
+		? { histories: fileHists, setHists: setFilehists }
+		: { histories: historiesBase[eventId] || [], setHists }
+}
+export const toHist = (history: HistoryRaw): History => {
+	const timeStr = formatDate(history.time)
+	return {
+		...history,
+		timeStr,
+		timeCate: Number(timeStr.substring(11, 13)),
+	}
+}
+
+async function getHistories(eventId: string, from: number, histOld: History[]) {
+	if (currentEvent?.id === eventId) {
+		const snaps = await getHistoriesDb(eventId, from)
+		const newHists = snaps.docs.map((snap) => toHist(snap.data() as HistoryRaw))
+
+		console.log(`nl:${newHists.length}`)
+
+		return [...newHists, ...histOld]
+	}
+	const csv = await getHistoriesStorage(eventId)
+	const res = parse(csv) as [string, string, string][]
+
+	return res
+		.map(([time, title, n]) =>
+			toHist({ time: Number(time), title, n: Number(n) })
+		)
+		.reverse()
 }
 
 export function useHistoryDb() {
@@ -58,24 +96,7 @@ export function useHistoryDb() {
 			})
 		console.log(histOld[0])
 
-		getHistories(eventId, histOld[0]?.time || 0).then((snaps) => {
-			const newHists = snaps.docs.map((snap) => {
-				const { time, title, n } = snap.data()
-				const timeStr = formatDate(time)
-
-				return {
-					title,
-					time,
-					n,
-					timeStr,
-					timeCate: Number(timeStr.substring(11, 13)),
-				}
-			})
-
-			console.log(`nl:${newHists.length}`)
-
-			const hists = [...newHists, ...histOld]
-
+		getHistories(eventId, histOld[0]?.time || 0, histOld).then((hists) => {
 			setHists(hists)
 
 			const counts = makeCounts(hists)
