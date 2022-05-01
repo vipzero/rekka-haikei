@@ -215,6 +215,18 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 		],
 	},
 	{
+		id: 'yamajo',
+		chars: [
+			{ id: 'ur', name: 'うらら', color: '#F1E9BF' },
+			{ id: 'nn', name: '寧々', color: '#A798BF' },
+			{ id: 'mi', name: '芽子', color: '#7EB78F' },
+			{ id: 'mr', name: 'マリア', color: '#A4C7D3' },
+			{ id: 'na', name: 'ノア', color: '#E5BAC9' },
+			{ id: 'as', name: '飛鳥', color: '#41405A' },
+			{ id: 'si', name: '西園寺', color: '#F1CB9D' },
+		],
+	},
+	{
 		id: 'gabudoro',
 		chars: [
 			{ id: 'gb', name: 'ガヴ', color: '#F5DD9B' },
@@ -262,6 +274,7 @@ export const eekeys = [
 	'amagami',
 	'shanimas',
 	'gabudoro',
+	'yamajo',
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -297,4 +310,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['一週間フレンズ', 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],
+	['山田くんと7人の魔女', 'yamajo'],
 ]
