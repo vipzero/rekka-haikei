@@ -237,8 +237,7 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 ]
 
-export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
-export const eekeys = [
+export const eekeysGimic = [
 	'nonnon',
 	'mia',
 	'higurashi',
@@ -248,18 +247,15 @@ export const eekeys = [
 	'masshiro',
 	'halowa',
 
-	// 'codegeass',
-	...eekeysThemetic,
-
 	'steinsgate',
 	'gkgurashi',
 	'issyuukanfr',
-
-	'spin',
-	'flip',
-	'patema',
 	'sao',
-
+	// 'codegeass',
+] as const
+export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
+export const eekeysMirror = ['spin', 'flip', 'patema'] as const
+export const eekeysVotic = [
 	'gotoyome',
 	'oreimo',
 	'oregairu',
@@ -275,6 +271,14 @@ export const eekeys = [
 	'shanimas',
 	'gabudoro',
 	'yamajo',
+]
+export const eekeys = [
+	...eekeysGimic,
+	...eekeysThemetic,
+
+	...eekeysMirror,
+
+	...eekeysVotic,
 ] as const
 
 export type Eekey = typeof eekeys[number] | false
@@ -304,9 +308,8 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ジョジョの奇妙な冒険', 'jojo'],
 	['ボーボボ', 'bobo'],
 	['ローゼンメイデン', 'rozen'],
-	['労働歌', 'halowa'],
 	['がっこうぐらし', 'gkgurashi'],
-	['ガヴドロ', 'gabudoro'],
+	['ガヴリール', 'gabudoro'],
 	['一週間フレンズ', 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],

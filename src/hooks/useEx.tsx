@@ -23,6 +23,7 @@ const icyJustMatch = (q: string, icy: string) =>
 	icy.split(' - ').some((w) => w.trim().includes(q))
 
 const isSakasa = (icy: string) => icy.includes('逆さま')
+const isRodo = (icy: string) => icy.includes('労働')
 const isSpin = (icy: string) =>
 	icy.includes('回レ') ||
 	icy.includes('ぐるぐる') ||
@@ -43,6 +44,8 @@ export function checkEx(song: Song): Eekey {
 		return 'spin'
 	} else if (isFlip(icy)) {
 		return 'flip'
+	} else if (isRodo(icy)) {
+		return 'rodo'
 	} else if (isRakupro(icy)) {
 		return 'rakupro'
 	} else if (isMasshiro(icy)) {
