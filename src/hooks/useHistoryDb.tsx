@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react'
 import {
 	getHistoriesDb,
+	getHistoriesDbRange,
 	getHistoriesStorage,
 	loadTable,
 	saveTable,
 } from '../../service/firebase'
 import { Count, History, HistoryRaw, Schedule } from '../types'
-import { formatDate } from '../util'
+import { formatDate, mergeArr } from '../util'
 import { useQeuryEid } from './useQueryEid'
 import { useLocalStorage } from './useLocalStorage'
 import { currentEvent } from '../config'
@@ -27,7 +28,7 @@ function makeCounts(histories: History[]) {
 		return { title, times, timesStr: times.map((t) => formatDate(t)) }
 	})
 }
-function useEventHisotry(eventId: string) {
+export function useEventHisotry(eventId: string) {
 	const archivedEvent = currentEvent?.id !== eventId
 	const [fileHists, setFilehists] = useState<History[]>([])
 	const [historiesBase, setHistsBase] = useLocalStorage<{
@@ -76,24 +77,21 @@ export function useHistoryDb() {
 	const eventId = useQeuryEid()
 	const { histories, setHists } = useEventHisotry(eventId)
 
+	const [loaded, setLoaded] = useState<boolean>(false)
 	const [counts, setCounts] = useState<Count[]>([])
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
 		let any = false
 		console.log(histories.length)
-		const histOld = histories
-			.filter((h) => {
-				if (any) return true
-				const b = h.n !== null
-				any = b
-				return b
-			})
-			.map((h) => {
-				// migration
-				if (typeof h.timeCate === 'number') return h
-				return { ...h, timeCate: new Date(h.time).getHours() }
-			})
+		// n を取得していない部分までは再取得する
+		const histOld = histories.filter((h) => {
+			if (any) return true
+			const b = h.n !== null
+			any = b
+			return b
+		})
+
 		console.log(histOld[0])
 
 		getHistories(eventId, histOld[0]?.time || 0, histOld).then((hists) => {
@@ -111,8 +109,25 @@ export function useHistoryDb() {
 
 			setCounts(counts)
 			setCountsSong(countsSong)
+			setLoaded(true)
 		})
 	}, [eventId])
+
+	useEffect(() => {
+		if (!loaded) return
+		const lost0501 = 1651344231000
+		const findLost0501 = histories.find((v) => v.time === lost0501)
+		if (eventId !== '2022gw' || findLost0501) return
+		const start = 1651344231000 - 1
+		const end = 1651357830000 + 1
+		getHistoriesDbRange(eventId, start, end).then((snaps) => {
+			const newHists = snaps.docs.map((snap) =>
+				toHist(snap.data() as HistoryRaw)
+			)
+
+			setHists(mergeArr(histories, newHists, (a) => -a.time)) // counts の整合性はこのタイミングだけなくなる
+		})
+	}, [loaded])
 
 	return { histories, counts, countsSong } as const
 }

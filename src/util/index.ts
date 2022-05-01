@@ -102,3 +102,16 @@ export const uaHash = () => {
 	if (typeof navigator === 'undefined') return 0
 	return makeHash(navigator.userAgent)
 }
+
+export const mergeArr = <T>(a0: T[], b0: T[], orderBy: (a: T) => number) => {
+	const res: T[] = []
+	const a = [...a0]
+	const b = [...b0]
+
+	while (a.length > 0 && b.length > 0) {
+		const v = (orderBy(a[0]) <= orderBy(b[0]) ? a : b).shift()
+		if (v !== undefined) res.push(v)
+	}
+
+	return res.concat(a).concat(b)
+}

@@ -100,6 +100,20 @@ export const getHistoriesDb = (eventId, from) =>
 		query(songsCol(eventId), where('time', '>', from), orderBy('time', 'desc'))
 	)
 
+export const getHistoriesDbRange = (
+	eventId: string,
+	start: number,
+	end: number
+) =>
+	getDocs(
+		query(
+			songsCol(eventId),
+			where('time', '>', start),
+			where('time', '<', end),
+			orderBy('time', 'desc')
+		)
+	)
+
 export const loadTable = (eventId) => getDoc(tableDoc(eventId))
 export const saveTable = (eventId, schedule: Schedule) =>
 	setDoc(tableDoc(eventId), schedule)
