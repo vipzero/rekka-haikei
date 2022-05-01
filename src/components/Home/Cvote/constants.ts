@@ -237,6 +237,7 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 ]
 
+// 🛑 ネタバラシ禁止
 export const eekeysGimic = [
 	'nonnon',
 	'mia',
@@ -253,6 +254,7 @@ export const eekeysGimic = [
 	'sao',
 	// 'codegeass',
 ] as const
+// 🛑 ネタバラシ禁止
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
 export const eekeysMirror = ['spin', 'flip', 'patema'] as const
 export const eekeysVotic = [
