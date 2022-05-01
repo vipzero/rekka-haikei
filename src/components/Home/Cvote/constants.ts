@@ -280,6 +280,12 @@ export const eekeys = [
 
 	...eekeysVotic,
 ] as const
+export const eekeyGroups = [
+	eekeysGimic,
+	eekeysThemetic,
+	eekeysMirror,
+	eekeysVotic,
+]
 
 export type Eekey = typeof eekeys[number] | false
 export type ExThemeKey = typeof eekeysThemetic[number]
