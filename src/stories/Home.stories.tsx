@@ -82,3 +82,7 @@ Patema.args = { setting: { ...setting, eeKey: 'patema' } }
 export const Sao = Template.bind({})
 
 Sao.args = { setting: { ...setting, eeKey: 'sao' } }
+
+export const Flip = Template.bind({})
+
+Flip.args = { setting: { ...setting, eeKey: 'flip' } }

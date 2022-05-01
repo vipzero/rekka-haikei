@@ -90,6 +90,14 @@ export const exStyles = css`
 	&[data-ex='patema'] {
 		transform: rotateX(180deg);
 	}
+	&[data-ex='flip'] {
+		#bg {
+			transform: rotateY(180deg);
+		}
+		.config {
+			transform: rotateY(180deg);
+		}
+	}
 	&[data-ex='spin'] {
 		.album img {
 			animation: ${spin} 5s linear infinite;

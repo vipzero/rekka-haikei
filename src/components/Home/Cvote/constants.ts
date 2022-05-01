@@ -244,6 +244,7 @@ export const eekeys = [
 	'issyuukanfr',
 
 	'spin',
+	'flip',
 	'patema',
 	'sao',
 

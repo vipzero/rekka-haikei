@@ -19,18 +19,20 @@ const hasTitle = (q: string | RegExp, song: Song) =>
 	[song.animeTitle, song.albumName].some((v) => new RegExp(q).exec(v || ''))
 
 const matchTitle = (q: string, song: Song) => song.animeTitle === q
-const icyHit = (q: string, icy: string) =>
+const icyJustMatch = (q: string, icy: string) =>
 	icy.split(' - ').some((w) => w.trim().includes(q))
 
 const isSakasa = (icy: string) => icy.includes('逆さま')
 const isSpin = (icy: string) =>
 	icy.includes('回レ') ||
-	icyHit('ノルニル', icy) ||
-	icyHit('スクランブル', icy) ||
-	icyHit('ぐるぐる', icy)
-const isRakupro = (icy: string) => icyHit('楽園PROJECT', icy)
-const isShanimas = (icy: string) => icyHit('シャイニーカラーズ', icy)
-const isMasshiro = (icy: string) => icyHit('まっしろわーるど', icy)
+	icy.includes('ぐるぐる') ||
+	icyJustMatch('ノルニル', icy) ||
+	icyJustMatch('スクランブル', icy)
+const isFlip = (icy: string) =>
+	icy.match('/return/i') || icy.includes('ウラオモテ')
+const isRakupro = (icy: string) => icyJustMatch('楽園PROJECT', icy)
+const isShanimas = (icy: string) => icyJustMatch('シャイニーカラーズ', icy)
+const isMasshiro = (icy: string) => icyJustMatch('まっしろわーるど', icy)
 
 export function checkEx(song: Song): Eekey {
 	const { icy } = song
@@ -39,6 +41,8 @@ export function checkEx(song: Song): Eekey {
 
 	if (isSpin(icy)) {
 		return 'spin'
+	} else if (isFlip(icy)) {
+		return 'flip'
 	} else if (isRakupro(icy)) {
 		return 'rakupro'
 	} else if (isMasshiro(icy)) {
