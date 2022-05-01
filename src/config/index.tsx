@@ -4,7 +4,7 @@ import { Event, Theme, ThemeId } from '../types'
 
 const { NODE_ENV } = process.env
 
-const isDev = NODE_ENV === 'development'
+export const isDev = NODE_ENV === 'development'
 
 // prettier-ignore
 const finishTime    = +DateTime.local(2022,  5,  9,  0)

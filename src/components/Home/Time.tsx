@@ -4,6 +4,7 @@ import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
 import { EeSelector } from './EeSelector'
 import { useQeuryEid } from '../../hooks/useQueryEid'
+import { isDev } from '../../config'
 
 type Props = {
 	song: Song
@@ -93,7 +94,7 @@ const Time = ({ song }: Props) => {
 					<a href={`/${eid}/history?tab=4`}>(改善案募集)</a>
 				</div>
 			</div>
-			<EeSelector />
+			{isDev && <EeSelector />}
 		</Style>
 	)
 }
