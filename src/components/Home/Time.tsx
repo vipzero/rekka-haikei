@@ -23,6 +23,9 @@ const useTick = () => {
 	return now
 }
 
+const formatMmSs = (t: number) =>
+	`${pad2(Math.floor(t / 60000))}:${pad2(Math.floor((t % 60000) / 1000))}`
+
 const Time = ({ song }: Props) => {
 	const now = useTick()
 	const { time: startTime, trackTimeMillis } = song
@@ -47,22 +50,19 @@ const Time = ({ song }: Props) => {
 	const [songEndStr, songLeftStr, songElapsStr] = useMemo(() => {
 		if (!now) return ['--:--:--', '--:--', '--:--']
 		const elapsedTime = +now - startTime
-		const songElaps = `${pad2(Math.floor(elapsedTime / 60000))}:${pad2(
-			Math.floor((elapsedTime % 60000) / 1000)
-		)}`
+		const songElaps = formatMmSs(elapsedTime)
 
 		if (!currentSongEnd) return ['--:--:--', '--:--', songElaps]
 		const songEnd = formatTime(+currentSongEnd)
 		const diff = currentSongEnd - +now
 
-		const songDiff = `${pad2(Math.floor(diff / 60000))}:${pad2(
-			Math.floor((diff % 60000) / 1000)
-		)}`
+		const songDiff = formatMmSs(diff)
 
 		return [songEnd, songDiff, songElaps]
 	}, [now, currentSongEnd])
 
 	if (!now) return null
+	const trackTimeStr = trackTimeMillis ? formatMmSs(trackTimeMillis) : '??:??'
 
 	return (
 		<Style>
@@ -77,6 +77,7 @@ const Time = ({ song }: Props) => {
 				<div className={'ten'}>{songEndStr}</div>
 				<div className={'tnh'}>{nextHour}:00:00</div>
 
+				<div className={'ttt'}>[{trackTimeStr}]</div>
 				<div className={'del'}>+{songElapsStr}</div>
 				<div className={'dlf'}>-{songLeftStr}</div>
 				<div className={'dnh'}>-{leftHour}</div>
@@ -94,7 +95,7 @@ const Time = ({ song }: Props) => {
 					<a href={`/${eid}/history?tab=4`}>(改善案募集)</a>
 				</div>
 			</div>
-			{isDev && <EeSelector />}
+			{<EeSelector />}
 		</Style>
 	)
 }
@@ -116,7 +117,7 @@ const Style = styled.div`
 		grid-template-areas:
 			'lst lcu len lnh'
 			'tst tcu ten tnh'
-			'del --- dlf dnh';
+			'del ttt dlf dnh';
 
 		.lst,
 		.del,
@@ -126,6 +127,7 @@ const Style = styled.div`
 		}
 
 		.lcu,
+		.ttt,
 		.tcu {
 			text-align: center;
 		}
