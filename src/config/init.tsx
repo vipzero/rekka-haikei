@@ -117,5 +117,9 @@ li {
 	display: none !important;
 }
 
+.mono {
+	font-family: 'Roboto Mono', monospace;
+}
+
 
 `

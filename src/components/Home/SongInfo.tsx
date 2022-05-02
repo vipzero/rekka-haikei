@@ -97,9 +97,9 @@ function SongInfo({ song, showCounts }: Props) {
 											</a>
 										</Link>
 									))}
+								<BookCount songId={song.time} />
 							</p>
 						)}
-						<BookCount songId={song.time} />
 					</div>
 					<div>
 						{showArtwork && song.artworkUrl100 && (

@@ -11,7 +11,7 @@ import Home from './Home'
 const LoadingView = () => (
 	<div>
 		<span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
-		<Address />
+		{/* <Address /> */}
 	</div>
 )
 
