@@ -98,3 +98,7 @@ export type Event = {
 	label: string
 	current?: true
 }
+
+export type Yo = {
+	bookCount?: number
+}
