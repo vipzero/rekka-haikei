@@ -22,8 +22,7 @@ import {
 import ky from 'ky'
 import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
 import config from '../src/config'
-import { formatDate } from '../src/util'
-import { History, HistoryRaw, Schedule, Song, Yo } from './../src/types'
+import { History, HistoryRaw, Schedule, Song } from './../src/types'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -150,25 +149,17 @@ export const readSong = (eid: string, onNext: (song: Song) => void) =>
 		onNext(snap.data() as Song)
 	})
 
-export const watchYo = (onNext: (yo: Yo) => void) =>
-	onSnapshot(bookCountDoc(), (snap) => {
-		if (!snap.exists()) return
-
-		onNext(snap.data() as Yo)
-	})
-
-export const incBookCount = () =>
-	updateDoc(bookCountDoc(), {
-		bookCount: increment(1),
-	})
-
 export const watchHistSong = (
 	eid: string,
 	id: number,
 	onNext: (hist: HistoryRaw) => void
 ) =>
 	onSnapshot(histSongsDoc(eid, String(id)), (snap) => {
-		if (!snap.exists()) return
+		if (!snap.exists()) {
+			console.error('hist not found')
+			console.error(snap.id)
+			console.error({ eid, id })
+		}
 
 		onNext(snap.data() as HistoryRaw)
 	})

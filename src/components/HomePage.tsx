@@ -27,6 +27,7 @@ function HomePageBase() {
 	const { abyss } = useSettingsEe()
 
 	useEx(song)
+	if (!loaded) return <LoadingView />
 
 	return (
 		<>
