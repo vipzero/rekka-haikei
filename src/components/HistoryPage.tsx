@@ -43,7 +43,7 @@ function HistoryPage() {
 	return <HistoryPageBase />
 }
 function HistoryPageBase() {
-	const { histories, counts, countsSong } = useHistoryDb()
+	const { fixDb, histories, counts, countsSong } = useHistoryDb()
 	const eid = useQeuryEid()
 
 	const [searchPre, setSearchPre] = useState<string>('')
@@ -330,6 +330,9 @@ function HistoryPageBase() {
 			</TabPanel>
 
 			<Address />
+			<div>
+				<button onClick={fixDb}>重複・履歴抜け修正ボタン</button>
+			</div>
 			{/* <ResetWorkerButton /> */}
 		</Wrap>
 	)
