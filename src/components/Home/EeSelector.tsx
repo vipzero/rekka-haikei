@@ -10,8 +10,10 @@ const range = (start: number, end: number) =>
 
 export const EeSelector = (props: Props) => {
 	const { ee, eeKey, toggleEekeySimulate } = useSettingsEe()
+	console.log(eekeyGroups)
 	const eeSawGroups = useMemo(
-		() => eekeyGroups.map((eeg) => eeg.map((key) => ee?.[key] || false)),
+		() =>
+			eekeyGroups.map((eeg) => eeg.map((key) => ({ get: !!ee?.[key], key }))),
 		[ee]
 	)
 
@@ -23,21 +25,16 @@ export const EeSelector = (props: Props) => {
 					<div key={j}>
 						{eeSaw.map((b, i) => (
 							<span
-								key={i}
+								key={b.key}
 								className="tooltip"
-								style={{ gridArea: `egg${i}` }}
-								data-active={eeKey === eekeys[i]}
+								data-active={b.key === eeKey}
 								onClick={() => {
-									if (!b) return
-									toggleEekeySimulate(eekeys[i])
+									if (!b.get) return
+									toggleEekeySimulate(b.key)
 								}}
 							>
-								<span className="tooltip-text">
-									{b
-										? eekeys[i]
-										: eekeys[i][0] + eekeys[i].substring(1).replace(/./g, '.')}
-								</span>
-								{b ? '*' : '-'}
+								{b.get && <span className="tooltip-text">{b.key}</span>}
+								{b.get ? '*' : '-'}
 							</span>
 						))}
 					</div>
