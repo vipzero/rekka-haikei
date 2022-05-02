@@ -2,7 +2,7 @@ import { ThemeId } from '../../../types'
 import { Char } from './index'
 
 type CvoteProfile = {
-	id: Eekey
+	id: typeof eekeysVotic[number]
 	chars: Char[]
 }
 export const CVOTE_PROFILES: CvoteProfile[] = [
@@ -235,9 +235,21 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'rf', name: 'ラフィ', color: '#E8E7F7' },
 		],
 	},
+	{
+		id: 'bryunhild',
+		chars: [
+			{ id: 'nk', name: '寧子', color: '#465073' },
+			{ id: 'kn', name: '佳奈', color: '#F1EBBE' },
+			{ id: 'kz', name: 'カズミ', color: '#E9C3D2' },
+			{ id: 'kt', name: '小鳥', color: '#E1D1BC' },
+			{ id: 'nn', name: '奈波', color: '#DFE0EF' },
+			{ id: 'ht', name: '初菜', color: '#7C675B' },
+			{ id: 'mt', name: '真子', color: '#F6F9FA' },
+		],
+	},
 ]
 
-// 🛑 ネタバラシ禁止
+// 🛑 ネタバレ注意
 export const eekeysGimic = [
 	'nonnon',
 	'mia',
@@ -248,13 +260,12 @@ export const eekeysGimic = [
 	'masshiro',
 	'halowa',
 
-	'steinsgate',
 	'gkgurashi',
 	'issyuukanfr',
 	'sao',
 	// 'codegeass',
 ] as const
-// 🛑 ネタバラシ禁止
+// 🛑 ネタバレ注意
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
 export const eekeysMirror = ['spin', 'flip', 'patema', 'ariascarlet'] as const
 export const eekeysVotic = [
@@ -263,6 +274,7 @@ export const eekeysVotic = [
 	'oregairu',
 	'saekano',
 	'monogatari',
+	'steinsgate',
 	'oreshura',
 	'jinsei',
 	'toaru',
@@ -273,7 +285,8 @@ export const eekeysVotic = [
 	'shanimas',
 	'gabudoro',
 	'yamajo',
-]
+	'bryunhild',
+] as const
 export const eekeys = [
 	...eekeysGimic,
 	...eekeysThemetic,
@@ -312,6 +325,7 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['冴えない彼女の育てかた', 'saekano'],
 	[/[化猫傷偽終暦憑]物語/, 'monogatari'],
 	['が修羅場すぎ', 'oreshura'],
+	['極黒のブリュンヒルデ', 'bryunhild'],
 	[/とある(魔術|科学)の/, 'toaru'],
 	['ジョジョの奇妙な冒険', 'jojo'],
 	['ボーボボ', 'bobo'],
