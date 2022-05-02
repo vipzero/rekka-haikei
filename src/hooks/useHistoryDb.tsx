@@ -113,23 +113,40 @@ export function useHistoryDb() {
 		})
 	}, [eventId])
 
-	useEffect(() => {
+	const fixDb = () => {
 		if (!loaded) return
+
 		const lost0501 = 1651344231000
 		const findLost0501 = histories.find((v) => v.time === lost0501)
-		if (eventId !== '2022gw' || findLost0501) return
-		const start = 1651344231000 - 1
-		const end = 1651357830000 + 1
-		getHistoriesDbRange(eventId, start, end).then((snaps) => {
-			const newHists = snaps.docs.map((snap) =>
-				toHist(snap.data() as HistoryRaw)
-			)
+		if (eventId !== '2022gw' && !findLost0501) {
+			;(async () => {
+				const start = 1651344231000 - 1
+				const end = 1651357830000 + 1
+				const snaps = await getHistoriesDbRange(eventId, start, end)
+				const newHists = snaps.docs.map((snap) =>
+					toHist(snap.data() as HistoryRaw)
+				)
 
-			setHists(mergeArr(histories, newHists, (a) => -a.time)) // counts の整合性はこのタイミングだけなくなる
+				setHists(mergeArr(histories, newHists, (a) => -a.time)) // counts の整合性はこのタイミングだけなくなる
+				alert('2022/05/01 のデータを修正しました')
+			})()
+		}
+		const hists: typeof histories = []
+		histories.reduce((a, b) => {
+			if (a.title !== b.title) {
+				hists.push(a)
+			}
+			return b
 		})
-	}, [loaded])
+		if (hists.length !== histories.length) {
+			alert(
+				`重複しているデータを修正しました ${histories.length - hists.length}`
+			)
+			setHists(hists)
+		}
+	}
 
-	return { histories, counts, countsSong } as const
+	return { histories, counts, countsSong, fixDb } as const
 }
 
 export function useScheduleDb() {

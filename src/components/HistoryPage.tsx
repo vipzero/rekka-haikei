@@ -312,7 +312,7 @@ function HistoryPageBase() {
 						<p>{histories.length}中100件のみ表示しています</p>
 					)}
 					<button onClick={() => setViewAll((v) => !v)}>
-						{viewAll ? '隠す' : '全表示する'}
+						{viewAll ? '隠す▲' : '全表示する▶'}
 					</button>
 				</div>
 			</TabPanel>
