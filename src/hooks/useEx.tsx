@@ -22,6 +22,7 @@ const matchTitle = (q: string, song: Song) => song.animeTitle === q
 const icyJustMatch = (q: string, icy: string) =>
 	icy.split(' - ').some((w) => w.trim().includes(q))
 
+const isBullet = (icy: string) => icy.match(/bull['e]/)
 const isSakasa = (icy: string) => icy.includes('逆さま')
 const isRodo = (icy: string) => icy.includes('労働')
 const isSpin = (icy: string) =>
@@ -30,7 +31,7 @@ const isSpin = (icy: string) =>
 	icyJustMatch('ノルニル', icy) ||
 	icyJustMatch('スクランブル', icy)
 const isFlip = (icy: string) =>
-	icy.match('/return/i') || icy.includes('ウラオモテ')
+	icy.match(/return/i) || icy.includes('ウラオモテ')
 const isRakupro = (icy: string) => icyJustMatch('楽園PROJECT', icy)
 const isShanimas = (icy: string) => icyJustMatch('シャイニーカラーズ', icy)
 const isMasshiro = (icy: string) => icyJustMatch('まっしろわーるど', icy)
@@ -46,6 +47,8 @@ export function checkEx(song: Song): Eekey {
 		return 'flip'
 	} else if (isRodo(icy)) {
 		return 'rodo'
+	} else if (isBullet(icy)) {
+		return 'ariascarlet'
 	} else if (isRakupro(icy)) {
 		return 'rakupro'
 	} else if (isMasshiro(icy)) {

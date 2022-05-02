@@ -59,7 +59,7 @@
 		"coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
 		"gen:env": "cp templates/temp.env .env.development.local && cp templates/temp.env .env.production.local",
 		"test": "jest",
-		"storybook": "start-storybook -p 6006",
+		"storybook": "start-storybook -s./public -p 6006",
 		"build-storybook": "build-storybook"
 	},
 	"browserslist": [

@@ -268,7 +268,7 @@ export const exStyles = css`
 	}
 
 	&[data-ex='steinsgate'] {
-		#timebar > div {
+		#timebar > .wrap {
 			transform-origin: 0 0;
 			animation: spin-y 10s cubic-bezier(0.28, 1.61, 0.7, -0.71) infinite
 				alternate;
@@ -442,6 +442,27 @@ export const exStyles = css`
 	${['r', 'g', 'b'].map((k) => genAnimationRgbShift(k))}
 	${genAnimationGlitch('before')}
 	${genAnimationGlitch('after')}
+
+	&[data-ex='ariascarlet'] {
+		#timebar {
+			.fill {
+				background-color: red;
+			}
+			.pointer {
+				mask-image: url(/static/bullet.svg);
+				mask-mode: alpha;
+				mask-size: 16px 8px;
+				background: conic-gradient(at 0% 30%, red 10%, yellow 19%, #ff5722 45%);
+				transform: rotateY(180deg);
+				position: relative;
+				top: -2px;
+				left: -2px;
+
+				width: 16px;
+				height: 8px;
+			}
+		}
+	}
 
 	&[data-ex='sao'] {
 		/* .config,

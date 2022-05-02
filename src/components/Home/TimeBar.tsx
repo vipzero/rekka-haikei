@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { between } from '../../util'
 
 type Props = {
@@ -30,22 +32,26 @@ function TimeBar({ startTime, size }: Props) {
 	if (!size) return null
 
 	return (
-		<div
-			id="timebar"
-			style={{
-				position: 'absolute',
-				width: '100vw',
-				height: '4px',
-				background: '#222',
-			}}
-		>
-			<div>
-				<div
-					style={{ background: '#ddd', width: `${100 * p}vw`, height: '4px' }}
-				></div>
+		<Style id="timebar">
+			<div className="wrap">
+				<div className="fill" style={{ width: `${100 * p}vw` }}></div>
+				<div className="pointer" />
 			</div>
-		</div>
+		</Style>
 	)
 }
+const Style = styled.div`
+	.wrap {
+		display: flex;
+		position: absolute;
+		width: 100vw;
+		height: 4px;
+		background: #222;
+	}
+	.fill {
+		background: #ddd;
+		height: 4px;
+	}
+`
 
 export default TimeBar

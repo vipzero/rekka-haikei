@@ -86,3 +86,7 @@ Sao.args = { setting: { ...setting, eeKey: 'sao' } }
 export const Flip = Template.bind({})
 
 Flip.args = { setting: { ...setting, eeKey: 'flip' } }
+
+export const Aria = Template.bind({})
+
+Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }

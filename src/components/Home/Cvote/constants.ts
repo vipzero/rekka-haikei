@@ -256,7 +256,7 @@ export const eekeysGimic = [
 ] as const
 // 🛑 ネタバラシ禁止
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
-export const eekeysMirror = ['spin', 'flip', 'patema'] as const
+export const eekeysMirror = ['spin', 'flip', 'patema', 'ariascarlet'] as const
 export const eekeysVotic = [
 	'gotoyome',
 	'oreimo',
@@ -322,4 +322,5 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],
 	['山田くんと7人の魔女', 'yamajo'],
+	['緋弾', 'ariascarlet'],
 ]
