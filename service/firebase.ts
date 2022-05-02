@@ -19,11 +19,11 @@ import {
 	where,
 	writeBatch,
 } from 'firebase/firestore'
-import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
-import config, { currentEvent } from '../src/config'
-import { formatDate } from '../src/util'
-import { HistoryRaw, Schedule, Song, History } from './../src/types'
 import ky from 'ky'
+import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
+import config from '../src/config'
+import { formatDate } from '../src/util'
+import { History, HistoryRaw, Schedule, Song, Yo } from './../src/types'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -46,6 +46,8 @@ const P_TABLE = 'table'
 const P_HIST = 'hist'
 const P_COUNTS = 'counts'
 const P_CVOTE = 'cvote'
+const P_YO = 'yo'
+const P_CURRENT = 'current'
 
 // refs
 const voteDoc = (eid: string) => doc(fdb, P_VOTE, eid)
@@ -57,6 +59,7 @@ const songsCol = (eid: string) => collection(fdb, P_HIST, eid, P_SONGS)
 const countsCol = (eid: string) => collection(fdb, P_HIST, eid, P_COUNTS)
 const animeDoc = (aid: string) => doc(fdb, P_CVOTE, aid)
 const songDoc = (eid: string) => doc(fdb, P_SONG, eid)
+const bookCountDoc = () => doc(fdb, P_YO, P_CURRENT)
 
 // querys
 const icyIs = (icy: string) => where('icy', '==', icy)
@@ -134,11 +137,23 @@ export const readCvote = (
 		onNext(snap.data() as AnimeVotes)
 	})
 
-export const readSong = (animeId: string, onNext: (song: Song) => void) =>
-	onSnapshot(songDoc(animeId), (snap) => {
+export const readSong = (eid: string, onNext: (song: Song) => void) =>
+	onSnapshot(songDoc(eid), (snap) => {
 		if (!snap.exists()) return
 
 		onNext(snap.data() as Song)
+	})
+
+export const watchYo = (onNext: (yo: Yo) => void) =>
+	onSnapshot(bookCountDoc(), (snap) => {
+		if (!snap.exists()) return
+
+		onNext(snap.data() as Yo)
+	})
+
+export const incBookCount = () =>
+	updateDoc(bookCountDoc(), {
+		bookCount: increment(1),
 	})
 
 export const saveSongBg = async (url: string, eid: string, time: number) => {
