@@ -38,15 +38,15 @@ export const isSongFull = (song: Song): song is SongFull => 'spInfo' in song
 export type HistoryRaw = {
 	title: string
 	time: number
-	n: number | null
+	n?: number
+	b?: number
 }
 
 export type History = {
 	title: string
-	n: number | null
 	time: number
-	timeStr: string
-	timeCate: number // for style (hour % 10)
+	n: number | null
+	b: number | null
 }
 export type WordCount = {
 	count: number

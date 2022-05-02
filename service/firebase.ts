@@ -172,11 +172,8 @@ export const saveSongBg = async (url: string, eid: string, time: number) => {
 	})
 }
 
-function toHistory({ title, time, n }: HistoryRaw): History {
-	const timeStr = formatDate(time)
-	const timeCate = Number(timeStr.substring(11, 13))
-
-	return { title, time, timeStr, timeCate, n }
+function toHistory({ title, time, n, b }: HistoryRaw): History {
+	return { title, time, n: n ?? null, b: b ?? null }
 }
 
 export const readRecentHistory = (

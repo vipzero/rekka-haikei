@@ -20,6 +20,9 @@ import { WordCountTable } from './HistoryPage/WordCountTable'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 
+const toH = (ts: number) =>
+	Math.floor((ts % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
+
 const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false
 	try {
@@ -265,7 +268,7 @@ function HistoryPageBase() {
 						<div data-copy-mode className="hist-copy">
 							{viewHists.map((reco) => (
 								<div key={reco.time}>
-									{reco.timeStr} {reco.title}
+									{formatDate(reco.time)} {reco.title}
 								</div>
 							))}
 						</div>
@@ -287,8 +290,8 @@ function HistoryPageBase() {
 						</div>
 
 						{viewHists.map((reco, i) => (
-							<ColorTr key={reco.time} h={reco.timeCate} className="hist-row">
-								<div>{reco.timeStr}</div>
+							<ColorTr key={reco.time} h={toH(reco.time)} className="hist-row">
+								<div>{formatDate(reco.time)}</div>
 								<div>{reco.title}</div>
 								<div className={'non-copy'}>
 									<FontAwesomeIcon

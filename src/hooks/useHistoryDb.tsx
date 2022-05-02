@@ -45,14 +45,11 @@ export function useEventHisotry(eventId: string) {
 		? { histories: fileHists, setHists: setFilehists }
 		: { histories: historiesBase[eventId] || [], setHists }
 }
-export const toHist = (history: HistoryRaw): History => {
-	const timeStr = formatDate(history.time)
-	return {
-		...history,
-		timeStr,
-		timeCate: Number(timeStr.substring(11, 13)),
-	}
-}
+export const toHist = (history: HistoryRaw): History => ({
+	...history,
+	n: history.n ?? null,
+	b: history.b ?? null,
+})
 
 async function getHistories(eventId: string, from: number, histOld: History[]) {
 	if (currentEvent?.id === eventId) {
@@ -64,11 +61,11 @@ async function getHistories(eventId: string, from: number, histOld: History[]) {
 		return [...newHists, ...histOld]
 	}
 	const csv = await getHistoriesStorage(eventId)
-	const res = parse(csv) as [string, string, string][]
+	const res = parse(csv) as [string, string, string, string | undefined][]
 
 	return res
-		.map(([time, title, n]) =>
-			toHist({ time: Number(time), title, n: Number(n) })
+		.map(([time, title, n, b]) =>
+			toHist({ time: Number(time), title, n: Number(n), b: b ? Number(b) : 0 })
 		)
 		.reverse()
 }
