@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRecentHistoryDb } from '../../hooks/useRecentHistoryDb'
 import { useSettingsShowHistory } from '../../hooks/useSettings'
+import { formatDate } from '../../util'
 
 function RecentHistoryList() {
 	const { visible, closeHistory } = useSettingsShowHistory()
@@ -23,7 +24,7 @@ function RecentHistoryList() {
 			</p>
 			{histories.map((hist, i) => (
 				<p key={i}>
-					{hist.timeStr}: {hist.title}
+					{formatDate(hist.time)}: {hist.title}
 				</p>
 			))}
 		</div>

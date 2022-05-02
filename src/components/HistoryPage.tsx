@@ -19,6 +19,7 @@ import Schedule from './HistoryPage/Schedule'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 
 const toH = (ts: number) =>
 	Math.floor((ts % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
@@ -287,6 +288,11 @@ function HistoryPageBase() {
 									N
 								</div>
 							</div>
+							<div className="non-copy">
+								<div>
+									<FontAwesomeIcon icon={faThumbsUp} />
+								</div>
+							</div>
 						</div>
 
 						{viewHists.map((reco, i) => (
@@ -306,7 +312,18 @@ function HistoryPageBase() {
 										textAlign: 'right',
 									}}
 								>
-									{reco.n === null ? '-' : reco.n}
+									{reco.n ?? '-'}
+								</div>
+								<div
+									className={'non-copy'}
+									style={{
+										background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
+											reco.b ?? 0
+										}%, #fff ${reco.b ?? 0}%, #fff 100%)`,
+										textAlign: 'right',
+									}}
+								>
+									{reco.b || '-'}
 								</div>
 							</ColorTr>
 						))}
@@ -363,7 +380,7 @@ const Wrap = styled.div`
 		.hist-row {
 			width: max(96vw, 600px);
 			display: grid;
-			grid-template-columns: 184px 1fr 1.5rem 3rem;
+			grid-template-columns: 184px 1fr 1.5rem 2rem 2rem;
 		}
 
 		.hist-row {

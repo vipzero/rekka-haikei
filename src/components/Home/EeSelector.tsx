@@ -10,7 +10,7 @@ const range = (start: number, end: number) =>
 
 export const EeSelector = (props: Props) => {
 	const { ee, eeKey, toggleEekeySimulate } = useSettingsEe()
-	console.log(eekeyGroups)
+
 	const eeSawGroups = useMemo(
 		() =>
 			eekeyGroups.map((eeg) => eeg.map((key) => ({ get: !!ee?.[key], key }))),

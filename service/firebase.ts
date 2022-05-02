@@ -55,7 +55,9 @@ const booksCol = (eid: string) => collection(fdb, P_VOTE, eid, P_BOOKS)
 const tablesCol = () => collection(fdb, P_TABLE)
 const tableDoc = (eid: string) => doc(fdb, P_TABLE, eid)
 const histsCol = () => collection(fdb, P_HIST)
-const songsCol = (eid: string) => collection(fdb, P_HIST, eid, P_SONGS)
+const histSongsDoc = (eid: string, time: string) =>
+	doc(fdb, P_HIST, eid, P_SONGS, time)
+const histSongsCol = (eid: string) => collection(fdb, P_HIST, eid, P_SONGS)
 const countsCol = (eid: string) => collection(fdb, P_HIST, eid, P_COUNTS)
 const animeDoc = (aid: string) => doc(fdb, P_CVOTE, aid)
 const songDoc = (eid: string) => doc(fdb, P_SONG, eid)
@@ -100,7 +102,11 @@ export const getHistoriesStorage = async (eventId) => {
 
 export const getHistoriesDb = (eventId, from) =>
 	getDocs(
-		query(songsCol(eventId), where('time', '>', from), orderBy('time', 'desc'))
+		query(
+			histSongsCol(eventId),
+			where('time', '>', from),
+			orderBy('time', 'desc')
+		)
 	)
 
 export const getHistoriesDbRange = (
@@ -110,7 +116,7 @@ export const getHistoriesDbRange = (
 ) =>
 	getDocs(
 		query(
-			songsCol(eventId),
+			histSongsCol(eventId),
 			where('time', '>', start),
 			where('time', '<', end),
 			orderBy('time', 'desc')
@@ -156,6 +162,22 @@ export const incBookCount = () =>
 		bookCount: increment(1),
 	})
 
+export const watchHistSong = (
+	eid: string,
+	id: number,
+	onNext: (hist: HistoryRaw) => void
+) =>
+	onSnapshot(histSongsDoc(eid, String(id)), (snap) => {
+		if (!snap.exists()) return
+
+		onNext(snap.data() as HistoryRaw)
+	})
+export const incSongBookCount = (eid: string, id: number) =>
+	updateDoc(histSongsDoc(eid, String(id)), {
+		b: increment(1),
+		// a: increment(1),
+	})
+
 export const saveSongBg = async (url: string, eid: string, time: number) => {
 	const songRef = songDoc(eid)
 	runTransaction(fdb, async (trans) => {
@@ -181,7 +203,7 @@ export const readRecentHistory = (
 	onNext: (histories: History[]) => void
 ) =>
 	onSnapshot(
-		query(songsCol(eventId), orderBy('time', 'desc'), limit(10)),
+		query(histSongsCol(eventId), orderBy('time', 'desc'), limit(10)),
 		(snaps) => {
 			const histories = snaps.docs.map((snap) =>
 				toHistory(snap.data() as HistoryRaw)

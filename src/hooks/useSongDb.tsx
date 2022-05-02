@@ -7,12 +7,14 @@ import React, {
 } from 'react'
 import {
 	incBookCount,
+	incSongBookCount,
 	readSong,
 	saveSongBg,
+	watchHistSong,
 	watchYo,
 } from '../../service/firebase'
 import { currentEvent } from '../config'
-import { Song, Yo } from '../types'
+import { HistoryRaw, Song, Yo } from '../types'
 import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
 
@@ -58,21 +60,20 @@ const defaultConfig = {
 	addCount: () => {},
 }
 
-export function useBookCountDb() {
-	const [yo, setYo] = useState<Required<Yo>>(defaultConfig)
+export function useBookCountDb(songId: number) {
+	const [yo, setYo] = useState<HistoryRaw | null>(null)
+	const eventId = useQeuryEid()
 
 	useEffect(() => {
-		const si = watchYo((yo) => {
-			setYo({ bookCount: 0, ...yo })
-		})
+		const si = watchHistSong(eventId, songId, (hist) => setYo(hist))
 
 		return () => si()
 	}, [])
 	const addCount = () => {
-		incBookCount()
+		incSongBookCount(eventId, songId)
 	}
 
-	return { bookCount: yo.bookCount, addCount }
+	return { bookCount: yo?.n || 0, addCount }
 }
 
 export type YoState = ReturnType<typeof useBookCountDb>

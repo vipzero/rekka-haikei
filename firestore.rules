@@ -5,12 +5,22 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    match /song/{infoId=**} {
-      allow read, write;
-    }
-    match /hist/{eventId=**} {
+    match /song/{eventId} {
       allow read;
+      allow update: if (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['imageLinks']));
     }
+    match /hist/{eventId} {
+      allow read;
+      match /songs/{songId} {
+        allow read;
+        allow update: if (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['b']));
+      }
+      match /counts/{songId=**} {
+        allow read;
+      }
+    }
+
+
     match /feedback/{feedbackId=**} {
       allow write;
     }

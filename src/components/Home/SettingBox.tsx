@@ -65,7 +65,7 @@ function SettingBox({
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
-	const { addCount } = useBookCountDb()
+	const { addCount } = useBookCountDb(song.time)
 
 	const book = () => {
 		if (!pressed) addCount()
