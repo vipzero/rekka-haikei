@@ -23,5 +23,9 @@ service cloud.firestore {
     match /cvote/{animeId=**} {
       allow read, write;
     }
+    // スケジュール欄
+    match /table/{eventId=**} {
+      allow read, write;
+    }
   }
 }
