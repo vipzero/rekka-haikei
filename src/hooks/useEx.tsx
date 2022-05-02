@@ -46,7 +46,7 @@ export function checkEx(song: Song): Eekey {
 	} else if (isFlip(icy)) {
 		return 'flip'
 	} else if (isRodo(icy)) {
-		return 'rodo'
+		return 'halowa'
 	} else if (isBullet(icy)) {
 		return 'ariascarlet'
 	} else if (isRakupro(icy)) {
