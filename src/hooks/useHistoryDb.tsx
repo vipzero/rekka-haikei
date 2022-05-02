@@ -80,7 +80,6 @@ export function useHistoryDb() {
 
 	useEffect(() => {
 		let any = false
-		console.log(histories.length)
 		// n を取得していない部分までは再取得する
 		const histOld = histories.filter((h) => {
 			if (any) return true
@@ -88,8 +87,6 @@ export function useHistoryDb() {
 			any = b
 			return b
 		})
-
-		console.log(histOld[0])
 
 		getHistories(eventId, histOld[0]?.time || 0, histOld).then((hists) => {
 			setHists(hists)

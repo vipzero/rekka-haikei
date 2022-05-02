@@ -37,7 +37,6 @@ export const useQueryInit = (
 ) => {
 	const q = useQuerySearch()
 	const tab = useQueryChoise()
-	console.log({ q, tab })
 
 	const router = useRouter()
 

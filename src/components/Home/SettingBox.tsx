@@ -65,7 +65,6 @@ function SettingBox({
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
 	}
-	console.log({ songTime: song.time })
 	const { addCount } = useBookCountDb(song.time)
 
 	const book = () => {

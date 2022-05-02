@@ -61,7 +61,6 @@ const defaultConfig = {
 export function useBookCountDb(songId: number | undefined) {
 	const [yo, setYo] = useState<HistoryRaw | null>(null)
 	const eventId = useQeuryEid()
-	console.log({ yo })
 
 	useEffect(() => {
 		if (!songId) return
