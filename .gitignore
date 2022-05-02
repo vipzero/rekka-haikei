@@ -34,3 +34,5 @@ public/workbox-*
 
 /tmp
 public/fallback-*
+
+firebase-debug.log
