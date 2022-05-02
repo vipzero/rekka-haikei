@@ -50,7 +50,7 @@ function Home({ song }: Props) {
 				className={theme === 2 ? 'dark-theme' : 'light-theme'}
 				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
-				<SongInfo song={song} showCounts={showCounts}></SongInfo>
+				<SongInfo song={song} showCounts={showCounts} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
 				</div>

@@ -7,6 +7,7 @@ import {
 import {
 	faBookmark,
 	faColumns,
+	faCompactDisc,
 	faHistory,
 	faLightbulb,
 	faLock,
@@ -19,17 +20,17 @@ import {
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import config, { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
-import { faCompactDisc } from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
 	favorited: boolean
@@ -53,6 +54,8 @@ function SettingBox({
 	const s = useSettings()
 	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()
+	const [pressed, setPressed] = useState<boolean>(false)
+	useEffect(() => setPressed(false), [song.time])
 
 	const isLastTime = useMemo(
 		() => +new Date() > config.lastspurtTime,
@@ -61,6 +64,13 @@ function SettingBox({
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
+	}
+	const { addCount } = useBookCountDb()
+
+	const book = () => {
+		if (!pressed) addCount()
+		setPressed(true)
+		toggleFavorited()
 	}
 
 	return (
@@ -99,11 +109,7 @@ function SettingBox({
 						{s.showHelp && '閉じる'}
 					</ConfButton>
 
-					<ToggleButton
-						checked={favorited}
-						onClick={() => toggleFavorited()}
-						className="book"
-					>
+					<ToggleButton checked={favorited} onClick={book} className="book">
 						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
 						{s.showHelp &&
 							(favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)')}

@@ -3,7 +3,7 @@ import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
 import { useSettingsEe } from '../hooks/useSettings'
-import { useSongDb } from '../hooks/useSongDb'
+import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Address from './HistoryPage/Address'
 import Home from './Home'
@@ -41,7 +41,9 @@ function HomePageBase() {
 
 const RecoilHome = () => (
 	<RecoilRoot>
-		<HomePage />
+		<YoProvider>
+			<HomePage />
+		</YoProvider>
 	</RecoilRoot>
 )
 

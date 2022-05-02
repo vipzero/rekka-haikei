@@ -5,6 +5,7 @@ import { useQeuryEid } from '../../hooks/useQueryEid'
 import { isSongFull, Song } from '../../types'
 import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
 import { useSettings } from '../../hooks/useSettings'
+import BookCount from './BookCount'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -98,6 +99,7 @@ function SongInfo({ song, showCounts }: Props) {
 									))}
 							</p>
 						)}
+						<BookCount songId={song.time} />
 					</div>
 					<div>
 						{showArtwork && song.artworkUrl100 && (

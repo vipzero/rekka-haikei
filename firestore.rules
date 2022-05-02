@@ -14,13 +14,10 @@ service cloud.firestore {
     match /feedback/{feedbackId=**} {
       allow write;
     }
-    match /book/{bookId=**} {
-      allow read, write;
-    }
     match /vote/{voteId=**} {
       allow read, write;
     }
-    match /table/{eventId=**} {
+    match /yo/{yoId=**} {
       allow read, write;
     }
     match /cvote/{animeId=**} {
