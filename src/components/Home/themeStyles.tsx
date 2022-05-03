@@ -2,38 +2,26 @@ import { css } from 'styled-components'
 
 export const themeStyles = css`
 	& {
-		--back-color: white;
 		--font-color: black;
+		--setting-bg-color: #aaa;
+		--content-bg-color: transparent;
+		--sub-bg-color: #333;
+		--btn-bg-color: rgb(239, 239, 239);
+		--btn-bg-checked-color: #999;
 	}
 	&[data-theme='1'] {
-		.content,
-		.recenthistory,
-		.config > div,
-		.bookmarks {
-			background: rgba(255, 255, 255, 0.5);
-		}
+		--setting-bg-color: rgba(255, 255, 255, 0.5);
+		--content-bg-color: rgba(255, 255, 255, 0.5);
 	}
 	&[data-theme='2'] {
-		--back-color: black;
 		--font-color: white;
-		button {
-			--checked-bg: #333;
-			color: white;
-			background: black;
-			color: white;
-		}
-		.typography {
-			color: white;
-		}
-		.content,
-		.recenthistory,
-		.config > div,
-		.bookmarks {
-			background: rgba(0, 0, 0, 0.5);
-		}
+		--setting-bg-color: rgba(0, 0, 0, 0.5);
+		--content-bg-color: rgba(0, 0, 0, 0.5);
+		--btn-bg-color: black;
+		--btn-bg-checked-color: #333;
 	}
 	&[data-theme='3'] {
-		.content,
+		#song-info,
 		.recenthistory,
 		.bookmarks {
 			visibility: hidden;
@@ -44,11 +32,25 @@ export const themeStyles = css`
 		.bookmarks {
 			visibility: hidden;
 		}
-		.content > * {
-			visibility: hidden;
+		#song-info {
+			> * {
+				visibility: hidden;
+			}
+			.titles {
+				visibility: visible;
+			}
 		}
-		.content > .titles {
-			visibility: visible;
-		}
+	}
+	button {
+		color: var(--font-color);
+		background-color: var(--btn-bg-color);
+	}
+	.content,
+	.recenthistory,
+	.bookmarks {
+		background: var(--content-bg-color);
+	}
+	.typography {
+		color: var(--font-color);
 	}
 `

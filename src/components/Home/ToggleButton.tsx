@@ -27,7 +27,7 @@ export const ConfButton = styled.button`
 	}
 
 	&[data-checked='true'] {
-		background: var(--checked-bg) !important;
+		background: var(--btn-bg-checked-color) !important;
 	}
 `
 

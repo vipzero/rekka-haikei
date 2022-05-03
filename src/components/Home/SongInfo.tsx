@@ -15,15 +15,15 @@ function makeTitle(song: Song) {
 	return `${title} - ${artist}`
 }
 
-type Props = { song: Song; showCounts: boolean }
+type Props = { song: Song }
 
-function SongInfo({ song, showCounts }: Props) {
+function SongInfo({ song }: Props) {
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
-	const { showArtwork } = useSettings()
+	const { showArtwork, showCounts } = useSettings()
 
 	return (
-		<Wrap className="content">
+		<Wrap id="song-info">
 			<p className="titles">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
@@ -116,6 +116,7 @@ function SongInfo({ song, showCounts }: Props) {
 }
 
 const Wrap = styled.div`
+	background-color: var(--content-bg-color);
 	padding: 12px;
 	border-radius: 4px;
 	.details {

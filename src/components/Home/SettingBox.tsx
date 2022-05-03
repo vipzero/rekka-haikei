@@ -235,7 +235,7 @@ const Wrap = styled.div`
 	right: 0;
 	> div {
 		padding: 8px;
-		background: #aaa;
+		background: var(--setting-bg-color);
 	}
 	color: black;
 	a {

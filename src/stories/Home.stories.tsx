@@ -90,3 +90,19 @@ Flip.args = { setting: { ...setting, eeKey: 'flip' } }
 export const Aria = Template.bind({})
 
 Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }
+
+export const ThemeClear = Template.bind({})
+ThemeClear.args = { setting: { ...setting, theme: 0 } }
+
+export const ThemeWhite = Template.bind({})
+
+ThemeWhite.args = { setting: { ...setting, theme: 1 } }
+
+export const ThemeBlack = Template.bind({})
+ThemeBlack.args = { setting: { ...setting, theme: 2 } }
+
+export const ThemeEmpty = Template.bind({})
+ThemeEmpty.args = { setting: { ...setting, theme: 3 } }
+
+export const ThemeSingl = Template.bind({})
+ThemeSingl.args = { setting: { ...setting, theme: 4 } }

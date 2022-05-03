@@ -3,7 +3,7 @@ import { Setting } from '../types'
 
 export const defaultSetting: Setting = {
 	theme: 0,
-	showSetting: false,
+	showSetting: true,
 	showArtwork: true,
 	showBookmark: false,
 	showCounts: true,

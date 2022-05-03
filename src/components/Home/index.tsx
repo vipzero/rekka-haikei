@@ -19,8 +19,7 @@ type Props = {
 	song: Song
 }
 function Home({ song }: Props) {
-	const { theme, showCounts, sideMode, lockBgNum, toggleSetting } =
-		useSettings()
+	const { theme, sideMode, lockBgNum, toggleSetting } = useSettings()
 	const { eeKey } = useSettingsEe()
 
 	const { favorites: books, toggleFavorites } = useFavorites()
@@ -50,7 +49,7 @@ function Home({ song }: Props) {
 				className={theme === 2 ? 'dark-theme' : 'light-theme'}
 				style={{ width: sideMode ? '50vw' : '100%' }}
 			>
-				<SongInfo song={song} showCounts={showCounts} />
+				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
 				</div>
@@ -85,7 +84,6 @@ const Wrap = styled.div`
 		border-radius: 4px;
 		border: none;
 		margin: 4px;
-		--checked-bg: #999;
 		min-height: 24px;
 		min-width: 36px;
 		text-align: center;
