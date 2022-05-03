@@ -45,18 +45,29 @@ export const exStyles = css`
 		}
 
 		&[data-ex='kokaku'] {
-			--back-color: #0385f4;
-			--font-color: white;
+			--ex-color: #0385f4;
+			--font-color: #b8deff;
+			--btn-fo-color: var(--ex-color);
+			--btn-bg-color: white;
+			--btn-bg-checked-color: #b8deff;
+
 			div {
-				border-bottom: solid 1px #0385f4;
+				border-bottom: solid 1px var(--ex-color);
 				background: #a2c0c033;
 			}
+
 			p,
 			span,
 			a {
-				color: #0385f4 !important;
 				animation-name: noiseBlink;
-				/* background: #1008 !important; */
+			}
+
+			.setting-box {
+				p,
+				span,
+				a {
+					color: var(--ex-color);
+				}
 			}
 
 			/* cursor: url(/static/sac-min.png) 25 25, auto; */
@@ -71,16 +82,20 @@ export const exStyles = css`
 		}
 
 		&[data-ex='psychopass'] {
-			--back-color: #12e0ad;
-			--font-color: white;
+			--ex-color: #13e0ad;
+			--font-color: var(--ex-color);
+			--btn-fo-color: var(--ex-color);
+			--btn-bg-color: #15353b;
+			--btn-bg-checked-color: black;
+
 			div {
-				border-bottom: solid 1px #12e0ad;
+				border-bottom: solid 1px var(--ex-color);
 				background: #092b0933;
 			}
 			p,
 			span,
 			a {
-				color: #12e0ad !important;
+				color: var(--ex-color);
 				animation-name: noiseBlink;
 			}
 		}
@@ -94,7 +109,7 @@ export const exStyles = css`
 		#bg {
 			transform: rotateY(180deg);
 		}
-		.config {
+		.setting-box {
 			transform: rotateY(180deg);
 		}
 	}
@@ -465,10 +480,6 @@ export const exStyles = css`
 	}
 
 	&[data-ex='sao'] {
-		/* .config,
-		.config * {
-			cursor: none;
-		} */
 		.link-sao {
 			display: block !important;
 			text-decoration: underline;

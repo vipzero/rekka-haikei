@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 export const themeStyles = css`
 	& {
 		--font-color: black;
+		--btn-fo-color: black;
 		--setting-bg-color: #aaa;
 		--content-bg-color: transparent;
 		--sub-bg-color: #333;
@@ -15,6 +16,7 @@ export const themeStyles = css`
 	}
 	&[data-theme='2'] {
 		--font-color: white;
+		--btn-fo-color: white;
 		--setting-bg-color: rgba(0, 0, 0, 0.5);
 		--content-bg-color: rgba(0, 0, 0, 0.5);
 		--btn-bg-color: black;
@@ -40,17 +42,5 @@ export const themeStyles = css`
 				visibility: visible;
 			}
 		}
-	}
-	button {
-		color: var(--font-color);
-		background-color: var(--btn-bg-color);
-	}
-	.content,
-	.recenthistory,
-	.bookmarks {
-		background: var(--content-bg-color);
-	}
-	.typography {
-		color: var(--font-color);
 	}
 `

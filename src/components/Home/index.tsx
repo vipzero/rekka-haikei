@@ -32,6 +32,8 @@ function Home({ song }: Props) {
 			data-ex={eeKey || theme}
 			data-ex-just={eeKey}
 			data-has-art={!!song.artworkUrl100}
+			data-theme={theme}
+			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 		>
 			<Mask id="mask">
 				<Mask id="mask2" />
@@ -44,11 +46,7 @@ function Home({ song }: Props) {
 				px={sideMode ? 'right' : 'center'}
 			/>
 			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
-			<Wrap
-				data-theme={theme}
-				className={theme === 2 ? 'dark-theme' : 'light-theme'}
-				style={{ width: sideMode ? '50vw' : '100%' }}
-			>
+			<Wrap style={{ width: sideMode ? '50vw' : '100%' }}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
@@ -137,8 +135,6 @@ const Wrap = styled.div`
 		display: none;
 	}
 
-	${themeStyles}
-
 	[data-important='true'] {
 		animation: flash 1s linear infinite;
 	}
@@ -159,7 +155,22 @@ const Wrap = styled.div`
 `
 
 const Master = styled.div`
+	${themeStyles}
 	${exStyles}
+
+	button {
+		color: var(--btn-fo-color);
+		background-color: var(--btn-bg-color);
+	}
+	.content,
+	.recenthistory,
+	.bookmarks {
+		background: var(--content-bg-color);
+	}
+	.typography {
+		color: var(--font-color);
+	}
+
 	&:not(:hover) {
 		#player-box {
 			display: none;

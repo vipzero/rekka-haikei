@@ -74,7 +74,7 @@ function SettingBox({
 	}
 
 	return (
-		<Wrap data-theme={s.theme} className="config" data-visible={s.visible}>
+		<Wrap data-theme={s.theme} className="setting-box" data-visible={s.visible}>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
 					<ConfButton onClick={s.cycleTheme} className="theme">
