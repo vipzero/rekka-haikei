@@ -301,6 +301,23 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'ko', name: '歌織', color: '#D9CCE5' },
 		],
 	},
+	{
+		id: 'rakupro',
+		chars: [
+			{ id: 'mm', name: 'モモ', color: '#D7A3AF' },
+			{ id: 'si', name: '西蓮寺', color: '#6E7497' },
+			{ id: 'kt', name: '古手川', color: '#484845' },
+			{ id: 'ym', name: '闇', color: '#EFE0A2' },
+			{ id: 'mk', name: '美柑', color: '#5E3B32' },
+			{ id: 'mo', name: '籾岡', color: '#D0BA7C' },
+			{ id: 'nn', name: 'ナナ', color: '#D4859B' },
+			{ id: 'rr', name: 'ララ', color: '#E0BAD5' },
+			{ id: 'rt', name: 'リト', color: '#BF7840' },
+			{ id: 'ma', name: '芽亜', color: '#CD5D64' },
+			{ id: 'rn', name: 'ルン', color: '#AAD8C1' },
+			{ id: 'sz', name: '静', color: '#494F68' },
+		],
+	},
 ]
 
 // 🛑 ネタバレ注意
@@ -308,7 +325,6 @@ export const eekeysGimic = [
 	'nonnon',
 	'mia',
 	'higurashi',
-	'rakupro',
 
 	'sakurasou',
 	'masshiro',
@@ -343,6 +359,7 @@ export const eekeysVotic = [
 	'imasmlpr',
 	'imasmlfa',
 	'imasmlan',
+	'rakupro',
 ] as const
 export const eekeys = [
 	...eekeysGimic,
