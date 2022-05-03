@@ -1,17 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { useQeuryEid } from '../../hooks/useQueryEid'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
 import { EeSelector } from './EeSelector'
-import { useQeuryEid } from '../../hooks/useQueryEid'
-import { isDev } from '../../config'
 
 type Props = {
 	song: Song
 }
 
 const useTick = () => {
-	const [now, setNow] = useState<Date | null>(null)
+	const [now, setNow] = useState<Date>(new Date())
 	useEffect(() => {
 		const t = setInterval(() => {
 			const d = new Date()
@@ -26,40 +25,56 @@ const useTick = () => {
 const formatMmSs = (t: number) =>
 	`${pad2(Math.floor(t / 60000))}:${pad2(Math.floor((t % 60000) / 1000))}`
 
-const Time = ({ song }: Props) => {
-	const now = useTick()
-	const { time: startTime, trackTimeMillis } = song
-	const eid = useQeuryEid()
+function calcTimes(now: Date, startTime: number, trackTimeMillis) {
+	const leftMin = 60 - now.getMinutes() - 1
+	const leftSec = (60 - now.getSeconds()) % 60
+	const curHourEnd = leftMin * 60 + leftSec
+	const leftHour = [pad2(leftMin), pad2(leftSec)].join(':')
+	const nextHour = now.getHours() + 1
 
 	const currentSongEnd: null | number = trackTimeMillis
 		? startTime + trackTimeMillis
 		: null
 
-	const [cur, leftHour, nextHour] = useMemo(() => {
-		if (!now) return ['--:--:--', '--:--', 0]
+	const elapsedTime = +now - startTime
+	const songElapsStr = formatMmSs(elapsedTime)
 
-		const cur = formatTime(+now)
-		const diff = [
-			pad2(60 - now.getMinutes() - 1),
-			pad2((60 - now.getSeconds()) % 60),
-		].join(':')
+	if (!currentSongEnd)
+		return [leftHour, nextHour, curHourEnd, '--:--:--', '--:--', songElapsStr]
+	const songEndStr = formatTime(+currentSongEnd)
+	const diff = currentSongEnd - +now
 
-		return [cur, diff, now.getHours() + 1]
-	}, [now])
+	const leftFromSongEndStr = formatMmSs(curHourEnd * 1000 - diff)
 
-	const [songEndStr, songLeftStr, songElapsStr] = useMemo(() => {
-		if (!now) return ['--:--:--', '--:--', '--:--']
-		const elapsedTime = +now - startTime
-		const songElaps = formatMmSs(elapsedTime)
+	const songLeftStr = formatMmSs(diff)
 
-		if (!currentSongEnd) return ['--:--:--', '--:--', songElaps]
-		const songEnd = formatTime(+currentSongEnd)
-		const diff = currentSongEnd - +now
+	return [
+		leftHour,
+		nextHour,
+		songEndStr,
+		songLeftStr,
+		songElapsStr,
+		leftFromSongEndStr,
+	]
+}
 
-		const songDiff = formatMmSs(diff)
+const Time = ({ song }: Props) => {
+	const now = useTick()
+	const { time: startTime, trackTimeMillis } = song
+	const eid = useQeuryEid()
 
-		return [songEnd, songDiff, songElaps]
-	}, [now, currentSongEnd])
+	const cur = formatTime(+now)
+	const [
+		leftHour,
+		nextHour,
+		songEndStr,
+		songLeftStr,
+		songElapsStr,
+		leftFromSongEndStr,
+	] = useMemo(
+		() => calcTimes(now, startTime, trackTimeMillis),
+		[Math.floor(+now / 1000)]
+	)
 
 	if (!now) return null
 	const trackTimeStr = trackTimeMillis ? formatMmSs(trackTimeMillis) : '??:??'
@@ -81,6 +96,7 @@ const Time = ({ song }: Props) => {
 				<div className={'del'}>+{songElapsStr}</div>
 				<div className={'dlf'}>-{songLeftStr}</div>
 				<div className={'dnh'}>-{leftHour}</div>
+				<div className={'lfs'}>-[{leftFromSongEndStr}]</div>
 			</div>
 			<div>
 				<div>画像検索クエリ</div>
@@ -117,7 +133,8 @@ const Style = styled.div`
 		grid-template-areas:
 			'lst lcu len lnh'
 			'tst tcu ten tnh'
-			'del ttt dlf dnh';
+			'del ttt dlf dnh'
+			'--- --- --- lfs';
 
 		.lst,
 		.del,
@@ -138,7 +155,8 @@ const Style = styled.div`
 		}
 		.dnh,
 		.lnh,
-		.tnh {
+		.tnh,
+		.lfs {
 			text-align: right;
 		}
 
@@ -176,6 +194,9 @@ const Style = styled.div`
 		}
 		.dnh {
 			grid-area: dnh;
+		}
+		.lfs {
+			grid-area: lfs;
 		}
 	}
 `
