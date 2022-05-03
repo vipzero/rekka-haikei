@@ -24,14 +24,12 @@ export const themeStyles = css`
 	}
 	&[data-theme='3'] {
 		#song-info,
-		.recenthistory,
-		.bookmarks {
+		[data-co] {
 			visibility: hidden;
 		}
 	}
 	&[data-theme='4'] {
-		.recenthistory,
-		.bookmarks {
+		[data-co] {
 			visibility: hidden;
 		}
 		#song-info {

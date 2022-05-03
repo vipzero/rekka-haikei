@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useSettingsShowBookmark } from '../../hooks/useSettings'
+import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 
 type Props = {
 	books: Record<string, boolean>
@@ -10,7 +12,8 @@ export function BookmarkList({ books, toggleFavorites }: Props) {
 
 	return (
 		<div
-			className="bookmarks"
+			className="co-books"
+			data-co
 			onClick={(e) => e.stopPropagation()}
 			style={{ display: visible ? 'block' : 'none' }}
 		>
@@ -27,13 +30,13 @@ export function BookmarkList({ books, toggleFavorites }: Props) {
 			{Object.keys(books).length === 0 && <p>ブックマークはまだないお</p>}
 			{Object.keys(books).map((icy, i) => (
 				<p key={i}>
-					<span>{icy}</span>
 					<span
-						style={{ float: 'right', cursor: 'pointer' }}
+						style={{ cursor: 'pointer' }}
 						onClick={() => confirm('削除する') && toggleFavorites(icy)}
 					>
-						[削除]
+						<FontAwesomeIcon icon={faBookmark} />
 					</span>
+					<span>{icy}</span>
 				</p>
 			))}
 		</div>

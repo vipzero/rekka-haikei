@@ -12,7 +12,8 @@ function RecentHistoryList() {
 
 	return (
 		<div
-			className="recenthistory"
+			className="co-recenthist"
+			data-co
 			onClick={(e) => e.stopPropagation()}
 			style={{ display: visible ? 'block' : 'none' }}
 		>
@@ -24,7 +25,8 @@ function RecentHistoryList() {
 			</p>
 			{histories.map((hist, i) => (
 				<p key={i}>
-					<span className="mono">{formatTime(hist.time)}</span> {hist.title}
+					<span className="mono">{formatTime(hist.time)}</span>
+					<span>{hist.title}</span>
 				</p>
 			))}
 		</div>

@@ -105,21 +105,23 @@ const Wrap = styled.div`
 	.moc {
 		visibility: hidden;
 	}
-	.recenthistory:hover {
+	.co-recenthist:hover {
 		.moc {
 			visibility: visible;
 		}
 	}
-	.bookmarks:hover {
+	.co-books:hover {
 		.moc {
 			visibility: visible;
 		}
 	}
-	.recenthistory,
-	.bookmarks {
+	[data-co] {
 		padding: 0.4rem 0.4rem;
 		p {
 			font-size: 0.8rem;
+			span:not(:first-child) {
+				margin-left: 4px;
+			}
 		}
 	}
 	a {
@@ -162,10 +164,10 @@ const Master = styled.div`
 		color: var(--btn-fo-color);
 		background-color: var(--btn-bg-color);
 	}
-	.content,
-	.recenthistory,
-	.bookmarks {
+	[data-co] {
 		background: var(--content-bg-color);
+		overflow: scroll;
+		white-space: nowrap;
 	}
 	.typography {
 		color: var(--font-color);
