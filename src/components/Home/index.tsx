@@ -117,12 +117,6 @@ const Wrap = styled.div`
 			}
 		}
 	}
-	a {
-		color: #ccc;
-		&:blink {
-			color: #ccc;
-		}
-	}
 	.titles {
 		font-size: 1.1rem;
 	}
@@ -162,7 +156,8 @@ const Master = styled.div`
 		overflow: scroll;
 		white-space: nowrap;
 	}
-	#panel p {
+	#panel p,
+	#panel a {
 		font-weight: bold;
 		color: var(--panel-fo-color);
 		text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
