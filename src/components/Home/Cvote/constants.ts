@@ -1,4 +1,4 @@
-import { ThemeId } from '../../../types'
+import { Song, ThemeId } from '../../../types'
 import { Char } from './index'
 
 type CvoteProfile = {
@@ -365,7 +365,8 @@ export const isExTheme = (
 	theme: string | false | number
 ): theme is ExThemeKey => eekeysThemetic.includes(theme as ExThemeKey)
 
-export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
+// アルバム名・アニメ名に部分マッチ
+export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],
 	['アビス', 'mia'],
 	['さくら荘', 'sakurasou'],
@@ -394,4 +395,23 @@ export const TITLE_EX_PATTERNS: [string | RegExp, Eekey][] = [
 	['ソードアート・オンライン', 'sao'],
 	['山田くんと7人の魔女', 'yamajo'],
 	['緋弾', 'ariascarlet'],
+]
+export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
+	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
+]
+
+// icy のどちらか半分に完全一致
+export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = [
+	['楽園PROJECT', 'rakupro'],
+	['シャイニーカラーズ', 'shanimas'],
+	['まっしろわーるど', 'masshiro'],
+]
+
+// icy に部分一致
+export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
+	[/ノルニル|スクランブル|回レ|ぐるぐる/, 'spin'],
+	[/bull['e]/, 'ariascarlet'],
+	['逆さま', 'patema'],
+	['労働', 'halowa'],
+	[/return|ウラオモテ/, 'flip'],
 ]
