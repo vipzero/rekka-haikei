@@ -434,4 +434,5 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/真夏のダイヤ|咲くは浮世の君花火/, 'imasmlpr'],
 	[/ラスト.?アクトレス|DIAMOND JOKER/i, 'imasmlfa'],
 	[/花ざかりWeekend|Black.Party/i, 'imasmlan'],
+	['アマガミ', 'amagami'],
 ]
