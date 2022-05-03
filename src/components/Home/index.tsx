@@ -156,15 +156,18 @@ const Master = styled.div`
 		overflow: scroll;
 		white-space: nowrap;
 	}
-	#panel p,
-	#panel a {
-		font-weight: bold;
-		color: var(--panel-fo-color);
-		text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
-			-1px -1px 1px var(--panel-fo-shadow-color),
-			-1px 1px 1px var(--panel-fo-shadow-color),
-			1px -1px 1px var(--panel-fo-shadow-color);
-		margin: 0;
+	#panel,
+	[data-co] {
+		p,
+		a {
+			font-weight: bold;
+			color: var(--panel-fo-color);
+			text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
+				-1px -1px 1px var(--panel-fo-shadow-color),
+				-1px 1px 1px var(--panel-fo-shadow-color),
+				1px -1px 1px var(--panel-fo-shadow-color);
+			margin: 0;
+		}
 	}
 	.typography {
 		color: var(--font-color);
