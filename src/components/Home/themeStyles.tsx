@@ -3,6 +3,8 @@ import { css } from 'styled-components'
 export const themeStyles = css`
 	& {
 		--font-color: black;
+		--panel-fo-color: #ccc;
+		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--setting-bg-color: #aaa;
 		--content-bg-color: transparent;
@@ -23,7 +25,7 @@ export const themeStyles = css`
 		--btn-bg-checked-color: #333;
 	}
 	&[data-theme='3'] {
-		#song-info,
+		#panel,
 		[data-co] {
 			visibility: hidden;
 		}
@@ -32,7 +34,7 @@ export const themeStyles = css`
 		[data-co] {
 			visibility: hidden;
 		}
-		#song-info {
+		#panel {
 			> * {
 				visibility: hidden;
 			}

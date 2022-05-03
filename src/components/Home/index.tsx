@@ -94,13 +94,6 @@ const Wrap = styled.div`
 			margin-left: 2px;
 		}
 	}
-	p {
-		color: #ccc;
-		font-weight: bold;
-		text-shadow: 1px 1px 1px #000, -1px -1px 1px #000, -1px 1px 1px #000,
-			1px -1px 1px #000;
-		margin: 0;
-	}
 
 	.moc {
 		visibility: hidden;
@@ -168,6 +161,15 @@ const Master = styled.div`
 		background: var(--content-bg-color);
 		overflow: scroll;
 		white-space: nowrap;
+	}
+	#panel p {
+		font-weight: bold;
+		color: var(--panel-fo-color);
+		text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
+			-1px -1px 1px var(--panel-fo-shadow-color),
+			-1px 1px 1px var(--panel-fo-shadow-color),
+			1px -1px 1px var(--panel-fo-shadow-color);
+		margin: 0;
 	}
 	.typography {
 		color: var(--font-color);

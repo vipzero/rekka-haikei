@@ -23,7 +23,7 @@ function SongInfo({ song }: Props) {
 	const { showArtwork, showCounts } = useSettings()
 
 	return (
-		<Wrap id="song-info">
+		<Wrap id="panel">
 			<p className="titles">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
