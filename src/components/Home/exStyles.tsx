@@ -62,7 +62,7 @@ export const exStyles = css`
 				animation-name: noiseBlink;
 			}
 
-			.setting-box {
+			#setting-box {
 				p,
 				span,
 				a {
@@ -109,7 +109,7 @@ export const exStyles = css`
 		#bg {
 			transform: rotateY(180deg);
 		}
-		.setting-box {
+		#setting-box {
 			transform: rotateY(180deg);
 		}
 	}

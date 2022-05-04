@@ -7,6 +7,7 @@ import {
 	useSettings,
 	useSettingsEe,
 	useSettingsFakeBar,
+	useSettingsCustomTheme,
 } from '../../hooks/useSettings'
 import { Song } from '../../types'
 import { BookmarkList } from './BookmarkList'
@@ -34,6 +35,7 @@ function Home({ song }: Props) {
 	const timeBarSize =
 		song.trackTimeMillis ||
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
+	const { customTheme } = useSettingsCustomTheme()
 
 	return (
 		<Master
@@ -44,6 +46,7 @@ function Home({ song }: Props) {
 			data-theme={theme}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			className={theme === 2 ? 'dark-theme' : 'light-theme'}
+			customTheme={customTheme}
 		>
 			<Mask id="mask">
 				<Mask id="mask2" />
@@ -153,9 +156,12 @@ const Wrap = styled.div`
 	}
 `
 
-const Master = styled.div`
+const Master = styled.div<{ customTheme: string }>`
 	${themeStyles}
 	${exStyles}
+	&[data-theme='5'] {
+		${(p) => p.customTheme}
+	}
 
 	button {
 		color: var(--btn-fo-color);

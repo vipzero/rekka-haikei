@@ -4,7 +4,7 @@ import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
-	// '2022-05-04:03': 'feat カスタムテーマ',
+	'2022-05-04:15': 'feat カスタムテーマ',
 	'2022-05-04:03': 'feat 設定ページ追加',
 	'2022-05-04:01': 'feat 疑似トラックバー',
 	'2022-05-04:00': 'feat 履歴ブックソート追加',

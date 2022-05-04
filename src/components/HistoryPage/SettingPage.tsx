@@ -25,10 +25,11 @@ export function SettingPage() {
 					疑似シークバー: 曲の再生時間がとれない場合も4分のシークバーを表示する
 				</CheckBox>
 			</div>
-			<div style={{ width: 'max-content' }}>
-				<h4>カスタムテーマ</h4>
+			<div className="custom-theme-code">
+				<h4>カスタムテーマ(CSS)</h4>
+				<p>「CUSTM」選択時に有効</p>
 				<textarea
-					style={{ width: '400px' }}
+					style={{ width: '600px', height: '400px' }}
 					rows={10}
 					name="rekka-search-word"
 					value={customTheme}
@@ -39,4 +40,10 @@ export function SettingPage() {
 		</Style>
 	)
 }
-const Style = styled.div``
+const Style = styled.div`
+	.custom-theme-code {
+		width: max-content;
+
+		font-family: 'Roboto Mono', monospace;
+	}
+`

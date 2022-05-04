@@ -36,6 +36,7 @@ export const normalThemes: Theme[] = [
 	{ id: 2, key: 'BLACK' },
 	{ id: 3, key: 'EMPTY' },
 	{ id: 4, key: 'SINGL' },
+	{ id: 5, key: 'CUSTM' },
 ]
 
 export type ExTheme = Theme & { id: typeof eekeysThemetic[number] }

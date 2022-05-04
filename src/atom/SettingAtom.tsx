@@ -2,7 +2,42 @@ import { atom } from 'recoil'
 import { Setting } from '../types'
 
 const defaultCustomTheme = `
-	
+/*
+ * tips
+ * #aabbcc RGB Hex code
+ * #aabbccdd RGB +透過
+ * ↓色変数 値だけ変えれば反映される
+ */
+
+--font-color: #f00;                          // 文字色
+--panel-fo-color: #0f0;                      // パネル文字
+--panel-fo-shadow-color: #00f;               // パネル文字縁
+--btn-fo-color: #ff0;                        // ボタン文字
+--setting-bg-color: #80f;                    // 設定背景
+--content-bg-color: #0000ffaa;               // パネル背景
+--sub-bg-color: #333;                        // デバッグ背景
+--btn-bg-color: rgba(0, 0, 100, 0.5);        // 設定ボタン背景
+--btn-bg-checked-color: rgba(0, 0, 30, 0.5); // 設定ボタン背景有効
+
+
+#timebar {
+  .wrap {
+    background: orange;
+  }
+  .fill {
+    background-color: purple;
+  }
+  .pointer {
+    background-color: green;
+  }
+}
+
+#panel {
+}
+#bg {
+}
+#setting-box {
+}
 `
 
 export const defaultSetting: Setting = {
