@@ -83,7 +83,7 @@ function SettingBox({
 						{allThemesById[s.theme]?.key || allThemes[0].key}
 					</ConfButton>
 					<ToggleButton
-						checked={s.sideMode}
+						checked={s.sideMode !== 'wide'}
 						onClick={s.toggleSideMode}
 						className="half"
 					>

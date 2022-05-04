@@ -3,7 +3,7 @@ import { defaultSetting, settingState } from '../atom/SettingAtom'
 import { Eekey, isExTheme } from '../components/Home/Cvote/constants'
 import { Abyss, nextAbyss, normalThemes } from '../config'
 import { Setting, ThemeId } from '../types'
-import { toggle } from '../util'
+import { toggle, genToggle } from '../util'
 
 function exKeyToColor(exkey: Eekey) {
 	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
@@ -35,7 +35,9 @@ export const useSettings = () => {
 	const toggleLockBg = () =>
 		setSetting((v) => ({ ...v, lockBgNum: nextLockNum(v.lockBgNum) }))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
-	const toggleSideMode = () => setSetting((v) => toggle(v, 'sideMode'))
+	const toggleSide = genToggle(['wide', 'l', 'r'] as const)
+	const toggleSideMode = () =>
+		setSetting((v) => ({ ...v, sideMode: toggleSide(v.sideMode) }))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
@@ -80,10 +82,11 @@ const useSettingsBase = () => {
 
 export const useSettingsFakeBar = () => {
 	const [{ enableFakeBar }, setSetting] = useSettingsBase()
+	const toggleOnOff = genToggle(['on', 'off'] as const)
 	const toggleEnableFakeBar = () =>
 		setSetting((v) => ({
 			...v,
-			enableFakeBar: v.enableFakeBar === 'off' ? 'on' : 'off',
+			enableFakeBar: toggleOnOff(v.enableFakeBar),
 		}))
 	return {
 		enableFakeBar,

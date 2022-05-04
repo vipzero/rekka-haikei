@@ -81,7 +81,7 @@ export type Setting = {
 	showArtwork: boolean
 	showCounts: boolean
 	showHistory: boolean
-	sideMode: boolean
+	sideMode: 'r' | 'l' | 'wide'
 	lockBgNum: 0 | 1 | 10
 	showTool: boolean
 	showHelp: boolean

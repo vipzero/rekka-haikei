@@ -20,14 +20,14 @@ import { CheckBox } from './common/CheckBox'
 import { TabPanel, Tabs } from './common/Tab'
 import CountsPage from './CountsPage'
 import Address from './HistoryPage/Address'
-import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { SettingPage } from './HistoryPage/SettingPage'
-import { WordCountTable } from './HistoryPage/WordCountTable'
 
 const toH = (ts: number) =>
-	Math.floor((ts % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
+	Math.floor(
+		((ts + 9 * 60 * 60 * 1000) % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
+	)
 
 const searchFilter = (search: string, text: string, r: RegExp) => {
 	let res = false

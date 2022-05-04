@@ -115,3 +115,8 @@ export const mergeArr = <T>(a0: T[], b0: T[], orderBy: (a: T) => number) => {
 
 	return res.concat(a).concat(b)
 }
+
+export const genToggle =
+	<T>(arr: readonly T[]): ((v: T) => T) =>
+	(v) =>
+		arr[(arr.indexOf(v) + 1) % arr.length]

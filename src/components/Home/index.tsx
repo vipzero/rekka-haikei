@@ -9,7 +9,7 @@ import {
 	useSettingsFakeBar,
 	useSettingsCustomTheme,
 } from '../../hooks/useSettings'
-import { Song } from '../../types'
+import { Setting, Song } from '../../types'
 import { BookmarkList } from './BookmarkList'
 import { exStyles } from './exStyles'
 import { ExtraComp } from './ExtraComp'
@@ -20,6 +20,12 @@ import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
+
+const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
+	wide: 'center',
+	l: 'right',
+	r: 'left',
+}
 
 type Props = {
 	song: Song
@@ -56,10 +62,10 @@ function Home({ song }: Props) {
 				urls={song?.imageLinks || []}
 				lockCount={lockBgNum}
 				changedUrl={setUrl}
-				px={sideMode ? 'right' : 'center'}
+				px={sideMap[sideMode] || 'center'}
 			/>
 			<TrackTimeBar startTime={song.time} size={timeBarSize} />
-			<Wrap style={{ width: sideMode ? '50vw' : '100%' }}>
+			<Wrap data-side={sideMode}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<Player src={streamUrl}></Player>
@@ -83,7 +89,15 @@ function Home({ song }: Props) {
 }
 
 const Wrap = styled.div`
-	width: 100vw;
+	width: 50vw;
+	&[data-side='wide'] {
+		width: 100%;
+	}
+	&[data-side='r'] {
+		position: absolute;
+		right: 0;
+	}
+
 	min-height: 100vh;
 	display: grid;
 	/* overflow: hidden; */

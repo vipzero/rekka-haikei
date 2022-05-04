@@ -46,7 +46,7 @@ export const defaultSetting: Setting = {
 	showBookmark: false,
 	showCounts: true,
 	showHistory: false,
-	sideMode: false,
+	sideMode: 'wide',
 	lockBgNum: 10,
 	showTool: false,
 	enableFakeBar: 'off',
