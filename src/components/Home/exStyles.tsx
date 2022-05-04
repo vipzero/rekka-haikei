@@ -298,18 +298,17 @@ export const exStyles = css`
 		}
 	}
 
-	@keyframes disap-color {
-		0% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
-	}
-
 	&[data-ex='issyuukanfr'] {
-		#bg {
-			animation: disap-color 120s linear both;
+		#mask {
+			display: block;
+			background: #fff;
+			animation: appear-anim-part 180s cubic-bezier(0.18, 0.89, 0.32, 1.28) both;
+			mask-image: linear-gradient(
+				rgba(0, 0, 0, 0),
+				rgba(0, 0, 0, 1),
+				rgba(0, 0, 0, 1),
+				rgba(0, 0, 0, 1)
+			);
 		}
 	}
 
@@ -416,6 +415,14 @@ export const exStyles = css`
 		}
 		100% {
 			opacity: 1;
+		}
+	}
+	@keyframes appear-anim-part {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 0.9;
 		}
 	}
 	@keyframes cog-spin {
