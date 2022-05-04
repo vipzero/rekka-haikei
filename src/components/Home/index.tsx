@@ -169,7 +169,7 @@ const Master = styled.div<{ customTheme: string }>`
 	}
 	[data-co] {
 		background: var(--content-bg-color);
-		overflow: scroll;
+		overflow: auto;
 		white-space: nowrap;
 	}
 	#panel,

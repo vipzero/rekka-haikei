@@ -75,7 +75,7 @@ function Address() {
 
 const List = styled.div`
 	max-height: 20vh;
-	overflow: scroll;
+	overflow: auto;
 	border: solid gray 1px;
 	padding: 4px;
 	p {

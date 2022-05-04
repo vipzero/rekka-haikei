@@ -416,7 +416,7 @@ const Wrap = styled.div`
 		&[data-wrap-mode='false'] {
 			.hist-row {
 				> div:nth-child(2) {
-					overflow: scroll;
+					overflow: auto;
 					white-space: nowrap;
 				}
 			}
