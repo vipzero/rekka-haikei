@@ -134,3 +134,5 @@ export const URL_TOHYO_REQ = 'https://forms.gle/SqABcPbFsTTpRsuR7'
 export const URL_USE_REQ = 'https://forms.gle/fBQnrAxMnKNhmFA16'
 export const URL_FEAT_REQ =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfVQE9W3DFNPG03x3rJumLAGZfQsuFpxJP2vTDg4g0ddU3V-w/viewform'
+
+export const TMP_TRACK_TIME = 4 * 60 * 1000

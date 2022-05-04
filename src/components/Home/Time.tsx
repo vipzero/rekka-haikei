@@ -40,7 +40,7 @@ function calcTimes(now: Date, startTime: number, trackTimeMillis) {
 	const songElapsStr = formatMmSs(elapsedTime)
 
 	if (!currentSongEnd)
-		return [leftHour, nextHour, curHourEnd, '--:--:--', '--:--', songElapsStr]
+		return [leftHour, nextHour, '--:--:--', '--:--:--', '--:--', '--:--:--']
 	const songEndStr = formatTime(+currentSongEnd)
 	const diff = currentSongEnd - +now
 

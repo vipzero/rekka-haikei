@@ -1,7 +1,11 @@
-import { faStar } from '@fortawesome/free-regular-svg-icons'
-import { faStar as faStarFill } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import {
+	faStar as faStarFill,
+	faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useMemo, useState } from 'react'
+import { RecoilRoot } from 'recoil'
 import safe from 'safe-regex'
 import styled from 'styled-components'
 import config, { timeColorMap } from '../config'
@@ -10,17 +14,16 @@ import { useHistoryDb } from '../hooks/useHistoryDb'
 import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
 import { useSearch } from '../hooks/useSearch'
 import { useStart } from '../hooks/useStart'
-import { formatDate, not } from '../util'
+import { History } from '../types'
+import { formatDate } from '../util'
 import { CheckBox } from './common/CheckBox'
 import { TabPanel, Tabs } from './common/Tab'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
-import { WordCountTable } from './HistoryPage/WordCountTable'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
-import { History } from '../types'
+import { SettingPage } from './HistoryPage/SettingPage'
+import { WordCountTable } from './HistoryPage/WordCountTable'
 
 const toH = (ts: number) =>
 	Math.floor((ts % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
@@ -131,10 +134,11 @@ function HistoryPageBase() {
 				tab={tab}
 				items={[
 					{ label: '履歴' },
-					{ label: '再生回数' },
-					{ label: '再生回数(曲名)' },
+					{ label: '曲回数' },
+					{ label: '分割回数' },
 					{ label: 'タグカウント' },
-					{ label: '背景検索ラボ' },
+					{ label: '背景ラボ' },
+					{ label: '設定' },
 				]}
 				onChange={setTab}
 			/>
@@ -360,6 +364,11 @@ function HistoryPageBase() {
 			</TabPanel>
 			<TabPanel value={tab} index={4}>
 				<SearchQueryLab />
+			</TabPanel>
+			<TabPanel value={tab} index={5}>
+				<RecoilRoot>
+					<SettingPage />
+				</RecoilRoot>
 			</TabPanel>
 
 			<Address />

@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { TMP_TRACK_TIME } from '../../config'
 import { useFavorites } from '../../hooks/useFavorites'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
-import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import {
+	useSettings,
+	useSettingsEe,
+	useSettingsFakeBar,
+} from '../../hooks/useSettings'
 import { Song } from '../../types'
 import { BookmarkList } from './BookmarkList'
 import { exStyles } from './exStyles'
@@ -25,6 +30,10 @@ function Home({ song }: Props) {
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
 	const [url, setUrl] = useState<string>('')
+	const { enableFakeBar } = useSettingsFakeBar()
+	const timeBarSize =
+		song.trackTimeMillis ||
+		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 
 	return (
 		<Master
@@ -45,7 +54,7 @@ function Home({ song }: Props) {
 				changedUrl={setUrl}
 				px={sideMode ? 'right' : 'center'}
 			/>
-			<TimeBar startTime={song.time} size={song.trackTimeMillis} />
+			<TimeBar startTime={song.time} size={timeBarSize} />
 			<Wrap style={{ width: sideMode ? '50vw' : '100%' }}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>

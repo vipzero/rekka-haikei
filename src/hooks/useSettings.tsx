@@ -24,7 +24,6 @@ export const useSettings = () => {
 			lockBgNum,
 			showHelp,
 			showTool,
-			enableFakeBar,
 		},
 		setSetting,
 	] = useSettingsBase()
