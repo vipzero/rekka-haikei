@@ -18,6 +18,7 @@ import { History } from '../types'
 import { formatDate } from '../util'
 import { CheckBox } from './common/CheckBox'
 import { TabPanel, Tabs } from './common/Tab'
+import CountsPage from './CountsPage'
 import Address from './HistoryPage/Address'
 import { CountTable } from './HistoryPage/CountTable'
 import Schedule from './HistoryPage/Schedule'
@@ -134,9 +135,7 @@ function HistoryPageBase() {
 				tab={tab}
 				items={[
 					{ label: '履歴' },
-					{ label: '曲回数' },
-					{ label: '分割回数' },
-					{ label: 'タグカウント' },
+					{ label: 'カウント' },
 					{ label: '背景ラボ' },
 					{ label: '設定' },
 				]}
@@ -354,18 +353,12 @@ function HistoryPageBase() {
 				</div>
 			</TabPanel>
 			<TabPanel value={tab} index={1}>
-				<CountTable title="再生回数" counts={counts} />
+				<CountsPage counts={counts} countsSong={countsSong} />
 			</TabPanel>
 			<TabPanel value={tab} index={2}>
-				<CountTable title="再生回数(曲名)" counts={countsSong} />
-			</TabPanel>
-			<TabPanel value={tab} index={3}>
-				<WordCountTable />
-			</TabPanel>
-			<TabPanel value={tab} index={4}>
 				<SearchQueryLab />
 			</TabPanel>
-			<TabPanel value={tab} index={5}>
+			<TabPanel value={tab} index={3}>
 				<RecoilRoot>
 					<SettingPage />
 				</RecoilRoot>

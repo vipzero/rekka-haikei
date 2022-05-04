@@ -108,7 +108,7 @@ const Time = ({ song }: Props) => {
 					}}
 				>
 					{song.imageSearchWord}
-					<a href={`/${eid}/history?tab=4`}>(改善案募集)</a>
+					<a href={`/${eid}/history?tab=2`}> (改善案募集)</a>
 				</div>
 			</div>
 			{<EeSelector />}
