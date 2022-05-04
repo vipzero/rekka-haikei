@@ -11,6 +11,7 @@ export const defaultSetting: Setting = {
 	sideMode: false,
 	lockBgNum: 10,
 	showTool: false,
+	enableFakeBar: 'off',
 	abyss: '#fff', // TODO: change before deploy
 	abyssEx: null,
 	showHelp: false,

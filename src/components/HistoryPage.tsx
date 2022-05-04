@@ -80,7 +80,7 @@ function HistoryPageBase() {
 
 	const sortedHists = useMemo(() => {
 		if (sortBy === 'none') return histories
-		type A = keyof History
+
 		const sortKey: keyof History = sortBy === 'by_n' ? 'n' : 'b'
 		const sort = (a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1)
 

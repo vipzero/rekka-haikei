@@ -86,6 +86,7 @@ export type Setting = {
 	showTool: boolean
 	showHelp: boolean
 	feedBackText: string
+	enableFakeBar: 'off' | 'on'
 	abyss: Abyss // fade change background color: ;
 	abyssEx: Abyss | null
 	ee: Record<string, true>

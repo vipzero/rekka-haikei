@@ -24,6 +24,7 @@ export const useSettings = () => {
 			lockBgNum,
 			showHelp,
 			showTool,
+			enableFakeBar,
 		},
 		setSetting,
 	] = useSettingsBase()
@@ -76,6 +77,19 @@ const useSettingsBase = () => {
 	const setting: Setting = { ...defaultSetting, ...settingRaw }
 
 	return [setting, setSetting] as const
+}
+
+export const useSettingsFakeBar = () => {
+	const [{ enableFakeBar }, setSetting] = useSettingsBase()
+	const toggleEnableFakeBar = () =>
+		setSetting((v) => ({
+			...v,
+			enableFakeBar: v.enableFakeBar === 'off' ? 'on' : 'off',
+		}))
+	return {
+		enableFakeBar,
+		toggleEnableFakeBar,
+	}
 }
 
 export const useSettingsEe = () => {
