@@ -132,6 +132,37 @@ export const exStyles = css`
 			}
 		}
 	}
+	&[data-ex='shanimas'] {
+		#mask {
+			display: block;
+			opacity: 0.5;
+			animation: rainbow-anim 20s linear infinite alternate;
+			mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+		}
+		@keyframes rainbow-anim {
+			0% {
+				background: red;
+			}
+			16% {
+				background: orange;
+			}
+			32% {
+				background: yellow;
+			}
+			48% {
+				background: green;
+			}
+			64% {
+				background: aqua;
+			}
+			80% {
+				background: blue;
+			}
+			100% {
+				background: purple;
+			}
+		}
+	}
 	&[data-ex='rakupro'] {
 		#mask {
 			display: block;

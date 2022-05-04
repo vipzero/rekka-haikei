@@ -91,6 +91,9 @@ export const Aria = Template.bind({})
 
 Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }
 
+export const Shani = Template.bind({})
+Shani.args = { setting: { ...setting, eeKey: 'shanimas' } }
+
 export const ThemeClear = Template.bind({})
 ThemeClear.args = { setting: { ...setting, theme: 0 } }
 
