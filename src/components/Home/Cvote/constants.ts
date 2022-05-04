@@ -413,6 +413,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['ソードアート・オンライン', 'sao'],
 	['山田くんと7人の魔女', 'yamajo'],
 	['緋弾', 'ariascarlet'],
+	[/アマガミ/, 'amagami'],
 ]
 export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
