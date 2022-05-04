@@ -22,7 +22,10 @@ function Page() {
 							setBg(link, song.time)
 						}}
 					>
-						<img src={link} />
+						<img
+							src={link}
+							onError={(e) => (e.currentTarget.style.display = 'none')}
+						/>
 					</div>
 				))}
 			</Wrap>
