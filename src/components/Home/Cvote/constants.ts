@@ -408,6 +408,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['がっこうぐらし', 'gkgurashi'],
 	['ガヴリール', 'gabudoro'],
 	['一週間フレンズ', 'issyuukanfr'],
+	['プラスティック・メモリーズ', 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],
 	['山田くんと7人の魔女', 'yamajo'],
