@@ -10,6 +10,7 @@ export function textNormalize(s: string) {
 		.replace(/[（【「[]/, '(')
 		.replace(/[）】」\]]/, ')')
 		.replace('！', '!')
+		.replace('〜', '~')
 		.replace('？', '?')
 }
 
