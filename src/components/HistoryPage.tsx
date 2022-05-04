@@ -20,6 +20,7 @@ import { WordCountTable } from './HistoryPage/WordCountTable'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import { History } from '../types'
 
 const toH = (ts: number) =>
 	Math.floor((ts % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000))
@@ -55,7 +56,7 @@ function HistoryPageBase() {
 	const [multiMode, setMultiMode] = useState<boolean>(false)
 	const [copyMode, setCopyMode] = useState<boolean>(false)
 	const [wrapMode, setWrapMode] = useState<boolean>(true)
-	const [nsort, setNsort] = useState<boolean>(false)
+	const [sortBy, setSort] = useState<'none' | 'by_n' | 'by_b'>('none')
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
@@ -78,12 +79,14 @@ function HistoryPageBase() {
 	)
 
 	const sortedHists = useMemo(() => {
-		if (!nsort) return histories
-		const arr = [...histories].sort(
-			(a, b) => (b.n === null ? -1 : b.n) - (a.n === null ? -1 : a.n)
-		)
+		if (sortBy === 'none') return histories
+		type A = keyof History
+		const sortKey: keyof History = sortBy === 'by_n' ? 'n' : 'b'
+		const sort = (a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1)
+
+		const arr = [...histories].sort(sort)
 		return arr.sort()
-	}, [histories, nsort])
+	}, [histories, sortBy])
 
 	const [rangedHists] = useMemo(() => {
 		const rangeFiltered = sortedHists.filter((v) => rangeFilter(range, v.time))
@@ -284,12 +287,22 @@ function HistoryPageBase() {
 							<div>タイトル</div>
 							<div className="non-copy">ブ</div>
 							<div className="non-copy">
-								<div className="link-like" onClick={() => setNsort(not)}>
+								<div
+									className="link-like"
+									onClick={() =>
+										setSort((v) => (v === 'by_n' ? 'none' : 'by_n'))
+									}
+								>
 									N
 								</div>
 							</div>
 							<div className="non-copy">
-								<div>
+								<div
+									className="link-like"
+									onClick={() =>
+										setSort((v) => (v === 'by_b' ? 'none' : 'by_b'))
+									}
+								>
 									<FontAwesomeIcon icon={faThumbsUp} />
 								</div>
 							</div>
