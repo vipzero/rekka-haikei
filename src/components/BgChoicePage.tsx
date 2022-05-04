@@ -24,7 +24,10 @@ function Page() {
 					>
 						<img
 							src={link}
-							onError={(e) => (e.currentTarget.style.display = 'none')}
+							onError={(e) => {
+								if (e.currentTarget.parentElement)
+									e.currentTarget.parentElement.style.display = 'none'
+							}}
 						/>
 					</div>
 				))}
