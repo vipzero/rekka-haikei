@@ -18,7 +18,7 @@ import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
-import TimeBar from './TimeBar'
+import TrackTimeBar from './TrackTimeBar'
 
 type Props = {
 	song: Song
@@ -54,7 +54,7 @@ function Home({ song }: Props) {
 				changedUrl={setUrl}
 				px={sideMode ? 'right' : 'center'}
 			/>
-			<TimeBar startTime={song.time} size={timeBarSize} />
+			<TrackTimeBar startTime={song.time} size={timeBarSize} />
 			<Wrap style={{ width: sideMode ? '50vw' : '100%' }}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>

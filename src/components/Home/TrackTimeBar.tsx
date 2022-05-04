@@ -25,7 +25,7 @@ const useTimeBar = (startTime: number, size?: number) => {
 	return [p] as const
 }
 
-function TimeBar({ startTime, size }: Props) {
+function TrackTimeBar({ startTime, size }: Props) {
 	const [p] = useTimeBar(startTime, size)
 
 	if (!size) return null
@@ -53,4 +53,4 @@ const Style = styled.div`
 	}
 `
 
-export default TimeBar
+export default TrackTimeBar
