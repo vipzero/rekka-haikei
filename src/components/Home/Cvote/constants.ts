@@ -350,6 +350,7 @@ export const eekeysGimic = [
 	'gkgurashi',
 	'issyuukanfr',
 	'sao',
+	'3sha3yo',
 	// 'codegeass',
 ] as const
 // 🛑 ネタバレ注意
@@ -433,6 +434,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['緋弾', 'ariascarlet'],
 	[/アマガミ/, 'amagami'],
 	['音楽少女', 'shining'],
+	['三者三葉', '3sha3yo'],
 ]
 export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
@@ -456,4 +458,5 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/ラスト.?アクトレス|DIAMOND JOKER/i, 'imasmlfa'],
 	[/花ざかりWeekend|Black.Party/i, 'imasmlan'],
 	['アマガミ', 'amagami'],
+	[/シャイニング.?ピース/, 'shining'],
 ]

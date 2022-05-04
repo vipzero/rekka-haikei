@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo } from 'react'
 import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
@@ -6,6 +7,7 @@ import { useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
 import { CVOTE_PROFILES, Eekey } from '../Home/Cvote/constants'
+import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -116,6 +118,14 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 		)
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
+	} else if (eeKey === '3sha3yo') {
+		return (
+			<div className="hurricane">
+				<div className="hurricane-s">
+					<FontAwesomeIcon icon={faHurricane} />
+				</div>
+			</div>
+		)
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>

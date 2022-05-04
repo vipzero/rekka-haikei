@@ -14,6 +14,18 @@ const spin = keyframes`
 	transform: rotate(360deg);
 }
 `
+const fontInflare = keyframes`
+0% {
+	font-size: 1vw;
+	left: 0vmin;
+	bottom: 0vmin;
+}
+100% {
+	left: -20vmin;
+	bottom: -20vmin;
+	font-size: 100vmin;
+}
+`
 const animStart = process.env.NODE_ENV === 'development' ? 5 : 60
 
 const randAnimsCss = [...Array(20).keys()]
@@ -526,6 +538,19 @@ export const exStyles = css`
 		}
 		.link-hist {
 			display: none;
+		}
+	}
+	&[data-ex='3sha3yo'] {
+		.hurricane {
+			position: absolute;
+			animation: ${fontInflare} 240s linear both;
+			color: black;
+		}
+		.hurricane-s {
+			animation: ${spin} 0.3s linear infinite;
+			svg {
+				filter: drop-shadow(2rem 2rem 2rem #505);
+			}
 		}
 	}
 `
