@@ -42,6 +42,7 @@ function Home({ song }: Props) {
 			data-ex-just={eeKey}
 			data-has-art={!!song.artworkUrl100}
 			data-theme={theme}
+			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 		>
 			<Mask id="mask">
@@ -185,6 +186,18 @@ const Master = styled.div`
 	&:not(:hover) {
 		#player-box {
 			display: none;
+		}
+	}
+	&[data-time-bar-fake='true'] {
+		#timebar {
+			.fill {
+				opacity: 60%;
+			}
+
+			.pointer {
+				width: 12px;
+				background: white;
+			}
 		}
 	}
 `
