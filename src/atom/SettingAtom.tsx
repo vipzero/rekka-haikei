@@ -9,16 +9,15 @@ const defaultCustomTheme = `
  * ↓色変数 値だけ変えれば反映される
  */
 
---font-color: #f00;                          // 文字色
---panel-fo-color: #0f0;                      // パネル文字
---panel-fo-shadow-color: #00f;               // パネル文字縁
---btn-fo-color: #ff0;                        // ボタン文字
---setting-bg-color: #80f;                    // 設定背景
---content-bg-color: #0000ffaa;               // パネル背景
---sub-bg-color: #333;                        // デバッグ背景
---btn-bg-color: rgba(0, 0, 100, 0.5);        // 設定ボタン背景
---btn-bg-checked-color: rgba(0, 0, 30, 0.5); // 設定ボタン背景有効
-
+--font-color: #FFC627;                // 文字色
+--panel-fo-color: #FFC627;            // パネル文字
+--panel-fo-shadow-color: #000;        // パネル文字縁
+--btn-fo-color: #fff;                 // ボタン文字
+--setting-bg-color: #8C1D40aa;        // 設定背景
+--content-bg-color: #8C1D40aa;        // パネル背景
+--sub-bg-color: #8C1D40ee;            // デバッグ背景
+--btn-bg-color: #00A3E0;              // 設定ボタン背景
+--btn-bg-checked-color: #00A3E088;    // 設定ボタン背景有効
 
 #timebar {
   .wrap {
