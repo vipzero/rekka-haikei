@@ -1,6 +1,10 @@
 import { atom } from 'recoil'
 import { Setting } from '../types'
 
+const defaultCustomTheme = `
+	
+`
+
 export const defaultSetting: Setting = {
 	theme: 0,
 	showSetting: true,
@@ -19,6 +23,7 @@ export const defaultSetting: Setting = {
 	eeSim: false,
 	ee: {},
 	feedBackText: '',
+	customTheme: defaultCustomTheme,
 }
 
 const localStorageEffect =

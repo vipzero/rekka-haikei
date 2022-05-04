@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
-import { useSettingsEe } from '../hooks/useSettings'
+import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
 import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Address from './HistoryPage/Address'
@@ -25,6 +25,7 @@ function HomePage() {
 function HomePageBase() {
 	const [loaded, song] = useSongDb()
 	const { abyss } = useSettingsEe()
+	const { customTheme } = useSettingsCustomTheme()
 
 	useEx(song)
 	if (!loaded) return <LoadingView />
@@ -35,6 +36,7 @@ function HomePageBase() {
 				<title>{song.icy}</title>
 				<meta name="theme-color" content={abyss} />
 			</Head>
+			<style>{customTheme}</style>
 			<Home song={song} />
 		</>
 	)

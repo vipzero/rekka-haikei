@@ -92,6 +92,7 @@ export type Setting = {
 	ee: Record<string, true>
 	eeKey: Eekey
 	eeSim: boolean
+	customTheme: string
 }
 
 export type Event = {

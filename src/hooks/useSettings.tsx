@@ -91,6 +91,16 @@ export const useSettingsFakeBar = () => {
 	}
 }
 
+export const useSettingsCustomTheme = () => {
+	const [{ customTheme }, setSetting] = useSettingsBase()
+	const setCustomTheme = (customTheme: string) =>
+		setSetting((v) => ({
+			...v,
+			customTheme,
+		}))
+	return { customTheme, setCustomTheme }
+}
+
 export const useSettingsEe = () => {
 	const [{ abyss, abyssEx, ee, eeKey, eeSim }, setSetting] = useSettingsBase()
 
