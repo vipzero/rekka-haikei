@@ -318,6 +318,23 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'sz', name: '静', color: '#494F68' },
 		],
 	},
+	{
+		id: 'shining',
+		chars: [
+			{ id: 'hn', name: 'はなこ', color: '#7fffd4' },
+			{ id: 'ss', name: '沙々目', color: '#ba55d3' },
+			{ id: 'mr', name: '未来', color: '#ffd700' },
+			{ id: 'hy', name: '日陽', color: '#c71585' },
+			{ id: 'gs', name: '具志堅', color: '#cd853f' },
+			{ id: 'rr', name: 'ろろ', color: '#32cd32' },
+			{ id: 'kk', name: '琴子', color: '#ffa500' },
+			{ id: 'uo', name: '迎羽織', color: '#6a5acd' },
+			{ id: 'ms', name: '迎桐', color: '#00bfff' },
+			{ id: 'hr', name: 'ハル', color: '#b22222' },
+			{ id: 'er', name: '絵里', color: '#4169e1' },
+			{ id: 'te', name: '更紗', color: '#ff69b4' },
+		],
+	},
 ]
 
 // 🛑 ネタバレ注意
@@ -360,6 +377,7 @@ export const eekeysVotic = [
 	'imasmlfa',
 	'imasmlan',
 	'rakupro',
+	'shining',
 ] as const
 export const eekeys = [
 	...eekeysGimic,
@@ -414,6 +432,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['山田くんと7人の魔女', 'yamajo'],
 	['緋弾', 'ariascarlet'],
 	[/アマガミ/, 'amagami'],
+	['音楽少女', 'shining'],
 ]
 export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
