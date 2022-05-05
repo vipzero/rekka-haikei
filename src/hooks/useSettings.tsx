@@ -1,11 +1,15 @@
 import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
-import { Eekey, isExTheme } from '../components/Home/Cvote/constants'
+import {
+	Eekey,
+	EekeyState,
+	isExTheme,
+} from '../components/Home/Cvote/constants'
 import { Abyss, nextAbyss, normalThemes } from '../config'
 import { Setting, ThemeId } from '../types'
 import { toggle, genToggle } from '../util'
 
-function exKeyToColor(exkey: Eekey) {
+function exKeyToColor(exkey: EekeyState) {
 	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'
 	if (exkey === 'sakurasou') return '#fde'
 	return null
@@ -115,7 +119,7 @@ export const useSettingsEe = () => {
 	}
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
-	const setEekey = (eeKey: Eekey, simulate = false) => {
+	const setEekey = (eeKey: Eekey | false, simulate = false) => {
 		const exColor = exKeyToColor(eeKey)
 
 		setAbyssEx(exColor)

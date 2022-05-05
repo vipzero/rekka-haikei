@@ -1,4 +1,4 @@
-import { Eekey } from '../components/Home/Cvote/constants'
+import { Eekey, EekeyState } from '../components/Home/Cvote/constants'
 import { Abyss } from './../config/index'
 export type SongMiss = {
 	icy: string
@@ -90,7 +90,7 @@ export type Setting = {
 	abyss: Abyss // fade change background color: ;
 	abyssEx: Abyss | null
 	ee: Record<string, true>
-	eeKey: Eekey
+	eeKey: EekeyState
 	eeSim: boolean
 	customTheme: string
 }

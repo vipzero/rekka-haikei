@@ -6,7 +6,7 @@ import { FloatingBox, RainbowFontCool } from '../'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
-import { CVOTE_PROFILES, Eekey } from '../Home/Cvote/constants'
+import { CVOTE_PROFILES, Eekey, EekeyState } from '../Home/Cvote/constants'
 import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 
 const EmbedWindow = ({ url }: { url: string }) => (
@@ -139,7 +139,7 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 	}
 	return null
 }
-function getEx(eeKey: Eekey, sid: string, rand: number, eeSim: boolean) {
+function getEx(eeKey: EekeyState, sid: string, rand: number, eeSim: boolean) {
 	if (!eeKey) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === eeKey)
 

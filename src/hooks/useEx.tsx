@@ -5,6 +5,7 @@ import {
 	EX_PATTERNS_ANIME_OR_ALBUM,
 	EX_PATTERNS_JUST_ICY,
 	EX_PATTERNS_ICY,
+	EekeyState,
 } from '../components/Home/Cvote/constants'
 import { Song } from '../types'
 import { useSettingsEe } from './useSettings'
@@ -27,7 +28,7 @@ const hasTitle = (q: string | RegExp, song: Song) =>
 const icyJustMatch = (q: string, icy: string) =>
 	icy.split(' - ').some((w) => w.trim().includes(q))
 
-export function checkEx(song: Song): Eekey {
+export function checkEx(song: Song): EekeyState {
 	const { icy } = song
 
 	if (!icy) return false
