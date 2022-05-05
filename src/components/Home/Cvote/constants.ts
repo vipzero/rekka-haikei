@@ -423,7 +423,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['が修羅場すぎ', 'oreshura'],
 	['極黒のブリュンヒルデ', 'bryunhild'],
 	[/とある(魔術|科学)の/, 'toaru'],
-	['ジョジョの奇妙な冒険', 'jojo'],
+	['ジョジョ', 'jojo'],
 	['ボーボボ', 'bobo'],
 	['ローゼンメイデン', 'rozen'],
 	['がっこうぐらし', 'gkgurashi'],
