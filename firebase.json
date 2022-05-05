@@ -41,9 +41,7 @@
 	},
 	"functions": {
 		"source": "functions",
-		"predeploy": [
-			"npm --prefix \"$RESOURCE_DIR\" run build && mv functions/lib/* functions/out/"
-		],
+		"predeploy": "npm --prefix functions run build",
 		"ignore": [
 			"firebase.json",
 			"firebase-debug.log",
@@ -51,7 +49,6 @@
 			"**/node_modules/**",
 			"src/**",
 			"tsconfig.json",
-			"lib/**",
 			"public/**",
 			"package*",
 			"firestore.rules"
