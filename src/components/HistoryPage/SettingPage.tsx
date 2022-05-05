@@ -57,6 +57,17 @@ export function SettingPage() {
 					</ToggleButton>
 				</div>
 			</div>
+			<div>
+				<h4>プレイヤーで http のストリームを使う</h4>
+				<p>
+					<a href="chrome://flags">chrome://flags</a> の
+					<code>unsafely-treat-insecure-origin-as-secure</code>
+					に対象のURLを入れることで再生可能 (2022年4月時点)
+				</p>
+				<p>
+					<img src="https://i.imgur.com/AUViOQB.png" />
+				</p>
+			</div>
 		</Style>
 	)
 }
@@ -65,6 +76,9 @@ const Style = styled.div<{ customTheme: string }>`
 		width: max-content;
 
 		font-family: 'Roboto Mono', monospace;
+	}
+	img {
+		width: 400px;
 	}
 	${(p) => p.customTheme}
 	.preview {
