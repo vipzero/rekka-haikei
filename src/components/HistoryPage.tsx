@@ -29,15 +29,20 @@ const toH = (ts: number) =>
 		((ts + 9 * 60 * 60 * 1000) % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
 	)
 
-const searchHit = (search: string, text: string, r: RegExp) => {
-	let res = false
+const safeRegex = (s: string) => {
 	try {
-		if (safe(search)) {
-			res = !!r.exec(text)
+		if (safe(s)) {
+			return true
 		}
-	} catch (_e) {}
-	res = res || text.toLowerCase().includes(search.toLowerCase())
-	return res
+	} catch (_e) {
+		return false
+	}
+	return false
+}
+const searchHit = (search: string, text: string, r: RegExp | false) => {
+	return (
+		(r && r.exec(text)) || text.toLowerCase().includes(search.toLowerCase())
+	)
 }
 
 const searchFilter = (
@@ -46,19 +51,33 @@ const searchFilter = (
 ): [History[], Record<string, number> | null] => {
 	if (searchs.length === 0) return [rangedHists, null]
 
+	const preHists = rangedHists
+
 	const result: Record<string, number> = {}
 	const searchParts = searchs.map((s) => {
 		result[s] = 0
-		return [s, new RegExp(s, 'i')] as const
+		const ok = safeRegex(s)
+		return [s, ok && new RegExp(s, 'i')] as const
 	})
-	const histories = rangedHists.filter((v) => {
+	const histories: History[] = []
+
+	preHists.forEach((v) => {
 		const hits = searchParts.map(([s, r]) => {
 			const hit = searchHit(s, v.title, r)
 			result[s] += hit ? 1 : 0
 			return hit
 		})
-		return hits.some(Boolean)
+		if (hits.some(Boolean)) histories.push(v)
 	})
+
+	// const histories = preHists.filter((v) => {
+	// 	const hits = searchParts.map(([s, r]) => {
+	// 		const hit = searchHit(s, v.title, r)
+	// 		result[s] += hit ? 1 : 0
+	// 		return hit
+	// 	})
+	// 	return hits.some(Boolean)
+	// })
 
 	return [histories, result]
 }
@@ -117,6 +136,7 @@ function HistoryPageBase() {
 	}, [histories, sortBy])
 
 	const [rangedHists] = useMemo(() => {
+		if (range === null) return [sortedHists]
 		const rangeFiltered = sortedHists.filter((v) => rangeFilter(range, v.time))
 
 		return [rangeFiltered]
@@ -128,7 +148,7 @@ function HistoryPageBase() {
 		performance.mark('b')
 		performance.measure('search', 'a', 'b')
 
-		console.info(performance.getEntriesByName('search').pop()?.duration)
+		console.info(performance.getEntriesByName('search').pop())
 		return res
 	}, [rangedHists, searchs])
 
