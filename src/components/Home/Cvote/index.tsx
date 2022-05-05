@@ -51,10 +51,16 @@ const modeLabel: Record<Mode, string> = {
 }
 
 function CVote({ animeId, chars, sid, disabled }: Props) {
-	const { loaded, votes, vote, votedChars, votesNorm, initVotes } = useCvoteDb(
-		animeId,
-		sid
-	)
+	const {
+		loaded,
+		votes,
+		vote,
+		votedChars,
+		votesNorm,
+		initVotes,
+		voteEnd,
+		votedNum,
+	} = useCvoteDb(animeId, sid)
 	const [mode, setMode] = useState<Mode>(modes[0])
 	const cycleMode = () =>
 		setMode((v) => modes[(modes.indexOf(v) + 1) % modes.length])
@@ -76,7 +82,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					e.stopPropagation()
 				}}
 			>
-				{modeLabel[mode]}
+				{modeLabel[mode]}[{votedNum}/1]
 			</button>
 
 			<div
@@ -88,7 +94,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					<button
 						key={`char-${char.id}`}
 						data-voted={char.selected}
-						disabled={disabled || char.selected}
+						disabled={disabled || char.selected || voteEnd}
 						onClick={() => vote(char.id)}
 						style={{
 							borderColor: char.color,

@@ -45,9 +45,11 @@ export function useCvoteDb(animeId: string, sid: string) {
 			si()
 		}
 	}, [animeId])
+	const votedNum = Object.values(votedChars).length
+	const voteEnd = votedNum < 1
 
 	const vote = async (charId: string) => {
-		if (votedChars[charId]) {
+		if (votedChars[charId] || voteEnd) {
 			console.warn('no stream setup')
 			return
 		}
@@ -56,5 +58,14 @@ export function useCvoteDb(animeId: string, sid: string) {
 		await voteChar(animeId, charId)
 	}
 
-	return { loaded, votes, vote, votedChars, votesNorm, initVotes }
+	return {
+		loaded,
+		votes,
+		vote,
+		votedChars,
+		votesNorm,
+		initVotes,
+		voteEnd,
+		votedNum,
+	}
 }
