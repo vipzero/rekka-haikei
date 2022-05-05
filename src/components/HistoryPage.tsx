@@ -29,7 +29,7 @@ const toH = (ts: number) =>
 		((ts + 9 * 60 * 60 * 1000) % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
 	)
 
-const searchFilter = (search: string, text: string, r: RegExp) => {
+const searchHit = (search: string, text: string, r: RegExp) => {
 	let res = false
 	try {
 		if (safe(search)) {
@@ -39,6 +39,30 @@ const searchFilter = (search: string, text: string, r: RegExp) => {
 	res = res || text.toLowerCase().includes(search.toLowerCase())
 	return res
 }
+
+const searchFilter = (
+	searchs: string[],
+	rangedHists: History[]
+): [History[], Record<string, number> | null] => {
+	if (searchs.length === 0) return [rangedHists, null]
+
+	const result: Record<string, number> = {}
+	const searchParts = searchs.map((s) => {
+		result[s] = 0
+		return [s, new RegExp(s, 'i')] as const
+	})
+	const histories = rangedHists.filter((v) => {
+		const hits = searchParts.map(([s, r]) => {
+			const hit = searchHit(s, v.title, r)
+			result[s] += hit ? 1 : 0
+			return hit
+		})
+		return hits.some(Boolean)
+	})
+
+	return [histories, result]
+}
+
 const rangeFilter = (range: Range, time: number) => {
 	if (range === null) return true
 	return range.start <= time && time <= range.end
@@ -99,22 +123,13 @@ function HistoryPageBase() {
 	}, [sortedHists, range])
 
 	const [filteredHists, searchResult] = useMemo(() => {
-		if (searchs.length === 0) return [rangedHists, null]
-		const result: Record<string, number> = {}
-		const searchParts = searchs.map((s) => {
-			result[s] = 0
-			return [s, new RegExp(s, 'i')] as const
-		})
-		const histories = rangedHists.filter((v) => {
-			const hits = searchParts.map(([s, r]) => {
-				const hit = searchFilter(s, v.title, r)
-				result[s] += hit ? 1 : 0
-				return hit
-			})
-			return hits.some(Boolean)
-		})
+		performance.mark('a')
+		const res = searchFilter(searchs, rangedHists)
+		performance.mark('b')
+		performance.measure('search', 'a', 'b')
 
-		return [histories, result]
+		console.info(performance.getEntriesByName('search').pop()?.duration)
+		return res
 	}, [rangedHists, searchs])
 
 	const viewHists = useMemo(() => {
