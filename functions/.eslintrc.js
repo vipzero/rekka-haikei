@@ -1,12 +1,11 @@
 module.exports = {
+	extends: ['nzap', 'nzap/typescript'],
 	root: true,
-	env: { es6: true, node: true },
-	extends: [],
-	parserOptions: {
-		project: ['tsconfig.json', 'tsconfig.dev.json'],
-		sourceType: 'module',
+	env: {
+		es6: true,
+		node: true,
 	},
-	ignorePatterns: [],
-	plugins: ['@typescript-eslint', 'import'],
-	rules: {},
+	ignorePatterns: [
+		'/lib/**/*', // Ignore built files.
+	],
 }

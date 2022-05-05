@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 
-export const play = functions
+export const player = functions
 	.region('asia-northeast1')
 	.https.onRequest((req, res) => {
 		res.status(400)

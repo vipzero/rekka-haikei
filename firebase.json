@@ -7,7 +7,12 @@
 		"predeploy": "yarn export",
 		"public": "out",
 		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-		"rewrites": [{ "source": "/", "destination": "/2022gw/bg" }],
+		"rewrites": [
+			{
+				"source": "/",
+				"destination": "/2022gw/bg"
+			}
+		],
 		"headers": [
 			{
 				"source": "/sw.js",
@@ -40,18 +45,6 @@
 		"cleanUrls": true
 	},
 	"functions": {
-		"source": "functions",
-		"predeploy": "npm --prefix functions run build",
-		"ignore": [
-			"firebase.json",
-			"firebase-debug.log",
-			"**/.*",
-			"**/node_modules/**",
-			"src/**",
-			"tsconfig.json",
-			"public/**",
-			"package*",
-			"firestore.rules"
-		]
+		"predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
 	}
 }
