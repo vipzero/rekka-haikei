@@ -5,14 +5,10 @@ import 'firebase-functions/lib/logger/compat'
 const cors = require('cors')
 const requestIp = require('request-ip')
 
-exports.hello2 = functions.https.onRequest((req, res) => {
-	res.send(`Hello ${req.query.name}`)
-})
-
 const app = express()
 app.use(cors({ origin: true }))
 
-const blockIps = (functions.config().ip.blacklist, '').split(',')
+const blockIps: string[] = []
 
 exports.sugar = functions.https.onRequest((req, res) => {
 	const clientIp = requestIp.getClientIp(req)
@@ -38,4 +34,25 @@ app.all('/*', function (req, res) {
 
 // app.use(express.static(__dirname + '/static'))
 
-exports.filter3 = functions.https.onRequest(app)
+exports.player = functions
+	.region('asia-northeast1')
+	.https.onRequest((req, res) => {
+		res.status(400)
+		const url = req.query['url']
+		if (typeof url !== 'string') {
+			res.status(400)
+			return
+		}
+
+		res.status(200).send(`<!doctype html>
+    <head>
+      <title>player</title>
+    </head>
+    <body>
+			<audio controls src="${decodeURIComponent(url)}">
+					Your browser does not support the
+			<code>audio</code>
+    </audio>
+    </body>
+  </html>`)
+	})
