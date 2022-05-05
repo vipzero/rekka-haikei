@@ -1,20 +1,44 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
-import { eekeyGroups, eekeys } from './Cvote/constants'
+import { Eekey, eekeyGroups } from './Cvote/constants'
 
 type Props = {}
+
+type EeDot = {
+	get: boolean
+	char: string
+	key: Eekey
+	label: string
+}
+
+const hint = (s: string, group: number) => {
+	const full = s.replace(/./, '.')
+	const head = s[0] + '~'
+	const tails = '~' + s[s.length - 1]
+	const shima = s.replace(/.(.)?/g, '.$1')
+
+	return [head, full, tails, shima][group]
+}
+const makeDot = (
+	key: Eekey,
+	comps: Record<string, true>,
+	hintGroup: number
+): EeDot => {
+	const get = !!comps?.[key]
+	if (get) return { get, char: '*', key, label: key }
+	return { get, char: '-', key, label: hint(key, hintGroup) || '.' }
+}
 
 const range = (start: number, end: number) =>
 	Array.from({ length: end - start }, (_, i) => i + start)
 
 export const EeSelector = (props: Props) => {
-	const { ee, eeKey, toggleEekeySimulate } = useSettingsEe()
+	const { ee: comps, eeKey, toggleEekeySimulate } = useSettingsEe()
 
 	const eeSawGroups = useMemo(
-		() =>
-			eekeyGroups.map((eeg) => eeg.map((key) => ({ get: !!ee?.[key], key }))),
-		[ee]
+		() => eekeyGroups.map((eeg, i) => eeg.map((key) => makeDot(key, comps, i))),
+		[comps]
 	)
 
 	return (
@@ -33,8 +57,9 @@ export const EeSelector = (props: Props) => {
 									toggleEekeySimulate(b.key)
 								}}
 							>
-								{b.get && <span className="tooltip-text">{b.key}</span>}
-								{b.get ? '*' : '-'}
+								<span className="tooltip-text">{b.label}</span>
+
+								{b.char}
 							</span>
 						))}
 					</div>

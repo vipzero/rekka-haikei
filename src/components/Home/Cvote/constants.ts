@@ -352,10 +352,11 @@ export const eekeysGimic = [
 	'sao',
 	'3sha3yo',
 	// 'codegeass',
+	'ariascarlet',
 ] as const
 // 🛑 ネタバレ注意
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
-export const eekeysMirror = ['spin', 'flip', 'patema', 'ariascarlet'] as const
+export const eekeysMirror = ['spin', 'flip', 'patema'] as const
 export const eekeysVotic = [
 	'gotoyome',
 	'oreimo',
@@ -395,7 +396,8 @@ export const eekeyGroups = [
 	eekeysVotic,
 ]
 
-export type Eekey = typeof eekeys[number] | false
+export type Eekey = typeof eekeys[number]
+export type EekeyState = Eekey | false
 export type ExThemeKey = typeof eekeysThemetic[number]
 export const isExTheme = (
 	theme: string | false | number
