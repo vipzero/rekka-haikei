@@ -14,7 +14,7 @@ import { BookmarkList } from './BookmarkList'
 import { exStyles } from './exStyles'
 import { ExtraComp } from './ExtraComp'
 import FadeBgChanger from './FadeBgChanger'
-import Player from './Player'
+import AudioPlayer from './AudioPlayer'
 import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
@@ -68,7 +68,7 @@ function Home({ song }: Props) {
 			<Wrap data-side={sideMode}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
-					<Player src={streamUrl}></Player>
+					<AudioPlayer src={streamUrl}></AudioPlayer>
 				</div>
 				<SettingBox
 					song={song}

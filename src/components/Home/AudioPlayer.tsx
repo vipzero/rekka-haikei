@@ -11,7 +11,7 @@ function isHTMLMediaElement(e: object): e is HTMLMediaElement {
 	return typeof e['volume'] === 'number'
 }
 
-function Player({ src }: Props) {
+function AudioPlayer({ src }: Props) {
 	const [volume, setVolume] = useLocalStorage<number>('player-volume', 0.5)
 
 	if (!isValidUrl(src)) return null
@@ -31,4 +31,4 @@ function Player({ src }: Props) {
 		/>
 	)
 }
-export default Player
+export default AudioPlayer
