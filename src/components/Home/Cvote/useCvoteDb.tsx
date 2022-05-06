@@ -46,7 +46,7 @@ export function useCvoteDb(animeId: string, sid: string) {
 		}
 	}, [animeId])
 	const votedNum = Object.values(votedChars).length
-	const voteEnd = votedNum < 1
+	const voteEnd = votedNum >= 1
 
 	const vote = async (charId: string) => {
 		if (votedChars[charId] || voteEnd) {
