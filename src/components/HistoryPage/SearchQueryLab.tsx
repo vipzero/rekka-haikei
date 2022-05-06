@@ -40,7 +40,7 @@ export function SearchQueryLab() {
 	if (!loaded) return <p>ロード中</p>
 	const anime = song.animeTitle?.replace('-', ' ') || 'のんのんびより'
 
-	const icy = song.icy.replace('-', ' ')
+	const icy = song.icy.replace(' - ', ' OR ')
 
 	return (
 		<Style>
