@@ -44,7 +44,7 @@ export const useQueryInit = (
 		if (!q && !tab === undefined) return
 
 		if (q) {
-			detected(decodeURI(q))
+			detected(decodeURIComponent(q))
 		}
 		if (tab !== undefined && Number(tab) >= 0) {
 			hasTab(Number(tab))
