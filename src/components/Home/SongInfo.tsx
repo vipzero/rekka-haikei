@@ -88,7 +88,10 @@ function SongInfo({ song }: Props) {
 										<Link
 											prefetch={false}
 											href="/[eid]/history"
-											as={{ pathname: `/${eid}/history`, query: { q: tag } }}
+											as={{
+												pathname: `/${eid}/history`,
+												query: { q: encodeURIComponent(tag) },
+											}}
 											key={i}
 											passHref
 										>
