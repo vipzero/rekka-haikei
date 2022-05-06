@@ -6,12 +6,31 @@ import { searchImageUrl } from '../../util'
 
 type Props = {}
 
+const WORDS = [
+	'meme',
+	'キャプ画',
+	'キャラ',
+	'かわいい',
+	'グッズ',
+	'ネタ画像',
+	'壁紙',
+	'相関図',
+	'名シーン',
+	'作画',
+	'wallpaper',
+	'敵',
+	'ヒット',
+	'似てる',
+	'2話',
+]
+
 const defaultText = `
 {icy} 壁紙
 {anime} アニメ
 {icy} -写真 -3次元
 {icy} -artwork -shop
-{anime} AND (主人公 OR グッズ)
+${WORDS.map((w) => `{anime} AND ${w}`).join('\n')}
+
 {anime} AND (キャラ OR 名シーン OR 2話)
 `
 
@@ -26,14 +45,19 @@ export function SearchQueryLab() {
 	return (
 		<Style>
 			<p>
+				<b>いい感じの壁紙が見つかる「検索ワード」を探しています。</b>
+				いい感じの検索ワードが見つかったら教えて下さい。
 				アルゴリズムの改善募集中です。 背景用の画像は
 				Google検索(カスタムサーチAPI)で見つけています。
 				<a href={URL_MAKE_SEARCH_CODE}>該当コード</a>
 			</p>
 			<p>
-				下のツールでリンクを生成し、画像検索をテストできます。
-				<b>いい感じの壁紙が見つかる「任意のワード」を探しています。</b>
+				<code>
+					{JSON.stringify(WORDS)}
+					など
+				</code>
 			</p>
+			<p>下のツールでリンクを生成し、画像検索をテストできます。</p>
 			<section>
 				<p>検索につかえること</p>
 				<ul>
@@ -71,7 +95,8 @@ export function SearchQueryLab() {
 						onChange={(e) => setText(e.target.value)}
 					/>
 				</div>
-				<div style={{ display: 'grid' }}>
+				<button onClick={() => setText(defaultText)}>初期テキストに戻す</button>
+				<div className="generated">
 					{text
 						.trim()
 						.split('\n')
@@ -90,6 +115,16 @@ export function SearchQueryLab() {
 							</a>
 						))}
 				</div>
+				<div style={{ display: 'grid' }}>
+					<h4>再生中の曲の検索ワード</h4>
+					<a
+						href={searchImageUrl(song.imageSearchWord)}
+						target="_blank"
+						rel="noreferrer"
+					>
+						{song.imageSearchWord}
+					</a>
+				</div>
 			</section>
 		</Style>
 	)
@@ -97,5 +132,14 @@ export function SearchQueryLab() {
 const Style = styled.div`
 	li::before {
 		content: '・';
+	}
+	p {
+		padding: 8px;
+	}
+	.generated {
+		display: grid;
+		border: solid gray;
+		padding: 8px;
+		border-radius: 8px;
 	}
 `

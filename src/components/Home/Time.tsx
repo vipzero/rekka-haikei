@@ -111,7 +111,7 @@ const Time = ({ song }: Props) => {
 					<a href={`/${eid}/history?tab=2`}> (改善案募集)</a>
 				</div>
 			</div>
-			{<EeSelector />}
+			<EeSelector />
 		</Style>
 	)
 }
