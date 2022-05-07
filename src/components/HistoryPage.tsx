@@ -4,6 +4,7 @@ import {
 	faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import copy from 'copy-to-clipboard'
 import React, { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import safe from 'safe-regex'
@@ -16,6 +17,7 @@ import { useSearch } from '../hooks/useSearch'
 import { useStart } from '../hooks/useStart'
 import { History } from '../types'
 import { formatDate } from '../util'
+import { CopyButton } from './BookPage/CopyButton'
 import { CheckBox } from './common/CheckBox'
 import { TabPanel, Tabs } from './common/Tab'
 import CountsPage from './CountsPage'
@@ -158,6 +160,9 @@ function HistoryPageBase() {
 	const search = (text: string) => {
 		setSearch(text.trim().split('\n').filter(Boolean))
 	}
+	const searchResultTexts = searchs.map(
+		(s) => `${s} の検索結果: ${searchResult?.[s]}件`
+	)
 
 	return (
 		<Wrap>
@@ -273,11 +278,12 @@ function HistoryPageBase() {
 						{searchResult && (
 							<div className="option-box-word">
 								<h4>検索結果</h4>
-								{searchs.map((search) => (
-									<p key={search}>
-										{search} の検索結果: {searchResult[search]}件
-									</p>
+								{searchResultTexts.map((text) => (
+									<div key={text}>{text}</div>
 								))}
+								<CopyButton
+									onClick={() => copy(searchResultTexts.join('\n'))}
+								/>
 							</div>
 						)}
 						{range && (
