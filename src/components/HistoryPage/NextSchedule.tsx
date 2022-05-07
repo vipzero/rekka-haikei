@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
+import { ScheduleRow } from '../../hooks/useHistoryDb'
 import { formatYmdSlash } from '../../util'
-import { ScheduleRow } from './Schedule'
 
 type Props = {
 	rows: Record<string, ScheduleRow>
