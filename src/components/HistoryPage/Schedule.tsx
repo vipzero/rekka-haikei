@@ -24,7 +24,7 @@ function ScheduleComp(props: Props) {
 				<ScheduleTable rows={rows} setFilter={props.setFilter} />
 				<div>
 					<textarea
-						style={{ width: '100%' }}
+						style={{ width: '100%', fontFamily: `'Roboto Mono'` }}
 						value={schedule.text}
 						rows={4}
 						placeholder={`
