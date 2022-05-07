@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ScheduleRow } from './Schedule'
+import { ScheduleRow } from '../../hooks/useHistoryDb'
 
 function ScheduleTable({
 	rows,
