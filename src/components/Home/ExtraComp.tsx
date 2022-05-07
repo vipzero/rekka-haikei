@@ -126,6 +126,14 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 				</div>
 			</div>
 		)
+	} else if (eeKey === 'imascd') {
+		return (
+			<div id="imascd">
+				<div>
+					<img src="/static/clock-hands.svg" />
+				</div>
+			</div>
+		)
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>

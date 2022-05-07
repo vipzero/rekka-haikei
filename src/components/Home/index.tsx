@@ -46,6 +46,8 @@ function Home({ song }: Props) {
 	return (
 		<Master
 			onClick={toggleSetting}
+			// @ts-ignore
+			style={{ '--song-time': `${song.trackTimeMillis / 1000}s` }}
 			data-ex={eeKey || theme}
 			data-ex-just={eeKey}
 			data-has-art={!!song.artworkUrl100}
