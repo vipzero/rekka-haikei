@@ -426,7 +426,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/とある(魔術|科学)の/, 'toaru'],
 	['ジョジョ', 'jojo'],
 	['ボーボボ', 'bobo'],
-	['ローゼンメイデン', 'rozen'],
+	[/ローゼンメイデン|Rozen Maiden/i, 'rozen'],
 	['がっこうぐらし', 'gkgurashi'],
 	['ガヴリール', 'gabudoro'],
 	['一週間フレンズ', 'issyuukanfr'],
