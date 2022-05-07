@@ -14,6 +14,12 @@ function makeTitle(song: Song) {
 	if (!artist) return song.icy
 	return `${title} - ${artist}`
 }
+type TagCount = { s: string; count: number }
+function tagOrder(tags: Record<string, number>): TagCount[] {
+	return Object.entries(tags)
+		.map(([s, count]) => ({ s, count }))
+		.sort((a, b) => (a.count - b.count) * 100 + a.s.localeCompare(b.s))
+}
 
 type Props = { song: Song }
 
@@ -82,21 +88,21 @@ function SongInfo({ song }: Props) {
 						</p>
 						{showCounts && (
 							<p className="tags">
-								{Object.entries(song.wordCounts)
-									.filter(([k]) => k !== song.icy)
-									.map(([tag, v], i) => (
+								{tagOrder(song.wordCounts)
+									.filter(({ s }) => s !== song.icy)
+									.map((tag, i) => (
 										<Link
 											prefetch={false}
 											href="/[eid]/history"
 											as={{
 												pathname: `/${eid}/history`,
-												query: { q: encodeURIComponent(tag) },
+												query: { q: encodeURIComponent(tag.s) },
 											}}
 											key={i}
 											passHref
 										>
 											<a>
-												{tag}({formatCount(v)})
+												{tag.s}({formatCount(tag.count)})
 											</a>
 										</Link>
 									))}
