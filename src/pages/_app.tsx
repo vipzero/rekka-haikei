@@ -18,6 +18,7 @@ const App = ({ Component, pageProps }: AppProps<{}>) => (
 			/>
 			<link rel="manifest" href="/manifest.json" />
 			<title>music stream</title>
+			<meta name="robots" content="noindex" />
 			<meta name="application-name" content={APP_NAME} />
 			<meta name="apple-mobile-web-app-capable" content="yes" />
 			<meta name="apple-mobile-web-app-status-bar-style" content="default" />
