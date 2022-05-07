@@ -331,7 +331,9 @@ function HistoryPageBase() {
 										setSort((v) => (v === 'by_n' ? 'none' : 'by_n'))
 									}
 								>
-									N
+									<div className="tooltip">
+										<span className="tooltip-text">勢い</span>N
+									</div>
 								</div>
 							</div>
 							<div className="non-copy">
@@ -341,7 +343,9 @@ function HistoryPageBase() {
 										setSort((v) => (v === 'by_b' ? 'none' : 'by_b'))
 									}
 								>
-									<FontAwesomeIcon icon={faThumbsUp} />
+									<div className="tooltip">
+										<span className="tooltip-text">ブクマ数</span>★
+									</div>
 								</div>
 							</div>
 						</div>
