@@ -39,7 +39,12 @@ function ScheduleTable({
 													setFilter({ start: +item.start, end: +item.end })
 												}
 											>
-												{item.memo?.substring(0, 8)}
+												<div className="tooltip">
+													<span className="tooltip-text">{item.memo}</span>
+													<div style={{ overflow: 'hidden', width: '100%' }}>
+														{item.memo?.substring(0, 8)}
+													</div>
+												</div>
 											</td>
 										)
 								}
@@ -66,7 +71,6 @@ const Table = styled.table`
 		padding: 2px;
 		&.filled {
 			border: solid 1px;
-			overflow: hidden;
 			white-space: nowrap;
 			&:hover {
 				cursor: pointer;
