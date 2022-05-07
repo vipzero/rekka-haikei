@@ -1,5 +1,7 @@
+import copy from 'copy-to-clipboard'
 import React, { useMemo, useState } from 'react'
 import { useScheduleDb } from '../../hooks/useHistoryDb'
+import { CopyButton } from '../BookPage/CopyButton'
 import { TabPanel, Tabs } from '../common/Tab'
 import NextSchedule from './NextSchedule'
 import ScheduleTable from './ScheduleTable'
@@ -26,6 +28,7 @@ function ScheduleComp(props: Props) {
 						<code>
 							<pre>{todayText}</pre>
 						</code>
+						<CopyButton onClick={() => copy(todayText)} />
 					</TabPanel>
 					<TabPanel value={tab} index={1}>
 						<div>

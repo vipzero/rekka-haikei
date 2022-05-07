@@ -12,8 +12,13 @@ type Props = {}
 export function BookmarkList() {
 	const { favorites, toggleFavorites } = useFavorites()
 	const [mode, setMode] = useState<'normal' | 'copy' | 'txt'>('copy')
+	const [lastCopy, setLastCopy] = useState<string>('')
 	const text = Object.keys(favorites).join('\n')
 
+	const copyAciton = (s: string) => {
+		setLastCopy(s)
+		copy(s)
+	}
 	return (
 		<Style>
 			<div style={{ display: 'flex', gap: '8px' }}>
@@ -42,7 +47,7 @@ export function BookmarkList() {
 					<pre>
 						<code>{text}</code>
 					</pre>
-					<CopyButton onClick={() => copy(text)} label={'コピー'} />
+					<CopyButton onClick={() => copyAciton(text)} label={'コピー'} />
 				</div>
 			)}
 			{mode === 'normal' &&
@@ -50,9 +55,9 @@ export function BookmarkList() {
 					.map((icy) => ({ icy, units: icy.split(' - ') }))
 					.map(({ icy, units: [icyA, icyB] }, i) => (
 						<div key={i} className="row">
-							<div>
+							<div data-active={icy === lastCopy} key={icy}>
 								<span>{icy}</span>
-								<CopyButton onClick={() => copy(icy)} />
+								<CopyButton onClick={() => copyAciton(icy)} />
 							</div>
 							<div />
 							<div />
@@ -68,18 +73,13 @@ export function BookmarkList() {
 					.map((icy) => ({ icy, units: icy.split(' - ') }))
 					.map(({ icy, units: [icyA, icyB] }, i) => (
 						<div key={i} className="row">
-							<div>
-								<span>{icy}</span>
-								<CopyButton onClick={() => copy(icy)} />
-							</div>
-							<div>
-								<span>{icyA}</span>
-								<CopyButton onClick={() => copy(icyA)} />
-							</div>
-							<div>
-								<span>{icyB}</span>
-								<CopyButton onClick={() => copy(icyB)} />
-							</div>
+							{[icy, icyA, icyB].map((str) => (
+								<div data-active={str === lastCopy} key={str}>
+									<span>{str}</span>
+									<CopyButton onClick={() => copyAciton(str)} />
+								</div>
+							))}
+
 							<button
 								onClick={() => confirm('削除する') && toggleFavorites(icy)}
 							>
@@ -100,5 +100,14 @@ const Style = styled.div`
 		border-bottom: solid 1px;
 		display: grid;
 		grid-template-columns: 2fr 1fr 1fr auto;
+		padding: 4px;
+		gap: 12px;
+		[data-active='true'] {
+			background: #dfa;
+		}
+		/* > div {} */
+		> div button {
+			float: right;
+		}
 	}
 `
