@@ -5,6 +5,8 @@ import {
 	getHistoriesStorage,
 	loadTable,
 	saveTable,
+	toHistory,
+	calcG,
 } from '../../service/firebase'
 import { Count, History, HistoryRaw, Schedule } from '../types'
 import { formatDate, formatYmdSlash, mergeArr, pad2 } from '../util'
@@ -114,12 +116,6 @@ export function useEventHisotry(eventId: string) {
 		? { histories: fileHists, setHists: setFilehists }
 		: { histories: historiesBase[eventId] || [], setHists }
 }
-export const toHist = (history: HistoryRaw): History => ({
-	...history,
-	n: history.n ?? null,
-	b: history.b ?? null,
-})
-
 async function getHistories(
 	eventId: string,
 	from: number,
@@ -128,18 +124,25 @@ async function getHistories(
 	const archivedEvent = currentEvent?.id !== eventId
 	if (!archivedEvent) {
 		const snaps = await getHistoriesDb(eventId, from)
-		const newHists = snaps.docs.map((snap) => toHist(snap.data() as HistoryRaw))
+		const newHists = snaps.docs.map((snap) =>
+			toHistory(snap.data() as HistoryRaw)
+		)
 
 		console.log(`nl:${newHists.length}`)
 
-		return [...newHists, ...histOld]
+		return [...newHists, ...histOld.map((v) => ({ ...v, g: calcG(v.n, v.b) }))] // TODO: remove
 	}
 	const csv = await getHistoriesStorage(eventId)
 	const res = parse(csv) as [string, string, string, string | undefined][]
 
 	return res
 		.map(([time, title, n, b]) =>
-			toHist({ time: Number(time), title, n: Number(n), b: b ? Number(b) : 0 })
+			toHistory({
+				time: Number(time),
+				title,
+				n: Number(n),
+				b: b ? Number(b) : 0,
+			})
 		)
 		.reverse()
 }
@@ -189,12 +192,13 @@ export function useHistoryDb() {
 		const lost0501 = 1651344231000
 		const findLost0501 = histories.find((v) => v.time === lost0501)
 		if (eventId !== '2022gw' && !findLost0501) {
+			// TODO: remove
 			;(async () => {
 				const start = 1651344231000 - 1
 				const end = 1651357830000 + 1
 				const snaps = await getHistoriesDbRange(eventId, start, end)
 				const newHists = snaps.docs.map((snap) =>
-					toHist(snap.data() as HistoryRaw)
+					toHistory(snap.data() as HistoryRaw)
 				)
 
 				setHists(mergeArr(histories, newHists, (a) => -a.time)) // counts の整合性はこのタイミングだけなくなる

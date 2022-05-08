@@ -9,6 +9,7 @@ import React, { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import safe from 'safe-regex'
 import styled from 'styled-components'
+import { BRate } from '../../service/firebase'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
@@ -105,7 +106,7 @@ function HistoryPageBase() {
 	const [multiMode, setMultiMode] = useState<boolean>(false)
 	const [copyMode, setCopyMode] = useState<boolean>(false)
 	const [wrapMode, setWrapMode] = useState<boolean>(true)
-	const [sortBy, setSort] = useState<'none' | 'by_n' | 'by_b'>('none')
+	const [sortBy, setSort] = useState<'none' | 'by_n' | 'by_b' | 'by_g'>('none')
 	const [range, setRange] = useState<Range>(null)
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
@@ -130,7 +131,10 @@ function HistoryPageBase() {
 	const sortedHists = useMemo(() => {
 		if (sortBy === 'none') return histories
 
-		const sortKey: keyof History = sortBy === 'by_n' ? 'n' : 'b'
+		const sortKey: keyof History =
+			({ by_n: 'n', by_b: 'b', by_g: 'g' } as Record<string, keyof History>)[
+				sortBy
+			] || 'n'
 		const sort = (a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1)
 
 		const arr = [...histories].sort(sort)
@@ -354,6 +358,21 @@ function HistoryPageBase() {
 									</div>
 								</div>
 							</div>
+							<div className="non-copy">
+								<div
+									className="link-like"
+									onClick={() =>
+										setSort((v) => (v === 'by_g' ? 'none' : 'by_g'))
+									}
+								>
+									<div className="tooltip">
+										<span className="tooltip-text">
+											(ブクマ数 ^ 2)/(勢い + {BRate})
+										</span>
+										%
+									</div>
+								</div>
+							</div>
 						</div>
 
 						{viewHists.map((reco, i) => (
@@ -385,6 +404,17 @@ function HistoryPageBase() {
 									}}
 								>
 									{reco.b || '-'}
+								</div>
+								<div
+									className={'non-copy'}
+									style={{
+										background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
+											reco.g
+										}%, #fff ${reco.g ?? 0}%, #fff 100%)`,
+										textAlign: 'right',
+									}}
+								>
+									{reco.g.toFixed(1)}
 								</div>
 							</ColorTr>
 						))}
@@ -440,7 +470,7 @@ const Wrap = styled.div`
 		.hist-row {
 			width: max(96vw, 600px);
 			display: grid;
-			grid-template-columns: 184px 1fr 1.5rem 2rem 2rem;
+			grid-template-columns: 184px 1fr 1.5rem 2rem 2rem 2rem;
 		}
 
 		.hist-row {

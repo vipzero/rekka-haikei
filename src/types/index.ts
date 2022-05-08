@@ -47,6 +47,7 @@ export type History = {
 	time: number
 	n: number | null
 	b: number | null
+	g: number
 }
 export type WordCount = {
 	count: number

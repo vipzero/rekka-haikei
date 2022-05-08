@@ -185,8 +185,11 @@ export const saveSongBg = async (url: string, eid: string, time: number) => {
 	})
 }
 
-function toHistory({ title, time, n, b }: HistoryRaw): History {
-	return { title, time, n: n ?? null, b: b ?? null }
+export const BRate = 10
+export const calcG = (n?: number | null, b?: number | null) =>
+	(b ?? 0) ** 2 / ((n ?? 0) + BRate)
+export function toHistory({ title, time, n, b }: HistoryRaw): History {
+	return { title, time, n: n ?? null, b: b ?? null, g: calcG(n, b) }
 }
 
 export const readRecentHistory = (
