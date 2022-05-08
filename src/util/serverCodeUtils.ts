@@ -6,12 +6,12 @@ export function textNormalize(s: string) {
 	return s
 		.trim()
 		.toLowerCase()
-		.replace('　', ' ')
-		.replace(/[（【「[]/, '(')
-		.replace(/[）】」\]]/, ')')
-		.replace('！', '!')
-		.replace('〜', '~')
-		.replace('？', '?')
+		.replace(/[　 ]/g, '')
+		.replace(/[（【「[]/g, '(')
+		.replace(/[）】」\]]/g, ')')
+		.replace(/！/g, '!')
+		.replace(/〜/g, '~')
+		.replace(/？/g, '?')
 }
 
 const SP =

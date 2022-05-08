@@ -19,7 +19,6 @@ export function ComparePage({ counts }: Props) {
 					<tr>
 						<th>タイトル</th>
 						<th>今回 - 前回</th>
-						<th>Total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -27,7 +26,6 @@ export function ComparePage({ counts }: Props) {
 						<tr key={i}>
 							<td>{count.title}</td>
 							<td>{count.pt}</td>
-							<td>{count.total}</td>
 						</tr>
 					))}
 				</tbody>
@@ -40,7 +38,6 @@ export function ComparePage({ counts }: Props) {
 					<tr>
 						<th>タイトル</th>
 						<th>今回 - 前回</th>
-						<th>Total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -48,7 +45,6 @@ export function ComparePage({ counts }: Props) {
 						<tr key={i}>
 							<td>{count.title}</td>
 							<td>{count.pt}</td>
-							<td>{count.total}</td>
 						</tr>
 					))}
 				</tbody>

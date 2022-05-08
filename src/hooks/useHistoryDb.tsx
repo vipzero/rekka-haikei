@@ -293,8 +293,15 @@ export function useScheduleDb() {
 	return { schedule, setSchedule, save, todayText, rows } as const
 }
 
-const keyBy = <T,>(obj: Count[]) =>
-	obj.reduce((p, c) => ({ ...p, [c.title]: c }), {} as Record<string, Count>)
+const keyBy = <T,>(list: Count[]) => {
+	const res: Record<string, Count> = {}
+
+	list.forEach((c) => {
+		res[c.title] = c
+	})
+
+	return res
+}
 
 export function useHistoryAnaCounts(counts: Count[]) {
 	const pastCounts = usePastHistoryCounts()
@@ -303,8 +310,11 @@ export function useHistoryAnaCounts(counts: Count[]) {
 		console.log('ana start')
 
 		performance.mark('countcalc-a')
+		console.log('a')
+
 		const countsByTitle = keyBy(counts)
 		const pastCountsByTitle = keyBy(pastCounts)
+		console.log('b')
 
 		const newSongs: SongCountDiff[] = []
 		const nonSongs: SongCountDiff[] = []
@@ -321,9 +331,15 @@ export function useHistoryAnaCounts(counts: Count[]) {
 			if (pp === 0) newSongs.push(song)
 			if (cp === 0 && pp >= 4) nonSongs.push(song)
 		})
+		console.log('c')
+
+		performance.mark('sort-a')
 
 		nonSongs.sort((a, b) => a.pt - b.pt)
 		newSongs.sort((a, b) => b.pt - a.pt)
+		performance.mark('sort-b')
+		performance.measure('sort', 'sort-a', 'sort-b')
+		console.info(performance.getEntriesByName('sort').pop())
 
 		performance.mark('countcalc-b')
 		performance.measure('countcalc', 'countcalc-a', 'countcalc-b')
@@ -344,7 +360,6 @@ export function usePastHistoryCounts() {
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
-		performance.mark('load-a')
 		Promise.all(
 			events.filter((v) => !v.current).map((ev) => getHistories(ev.id, 0))
 		).then((res) => {
@@ -362,9 +377,6 @@ export function usePastHistoryCounts() {
 					})
 				)
 			)
-			performance.mark('load-b')
-			performance.measure('load', 'load-a', 'load-b')
-			console.info(performance.getEntriesByName('load').pop())
 		})
 	}, [])
 	return countsSong
