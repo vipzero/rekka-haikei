@@ -6,10 +6,8 @@ const { NODE_ENV } = process.env
 
 export const isDev = NODE_ENV === 'development'
 
-// prettier-ignore
-export const finishTime    = +DateTime.local(2022,  5,  10,  0)
-// prettier-ignore
-export const lastspurtTime = +DateTime.local(2022,  5,  9, 22)
+export const finishTime = +DateTime.local(2022, 5, 10, 0)
+export const isEnd = () => +new Date() >= finishTime
 
 export const events: Event[] = [
 	{ id: '2022gw', label: '2022GW', current: true },
@@ -25,8 +23,6 @@ export const currentEvent = events.find((v) => v.current)
 const config = {
 	isDev,
 	eventId: process.env.EVENT_ID || events[0].id,
-	finishTime,
-	lastspurtTime,
 	visibleRecordLimit: 100,
 }
 

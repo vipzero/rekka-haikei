@@ -7,7 +7,7 @@ type Props = {
 	books: Record<string, boolean>
 	toggleFavorites: (icy: string) => void
 }
-export function BookmarkList({ books, toggleFavorites }: Props) {
+export function BookmarkMiniList({ books, toggleFavorites }: Props) {
 	const { visible, closeBookmark } = useSettingsShowBookmark()
 
 	return (

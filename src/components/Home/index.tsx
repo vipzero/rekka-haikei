@@ -10,7 +10,7 @@ import {
 	useSettingsCustomTheme,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
-import { BookmarkList } from './BookmarkList'
+import { BookmarkMiniList } from './BookmarkMiniList'
 import { exStyles } from './exStyles'
 import { ExtraComp } from './ExtraComp'
 import FadeBgChanger from './FadeBgChanger'
@@ -84,7 +84,7 @@ function Home({ song }: Props) {
 
 				<ExtraComp sid={`${song.time}`} />
 				<RecentHistoryList />
-				<BookmarkList books={books} toggleFavorites={toggleFavorites} />
+				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
 		</Master>
 	)
@@ -153,9 +153,6 @@ const Wrap = styled.div`
 		display: none;
 	}
 
-	[data-important='true'] {
-		animation: flash 1s linear infinite;
-	}
 	@keyframes flash {
 		0% {
 			opacity: 1;

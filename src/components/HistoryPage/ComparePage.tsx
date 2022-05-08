@@ -22,7 +22,7 @@ export function ComparePage({ counts }: Props) {
 					</tr>
 				</thead>
 				<tbody>
-					{nonSongs.slice(0, config.visibleRecordLimit).map((count, i) => (
+					{nonSongs.slice(0, 200).map((count, i) => (
 						<tr key={i}>
 							<td>{count.title}</td>
 							<td>{count.pt}</td>
@@ -30,7 +30,7 @@ export function ComparePage({ counts }: Props) {
 					))}
 				</tbody>
 			</table>
-			<p>100件までのみ表示しています</p>
+			<p>200件までかつ3回以上のみ表示しています</p>
 
 			<h3>初めて流れた曲</h3>
 			<table className="count">

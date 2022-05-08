@@ -21,7 +21,7 @@ export function BookmarkList() {
 	}
 	return (
 		<Style>
-			<div style={{ display: 'flex', gap: '8px' }}>
+			<div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
 				<RadioButton
 					label="テキスト"
 					value={'txt'}

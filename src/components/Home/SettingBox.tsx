@@ -20,9 +20,9 @@ import {
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import config, { abyssColorsEx, allThemes, allThemesById } from '../../config'
+import { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
@@ -57,10 +57,6 @@ function SettingBox({
 	const [pressed, setPressed] = useState<boolean>(false)
 	useEffect(() => setPressed(false), [song.time])
 
-	const isLastTime = useMemo(
-		() => +new Date() > config.lastspurtTime,
-		[config.lastspurtTime, song]
-	)
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
 		downloadImg(url, song.icy)
@@ -195,9 +191,7 @@ function SettingBox({
 						<a href={`/${eid}/history`} className="link-hist">
 							履歴
 						</a>
-						<a href={`/${eid}/book`} data-important={isLastTime}>
-							ブクマ
-						</a>
+						<a href={`/${eid}/book`}>ブクマ</a>
 						<a href={`/${eid}/choice`}>背景補正</a>
 					</div>
 

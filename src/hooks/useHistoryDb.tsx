@@ -329,7 +329,7 @@ export function useHistoryAnaCounts(counts: Count[]) {
 			const cp = countsByTitle[title]?.times.length || 0
 			const song = { title, pt: cp - pp, total: cp + pp, cp, pp }
 			if (pp === 0) newSongs.push(song)
-			if (cp === 0 && pp >= 4) nonSongs.push(song)
+			if (cp === 0 && pp >= 3) nonSongs.push(song)
 		})
 		console.log('c')
 

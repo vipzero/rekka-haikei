@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import config from '../../config'
 import { useBookDb } from '../../hooks/useBookDb'
-import { useFavorites, useSyncFavorite } from '../../hooks/useFavorites'
-import { useHistoryDb } from '../../hooks/useHistoryDb'
-import { Tab, TabPanel, Tabs } from '../common/Tab'
+import { useSyncFavorite } from '../../hooks/useFavorites'
+import { TabPanel, Tabs } from '../common/Tab'
 import { BookmarkList } from './BookmarkList'
 
 function Page() {
@@ -17,19 +16,17 @@ function Page() {
 
 function CountTable() {
 	const [books, postCount, wordCounts] = useBookDb()
-	const { favorites } = useFavorites()
 
-	const [synced, doSync] = useSyncFavorite()
-	const { histories } = useHistoryDb()
+	useSyncFavorite()
 	const [tab, setTab] = useState<number>(0)
 
-	const histLib = useMemo(() => {
-		const lib: Record<string, boolean> = {}
-		histories.forEach((h) => {
-			lib[h.title] = true
-		})
-		return lib
-	}, [histories.length])
+	// const histLib = useMemo(() => {
+	// 	const lib: Record<string, boolean> = {}
+	// 	histories.forEach((h) => {
+	// 		lib[h.title] = true
+	// 	})
+	// 	return lib
+	// }, [histories.length])
 
 	return (
 		<div>
@@ -43,23 +40,6 @@ function CountTable() {
 				onChange={setTab}
 			/>
 			<TabPanel value={tab} index={0}>
-				{!synced && (
-					<div>
-						<p>
-							自分のブックマーク({Object.keys(favorites).length})
-							件を投票しますか？
-							<button
-								onClick={() => {
-									doSync(favorites).then(() => {
-										alert('投票しました')
-									})
-								}}
-							>
-								送信する(1回のみ)
-							</button>
-						</p>
-					</div>
-				)}
 				<BookmarkList />
 			</TabPanel>
 			<TabPanel value={tab} index={1}>
