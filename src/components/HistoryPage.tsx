@@ -414,7 +414,7 @@ function HistoryPageBase() {
 										textAlign: 'right',
 									}}
 								>
-									{reco.g.toFixed(1)}
+									{reco.g?.toFixed(1)}
 								</div>
 							</ColorTr>
 						))}
