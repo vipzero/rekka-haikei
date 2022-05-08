@@ -7,10 +7,10 @@ import {
 	saveTable,
 } from '../../service/firebase'
 import { Count, History, HistoryRaw, Schedule } from '../types'
-import { formatDate, formatYmdSlash, mergeArr } from '../util'
+import { formatDate, formatYmdSlash, mergeArr, pad2 } from '../util'
 import { useQeuryEid } from './useQueryEid'
 import { useLocalStorage } from './useLocalStorage'
-import { currentEvent } from '../config'
+import { currentEvent, finishTime } from '../config'
 import { parse } from 'csv-parse/sync'
 
 const fills: Record<number, boolean> = [...Array(24).keys()].reduce(
@@ -222,8 +222,8 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 	const todYmd = formatYmdSlash(+tod)
 	const tomYmd = formatYmdSlash(+tom)
 
-	const fromTimeKey = `${todYmd}:${tod.getHours()}`
-	const toTimeKey = `${tomYmd}:${tod.getHours()}`
+	const fromTimeKey = `${todYmd}:${pad2(tod.getHours())}`
+	const toTimeKey = `${tomYmd}:${pad2(tod.getHours())}`
 
 	const viewDays = [
 		[rows[todYmd] || { day: todStr, items: [] }, todStr] as const,
@@ -231,11 +231,13 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 	]
 
 	viewDays.forEach(([row, str]) => {
+		if (row.day >= formatYmdSlash(finishTime)) {
+			return lines.push('=====終了=====')
+		}
 		lines.push(str)
 		const dayLines: string[] = []
 		row.items.forEach((v) => {
 			if (v === 'emp' || v === 'skip') return
-			console.log({ toTimeKey, vsk: v.startKey })
 			if (fromTimeKey <= v.endKey && v.startKey <= toTimeKey) {
 				dayLines.push(`${v.rangeStr}　　${v.name}${v.memo ? `※${v.memo}` : ''}`)
 			}

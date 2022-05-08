@@ -7,9 +7,9 @@ const { NODE_ENV } = process.env
 export const isDev = NODE_ENV === 'development'
 
 // prettier-ignore
-const finishTime    = +DateTime.local(2022,  5,  9,  0)
+export const finishTime    = +DateTime.local(2022,  5,  10,  0)
 // prettier-ignore
-const lastspurtTime = +DateTime.local(2022,  5,  8, 22)
+export const lastspurtTime = +DateTime.local(2022,  5,  9, 22)
 
 export const events: Event[] = [
 	{ id: '2022gw', label: '2022GW', current: true },
