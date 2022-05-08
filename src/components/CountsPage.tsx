@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Count } from '../types'
 import { TabPanel, Tabs } from './common/Tab'
+import { ComparePage } from './HistoryPage/ComparePage'
 import { CountTable } from './HistoryPage/CountTable'
 import { WordCountTable } from './HistoryPage/WordCountTable'
 
@@ -14,7 +15,12 @@ export const CountsPage = ({ counts, countsSong }: Props) => {
 		<div>
 			<Tabs
 				tab={tab}
-				items={[{ label: '曲(icy)' }, { label: '曲' }, { label: 'タグ' }]}
+				items={[
+					{ label: '曲(icy)' },
+					{ label: '曲' },
+					{ label: 'タグ' },
+					{ label: '過去比較' },
+				]}
 				onChange={setTab}
 			/>
 
@@ -26,6 +32,9 @@ export const CountsPage = ({ counts, countsSong }: Props) => {
 			</TabPanel>
 			<TabPanel value={tab} index={2}>
 				<WordCountTable />
+			</TabPanel>
+			<TabPanel value={tab} index={3}>
+				<ComparePage counts={countsSong} />
 			</TabPanel>
 		</div>
 	)

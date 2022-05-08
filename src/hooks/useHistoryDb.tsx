@@ -10,8 +10,9 @@ import { Count, History, HistoryRaw, Schedule } from '../types'
 import { formatDate, formatYmdSlash, mergeArr, pad2 } from '../util'
 import { useQeuryEid } from './useQueryEid'
 import { useLocalStorage } from './useLocalStorage'
-import { currentEvent, finishTime } from '../config'
+import { currentEvent, events, finishTime } from '../config'
 import { parse } from 'csv-parse/sync'
+import { textNormalize } from '../util/serverCodeUtils'
 
 const fills: Record<number, boolean> = [...Array(24).keys()].reduce(
 	(p, c) => ({ ...p, [c]: false }),
@@ -119,8 +120,13 @@ export const toHist = (history: HistoryRaw): History => ({
 	b: history.b ?? null,
 })
 
-async function getHistories(eventId: string, from: number, histOld: History[]) {
-	if (currentEvent?.id === eventId) {
+async function getHistories(
+	eventId: string,
+	from: number,
+	histOld: History[] = []
+) {
+	const archivedEvent = currentEvent?.id !== eventId
+	if (!archivedEvent) {
 		const snaps = await getHistoriesDb(eventId, from)
 		const newHists = snaps.docs.map((snap) => toHist(snap.data() as HistoryRaw))
 
@@ -162,7 +168,9 @@ export function useHistoryDb() {
 			const counts = makeCounts(hists)
 			const countsSong = makeCounts(
 				hists.map((h) => {
-					const [artist, songTitle] = h.title.split(' - ')
+					const [artist, songTitle] = h.title
+						.split(' - ')
+						.map((s) => textNormalize(s.trim()))
 					const key = songTitle || artist || 'none'
 
 					return { ...h, title: key }
@@ -283,4 +291,81 @@ export function useScheduleDb() {
 	const todayText = makeText(rows)
 
 	return { schedule, setSchedule, save, todayText, rows } as const
+}
+
+const keyBy = <T,>(obj: Count[]) =>
+	obj.reduce((p, c) => ({ ...p, [c.title]: c }), {} as Record<string, Count>)
+
+export function useHistoryAnaCounts(counts: Count[]) {
+	const pastCounts = usePastHistoryCounts()
+	return useMemo(() => {
+		if (pastCounts.length === 0) return false
+		console.log('ana start')
+
+		performance.mark('countcalc-a')
+		const countsByTitle = keyBy(counts)
+		const pastCountsByTitle = keyBy(pastCounts)
+
+		const newSongs: SongCountDiff[] = []
+		const nonSongs: SongCountDiff[] = []
+
+		Array.from(
+			new Set([
+				...Object.keys(countsByTitle),
+				...Object.keys(pastCountsByTitle),
+			])
+		).forEach((title) => {
+			const pp = pastCountsByTitle[title]?.times.length || 0
+			const cp = countsByTitle[title]?.times.length || 0
+			const song = { title, pt: cp - pp, total: cp + pp, cp, pp }
+			if (pp === 0) newSongs.push(song)
+			if (cp === 0 && pp >= 4) nonSongs.push(song)
+		})
+
+		nonSongs.sort((a, b) => a.pt - b.pt)
+		newSongs.sort((a, b) => b.pt - a.pt)
+
+		performance.mark('countcalc-b')
+		performance.measure('countcalc', 'countcalc-a', 'countcalc-b')
+		console.info(performance.getEntriesByName('countcalc').pop())
+		return { nonSongs, newSongs }
+	}, [counts.length, Object.values(pastCounts).length])
+}
+
+type SongCountDiff = {
+	title: string
+	pt: number
+	pp: number
+	cp: number
+	total: number
+}
+
+export function usePastHistoryCounts() {
+	const [countsSong, setCountsSong] = useState<Count[]>([])
+
+	useEffect(() => {
+		performance.mark('load-a')
+		Promise.all(
+			events.filter((v) => !v.current).map((ev) => getHistories(ev.id, 0))
+		).then((res) => {
+			const hists = res.flat()
+
+			setCountsSong(
+				makeCounts(
+					hists.map((h) => {
+						const [artist, songTitle] = h.title
+							.split(' - ')
+							.map((v) => textNormalize(v.trim()))
+
+						const key = songTitle || artist || 'none'
+						return { ...h, title: key }
+					})
+				)
+			)
+			performance.mark('load-b')
+			performance.measure('load', 'load-a', 'load-b')
+			console.info(performance.getEntriesByName('load').pop())
+		})
+	}, [])
+	return countsSong
 }

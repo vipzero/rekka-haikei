@@ -429,8 +429,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/ローゼンメイデン|Rozen Maiden/i, 'rozen'],
 	['がっこうぐらし', 'gkgurashi'],
 	['ガヴリール', 'gabudoro'],
-	['一週間フレンズ', 'issyuukanfr'],
-	['プラスティック・メモリーズ', 'issyuukanfr'],
+	[/一週間フレンズ|プラスティック・メモリーズ/, 'issyuukanfr'],
 	['サカサマのパテマ', 'patema'],
 	['ソードアート・オンライン', 'sao'],
 	[/山田.*魔女/, 'yamajo'],
@@ -439,17 +438,16 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['音楽少女', 'shining'],
 	['三者三葉', '3sha3yo'],
 	['シンデレラガールズ', 'imascd'],
+	['楽園PROJECT', 'rakupro'],
+	['シャイニーカラーズ', 'shanimas'],
+	['まっしろわーるど', 'masshiro'],
 ]
 export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
 ]
 
 // icy のどちらか半分に完全一致
-export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = [
-	['楽園PROJECT', 'rakupro'],
-	['シャイニーカラーズ', 'shanimas'],
-	['まっしろわーるど', 'masshiro'],
-]
+export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = []
 
 // icy に部分一致
 export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
