@@ -9710,10 +9710,10 @@ rollup@^2.43.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rooks@^5.11.0:
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/rooks/-/rooks-5.11.0.tgz#7543af7bf57eead840a2f32b68eb95f0fbc5a041"
-  integrity sha512-acyTuaYbB021hhHAN6uiU6QUUSuGucK9YOU16nOUM0oypqpckYm7nX5v9xnopoX4pNtrxzIM/mtjC8O7fF3/8A==
+rooks@5.11.2:
+  version "5.11.2"
+  resolved "https://registry.yarnpkg.com/rooks/-/rooks-5.11.2.tgz#f7ba3a758c512c7cc807af38615f3052439578b8"
+  integrity sha512-kOVYjNW/0Emq9NN3DbmC41xcltK25gVV2PMGw+Et9vC5UiIKrwWYRYmMid2/WRGQ0oodOeksCkrqGwJcV2buuQ==
   dependencies:
     lodash.debounce "^4.0.8"
     raf "^3.4.1"
