@@ -335,6 +335,17 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'te', name: '更紗', color: '#ff69b4' },
 		],
 	},
+	{
+		id: 'aobuta',
+		chars: [
+			{ id: 'mi', name: '麻衣', color: '#68686F' },
+			{ id: 'tm', name: '古賀', color: '#A99982' },
+			{ id: 'ft', name: '双葉', color: '#908B82' },
+			{ id: 'nd', name: '豊浜', color: '#F1E2B0' },
+			{ id: 'ke', name: 'かえで', color: '#A18978' },
+			{ id: 'sk', name: '翔子', color: '#575869' },
+		],
+	},
 ]
 
 // 🛑 ネタバレ注意
@@ -365,6 +376,7 @@ export const eekeysVotic = [
 	'saekano',
 	'monogatari',
 	'steinsgate',
+	'aobuta',
 	'oreshura',
 	'jinsei',
 	'toaru',
@@ -409,6 +421,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],
 	['アビス', 'mia'],
 	['さくら荘', 'sakurasou'],
+	['青ブタ', 'aobuta'],
 	['ひぐらしの', 'higurashi'],
 	['experiments lain', 'lain'],
 	// ['コードギアス', 'codegeass'],
