@@ -1575,10 +1575,10 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.1.1"
 
-"@fortawesome/react-fontawesome@0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.18.tgz#dae37f718a24e14d7a99a5496c873d69af3fbd73"
-  integrity sha512-RwLIB4TZw0M9gvy5u+TusAA0afbwM4JQIimNH/j3ygd6aIvYPQLqXMhC9ErY26J23rDPyDZldIfPq/HpTTJ/tQ==
+"@fortawesome/react-fontawesome@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.0.tgz#d90dd8a9211830b4e3c08e94b63a0ba7291ddcf4"
+  integrity sha512-uHg75Rb/XORTtVt7OS9WoK8uM276Ufi7gCzshVWkUJbHhh3svsUUeqXerrM96Wm7fRiDzfKRwSoahhMIkGAYHw==
   dependencies:
     prop-types "^15.8.1"
 
@@ -4943,10 +4943,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
-csv-parse@5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.2.0.tgz#492b5ca2e5e87e3672ca834e83ab3a0e2486d5cb"
-  integrity sha512-ZuLjTp3Qx2gycoB7FKS9q11KgDL3f0wQszTlNOajS3fHa0jypN/zgjmkam+rczX5dXw5z7+KrDW2hWkM4542Ug==
+csv-parse@5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.2.2.tgz#46cafc760fd56f6e2fb347b3eb4d3ba026845248"
+  integrity sha512-WCQVGZM5YEj+2+mOuV0ss73GQi/pSlurOGD7qlJJi0sY9DPp2KiX7AInd3W1mjaxnIASlUIHirsTnLX5LoHF4g==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -9823,10 +9823,10 @@ rollup@^2.43.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rooks@5.11.2:
-  version "5.11.2"
-  resolved "https://registry.yarnpkg.com/rooks/-/rooks-5.11.2.tgz#f7ba3a758c512c7cc807af38615f3052439578b8"
-  integrity sha512-kOVYjNW/0Emq9NN3DbmC41xcltK25gVV2PMGw+Et9vC5UiIKrwWYRYmMid2/WRGQ0oodOeksCkrqGwJcV2buuQ==
+rooks@5.11.8:
+  version "5.11.8"
+  resolved "https://registry.yarnpkg.com/rooks/-/rooks-5.11.8.tgz#2450de1626f59972bc60413ef8030871140caf66"
+  integrity sha512-mS+hBfEtqTumxQZerJkCysuIyzg0Mxmh83ElE2lI+rj5od+YHtSLLexklhtEXFWCXPG2p3xRhEJwi2pmyrIGWw==
   dependencies:
     lodash.debounce "^4.0.8"
     raf "^3.4.1"
