@@ -4971,10 +4971,10 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
-csv-parse@5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.2.2.tgz#46cafc760fd56f6e2fb347b3eb4d3ba026845248"
-  integrity sha512-WCQVGZM5YEj+2+mOuV0ss73GQi/pSlurOGD7qlJJi0sY9DPp2KiX7AInd3W1mjaxnIASlUIHirsTnLX5LoHF4g==
+csv-parse@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.3.0.tgz#85cc02fc9d1c89bd1b02e69069c960f8b8064322"
+  integrity sha512-UXJCGwvJ2fep39purtAn27OUYmxB1JQto+zhZ4QlJpzsirtSFbzLvip1aIgziqNdZp/TptvsKEV5BZSxe10/DQ==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
