@@ -30,9 +30,6 @@ const makeDot = (
 	return { get, char: '-', key, label: hint(key, hintGroup) || '.' }
 }
 
-const range = (start: number, end: number) =>
-	Array.from({ length: end - start }, (_, i) => i + start)
-
 export const EeSelector = (props: Props) => {
 	const { ee: comps, eeKey, toggleEekeySimulate } = useSettingsEe()
 
