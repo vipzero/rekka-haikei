@@ -120,3 +120,34 @@ export const genToggle =
 	<T>(arr: readonly T[]): ((v: T) => T) =>
 	(v) =>
 		arr[(arr.indexOf(v) + 1) % arr.length]
+
+export const keyNorm = (title: string) =>
+	title
+		.trim()
+		.toLowerCase()
+		.replace(/[　 ]/g, ' ')
+		.replace(/！/g, '!')
+		.replace(/？/g, '?')
+		.replace(/／/g, '/')
+		.replace(/＼/g, '\\')
+		.replace(/[、，]/g, ',')
+		.replace(/[。．]/g, '.')
+		.replace(/：/g, ':')
+		.replace(/；/g, ';')
+		.replace(/[´｀¨‘’]/g, "'")
+		.replace(/＿/g, '_')
+		.replace(/＾/g, '^')
+		.replace(/[ー―‐－]/g, '^')
+		.replace(/～/g, '~')
+		.replace(/[✕×✖]/g, '×')
+		.replace(/[“”]/g, '"')
+		.replace(/[＝]/g, '=')
+		.replace(/[￥]/g, '¥')
+		.replace(/[＄]/g, '$')
+		.replace(/[％]/g, '%')
+		.replace(/[＃]/g, '#')
+		.replace(/[＆]/g, '&')
+		.replace(/[＊]/g, '*')
+		.replace(/[＠]/g, '@')
+		.replace(/[（〔［｛〈《「『【＜]/g, '(')
+		.replace(/[）〕］｝〉》」』】＞]/g, ')')
