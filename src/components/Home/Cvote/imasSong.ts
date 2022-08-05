@@ -158,5 +158,3 @@ const imasChars = [
 	{ id: 'my', group: 'an', name: '美也', color: '#FCF062' },
 	{ id: 'ko', group: 'an', name: '歌織', color: '#D9CCE5' },
 ]
-
-console.log(getIdles('ラスト・アクトレス'))
