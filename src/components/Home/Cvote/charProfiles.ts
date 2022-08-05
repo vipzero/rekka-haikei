@@ -293,4 +293,8 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'sk', name: '翔子', color: '#575869' },
 		],
 	},
+	{
+		id: 'imasml',
+		chars: [],
+	},
 ]

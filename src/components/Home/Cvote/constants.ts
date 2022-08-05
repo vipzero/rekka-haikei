@@ -66,7 +66,7 @@ export const eekeyGroups = [
 
 export type Eekey = typeof eekeys[number]
 export type EekeyState = Eekey | false
-export type EekeyOpt = null | { chars: Char[] }
+export type EeOpt = null | { chars: Char[] }
 export type ExThemeKey = typeof eekeysThemetic[number]
 export const isExTheme = (
 	theme: string | false | number

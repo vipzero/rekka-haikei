@@ -6,7 +6,7 @@ import { FloatingBox, RainbowFontCool } from '../'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
-import { Eekey, EekeyState } from '../Home/Cvote/constants'
+import { Eekey, EekeyState, EeOpt } from '../Home/Cvote/constants'
 import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 import { CVOTE_PROFILES } from './Cvote/charProfiles'
 
@@ -148,14 +148,25 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 	}
 	return null
 }
-function getEx(eeKey: EekeyState, sid: string, rand: number, eeSim: boolean) {
+function getEx(
+	eeKey: EekeyState,
+	sid: string,
+	rand: number,
+	eeSim: boolean,
+	eeOpt: EeOpt
+) {
 	if (!eeKey) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === eeKey)
 
 	return (
 		<>
 			{cvote && (
-				<CVote animeId={eeKey} sid={sid} chars={cvote.chars} disabled={eeSim} />
+				<CVote
+					animeId={eeKey}
+					sid={sid}
+					chars={cvote.chars || eeOpt?.chars || []}
+					disabled={eeSim}
+				/>
 			)}
 			<ExCompMain eeKey={eeKey} />
 		</>
@@ -165,7 +176,10 @@ type Props = {
 	sid: string
 }
 export function ExtraComp({ sid }: Props) {
-	const { eeKey, eeSim } = useSettingsEe()
+	const { eeKey, eeSim, eeOpt } = useSettingsEe()
 
-	return useMemo(() => getEx(eeKey, sid, Math.random(), eeSim), [eeKey, sid])
+	return useMemo(
+		() => getEx(eeKey, sid, Math.random(), eeSim, eeOpt),
+		[eeKey, sid]
+	)
 }

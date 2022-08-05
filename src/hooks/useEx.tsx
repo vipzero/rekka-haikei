@@ -7,7 +7,7 @@ import {
 	EX_PATTERNS_JUST_ICY,
 	EX_PATTERNS_ICY,
 	EekeyState,
-	EekeyOpt,
+	EeOpt,
 } from '../components/Home/Cvote/constants'
 import { getIdles } from '../components/Home/Cvote/imasSong'
 import { Song } from '../types'
@@ -34,7 +34,7 @@ const hasTitle = (q: string | RegExp, song: Song) =>
 const icyJustMatch = (q: string, icy: string) =>
 	icy.split(' - ').some((w) => w.trim().includes(q))
 
-export function checkEx(song: Song): false | [EekeyState, EekeyOpt] {
+export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 	const { icy } = song
 
 	if (!icy) return false

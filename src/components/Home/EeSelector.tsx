@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { Eekey, eekeyGroups } from './Cvote/constants'
 
-type Props = {}
-
 type EeDot = {
 	get: boolean
 	char: string
@@ -30,7 +28,7 @@ const makeDot = (
 	return { get, char: '-', key, label: hint(key, hintGroup) || '.' }
 }
 
-export const EeSelector = (props: Props) => {
+export const EeSelector = () => {
 	const { ee: comps, eeKey, toggleEekeySimulate } = useSettingsEe()
 
 	const eeSawGroups = useMemo(
