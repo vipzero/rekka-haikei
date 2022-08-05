@@ -265,6 +265,9 @@ const ButtonGrid = styled.div`
 	.tool { grid-area: tl; }
 	.artw { grid-area: aw; }
 	.download { grid-area: dl; }
+	button svg {
+		height: 1.1rem
+	}
 `}
 `
 
