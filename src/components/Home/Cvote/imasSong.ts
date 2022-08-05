@@ -8,7 +8,6 @@ const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const lib = Object.fromEntries(libTsv)
 
 export const getIdles = (title: string): false | Char[] => {
-	title = 'ラスト・アクトレス'
 	const bb = `${meta.salt}${textNormalize(title)}`
 	const key = makeHash(bb).substring(0, meta.len)
 
