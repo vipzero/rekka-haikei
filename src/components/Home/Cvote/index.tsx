@@ -54,7 +54,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 	const {
 		loaded,
 		votes,
-		vote,
+		sendVote,
 		votedChars,
 		votesNorm,
 		initVotes,
@@ -95,7 +95,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 						key={`char-${char.id}`}
 						data-voted={char.selected}
 						disabled={disabled || char.selected || voteEnd}
-						onClick={() => vote(char.id)}
+						onClick={() => sendVote(char.id)}
 						style={{
 							borderColor: char.color,
 							marginTop: `${(1 - char.voteNorm) * 10}px`,

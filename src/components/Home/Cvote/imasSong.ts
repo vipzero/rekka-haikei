@@ -1,11 +1,12 @@
 import { createHash } from 'crypto'
+import { Char } from '.'
 import { textNormalize } from '../../../util/serverCodeUtils'
 import { libTsv } from './imasSongLib'
 
 const meta = { len: 2, salt: 'WQ' }
 const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const lib = Object.fromEntries(libTsv)
-export const getIdles = (title: string) => {
+export const getIdles = (title: string): false | Char[] => {
 	const key = makeHash(`${meta.salt}${textNormalize(title)}`).substring(
 		0,
 		meta.len

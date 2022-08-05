@@ -2,6 +2,7 @@ import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
 import {
 	Eekey,
+	EekeyOpt,
 	EekeyState,
 	isExTheme,
 } from '../components/Home/Cvote/constants'
@@ -119,12 +120,17 @@ export const useSettingsEe = () => {
 	}
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
-	const setEekey = (eeKey: Eekey | false, simulate = false) => {
+	const setEekey = (
+		eeKey: Eekey | false,
+		simulate = false,
+		eekeyOpt: null | EekeyOpt = null
+	) => {
 		const exColor = exKeyToColor(eeKey)
 
 		setAbyssEx(exColor)
 
-		setSetting((v) => ({ ...v, eeKey, eeSim: simulate }))
+		setSetting((v) => ({ ...v, eeKey, eeSim: simulate, eekeyOpt }))
+
 		if (eeKey === false) return
 
 		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
