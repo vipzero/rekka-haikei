@@ -45,7 +45,8 @@ export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 		EX_PATTERNS_JUST_ICY.find(([q]) => icyJustMatch(q, icy))?.[1] ||
 		EX_PATTERNS_ICY.find(([q]) => icy.match(q))?.[1]
 	if (match) return [match, null]
-	const im = getIdles(icy.split(' - ')[0])
+	const im =
+		getIdles(icy.split(' - ')[0]) || getIdles(icy.split(' - ')?.[1] || '')
 	if (im) return ['imasml', { chars: im }]
 
 	return false

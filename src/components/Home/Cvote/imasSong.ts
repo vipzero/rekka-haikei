@@ -1,6 +1,6 @@
 import { createHash } from 'crypto'
 import { Char } from '.'
-import { textNormalize } from '../../../util/serverCodeUtils'
+import { keyNorm } from '../../../util'
 import { libTsv } from './imasSongLib'
 
 const meta = { len: 24, salt: 'AA' }
@@ -8,10 +8,12 @@ const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const lib = Object.fromEntries(libTsv)
 
 export const getIdles = (title: string): false | Char[] => {
-	const bb = `${meta.salt}${textNormalize(title)}`
+	const bb = `${meta.salt}${keyNorm(title)}`
 	const key = makeHash(bb).substring(0, meta.len)
+	// console.log({ bb, key })
 
 	if (!lib[key]) return false
+	// console.log(lib[key])
 
 	const names = lib[key]?.split('_').map((idle) => charKeyLib[idle])
 	if (!names) return false
