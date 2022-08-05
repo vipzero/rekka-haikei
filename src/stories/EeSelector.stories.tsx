@@ -46,9 +46,7 @@ export default {
 	args: {},
 } as ComponentMeta<typeof Home>
 
-const Template: ComponentStory<typeof EeSelector> = (args) => (
-	<EeSelector {...args} />
-)
+const Template: ComponentStory<typeof EeSelector> = (args) => <EeSelector />
 
 export const Full = Template.bind({})
 Full.args = {}
