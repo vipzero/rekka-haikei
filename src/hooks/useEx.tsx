@@ -7,6 +7,7 @@ import {
 	EX_PATTERNS_ICY,
 	EekeyState,
 } from '../components/Home/Cvote/constants'
+import { getIdles } from '../components/Home/Cvote/imasSong'
 import { Song } from '../types'
 import { useSettingsEe } from './useSettings'
 
@@ -33,11 +34,14 @@ export function checkEx(song: Song): EekeyState {
 
 	if (!icy) return false
 
-	return (
+	const match =
 		EX_PATTERNS_CUSTOM.find(([checker]) => checker(song))?.[1] ||
 		EX_PATTERNS_ANIME_OR_ALBUM.find(([q]) => hasTitle(q, song))?.[1] ||
 		EX_PATTERNS_JUST_ICY.find(([q]) => icyJustMatch(q, icy))?.[1] ||
-		EX_PATTERNS_ICY.find(([q]) => icy.match(q))?.[1] ||
-		false
-	)
+		EX_PATTERNS_ICY.find(([q]) => icy.match(q))?.[1]
+	if (match) return match
+	const im = getIdles(icy.split(' - ')[0])
+	if (im) return 'imasml'
+
+	return false
 }

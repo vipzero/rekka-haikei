@@ -6,8 +6,9 @@ import { FloatingBox, RainbowFontCool } from '../'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { uaHash } from '../../util'
 import CVote from '../Home/Cvote'
-import { CVOTE_PROFILES, Eekey, EekeyState } from '../Home/Cvote/constants'
+import { Eekey, EekeyState } from '../Home/Cvote/constants'
 import { faHurricane } from '@fortawesome/free-solid-svg-icons'
+import { CVOTE_PROFILES } from './Cvote/charProfiles'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>

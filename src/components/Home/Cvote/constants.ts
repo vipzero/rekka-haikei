@@ -1,3 +1,4 @@
+import { Char } from '.'
 import { Song } from '../../../types'
 
 // 🛑 ネタバレ注意
@@ -40,9 +41,11 @@ export const eekeysVotic = [
 	'gabudoro',
 	'yamajo',
 	'bryunhild',
-	'imasmlpr',
-	'imasmlfa',
-	'imasmlan',
+	'imasml',
+	// 'imasmlas',
+	// 'imasmlpr',
+	// 'imasmlfa',
+	// 'imasmlan',
 	'rakupro',
 	'shining',
 ] as const
@@ -63,6 +66,7 @@ export const eekeyGroups = [
 
 export type Eekey = typeof eekeys[number]
 export type EekeyState = Eekey | false
+export type EekeyOpt = null | { chars: Char[] }
 export type ExThemeKey = typeof eekeysThemetic[number]
 export const isExTheme = (
 	theme: string | false | number
@@ -121,9 +125,6 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	['逆さま', 'patema'],
 	['労働', 'halowa'],
 	[/return|ウラオモテ/, 'flip'],
-	[/真夏のダイヤ|咲くは浮世の君花火/, 'imasmlpr'],
-	[/ラスト.?アクトレス|DIAMOND JOKER/i, 'imasmlfa'],
-	[/花ざかりWeekend|Black.Party/i, 'imasmlan'],
 	['アマガミ', 'amagami'],
 	[/シャイニング.?ピース/, 'shining'],
 ]

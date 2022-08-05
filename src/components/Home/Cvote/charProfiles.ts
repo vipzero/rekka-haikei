@@ -1,4 +1,3 @@
-import { Song, ThemeId } from '../../../types'
 import { eekeysVotic } from './constants'
 import { Char } from './index'
 
@@ -6,6 +5,7 @@ type CvoteProfile = {
 	id: typeof eekeysVotic[number]
 	chars: Char[]
 }
+
 export const CVOTE_PROFILES: CvoteProfile[] = [
 	{
 		id: 'gotoyome',
@@ -246,60 +246,6 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'nn', name: '奈波', color: '#DFE0EF' },
 			{ id: 'ht', name: '初菜', color: '#7C675B' },
 			{ id: 'mt', name: '真子', color: '#F6F9FA' },
-		],
-	},
-	{
-		id: 'imasmlpr',
-		chars: [
-			{ id: 'mr', name: '未来', color: '#D96478' },
-			{ id: 'sy', name: '紗代子', color: '#7B6674' },
-			{ id: 'kt', name: '琴葉', color: '#9FCDBC' },
-			{ id: 'ar', name: '亜利沙', color: '#A84B62' },
-			{ id: 'kn', name: '可奈', color: '#EAAF53' },
-			{ id: 'em', name: 'ｴﾐﾘｰ', color: '#52436E' },
-			{ id: 'um', name: '海美', color: '#DA799A' },
-			{ id: 'mn', name: '美奈子', color: '#6AA5D7' },
-			{ id: 'nr', name: 'のり子', color: '#ECEA82' },
-			{ id: 'no', name: '奈緒', color: '#7C8BC1' },
-			{ id: 'mt', name: 'まつり', color: '#75BDB6' },
-			{ id: 'ik', name: '育', color: '#F4E799' },
-			{ id: 'yr', name: '百合子', color: '#C4B853' },
-		],
-	},
-	{
-		id: 'imasmlfa',
-		chars: [
-			{ id: 'jr', name: 'ｼﾞｭﾘｱ', color: '#C64661' },
-			{ id: 'tm', name: '朋花', color: '#C5E2E2' },
-			{ id: 'sz', name: '静香', color: '#6F95CA' },
-			{ id: 'sb', name: '昴', color: '#AFB49E' },
-			{ id: 'ay', name: '歩', color: '#D26499' },
-			{ id: 'mz', name: '瑞希', color: '#9FB6BB' },
-			{ id: 'ro', name: '莉緒', color: '#E49994' },
-			{ id: 'sh', name: '志保', color: '#ADA592' },
-			{ id: 'mm', name: '桃子', color: '#E6B971' },
-			{ id: 'em', name: '恵美', color: '#454341' },
-			{ id: 'cz', name: '千鶴', color: '#E49863' },
-			{ id: 'rk', name: 'ロコ', color: '#FCF062' },
-			{ id: 'tg', name: '紬', color: '#D9CCE5' },
-		],
-	},
-	{
-		id: 'imasmlan',
-		chars: [
-			{ id: 'hn', name: 'ひなた', color: '#C64661' },
-			{ id: 'sr', name: '星梨花', color: '#C5E2E2' },
-			{ id: 'an', name: '杏奈', color: '#6F95CA' },
-			{ id: 'tm', name: '環', color: '#AFB49E' },
-			{ id: 'ri', name: '麗花', color: '#D26499' },
-			{ id: 'el', name: 'エレナ', color: '#9FB6BB' },
-			{ id: 'ak', name: '茜', color: '#E49994' },
-			{ id: 'kn', name: 'このみ', color: '#ADA592' },
-			{ id: 'tb', name: '翼', color: '#E6B971' },
-			{ id: 'kl', name: '可憐', color: '#454341' },
-			{ id: 'hk', name: '風花', color: '#E49863' },
-			{ id: 'my', name: '美也', color: '#FCF062' },
-			{ id: 'ko', name: '歌織', color: '#D9CCE5' },
 		],
 	},
 	{
