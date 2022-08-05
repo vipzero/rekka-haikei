@@ -164,7 +164,7 @@ function getEx(
 				<CVote
 					animeId={eeKey}
 					sid={sid}
-					chars={cvote.chars || eeOpt?.chars || []}
+					chars={eeOpt?.chars || cvote.chars || []}
 					disabled={eeSim}
 				/>
 			)}

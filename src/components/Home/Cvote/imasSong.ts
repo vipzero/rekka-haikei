@@ -3,15 +3,16 @@ import { Char } from '.'
 import { textNormalize } from '../../../util/serverCodeUtils'
 import { libTsv } from './imasSongLib'
 
-const meta = { len: 2, salt: 'WQ' }
+const meta = { len: 24, salt: 'AA' }
 const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const lib = Object.fromEntries(libTsv)
+
 export const getIdles = (title: string): false | Char[] => {
-	const key = makeHash(`${meta.salt}${textNormalize(title)}`).substring(
-		0,
-		meta.len
-	)
-	if (lib[key]) return false
+	title = 'ラスト・アクトレス'
+	const bb = `${meta.salt}${textNormalize(title)}`
+	const key = makeHash(bb).substring(0, meta.len)
+
+	if (!lib[key]) return false
 
 	const names = lib[key]?.split('_').map((idle) => charKeyLib[idle])
 	if (!names) return false
@@ -158,3 +159,5 @@ const imasChars = [
 	{ id: 'my', group: 'an', name: '美也', color: '#FCF062' },
 	{ id: 'ko', group: 'an', name: '歌織', color: '#D9CCE5' },
 ]
+
+console.log(getIdles('ラスト・アクトレス'))
