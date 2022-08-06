@@ -3,7 +3,7 @@ import { Char } from '.'
 import { keyNorm } from '../../../util'
 import { libTsv } from './imasSongLib'
 
-const meta = { len: 24, salt: 'AA' }
+const meta = { len: 6, salt: 'AA' }
 const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const lib = Object.fromEntries(libTsv)
 
