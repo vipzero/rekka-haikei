@@ -20,7 +20,7 @@ import {
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
@@ -36,7 +36,7 @@ type Props = {
 	favorited: boolean
 	toggleFavorited: () => void
 	streamUrl: string
-	setStreamUrl: (url: string) => void
+	setStreamUrl: (_url: string) => void
 	favCount: number
 	song: Song
 	url: string

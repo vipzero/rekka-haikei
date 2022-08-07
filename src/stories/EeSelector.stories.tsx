@@ -1,14 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React, { ComponentProps } from 'react'
 import { RecoilRoot } from 'recoil'
 import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { eekeys } from '../components/Home/Cvote/constants'
 import { EeSelector } from '../components/Home/EeSelector'
 import { GlobalStyle } from '../config/init'
-import { Setting } from '../types'
-
-type Props = ComponentProps<typeof Home> & { setting: Setting }
 
 export default {
 	title: 'EeSelector',
@@ -46,7 +42,7 @@ export default {
 	args: {},
 } as ComponentMeta<typeof Home>
 
-const Template: ComponentStory<typeof EeSelector> = (args) => <EeSelector />
+const Template: ComponentStory<typeof EeSelector> = () => <EeSelector />
 
 export const Full = Template.bind({})
 Full.args = {}

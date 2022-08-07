@@ -1,6 +1,7 @@
 {
-	"extends": ["next"],
+	"extends": ["next", "next/core-web-vitals"],
 	"rules": {
+		"no-unused-vars": "off",
 		"no-console": "off",
 		"sort-imports": "off",
 		"no-restricted-globals": "off",

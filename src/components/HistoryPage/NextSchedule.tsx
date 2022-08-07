@@ -6,7 +6,7 @@ type Props = {
 	rows: Record<string, ScheduleRow>
 }
 function NextSchedule({ rows }: Props) {
-	const res = useMemo(() => {
+	const _res = useMemo(() => {
 		const res = {}
 		const DAY1 = 1000 * 60 * 60 * 24
 		const tomorrowTime = Date.now() + DAY1

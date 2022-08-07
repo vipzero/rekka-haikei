@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { Eekey, eekeyGroups } from './Cvote/constants'
@@ -42,7 +42,7 @@ export const EeSelector = () => {
 			<div className="eeg">
 				{eeSawGroups.map((eeSaw, j) => (
 					<div key={j}>
-						{eeSaw.map((b, i) => (
+						{eeSaw.map((b) => (
 							<span
 								key={b.key}
 								className="tooltip"

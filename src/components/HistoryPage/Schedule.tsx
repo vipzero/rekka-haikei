@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard'
-import React, { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useScheduleDb } from '../../hooks/useHistoryDb'
 import { CopyButton } from '../BookPage/CopyButton'
 import { TabPanel, Tabs } from '../common/Tab'
@@ -7,7 +7,7 @@ import NextSchedule from './NextSchedule'
 import ScheduleTable from './ScheduleTable'
 
 type Props = {
-	setFilter?: (range: { start: number; end: number }) => void
+	setFilter?: (_range: { start: number; end: number }) => void
 }
 function ScheduleComp(props: Props) {
 	const { schedule, setSchedule, save, todayText, rows } = useScheduleDb()

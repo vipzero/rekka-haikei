@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
-import { Char } from '../components/Home/Cvote'
 import {
-	Eekey,
-	EX_PATTERNS_CUSTOM,
-	EX_PATTERNS_ANIME_OR_ALBUM,
-	EX_PATTERNS_JUST_ICY,
-	EX_PATTERNS_ICY,
 	EekeyState,
 	EeOpt,
+	EX_PATTERNS_ANIME_OR_ALBUM,
+	EX_PATTERNS_CUSTOM,
+	EX_PATTERNS_ICY,
+	EX_PATTERNS_JUST_ICY,
 } from '../components/Home/Cvote/constants'
 import { getIdles } from '../components/Home/Cvote/imasSong'
 import { Song } from '../types'

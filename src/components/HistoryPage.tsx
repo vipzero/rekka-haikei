@@ -1,11 +1,11 @@
-import { faStar, faThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import { faStar } from '@fortawesome/free-regular-svg-icons'
 import {
 	faStar as faStarFill,
-	faTrash,
+	faTrash
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import copy from 'copy-to-clipboard'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import safe from 'safe-regex'
 import styled from 'styled-components'

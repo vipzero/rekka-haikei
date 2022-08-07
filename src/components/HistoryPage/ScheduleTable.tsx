@@ -6,7 +6,7 @@ function ScheduleTable({
 	setFilter,
 }: {
 	rows: Record<string, ScheduleRow>
-	setFilter?: (range: { start: number; end: number }) => void
+	setFilter?: (_range: { start: number; end: number }) => void
 }) {
 	return (
 		<div>

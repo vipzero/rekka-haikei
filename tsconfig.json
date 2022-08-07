@@ -19,5 +19,11 @@
 		"incremental": true
 	},
 	"exclude": ["node_modules", "functions"],
-	"include": ["**/*.ts", "**/*.tsx", "pages/_app.js", "next.config.js", "src/components/sw.js"]
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"pages/_app.js",
+		"next.config.js",
+		"src/components/sw.js"
+	]
 }

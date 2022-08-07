@@ -111,7 +111,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['シャイニーカラーズ', 'shanimas'],
 	['まっしろわーるど', 'masshiro'],
 ]
-export const EX_PATTERNS_CUSTOM: [(song: Song) => boolean, Eekey][] = [
+export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
 ]
 

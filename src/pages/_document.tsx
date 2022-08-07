@@ -5,7 +5,6 @@ import Document, {
 	Main,
 	NextScript,
 } from 'next/document'
-import { ReactFragment } from 'react'
 import { ServerStyleSheet } from 'styled-components'
 
 // @ts-ignore

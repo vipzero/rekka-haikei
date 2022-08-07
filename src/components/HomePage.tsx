@@ -1,11 +1,9 @@
 import Head from 'next/head'
-import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
 import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
-import Address from './HistoryPage/Address'
 import Home from './Home'
 
 const LoadingView = () => (

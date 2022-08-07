@@ -1,6 +1,4 @@
-import { incFavoritesAll } from '../../service/firebase'
 import { useLocalStorage } from './useLocalStorage'
-import { useQeuryEid } from './useQueryEid'
 
 type Search = {
 	q: string

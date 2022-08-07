@@ -1,14 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import copy from 'copy-to-clipboard'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useFavorites } from '../../hooks/useFavorites'
-import { useSettingsShowBookmark } from '../../hooks/useSettings'
-import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { RadioButton } from '../Home/RadioButton'
 import { CopyButton } from './CopyButton'
 
-type Props = {}
 export function BookmarkList() {
 	const { favorites, toggleFavorites } = useFavorites()
 	const [mode, setMode] = useState<'normal' | 'copy' | 'txt'>('copy')
@@ -53,7 +49,7 @@ export function BookmarkList() {
 			{mode === 'normal' &&
 				Object.keys(favorites)
 					.map((icy) => ({ icy, units: icy.split(' - ') }))
-					.map(({ icy, units: [icyA, icyB] }, i) => (
+					.map(({ icy, units: [_icyA, _icyB] }, i) => (
 						<div key={i} className="row">
 							<div data-active={icy === lastCopy} key={icy}>
 								<span>{icy}</span>
