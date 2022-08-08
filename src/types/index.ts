@@ -96,6 +96,7 @@ export type Setting = {
 	eeOpt: EeOpt
 	eeSim: boolean
 	customTheme: string
+	showEmol: boolean
 }
 
 export type Event = {

@@ -8,6 +8,7 @@ import {
 	useSettingsEe,
 	useSettingsFakeBar,
 	useSettingsCustomTheme,
+	useSettingsShowEmol,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
 import { BookmarkMiniList } from './BookmarkMiniList'
@@ -20,6 +21,7 @@ import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
+import { useEmolDb } from '../../hooks/useEmolDb'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
 	wide: 'center',
@@ -33,6 +35,7 @@ type Props = {
 function Home({ song }: Props) {
 	const { theme, sideMode, lockBgNum, toggleSetting } = useSettings()
 	const { eeKey } = useSettingsEe()
+	const { showEmol } = useSettingsShowEmol()
 
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
@@ -84,9 +87,20 @@ function Home({ song }: Props) {
 
 				<ExtraComp sid={`${song.time}`} />
 				<RecentHistoryList />
+				{showEmol && <LyricsBox />}
+
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
 		</Master>
+	)
+}
+
+const LyricsBox = () => {
+	const [loaded, emol] = useEmolDb()
+	return (
+		<div className="lyricsbox">
+			<pre>{emol.text}</pre>
+		</div>
 	)
 }
 
@@ -218,6 +232,9 @@ const Master = styled.div<{ customTheme: string }>`
 				background: white;
 			}
 		}
+	}
+	.lyricsbox {
+		background: rgba(255, 255, 255, 0.5);
 	}
 `
 

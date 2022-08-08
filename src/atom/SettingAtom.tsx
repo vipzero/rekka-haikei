@@ -59,6 +59,7 @@ export const defaultSetting: Setting = {
 	eeOpt: null,
 	feedBackText: '',
 	customTheme: defaultCustomTheme,
+	showEmol: true,
 }
 
 const localStorageEffect =

@@ -9,6 +9,7 @@ import {
 	faColumns,
 	faCompactDisc,
 	faHistory,
+	faIcons,
 	faLightbulb,
 	faLock,
 	faLockOpen,
@@ -24,7 +25,11 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
-import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import {
+	useSettings,
+	useSettingsEe,
+	useSettingsShowEmol,
+} from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
@@ -62,6 +67,7 @@ function SettingBox({
 		downloadImg(url, song.icy)
 	}
 	const { addCount } = useBookCountDb(song.time)
+	const { showEmol, toggleEmol } = useSettingsShowEmol()
 
 	const book = () => {
 		if (!pressed) addCount()
@@ -149,6 +155,16 @@ function SettingBox({
 						<FontAwesomeIcon icon={faBookmark} />
 						<FontAwesomeIcon icon={s.showBookmark ? faEye : faEyeSlash} />
 						{s.showHelp && `ブックマーク表示(${favCount})`}
+					</ToggleButton>
+
+					<ToggleButton
+						checked={showEmol}
+						onClick={toggleEmol}
+						className="emol"
+					>
+						<FontAwesomeIcon icon={faIcons} />
+						<FontAwesomeIcon icon={showEmol ? faEye : faEyeSlash} />
+						{s.showHelp && `EMOL表示`}
 					</ToggleButton>
 
 					<ToggleButton
@@ -250,7 +266,8 @@ const ButtonGrid = styled.div`
 		'aw lk lk cl'
 		'tg bk bk cl'
 		'hi bk bk hl'
-		'bl dl dl tl';
+		'bl bk bk tl'
+		'el dl dl tl';
 	${`
 	.theme { grid-area: th; }
 	.half { grid-area: ha; }
@@ -264,6 +281,7 @@ const ButtonGrid = styled.div`
 	.books { grid-area: bl; }
 	.tool { grid-area: tl; }
 	.artw { grid-area: aw; }
+	.emol { grid-area: el; }
 	.download { grid-area: dl; }
 	button svg {
 		height: 1.1rem

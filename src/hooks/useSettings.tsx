@@ -168,6 +168,13 @@ export const useSettingsEe = () => {
 	}
 }
 
+export const useSettingsShowEmol = () => {
+	const [{ showEmol }, setSetting] = useSettingsBase()
+	const setEmol = (showEmol: boolean) => setSetting((v) => ({ ...v, showEmol }))
+	const toggleEmol = () => setEmol(!showEmol)
+	return { showEmol, setEmol, toggleEmol }
+}
+
 export const useSettingsShowHistory = () => {
 	const [{ showHistory: visible }, setSetting] = useSettingsBase()
 	const closeHistory = () => setSetting((v) => ({ ...v, showHistory: false }))

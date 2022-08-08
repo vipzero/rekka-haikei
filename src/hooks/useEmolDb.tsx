@@ -1,54 +1,21 @@
-import React, {
-	createContext,
-	PropsWithChildren,
-	useContext,
-	useEffect,
-	useState,
-} from 'react'
-import {
-	incSongBookCount,
-	readSong,
-	saveSongBg,
-	watchHistSong,
-} from '../../service/firebase'
-import { currentEvent } from '../config'
-import { HistoryRaw, Song } from '../types'
-import { formatCount } from '../util'
+import { useEffect, useState } from 'react'
+import { readEmol } from '../../service/firebase'
+import { Emol } from '../types'
 import { useQeuryEid } from './useQueryEid'
 
 export function useEmolDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()
-	const [song, setSong] = useState<Song>({
-		icy: currentEvent?.label || '',
-		time: 0,
-		wordCounts: {},
-		wordCountsAna: [],
-		imageSearchWord: '',
-	})
+	const [emol, setEmol] = useState<Emol>({ text: '' })
 
 	useEffect(() => {
-		const si = readSong(eventId, (song) => {
-			const wordCountsAna = Object.entries(song.wordCounts)
-				.filter(([k]) => k !== song.icy)
-				.map(([name, count]) => ({
-					name,
-					count,
-					label: `[${name} (${formatCount(count)})]`,
-				}))
-
-			song.wordCountsAna = [...wordCountsAna].sort((a, b) => a.count - b.count)
-
-			setSong(song)
+		const si = readEmol(eventId, (emol) => {
+			setEmol(emol)
 			setLoaded(true)
 		})
 
 		return () => si()
 	}, [eventId])
 
-	const setBg = async (url, sid) => {
-		saveSongBg(url, eventId, sid)
-	}
-
-	return [loaded, song, setBg] as const
+	return [loaded, emol] as const
 }
