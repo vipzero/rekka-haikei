@@ -77,7 +77,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['のんのんびより', 'nonnon'],
 	['アビス', 'mia'],
 	['さくら荘', 'sakurasou'],
-	['青ブタ', 'aobuta'],
+	['青春ブタ', 'aobuta'],
 	['ひぐらしの', 'higurashi'],
 	['experiments lain', 'lain'],
 	// ['コードギアス', 'codegeass'],
@@ -109,7 +109,6 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['シンデレラガールズ', 'imascd'],
 	['楽園PROJECT', 'rakupro'],
 	['シャイニーカラーズ', 'shanimas'],
-	['まっしろわーるど', 'masshiro'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
@@ -127,4 +126,5 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/return|ウラオモテ/, 'flip'],
 	['アマガミ', 'amagami'],
 	[/シャイニング.?ピース/, 'shining'],
+	['まっしろわーるど', 'masshiro'],
 ]

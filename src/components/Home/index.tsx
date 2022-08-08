@@ -117,7 +117,7 @@ const Wrap = styled.div`
 	min-height: 100vh;
 	display: grid;
 	/* overflow: hidden; */
-	grid-template-rows: repeat(6, max-content);
+	grid-template-rows: repeat(7, max-content);
 	padding: 16px;
 	color: white;
 
