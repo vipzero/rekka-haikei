@@ -22,7 +22,7 @@ import {
 import ky from 'ky'
 import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
 import config from '../src/config'
-import { History, HistoryRaw, Schedule, Song } from './../src/types'
+import { Emol, History, HistoryRaw, Schedule, Song } from './../src/types'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -37,6 +37,7 @@ const app = initializeApp(firebaseConfig)
 const fdb = getFirestore(app)
 
 const P_SONG = 'song'
+const P_EMOL = 'emol'
 const P_FEEDBACK = 'feedback'
 const P_VOTE = 'vote'
 const P_BOOKS = 'books'
@@ -60,6 +61,7 @@ const histSongsCol = (eid: string) => collection(fdb, P_HIST, eid, P_SONGS)
 const countsCol = (eid: string) => collection(fdb, P_HIST, eid, P_COUNTS)
 const animeDoc = (aid: string) => doc(fdb, P_CVOTE, aid)
 const songDoc = (eid: string) => doc(fdb, P_SONG, eid)
+const emolDoc = (eid: string) => doc(fdb, P_EMOL, eid)
 const bookCountDoc = () => doc(fdb, P_YO, P_CURRENT)
 
 // querys
@@ -147,6 +149,12 @@ export const readSong = (eid: string, onNext: (song: Song) => void) =>
 		if (!snap.exists()) return
 
 		onNext(snap.data() as Song)
+	})
+export const readEmol = (eid: string, onNext: (emol: Emol) => void) =>
+	onSnapshot(emolDoc(eid), (snap) => {
+		if (!snap.exists()) return
+
+		onNext(snap.data() as Emol)
 	})
 
 export const watchHistSong = (

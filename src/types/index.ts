@@ -32,6 +32,7 @@ export type SongFull = SongMiss & {
 }
 
 export type Song = SongFull | SongMiss
+export type Emol = { text: string }
 
 export const isSongFull = (song: Song): song is SongFull => 'spInfo' in song
 

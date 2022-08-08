@@ -9,6 +9,9 @@ service cloud.firestore {
       allow read;
       allow update: if (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['imageLinks']));
     }
+    match /emol/{emolId} {
+      allow read;
+    }
     match /hist/{eventId} {
       allow read;
       match /songs/{songId} {
