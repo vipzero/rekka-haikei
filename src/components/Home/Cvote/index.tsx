@@ -52,6 +52,7 @@ const modeLabel: Record<Mode, string> = {
 
 function CVote({ animeId, chars, sid, disabled }: Props) {
 	const {
+		max,
 		loaded,
 		votes,
 		sendVote,
@@ -60,7 +61,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 		initVotes,
 		voteEnd,
 		votedNum,
-	} = useCvoteDb(animeId, sid)
+	} = useCvoteDb(animeId, sid, chars.length)
 	const [mode, setMode] = useState<Mode>(modes[0])
 	const cycleMode = () =>
 		setMode((v) => modes[(modes.indexOf(v) + 1) % modes.length])
@@ -82,7 +83,7 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 					e.stopPropagation()
 				}}
 			>
-				{modeLabel[mode]}[{votedNum}/1]
+				{`${modeLabel[mode]}[${votedNum}/${max}]`}
 			</button>
 
 			<div

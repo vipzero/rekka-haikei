@@ -14,9 +14,10 @@ const normalizeVotes = (votes: AnimeVotes) => {
 	return normalized
 }
 
-export function useCvoteDb(animeId: string, sid: string) {
+export function useCvoteDb(animeId: string, sid: string, charNum: number) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
+	const [max, setMax] = useState<Number>(1)
 	const [initVotes, setInitVotes] = useState<AnimeVotes>({})
 	const [votesNorm, setVotesNorm] = useState<AnaVotes>({})
 	const [[lastVote, votedChars], setLastVote] = useLocalStorage<
@@ -26,7 +27,8 @@ export function useCvoteDb(animeId: string, sid: string) {
 	useEffect(() => {
 		if (lastVote === sid) return
 		setLastVote([sid, {}])
-	}, [sid])
+		setMax((Number(sid) % Math.ceil(Math.sqrt(charNum))) + 1)
+	}, [sid, charNum])
 
 	useEffect(() => {
 		if (loaded) setInitVotes(votes)
@@ -46,7 +48,7 @@ export function useCvoteDb(animeId: string, sid: string) {
 		}
 	}, [animeId])
 	const votedNum = Object.values(votedChars).length
-	const voteEnd = votedNum >= 3
+	const voteEnd = votedNum >= max
 
 	const sendVote = async (charId: string) => {
 		if (votedChars[charId] || voteEnd) {
@@ -59,6 +61,7 @@ export function useCvoteDb(animeId: string, sid: string) {
 	}
 
 	return {
+		max,
 		loaded,
 		votes,
 		sendVote,
