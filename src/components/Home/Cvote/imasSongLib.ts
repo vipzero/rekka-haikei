@@ -1,4 +1,4 @@
-export const libTsv: string[][] = `
+export const imasLib: string[][] = `
 j4UiuN	1
 KGYT0M	2
 ckd3DK	3
@@ -214,3 +214,9 @@ oeEtdh	1_8
 	.trim()
 	.split('\n')
 	.map((v) => v.split('\t'))
+
+export const shaniLib = Object.fromEntries(
+	'NHU5vE_/rfQNZ_q2Thum_bMV/Lj_QWv9eU_qR5TjX_FO+LyR_2yTUM0_xsCvN/_AQxCZs_UoF1v5_rr0Wyr_6Uk5T4_sbAmdc_EFVSD5_mTI7Pz_Yyjm5M_iCc5vW_LHl7ku_uzZkVZ_HjA34e_+pr5hc_XmfNGQ_Ey7eSc_9X0yg4_OcHIns_Ya8ra+_9Tp9xK_yv2d4Y_lv7/xR_YvUaHD_t0bAOe_AhG9qD_/nKcdo_MjuGH6_9uZHtH_SAaMJ3_FiYEz4_lIwqek_Ww2ht5_RcHU3H_oN57Jz_BoJcRz_KAL7SM_KMHOBJ_raE2+e_l19uKd_0ypwVp_/qhKxm_RWIGsN_Wf5Sd8_y22dCA_xV/1yT_J7dsVJ_P3h7V4_R32fGf_G/84IF_tOtyUM_RrFHPe_5FIgNy_fke/Bm_97PJff_ir/Q+7_VZAvig_OfiPHg_bAagDf_KItqoF_ErH6cM_rwuVom_+EDfwf_6/M4V8_4LsxzR_TIw6R7_M2Rqr+'
+		.split('_')
+		.map((v) => [v, true])
+)

@@ -1,19 +1,21 @@
 import { createHash } from 'crypto'
 import { Char } from '.'
 import { keyNorm } from '../../../util'
-import { libTsv } from './imasSongLib'
+import { imasLib, shaniLib } from './imasSongLib'
 
 const meta = { len: 6, salt: 'AA' }
 const makeHash = (s) => createHash('md5').update(s).digest('base64')
-const lib = Object.fromEntries(libTsv)
+const lib = Object.fromEntries(imasLib)
+
+const keying = (title: string) =>
+	makeHash(`${meta.salt}${keyNorm(title)}`).substring(0, meta.len)
+
+export const isShani = (title: string) => shaniLib[keying(title)] || false
 
 export const getIdles = (title: string): false | Char[] => {
-	const bb = `${meta.salt}${keyNorm(title)}`
-	const key = makeHash(bb).substring(0, meta.len)
-	// console.log({ bb, key })
+	const key = keying(title)
 
-	if (!lib[key]) return false
-	// console.log(lib[key])
+	if (!key) return false
 
 	const names = lib[key]?.split('_').map((idle) => charKeyLib[idle])
 	if (!names) return false
