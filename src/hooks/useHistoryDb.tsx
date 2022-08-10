@@ -113,7 +113,7 @@ function makeRows(text: string) {
 				{ day, items },
 			])
 		)
-	const rows = makeScheduleMap(cells2.filter((v) => v.isBase))
+	const rowsBase = makeScheduleMap(cells2.filter((v) => v.isBase))
 	const rowsSplit = makeScheduleMap(cells2.filter((v) => v.isSplit))
 
 	const rows2: Record<string, ScheduleRow> = {}
@@ -121,7 +121,7 @@ function makeRows(text: string) {
 		() => 'emp' as const
 	)
 
-	for (const [day, row] of Object.entries(rows)) {
+	for (const [day, row] of Object.entries(rowsSplit)) {
 		const cells = [...empCells]
 		row.items.forEach((item) => {
 			cells[item.start.getHours()] = item
@@ -131,7 +131,7 @@ function makeRows(text: string) {
 		})
 		rows2[day] = { day, items: cells }
 	}
-	return { rowsBase: rows2, rowsSplit }
+	return { rowsBase, rowsSplit: rows2 }
 }
 
 function makeCounts(histories: History[]) {
