@@ -28,7 +28,7 @@ function ScheduleComp(props: Props) {
 						<code>
 							<pre>{todayText}</pre>
 						</code>
-						<CopyButton onClick={() => copy(todayText)} />
+						<CopyButton onClick={() => copy(todayText)} label="コピー" />
 					</TabPanel>
 					<TabPanel value={tab} index={1}>
 						<div>
@@ -48,7 +48,6 @@ function ScheduleComp(props: Props) {
 							>
 								保存
 							</button>
-							<NextSchedule rows={rows} />
 						</div>
 					</TabPanel>
 				</div>

@@ -25,6 +25,7 @@ type FillCell = {
 	start: Date
 	end: Date
 	hn: number
+	mn: number
 	memo: string
 	rangeStr: string
 	name: string
@@ -37,34 +38,54 @@ export type ScheduleRow = {
 	items: ScheduleCell[]
 }
 
+const guardHm = (hm: string) => {
+	const [h, m] = hm.split(':')
+	return [Number(h) % 24, Number(m || 0), Number(h) > 24 ? 1 : 0]
+}
+
 function makeRows(text: string) {
 	const rows: Record<string, ScheduleRow> = {}
 
-	text
-		.trim()
-		.split('\n')
-		.filter(Boolean)
-		.forEach((line) => {
-			const [day, s, e, name, memo] = line.split(',')
-			const start = new Date(`${day} ${s}:00:00`)
-			const end = new Date(`${day} ${e}:00:00`)
-			if (!rows[day]) rows[day] = { day, items: [] }
-			const hn = Number(e) - Number(s)
-			const rangeStr = `${s}:00〜${e}:00`
-			const startKey = `${day}:${s}`
-			const endKey = `${day}:${e}`
+	const lines = text.trim().split('\n').filter(Boolean)
 
-			rows[day].items.push({
-				start,
-				end,
-				hn,
-				memo,
-				name,
-				rangeStr,
-				startKey,
-				endKey,
-			})
+	let dayPrev = ''
+	let ePrev = ''
+	lines.forEach((line) => {
+		const [day0, sRaw, eRaw, name, memo] = line.split(',')
+		const day = day0 || dayPrev
+		const [sh, sm] = sRaw ? guardHm(sRaw) : guardHm(ePrev)
+		const [eh, em, upDay] = guardHm(eRaw)
+		const ehr = eh + upDay * 24
+
+		// const s = (s0 || ePrev).padStart(2, '0')
+		// const e = Number(e0) % 24
+
+		const start = new Date(`${day} ${sh}:${sm}`)
+		const end = new Date(`${day} ${eh}:${em}`)
+		end.setDate(end.getDate() + upDay)
+
+		if (!rows[day]) rows[day] = { day, items: [] }
+		const hn = (eh - sh + 24) % 24
+		const mn = (em - sm + 60) % 60
+
+		const rangeStr = `${pad2(sh)}:${pad2(sm)}〜${pad2(ehr)}:${pad2(em)}`
+		const startKey = `${day}:${pad2(sh)}`
+		const endKey = `${day}:${pad2(Number(eRaw))}`
+
+		rows[day].items.push({
+			start,
+			end,
+			hn,
+			mn,
+			memo,
+			name,
+			rangeStr,
+			startKey,
+			endKey,
 		})
+		dayPrev = day
+		ePrev = eRaw
+	})
 	const rows2: Record<string, ScheduleRow> = {}
 	const empCells: ScheduleCell[] = Object.values(fills).map(
 		() => 'emp' as const
