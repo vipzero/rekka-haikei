@@ -15,22 +15,24 @@ import { useLocalStorage } from './useLocalStorage'
 import { currentEvent, events, finishTime } from '../config'
 import { parse } from 'csv-parse/sync'
 import { textNormalize } from '../util/serverCodeUtils'
+import groupBy from 'lodash/groupBy'
 
 const fills: Record<number, boolean> = [...Array(24).keys()].reduce(
 	(p, c) => ({ ...p, [c]: false }),
 	{}
 )
 
-type FillCell = {
+type FillCellPrimary = {
 	start: Date
 	end: Date
+	memo: string
+	name: string
+}
+type FillCell = FillCellPrimary & {
+	day: string
 	hn: number
 	mn: number
-	memo: string
 	rangeStr: string
-	name: string
-	startKey: string
-	endKey: string
 }
 type ScheduleCell = FillCell | 'skip' | 'emp'
 export type ScheduleRow = {
@@ -44,7 +46,7 @@ const guardHm = (hm: string) => {
 }
 
 function makeRows(text: string) {
-	const rows: Record<string, ScheduleRow> = {}
+	const cells: FillCellPrimary[] = []
 
 	const lines = text.trim().split('\n').filter(Boolean)
 
@@ -55,37 +57,65 @@ function makeRows(text: string) {
 		const day = day0 || dayPrev
 		const [sh, sm] = sRaw ? guardHm(sRaw) : guardHm(ePrev)
 		const [eh, em, upDay] = guardHm(eRaw)
-		const ehr = eh + upDay * 24
-
-		// const s = (s0 || ePrev).padStart(2, '0')
-		// const e = Number(e0) % 24
 
 		const start = new Date(`${day} ${sh}:${sm}`)
 		const end = new Date(`${day} ${eh}:${em}`)
 		end.setDate(end.getDate() + upDay)
 
-		if (!rows[day]) rows[day] = { day, items: [] }
-		const hn = (eh - sh + 24) % 24
-		const mn = (em - sm + 60) % 60
-
-		const rangeStr = `${pad2(sh)}:${pad2(sm)}〜${pad2(ehr)}:${pad2(em)}`
-		const startKey = `${day}:${pad2(sh)}`
-		const endKey = `${day}:${pad2(Number(eRaw))}`
-
-		rows[day].items.push({
-			start,
-			end,
-			hn,
-			mn,
-			memo,
-			name,
-			rangeStr,
-			startKey,
-			endKey,
-		})
+		cells.push({ start, end, memo, name })
 		dayPrev = day
 		ePrev = eRaw
 	})
+	const cells2 = cells
+		.map((cell) => {
+			const { start, end } = cell
+			if (start.getDate() === end.getDate())
+				return [{ ...cell, isBase: true, isSplit: true }]
+			const midDay = new Date(end)
+			midDay.setHours(0, 0)
+			return [
+				{ ...cell, isBase: true, isSplit: false },
+				{ ...cell, end: midDay, isBase: false, isSplit: true },
+				{ ...cell, start: midDay, isBase: false, isSplit: true },
+			]
+		})
+		.flat()
+		.map((cell) => {
+			const { start, end } = cell
+			const day = formatYmdSlash(+cell.start)
+
+			// const s = (s0 || ePrev).padStart(2, '0')
+			// const e = Number(e0) % 24
+			const sh = start.getHours()
+			const sm = start.getMinutes()
+			const eh = end.getHours()
+			const em = end.getMinutes()
+
+			const ehr = eh + (sh > eh ? 24 : 0)
+
+			const hn = (eh - sh + 24) % 24
+			const mn = (em - sm + 60) % 60
+
+			const rangeStr = `${pad2(sh)}:${pad2(sm)}〜${pad2(ehr)}:${pad2(em)}`
+			return {
+				...cell,
+				day,
+				hn,
+				mn,
+				rangeStr,
+			}
+		})
+
+	const makeScheduleMap = (cells: FillCell[]) =>
+		Object.fromEntries(
+			Object.entries(groupBy(cells, (v) => v.day)).map(([day, items]) => [
+				day,
+				{ day, items },
+			])
+		)
+	const rows = makeScheduleMap(cells2.filter((v) => v.isBase))
+	const rowsSplit = makeScheduleMap(cells2.filter((v) => v.isSplit))
+
 	const rows2: Record<string, ScheduleRow> = {}
 	const empCells: ScheduleCell[] = Object.values(fills).map(
 		() => 'emp' as const
@@ -94,7 +124,6 @@ function makeRows(text: string) {
 	for (const [day, row] of Object.entries(rows)) {
 		const cells = [...empCells]
 		row.items.forEach((item) => {
-			if (item === 'emp' || item === 'skip') return
 			cells[item.start.getHours()] = item
 			for (let i = item.start.getHours() + 1; i < item.end.getHours(); i++) {
 				cells[i] = 'skip'
@@ -102,7 +131,7 @@ function makeRows(text: string) {
 		})
 		rows2[day] = { day, items: cells }
 	}
-	return rows2
+	return { rowsBase: rows2, rowsSplit }
 }
 
 function makeCounts(histories: History[]) {
@@ -255,9 +284,6 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 	const todYmd = formatYmdSlash(+tod)
 	const tomYmd = formatYmdSlash(+tom)
 
-	const fromTimeKey = `${todYmd}:${pad2(tod.getHours())}`
-	const toTimeKey = `${tomYmd}:${pad2(tod.getHours())}`
-
 	const viewDays = [
 		[rows[todYmd] || { day: todStr, items: [] }, todStr] as const,
 		[rows[tomYmd] || { day: tomStr, items: [] }, tomStr] as const,
@@ -271,7 +297,7 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 		const dayLines: string[] = []
 		row.items.forEach((v) => {
 			if (v === 'emp' || v === 'skip') return
-			if (fromTimeKey <= v.endKey && v.startKey <= toTimeKey) {
+			if (tod <= v.end && v.start <= tod) {
 				dayLines.push(`${v.rangeStr}　　${v.name}${v.memo ? `※${v.memo}` : ''}`)
 			}
 		})
@@ -304,18 +330,25 @@ export function useScheduleDb() {
 		saveTable(eventId, schedule)
 	}
 
-	const rows = useMemo(() => {
+	const { rowsBase, rowsSplit } = useMemo(() => {
 		try {
 			return makeRows(schedule.text)
 		} catch (e) {
 			console.log(e)
 		}
-		return {}
+		return { rowsBase: {}, rowsSplit: {} }
 	}, [schedule.text])
 
-	const todayText = makeText(rows)
+	const todayText = makeText(rowsBase)
 
-	return { schedule, setSchedule, save, todayText, rows } as const
+	return {
+		schedule,
+		setSchedule,
+		save,
+		todayText,
+		rowsBase,
+		rowsSplit,
+	} as const
 }
 
 const keyBy = <T,>(list: Count[]) => {

@@ -3,21 +3,21 @@ import { useState } from 'react'
 import { useScheduleDb } from '../../hooks/useHistoryDb'
 import { CopyButton } from '../BookPage/CopyButton'
 import { TabPanel, Tabs } from '../common/Tab'
-import NextSchedule from './NextSchedule'
 import ScheduleTable from './ScheduleTable'
 
 type Props = {
 	setFilter?: (_range: { start: number; end: number }) => void
 }
 function ScheduleComp(props: Props) {
-	const { schedule, setSchedule, save, todayText, rows } = useScheduleDb()
+	const { schedule, setSchedule, save, todayText, rowsBase, rowsSplit } =
+		useScheduleDb()
 
 	const [tab, setTab] = useState<number>(0)
 
 	return (
 		<div>
 			<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-				<ScheduleTable rows={rows} setFilter={props.setFilter} />
+				<ScheduleTable rows={rowsSplit} setFilter={props.setFilter} />
 				<div>
 					<Tabs
 						items={[{ label: 'テキスト' }, { label: '編集' }]}
