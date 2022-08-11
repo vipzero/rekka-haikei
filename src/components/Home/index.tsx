@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
 import { useFavorites } from '../../hooks/useFavorites'
@@ -22,11 +22,26 @@ import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
 import { useEmolDb } from '../../hooks/useEmolDb'
+import { useKeyPressChange } from '../../hooks/useKeyPress'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
 	wide: 'center',
 	l: 'right',
 	r: 'left',
+}
+
+const mozList = ['on1', 'on2', 'off']
+const useLightConfig = (song: Song) => {
+	const [moz, setMoz] = useState<typeof mozList[number]>('off')
+
+	const cycle = <T,>(arr: T[], cur: T) =>
+		arr[(arr.indexOf(cur) + 1) % arr.length]
+
+	useKeyPressChange('m', () => setMoz((v) => cycle(mozList, v)))
+	useEffect(() => {
+		setMoz('off')
+	}, [song.icy])
+	return { moz }
 }
 
 type Props = {
@@ -45,6 +60,7 @@ function Home({ song }: Props) {
 		song.trackTimeMillis ||
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
+	const { moz } = useLightConfig(song)
 
 	return (
 		<Master
@@ -55,6 +71,7 @@ function Home({ song }: Props) {
 			data-ex-just={eeKey}
 			data-has-art={!!song.artworkUrl100}
 			data-theme={theme}
+			data-moz={moz}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 			customTheme={customTheme}
@@ -235,6 +252,17 @@ const Master = styled.div<{ customTheme: string }>`
 	}
 	.lyricsbox {
 		background: rgba(255, 255, 255, 0.5);
+	}
+
+	&[data-moz='on1'] {
+		#bg {
+			filter: blur(10px);
+		}
+	}
+	&[data-moz='on2'] {
+		#bg {
+			filter: blur(100px);
+		}
 	}
 `
 
