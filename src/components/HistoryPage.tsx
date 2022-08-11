@@ -1,7 +1,7 @@
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import {
 	faStar as faStarFill,
-	faTrash
+	faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import copy from 'copy-to-clipboard'
@@ -167,6 +167,11 @@ function HistoryPageBase() {
 	const searchResultTexts = searchs.map(
 		(s) => `${s} の検索結果: ${searchResult?.[s]}件`
 	)
+	const index2bText = (b: boolean, i: number) =>
+		b ? '済' : `${i + 1}`.padStart(2, '0')
+	const searchResultTexts2 = searchs.map(
+		(s, i) => index2bText(!!searchResult?.[s], i) + ' ' + s
+	)
 
 	return (
 		<Wrap>
@@ -280,15 +285,25 @@ function HistoryPageBase() {
 					</div>
 					<div className="search-result">
 						{searchResult && (
-							<div className="option-box-word">
-								<h4>検索結果</h4>
-								{searchResultTexts.map((text) => (
-									<div key={text}>{text}</div>
-								))}
-								<CopyButton
-									onClick={() => copy(searchResultTexts.join('\n'))}
-								/>
-							</div>
+							<>
+								<div className="option-box-word">
+									<h4>検索結果</h4>
+									{searchResultTexts.map((text) => (
+										<div key={text}>{text}</div>
+									))}
+									<CopyButton
+										onClick={() => copy(searchResultTexts.join('\n'))}
+									/>
+								</div>
+								<div className="option-box-word">
+									{searchResultTexts2.map((text) => (
+										<div key={text}>{text}</div>
+									))}
+									<CopyButton
+										onClick={() => copy(searchResultTexts2.join('\n'))}
+									/>
+								</div>
+							</>
 						)}
 						{range && (
 							<div className="option-box">
