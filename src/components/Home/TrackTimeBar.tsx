@@ -31,12 +31,17 @@ function TrackTimeBar({ startTime, size }: Props) {
 	if (!size) return null
 
 	return (
-		<Style id="timebar">
-			<div className="wrap">
-				<div className="fill" style={{ width: `${100 * p}vw` }}></div>
-				<div className="pointer" />
-			</div>
-		</Style>
+		<>
+			<Style id="timebar">
+				<div className="wrap">
+					<div className="fill" style={{ width: `${100 * p}vw` }}></div>
+					<div className="pointer" />
+				</div>
+			</Style>
+			{/* <div id="breaks">
+				<div id="break-y" style={{ height: `${100 / (p + 0.1)}vh` }}></div>
+			</div> */}
+		</>
 	)
 }
 const Style = styled.div`
@@ -50,6 +55,11 @@ const Style = styled.div`
 	.fill {
 		background: #ddd;
 		height: 4px;
+	}
+	#break-y {
+		background: #f008;
+		position: absolute;
+		width: 10px;
 	}
 `
 

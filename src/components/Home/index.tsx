@@ -47,7 +47,7 @@ function Home({ song }: Props) {
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
 
-	const { moz } = useLightConfig(song, () => toggleFavorites(song.icy))
+	const { moz, bre } = useLightConfig(song, () => toggleFavorites(song.icy))
 
 	return (
 		<Master
@@ -59,6 +59,7 @@ function Home({ song }: Props) {
 			data-has-art={!!song.artworkUrl100}
 			data-theme={theme}
 			data-moz={moz}
+			data-bre={bre}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 			customTheme={customTheme}
@@ -251,6 +252,8 @@ const Master = styled.div<{ customTheme: string }>`
 		#bg {
 			filter: blur(100px);
 		}
+	}
+	&[data-bre='true'] {
 	}
 `
 
