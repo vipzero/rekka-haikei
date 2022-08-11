@@ -52,7 +52,7 @@ function makeRows(text: string) {
 
 	let dayPrev = ''
 	let ePrev = ''
-	lines.forEach((line) => {
+	lines.forEach((line, i) => {
 		const [day0, sRaw, eRaw, name, memo] = line.split(',')
 		const day = day0 || dayPrev
 		const [sh, sm] = sRaw ? guardHm(sRaw) : guardHm(ePrev)
@@ -62,7 +62,7 @@ function makeRows(text: string) {
 		const end = new Date(`${day} ${eh}:${em}`)
 		end.setDate(end.getDate() + upDay)
 
-		cells.push({ start, end, memo, name })
+		cells.push({ start, end, memo: memo || `#${i}`, name })
 		dayPrev = day
 		ePrev = eRaw
 	})
@@ -297,7 +297,7 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 		const dayLines: string[] = []
 		row.items.forEach((v) => {
 			if (v === 'emp' || v === 'skip') return
-			if (tod <= v.end && v.start <= tod) {
+			if (tod <= v.end && v.start <= tom) {
 				dayLines.push(`${v.rangeStr}　　${v.name}${v.memo ? `※${v.memo}` : ''}`)
 			}
 		})
