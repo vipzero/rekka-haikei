@@ -101,7 +101,7 @@ const groups = {
 	エンジェルスターズ: 'an',
 }
 
-const imasChars = [
+export const imasChars = [
 	// as
 	{ id: 'ah', group: 'as', name: '春香', color: '#e22b30' },
 	{ id: 'ch', group: 'as', name: '千早', color: '#2743d2' },

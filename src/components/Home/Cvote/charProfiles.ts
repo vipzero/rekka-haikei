@@ -1,4 +1,5 @@
 import { eekeysVotic } from './constants'
+import { imasChars } from './imasSong'
 import { Char } from './index'
 
 type CvoteProfile = {
@@ -295,6 +296,6 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 	},
 	{
 		id: 'imasml',
-		chars: [],
+		chars: imasChars,
 	},
 ]
