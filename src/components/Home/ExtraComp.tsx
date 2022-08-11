@@ -9,6 +9,7 @@ import CVote from '../Home/Cvote'
 import { Eekey, EekeyState, EeOpt } from '../Home/Cvote/constants'
 import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 import { CVOTE_PROFILES } from './Cvote/charProfiles'
+import { range } from 'lodash'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -94,6 +95,18 @@ const workLinks: ([string] | [string, string])[] = [
 	['https://mynavi-job20s.jp/lp/fm/', 'https://mynavi-job20s.jp'],
 ]
 
+const RainEx = () => {
+	return (
+		<div id="rains-box">
+			<div className="rains">
+				{range(20).map((i) => (
+					<span key={i} />
+				))}
+			</div>
+		</div>
+	)
+}
+
 function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 	if (eeKey === 'steinsgate') {
 		return <SteinsBg />
@@ -105,6 +118,8 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 		return <MasshiroEx />
 	} else if (eeKey === 'kokaku') {
 		return <KokakuEx />
+	} else if (eeKey === 'rain') {
+		return <RainEx />
 	} else if (eeKey === 'halowa') {
 		return (
 			<div style={{ display: 'grid' }}>

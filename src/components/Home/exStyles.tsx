@@ -592,6 +592,67 @@ export const exStyles = css`
 			}
 		}
 	}
+	&[data-ex='rain'] {
+		#rains-box {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			background: #0000ff08;
+			z-index: -3;
+		}
+
+		.rains {
+			position: absolute;
+
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			span {
+				position: absolute;
+				width: 1px;
+				height: 30vh;
+				background: #def;
+				opacity: 0.4;
+				${range(20).map(
+					(i) => css`
+						&:nth-child(${i + 1}) {
+							left: ${`${(i + 1) * 5}%`};
+							top: ${rand(0, 50) - 190} px;
+							animation: rain-anim ${rand(6, 14)}s infinite;
+						}
+					`
+				)}
+			}
+		}
+
+		@keyframes rain-anim {
+			${range(20)
+				.map((i) => ({ s: i * 5, e: i * 5 + 4, w: rand(-10, 10) * 10 }))
+				.map(
+					({ s, e, w }) => css`
+						${s}% {
+							/* ${`${5}%`} { */
+							transform: translate(${w}px, 0);
+						}
+						${e}% {
+							transform: translate(${w}px, 100vh);
+						}
+					`
+				)}
+			100% {
+				transform: translate(0px, 0px);
+			}
+		}
+	}
 `
 
 function genAnimationRgbShift() {

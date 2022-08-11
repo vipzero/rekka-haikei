@@ -37,18 +37,19 @@ export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 
 	if (!icy) return false
 
-	const match =
-		EX_PATTERNS_CUSTOM.find(([checker]) => checker(song))?.[1] ||
-		EX_PATTERNS_ANIME_OR_ALBUM.find(([q]) => hasTitle(q, song))?.[1] ||
-		EX_PATTERNS_JUST_ICY.find(([q]) => icyJustMatch(q, icy))?.[1] ||
-		EX_PATTERNS_ICY.find(([q]) => icy.match(q))?.[1]
-	if (match) return [match, null]
 	const [icy1, icy2] = icy.split(' - ')[0]
 
 	if (isShani(icy1) || isShani(icy2)) return ['shanimas', null]
 	const im = getIdles(icy1) || getIdles(icy2)
 
 	if (im) return ['imasml', { chars: im }]
+
+	const match =
+		EX_PATTERNS_CUSTOM.find(([checker]) => checker(song))?.[1] ||
+		EX_PATTERNS_ANIME_OR_ALBUM.find(([q]) => hasTitle(q, song))?.[1] ||
+		EX_PATTERNS_JUST_ICY.find(([q]) => icyJustMatch(q, icy))?.[1] ||
+		EX_PATTERNS_ICY.find(([q]) => icy.match(q))?.[1]
+	if (match) return [match, null]
 
 	return false
 }

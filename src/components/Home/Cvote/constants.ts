@@ -10,6 +10,7 @@ export const eekeysGimic = [
 	'sakurasou',
 	'masshiro',
 	'halowa',
+	'rain',
 
 	'gkgurashi',
 	'issyuukanfr',
@@ -133,4 +134,5 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	['アマガミ', 'amagami'],
 	[/シャイニング.?ピース/, 'shining'],
 	['まっしろわーるど', 'masshiro'],
+	[/雨|Rain|rain/i, 'rain'],
 ]
