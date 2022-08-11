@@ -121,6 +121,8 @@ export const useSettingsEe = () => {
 	}
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
+	const openEekey = (eeKey: Eekey) =>
+		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
 	const setEekey = (
 		eeKey: Eekey | false,
 		simulate = false,
@@ -133,8 +135,7 @@ export const useSettingsEe = () => {
 		setSetting((v) => ({ ...v, eeKey, eeSim: simulate, eeOpt: eeOpt }))
 
 		if (eeKey === false) return
-
-		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
+		openEekey(eeKey)
 
 		if (simulate && isExTheme(eeKey)) {
 			setTheme(eeKey)
@@ -162,6 +163,7 @@ export const useSettingsEe = () => {
 		eeSim,
 		setAbyss,
 		cycleAbyss,
+		openEekey,
 		setEekey,
 		toggleEekeySimulate,
 		setSetting,

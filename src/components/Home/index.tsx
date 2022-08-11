@@ -241,7 +241,8 @@ const Master = styled.div<{ customTheme: string }>`
 		background: rgba(255, 255, 255, 0.5);
 	}
 
-	&[data-moz='on1'] {
+	&[data-moz='on1'],
+	&[data-ex='mosaic'] {
 		#bg {
 			filter: blur(10px);
 		}

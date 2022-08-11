@@ -21,7 +21,13 @@ export const eekeysGimic = [
 ] as const
 // 🛑 ネタバレ注意
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
-export const eekeysMirror = ['spin', 'flip', 'patema'] as const
+export const eekeysMirror = [
+	'spin',
+	'flip',
+	'patema',
+	'break',
+	'mosaic',
+] as const
 export const eekeysVotic = [
 	'gotoyome',
 	'oreimo',
