@@ -151,3 +151,5 @@ export const keyNorm = (title: string) =>
 		.replace(/[＠]/g, '@')
 		.replace(/[（〔［｛〈《「『【＜]/g, '(')
 		.replace(/[）〕］｝〉》」』】＞]/g, ')')
+
+export const isEmoji = (v) => /\p{Emoji}/u.test(v)

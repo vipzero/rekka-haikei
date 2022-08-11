@@ -239,7 +239,9 @@ const Master = styled.div<{ customTheme: string }>`
 		}
 	}
 	.lyricsbox {
+		user-select: none;
 		background: rgba(255, 255, 255, 0.5);
+		color: black;
 	}
 
 	&[data-moz='on1'],

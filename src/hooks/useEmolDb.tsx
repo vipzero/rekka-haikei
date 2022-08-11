@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import { readEmol } from '../../service/firebase'
 import { Emol } from '../types'
 import { useQeuryEid } from './useQueryEid'
+import { isEmoji } from '../util'
 
+const italicizeNonEmoji = (s: string) =>
+	[...s].map((c) => (isEmoji(c) || '\n 　'.includes(c) ? c : '\uFFED')).join('')
 export function useEmolDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()
@@ -10,7 +13,7 @@ export function useEmolDb() {
 
 	useEffect(() => {
 		const si = readEmol(eventId, (emol) => {
-			setEmol(emol)
+			setEmol({ ...emol, text: italicizeNonEmoji(emol.text) })
 			setLoaded(true)
 		})
 
