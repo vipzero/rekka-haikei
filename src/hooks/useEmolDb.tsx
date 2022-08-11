@@ -5,7 +5,7 @@ import { useQeuryEid } from './useQueryEid'
 import { isEmoji } from '../util'
 
 const italicizeNonEmoji = (s: string) =>
-	[...s].map((c) => (isEmoji(c) || '\n 　'.includes(c) ? c : '\uFFED')).join('')
+	[...s].map((c) => (isEmoji(c) || '\n 　'.includes(c) ? c : '|')).join('')
 export function useEmolDb() {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()

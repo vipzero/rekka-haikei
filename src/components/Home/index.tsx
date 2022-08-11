@@ -241,7 +241,8 @@ const Master = styled.div<{ customTheme: string }>`
 	.lyricsbox {
 		user-select: none;
 		background: rgba(255, 255, 255, 0.5);
-		color: black;
+		color: gray;
+		width: max-content;
 	}
 
 	&[data-moz='on1'],
