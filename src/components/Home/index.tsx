@@ -1,47 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
+import { useEmolDb } from '../../hooks/useEmolDb'
 import { useFavorites } from '../../hooks/useFavorites'
+import { useLightConfig } from '../../hooks/useLightConfig'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import {
 	useSettings,
+	useSettingsCustomTheme,
 	useSettingsEe,
 	useSettingsFakeBar,
-	useSettingsCustomTheme,
 	useSettingsShowEmol,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
+import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
 import { exStyles } from './exStyles'
 import { ExtraComp } from './ExtraComp'
 import FadeBgChanger from './FadeBgChanger'
-import AudioPlayer from './AudioPlayer'
 import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
-import { useEmolDb } from '../../hooks/useEmolDb'
-import { useKeyPressChange } from '../../hooks/useKeyPress'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
 	wide: 'center',
 	l: 'right',
 	r: 'left',
-}
-
-const mozList = ['on1', 'on2', 'off']
-const useLightConfig = (song: Song) => {
-	const [moz, setMoz] = useState<typeof mozList[number]>('off')
-
-	const cycle = <T,>(arr: T[], cur: T) =>
-		arr[(arr.indexOf(cur) + 1) % arr.length]
-
-	useKeyPressChange('m', () => setMoz((v) => cycle(mozList, v)))
-	useEffect(() => {
-		setMoz('off')
-	}, [song.icy])
-	return { moz }
 }
 
 type Props = {
