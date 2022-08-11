@@ -39,6 +39,12 @@ const clockSpin = keyframes`
 }
 `
 
+const rgbShiftR = genAnimationRgbShift()
+const rgbShiftG = genAnimationRgbShift()
+const rgbShiftB = genAnimationRgbShift()
+const glitchBefore = genAnimationGlitch()
+const glitchAfter = genAnimationGlitch()
+
 const randAnimsCss = [...Array(20).keys()]
 	.map(
 		(i) => `
@@ -474,7 +480,7 @@ export const exStyles = css`
 			top: 0;
 		}
 		&::before {
-			animation: glitch-before 3s linear infinite alternate both;
+			animation: ${glitchBefore} 3s linear infinite alternate both;
 			content: '';
 		}
 		.channel {
@@ -491,19 +497,19 @@ export const exStyles = css`
 			}
 		}
 		.r {
-			animation: rgb-shift-r 3s steps(1, jump-end) infinite alternate both;
+			animation: ${rgbShiftR} 3s steps(1, jump-end) infinite alternate both;
 			&::before {
 				background: #f00;
 			}
 		}
 		.g {
-			animation: rgb-shift-g 3s steps(1, jump-end) infinite alternate both;
+			animation: ${rgbShiftG} 3s steps(1, jump-end) infinite alternate both;
 			&::before {
 				background: #0f0;
 			}
 		}
 		.b {
-			animation: rgb-shift-b 3s steps(1, jump-end) infinite alternate both;
+			animation: ${rgbShiftB} 3s steps(1, jump-end) infinite alternate both;
 			::before {
 				background: #00f;
 			}
@@ -514,10 +520,6 @@ export const exStyles = css`
 			animation-delay: ${animStart - 3}s;
 		}
 	}
-
-	${['r', 'g', 'b'].map((k) => genAnimationRgbShift(k))}
-	${genAnimationGlitch('before')}
-	${genAnimationGlitch('after')}
 
 	&[data-ex='ariascarlet'] {
 		#timebar {
@@ -592,53 +594,48 @@ export const exStyles = css`
 	}
 `
 
-function genAnimationRgbShift(name) {
-	return css`
-		@keyframes rgb-shift-${name} {
-			${range(frequency).map(
-				(p) => css`
-					${p * interval * 100}% {
-						transform: translate(${rand(-2, 2)}%, ${rand(-0.5, 0.5)}%);
-						opacity: 1;
-					}
-				`
-			)}
-
-			${duration * 100}%,
-			100% {
-				opacity: 0;
-				transform: none;
-			}
+function genAnimationRgbShift() {
+	return keyframes`
+		${`${duration * 100}%`}, 100% {
+			opacity: 0;
+			transform: none;
 		}
+
+		${range(frequency).map(
+			(p) => css`
+				${p * interval * 100}% {
+					transform: translate(${rand(-2, 2)}%, ${rand(-0.5, 0.5)}%);
+					opacity: 1;
+				}
+			`
+		)}
 	`
 }
 
-function genAnimationGlitch(name: string) {
-	return css`
-		@keyframes glitch-${name} {
-			${range(frequency).map((p) => {
-				const left = 0
-				const right = 100
-				const top = rand(0, 90)
-				const bottom = top + rand(1, 10)
-				return css`
-					${p * interval * 100}% {
-						clip-path: polygon(
-							${left}% ${top}%,
-							${right}% ${top}%,
-							${right}% ${bottom}%,
-							${left}% ${bottom}%
-						);
-						transform: translate(${rand(-8, 8)}%, ${rand(-0.5, 0.5)}%);
-					}
-				`
-			})}
+function genAnimationGlitch() {
+	return keyframes`
+		${range(frequency).map((p) => {
+			const left = 0
+			const right = 100
+			const top = rand(0, 90)
+			const bottom = top + rand(1, 10)
+			return css`
+				${p * interval * 100}% {
+					clip-path: polygon(
+						${left}% ${top}%,
+						${right}% ${top}%,
+						${right}% ${bottom}%,
+						${left}% ${bottom}%
+					);
+					transform: translate(${rand(-8, 8)}%, ${rand(-0.5, 0.5)}%);
+				}
+			`
+		})}
 
-			${duration * 100}%,
-			100% {
-				clip-path: none;
-				transform: none;
-			}
+		${`${duration * 100}%`}, 100% {
+			clip-path: none;
+			transform: none;
 		}
+
 	`
 }
