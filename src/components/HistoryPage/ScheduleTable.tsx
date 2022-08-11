@@ -42,7 +42,7 @@ function ScheduleTable({
 												<div className="tooltip">
 													<span className="tooltip-text">{item.memo}</span>
 													<div style={{ overflow: 'hidden', width: '100%' }}>
-														{item.memo?.substring(0, 8)}
+														{item.memo?.substring(0, 8) || `#${item.i}`}
 													</div>
 												</div>
 											</td>

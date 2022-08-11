@@ -26,6 +26,7 @@ type FillCellPrimary = {
 	start: Date
 	end: Date
 	memo: string
+	i: number
 	name: string
 }
 type FillCell = FillCellPrimary & {
@@ -62,7 +63,7 @@ function makeRows(text: string) {
 		const end = new Date(`${day} ${eh}:${em}`)
 		end.setDate(end.getDate() + upDay)
 
-		cells.push({ start, end, memo: memo || `#${i}`, name })
+		cells.push({ start, end, memo: memo || ``, i, name })
 		dayPrev = day
 		ePrev = eRaw
 	})
