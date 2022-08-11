@@ -23,7 +23,7 @@ export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
 	})
 	useKeyPressChange(']', () => {
 		setBre(not)
-		openEekey('break')
+		// openEekey('break')
 	})
 	useKeyPressChange('l', toggleEmol)
 	useKeyPressChange('a', s.toggleArtwork)
