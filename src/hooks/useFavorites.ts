@@ -37,7 +37,7 @@ export const useFavoritesBase = (eventId: string) => {
 		{}
 	)
 
-	const toggleFavorites = (icy) => {
+	const toggleFavorites = (icy: string) => {
 		setFavortes((data) => {
 			const newFavorites = { ...data }
 

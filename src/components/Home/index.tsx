@@ -34,7 +34,7 @@ type Props = {
 	song: Song
 }
 function Home({ song }: Props) {
-	const { theme, sideMode, lockBgNum, toggleSetting } = useSettings()
+	const { theme, sideMode, lockBgNum, toggleSetting, ...s } = useSettings()
 	const { eeKey } = useSettingsEe()
 	const { showEmol } = useSettingsShowEmol()
 
@@ -46,7 +46,8 @@ function Home({ song }: Props) {
 		song.trackTimeMillis ||
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
-	const { moz } = useLightConfig(song)
+
+	const { moz } = useLightConfig(song, () => toggleFavorites(song.icy))
 
 	return (
 		<Master
