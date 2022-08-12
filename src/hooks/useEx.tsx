@@ -37,7 +37,7 @@ export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 
 	if (!icy) return false
 
-	const [icy1, icy2] = icy.split(' - ')
+	const [icy1, icy2 = ''] = icy.split(' - ')
 
 	if (isShani(icy1) || isShani(icy2)) return ['shanimas', null]
 	const im = getIdles(icy1) || getIdles(icy2)
