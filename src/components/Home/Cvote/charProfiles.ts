@@ -133,6 +133,7 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'msi', name: '御坂妹', color: '#A67A66' },
 			{ id: 'utd', name: '打ち止', color: '#A67A66' },
 			{ id: 'bng', name: '番外', color: '#A67A66' },
+			{ id: 'kho', name: '固法', color: '#616874' },
 			{ id: 'oth', name: '他', color: '#fff' },
 		],
 	},

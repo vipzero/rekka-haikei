@@ -135,4 +135,5 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/シャイニング.?ピース/, 'shining'],
 	['まっしろわーるど', 'masshiro'],
 	[/雨|Rain|rain/i, 'rain'],
+	[/�/, 'lain'],
 ]

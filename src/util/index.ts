@@ -153,3 +153,4 @@ export const keyNorm = (title: string) =>
 		.replace(/[）〕］｝〉》」』】＞]/g, ')')
 
 export const isEmoji = (v) => /\p{Emoji}/u.test(v)
+export const isBugText = (s) => s.includes('�')
