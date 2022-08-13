@@ -161,7 +161,8 @@ export const exStyles = css`
 			}
 		}
 	}
-	&[data-ex='shanimas'] {
+	&[data-ex='shanimas'],
+	&[data-ex='rainbow'] {
 		#mask {
 			display: block;
 			opacity: 0.5;
