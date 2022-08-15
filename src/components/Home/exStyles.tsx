@@ -597,6 +597,7 @@ export const exStyles = css`
 	}
 	&[data-ex='imascd'] {
 		#imascd {
+			pointer-events: none;
 			position: absolute;
 			top: 0;
 			left: 0;
