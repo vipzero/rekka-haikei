@@ -161,6 +161,57 @@ export const exStyles = css`
 			}
 		}
 	}
+
+	@keyframes rainbow-anim {
+		0% {
+			background: red;
+		}
+		16% {
+			background: orange;
+		}
+		32% {
+			background: yellow;
+		}
+		48% {
+			background: green;
+		}
+		64% {
+			background: aqua;
+		}
+		80% {
+			background: blue;
+		}
+		100% {
+			background: purple;
+		}
+	}
+	@keyframes rainbow-anim-frame {
+		${[
+			{ color: 'red', p: 0 },
+			{ color: 'orange', p: 16 },
+			{ color: 'yellow', p: 32 },
+			{ color: 'green', p: 48 },
+			{ color: 'aqua', p: 64 },
+			{ color: 'blue', p: 80 },
+			{ color: 'purple', p: 100 },
+		]
+			.map(
+				({ color, p }) => `${p}% {
+			box-shadow: 0px 0px 10px 20px ${color} inset;
+		}`
+			)
+			.join('\n')}
+	}
+	&[data-ex='gaming'] {
+		#mask {
+			display: block;
+			opacity: 0.5;
+			animation: rainbow-anim-frame 20s linear infinite alternate;
+		}
+		#setting-box {
+			box-shadow: 0px 0px 10px 20px rgba(0, 255, 68, 0.3);
+		}
+	}
 	&[data-ex='shanimas'],
 	&[data-ex='rainbow'] {
 		#mask {
@@ -168,29 +219,6 @@ export const exStyles = css`
 			opacity: 0.5;
 			animation: rainbow-anim 20s linear infinite alternate;
 			mask-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
-		}
-		@keyframes rainbow-anim {
-			0% {
-				background: red;
-			}
-			16% {
-				background: orange;
-			}
-			32% {
-				background: yellow;
-			}
-			48% {
-				background: green;
-			}
-			64% {
-				background: aqua;
-			}
-			80% {
-				background: blue;
-			}
-			100% {
-				background: purple;
-			}
 		}
 	}
 	&[data-ex='rakupro'] {

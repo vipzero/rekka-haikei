@@ -12,6 +12,7 @@ export const eekeysGimic = [
 	'halowa',
 	'rain',
 	'rainbow',
+	'gaming',
 
 	'gkgurashi',
 	'issyuukanfr',
@@ -117,6 +118,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['シンデレラガールズ', 'imascd'],
 	['楽園PROJECT', 'rakupro'],
 	['シャイニーカラーズ', 'shanimas'],
+	[/new game|ゲーマーズ|ハイスコア|ネトゲ/i, 'gaming'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
