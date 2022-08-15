@@ -131,7 +131,7 @@ export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = []
 export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/ノルニル|スクランブル|回レ|ぐるぐる|ろーりんぐ|ローリング/, 'spin'],
 	[/bull['e]/, 'ariascarlet'],
-	['逆さま', 'patema'],
+	[/逆さま|サカサマ|サーカス/, 'patema'],
 	['労働', 'halowa'],
 	[/return|ウラオモテ/, 'flip'],
 	['アマガミ', 'amagami'],
