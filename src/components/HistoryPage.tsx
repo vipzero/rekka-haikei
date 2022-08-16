@@ -164,9 +164,10 @@ function HistoryPageBase() {
 	const search = (text: string) => {
 		setSearch(text.trim().split('\n').filter(Boolean))
 	}
-	const searchResultTexts = searchs.map(
-		(s) => `${s} の検索結果: ${searchResult?.[s]}件`
-	)
+	const searchResultTexts = [
+		`履歴検索 ${eid}`,
+		...searchs.map((s) => `${s}: ${searchResult?.[s]}件`),
+	]
 	const index2bText = (b: boolean, i: number) =>
 		b ? '済' : `${i + 1}`.padStart(2, '0')
 	const searchResultTexts2 = searchs.map(
