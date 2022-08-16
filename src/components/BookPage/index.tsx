@@ -1,8 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
-import config from '../../config'
-import { useBookDb } from '../../hooks/useBookDb'
-import { useSyncFavorite } from '../../hooks/useFavorites'
 import { TabPanel, Tabs } from '../common/Tab'
 import { BookmarkList } from './BookmarkList'
 
@@ -15,18 +12,7 @@ function Page() {
 }
 
 function CountTable() {
-	const [books, postCount, wordCounts] = useBookDb()
-
-	useSyncFavorite()
 	const [tab, setTab] = useState<number>(0)
-
-	// const histLib = useMemo(() => {
-	// 	const lib: Record<string, boolean> = {}
-	// 	histories.forEach((h) => {
-	// 		lib[h.title] = true
-	// 	})
-	// 	return lib
-	// }, [histories.length])
 
 	return (
 		<div>
@@ -35,49 +21,9 @@ function CountTable() {
 				<a href="./bg">戻る</a>
 			</p>
 
-			<Tabs
-				items={[{ label: 'リスト' }, { label: '投票' }]}
-				onChange={setTab}
-			/>
+			<Tabs items={[{ label: 'リスト' }]} onChange={setTab} />
 			<TabPanel value={tab} index={0}>
 				<BookmarkList />
-			</TabPanel>
-			<TabPanel value={tab} index={1}>
-				<p>投票数: {postCount}</p>
-				<table className="count">
-					<thead>
-						<tr>
-							<th>タイトル</th>
-							<th>人数</th>
-						</tr>
-					</thead>
-					<tbody>
-						{books.slice(0, config.visibleRecordLimit).map((count, i) => (
-							<tr key={i}>
-								<td>{count.icy}</td>
-								<td>{count.count}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-				{books.length >= 100 && <p>100件までのみ表示しています</p>}
-				<h3>人気タグ</h3>
-				<table className="count">
-					<thead>
-						<tr>
-							<th>タグ</th>
-							<th>pt</th>
-						</tr>
-					</thead>
-					<tbody>
-						{wordCounts.slice(0, config.visibleRecordLimit).map((count, i) => (
-							<tr key={i}>
-								<td>{count.word}</td>
-								<td>{count.count}</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
 			</TabPanel>
 		</div>
 	)
