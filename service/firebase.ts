@@ -132,7 +132,7 @@ export const getCounts = (eventId, limitNum = 200) =>
 	getDocs(query(countsCol(eventId), orderByCountTop, limit(limitNum)))
 
 export const voteChar = (animeId: string, charId: string) =>
-	updateDoc(animeDoc(animeId), { [charId]: increment(1) })
+	setDoc(animeDoc(animeId), { [charId]: increment(1) }, { merge: true })
 
 export const readCvote = (
 	animeId: string,

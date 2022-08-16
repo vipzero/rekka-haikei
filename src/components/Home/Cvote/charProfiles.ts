@@ -299,4 +299,12 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 		id: 'imasml',
 		chars: imasChars,
 	},
+	{
+		id: 'loveplus',
+		chars: [
+			{ id: 'ai', name: '愛花', color: '#59A1DC' },
+			{ id: 'rn', name: '凛子', color: '#A0CA64' },
+			{ id: 'nn', name: '寧々', color: '#FF98B3' },
+		],
+	},
 ]
