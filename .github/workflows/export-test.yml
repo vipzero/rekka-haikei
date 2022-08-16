@@ -13,12 +13,13 @@ jobs:
       matrix:
         node-version: [18.x]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           cache: 'yarn'
+          node-version: ${{ matrix.node-version }}
 
       - run: yarn
       - run: echo "${{ secrets.ENV_BODY }}" > .env
