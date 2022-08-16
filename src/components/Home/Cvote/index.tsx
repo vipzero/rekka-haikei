@@ -53,7 +53,6 @@ const modeLabel: Record<Mode, string> = {
 function CVote({ animeId, chars, sid, disabled }: Props) {
 	const {
 		max,
-		loaded,
 		votes,
 		sendVote,
 		votedChars,
@@ -71,8 +70,6 @@ function CVote({ animeId, chars, sid, disabled }: Props) {
 			chars.map((c) => toCharVote(c, votedChars, votes, votesNorm, initVotes)),
 		[chars, votes, votedChars, votesNorm, initVotes]
 	)
-
-	if (!loaded) return null
 
 	return (
 		<Container>
