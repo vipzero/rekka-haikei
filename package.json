@@ -20,7 +20,7 @@
 		"react-dom": "18.2.0",
 		"react-transition-group": "4.4.5",
 		"recoil": "0.7.5",
-		"rooks": "5.14.1",
+		"rooks": "6.4.3",
 		"safe-regex": "2.1.1",
 		"styled-components": "5.3.5"
 	},
