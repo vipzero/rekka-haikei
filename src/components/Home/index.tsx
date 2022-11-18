@@ -85,7 +85,7 @@ function Home({ song }: Props) {
 					setStreamUrl={setStreamUrl}
 					favorited={books[song.icy]}
 					toggleFavorited={() => toggleFavorites(song.icy)}
-					addSnap={() => addSnap(song)}
+					addSnap={() => addSnap(song, url)}
 					favCount={Object.keys(books).length}
 					url={url}
 				/>

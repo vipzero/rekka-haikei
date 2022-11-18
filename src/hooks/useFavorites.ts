@@ -59,10 +59,10 @@ export const useFavoritesBase = (eventId: string) => {
 	}
 }
 
-function song2Snap(song: Song): Snap {
+function song2Snap(song: Song, url: string): Snap {
 	return {
 		animeTitle: song.animeTitle || '',
-		url: song.imageLinks?.[0] || '',
+		url,
 		time: +new Date(),
 		words: Object.keys(song.wordCounts),
 		icy: song.icy,
@@ -79,7 +79,8 @@ export const useSnaps = () => {
 		})
 	}
 
-	const addSnap = (snap: Song) => setSnaps((data) => [...data, song2Snap(snap)])
+	const addSnap = (snap: Song, url: string) =>
+		setSnaps((data) => [...data, song2Snap(snap, url)])
 
 	return { snaps, addSnap, removeSnap }
 }
