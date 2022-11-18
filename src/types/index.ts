@@ -1,5 +1,6 @@
 import { EekeyState, EeOpt } from '../components/Home/Cvote/constants'
 import { Abyss } from './../config/index'
+
 export type SongMiss = {
 	icy: string
 	time: number
@@ -108,3 +109,5 @@ export type Event = {
 export type Yo = {
 	bookCount?: number
 }
+
+export type Snap = {}

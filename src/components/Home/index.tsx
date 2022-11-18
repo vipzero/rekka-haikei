@@ -10,7 +10,6 @@ import {
 	useSettingsCustomTheme,
 	useSettingsEe,
 	useSettingsFakeBar,
-	useSettingsShowEmol,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
 import AudioPlayer from './AudioPlayer'
@@ -36,7 +35,6 @@ type Props = {
 function Home({ song }: Props) {
 	const { theme, sideMode, lockBgNum, toggleSetting, ...s } = useSettings()
 	const { eeKey } = useSettingsEe()
-	const { showEmol } = useSettingsShowEmol()
 
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
@@ -92,7 +90,7 @@ function Home({ song }: Props) {
 
 				<ExtraComp sid={`${song.time}`} />
 				<RecentHistoryList />
-				{showEmol && <LyricsBox />}
+				{/* {showEmol && <LyricsBox />} */}
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>

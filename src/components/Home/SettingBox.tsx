@@ -19,6 +19,7 @@ import {
 	faTags,
 	faTimes,
 	faToolbox,
+	faPaperclip,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
@@ -67,7 +68,7 @@ function SettingBox({
 		downloadImg(url, song.icy)
 	}
 	const { addCount } = useBookCountDb(song.time)
-	const { showEmol, toggleEmol } = useSettingsShowEmol()
+	// const { showEmol, toggleEmol } = useSettingsShowEmol()
 
 	const book = () => {
 		if (!pressed) addCount()
@@ -157,7 +158,12 @@ function SettingBox({
 						{s.showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
-					<ToggleButton
+					<ConfButton onClick={s.closeSetting} className="close">
+						<FontAwesomeIcon icon={faPaperclip} />
+						{s.showHelp && 'スナップ'}
+					</ConfButton>
+
+					{/* <ToggleButton
 						checked={showEmol}
 						onClick={toggleEmol}
 						className="emol"
@@ -165,7 +171,7 @@ function SettingBox({
 						<FontAwesomeIcon icon={faIcons} />
 						<FontAwesomeIcon icon={showEmol ? faEye : faEyeSlash} />
 						{s.showHelp && `EMOL表示`}
-					</ToggleButton>
+					</ToggleButton> */}
 
 					<ToggleButton
 						checked={s.lockBgNum === 0}
@@ -267,7 +273,7 @@ const ButtonGrid = styled.div`
 		'tg bk bk cl'
 		'hi bk bk hl'
 		'bl bk bk tl'
-		'el dl dl tl';
+		'-- sn dl tl';
 	${`
 	.theme { grid-area: th; }
 	.half { grid-area: ha; }
@@ -281,7 +287,8 @@ const ButtonGrid = styled.div`
 	.books { grid-area: bl; }
 	.tool { grid-area: tl; }
 	.artw { grid-area: aw; }
-	.emol { grid-area: el; }
+	// .emol { grid-area: el; }
+	.snap { grid-area: sn; }
 	.download { grid-area: dl; }
 	button svg {
 		height: 1.1rem
