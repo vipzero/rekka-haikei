@@ -6,11 +6,12 @@ const { NODE_ENV } = process.env
 
 export const isDev = NODE_ENV === 'development'
 
-export const finishTime = +DateTime.local(2022, 8, 16, 0)
+export const finishTime = +DateTime.local(2022, 9, 25, 0)
 export const isEnd = () => +new Date() >= finishTime
 
 export const events: Event[] = [
-	{ id: '2022obon', label: '2022盆', current: true },
+	{ id: '2022silver', label: '2022SW', current: true },
+	{ id: '2022obon', label: '2022盆' },
 	{ id: '2022gw', label: '2022GW' },
 	{ id: '2021winter', label: '2021冬' },
 	{ id: '2021obon', label: '2021盆' },

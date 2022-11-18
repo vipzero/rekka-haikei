@@ -10,7 +10,7 @@
 		"rewrites": [
 			{
 				"source": "/",
-				"destination": "/2022obon/bg"
+				"destination": "/2022silver/bg"
 			}
 		],
 		"headers": [
