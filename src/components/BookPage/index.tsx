@@ -17,7 +17,7 @@ function Snaps() {
 	const { snaps, removeSnap } = useSnaps()
 
 	return (
-		<div>
+		<div style={{ display: 'flex', gap: '1rem' }}>
 			{snaps.map((snap, i) => (
 				<SnapReplica key={i} snap={snap} onDelete={() => removeSnap(i)} />
 			))}
