@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Snap } from '../../types'
+import { formatDate } from '../../util'
 
 type Props = {
 	snap: Snap
@@ -7,8 +8,10 @@ type Props = {
 }
 const hexAlpha = '80'
 // const hexAlpha = 'd0'
-export function SnapReplica({ snap }: Props) {
-	const grad = gradation[hourGrad(new Date(snap.time).getHours())]
+export function SnapReplica({ snap, onDelete }: Props) {
+	const time = new Date(snap.time)
+	const grad = gradation[hourGrad(time.getHours())]
+	const [icy1, icy2] = snap.icy.split(' - ')
 
 	return (
 		<Style
@@ -18,9 +21,14 @@ export function SnapReplica({ snap }: Props) {
 					.join(', ')}), url(${snap.url})`,
 			}}
 		>
-			<div>
+			<div className="texts">
 				<div className="sub">{snap.animeTitle}</div>
-				<div className="title">{snap.icy}</div>
+				<div className="title">{icy1}</div>
+				<div className="title">{icy2}</div>
+			</div>
+			<div className="hover-conf">
+				<button onClick={onDelete}>削除</button>
+				<div className="sub">{formatDate(+time)}</div>
 			</div>
 		</Style>
 	)
@@ -59,18 +67,36 @@ const Style = styled.div`
 	background-position: center center;
 	/* box-shadow: 0 -10px 20px 0px #000 inset; */
 	border-radius: 10px;
-	> div {
+
+	&:hover {
+		.hover-conf {
+			display: block;
+			background: #333333ff !important;
+		}
+		.texts {
+			display: none;
+		}
+	}
+	.hover-conf {
+		display: none;
+		padding: 4px;
+		button {
+			background: #949494;
+		}
+	}
+	.texts {
 		position: absolute;
 		width: 100%;
 		height: 100%;
 		padding: 4px;
+		display: grid;
+		grid-template-rows: 1fr max-content max-content;
 	}
 	.title {
 		font-size: 10px;
-		position: absolute;
-		bottom: 4px;
 		/* mix-blend-mode: overlay; */
 		color: white;
+		white-space: nowrap;
 	}
 	.sub {
 		color: #fefefe;
