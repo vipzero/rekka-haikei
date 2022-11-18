@@ -1,13 +1,27 @@
 import { useState } from 'react'
 import styled from 'styled-components'
+import { useSnaps } from '../../hooks/useFavorites'
 import { TabPanel, Tabs } from '../common/Tab'
 import { BookmarkList } from './BookmarkList'
+import { SnapReplica } from './SnapReplica'
 
 function Page() {
 	return (
 		<Wrap>
 			<CountTable />
 		</Wrap>
+	)
+}
+
+function Snaps() {
+	const { snaps, removeSnap } = useSnaps()
+
+	return (
+		<div>
+			{snaps.map((snap, i) => (
+				<SnapReplica key={i} snap={snap} onDelete={() => removeSnap(i)} />
+			))}
+		</div>
 	)
 }
 
@@ -20,6 +34,7 @@ function CountTable() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
+			<Snaps />
 
 			<Tabs items={[{ label: 'リスト' }]} onChange={setTab} />
 			<TabPanel value={tab} index={0}>

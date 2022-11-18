@@ -1,7 +1,15 @@
 const withImages = require('next-images')
-const withPWA = require('next-pwa')
 const withTM = require('next-transpile-modules')
 const runtimeCaching = require('next-pwa/cache')
+
+const withPWA = require('next-pwa')({
+	dest: 'public',
+	register: true,
+	skipWaiting: true,
+	runtimeCaching,
+	buildExcludes: [/middleware-manifest.json$/],
+	disable: process.env.NODE_ENV === 'development',
+})
 
 const transpileModules = [
 	'@fortawesome/free-regular-svg-icons',
@@ -9,10 +17,6 @@ const transpileModules = [
 ]
 
 const opt = {
-	reactStrictMode: true,
-	compiler: {
-		styledComponents: true,
-	},
 	// webpack(config) {
 	// 	config.module.rules.push({
 	// 		test: /\.(png|jpeg|jpg|gif|svg)$/,
@@ -23,17 +27,8 @@ const opt = {
 	// 			},
 	// 		},
 	// 	})
-
 	// 	return config
 	// },
-	pwa: {
-		dest: 'public',
-		register: true,
-		skipWaiting: true,
-		runtimeCaching,
-		buildExcludes: [/middleware-manifest.json$/],
-		disable: process.env.NODE_ENV === 'development',
-	},
 	// transpileModules,
 }
 

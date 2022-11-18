@@ -216,7 +216,7 @@ function SettingBox({
 					</div>
 				)}
 				<div className="footer">
-					<div style={{ display: 'flex' }}>
+					<div style={{ display: 'flex', gap: '8px' }}>
 						<a style={{ display: 'none' }} className="link-sao">
 							Logout
 						</a>

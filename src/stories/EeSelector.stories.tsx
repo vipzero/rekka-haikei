@@ -45,4 +45,7 @@ export default {
 const Template: ComponentStory<typeof EeSelector> = () => <EeSelector />
 
 export const Full = Template.bind({})
+Full.parameters = {
+	consoles: { hideNoControlsWarning: true },
+}
 Full.args = {}

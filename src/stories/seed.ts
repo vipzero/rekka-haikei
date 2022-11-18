@@ -1,4 +1,4 @@
-import { Song } from '../types'
+import { Snap, Song } from '../types'
 
 export const seedSong: Song = {
 	imageSearchWord: '普通の女子校生が【ろこどる】やってみた。',
@@ -24,3 +24,42 @@ export const seedSong: Song = {
 		{ count: 23, label: '[伊藤美来 (23回目)]', name: '伊藤美来' },
 	],
 }
+
+const jam = (s: string) => s.split('').reverse().join('')
+
+export const snaps: Snap[] = [
+	{
+		animeTitle: 'けものフレンズ',
+		url: jam('gpj.tluafedserxam/UNv_BcLdMkx/iv/moc.gmity.i//:sptth'),
+		time: 1668749891383,
+		words: [
+			'ぼくのフレンド(けものフレンズ　ED)',
+			'けものフレンズ',
+			'ぼくのフレンド',
+			'けものフレンズ　ED',
+			'みゆはん',
+		],
+		icy: 'みゆはん - ぼくのフレンド(けものフレンズ　ED)',
+	},
+	{
+		animeTitle: 'となりの吸血鬼さん',
+		url: jam(
+			'0002899431551?gpj.2d_1_54422/5/44/22/gmi/vk_emina/pj.en.omocod.erotsemina.1sc//:sptth'
+		),
+		time: 1668750409177,
+		words: [
+			'和氣あず未',
+			'となりの吸血鬼さん',
+			'富田美憂',
+			'Lynn',
+			'ソフィー',
+			'天野灯',
+			'トワイライト',
+			'夏木ひなた',
+			'HAPPY!! ストレンジフレンズ',
+			'エリー',
+			'篠原侑',
+		],
+		icy: 'ソフィー・トワイライト(CV.富田美憂)、天野灯(CV.篠原侑)、夏木ひなた(CV.Lynn)、エリー(CV.和氣あず未) - HAPPY!! ストレンジフレンズ ',
+	},
+]

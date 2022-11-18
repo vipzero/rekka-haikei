@@ -1,8 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React, { ComponentProps, useState } from 'react'
-import { RecoilRoot } from 'recoil'
-import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
-import { Tabs, Tab } from '../components/common/Tab'
+import { ComponentProps } from 'react'
+import { Tabs } from '../components/common/Tab'
 import { GlobalStyle } from '../config/init'
 import { Setting } from '../types'
 
