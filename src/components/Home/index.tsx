@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
 import { useEmolDb } from '../../hooks/useEmolDb'
-import { useFavorites } from '../../hooks/useFavorites'
+import { useFavorites, useSnaps } from '../../hooks/useFavorites'
 import { useLightConfig } from '../../hooks/useLightConfig'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import {
@@ -44,6 +44,7 @@ function Home({ song }: Props) {
 		song.trackTimeMillis ||
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
+	const { addSnap } = useSnaps()
 
 	const { moz, bre } = useLightConfig(song, () => toggleFavorites(song.icy))
 
@@ -84,6 +85,7 @@ function Home({ song }: Props) {
 					setStreamUrl={setStreamUrl}
 					favorited={books[song.icy]}
 					toggleFavorited={() => toggleFavorites(song.icy)}
+					addSnap={() => addSnap(song)}
 					favCount={Object.keys(books).length}
 					url={url}
 				/>

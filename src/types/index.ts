@@ -110,4 +110,10 @@ export type Yo = {
 	bookCount?: number
 }
 
-export type Snap = {}
+export type Snap = {
+	icy: string
+	words: string[]
+	animeTitle: string
+	url: string
+	time: number
+}

@@ -9,28 +9,23 @@ import {
 	faColumns,
 	faCompactDisc,
 	faHistory,
-	faIcons,
 	faLightbulb,
 	faLock,
 	faLockOpen,
 	faPalette,
+	faPaperclip,
 	faQuestion,
 	faStar as faStarFill,
 	faTags,
 	faTimes,
 	faToolbox,
-	faPaperclip,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { abyssColorsEx, allThemes, allThemesById } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
-import {
-	useSettings,
-	useSettingsEe,
-	useSettingsShowEmol,
-} from '../../hooks/useSettings'
+import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
@@ -41,6 +36,7 @@ import ToggleButton, { ConfButton } from './ToggleButton'
 type Props = {
 	favorited: boolean
 	toggleFavorited: () => void
+	addSnap: () => void
 	streamUrl: string
 	setStreamUrl: (_url: string) => void
 	favCount: number
@@ -51,6 +47,7 @@ type Props = {
 function SettingBox({
 	favorited,
 	toggleFavorited,
+	addSnap,
 	streamUrl,
 	setStreamUrl,
 	favCount,
@@ -61,7 +58,12 @@ function SettingBox({
 	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()
 	const [pressed, setPressed] = useState<boolean>(false)
-	useEffect(() => setPressed(false), [song.time])
+	const [snapped, setSnapped] = useState<boolean>(false)
+
+	useEffect(() => {
+		setPressed(false)
+		setSnapped(false)
+	}, [song.time])
 
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
@@ -74,6 +76,11 @@ function SettingBox({
 		if (!pressed) addCount()
 		setPressed(true)
 		toggleFavorited()
+	}
+	const snapping = () => {
+		if (snapped) return
+		setSnapped(true)
+		addSnap()
 	}
 
 	return (
@@ -158,11 +165,6 @@ function SettingBox({
 						{s.showHelp && `ブックマーク表示(${favCount})`}
 					</ToggleButton>
 
-					<ConfButton onClick={s.closeSetting} className="close">
-						<FontAwesomeIcon icon={faPaperclip} />
-						{s.showHelp && 'スナップ'}
-					</ConfButton>
-
 					{/* <ToggleButton
 						checked={showEmol}
 						onClick={toggleEmol}
@@ -188,6 +190,14 @@ function SettingBox({
 
 					<ConfButton onClick={handleDownload} className="download">
 						<DownloadButton url={url} filename={`${song.icy}.png`} />
+					</ConfButton>
+
+					<ConfButton onClick={snapping} className="snap">
+						<div className="tooltip">
+							<FontAwesomeIcon icon={faPaperclip} />
+							{s.showHelp && 'スナップ'}
+							<span className="tooltip-text">ブクマから確認できます</span>
+						</div>
 					</ConfButton>
 
 					<ToggleButton
@@ -255,7 +265,7 @@ const Wrap = styled.div`
 	}
 	color: black;
 	a {
-		margin: 4px 8px 4px 0;
+		margin: 4px 0;
 	}
 	.footer {
 		a,

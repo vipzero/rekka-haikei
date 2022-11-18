@@ -3,6 +3,7 @@ import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
 import { isEnd } from '../config'
 import { useEffect } from 'react'
+import { Snap, Song } from '../types'
 
 export function useSyncFavorite() {
 	const { favorites } = useFavorites()
@@ -28,6 +29,7 @@ export function useSyncFavorite() {
 
 export const useFavorites = () => {
 	const eid = useQeuryEid()
+
 	return useFavoritesBase(eid)
 }
 
@@ -55,4 +57,29 @@ export const useFavoritesBase = (eventId: string) => {
 		setFavortes,
 		toggleFavorites,
 	}
+}
+
+function song2Snap(song: Song): Snap {
+	return {
+		animeTitle: song.animeTitle || '',
+		url: song.imageLinks?.[0] || '',
+		time: +new Date(),
+		words: Object.keys(song.wordCounts),
+		icy: song.icy,
+	}
+}
+
+export const useSnaps = () => {
+	const [snaps, setSnaps] = useLocalStorage<Snap[]>(`snaps`, [])
+	const removeSnap = (i) => {
+		setSnaps((data) => {
+			const newSnaps = [...data]
+			newSnaps.splice(i, 1)
+			return newSnaps
+		})
+	}
+
+	const addSnap = (snap: Song) => setSnaps((data) => [...data, song2Snap(snap)])
+
+	return { snaps, addSnap, removeSnap }
 }
