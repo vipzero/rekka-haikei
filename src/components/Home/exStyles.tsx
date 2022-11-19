@@ -134,6 +134,24 @@ export const exStyles = css`
 	&[data-ex='patema'] {
 		transform: rotateX(180deg);
 	}
+	&[data-ex='shadow'] {
+		#panel {
+			box-shadow: 12px 12px 0 var(--panel-fo-shadow-color);
+		}
+		#panel,
+		[data-co] {
+			p,
+			a {
+				text-shadow: 4px 4px 0 #000, 1px 1px 1px var(--panel-fo-shadow-color),
+					-1px -1px 1px var(--panel-fo-shadow-color),
+					-1px 1px 1px var(--panel-fo-shadow-color),
+					1px -1px 1px var(--panel-fo-shadow-color);
+			}
+		}
+		button-grid-panel button {
+			box-shadow: 4px 4px;
+		}
+	}
 	&[data-ex='flip'] {
 		#bg {
 			transform: rotateY(180deg);

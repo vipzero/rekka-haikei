@@ -65,6 +65,9 @@ Lain.args = { setting: { ...setting, eeKey: 'lain' } }
 export const SteinsGate = Template.bind({})
 SteinsGate.args = { setting: { ...setting, eeKey: 'steinsgate' } }
 
+export const Shadow = Template.bind({})
+Shadow.args = { setting: { ...setting, eeKey: 'shadow' } }
+
 export const Toaru = Template.bind({})
 Toaru.args = { setting: { ...setting, eeKey: 'toaru' } }
 
