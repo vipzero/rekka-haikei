@@ -148,7 +148,7 @@ export const exStyles = css`
 					1px -1px 1px var(--panel-fo-shadow-color);
 			}
 		}
-		button-grid-panel button {
+		#button-grid-panel button {
 			box-shadow: 4px 4px;
 		}
 	}
