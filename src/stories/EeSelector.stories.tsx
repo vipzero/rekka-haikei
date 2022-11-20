@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react'
 import { RecoilRoot } from 'recoil'
 import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
 import Home from '../components/Home'
@@ -9,43 +9,26 @@ import { GlobalStyle } from '../config/init'
 export default {
 	title: 'EeSelector',
 	component: EeSelector,
-	argTypes: {
-		['setting.eeKey']: {
-			control: {
-				type: 'select',
-				options: eekeys,
-			},
-		},
-	},
 	decorators: [
 		(s) => (
 			<>
 				<GlobalStyle />
-				<RecoilRoot
-					initializeState={({ set }) => {
-						set(settingState, {
-							...setting,
-							ee: {
-								[eekeys[0]]: true,
-								[eekeys[2]]: true,
-								[eekeys[4]]: true,
-							},
-						})
-					}}
-				>
-					{s()}
-				</RecoilRoot>
+				{s()}
 			</>
 		),
 	],
 	parameters: {},
-	args: {},
 } as ComponentMeta<typeof Home>
+type Story = ComponentStoryObj<typeof EeSelector>
 
-const Template: ComponentStory<typeof EeSelector> = () => <EeSelector />
-
-export const Full = Template.bind({})
-Full.parameters = {
-	consoles: { hideNoControlsWarning: true },
+export const Full: Story = {
+	parameters: { consoles: { hideNoControlsWarning: true } },
+	args: {
+		comps: {
+			mia: true, // old
+			sakura: 1,
+			steinsgate: 2,
+		},
+		eeKey: 'flip'
+	},
 }
-Full.args = {}

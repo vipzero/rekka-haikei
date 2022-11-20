@@ -92,7 +92,7 @@ export type Setting = {
 	enableFakeBar: 'off' | 'on'
 	abyss: Abyss // fade change background color: ;
 	abyssEx: Abyss | null
-	ee: Record<string, true>
+	ee: Record<string, true | number>
 	eeKey: EekeyState
 	eeOpt: EeOpt
 	eeSim: boolean

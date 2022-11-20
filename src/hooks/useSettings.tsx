@@ -6,7 +6,7 @@ import {
 	EekeyState,
 	isExTheme,
 } from '../components/Home/Cvote/constants'
-import { Abyss, nextAbyss, normalThemes } from '../config'
+import { Abyss, EE_SEASON, nextAbyss, normalThemes } from '../config'
 import { Setting, ThemeId } from '../types'
 import { toggle, genToggle } from '../util'
 
@@ -122,7 +122,7 @@ export const useSettingsEe = () => {
 	const setAbyssEx = (abyssEx: Abyss | null) =>
 		setSetting((v) => ({ ...v, abyssEx }))
 	const openEekey = (eeKey: Eekey) =>
-		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: true } }))
+		setSetting((v) => ({ ...v, ee: { ...v.ee, [eeKey]: EE_SEASON } }))
 	const setEekey = (
 		eeKey: Eekey | false,
 		simulate = false,

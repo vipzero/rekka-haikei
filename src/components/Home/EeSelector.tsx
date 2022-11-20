@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
-import { Eekey, eekeyGroups } from './Cvote/constants'
+import { Eekey, eekeyGroups, EekeyState } from './Cvote/constants'
 
 type EeDot = {
 	get: boolean
@@ -20,17 +20,33 @@ const hint = (s: string, group: number) => {
 }
 const makeDot = (
 	key: Eekey,
-	comps: Record<string, true>,
+	comps: Record<string, undefined | true | number>,
 	hintGroup: number
 ): EeDot => {
-	const get = !!comps?.[key]
-	if (get) return { get, char: '*', key, label: key }
-	return { get, char: '-', key, label: hint(key, hintGroup) || '.' }
+	const get = comps?.[key]
+	if (get === 2) return { get: true, char: '#', key, label: key }
+	if (get) return { get: true, char: '*', key, label: key }
+	return { get: false, char: '-', key, label: hint(key, hintGroup) || '.' }
 }
 
-export const EeSelector = () => {
+export const EeSelectorConnected = () => {
 	const { ee: comps, eeKey, toggleEekeySimulate } = useSettingsEe()
 
+	return (
+		<EeSelector
+			comps={comps}
+			eeKey={eeKey}
+			toggleSimulate={toggleEekeySimulate}
+		/>
+	)
+}
+
+type Props = {
+	toggleSimulate: (key: Eekey) => void
+	eeKey: EekeyState
+	comps: Record<string, number | true>
+}
+export const EeSelector = ({ comps, eeKey, toggleSimulate }: Props) => {
 	const eeSawGroups = useMemo(
 		() => eekeyGroups.map((eeg, i) => eeg.map((key) => makeDot(key, comps, i))),
 		[comps]
@@ -49,7 +65,7 @@ export const EeSelector = () => {
 								data-active={b.key === eeKey}
 								onClick={() => {
 									if (!b.get) return
-									toggleEekeySimulate(b.key)
+									toggleSimulate(b.key)
 								}}
 							>
 								<span className="tooltip-text">{b.label}</span>
