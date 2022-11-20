@@ -1,8 +1,5 @@
 import { ComponentMeta, ComponentStoryObj } from '@storybook/react'
-import { RecoilRoot } from 'recoil'
-import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
 import Home from '../components/Home'
-import { eekeys } from '../components/Home/Cvote/constants'
 import { EeSelector } from '../components/Home/EeSelector'
 import { GlobalStyle } from '../config/init'
 
@@ -29,6 +26,6 @@ export const Full: Story = {
 			sakura: 1,
 			steinsgate: 2,
 		},
-		eeKey: 'flip'
+		eeKey: 'flip',
 	},
 }

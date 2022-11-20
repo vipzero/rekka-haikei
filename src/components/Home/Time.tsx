@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
-import { EeSelector } from './EeSelector'
+import { EeSelectorConnected } from './EeSelector'
 
 type Props = {
 	song: Song
@@ -111,7 +111,7 @@ const Time = ({ song }: Props) => {
 					<a href={`/${eid}/history?tab=2`}> (改善案募集)</a>
 				</div>
 			</div>
-			<EeSelector />
+			<EeSelectorConnected />
 		</Style>
 	)
 }
