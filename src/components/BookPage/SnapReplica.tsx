@@ -12,14 +12,18 @@ export function SnapReplica({ snap, onDelete }: Props) {
 	const time = new Date(snap.time)
 	const grad = gradation[hourGrad(time.getHours())]
 	const [icy1, icy2] = snap.icy.split(' - ')
+	const gradCss = `linear-gradient(135deg, ${grad
+		.map((c) => c + hexAlpha)
+		.join(', ')})`
 
 	return (
 		<Style
 			style={{
-				backgroundImage: `linear-gradient(135deg, ${grad
-					.map((c) => c + hexAlpha)
-					.join(', ')}), url(${snap.url})`,
+				// backgroundImage: `url(${snap.url})`,
+				backgroundImage: `${gradCss}, url(${snap.url})`,
+				borderImage: `linear-gradient(45deg, ${grad.join(', ')}) 1`,
 			}}
+			data-d={time.getDay()}
 		>
 			<div className="texts">
 				<div className="sub">{snap.animeTitle}</div>
@@ -66,7 +70,33 @@ const Style = styled.div`
 	background-size: cover;
 	background-position: center center;
 	/* box-shadow: 0 -10px 20px 0px #000 inset; */
-	border-radius: 10px;
+	/* border-bottom: solid 4px; */
+	/* border-radius: 10px; */
+
+	border-radius: 2px;
+	border-bottom: 4px;
+
+	&[data-d='0'] {
+	}
+	&[data-d='1'] {
+		border-left: 5px solid;
+	}
+	&[data-d='2'] {
+		border-bottom: 5px solid;
+	}
+	&[data-d='3'] {
+		border-radius: 20px;
+	}
+	&[data-d='4'] {
+		border: 2px solid;
+	}
+	&[data-d='5'] {
+		border-bottom: 5px;
+		border-radius: 12px 0;
+	}
+	&[data-d='6'] {
+		transform: skewX(-3deg);
+	}
 
 	&:hover {
 		.hover-conf {

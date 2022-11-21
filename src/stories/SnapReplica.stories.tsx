@@ -33,29 +33,49 @@ Snap1.args = {
 	snap: snaps[0],
 }
 
-export const Snap2 = Template.bind({})
-Snap2.args = {
-	snap: snaps[1],
+export const Snap2 = {
+	args: {
+		snap: snaps[1],
+	},
 }
 
-const Cols = {}
+const Cols: Record<string, unknown> = {}
+const hour = 60 * 60 * 1000
+const day = 24 * hour
 
 range(24).forEach((v) => {
-	const Col = Template.bind({})
-	Col.args = {
-		snap: { ...snaps[1], animeTitle: `${v}時`, time: (v - 9) * 60 * 60 * 1000 },
+	Cols[`Hour${v}`] = {
+		args: {
+			snap: { ...snaps[1], animeTitle: `${v}時`, time: (v - 9) * hour },
+		},
 	}
-	Cols[`Hour${v}`] = Col
 })
 
-export const Cols0 = Cols['Hour0']
-export const Cols3 = Cols['Hour3']
-export const Cols6 = Cols['Hour6']
-export const Cols9 = Cols['Hour9']
-export const Cols12 = Cols['Hour12']
-export const Cols15 = Cols['Hour15']
-export const Cols18 = Cols['Hour18']
-export const Cols21 = Cols['Hour21']
+range(7).forEach((v) => {
+	Cols[`Day${v}`] = {
+		args: {
+			snap: { ...snaps[1], animeTitle: `${v}曜`, time: (v + 3) * day },
+		},
+	}
+})
+
+export const {
+	Hour0,
+	Hour3,
+	Hour6,
+	Hour9,
+	Hour12,
+	Hour15,
+	Hour18,
+	Hour21,
+	Day0,
+	Day1,
+	Day2,
+	Day3,
+	Day4,
+	Day5,
+	Day6,
+} = Cols
 
 // export const Col1 = Template.bind({})
 // Col1.args = {
