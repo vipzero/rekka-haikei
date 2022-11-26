@@ -4,6 +4,8 @@ import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2022-12-01:01': 'feat レプリカ機能',
+	'2022-12-01:00': 'anno 投票数リセット',
 	'2022-05-07:15': 'enha コピー目印',
 	'2022-05-07:12': 'feat スケジュールテキスト生成',
 	'2022-05-05:23': 'enha 履歴検索高速化',
