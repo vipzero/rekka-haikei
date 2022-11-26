@@ -45,8 +45,8 @@ const HIDE_MODE = 'hide'
 const modes = [TOTL_MODE, PLUS_MODE, HIDE_MODE] as const
 type Mode = typeof modes[number]
 const modeLabel: Record<Mode, string> = {
+	plus: '投票',
 	totl: '投票(合計)',
-	plus: '投票(差分)',
 	hide: '投票を開く',
 }
 
