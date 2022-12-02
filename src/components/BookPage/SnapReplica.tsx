@@ -6,25 +6,33 @@ type Props = {
 	snap: Snap
 	onDelete: () => void
 }
-const hexAlpha = '80'
+// const hexAlpha = ''
+// const hexAlpha = '80'
 // const hexAlpha = 'd0'
 export function SnapReplica({ snap, onDelete }: Props) {
 	const time = new Date(snap.time)
 	const grad = gradation[hourGrad(time.getHours())]
 	const [icy1, icy2] = snap.icy.split(' - ')
 	const gradCss = `linear-gradient(135deg, ${grad
-		.map((c) => c + hexAlpha)
+		// .map((c) => c + hexAlpha)
 		.join(', ')})`
 
 	return (
 		<Style
+			data-d={time.getDay()}
 			style={{
-				// backgroundImage: `url(${snap.url})`,
-				backgroundImage: `${gradCss}, url(${snap.url})`,
 				borderImage: `linear-gradient(45deg, ${grad.join(', ')}) 1`,
 			}}
-			data-d={time.getDay()}
 		>
+			<div
+				className="img"
+				style={{
+					// backgroundImage: `url(${snap.url})`,
+					backgroundImage: `url(${snap.url})`,
+				}}
+			/>
+			<div className="pattern" />
+			<div className="color" style={{ backgroundImage: `${gradCss}` }} />
 			<div className="texts">
 				<div className="sub">{snap.animeTitle}</div>
 				<div className="title">{icy1}</div>
@@ -67,14 +75,46 @@ const Style = styled.div`
 	position: relative;
 	width: 200px;
 	aspect-ratio: 1.618 / 1;
-	background-size: cover;
-	background-position: center center;
 	/* box-shadow: 0 -10px 20px 0px #000 inset; */
 	/* border-bottom: solid 4px; */
 	/* border-radius: 10px; */
 
 	border-radius: 2px;
 	border-bottom: 4px;
+	overflow: hidden;
+
+	.img {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: center center;
+	}
+	.pattern {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: repeating-radial-gradient(
+			circle at -150% -25%,
+			#fff,
+			#777 3px,
+			#fff 3px
+		);
+		background-position: 50% 50%;
+		background-size: 120% 120%;
+		mix-blend-mode: color-dodge;
+		opacity: 0.3;
+	}
+	.color {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-position: 50% 50%;
+		/* background-size: 200% 200%; */
+		mix-blend-mode: multiply;
+		opacity: 40%;
+	}
 
 	&[data-d='0'] {
 	}
