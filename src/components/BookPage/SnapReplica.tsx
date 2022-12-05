@@ -95,14 +95,6 @@ const Style = styled.div`
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		background: repeating-radial-gradient(
-			circle at -150% -25%,
-			#fff,
-			#777 3px,
-			#fff 3px
-		);
-		background-position: 50% 50%;
-		background-size: 120% 120%;
 		mix-blend-mode: color-dodge;
 		opacity: 0.3;
 	}
@@ -120,12 +112,54 @@ const Style = styled.div`
 	}
 	&[data-d='1'] {
 		border-left: 5px solid;
+		.pattern {
+			background: repeating-radial-gradient(
+				circle at -150% -25%,
+				#fff,
+				#777 3px,
+				#fff 3px
+			);
+			background-position: 50% 50%;
+			background-size: 120% 120%;
+		}
 	}
 	&[data-d='2'] {
 		border-bottom: 5px solid;
+		.pattern {
+			background-color: #888;
+			background-image: linear-gradient(
+					45deg,
+					#444 25%,
+					transparent 25%,
+					transparent 75%,
+					#444 75%,
+					#444
+				),
+				linear-gradient(
+					45deg,
+					#444 25%,
+					transparent 25%,
+					transparent 75%,
+					#444 75%,
+					#444
+				);
+			background-position: 0 0, 25px 25px;
+			--cw: 10px;
+			background-size: var(--cw) var(--cw);
+		}
 	}
 	&[data-d='3'] {
 		border-radius: 20px;
+		.pattern {
+			background-color: #fff;
+			background-image: radial-gradient(#777 20%, #12060640 20%),
+				radial-gradient(#777 20%, #12060640 20%);
+			/* background-size: 8px 8px;
+			background-position: 0 0, 4px 4px; */
+			--cw: 20px;
+			background-size: var(--cw) var(--cw);
+			background-position: 0 0, calc(var(--cw) / 2) calc(var(--cw) / 2);
+		}
 	}
 	&[data-d='4'] {
 		border: 2px solid;
@@ -133,9 +167,56 @@ const Style = styled.div`
 	&[data-d='5'] {
 		border-bottom: 5px;
 		border-radius: 12px 0;
+		.pattern {
+			background-color: #fff;
+			--bc: rgba(0, 0, 0, 0.74);
+			background-image: linear-gradient(
+					-45deg,
+					var(--bc) 25%,
+					transparent 25%,
+					transparent 50%,
+					var(--bc) 50%,
+					var(--bc) 75%,
+					transparent 75%,
+					transparent 100%
+				),
+				linear-gradient(
+					45deg,
+					var(--bc) 25%,
+					transparent 25%,
+					transparent 50%,
+					var(--bc) 50%,
+					var(--bc) 75%,
+					transparent 75%,
+					transparent 100%
+				);
+			--cw: 34px;
+			background-size: var(--cw) var(--cw);
+		}
 	}
 	&[data-d='6'] {
 		transform: skewX(-3deg);
+		.pattern {
+			background-color: #888;
+			background-image: linear-gradient(
+					45deg,
+					#444 25%,
+					transparent 25%,
+					transparent 75%,
+					#444 75%,
+					#444
+				),
+				linear-gradient(
+					-45deg,
+					#444 25%,
+					transparent 25%,
+					transparent 75%,
+					#444 75%,
+					#444
+				);
+			--cw: 20px;
+			background-size: var(--cw) var(--cw);
+		}
 	}
 
 	&:hover {
