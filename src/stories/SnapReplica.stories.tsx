@@ -40,7 +40,8 @@ export const Snap2 = {
 }
 
 const Cols: Record<string, unknown> = {}
-const hour = 60 * 60 * 1000
+const min = 60 * 1000
+const hour = 60 * min
 const day = 24 * hour
 
 range(24).forEach((v) => {
@@ -55,6 +56,14 @@ range(7).forEach((v) => {
 	Cols[`Day${v}`] = {
 		args: {
 			snap: { ...snaps[1], animeTitle: `${v}曜`, time: (v + 3) * day },
+		},
+	}
+})
+
+range(10).forEach((v) => {
+	Cols[`Min${v}`] = {
+		args: {
+			snap: { ...snaps[0], animeTitle: `${v}Min`, time: v * min },
 		},
 	}
 })
@@ -75,6 +84,16 @@ export const {
 	Day4,
 	Day5,
 	Day6,
+	Min0,
+	Min1,
+	Min2,
+	Min3,
+	Min4,
+	Min5,
+	Min6,
+	Min7,
+	Min8,
+	Min9,
 } = Cols
 
 // export const Col1 = Template.bind({})
