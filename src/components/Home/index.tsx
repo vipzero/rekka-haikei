@@ -22,6 +22,7 @@ import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
 import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
+import TrackTimeBitBar from './TrackTimeBitBar'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
 	wide: 'center',
@@ -73,7 +74,11 @@ function Home({ song }: Props) {
 				changedUrl={setUrl}
 				px={sideMap[sideMode] || 'center'}
 			/>
-			<TrackTimeBar startTime={song.time} size={timeBarSize} />
+			{eeKey && eeKey === 'subetef' ? (
+				<TrackTimeBitBar startTime={song.time} size={timeBarSize} />
+			) : (
+				<TrackTimeBar startTime={song.time} size={timeBarSize} />
+			)}
 			<Wrap data-side={sideMode}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>

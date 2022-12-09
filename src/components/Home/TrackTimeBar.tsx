@@ -1,28 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { between } from '../../util'
+import { useTimeBar } from '../../hooks/useTimeBar'
 
 type Props = {
 	startTime: number
 	size?: number
-}
-const useTimeBar = (startTime: number, size?: number) => {
-	const [p, setP] = useState<number>(0)
-
-	useEffect(() => {
-		if (!size) return
-		setP(0)
-		const t = setInterval(() => {
-			const newP = (Date.now() - startTime) / size
-
-			setP(between(newP, 0, 1))
-		}, 1000)
-
-		return () => {
-			clearInterval(t)
-		}
-	}, [startTime, size])
-	return [p] as const
 }
 
 function TrackTimeBar({ startTime, size }: Props) {

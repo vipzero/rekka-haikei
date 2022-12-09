@@ -13,6 +13,7 @@ export const eekeysGimic = [
 	'rain',
 	'rainbow',
 	'gaming',
+	'subetef',
 
 	'gkgurashi',
 	'issyuukanfr',
@@ -98,6 +99,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['Steins;Gate', 'steinsgate'],
 	['五等分の花嫁', 'gotoyome'],
 	['俺の妹がこんなに', 'oreimo'],
+	['すべてがFになる', 'subetef'],
 	['やはり俺の青春ラブコメは', 'oregairu'],
 	['冴えない彼女の育てかた', 'saekano'],
 	[/[化猫傷偽終暦憑]物語/, 'monogatari'],

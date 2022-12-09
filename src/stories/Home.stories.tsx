@@ -100,6 +100,9 @@ Shani.args = { setting: { ...setting, eeKey: 'shanimas' } }
 export const Delemas = Template.bind({})
 Delemas.args = { setting: { ...setting, eeKey: 'imascd' } }
 
+export const Shiki = Template.bind({})
+Shiki.args = { setting: { ...setting, eeKey: 'subetef' } }
+
 export const ThemeClear = Template.bind({})
 ThemeClear.args = { setting: { ...setting, theme: 0 } }
 
