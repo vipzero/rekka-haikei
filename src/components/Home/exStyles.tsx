@@ -316,6 +316,15 @@ export const exStyles = css`
 		}
 	}
 
+	@keyframes blink {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+
 	@keyframes skipping {
 		0% {
 			transform: translate(0%) rotateY(-90deg);
