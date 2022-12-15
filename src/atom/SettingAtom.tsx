@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+import { storageKeys } from '../config'
 import { Setting } from '../types'
 
 const defaultCustomTheme = `
@@ -76,7 +77,7 @@ const localStorageEffect =
 	}
 
 export const settingState = atom<Setting>({
-	key: 'setting',
+	key: storageKeys.setting,
 	default: defaultSetting,
-	effects: [localStorageEffect('setting')],
+	effects: [localStorageEffect(storageKeys.setting)],
 })

@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { storageKeys } from '../config'
+import { Setting } from '../types'
 import { useLocalStorage } from './useLocalStorage'
 
 export function useStart() {
@@ -9,6 +11,10 @@ export function useStart() {
 	}, [])
 	return migReady
 }
+const getSettingsStorage = () =>
+	JSON.parse(localStorage.getItem(storageKeys.setting) || '{}')
+const setSettingsStorage = (v: Partial<Setting>) =>
+	localStorage.setItem(storageKeys.setting, JSON.stringify(v))
 
 function useMigration() {
 	const [v, setV] = useLocalStorage<number>('version', 0)
@@ -33,7 +39,19 @@ function useMigration() {
 			delete v['2021winter']
 			localStorage.setItem('hists_v2', JSON.stringify(v))
 		}
-		setV(7)
+		if (v < 8) {
+			const settings = getSettingsStorage() as Partial<Setting>
+			const ee: Record<string, number> = {}
+			Object.entries(settings.ee || {}).forEach(([k, v]) => {
+				ee[k] = v === true ? 1 : v
+			})
+			if (ee.patema) ee.sakasa = 1
+
+			delete ee.patema
+
+			setSettingsStorage({ ...settings, ee })
+		}
+		setV(8)
 		setReady(true)
 	}, [])
 	return ready

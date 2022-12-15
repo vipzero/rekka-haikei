@@ -66,7 +66,7 @@ export const SteinsGate = Template.bind({})
 SteinsGate.args = { setting: { ...setting, eeKey: 'steinsgate' } }
 
 export const Shadow = Template.bind({})
-Shadow.args = { setting: { ...setting, eeKey: 'shadow' } }
+Shadow.args = { setting: { ...setting, eeKey: 'susu' } }
 
 export const Toaru = Template.bind({})
 Toaru.args = { setting: { ...setting, eeKey: 'toaru' } }
@@ -80,7 +80,7 @@ Psychopass.args = { setting: { ...setting, eeKey: 'psychopass' } }
 
 export const Patema = Template.bind({})
 
-Patema.args = { setting: { ...setting, eeKey: 'patema' } }
+Patema.args = { setting: { ...setting, eeKey: 'sakasa' } }
 
 export const Sao = Template.bind({})
 

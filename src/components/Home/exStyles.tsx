@@ -131,10 +131,10 @@ export const exStyles = css`
 
 		${randAnimsCss}
 	}
-	&[data-ex='patema'] {
+	&[data-ex='sakasa'] {
 		transform: rotateX(180deg);
 	}
-	&[data-ex='shadow'] {
+	&[data-ex='susu'] {
 		#panel {
 			box-shadow: 12px 12px 0 var(--panel-fo-shadow-color);
 		}

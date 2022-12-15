@@ -20,6 +20,9 @@ export const events: Event[] = [
 ]
 export const EE_SEASON = 2
 export const currentEvent = events.find((v) => v.current)
+export const storageKeys = {
+	setting: 'setting',
+}
 
 const config = {
 	isDev,
