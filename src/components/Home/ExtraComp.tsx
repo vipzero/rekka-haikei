@@ -69,20 +69,6 @@ export const Lain = createGlobalStyle<{ r: number }>`
 } */
 `
 
-function SteinsBg() {
-	return (
-		<>
-			<div id="cog-box">
-				{/* <div id="cog1" className="cog" /> */}
-				<div id="cog2" className="cog" />
-				<div id="cog3" className="cog" />
-				<div id="cog4" className="cog" />
-				<div id="cog5" className="cog" />
-			</div>
-		</>
-	)
-}
-
 const workLinks: ([string] | [string, string])[] = [
 	[
 		'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/koyou_roudou/koyou/hellowork.html',
@@ -109,7 +95,6 @@ const RainEx = () => {
 
 function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 	if (eeKey === 'steinsgate') {
-		return <SteinsBg />
 	} else if (eeKey === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
 	} else if (eeKey === 'mia') {

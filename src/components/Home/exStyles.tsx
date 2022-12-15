@@ -433,66 +433,6 @@ export const exStyles = css`
 			background: transparent;
 		}
 	}
-	#cog-box {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		overflow: hidden;
-		opacity: 0;
-		animation: appear-anim 1s linear ${animStart}s both;
-		z-index: -3;
-	}
-	.cog {
-		position: absolute;
-
-		/* border: solid 1px black; */
-		background: url(/static/cog.svg);
-		pointer-events: none;
-		opacity: 0.7;
-
-		&#cog1 {
-			width: 400vmax;
-			height: 400vmax;
-			top: -40vmax;
-			left: -140vmax;
-			animation: cog-spin 300s linear infinite;
-			opacity: 1;
-		}
-		&#cog2 {
-			width: 40vmax;
-			height: 40vmax;
-			top: -10vmax;
-			right: -20vmax;
-			animation: cog-spin 10s ease-in-out infinite;
-			background: url(/static/cog2.svg);
-		}
-		&#cog3 {
-			width: 100vmax;
-			height: 100vmax;
-			top: -80vmax;
-			left: 0vmax;
-			animation: cog-spin 100s linear infinite;
-			background: url(/static/cog2.svg);
-		}
-		&#cog4 {
-			width: 100vmax;
-			height: 100vmax;
-			top: 50vmax;
-			left: -50vmax;
-			animation: cog-spin 100s ease-in-out infinite;
-			background: url(/static/cog3.svg);
-		}
-		&#cog5 {
-			width: 150vmax;
-			height: 150vmax;
-			top: 25vmax;
-			left: -75vmax;
-			animation: cog-spin 50s linear infinite reverse;
-			background: url(/static/cog3.svg);
-		}
-	}
 
 	@keyframes appear-anim {
 		0% {
@@ -508,19 +448,6 @@ export const exStyles = css`
 		}
 		100% {
 			opacity: 0.9;
-		}
-	}
-	@keyframes cog-spin {
-		0% {
-			opacity: 0.3;
-			transform: rotate(0deg);
-		}
-		50% {
-			opacity: 0.8;
-		}
-		100% {
-			opacity: 0.3;
-			transform: rotate(-360deg);
 		}
 	}
 
