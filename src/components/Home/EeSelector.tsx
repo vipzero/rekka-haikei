@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
+import { Setting } from '../../types'
 import { Eekey, eekeyGroups, EekeyState } from './Cvote/constants'
 
 type EeDot = {
@@ -20,7 +21,7 @@ const hint = (s: string, group: number) => {
 }
 const makeDot = (
 	key: Eekey,
-	comps: Record<string, undefined | true | number>,
+	comps: Setting['ee'],
 	hintGroup: number
 ): EeDot => {
 	const get = comps?.[key]
@@ -44,7 +45,7 @@ export const EeSelectorConnected = () => {
 type Props = {
 	toggleSimulate: (key: Eekey) => void
 	eeKey: EekeyState
-	comps: Record<string, number | true>
+	comps: Setting['ee']
 }
 export const EeSelector = ({ comps, eeKey, toggleSimulate }: Props) => {
 	const eeSawGroups = useMemo(

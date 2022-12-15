@@ -135,7 +135,7 @@ export const useSettingsEe = () => {
 		setSetting((v) => ({ ...v, eeKey, eeSim: simulate, eeOpt: eeOpt }))
 
 		if (eeKey === false) return
-		openEekey(eeKey)
+		if (!simulate) openEekey(eeKey)
 
 		if (simulate && isExTheme(eeKey)) {
 			setTheme(eeKey)
