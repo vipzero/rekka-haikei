@@ -77,13 +77,14 @@ function SettingBox({
 		if (!pressed) addCount()
 		setPressed(true)
 		toggleFavorited()
+		toast.success('ブックマークしました', {})
 	}
 	const snapping = () => {
 		if (snapped) return
 		setSnapped(true)
 		addSnap()
 
-		toast('スナップ保存しました', {})
+		toast.success('スナップ保存しました', {})
 	}
 
 	return (
@@ -195,7 +196,11 @@ function SettingBox({
 						<DownloadButton url={url} filename={`${song.icy}.png`} />
 					</ConfButton>
 
-					<ConfButton onClick={snapping} className="snap">
+					<ConfButton
+						data-checked={snapped}
+						onClick={snapping}
+						className="snap"
+					>
 						<div className="tooltip">
 							<FontAwesomeIcon icon={faPaperclip} />
 							{s.showHelp && 'スナップ'}
