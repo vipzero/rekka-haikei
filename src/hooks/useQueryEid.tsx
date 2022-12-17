@@ -1,6 +1,6 @@
 import { useRouter } from 'next/dist/client/router'
 import { ParsedUrlQuery } from 'querystring'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import config from '../config'
 
 export function useQeuryEid() {

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, useEffect } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 
 export function useLocalStorage<T = unknown>(
 	key: string,

@@ -1,5 +1,5 @@
 import copy from 'copy-to-clipboard'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useScheduleDb } from '../../hooks/useHistoryDb'
 import { CopyButton } from '../BookPage/CopyButton'
 import { TabPanel, Tabs } from '../common/Tab'

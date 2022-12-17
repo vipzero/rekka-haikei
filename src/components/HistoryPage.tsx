@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import copy from 'copy-to-clipboard'
-import { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import safe from 'safe-regex'
 import styled from 'styled-components'

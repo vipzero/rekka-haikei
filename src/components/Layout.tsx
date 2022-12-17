@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import styled from 'styled-components'
 import { GlobalStyle } from '../config/init'
 

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { AnaVotes, AnimeVotes, useCvoteDb } from './useCvoteDb'
 

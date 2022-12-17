@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { ScheduleRow } from '../../hooks/useHistoryDb'
 import { formatYmdSlash } from '../../util'
 

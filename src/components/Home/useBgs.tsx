@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { imgCheck } from '../../util'
 
 async function enableUrl(urls: string[]) {

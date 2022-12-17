@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { History, HistoryRaw } from '../types'
 import { useQeuryEid } from './useQueryEid'
 import { readRecentHistory } from '../../service/firebase'

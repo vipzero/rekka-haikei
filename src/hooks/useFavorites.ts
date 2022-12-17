@@ -2,7 +2,7 @@ import { incFavoritesAll } from '../../service/firebase'
 import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
 import { isEnd } from '../config'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Snap, Song } from '../types'
 
 export function useSyncFavorite() {

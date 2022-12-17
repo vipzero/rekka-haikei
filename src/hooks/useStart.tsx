@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { storageKeys } from '../config'
 import { Setting } from '../types'
 import { useLocalStorage } from './useLocalStorage'
@@ -42,7 +42,9 @@ function useMigration() {
 		if (v < 8) {
 			const settings = getSettingsStorage() as Partial<Setting>
 			const ee: Record<string, number> = {}
-			Object.entries(settings.ee || {}).forEach(([k, v]) => {
+			Object.entries(
+				(settings.ee as Record<string, true | number> | undefined) || {}
+			).forEach(([k, v]) => {
 				ee[k] = v === true ? 1 : v
 			})
 			if (ee.patema) ee.sakasa = 1

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { readCvote, voteChar } from '../../../../service/firebase'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 

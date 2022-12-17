@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { sugarOn } from '../config'
 import { getIp, makeHash } from '../util'
 
