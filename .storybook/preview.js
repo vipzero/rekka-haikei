@@ -1,4 +1,6 @@
 import { RouterContext } from 'next/dist/shared/lib/router-context' // next 12
+import 'react-toastify/dist/ReactToastify.css'
+
 export const parameters = {
 	actions: { argTypesRegex: '^on[A-Z].*' },
 	controls: {

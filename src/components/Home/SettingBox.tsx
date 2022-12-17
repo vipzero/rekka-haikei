@@ -32,6 +32,7 @@ import { downloadImg } from '../../util'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 import ToggleButton, { ConfButton } from './ToggleButton'
+import { toast } from 'react-toastify'
 
 type Props = {
 	favorited: boolean
@@ -81,6 +82,8 @@ function SettingBox({
 		if (snapped) return
 		setSnapped(true)
 		addSnap()
+
+		toast('スナップ保存しました', {})
 	}
 
 	return (

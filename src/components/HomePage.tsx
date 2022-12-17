@@ -1,10 +1,12 @@
 import Head from 'next/head'
+import React from 'react'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
 import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Home from './Home'
+import { Toast } from './Toast'
 
 const LoadingView = () => (
 	<div>
@@ -35,6 +37,7 @@ function HomePageBase() {
 				<meta name="theme-color" content={abyss} />
 			</Head>
 			<style>{customTheme}</style>
+			<Toast />
 			<Home song={song} />
 		</>
 	)

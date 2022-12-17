@@ -1,5 +1,7 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import React from 'react'
+import 'react-toastify/dist/ReactToastify.css'
 
 const APP_NAME = 'rekka haikei'
 const APP_DESCRIPTION = 'music stream'
