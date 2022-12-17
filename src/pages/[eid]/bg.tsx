@@ -3,6 +3,7 @@ import ErrorBoundary from '../../components/ErrorBoundary'
 import Layout from '../../components/Layout'
 import { events } from '../../config'
 import { ProtectFlash } from '../../config/init'
+import { SvgFilters } from '../../config/SvgFilters'
 
 const HomeDynamic = dynamic(async () => import('../../components/HomePage'), {
 	ssr: false,
@@ -13,6 +14,7 @@ const HomePage = () => {
 			<ErrorBoundary>
 				<HomeDynamic />
 			</ErrorBoundary>
+			<SvgFilters />
 			<ProtectFlash />
 		</Layout>
 	)

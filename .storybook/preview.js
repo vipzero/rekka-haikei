@@ -15,4 +15,5 @@ export const parameters = {
 		push() {}, // defaults to using addon actions integration,
 		//   can override any method in the router
 	},
+	layout: 'fullscreen',
 }

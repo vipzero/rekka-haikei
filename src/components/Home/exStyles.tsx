@@ -135,8 +135,11 @@ export const exStyles = css`
 		transform: rotateX(180deg);
 	}
 	&[data-ex='susu'] {
-		#panel {
-			box-shadow: 12px 12px 0 var(--panel-fo-shadow-color);
+		#panel-shadow {
+			display: block;
+			box-shadow: 0 0 20px 12px var(--panel-fo-shadow-color);
+			filter: url(#wavy) blur(1px);
+			margin: -20px;
 		}
 		#panel,
 		[data-co] {
@@ -147,9 +150,6 @@ export const exStyles = css`
 					-1px 1px 1px var(--panel-fo-shadow-color),
 					1px -1px 1px var(--panel-fo-shadow-color);
 			}
-		}
-		#button-grid-panel button {
-			box-shadow: 4px 4px;
 		}
 	}
 	&[data-ex='flip'] {

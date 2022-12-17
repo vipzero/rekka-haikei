@@ -1,10 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React, { ComponentProps, useEffect } from 'react'
+import { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
-import { defaultSetting as setting, settingState } from '../atom/SettingAtom'
+import { defaultSetting as setting } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { eekeys } from '../components/Home/Cvote/constants'
 import { GlobalStyle } from '../config/init'
+import { SvgFilters } from '../config/SvgFilters'
 import { useSettings } from '../hooks/useSettings'
 import { Setting } from '../types'
 import { seedSong as song } from './seed'
@@ -35,7 +36,10 @@ export default {
 		(s) => (
 			<>
 				<GlobalStyle />
-				<RecoilRoot>{s()}</RecoilRoot>
+				<SvgFilters />
+				<RecoilRoot>
+					<div style={{}}>{s()}</div>
+				</RecoilRoot>
 			</>
 		),
 	],

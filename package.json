@@ -21,6 +21,7 @@
 		"react-audio-player": "0.17.0",
 		"react-dom": "18.2.0",
 		"react-transition-group": "4.4.5",
+		"react-use": "^17.4.0",
 		"recoil": "0.7.6",
 		"rooks": "5.14.1",
 		"safe-regex": "2.1.1",

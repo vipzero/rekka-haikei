@@ -6,6 +6,7 @@ import { isSongFull, Song } from '../../types'
 import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
 import { useSettings } from '../../hooks/useSettings'
 import BookCount from './BookCount'
+import { useMeasure } from 'react-use'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -30,6 +31,7 @@ function SongInfo({ song }: Props) {
 
 	return (
 		<Wrap id="panel">
+			<div id="panel-shadow" />
 			<p className="titles">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
@@ -125,9 +127,20 @@ function SongInfo({ song }: Props) {
 }
 
 const Wrap = styled.div`
+	position: relative;
+
 	background-color: var(--content-bg-color);
 	padding: 12px;
 	border-radius: 4px;
+	#panel-shadow {
+		// ee
+		display: none;
+		width: 100%;
+		height: 100%;
+		margin: -12px;
+		box-sizing: content-box;
+		position: absolute;
+	}
 	.details {
 		p {
 			padding-top: 4px;
