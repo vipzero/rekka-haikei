@@ -91,7 +91,7 @@ function SettingBox({
 		<Wrap
 			data-theme={s.theme}
 			id="setting-box"
-			data-visible={s.visible}
+			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>

@@ -73,8 +73,8 @@ const Style = styled.button`
 	&[data-checked='true'] {
 		background: var(--btn-bg-checked-color) !important;
 		svg {
-			/* animation: var(--animation-slide-in-up) 1s; */
-			animation: var(--animation-blink);
+			animation: var(--animation-bounce);
+			animation-iteration-count: 1;
 		}
 	}
 `

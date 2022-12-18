@@ -28,6 +28,8 @@ class NextDocument extends Document {
 						crossOrigin="anonymous"
 						referrerPolicy="no-referrer"
 					/>
+					<link rel="stylesheet" href="https://unpkg.com/open-props" />
+
 					<link
 						rel="stylesheet"
 						href="https://unpkg.com/open-props/animations.min.css"

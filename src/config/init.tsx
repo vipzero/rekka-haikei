@@ -54,6 +54,8 @@ a {
 `
 
 export const GlobalStyle = createGlobalStyle`
+@import "open-props/style";
+@import "open-props/animations";
 
 html {
   height: 100%;

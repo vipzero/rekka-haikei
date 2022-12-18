@@ -155,29 +155,11 @@ const Container = styled.div`
 
 			&[data-voted='true'] {
 				border-style: double;
-				animation: bound-anim 1s;
+				animation: var(--animation-bounce) 1s;
 			}
 			&[data-voted='false'] {
 				margin: 3px;
 				border-style: solid !important;
-			}
-
-			@keyframes bound-anim {
-				0%,
-				100% {
-					transform: scale(1), translateY(0);
-				}
-				30% {
-					top: -60%;
-					transform: scale(0.96, 1.04) translateY(-20px);
-				}
-				60% {
-					transform: scale(1);
-				}
-				90% {
-					top: 0;
-					transform: scale(1.15, 0.9);
-				}
 			}
 		}
 	}

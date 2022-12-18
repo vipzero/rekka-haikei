@@ -11,14 +11,6 @@ const toPar100 = (i, total) => Math.round((100 / (total - 1)) * i)
 const makeAnim = (key: string, vals: string[]) =>
 	vals.map((v, i) => `${toPar100(i, vals.length)}% { ${key}: ${v}}`).join('\n')
 
-const spin = keyframes`
-0% {
-	transform: rotate(0deg);
-}
-100% {
-	transform: rotate(360deg);
-}
-`
 const fontInflare = keyframes`
 0% {
 	font-size: 1vw;
@@ -110,7 +102,7 @@ export const exStyles = css`
 
 				#kokaku-pointer {
 					pointer-events: none;
-					animation: ${spin} 10s linear infinite;
+					animation: spin 10s linear infinite;
 				}
 			}
 		}
@@ -167,7 +159,7 @@ export const exStyles = css`
 	}
 	&[data-ex='spin'] {
 		.album img {
-			animation: ${spin} 5s linear infinite;
+			animation: spin 5s linear infinite;
 			&:hover {
 				animation-name: none;
 			}
@@ -175,12 +167,12 @@ export const exStyles = css`
 
 		&[data-has-art='true'] {
 			#bg > div {
-				animation: ${spin} 3000s linear infinite;
+				animation: spin 3000s linear infinite;
 			}
 		}
 		&[data-has-art='false'] {
 			#bg > div {
-				animation: ${spin} 60s linear infinite;
+				animation: spin 60s linear infinite;
 			}
 		}
 	}
@@ -286,15 +278,6 @@ export const exStyles = css`
 			opacity: 1;
 		}
 		99% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
-	}
-
-	@keyframes blink {
-		0% {
 			opacity: 1;
 		}
 		100% {
@@ -520,7 +503,7 @@ export const exStyles = css`
 			color: black;
 		}
 		.hurricane-s {
-			animation: ${spin} 0.3s linear infinite;
+			animation: spin 0.3s linear infinite;
 			svg {
 				filter: drop-shadow(2rem 2rem 2rem #505);
 			}
