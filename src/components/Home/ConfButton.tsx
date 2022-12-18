@@ -1,12 +1,7 @@
-import {
-	faEye,
-	faEyeSlash,
-	faStar,
-	faTimesCircle,
-	IconDefinition,
-} from '@fortawesome/free-regular-svg-icons'
+import { IconDefinition } from '@fortawesome/free-regular-svg-icons'
+import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 type Props = {
@@ -17,6 +12,8 @@ type Props = {
 	helpText: string
 	icon?: IconDefinition
 	children?: ReactNode
+	showToggleIcon?: boolean
+	areaKey: string // grid-area用一意な2文字
 }
 
 export const ConfButton = ({
@@ -25,22 +22,42 @@ export const ConfButton = ({
 	className,
 	helpText,
 	icon,
+	areaKey,
 	checked = undefined,
+	showToggleIcon = false,
 	text = '',
 }: Props) => {
 	return (
-		<Style className={className} onClick={onClick} data-checked={checked}>
-			{icon && <FontAwesomeIcon icon={icon} />}
-			{typeof checked === 'boolean' && (
-				<FontAwesomeIcon icon={checked ? faEye : faEyeSlash} />
+		<Style
+			className={`${className} `}
+			onClick={onClick}
+			data-checked={checked}
+			style={{ gridArea: areaKey }}
+		>
+			{icon && (
+				<IconWrap>
+					<FontAwesomeIcon icon={icon} />
+				</IconWrap>
 			)}
-			<span className="help">{helpText}</span>
+			{showToggleIcon && (
+				<IconWrap className={`faa-parent animated-hover`}>
+					<FontAwesomeIcon
+						className="faa-ring animated"
+						icon={checked ? faToggleOn : faToggleOff}
+					/>
+				</IconWrap>
+			)}
+			<span className="help-text">{helpText}</span>
 			{text}
+			{children}
 		</Style>
 	)
 }
 
-export const Style = styled.button`
+const IconWrap = styled.span`
+	width: 1.3rem;
+`
+const Style = styled.button`
 	display: flex;
 	align-items: center;
 	justify-content: center;
