@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { rainbows } from '../util'
 
 export const FloatingBox = styled.div`
 	width: 3vw;
@@ -52,16 +53,7 @@ export const RainbowFont = styled.div`
 	> a {
 		color: #acb6e5;
 
-		background: linear-gradient(
-			-45deg,
-			red,
-			orange,
-			yellow,
-			green,
-			aqua,
-			blue,
-			purple
-		);
+		background: linear-gradient(-45deg, ${rainbows.join(',')});
 		font-size: 1.5rem;
 
 		-webkit-background-clip: text;

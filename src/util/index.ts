@@ -154,3 +154,13 @@ export const keyNorm = (title: string) =>
 
 export const isEmoji = (v) => /\p{Emoji}/u.test(v)
 export const isBugText = (s) => s.includes('�')
+
+export const rainbows = [
+	'red',
+	'orange',
+	'yellow',
+	'green',
+	'aqua',
+	'blue',
+	'purple',
+]

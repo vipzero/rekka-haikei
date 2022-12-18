@@ -5,7 +5,7 @@ import {
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
 import { CheckBox } from '../common/CheckBox'
-import ToggleButton, { ConfButton } from '../Home/ToggleButton'
+import ToggleButton, { ConfButton } from '../Home/ConfButton'
 
 type Props = {}
 

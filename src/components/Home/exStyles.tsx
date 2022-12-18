@@ -1,10 +1,15 @@
 import { css, keyframes } from 'styled-components'
+import { rainbows } from '../../util'
 
 const duration = 0.2
 const frequency = 10
 const interval = duration / frequency
 const range = (n: number) => [...Array(n).keys()]
 const rand = (a, b) => Math.floor((Math.random() * (b - a) + a) * 100) / 100
+
+const toPar100 = (i, total) => Math.round((100 / (total - 1)) * i)
+const makeAnim = (key: string, vals: string[]) =>
+	vals.map((v, i) => `${toPar100(i, vals.length)}% { ${key}: ${v}}`).join('\n')
 
 const spin = keyframes`
 0% {
@@ -181,40 +186,12 @@ export const exStyles = css`
 	}
 
 	@keyframes rainbow-anim {
-		0% {
-			background: red;
-		}
-		16% {
-			background: orange;
-		}
-		32% {
-			background: yellow;
-		}
-		48% {
-			background: green;
-		}
-		64% {
-			background: aqua;
-		}
-		80% {
-			background: blue;
-		}
-		100% {
-			background: purple;
-		}
+		${makeAnim('background', rainbows)}
 	}
 	@keyframes rainbow-anim-frame {
-		${[
-			{ color: 'red', p: 0 },
-			{ color: 'orange', p: 16 },
-			{ color: 'yellow', p: 32 },
-			{ color: 'green', p: 48 },
-			{ color: 'aqua', p: 64 },
-			{ color: 'blue', p: 80 },
-			{ color: 'purple', p: 100 },
-		]
+		${rainbows
 			.map(
-				({ color, p }) => `${p}% {
+				(color, i) => `${toPar100(i, rainbows.length)}% {
 			box-shadow: 0px 0px 10px 20px ${color} inset;
 		}`
 			)

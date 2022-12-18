@@ -31,8 +31,14 @@ import { Song } from '../../types'
 import { downloadImg } from '../../util'
 import { DownloadButton } from './DownloadButton'
 import Time from './Time'
-import ToggleButton, { ConfButton } from './ToggleButton'
+import { ConfButton } from './ConfButton'
 import { toast } from 'react-toastify'
+
+const lockLabel = {
+	0: { help: `背景変更同期なし`, text: '' },
+	1: { help: `背景変更1回まで`, text: '' },
+	10: { help: `背景変更同期あり`, text: '' },
+} as const
 
 type Props = {
 	favorited: boolean
@@ -77,145 +83,145 @@ function SettingBox({
 		if (!pressed) addCount()
 		setPressed(true)
 		toggleFavorited()
-		toast.success('ブックマークしました', {})
 	}
 	const snapping = () => {
 		if (snapped) return
 		setSnapped(true)
 		addSnap()
 
-		toast.success('スナップ保存しました', {})
+		toast.success('スナップ保存しました\nブクマから確認できます', {})
 	}
 
 	return (
-		<Wrap data-theme={s.theme} id="setting-box" data-visible={s.visible}>
+		<Wrap
+			data-theme={s.theme}
+			id="setting-box"
+			data-visible={s.visible}
+			data-help={s.showHelp}
+		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
-					<ConfButton onClick={s.cycleTheme} className="theme">
-						<FontAwesomeIcon icon={faPalette} />
-						{s.showHelp && 'テーマ: '}
-						{allThemesById[s.theme]?.key || allThemes[0].key}
-					</ConfButton>
-					<ToggleButton
-						checked={s.sideMode !== 'wide'}
-						onClick={s.toggleSideMode}
+					<ConfButton
+						helpText={'テーマ: '}
+						className="theme"
+						icon={faPalette}
+						onClick={s.cycleTheme}
+						text={allThemesById[s.theme]?.key || allThemes[0].key}
+					/>
+					<ConfButton
+						helpText="ハーフ"
 						className="half"
-					>
-						<FontAwesomeIcon icon={faColumns} />
-						{s.showHelp && 'ハーフ'}
-					</ToggleButton>
-					<ConfButton onClick={cycleAbyss} className="fade">
-						<FontAwesomeIcon icon={faLightbulb} />
-						{s.showHelp && '切替背景色: '}
-						{abyssColorsEx[abyss]?.label || '???'}
-					</ConfButton>
+						icon={faColumns}
+						onClick={s.toggleSideMode}
+						checked={s.sideMode !== 'wide'}
+					/>
+					<ConfButton
+						helpText="切替背景色: "
+						className="fade"
+						icon={faLightbulb}
+						onClick={cycleAbyss}
+						text={abyssColorsEx[abyss]?.label || '???'}
+					/>
 
-					<ToggleButton
-						checked={s.showHelp}
-						onClick={s.toggleShowHelp}
+					<ConfButton
+						helpText="ヘルプ"
 						className="help"
-					>
-						<FontAwesomeIcon icon={faQuestion} />
-						{s.showHelp && 'ヘルプ'}
-					</ToggleButton>
-					<ConfButton onClick={s.closeSetting} className="close">
-						<FontAwesomeIcon icon={faTimes} />
-						{s.showHelp && '閉じる'}
-					</ConfButton>
+						icon={faQuestion}
+						onClick={s.toggleShowHelp}
+						checked={s.showHelp}
+					/>
+					<ConfButton
+						helpText="閉じる"
+						className="close"
+						icon={faTimes}
+						onClick={s.closeSetting}
+					/>
 
-					<ToggleButton checked={favorited} onClick={book} className="book">
-						<FontAwesomeIcon icon={favorited ? faStarFill : faStar} />
-						{s.showHelp &&
-							(favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)')}
-					</ToggleButton>
+					<ConfButton
+						helpText={
+							favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)'
+						}
+						className="book"
+						icon={favorited ? faStarFill : faStar}
+						onClick={book}
+						checked={favorited}
+					/>
 
-					<ToggleButton
+					<ConfButton
+						helpText="タグ表示"
+						className="tags"
+						icon={faTags}
 						checked={s.showCounts}
 						onClick={s.toggleCounts}
-						className="tags"
-					>
-						<FontAwesomeIcon icon={faTags} />
-						<FontAwesomeIcon icon={s.showCounts ? faEye : faEyeSlash} />
-						{s.showHelp && 'タグ表示'}
-					</ToggleButton>
+					/>
 
-					<ToggleButton
+					<ConfButton
+						helpText="アートワーク表示"
+						className="artw"
+						icon={faCompactDisc}
 						checked={s.showArtwork}
 						onClick={s.toggleArtwork}
-						className="artw"
-					>
-						<FontAwesomeIcon icon={faCompactDisc} />
-						<FontAwesomeIcon icon={s.showArtwork ? faEye : faEyeSlash} />
-						{s.showHelp && 'アートワーク表示'}
-					</ToggleButton>
+					/>
 
-					<ToggleButton
+					<ConfButton
+						helpText="簡易履歴表示"
+						className="hist"
+						icon={faHistory}
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
-						className="hist"
-					>
-						<FontAwesomeIcon icon={faHistory} />
-						<FontAwesomeIcon icon={s.showHistory ? faEye : faEyeSlash} />
-						{s.showHelp && '簡易履歴表示'}
-					</ToggleButton>
+					/>
 
-					<ToggleButton
+					<ConfButton
+						helpText={`ブックマーク表示(${favCount})`}
+						className="books"
+						icon={faBookmark}
 						checked={s.showBookmark}
 						onClick={s.toggleBookmark}
-						className="books"
-					>
-						<FontAwesomeIcon icon={faBookmark} />
-						<FontAwesomeIcon icon={s.showBookmark ? faEye : faEyeSlash} />
-						{s.showHelp && `ブックマーク表示(${favCount})`}
-					</ToggleButton>
+					/>
 
-					{/* <ToggleButton
+					{/* <ConfButton
+						helpText={`EMOL表示`}
 						checked={showEmol}
+						icon={faIcons}
 						onClick={toggleEmol}
 						className="emol"
-					>
-						<FontAwesomeIcon icon={faIcons} />
-						<FontAwesomeIcon icon={showEmol ? faEye : faEyeSlash} />
-						{s.showHelp && `EMOL表示`}
-					</ToggleButton> */}
+					/> */}
 
-					<ToggleButton
+					<ConfButton
+						helpText={lockLabel[s.lockBgNum].help}
+						text={lockLabel[s.lockBgNum].text}
+						icon={s.lockBgNum === 0 ? faLock : faLockOpen}
 						checked={s.lockBgNum === 0}
 						onClick={s.toggleLockBg}
 						className="lock"
-					>
-						<FontAwesomeIcon icon={s.lockBgNum === 0 ? faLock : faLockOpen} />
-						{s.showHelp
-							? { 0: `背景変更なし`, 1: `背景変更1回まで`, 10: `背景変更可` }[
-									s.lockBgNum
-							  ]
-							: { 0: ``, 1: `1`, 10: `` }[s.lockBgNum]}
-					</ToggleButton>
+					/>
 
-					<ConfButton onClick={handleDownload} className="download">
+					<ConfButton
+						helpText="ダウンロード"
+						className="download"
+						onClick={handleDownload}
+						icon={undefined}
+					>
 						<DownloadButton url={url} filename={`${song.icy}.png`} />
 					</ConfButton>
 
 					<ConfButton
-						data-checked={snapped}
-						onClick={snapping}
+						helpText="スナップ"
+						icon={faPaperclip}
 						className="snap"
+						checked={snapped}
+						onClick={snapping}
 					>
-						<div className="tooltip">
-							<FontAwesomeIcon icon={faPaperclip} />
-							{s.showHelp && 'スナップ'}
-							<span className="tooltip-text">ブクマから確認できます</span>
-						</div>
+						<span className="tooltip-text"></span>
 					</ConfButton>
 
-					<ToggleButton
+					<ConfButton
+						helpText="デバッグ"
+						className="tool"
+						icon={faToolbox}
 						checked={s.showTool}
 						onClick={s.toggleTool}
-						className="tool"
-					>
-						<FontAwesomeIcon icon={faToolbox} />
-						{s.showHelp && 'デバッグ'}
-					</ToggleButton>
+					/>
 				</ButtonGrid>
 
 				{s.showTool && (
@@ -284,6 +290,11 @@ const Wrap = styled.div`
 `
 
 const ButtonGrid = styled.div`
+	&[data-help='true'] {
+		.help-text {
+			display: block;
+		}
+	}
 	display: grid;
 	grid-template-areas:
 		'th fd ha cl'
@@ -308,9 +319,6 @@ const ButtonGrid = styled.div`
 	// .emol { grid-area: el; }
 	.snap { grid-area: sn; }
 	.download { grid-area: dl; }
-	button svg {
-		height: 1.1rem
-	}
 `}
 `
 

@@ -303,11 +303,15 @@ const Style = styled.div`
 			display: block;
 			background: #333333ff !important;
 		}
+		.color {
+			opacity: 0;
+		}
 		.texts {
 			display: none;
 		}
 	}
 	.hover-conf {
+		position: absolute;
 		display: none;
 		padding: 4px;
 		button {
