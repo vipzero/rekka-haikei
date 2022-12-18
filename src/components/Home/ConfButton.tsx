@@ -40,11 +40,8 @@ export const ConfButton = ({
 				</IconWrap>
 			)}
 			{showToggleIcon && (
-				<IconWrap className={`faa-parent animated-hover`}>
-					<FontAwesomeIcon
-						className="faa-ring animated"
-						icon={checked ? faToggleOn : faToggleOff}
-					/>
+				<IconWrap>
+					<FontAwesomeIcon icon={checked ? faToggleOn : faToggleOff} />
 				</IconWrap>
 			)}
 			{children}
@@ -75,5 +72,9 @@ const Style = styled.button`
 
 	&[data-checked='true'] {
 		background: var(--btn-bg-checked-color) !important;
+		svg {
+			/* animation: var(--animation-slide-in-up) 1s; */
+			animation: var(--animation-blink);
+		}
 	}
 `

@@ -1,13 +1,10 @@
-import React from 'react'
 import styled from 'styled-components'
 import {
 	useSettingsCustomTheme,
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
 import { CheckBox } from '../common/CheckBox'
-import ToggleButton, { ConfButton } from '../Home/ConfButton'
-
-type Props = {}
+import { ConfButton } from '../Home/ConfButton'
 
 export function SettingPage() {
 	const { enableFakeBar, toggleEnableFakeBar } = useSettingsFakeBar()
@@ -49,12 +46,17 @@ export function SettingPage() {
 					<p>タイトル</p>
 				</div>
 				<div id="setting-box">
-					<ToggleButton onClick={() => {}} checked>
+					<ConfButton onClick={() => {}} checked helpText={''} areaKey={''}>
 						ON
-					</ToggleButton>
-					<ToggleButton onClick={() => {}} checked={false}>
+					</ConfButton>
+					<ConfButton
+						onClick={() => {}}
+						checked={false}
+						helpText={''}
+						areaKey={''}
+					>
 						OFF
-					</ToggleButton>
+					</ConfButton>
 				</div>
 			</div>
 			<div>

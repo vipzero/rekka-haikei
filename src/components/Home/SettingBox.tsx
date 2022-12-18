@@ -31,7 +31,7 @@ import Time from './Time'
 
 const lockLabel = {
 	0: { help: `背景変更同期なし`, text: '' },
-	1: { help: `背景変更1回まで`, text: '' },
+	1: { help: `背景変更1回まで`, text: '1' },
 	10: { help: `背景変更同期あり`, text: '' },
 } as const
 
@@ -308,19 +308,12 @@ const Wrap = styled.div`
 const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
-		'th fd ha cl'
-		'aw lk lk cl'
-		'tg bk bk cl'
-		'hi bk bk hl'
-		'bl bk bk db'
-		'-- sn dl db';
-	grid-template-areas:
 		'th th fd fd ha ha cl'
-		'aw aw aw lk lk lk cl'
+		'aw aw aw bk bk bk cl'
 		'tg tg tg bk bk bk cl'
 		'hi hi hi bk bk bk hl'
 		'bl bl bl bk bk bk db'
-		'lk lk sn sn dl dl db';
+		'lk sn sn sn dl dl db';
 `
 
 export default SettingBox
