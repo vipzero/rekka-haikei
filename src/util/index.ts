@@ -49,13 +49,16 @@ export function imgLoad(url: string) {
 	})
 }
 export const downloadImg = async (url: string, filename: string) => {
-	const img = await imgLoad(url)
+	// const img = await imgLoad(url)
+	// const dataUrl = URL.createObjectURL(img.response)
+	const dataUrl = url
 	let dlLink = document.createElement('a')
 
-	const dataUrl = URL.createObjectURL(img.response)
+	console.log({ dlLink })
 	dlLink.href = dataUrl
 
-	dlLink.download = filename
+	// ファイル名未対応
+	dlLink.download = filename // only same-origin
 
 	dlLink.click()
 	dlLink.remove()

@@ -4,6 +4,7 @@ import {
 	faCircleHalfStroke,
 	faColumns,
 	faCompactDisc,
+	faDownload,
 	faHistory,
 	faLock,
 	faLockOpen,
@@ -26,7 +27,6 @@ import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
 import { ConfButton } from './ConfButton'
-import { DownloadButton } from './DownloadButton'
 import Time from './Time'
 
 const lockLabel = {
@@ -208,12 +208,11 @@ function SettingBox({
 
 					<ConfButton
 						helpText="ダウンロード"
-						areaKey="dl"
 						className="download"
+						areaKey="dl"
+						icon={faDownload}
 						onClick={handleDownload}
-					>
-						<DownloadButton url={url} filename={`${song.icy}.png`} />
-					</ConfButton>
+					/>
 
 					<ConfButton
 						helpText="スナップ"

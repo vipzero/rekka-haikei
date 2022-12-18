@@ -47,9 +47,9 @@ export const ConfButton = ({
 					/>
 				</IconWrap>
 			)}
+			{children}
 			<span className="help-text">{helpText}</span>
 			{text}
-			{children}
 		</Style>
 	)
 }
