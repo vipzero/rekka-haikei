@@ -1,4 +1,4 @@
-import { sammonSpell } from './fukkatsu'
+import { sammonSpell, spell } from './fukkatsu'
 
 import { config } from './protobuf/config.proto'
 const { Config } = config
@@ -60,4 +60,20 @@ it('sammonSpell', () => {
 	expect(spell).toMatchInlineSnapshot(
 		`"㌂㌀㌀㌐㌀㌁㌠㌀㌊㌀㌅㌒㌂㌆㌅㌡㌘㌒㌱㌢㌘㌢㌱㌣"`
 	)
+})
+it('spell', () => {
+	expect(spell('㌂㌀㌀㌐㌀㌁㌠㌀㌊㌀㌅㌒㌂㌆㌅㌡㌘㌒㌱㌢㌘㌢㌱㌣'))
+		.toMatchInlineSnapshot(`
+		{
+		  "ee": {
+		    "aaa": 1,
+		    "bb": 1,
+		    "c": 1,
+		  },
+		  "showArtwork": false,
+		  "showBookmark": false,
+		  "showCounts": false,
+		  "sideMode": "r",
+		}
+	`)
 })
