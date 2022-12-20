@@ -5,7 +5,7 @@ const { Config } = config
 const strToBytes = (s: string) => new TextEncoder().encode(s)
 const bytesToStr = (b: Uint8Array) => new TextDecoder().decode(b)
 
-export const sammonSpell = (setting: Setting): string => {
+export const settingToBuf = (setting: Setting): Uint8Array => {
 	const cauldron = new Config()
 	cauldron.showArtwork = setting.showArtwork
 	cauldron.showBookmark = setting.showBookmark
@@ -21,12 +21,26 @@ export const sammonSpell = (setting: Setting): string => {
 		.join(',')
 
 	cauldron.ee = strToBytes(eeLine)
-	const buf = Config.encode(cauldron).finish()
-	console.log(buf.length)
-	console.log(buf.byteLength)
-
-	return bytesToStr(buf)
+	return Config.encode(cauldron).finish()
 }
+
+const henyoChar = (n: number) => String.fromCodePoint(0x3300 + n)
+
+export const sammonSpell = (setting: Setting): string => {
+	const buf = settingToBuf(setting)
+	const bits = Array.from(buf)
+		.map((b) => b.toString(2).padStart(8, '0'))
+		.join('')
+	const b6s = bits.match(/.{6}/g)
+	if (!b6s) throw new Error('b6s is null')
+
+	return Array.from(b6s)
+		.map((b) => b.padEnd(6, '0'))
+		.map((b) => henyoChar(parseInt(b, 2)))
+		.join('')
+}
+
+export const spell = (str: string): string => {}
 
 export const fukkatsu = (str: string): Buffer => {
 	return Buffer.from([])
