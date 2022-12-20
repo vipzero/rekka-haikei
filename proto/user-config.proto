@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package config;
+
+message Config {
+	bool showBookmark = 1;
+	bool showArtwork = 2;
+	bool showCounts = 3;
+	bool showHistory = 4;
+    enum SideMode {
+        L = 0;
+        R = 1;
+        WIDE = 2;
+    }
+	SideMode sideMode = 5;
+	int32 theme = 6;
+
+    bytes ee = 10;
+}
