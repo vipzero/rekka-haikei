@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { readSong, saveSongBg } from '../../service/firebase'
+import { readSong, saveSongBg } from '../service/firebase'
 import { currentEvent } from '../config'
 import { Song } from '../types'
 import { formatCount } from '../util'

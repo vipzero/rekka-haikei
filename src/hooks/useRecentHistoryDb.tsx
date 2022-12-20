@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { History, HistoryRaw } from '../types'
 import { useQeuryEid } from './useQueryEid'
-import { readRecentHistory } from '../../service/firebase'
+import { readRecentHistory } from '../service/firebase'
 
 export function useRecentHistoryDb(enabled: boolean) {
 	const [histories, setHistories] = useState<History[]>([])

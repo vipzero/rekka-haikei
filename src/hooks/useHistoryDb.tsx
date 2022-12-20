@@ -7,7 +7,7 @@ import {
 	saveTable,
 	toHistory,
 	calcG,
-} from '../../service/firebase'
+} from '../service/firebase'
 import { Count, History, HistoryRaw, Schedule } from '../types'
 import { formatDate, formatYmdSlash, mergeArr, pad2 } from '../util'
 import { useQeuryEid } from './useQueryEid'

@@ -1,4 +1,4 @@
-import { incFavoritesAll } from '../../service/firebase'
+import { incFavoritesAll } from '../service/firebase'
 import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
 import { isEnd } from '../config'

@@ -10,7 +10,7 @@ import {
 	readSong,
 	saveSongBg,
 	watchHistSong,
-} from '../../service/firebase'
+} from '../service/firebase'
 import { currentEvent } from '../config'
 import { HistoryRaw, Song } from '../types'
 import { formatCount } from '../util'

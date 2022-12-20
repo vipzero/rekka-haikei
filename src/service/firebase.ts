@@ -20,9 +20,9 @@ import {
 	writeBatch,
 } from 'firebase/firestore'
 import ky from 'ky'
-import { AnimeVotes } from '../src/components/Home/Cvote/useCvoteDb'
-import config from '../src/config'
-import { Emol, History, HistoryRaw, Schedule, Song } from './../src/types'
+import { AnimeVotes } from '../components/Home/Cvote/useCvoteDb'
+import config from '../config'
+import { Emol, History, HistoryRaw, Schedule, Song } from '../types'
 
 const firebaseConfig = {
 	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,

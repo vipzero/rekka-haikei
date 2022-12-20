@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { readCvote, voteChar } from '../../../../service/firebase'
+import { readCvote, voteChar } from '../../../service/firebase'
 import { useLocalStorage } from '../../../hooks/useLocalStorage'
 
 export type AnimeVotes = Record<string, number>

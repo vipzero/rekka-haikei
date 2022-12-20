@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addFeedback } from '../../../service/firebase'
+import { addFeedback } from '../../service/firebase'
 import { Song } from '../../types'
 
 function genDefaultReportText(song: Song) {
