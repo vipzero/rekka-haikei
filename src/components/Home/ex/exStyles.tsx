@@ -1,5 +1,5 @@
 import { css, keyframes } from 'styled-components'
-import { rainbows } from '../../util'
+import { rainbows } from '../../../util'
 
 const duration = 0.2
 const frequency = 10
