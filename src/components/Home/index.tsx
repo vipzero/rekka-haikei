@@ -14,6 +14,7 @@ import {
 import { Setting, Song } from '../../types'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
+import { Conways } from './ex/Coway'
 import { exStyles } from './ex/exStyles'
 import { ExtraComp } from './ex/ExtraComp'
 import FadeBgChanger from './FadeBgChanger'
@@ -75,7 +76,10 @@ function Home({ song }: Props) {
 				px={sideMap[sideMode] || 'center'}
 			/>
 			{eeKey && eeKey === 'subetef' ? (
-				<TrackTimeBitBar startTime={song.time} size={timeBarSize} />
+				<>
+					<TrackTimeBitBar startTime={song.time} size={timeBarSize} />
+					<Conways />
+				</>
 			) : (
 				<TrackTimeBar startTime={song.time} size={timeBarSize} />
 			)}
