@@ -57,13 +57,10 @@ it('sammonSpell', () => {
 		customTheme: '',
 		showEmol: false,
 	})
-	expect(spell).toMatchInlineSnapshot(
-		`"㌂㌀㌀㌐㌀㌁㌠㌀㌊㌀㌅㌒㌂㌆㌅㌡㌘㌒㌱㌢㌘㌢㌱㌣"`
-	)
+	expect(spell).toMatchInlineSnapshot(`"ꔈꔀꔐꔀꔘꔀꔨꔁꕒꔈꕡꕡꕡꔬꕢꕢꔬꕣ"`)
 })
 it('spell', () => {
-	expect(spell('㌂㌀㌀㌐㌀㌁㌠㌀㌊㌀㌅㌒㌂㌆㌅㌡㌘㌒㌱㌢㌘㌢㌱㌣'))
-		.toMatchInlineSnapshot(`
+	expect(spell('ꔈꔀꔐꔀꔘꔀꔨꔁꕒꔈꕡꕡꕡꔬꕢꕢꔬꕣ')).toMatchInlineSnapshot(`
 		{
 		  "ee": {
 		    "aaa": 1,

@@ -50,18 +50,20 @@ export const decodeSetting = (buf: Uint8Array): Partial<Setting> => {
 	}
 }
 
-const henyoChar = (n: number) => String.fromCodePoint(0x3300 + n)
-const unHenyo = (s: string) => (s.codePointAt(0) || 0) - 0x3300
+const point = 'ꔀ'.codePointAt(0) || 0
+const codeRange = Math.floor(Math.log2(319)) // 8
+const henyoChar = (n: number) => String.fromCodePoint(point + n)
+const unHenyo = (s: string) => (s.codePointAt(0) || 0) - point
 
 export const sammonSpell = (setting: Setting): string => {
 	const buf = encodeSetting(setting)
 	const bits = Array.from(buf)
 		.map((b) => b.toString(2).padStart(8, '0'))
 		.join('')
-	const b6s = bits.match(/.{6}/g) || []
+	const b6s = bits.match(new RegExp(`.{${codeRange}}`, 'g')) || []
 
 	return Array.from(b6s)
-		.map((b) => b.padEnd(6, '0'))
+		.map((b) => b.padEnd(codeRange, '0'))
 		.map((b) => henyoChar(parseInt(b, 2)))
 		.join('')
 }
@@ -70,7 +72,7 @@ export const spell = (str: string): Partial<Setting> => {
 	const u8s = (
 		[...str]
 			.map(unHenyo)
-			.map((b) => b.toString(2).padStart(6, '0'))
+			.map((b) => b.toString(2).padStart(codeRange, '0'))
 			.join('')
 			.match(/.{8}/g) || []
 	).map((b) => parseInt(b, 2))
