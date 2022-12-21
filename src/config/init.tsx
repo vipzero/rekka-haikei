@@ -13,16 +13,20 @@ body {
   z-index: 0;
 }
 button {
-	background: #ffc3cf;
+	background: #331a1f;
 	border: none;
 	border-radius:12px;
 	padding: 2px 12px;
-	&:hover {
-		background: #eea3af;
+
+	:not(:disabled) {
+		&:hover { background: #c9c9c9; }
+		&:active { background: #a9a9a9; }
 	}
-	&:active {
-		background: #aa83af;
-	}
+  border-radius: 12px;
+	padding: .4rem 1rem;
+  background: linear-gradient(145deg, #d5d5d5, #fefefe);
+  box-shadow:  4px 4px 8px #c9c9c9,
+             -4px -4px 8px #ffffff;
 }
 
 table.count {
