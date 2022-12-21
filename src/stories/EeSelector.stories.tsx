@@ -22,7 +22,7 @@ export const Full: Story = {
 	parameters: { consoles: { hideNoControlsWarning: true } },
 	args: {
 		comps: {
-			mia: true, // old
+			mia: 1, // old
 			sakura: 1,
 			steinsgate: 2,
 		},
