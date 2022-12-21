@@ -2,16 +2,38 @@ import styled from 'styled-components'
 import {
 	useSettingsCustomTheme,
 	useSettingsFakeBar,
+	useSettingsSpell,
 } from '../../hooks/useSettings'
 import { CheckBox } from '../common/CheckBox'
 import { ConfButton } from '../Home/ConfButton'
+import { toast } from 'react-toastify'
 
 export function SettingPage() {
 	const { enableFakeBar, toggleEnableFakeBar } = useSettingsFakeBar()
 	const { customTheme, setCustomTheme } = useSettingsCustomTheme()
+	const { callSpell, text, onChangeText, parsed } = useSettingsSpell()
 
 	return (
 		<Style customTheme={customTheme}>
+			<div style={{ width: 'max-content' }}>
+				<h4>設定バックアップ</h4>
+				<input onChange={(e) => onChangeText(e.target.value)} value={text} />
+				<code>
+					<pre>{JSON.stringify(parsed)}</pre>
+				</code>
+				<button
+					disabled={!parsed}
+					onClick={() => {
+						if (callSpell()) {
+							toast.success('設定を復元しました')
+						} else {
+							toast.error('復元に失敗しました')
+						}
+					}}
+				>
+					復元する
+				</button>
+			</div>
 			<div style={{ width: 'max-content' }}>
 				<h4>オプション</h4>
 				<CheckBox
@@ -74,6 +96,8 @@ export function SettingPage() {
 	)
 }
 const Style = styled.div<{ customTheme: string }>`
+	> div {
+	}
 	.custom-theme-code {
 		width: max-content;
 

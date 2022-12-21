@@ -26,6 +26,7 @@ import Address from './HistoryPage/Address'
 import Schedule from './HistoryPage/Schedule'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { SettingPage } from './HistoryPage/SettingPage'
+import { Toast } from './Toast'
 
 const toH = (ts: number) =>
 	Math.floor(
@@ -191,6 +192,8 @@ function HistoryPageBase() {
 				]}
 				onChange={setTab}
 			/>
+
+			<Toast />
 			<TabPanel value={tab} index={0}>
 				<div>
 					<h3>履歴</h3>

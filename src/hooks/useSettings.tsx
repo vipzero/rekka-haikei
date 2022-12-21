@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
 import {
@@ -7,6 +8,7 @@ import {
 	isExTheme,
 } from '../components/Home/Cvote/constants'
 import { Abyss, EE_SEASON, nextAbyss, normalThemes } from '../config'
+import { sammonSpell, spellCatch } from '../service/fukkatsu'
 import { Setting, ThemeId } from '../types'
 import { toggle, genToggle } from '../util'
 
@@ -187,4 +189,27 @@ export const useSettingsShowBookmark = () => {
 	const [{ showBookmark: visible }, setSetting] = useSettingsBase()
 	const closeBookmark = () => setSetting((v) => ({ ...v, showBookmark: false }))
 	return { closeBookmark, visible }
+}
+
+export const useSettingsSpell = () => {
+	const [settings, setSetting] = useSettingsBase()
+	const spellText = sammonSpell(settings)
+	const [text, setText] = useState<string>(spellText)
+	const [parsed, setParsed] = useState<ReturnType<typeof spellCatch>>(
+		spellCatch(spellText)
+	)
+
+	const onChangeText = (text: string) => {
+		setText(text)
+		setParsed(spellCatch(text))
+	}
+
+	const callSpell = () => {
+		const sp = spellCatch(text)
+		if (!sp) return false
+		setSetting({ ...settings, ...sp })
+		return true
+	}
+
+	return { spellText, callSpell, parsed, text, onChangeText }
 }

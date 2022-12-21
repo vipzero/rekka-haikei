@@ -79,6 +79,12 @@ export const spell = (str: string): Partial<Setting> => {
 	const buf = new Uint8Array(Array.from(u8s))
 	return decodeSetting(buf)
 }
+export const spellCatch = (str: string): Partial<Setting> | false => {
+	try {
+		return spell(str)
+	} catch {}
+	return false
+}
 
 export const fukkatsu = (str: string): Buffer => {
 	return Buffer.from([])
