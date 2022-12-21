@@ -15,8 +15,9 @@ export function SettingPage() {
 
 	return (
 		<Style customTheme={customTheme}>
-			<div style={{ width: 'max-content' }}>
+			<section style={{ width: 'max-content' }}>
 				<h4>設定バックアップ</h4>
+				<label>ふっかつのじゅもん</label>
 				<input onChange={(e) => onChangeText(e.target.value)} value={text} />
 				<code>
 					<pre>{JSON.stringify(parsed)}</pre>
@@ -33,8 +34,8 @@ export function SettingPage() {
 				>
 					復元する
 				</button>
-			</div>
-			<div style={{ width: 'max-content' }}>
+			</section>
+			<section style={{ width: 'max-content' }}>
 				<h4>オプション</h4>
 				<CheckBox
 					onChange={() => {
@@ -44,44 +45,47 @@ export function SettingPage() {
 				>
 					疑似シークバー: 曲の再生時間がとれない場合も4分のシークバーを表示する
 				</CheckBox>
-			</div>
-			<div className="custom-theme-code">
+			</section>
+			<section>
 				<h4>カスタムテーマ(CSS)</h4>
-				<p>「CUSTM」選択時に有効</p>
-				<textarea
-					style={{ width: '600px', height: '400px' }}
-					rows={10}
-					name="rekka-search-word"
-					value={customTheme}
-					autoComplete="on"
-					onChange={(e) => setCustomTheme(e.target.value)}
-				/>
-			</div>
-			<div className="preview">
-				<div id="timebar">
-					<div className="wrap">
-						<div className="fill" style={{ width: '30%' }} />
-						<div className="pointer" />
+				<div className="custom-theme-code">
+					<p>「CUSTM」選択時に有効</p>
+					<textarea
+						style={{ width: '600px', height: '400px' }}
+						rows={10}
+						name="rekka-search-word"
+						value={customTheme}
+						autoComplete="on"
+						onChange={(e) => setCustomTheme(e.target.value)}
+					/>
+				</div>
+				<p>プレビュー</p>
+				<div className="preview">
+					<div id="timebar">
+						<div className="wrap">
+							<div className="fill" style={{ width: '30%' }} />
+							<div className="pointer" />
+						</div>
+					</div>
+					<div id="panel">
+						<p>タイトル</p>
+					</div>
+					<div id="setting-box">
+						<ConfButton onClick={() => {}} checked helpText={''} areaKey={''}>
+							ON
+						</ConfButton>
+						<ConfButton
+							onClick={() => {}}
+							checked={false}
+							helpText={''}
+							areaKey={''}
+						>
+							OFF
+						</ConfButton>
 					</div>
 				</div>
-				<div id="panel">
-					<p>タイトル</p>
-				</div>
-				<div id="setting-box">
-					<ConfButton onClick={() => {}} checked helpText={''} areaKey={''}>
-						ON
-					</ConfButton>
-					<ConfButton
-						onClick={() => {}}
-						checked={false}
-						helpText={''}
-						areaKey={''}
-					>
-						OFF
-					</ConfButton>
-				</div>
-			</div>
-			<div>
+			</section>
+			<section>
 				<h4>プレイヤーで http のストリームを使う</h4>
 				<p>
 					<a href="chrome://flags">chrome://flags</a> の
@@ -91,12 +95,15 @@ export function SettingPage() {
 				<p>
 					<img src="https://i.imgur.com/AUViOQB.png" />
 				</p>
-			</div>
+			</section>
 		</Style>
 	)
 }
 const Style = styled.div<{ customTheme: string }>`
-	> div {
+	> section {
+		border-bottom: 1px dotted gray;
+		padding-bottom: 8px;
+		margin-bottom: 8px;
 	}
 	.custom-theme-code {
 		width: max-content;
