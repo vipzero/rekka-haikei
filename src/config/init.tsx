@@ -9,24 +9,23 @@ body {
 
 export const SubPageTheme = createGlobalStyle`
 body {
-  background: white;
+	background: #ffffff;
   z-index: 0;
 }
 button {
 	background: #331a1f;
 	border: none;
-	border-radius:12px;
+	border-radius: 8px;
 	padding: 2px 12px;
 
 	:not(:disabled) {
-		&:hover { background: #c9c9c9; }
-		&:active { background: #a9a9a9; }
+		&:hover { background: #eeeeee; }
+		&:active { background: #dddddd; }
 	}
-  border-radius: 12px;
 	padding: .4rem 1rem;
-  background: linear-gradient(145deg, #d5d5d5, #fefefe);
-  box-shadow:  4px 4px 8px #c9c9c9,
-             -4px -4px 8px #ffffff;
+	background: #ffffff;
+  box-shadow:  4px 4px 8px #d9d9d9,
+              -4px -4px 8px #ffffff;
 }
 
 table.count {

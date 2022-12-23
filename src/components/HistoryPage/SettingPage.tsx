@@ -20,7 +20,9 @@ export function SettingPage() {
 				<label>ふっかつのじゅもん</label>
 				<input onChange={(e) => onChangeText(e.target.value)} value={text} />
 				<code>
-					<pre>{JSON.stringify(parsed)}</pre>
+					<pre style={{ maxWidth: '80vw', overflow: 'scroll' }}>
+						{JSON.stringify(parsed)}
+					</pre>
 				</code>
 				<button
 					disabled={!parsed}

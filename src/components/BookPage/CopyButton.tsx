@@ -16,6 +16,6 @@ export const CopyButton = ({ onClick }: Props) => {
 }
 
 const Button = styled.button`
-	max-width: 2.4rem;
+	/* max-width: 2.4rem; */
 	margin-left: 4px;
 `
