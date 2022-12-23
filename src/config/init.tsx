@@ -8,28 +8,30 @@ body {
 `
 
 export const SubPageTheme = createGlobalStyle`
+
 body {
-	background: #ffffff;
+	background: var(--color-bg);
   z-index: 0;
+	color: var(--color-fg);
 }
 button {
-	background: #331a1f;
 	border: none;
 	border-radius: 8px;
 	padding: 2px 12px;
 
 	:not(:disabled) {
-		&:hover { background: #eeeeee; }
-		&:active { background: #dddddd; }
+		&:hover { background: var(--color-bg2); }
+		&:active { background: var(--color-bg3); }
 	}
 	padding: .4rem 1rem;
-	background: #ffffff;
-  box-shadow:  4px 4px 8px #d9d9d9,
-              -4px -4px 8px #ffffff;
+	background: var(--color-bg);
+  box-shadow:  4px 4px 8px var(--color-bg3),
+              -4px -4px 8px var(--color-bg);
+	color: var(--color-fg);
 }
 
 table.count {
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-bg3);
   text-align: left;
   td, th {
     padding: 4px;
@@ -39,13 +41,13 @@ table.count {
     font-weight: bold;
   }
   tfoot {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--color-bg3);
   }
   tbody tr th {
     font-weight: bold;
   }
   tbody tr:nth-of-type(2n) {
-    background: #f5f5f5;
+    background: var(--color-bg);
   }
 }
 a {
@@ -59,6 +61,19 @@ a {
 export const GlobalStyle = createGlobalStyle`
 @import "open-props/style";
 @import "open-props/animations";
+
+:root {
+	--color-bg: #fff;
+	--color-bg2: #eee;
+	--color-bg3: #ddd;
+	--color-fg: #000;
+	@media (prefers-color-scheme: dark) {
+		--color-bg: #222;
+		--color-bg2: #333;
+		--color-bg3: #444;
+		--color-fg: #eee;
+	}
+}
 
 html {
   height: 100%;
@@ -107,8 +122,8 @@ li {
 	white-space: nowrap;
 	font-size: 0.8rem;
 	line-height: 1.3;
-	background: #333;
-	color: #fff;
+	background: var(--color-bg3);
+	color: var(--color-fg);
 	border-radius: 4px;
 	transition: 0.3s ease-in;
 }

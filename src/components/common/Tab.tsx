@@ -52,7 +52,7 @@ export const Style = styled.div`
 	.tab-line {
 		display: flex;
 		margin-top: 12px;
-		border-bottom: solid 1px #ddd;
+		border-bottom: solid 1px var(--color-bg2);
 		gap: 2px;
 	}
 
@@ -61,15 +61,15 @@ export const Style = styled.div`
 		width: ${WIDTH}px;
 		padding: 6px 0;
 		border: none;
-		background: var(--gray-color);
+		background: var(--color-bg2);
 		&:hover {
-			background: #ddd;
+			background: var(--color-bg3);
 		}
 		&[data-active='true'] {
 			cursor: default;
-			background: white;
-			border-color: var(--primary);
-			color: var(--primary);
+			background: var(--color-bg);
+			border-color: var(--primary-color);
+			color: var(--primary-color);
 		}
 	}
 	.lamp {
