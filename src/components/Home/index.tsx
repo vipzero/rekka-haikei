@@ -173,6 +173,7 @@ const Wrap = styled.div`
 				margin-left: 4px;
 			}
 		}
+		-ms-overflow-style: none;
 	}
 	.titles {
 		font-size: 1.1rem;

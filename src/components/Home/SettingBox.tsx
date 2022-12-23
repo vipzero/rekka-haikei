@@ -221,9 +221,7 @@ function SettingBox({
 						icon={faPaperclip}
 						checked={snapped}
 						onClick={snapping}
-					>
-						<span className="tooltip-text"></span>
-					</ConfButton>
+					/>
 
 					<ConfButton
 						helpText="デバッグ"

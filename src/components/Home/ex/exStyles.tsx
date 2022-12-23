@@ -498,6 +498,7 @@ export const exStyles = css`
 	}
 	&[data-ex='3sha3yo'] {
 		.hurricane {
+			filter: url(#wavy) blur(1px);
 			position: absolute;
 			animation: ${fontInflare} 240s linear both;
 			color: black;
