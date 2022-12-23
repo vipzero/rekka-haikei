@@ -282,6 +282,7 @@ const Wrap = styled.div`
 	position: absolute;
 	bottom: 0;
 	right: 0;
+	overflow: hidden;
 	> div {
 		padding: 8px;
 		background: var(--setting-bg-color);
