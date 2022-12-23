@@ -53,9 +53,15 @@ range(24).forEach((v) => {
 })
 
 range(7).forEach((v) => {
+	const time = (v + 3) * day
 	Cols[`Day${v}`] = {
 		args: {
-			snap: { ...snaps[1], animeTitle: `${v}曜`, time: (v + 3) * day },
+			snap: { ...snaps[1], animeTitle: `${v}曜`, time },
+		},
+	}
+	Cols[`Day${v}Ni`] = {
+		args: {
+			snap: { ...snaps[1], animeTitle: `${v}曜`, time: time + 12 * hour },
 		},
 	}
 })
@@ -78,12 +84,19 @@ export const {
 	Hour18,
 	Hour21,
 	Day0,
+	Day0Ni,
 	Day1,
+	Day1Ni,
 	Day2,
+	Day2Ni,
 	Day3,
+	Day3Ni,
 	Day4,
+	Day4Ni,
 	Day5,
+	Day5Ni,
 	Day6,
+	Day6Ni,
 	Min0,
 	Min1,
 	Min2,
@@ -92,8 +105,6 @@ export const {
 	Min5,
 	Min6,
 	Min7,
-	Min8,
-	Min9,
 } = Cols
 
 // export const Col1 = Template.bind({})
