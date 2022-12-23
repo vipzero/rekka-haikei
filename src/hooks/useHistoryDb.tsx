@@ -240,20 +240,20 @@ export function useHistoryDb() {
 	const fixDb = () => {
 		if (!loaded) return
 
-		const lost0501 = 1651344231000
-		const findLost0501 = histories.find((v) => v.time === lost0501)
-		if (eventId !== '2022gw' && !findLost0501) {
+		const lost1225 = 1671834567210
+		const findLost1225 = () => histories.find((v) => v.time === lost1225)
+		if (eventId === '2022winter' && !findLost1225()) {
 			// TODO: remove
 			;(async () => {
-				const start = 1651344231000 - 1
-				const end = 1651357830000 + 1
+				const start = 1671826806406 - 1
+				const end = 1671834567210 + 1
 				const snaps = await getHistoriesDbRange(eventId, start, end)
 				const newHists = snaps.docs.map((snap) =>
 					toHistory(snap.data() as HistoryRaw)
 				)
 
 				setHists(mergeArr(histories, newHists, (a) => -a.time)) // counts の整合性はこのタイミングだけなくなる
-				alert('2022/05/01 のデータを修正しました')
+				alert('2022/12/24 のデータを修正しました')
 			})()
 		}
 		const hists: typeof histories = []
