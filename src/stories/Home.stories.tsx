@@ -53,6 +53,7 @@ export default {
 		),
 	],
 	parameters: {
+		layout: 'fullscreen',
 		nextRouter: {
 			path: '/[eid]/bg',
 			asPath: '/2000winter/bg',
