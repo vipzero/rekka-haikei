@@ -125,7 +125,7 @@ li {
 	background: var(--color-bg3);
 	color: var(--color-fg);
 	border-radius: 4px;
-	transition: 0.3s ease-in;
+	transition: opacity 0.3s ease-in;
 }
 
 .tooltip:hover .tooltip-text {
