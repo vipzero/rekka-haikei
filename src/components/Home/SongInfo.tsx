@@ -1,12 +1,10 @@
 import Link from 'next/link'
-import React from 'react'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
+import { useSettings } from '../../hooks/useSettings'
 import { isSongFull, Song } from '../../types'
 import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
-import { useSettings } from '../../hooks/useSettings'
 import BookCount from './BookCount'
-import { useMeasure } from 'react-use'
 
 function makeTitle(song: Song) {
 	if (isSongFull(song)) return `${song.title} - ${song.artist}`
@@ -24,19 +22,58 @@ function tagOrder(tags: Record<string, number>): TagCount[] {
 
 type Props = { song: Song }
 
+const SingerLine = ({ singer }: { singer?: string }) => (
+	<>{singer && <p>歌手: {singer}</p>}</>
+)
+const ArtistLine = ({
+	composer,
+	arranger,
+	writer,
+}: Pick<Song, 'composer' | 'arranger' | 'writer'>) => (
+	<p>
+		{composer && <span>作詞: {composer}</span>}
+		{arranger && <span>編曲: {arranger}</span>}
+		{writer && <span>作曲: {writer}</span>}
+	</p>
+)
+const AlbumLine = ({
+	albumName,
+	itunesUrl,
+	copyright,
+}: Pick<Song, 'albumName' | 'itunesUrl' | 'copyright'>) => (
+	<p>
+		{albumName && (
+			<>
+				{albumName.replace(' - Single', '')}
+				{copyright && ` (${copyright})`} <a href={itunesUrl}>iTunes</a>{' '}
+			</>
+		)}
+	</p>
+)
+
 function SongInfo({ song }: Props) {
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()
+	const tags = tagOrder(song.wordCounts).filter(({ s }) => s !== song.icy)
+
+	const { singer, composer, arranger, writer } = song
+
+	const { albumName, copyright, itunesUrl } = song
+	const sUrl = searchImageUrl(song.imageSearchWord)
+	const uUrl = utanetSearchUrl(song.icy)
 
 	return (
-		<Wrap id="panel">
+		<Wrap
+			id="panel"
+			data-show-artwark={showArtwork && song.artworkUrl100}
+			data-show-tags={showCounts}
+		>
 			<div id="panel-shadow" />
 			<p className="titles">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
 					<div style={{ flex: 1 }}>
-						{/* そろそろ汚えええええ */}
 						{isSongFull(song) && (
 							<>
 								<p>
@@ -57,67 +94,42 @@ function SongInfo({ song }: Props) {
 								</p>
 							</>
 						)}
-						{song.singer && <p>歌手: {song.singer}</p>}
-						<p>
-							{song.composer && <span>作詞: {song.composer}</span>}
-							{song.arranger && <span>編曲: {song.arranger}</span>}
-							{song.writer && <span>作曲: {song.writer}</span>}
-						</p>
-						<p>
-							{song.albumName && (
-								<>
-									{song.albumName.replace(' - Single', '')}
-									{song.copyright && ` (${song.copyright})`}{' '}
-									<a href={song.itunesUrl}>iTunes</a>{' '}
-								</>
-							)}
-						</p>
+						<SingerLine singer={singer} />
+						<ArtistLine {...{ composer, arranger, writer }} />
+						<AlbumLine {...{ albumName, copyright, itunesUrl }} />
 						<p style={{ display: 'flex', gap: '4px' }}>
-							<a
-								href={utanetSearchUrl(song.icy)}
-								target="_blank"
-								rel="noreferrer"
-							>
+							<a href={uUrl} target="_blank" rel="noreferrer">
 								歌詞検索
 							</a>
-							<a
-								href={searchImageUrl(song.imageSearchWord)}
-								target="_blank"
-								rel="noreferrer"
-							>
+							<a href={sUrl} target="_blank" rel="noreferrer">
 								画像検索
 							</a>
 						</p>
-						{showCounts && (
-							<p className="tags">
-								{tagOrder(song.wordCounts)
-									.filter(({ s }) => s !== song.icy)
-									.map((tag, i) => (
-										<Link
-											prefetch={false}
-											href="/[eid]/history"
-											as={{
-												pathname: `/${eid}/history`,
-												query: { q: encodeURIComponent(tag.s) },
-											}}
-											key={i}
-											passHref
-										>
-											<a>
-												{tag.s}({formatCount(tag.count)})
-											</a>
-										</Link>
-									))}
-								<BookCount songId={song.time} />
-							</p>
-						)}
+
+						<p className="tags">
+							{tags.map((tag, i) => (
+								<Link
+									prefetch={false}
+									href="/[eid]/history"
+									as={{
+										pathname: `/${eid}/history`,
+										query: { q: encodeURIComponent(tag.s) },
+									}}
+									key={i}
+									passHref
+								>
+									<a>
+										{tag.s}({formatCount(tag.count)})
+									</a>
+								</Link>
+							))}
+							<BookCount songId={song.time} />
+						</p>
 					</div>
 					<div>
-						{showArtwork && song.artworkUrl100 && (
-							<div className="album">
-								<img src={song.artworkUrl100} />
-							</div>
-						)}
+						<div className="artwork">
+							<img src={song.artworkUrl100} />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -170,10 +182,20 @@ const Wrap = styled.div`
 		text-align: right;
 		font-size: 0.5rem;
 	}
-	.album {
+	.artwork {
 		img {
 			margin-top: 12px;
 			width: 150px;
+		}
+	}
+	&[data-show-artwark='false'] {
+		.artwork {
+			display: none;
+		}
+	}
+	&[data-show-tags='false'] {
+		.tags {
+			display: none;
 		}
 	}
 `
