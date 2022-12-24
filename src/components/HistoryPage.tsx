@@ -391,13 +391,6 @@ const Wrap = styled.div`
 		text-decoration: underline;
 		cursor: pointer;
 	}
-	form {
-		display: flex;
-		gap: 8px;
-		> :not(button) {
-			margin-top: 4px;
-		}
-	}
 
 	.search-result {
 		p {
@@ -422,29 +415,6 @@ const Wrap = styled.div`
 				margin-top: 4px;
 			}
 		}
-	}
-	.search-hist {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 2px;
-		border-left: dotted var(--primary-color);
-		padding-left: 4px;
-	}
-	.del-btn {
-		button:first-child {
-			border-top-right-radius: 0;
-			border-bottom-right-radius: 0;
-		}
-		button:nth-of-type(2) {
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
-			filter: brightness(0.8);
-		}
-	}
-	.search-control {
-		display: grid;
-		grid-template-rows: auto 1fr;
-		gap: 3px;
 	}
 `
 
