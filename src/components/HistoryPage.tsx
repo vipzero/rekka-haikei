@@ -414,6 +414,7 @@ function HistoryPageBase() {
 								</div>
 								<div
 									className={'non-copy'}
+									data-prog-cell
 									style={{
 										background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
 										textAlign: 'right',
@@ -483,11 +484,17 @@ const Wrap = styled.div`
 
 	div[data-copy-mode] {
 		width: max-content;
-		&[data-copy-mode='true'] {
-			border: solid 1px orange;
-			background: #fefedd;
+	}
+
+	[data-copy-mode='true'],
+	.option-box-word {
+		border: solid 1px orange;
+		background: var(--color-bg-sub);
+		button {
+			box-shadow: none;
 		}
 	}
+
 	.hist-copy {
 		font-family: 'Roboto Mono', monospace;
 	}
@@ -562,8 +569,6 @@ const Wrap = styled.div`
 			display: flex;
 			gap: 0.5rem;
 			padding: 2px;
-			border: solid 1px orange;
-			background: #fefedd;
 		}
 		.option-box-word {
 			flex-direction: column;
@@ -589,7 +594,7 @@ const Wrap = styled.div`
 		button:nth-of-type(2) {
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
-			background: var(--gray-color);
+			filter: brightness(0.8);
 		}
 	}
 	.search-control {

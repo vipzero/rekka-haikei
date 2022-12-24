@@ -27,6 +27,12 @@ button {
 	background: var(--color-bg);
   box-shadow:  4px 4px 8px var(--color-bg3),
               -4px -4px 8px var(--color-bg);
+	margin: 2px 2px 0 0;
+						
+	@media (prefers-color-scheme: dark) {
+		box-shadow:  4px 4px 8px #1d1d1d,
+                -4px -4px 12px #272727;
+	}
 	color: var(--color-fg);
 }
 
@@ -67,10 +73,12 @@ export const GlobalStyle = createGlobalStyle`
 	--color-bg2: #eee;
 	--color-bg3: #ddd;
 	--color-fg: #000;
+	--color-bg-sub: #fefedd;
 	@media (prefers-color-scheme: dark) {
 		--color-bg: #222;
 		--color-bg2: #333;
 		--color-bg3: #444;
+		--color-bg-sub: #3d3d00;
 		--color-fg: #eee;
 	}
 }

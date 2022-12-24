@@ -71,6 +71,7 @@ export const Style = styled.div`
 			border-color: var(--primary-color);
 			color: var(--primary-color);
 		}
+		box-shadow: none;
 	}
 	.lamp {
 		position: relative;
