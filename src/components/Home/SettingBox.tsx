@@ -8,6 +8,7 @@ import {
 	faHistory,
 	faLock,
 	faLockOpen,
+	faMagicWandSparkles,
 	faPalette,
 	faPaperclip,
 	faQuestion,
@@ -62,6 +63,7 @@ function SettingBox({
 	const eid = useQeuryEid()
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
+	const [bgPicker, setBgPicker] = useState<boolean>(false)
 
 	useEffect(() => {
 		setPressed(false)
@@ -129,7 +131,7 @@ function SettingBox({
 					<ConfButton
 						helpText="ヘルプ"
 						className="help"
-						areaKey="hl"
+						areaKey="_h"
 						icon={faQuestion}
 						onClick={s.toggleShowHelp}
 						checked={s.showHelp}
@@ -147,7 +149,7 @@ function SettingBox({
 							favorited ? 'ブックマーク中' : 'ブックマークする(ブラウザ保存)'
 						}
 						className="book"
-						areaKey="bk"
+						areaKey="bb"
 						icon={favorited ? faStarFill : faStar}
 						onClick={book}
 						checked={favorited}
@@ -156,7 +158,7 @@ function SettingBox({
 					<ConfButton
 						helpText="タグ表示"
 						className="tags"
-						areaKey="tg"
+						areaKey="vt"
 						icon={faTags}
 						checked={s.showCounts}
 						onClick={s.toggleCounts}
@@ -166,7 +168,7 @@ function SettingBox({
 					<ConfButton
 						helpText="アートワーク表示"
 						className="artw"
-						areaKey="aw"
+						areaKey="va"
 						icon={faCompactDisc}
 						checked={s.showArtwork}
 						onClick={s.toggleArtwork}
@@ -176,7 +178,7 @@ function SettingBox({
 					<ConfButton
 						helpText="簡易履歴表示"
 						className="hist"
-						areaKey="hi"
+						areaKey="vh"
 						icon={faHistory}
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
@@ -186,7 +188,7 @@ function SettingBox({
 					<ConfButton
 						helpText={`ブックマーク表示(${favCount})`}
 						className="books"
-						areaKey="bl"
+						areaKey="vb"
 						icon={faBookmark}
 						checked={s.showBookmark}
 						onClick={s.toggleBookmark}
@@ -214,7 +216,7 @@ function SettingBox({
 					<ConfButton
 						helpText="ダウンロード"
 						className="download"
-						areaKey="dl"
+						areaKey="dd"
 						icon={faDownload}
 						onClick={handleDownload}
 					/>
@@ -222,7 +224,7 @@ function SettingBox({
 					<ConfButton
 						helpText="スナップ"
 						className="snap"
-						areaKey="sn"
+						areaKey="ss"
 						icon={faPaperclip}
 						checked={snapped}
 						onClick={snapping}
@@ -231,7 +233,7 @@ function SettingBox({
 					<ConfButton
 						helpText="ストリーム"
 						className="stream"
-						areaKey="st"
+						areaKey="rr"
 						icon={faRadio}
 						checked={!!streamUrl}
 						onClick={toggleStream}
@@ -240,10 +242,18 @@ function SettingBox({
 					<ConfButton
 						helpText="デバッグ"
 						className="debug"
-						areaKey="db"
+						areaKey="_d"
 						icon={faToolbox}
 						checked={s.showTool}
 						onClick={s.toggleTool}
+					/>
+					<ConfButton
+						helpText="背景補正"
+						className="bgpick"
+						areaKey="pp"
+						icon={faMagicWandSparkles}
+						checked={bgPicker}
+						onClick={() => setBgPicker}
 					/>
 				</ButtonGrid>
 
@@ -322,12 +332,12 @@ const Wrap = styled.div`
 const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
-		'aw bk bk bk bk sn'
-		'tg bk bk bk bk sn'
-		'hi bk bk bk bk sn'
-		'bl bk bk bk bk dl'
-		'th th fd ha ha hl'
-		'lk st st db db db';
+		'va bb bb bb bb ss'
+		'vt bb bb bb bb ss'
+		'vh bb bb bb bb ss'
+		'vb bb bb bb bb dd'
+		'th th fd ha ha _h'
+		'lk pp pp rr rr _d';
 `
 
 export default SettingBox
