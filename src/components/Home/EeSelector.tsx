@@ -14,10 +14,11 @@ type EeDot = {
 const hint = (s: string, group: number) => {
 	const full = s.replace(/./, '.')
 	const head = s[0] + '~'
-	const tails = '~' + s[s.length - 1]
+	// const tails = '~' + s[s.length - 1]
+	const stripe = s.replace(/(.).?/g, '$1.')
 	const shima = s.replace(/.(.)?/g, '.$1')
 
-	return [head, full, tails, shima][group]
+	return [head, full, stripe, shima][group]
 }
 const makeDot = (
 	key: Eekey,
