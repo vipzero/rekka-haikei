@@ -132,6 +132,8 @@ export const timeColorMap = [
 export const URL_MAKE_SEARCH_CODE =
 	'https://github.com/vipzero/haikei-server/blob/main/src/utils/makeSearchWord.ts'
 
+export const URL_GITHUB_REPO_URL = 'https://github.com/vipzero/rekka-haikei'
+
 export const URL_TOHYO_REQ = 'https://forms.gle/SqABcPbFsTTpRsuR7'
 export const URL_USE_REQ = 'https://forms.gle/fBQnrAxMnKNhmFA16'
 export const URL_FEAT_REQ =

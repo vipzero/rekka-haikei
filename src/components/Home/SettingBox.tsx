@@ -22,7 +22,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
-import { abyssColorsEx, allThemes, allThemesById } from '../../config'
+import {
+	abyssColorsEx,
+	allThemes,
+	allThemesById,
+	URL_GITHUB_REPO_URL,
+} from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
@@ -292,12 +297,13 @@ function SettingBox({
 							履歴
 						</a>
 						<a href={`/${eid}/book`}>ブクマ</a>
-						<a href={`/${eid}/choice`}>背景補正</a>
+						<a href={URL_GITHUB_REPO_URL}>コード</a>
 					</div>
 
 					<div style={{ display: 'flex', gap: '8px' }}>
-						<a href="http://anison.info">アニメ情報元: Anison Generation</a>
-						<a href="https://github.com/vipzero/rekka-haikei">コード</a>
+						<a href="http://anison.info" rel="Anison Generation">
+							アニメ情報元
+						</a>
 					</div>
 				</div>
 			</div>
@@ -324,6 +330,7 @@ const Wrap = styled.div`
 		a,
 		label {
 			color: var(--font-color);
+			font-size: 1.2rem;
 		}
 	}
 	&[data-help='true'] {
