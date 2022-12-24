@@ -7,6 +7,7 @@ import {
 import { CheckBox } from '../common/CheckBox'
 import { ConfButton } from '../Home/ConfButton'
 import { toast } from 'react-toastify'
+import { chocoTheme, defaultCustomTheme } from '../../atom/customThemes'
 
 export function SettingPage() {
 	const { enableFakeBar, toggleEnableFakeBar } = useSettingsFakeBar()
@@ -60,6 +61,22 @@ export function SettingPage() {
 						autoComplete="on"
 						onChange={(e) => setCustomTheme(e.target.value)}
 					/>
+				</div>
+				<div>
+					<button
+						onClick={() => {
+							setCustomTheme(defaultCustomTheme)
+						}}
+					>
+						デフォルトに戻す
+					</button>
+					<button
+						onClick={() => {
+							setCustomTheme(chocoTheme)
+						}}
+					>
+						チョコ
+					</button>
 				</div>
 				<p>プレビュー</p>
 				<div className="preview">
@@ -118,6 +135,9 @@ const Style = styled.div<{ customTheme: string }>`
 	${(p) => p.customTheme}
 	.preview {
 		background: url('/static/pattern-randomized.svg');
+		button {
+			box-shadow: none;
+		}
 		width: 400px;
 		border: solid 1px;
 		.wrap {
@@ -134,7 +154,7 @@ const Style = styled.div<{ customTheme: string }>`
 
 		#panel {
 			background-color: var(--content-bg-color);
-			padding: 4px;
+			padding: 12px 4px;
 			margin: 4px;
 		}
 		#setting-box {

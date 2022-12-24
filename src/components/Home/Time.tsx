@@ -80,7 +80,7 @@ const Time = ({ song }: Props) => {
 	const trackTimeStr = trackTimeMillis ? formatMmSs(trackTimeMillis) : '??:??'
 
 	return (
-		<Style>
+		<Style id="the-goal-of-all-life-is-death">
 			<div className="mirror-table">
 				<div className={'lst'}>曲開始</div>
 				<div className={'lcu'}>現在</div>
