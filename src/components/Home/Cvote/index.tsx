@@ -42,7 +42,7 @@ const toCharVote = (
 const TOTL_MODE = 'totl'
 const PLUS_MODE = 'plus'
 const HIDE_MODE = 'hide'
-const modes = [TOTL_MODE, PLUS_MODE, HIDE_MODE] as const
+const modes = [PLUS_MODE, TOTL_MODE, HIDE_MODE] as const
 type Mode = typeof modes[number]
 const modeLabel: Record<Mode, string> = {
 	plus: '投票',
