@@ -50,8 +50,7 @@ export const eekeysVotic = [
 	'amagami',
 	'shanimas',
 	'gabudoro',
-	'yamajo',
-	'bryunhild',
+	// 'yamajo',
 	'imasml',
 	// 'imasmlas',
 	// 'imasmlpr',
@@ -92,7 +91,6 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['青春ブタ', 'aobuta'],
 	['ひぐらしの', 'higurashi'],
 	['experiments lain', 'lain'],
-	// ['コードギアス', 'codegeass'],
 	['攻殻機動隊', 'kokaku'],
 	['PSYCHO-PASS', 'psychopass'],
 	['廻って', 'spin'],
@@ -104,7 +102,6 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['冴えない彼女の育てかた', 'saekano'],
 	[/[化猫傷偽終暦憑]物語/, 'monogatari'],
 	['が修羅場すぎ', 'oreshura'],
-	['極黒のブリュンヒルデ', 'bryunhild'],
 	[/とある(魔術|科学)の/, 'toaru'],
 	['ジョジョ', 'jojo'],
 	['ボーボボ', 'bobo'],
@@ -114,7 +111,6 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/一週間フレンズ|プラスティック・メモリーズ/, 'issyuukanfr'],
 	['サカサマのパテマ', 'sakasa'],
 	['ソードアート・オンライン', 'sao'],
-	[/山田.*魔女/, 'yamajo'],
 	['/シャドーハウス|亜人[^ち]/', 'susu'],
 	['緋弾', 'ariascarlet'],
 	[/アマガミ/, 'amagami'],
@@ -125,6 +121,9 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['シャイニーカラーズ', 'shanimas'],
 	[/new game|ゲーマーズ|ハイスコア|ネトゲ/i, 'gaming'],
 	[/ラブプラス/i, 'loveplus'],
+	// ['極黒のブリュンヒルデ', 'bryunhild'],
+	// [/山田.*魔女/, 'yamajo'],
+	// ['コードギアス', 'codegeass'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
