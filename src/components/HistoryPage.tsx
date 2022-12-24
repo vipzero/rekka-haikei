@@ -1,27 +1,21 @@
-import { faStar } from '@fortawesome/free-regular-svg-icons'
-import {
-	faStar as faStarFill,
-	faTrash,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import copy from 'copy-to-clipboard'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
-import safe from 'safe-regex'
 import styled from 'styled-components'
-import { BRate } from '../service/firebase'
-import config, { timeColorMap } from '../config'
+import config from '../config'
 import { useFavorites } from '../hooks/useFavorites'
+import { useHistoryAuth } from '../hooks/useHistoryAuth'
 import { useHistoryDb } from '../hooks/useHistoryDb'
 import {
 	useIsCurrentEvent,
 	useQeuryEid,
 	useQueryInit,
 } from '../hooks/useQueryEid'
-import { useSearch } from '../hooks/useSearch'
 import { useStart } from '../hooks/useStart'
+import { BRate } from '../service/firebase'
 import { History } from '../types'
 import { formatDate } from '../util'
+import { safeRegex } from '../util/regex'
 import { CopyButton } from './BookPage/CopyButton'
 import { CheckBox } from './common/CheckBox'
 import { TabPanel, Tabs } from './common/Tab'
@@ -30,24 +24,10 @@ import Address from './HistoryPage/Address'
 import Schedule from './HistoryPage/Schedule'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { SettingPage } from './HistoryPage/SettingPage'
+import { TableItem } from './HistoryPage/TableItem'
+import { HistorySearchForm } from './HistorySearchForm'
 import { Toast } from './Toast'
-import { useHistoryAuth } from '../hooks/useHistoryAuth'
 
-const toH = (ts: number) =>
-	Math.floor(
-		((ts + 9 * 60 * 60 * 1000) % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000)
-	)
-
-const safeRegex = (s: string) => {
-	try {
-		if (safe(s)) {
-			return true
-		}
-	} catch (_e) {
-		return false
-	}
-	return false
-}
 const searchHit = (search: string, text: string, r: RegExp | false) => {
 	return (
 		(r && r.exec(text)) || text.toLowerCase().includes(search.toLowerCase())
@@ -114,13 +94,17 @@ function HistoryPage() {
 
 	return <HistoryPageBase />
 }
+
+const sortKeyConv: Record<string, keyof History> = {
+	by_n: 'n',
+	by_b: 'b',
+	by_g: 'g',
+}
 function HistoryPageBase() {
 	const { fixDb, histories, counts, countsSong } = useHistoryDb()
 	const eid = useQeuryEid()
 
-	const [searchPre, setSearchPre] = useState<string>('')
-	const [searchs, setSearch] = useState<string[]>([])
-	const [multiMode, setMultiMode] = useState<boolean>(false)
+	const [searchs, setSearchs] = useState<string[]>([])
 	const [copyMode, setCopyMode] = useState<boolean>(false)
 	const [wrapMode, setWrapMode] = useState<boolean>(true)
 	const [sortBy, setSort] = useState<'none' | 'by_n' | 'by_b' | 'by_g'>('none')
@@ -128,30 +112,16 @@ function HistoryPageBase() {
 	const [viewAll, setViewAll] = useState<boolean>(false)
 	const [tab, setTab] = useState<number>(0)
 	const { favorites, toggleFavorites } = useFavorites()
-	const {
-		searchs: searchHists,
-		addSearch,
-		delAllSearchs,
-		delSearch,
-	} = useSearch()
 
 	useQueryInit(
-		(q) => {
-			setSearchPre(q)
-			setSearch([q])
-		},
-		(tab) => {
-			setTab(tab)
-		}
+		(q) => setSearchs([q]),
+		(tab) => setTab(tab)
 	)
 
 	const sortedHists = useMemo(() => {
 		if (sortBy === 'none') return histories
 
-		const sortKey: keyof History =
-			({ by_n: 'n', by_b: 'b', by_g: 'g' } as Record<string, keyof History>)[
-				sortBy
-			] || 'n'
+		const sortKey: keyof History = sortKeyConv[sortBy] || 'n'
 		const sort = (a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1)
 
 		const arr = [...histories].sort(sort)
@@ -178,9 +148,7 @@ function HistoryPageBase() {
 	const viewHists = useMemo(() => {
 		return filteredHists.slice(0, viewAll ? 10000 : config.visibleRecordLimit)
 	}, [viewAll, filteredHists])
-	const search = (text: string) => {
-		setSearch(text.trim().split('\n').filter(Boolean))
-	}
+
 	const searchResultTexts = [
 		`履歴検索 ${eid}`,
 		...searchs.map((s) => `${s}: ${searchResult?.[s]}件`),
@@ -190,6 +158,8 @@ function HistoryPageBase() {
 	const searchResultTexts2 = searchs.map(
 		(s, i) => index2bText(!!searchResult?.[s], i) + ' ' + s
 	)
+	const toggleSort = (k: 'none' | 'by_n' | 'by_b' | 'by_g') =>
+		setSort((v) => (v === k ? 'none' : k))
 
 	return (
 		<Wrap>
@@ -214,94 +184,13 @@ function HistoryPageBase() {
 				<div>
 					<h3>履歴</h3>
 					<div>
-						<form className="search-box">
-							<div>
-								<textarea
-									rows={multiMode ? 8 : 1}
-									name="rekka-search-word"
-									value={searchPre}
-									autoComplete="on"
-									onChange={(e) =>
-										setSearchPre(
-											multiMode ? e.target.value : e.target.value.split('\n')[0]
-										)
-									}
-								/>
-							</div>
-							<div className="search-control">
-								<CheckBox
-									onChange={(multiMode) => {
-										setMultiMode(multiMode)
-										if (!multiMode) {
-											setSearchPre(searchPre.replace(/\n/g, ' '))
-										}
-									}}
-									checked={multiMode}
-								>
-									複数
-								</CheckBox>
-								<button
-									style={{ minWidth: '100px' }}
-									onClick={(e) => {
-										e.preventDefault()
-										if (searchPre.trim() !== '')
-											addSearch({ q: searchPre, multi: multiMode })
-										search(searchPre)
-									}}
-								>
-									検索
-									<div>(正規表現)</div>
-								</button>
-								{searchs.length > 0 && (
-									<button
-										onClick={(e) => {
-											e.preventDefault()
-											setSearch([])
-											setSearchPre('')
-										}}
-									>
-										リセット
-									</button>
-								)}
-							</div>
-							<div>
-								<div className="search-hist">
-									{searchHists.map((s, i) => (
-										<div key={i} className="del-btn">
-											<button
-												onClick={(e) => {
-													e.preventDefault()
-													setMultiMode(s.multi)
-													search(s.q)
-													setSearchPre(s.q)
-												}}
-											>
-												{s.q.substring(0, 10)}
-											</button>
-											<button
-												onClick={(e) => {
-													e.preventDefault()
-													delSearch(s)
-												}}
-											>
-												x
-											</button>
-										</div>
-									))}
-									{searchHists.length > 0 && (
-										<button
-											style={{ background: 'var(--gray-color)' }}
-											onClick={(e) => {
-												e.preventDefault()
-												delAllSearchs()
-											}}
-										>
-											<FontAwesomeIcon icon={faTrash} />
-										</button>
-									)}
-								</div>
-							</div>
-						</form>
+						<HistorySearchForm
+							search={(text) => {
+								setSearchs(text.trim().split('\n').filter(Boolean))
+							}}
+							searchs={searchs}
+							setSearchs={setSearchs}
+						/>
 					</div>
 					<div className="search-result">
 						{searchResult && (
@@ -370,36 +259,21 @@ function HistoryPageBase() {
 							<div>タイトル</div>
 							<div className="non-copy">ブ</div>
 							<div className="non-copy">
-								<div
-									className="link-like"
-									onClick={() =>
-										setSort((v) => (v === 'by_n' ? 'none' : 'by_n'))
-									}
-								>
+								<div className="link-like" onClick={() => toggleSort('by_n')}>
 									<div className="tooltip">
 										<span className="tooltip-text">勢い</span>N
 									</div>
 								</div>
 							</div>
 							<div className="non-copy">
-								<div
-									className="link-like"
-									onClick={() =>
-										setSort((v) => (v === 'by_b' ? 'none' : 'by_b'))
-									}
-								>
+								<div className="link-like" onClick={() => toggleSort('by_b')}>
 									<div className="tooltip">
 										<span className="tooltip-text">ブクマ数</span>★
 									</div>
 								</div>
 							</div>
 							<div className="non-copy">
-								<div
-									className="link-like"
-									onClick={() =>
-										setSort((v) => (v === 'by_g' ? 'none' : 'by_g'))
-									}
-								>
+								<div className="link-like" onClick={() => toggleSort('by_g')}>
 									<div className="tooltip">
 										<span className="tooltip-text">
 											(ブクマ数 ^ 2)/(勢い + {BRate})
@@ -410,59 +284,13 @@ function HistoryPageBase() {
 							</div>
 						</div>
 
-						{viewHists.map((reco, i) => (
-							<ColorTr
+						{viewHists.map((reco) => (
+							<TableItem
 								key={reco.time}
-								className="hist-row"
-								data-h2={toH(reco.time) % 2}
-								style={{
-									// @ts-ignore
-									['--daytime-color']: timeColorMap[toH(reco.time)],
-								}}
-							>
-								<div>{formatDate(reco.time)}</div>
-								<div>{reco.title}</div>
-								<div className={'non-copy'}>
-									<FontAwesomeIcon
-										icon={favorites[reco.title] ? faStarFill : faStar}
-										onClick={() => toggleFavorites(reco.title)}
-									/>
-								</div>
-								<div
-									className={'non-copy'}
-									data-prog-cell
-									style={{
-										background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
-										textAlign: 'right',
-									}}
-								>
-									{reco.n ?? '-'}
-								</div>
-								<div
-									className={'non-copy'}
-									data-prog-cell
-									style={{
-										background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
-											reco.b ?? 0
-										}%, #fff ${reco.b ?? 0}%, #fff 100%)`,
-										textAlign: 'right',
-									}}
-								>
-									{reco.b || '-'}
-								</div>
-								<div
-									className={'non-copy'}
-									data-prog-cell
-									style={{
-										background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
-											reco.g
-										}%, #fff ${reco.g ?? 0}%, #fff 100%)`,
-										textAlign: 'right',
-									}}
-								>
-									{reco.g?.toFixed(1)}
-								</div>
-							</ColorTr>
+								reco={reco}
+								favorited={favorites[reco.title]}
+								toggleFavorites={() => toggleFavorites(reco.title)}
+							/>
 						))}
 					</div>
 					{histories.length >= 100 && (
@@ -617,34 +445,6 @@ const Wrap = styled.div`
 		display: grid;
 		grid-template-rows: auto 1fr;
 		gap: 3px;
-	}
-`
-
-const ColorTr = styled.div<{ h: number }>`
-	> div {
-		padding: 2px;
-	}
-	> div:first-child {
-		border-left: solid var(--daytime-color) 8px;
-	}
-	--bg-strip-color1: #98e0ff;
-	--bg-strip-color2: #e5faff;
-	@media (prefers-color-scheme: dark) {
-		--bg-strip-color1: #002737;
-		--bg-strip-color2: #003c4b;
-	}
-	&[data-h2='0'] {
-		> div:first-child {
-			background: var(--bg-strip-color1);
-		}
-	}
-	&[data-h2='1'] {
-		> div:first-child {
-			background: var(--bg-strip-color2);
-		}
-	}
-	[data-prog-cell] {
-		color: black;
 	}
 `
 

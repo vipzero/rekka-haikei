@@ -92,7 +92,6 @@ body {
   margin: 0;
   min-height: 100vh;
 	--primary-color: #e7627d;
-	--gray-color: #eee;
 }
 ul {
 		margin: 0;
