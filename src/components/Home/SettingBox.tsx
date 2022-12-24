@@ -11,6 +11,7 @@ import {
 	faPalette,
 	faPaperclip,
 	faQuestion,
+	faRadio,
 	faStar as faStarFill,
 	faTags,
 	faTimes,
@@ -40,7 +41,7 @@ type Props = {
 	toggleFavorited: () => void
 	addSnap: () => void
 	streamUrl: string
-	setStreamUrl: (_url: string) => void
+	setStreamUrl: (url: string) => void
 	favCount: number
 	song: Song
 	url: string
@@ -86,6 +87,10 @@ function SettingBox({
 
 		toast.success('スナップ保存しました\nブクマから確認できます', {})
 	}
+	const toggleStream = () => {
+		if (streamUrl) removeStream()
+		else setStreamUrl('http://')
+	}
 
 	return (
 		<Wrap
@@ -129,13 +134,13 @@ function SettingBox({
 						onClick={s.toggleShowHelp}
 						checked={s.showHelp}
 					/>
-					<ConfButton
+					{/* <ConfButton
 						helpText="閉じる"
 						className="close"
 						areaKey="cl"
 						icon={faTimes}
 						onClick={s.closeSetting}
-					/>
+					/> */}
 
 					<ConfButton
 						helpText={
@@ -224,6 +229,15 @@ function SettingBox({
 					/>
 
 					<ConfButton
+						helpText="ストリーム"
+						className="stream"
+						areaKey="st"
+						icon={faRadio}
+						checked={!!streamUrl}
+						onClick={toggleStream}
+					/>
+
+					<ConfButton
 						helpText="デバッグ"
 						className="debug"
 						areaKey="db"
@@ -233,6 +247,23 @@ function SettingBox({
 					/>
 				</ButtonGrid>
 
+				<div style={{ display: streamUrl ? 'block' : 'none' }}>
+					<span className="typography">StreamURL </span>
+					<input
+						name="streaming-url"
+						value={streamUrl}
+						onChange={(e) => setStreamUrl(e.target.value || '')}
+					/>
+
+					<button onClick={removeStream}>
+						<FontAwesomeIcon icon={faTimesCircle} size="xs" />
+					</button>
+					<div>
+						{streamUrl.includes('http://') && (
+							<span style={{ color: 'red' }}>http 非対応</span>
+						)}
+					</div>
+				</div>
 				{s.showTool && (
 					<div>
 						<Time song={song} />
@@ -250,22 +281,6 @@ function SettingBox({
 						<a href={`/${eid}/choice`}>背景補正</a>
 					</div>
 
-					<div>
-						<span className="typography">StreamURL </span>
-						<input
-							name="streaming-url"
-							value={streamUrl}
-							onChange={(e) => setStreamUrl(e.target.value || '')}
-						/>
-						{streamUrl.includes('http://') && (
-							<span style={{ color: 'red' }}>http 非対応</span>
-						)}
-						{streamUrl && (
-							<button onClick={removeStream}>
-								<FontAwesomeIcon icon={faTimesCircle} size="xs" />
-							</button>
-						)}
-					</div>
 					<div style={{ display: 'flex', gap: '8px' }}>
 						<a href="http://anison.info">アニメ情報元: Anison Generation</a>
 						<a href="https://github.com/vipzero/rekka-haikei">コード</a>
@@ -307,12 +322,12 @@ const Wrap = styled.div`
 const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
-		'th th fd fd ha ha cl'
-		'aw aw aw bk bk bk cl'
-		'tg tg tg bk bk bk cl'
-		'hi hi hi bk bk bk hl'
-		'bl bl bl bk bk bk db'
-		'lk sn sn sn dl dl db';
+		'aw bk bk bk bk sn'
+		'tg bk bk bk bk sn'
+		'hi bk bk bk bk sn'
+		'bl bk bk bk bk dl'
+		'th th fd ha ha hl'
+		'lk st st db db db';
 `
 
 export default SettingBox
