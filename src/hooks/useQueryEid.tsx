@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router'
 import { ParsedUrlQuery } from 'querystring'
 import React, { useEffect } from 'react'
-import config from '../config'
+import config, { currentEvent } from '../config'
 
 export function useQeuryEid() {
 	const router = useRouter()
@@ -10,6 +10,10 @@ export function useQeuryEid() {
 	if (typeof eid === 'object') return eid[0]
 
 	return eid || config.eventId
+}
+export function useIsCurrentEvent() {
+	const eid = useQeuryEid()
+	return currentEvent?.id === eid
 }
 
 const getQuery = (query: ParsedUrlQuery, path: string, queryKey: string) => {

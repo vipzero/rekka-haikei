@@ -13,7 +13,11 @@ import { BRate } from '../service/firebase'
 import config, { timeColorMap } from '../config'
 import { useFavorites } from '../hooks/useFavorites'
 import { useHistoryDb } from '../hooks/useHistoryDb'
-import { useQeuryEid, useQueryInit } from '../hooks/useQueryEid'
+import {
+	useIsCurrentEvent,
+	useQeuryEid,
+	useQueryInit,
+} from '../hooks/useQueryEid'
 import { useSearch } from '../hooks/useSearch'
 import { useStart } from '../hooks/useStart'
 import { History } from '../types'
@@ -27,6 +31,7 @@ import Schedule from './HistoryPage/Schedule'
 import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { SettingPage } from './HistoryPage/SettingPage'
 import { Toast } from './Toast'
+import { useHistoryAuth } from '../hooks/useHistoryAuth'
 
 const toH = (ts: number) =>
 	Math.floor(
@@ -94,8 +99,19 @@ const rangeFilter = (range: Range, time: number) => {
 type Range = null | { start: number; end: number }
 function HistoryPage() {
 	const ready = useStart()
+	const { authed, submit } = useHistoryAuth()
+	const isCurrent = useIsCurrentEvent()
+	console.log({ isCurrent, authed })
 
 	if (!ready) return null
+	if (!isCurrent && !authed) {
+		return (
+			<div style={{ padding: '1rem' }}>
+				pass: <input type="password" onChange={(e) => submit(e.target.value)} />
+			</div>
+		)
+	}
+
 	return <HistoryPageBase />
 }
 function HistoryPageBase() {
