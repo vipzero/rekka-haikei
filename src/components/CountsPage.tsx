@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Count } from '../types'
 import { TabPanel, Tabs } from './common/Tab'
 import { ComparePage } from './HistoryPage/ComparePage'

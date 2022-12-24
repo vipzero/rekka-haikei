@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getBooks, getBooksPostCount } from '../service/firebase'
 import { BookCount, WordCount } from '../types'
 import { countWordsIcys } from '../util/serverCodeUtils'

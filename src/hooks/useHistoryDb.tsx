@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
 	getHistoriesDb,
 	getHistoriesDbRange,
@@ -352,7 +352,7 @@ export function useScheduleDb() {
 	} as const
 }
 
-const keyBy = <T,>(list: Count[]) => {
+const keyBy = (list: Count[]) => {
 	const res: Record<string, Count> = {}
 
 	list.forEach((c) => {

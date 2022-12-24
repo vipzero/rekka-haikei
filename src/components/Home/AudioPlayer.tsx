@@ -1,7 +1,4 @@
-import React from 'react'
 import ReactAudioPlayer from 'react-audio-player'
-import styled from 'styled-components'
-import { URL_PLAYER_API } from '../../config'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { isValidUrl } from '../../util'
 
@@ -38,6 +35,5 @@ function AudioPlayer({ src }: Props) {
 		// </Style>
 	)
 }
-const Style = styled.div``
 
 export default AudioPlayer

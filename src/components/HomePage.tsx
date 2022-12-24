@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNetworkState } from 'react-use'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
@@ -20,7 +20,7 @@ function HomePage() {
 function HomePageBase() {
 	const network = useNetworkState()
 
-	const [loaded, song, setBg] = useSongDb(Boolean(network.online))
+	const [_loaded, song, setBg] = useSongDb(Boolean(network.online))
 	const { abyss, setEekey } = useSettingsEe()
 	const { customTheme } = useSettingsCustomTheme()
 

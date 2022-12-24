@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function useKeyPress(targetKey) {
 	const [keyPressed, setKeyPressed] = useState<boolean>(false)

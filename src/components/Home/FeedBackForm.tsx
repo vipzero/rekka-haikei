@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { addFeedback } from '../../service/firebase'
 import { Song } from '../../types'
 

@@ -1,10 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { ComponentProps } from 'react'
 import { Tabs } from '../components/common/Tab'
 import { GlobalStyle } from '../config/init'
-import { Setting } from '../types'
-
-type Props = ComponentProps<typeof Tabs> & { setting: Setting }
 
 export default {
 	title: 'Tabs',

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'

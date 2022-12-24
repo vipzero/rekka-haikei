@@ -40,7 +40,7 @@ const rgbShiftR = genAnimationRgbShift()
 const rgbShiftG = genAnimationRgbShift()
 const rgbShiftB = genAnimationRgbShift()
 const glitchBefore = genAnimationGlitch()
-const glitchAfter = genAnimationGlitch()
+// const glitchAfter = genAnimationGlitch()
 
 const randAnimsCss = [...Array(20).keys()]
 	.map(

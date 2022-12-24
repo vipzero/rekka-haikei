@@ -15,7 +15,6 @@ import {
 	faRadio,
 	faStar as faStarFill,
 	faTags,
-	faTimes,
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -33,7 +32,6 @@ import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
-import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
 

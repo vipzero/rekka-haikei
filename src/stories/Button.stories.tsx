@@ -1,15 +1,9 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { range } from 'lodash'
-import { ComponentProps } from 'react'
 import { GlobalStyle, SubPageTheme } from '../config/init'
-import { Setting } from '../types'
-import { snaps } from './seed'
 
 const Button = (props) => <button {...props} />
-
-type Props = ComponentProps<typeof Button> & { setting: Setting }
 
 export default {
 	title: 'Button',

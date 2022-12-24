@@ -4,8 +4,6 @@ import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useSongDb } from '../../hooks/useSongDb'
 import { searchImageUrl } from '../../util'
 
-type Props = {}
-
 const WORDS = [
 	'meme',
 	'キャプ画',

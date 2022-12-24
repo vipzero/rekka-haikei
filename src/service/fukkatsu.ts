@@ -16,8 +16,8 @@ export const encodeSetting = (setting: Setting): Uint8Array => {
 		wide: Config.SideMode.WIDE,
 	}[setting.sideMode]
 	const eeLine = Object.entries(setting.ee)
-		.filter(([k, v]) => v > 0)
-		.map(([k, v]) => k)
+		.filter(([_k, v]) => v > 0)
+		.map(([k]) => k)
 		.join(',')
 
 	cauldron.ee = strToBytes(eeLine)
@@ -84,8 +84,4 @@ export const spellCatch = (str: string): Partial<Setting> | false => {
 		return spell(str)
 	} catch {}
 	return false
-}
-
-export const fukkatsu = (str: string): Buffer => {
-	return Buffer.from([])
 }

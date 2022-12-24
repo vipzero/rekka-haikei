@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
-import { useEmolDb } from '../../hooks/useEmolDb'
 import { useFavorites, useSnaps } from '../../hooks/useFavorites'
 import { useLightConfig } from '../../hooks/useLightConfig'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
@@ -37,7 +36,7 @@ type Props = {
 	setBg: (url: string, time: number) => void
 }
 function Home({ song, setBg }: Props) {
-	const { theme, sideMode, lockBgNum, toggleSetting, ...s } = useSettings()
+	const { theme, sideMode, lockBgNum, toggleSetting } = useSettings()
 	const { eeKey } = useSettingsEe()
 	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
@@ -121,15 +120,6 @@ function Home({ song, setBg }: Props) {
 				onClose={() => setBgcmOpen(false)}
 			/>
 		</Master>
-	)
-}
-
-const LyricsBox = () => {
-	const [loaded, emol] = useEmolDb()
-	return (
-		<div className="lyricsbox">
-			<pre>{emol.text}</pre>
-		</div>
 	)
 }
 

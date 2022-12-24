@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getCounts } from '../service/firebase'
 import { WordCount } from '../types'
 import { useQeuryEid } from './useQueryEid'

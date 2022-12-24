@@ -1,6 +1,6 @@
 // @ts-ignore
 
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 
 type State = { hasError: boolean }
 class ErrorBoundary extends React.Component<PropsWithChildren<{}>, State> {

@@ -52,9 +52,9 @@ const P_CURRENT = 'current'
 // refs
 const voteDoc = (eid: string) => doc(fdb, P_VOTE, eid)
 const booksCol = (eid: string) => collection(fdb, P_VOTE, eid, P_BOOKS)
-const tablesCol = () => collection(fdb, P_TABLE)
+const _tablesCol = () => collection(fdb, P_TABLE)
 const tableDoc = (eid: string) => doc(fdb, P_TABLE, eid)
-const histsCol = () => collection(fdb, P_HIST)
+const _histsCol = () => collection(fdb, P_HIST)
 const histSongsDoc = (eid: string, time: string) =>
 	doc(fdb, P_HIST, eid, P_SONGS, time)
 const histSongsCol = (eid: string) => collection(fdb, P_HIST, eid, P_SONGS)
@@ -62,7 +62,7 @@ const countsCol = (eid: string) => collection(fdb, P_HIST, eid, P_COUNTS)
 const animeDoc = (aid: string) => doc(fdb, P_CVOTE, aid)
 const songDoc = (eid: string) => doc(fdb, P_SONG, eid)
 const emolDoc = (eid: string) => doc(fdb, P_EMOL, eid)
-const bookCountDoc = () => doc(fdb, P_YO, P_CURRENT)
+const _bookCountDoc = () => doc(fdb, P_YO, P_CURRENT)
 
 // querys
 const icyIs = (icy: string) => where('icy', '==', icy)

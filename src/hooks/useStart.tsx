@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { storageKeys } from '../config'
 import { Setting } from '../types'
 import { useLocalStorage } from './useLocalStorage'
 
 export function useStart() {
-	// useSugar()
 	const migReady = useMigration()
 	useEffect(() => {
 		killCache()

@@ -13,7 +13,7 @@ function ScheduleTable({
 			<Table>
 				<thead>
 					<tr>
-						{['day', ...Array(24).keys()].map((d, i) => (
+						{['day', ...Array(24).keys()].map((d) => (
 							<th key={d}>{d}</th>
 						))}
 					</tr>
@@ -81,7 +81,7 @@ const Table = styled.table`
 `
 
 const toMd = (ymd: string) => {
-	const [y, m, d] = ymd.split('/')
+	const [_y, m, d] = ymd.split('/')
 	return `${m || '-'}/${d || '-'}`
 }
 

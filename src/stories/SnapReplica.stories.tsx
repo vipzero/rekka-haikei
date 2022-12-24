@@ -1,12 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { range } from 'lodash'
-import { ComponentProps } from 'react'
 import { SnapReplica } from '../components/BookPage/SnapReplica'
 import { GlobalStyle } from '../config/init'
-import { Setting } from '../types'
 import { snaps } from './seed'
-
-type Props = ComponentProps<typeof SnapReplica> & { setting: Setting }
 
 export default {
 	title: 'SnapReplica',

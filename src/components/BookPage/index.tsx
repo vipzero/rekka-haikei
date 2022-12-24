@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useSnaps } from '../../hooks/useFavorites'
 import { TabPanel, Tabs } from '../common/Tab'

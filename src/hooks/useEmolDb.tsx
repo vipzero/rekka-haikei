@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { readEmol } from '../service/firebase'
 import { Emol } from '../types'
 import { useQeuryEid } from './useQueryEid'
