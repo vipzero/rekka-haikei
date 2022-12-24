@@ -41,9 +41,7 @@ export function SettingPage() {
 			<section style={{ width: 'max-content' }}>
 				<h4>オプション</h4>
 				<CheckBox
-					onChange={() => {
-						toggleEnableFakeBar()
-					}}
+					onChange={toggleEnableFakeBar}
 					checked={enableFakeBar === 'on'}
 				>
 					疑似シークバー: 曲の再生時間がとれない場合も4分のシークバーを表示する
@@ -63,20 +61,10 @@ export function SettingPage() {
 					/>
 				</div>
 				<div>
-					<button
-						onClick={() => {
-							setCustomTheme(defaultCustomTheme)
-						}}
-					>
+					<button onClick={() => setCustomTheme(defaultCustomTheme)}>
 						デフォルトに戻す
 					</button>
-					<button
-						onClick={() => {
-							setCustomTheme(chocoTheme)
-						}}
-					>
-						チョコ
-					</button>
+					<button onClick={() => setCustomTheme(chocoTheme)}>チョコ</button>
 				</div>
 				<p>プレビュー</p>
 				<div className="preview">
