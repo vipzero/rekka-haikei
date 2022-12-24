@@ -522,7 +522,7 @@ const Wrap = styled.div`
 		.hist-row {
 			width: max(96vw, 600px);
 			display: grid;
-			grid-template-columns: 184px 1fr 1.5rem 2rem 2rem 2rem;
+			grid-template-columns: 188px 1fr 1.5rem 2rem 2rem 2rem;
 		}
 
 		.hist-row {
@@ -544,7 +544,7 @@ const Wrap = styled.div`
 		&[data-copy-mode='true'] {
 			.hist-head,
 			.hist-row {
-				grid-template-columns: 184px 1fr;
+				grid-template-columns: 188px 1fr;
 				.non-copy {
 					display: none;
 				}
