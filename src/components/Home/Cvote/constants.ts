@@ -32,6 +32,7 @@ export const eekeysMirror = [
 	'sakasa',
 	// 'break',
 	'mosaic',
+	'offline',
 ] as const
 export const eekeysVotic = [
 	'gotoyome',

@@ -598,6 +598,11 @@ export const exStyles = css`
 			}
 		}
 	}
+	&[data-ex='offline'] {
+		#bg {
+			filter: grayscale(100%);
+		}
+	}
 `
 
 function genAnimationRgbShift() {

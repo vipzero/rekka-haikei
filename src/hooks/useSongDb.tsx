@@ -16,11 +16,11 @@ import { HistoryRaw, Song } from '../types'
 import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
 
-export function useSongDb() {
+export function useSongDb(online = true) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()
 	const [song, setSong] = useState<Song>({
-		icy: currentEvent?.label || '',
+		icy: (currentEvent?.label || '') + ' - loading',
 		time: 0,
 		wordCounts: {},
 		wordCountsAna: [],
@@ -28,6 +28,7 @@ export function useSongDb() {
 	})
 
 	useEffect(() => {
+		if (!online) return
 		const si = readSong(eventId, (song) => {
 			const wordCountsAna = Object.entries(song.wordCounts)
 				.filter(([k]) => k !== song.icy)
@@ -44,7 +45,7 @@ export function useSongDb() {
 		})
 
 		return () => si()
-	}, [eventId])
+	}, [eventId, online])
 
 	const setBg = async (url, sid) => {
 		saveSongBg(url, eventId, sid)

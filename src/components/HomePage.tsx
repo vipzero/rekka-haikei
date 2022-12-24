@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNetworkState } from 'react-use'
 import { RecoilRoot } from 'recoil'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
@@ -7,13 +8,7 @@ import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Home from './Home'
 import { Toast } from './Toast'
-
-const LoadingView = () => (
-	<div>
-		<span>{'■■■■■■■■■■□□□ NOWLOADING'}</span>
-		{/* <Address /> */}
-	</div>
-)
+import { toast } from 'react-toastify'
 
 function HomePage() {
 	const ready = useStart()
@@ -23,12 +18,19 @@ function HomePage() {
 }
 
 function HomePageBase() {
-	const [loaded, song] = useSongDb()
-	const { abyss } = useSettingsEe()
+	const network = useNetworkState()
+
+	const [loaded, song] = useSongDb(Boolean(network.online))
+	const { abyss, setEekey } = useSettingsEe()
 	const { customTheme } = useSettingsCustomTheme()
 
 	useEx(song)
-	if (!loaded) return <LoadingView />
+	useEffect(() => {
+		if (!network.online) {
+			toast.error('インターネットが壊れています', { autoClose: false })
+			setEekey('offline')
+		}
+	}, [network.online])
 
 	return (
 		<>
