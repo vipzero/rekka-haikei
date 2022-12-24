@@ -28,6 +28,7 @@ import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Song } from '../../types'
 import { downloadImg } from '../../util'
+import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
 
@@ -40,6 +41,8 @@ const lockLabel = {
 type Props = {
 	favorited: boolean
 	toggleFavorited: () => void
+	bgcmOpen: boolean
+	toggleBgcmOpen: () => void
 	addSnap: () => void
 	streamUrl: string
 	setStreamUrl: (url: string) => void
@@ -54,6 +57,8 @@ function SettingBox({
 	addSnap,
 	streamUrl,
 	setStreamUrl,
+	bgcmOpen,
+	toggleBgcmOpen,
 	favCount,
 	song,
 	url,
@@ -63,7 +68,6 @@ function SettingBox({
 	const eid = useQeuryEid()
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
-	const [bgPicker, setBgPicker] = useState<boolean>(false)
 
 	useEffect(() => {
 		setPressed(false)
@@ -252,8 +256,8 @@ function SettingBox({
 						className="bgpick"
 						areaKey="pp"
 						icon={faMagicWandSparkles}
-						checked={bgPicker}
-						onClick={() => setBgPicker}
+						checked={bgcmOpen}
+						onClick={toggleBgcmOpen}
 					/>
 				</ButtonGrid>
 

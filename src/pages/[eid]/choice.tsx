@@ -5,9 +5,12 @@ import dynamic from 'next/dynamic'
 import { SubPageTheme } from '../../config/init'
 
 export { getStaticPaths, getStaticProps }
-const BgChoice = dynamic(async () => import('../../components/BgChoicePage'), {
-	ssr: false,
-})
+const BgChoice = dynamic(
+	async () => import('../../components/BgChoise/BgChoicePage'),
+	{
+		ssr: false,
+	}
+)
 
 const Page = () => (
 	<Layout title="背景補正 - vipstream">

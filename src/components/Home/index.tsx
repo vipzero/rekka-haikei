@@ -12,6 +12,7 @@ import {
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
+import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
 import { Conways } from './ex/Coway'
@@ -33,10 +34,12 @@ const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
 
 type Props = {
 	song: Song
+	setBg: (url: string, time: number) => void
 }
-function Home({ song }: Props) {
+function Home({ song, setBg }: Props) {
 	const { theme, sideMode, lockBgNum, toggleSetting, ...s } = useSettings()
 	const { eeKey } = useSettingsEe()
+	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
 	const { favorites: books, toggleFavorites } = useFavorites()
 	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
@@ -52,7 +55,10 @@ function Home({ song }: Props) {
 
 	return (
 		<Master
-			onClick={toggleSetting}
+			onClick={() => {
+				toggleSetting()
+				setBgcmOpen(false)
+			}}
 			// @ts-ignore
 			style={{ '--song-time': `${song.trackTimeMillis / 1000}s` }}
 			data-ex={eeKey || theme}
@@ -94,6 +100,8 @@ function Home({ song }: Props) {
 					setStreamUrl={setStreamUrl}
 					favorited={books[song.icy]}
 					toggleFavorited={() => toggleFavorites(song.icy)}
+					bgcmOpen={bgcmOpen}
+					toggleBgcmOpen={() => setBgcmOpen((v) => !v)}
 					addSnap={() => addSnap(song, url)}
 					favCount={Object.keys(books).length}
 					url={url}
@@ -105,6 +113,13 @@ function Home({ song }: Props) {
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
 			</Wrap>
+
+			<BgChoiceModal
+				song={song}
+				setBg={setBg}
+				open={bgcmOpen}
+				onClose={() => setBgcmOpen(false)}
+			/>
 		</Master>
 	)
 }
