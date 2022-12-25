@@ -1,9 +1,9 @@
 // @ts-ignore
 
-import { PropsWithChildren } from 'react'
+import { Component, PropsWithChildren } from 'react'
 
 type State = { hasError: boolean }
-class ErrorBoundary extends React.Component<PropsWithChildren<{}>, State> {
+class ErrorBoundary extends Component<PropsWithChildren<{}>, State> {
 	constructor(props) {
 		super(props)
 		this.state = { hasError: false }

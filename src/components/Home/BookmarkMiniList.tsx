@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+
 import { useSettingsShowBookmark } from '../../hooks/useSettings'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 

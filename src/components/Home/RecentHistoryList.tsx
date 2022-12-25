@@ -1,4 +1,3 @@
-import React from 'react'
 import { useRecentHistoryDb } from '../../hooks/useRecentHistoryDb'
 import { useSettingsShowHistory } from '../../hooks/useSettings'
 import { formatTime } from '../../util'

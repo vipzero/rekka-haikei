@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React from 'react'
+
 import { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 import { defaultSetting as setting } from '../atom/SettingAtom'

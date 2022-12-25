@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'

@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 type Props = {
@@ -22,8 +22,8 @@ export const Tabs = ({
 	items: { label: string }[]
 	tab?: number
 }) => {
-	const [tab, setTab] = React.useState<number>(0)
-	React.useEffect(() => {
+	const [tab, setTab] = useState<number>(0)
+	useEffect(() => {
 		if (upTab !== undefined && upTab !== tab) setTab(upTab)
 	}, [upTab])
 	return (
@@ -84,7 +84,7 @@ export const Style = styled.div`
 `
 
 interface TabPanelProps {
-	children?: React.ReactNode
+	children?: ReactNode
 	index: number
 	value: number
 }
