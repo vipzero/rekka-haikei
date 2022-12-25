@@ -135,7 +135,7 @@ export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = []
 
 // icy に部分一致
 export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
-	[/ノルニル|スクランブル|回レ|ぐるぐる|ろーりんぐ|ローリング/, 'spin'],
+	[/ノルニル|スクランブル|回レ|ぐるぐる|ろーりんぐ|ローリング|回転/, 'spin'],
 	[/bull['e]/, 'ariascarlet'],
 	[/逆さま|サカサマ|サーカス/, 'sakasa'],
 	['労働', 'halowa'],
