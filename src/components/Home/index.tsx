@@ -56,7 +56,7 @@ function Home({ song, setBg }: Props) {
 	const { moz, bre } = useLightConfig(song, () => toggleFavorites(song.icy))
 
 	return (
-		<Master
+		<Wrap
 			onClick={() => {
 				toggleSetting()
 				setBgcmOpen(false)
@@ -91,30 +91,30 @@ function Home({ song, setBg }: Props) {
 			) : (
 				<TrackTimeBar startTime={song.time} size={timeBarSize} />
 			)}
-			<Wrap data-side={sideMode}>
+			<Container data-side={sideMode}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<AudioPlayer src={streamUrl}></AudioPlayer>
 				</div>
-				<SettingBox
-					song={song}
-					streamUrl={streamUrl}
-					setStreamUrl={setStreamUrl}
-					favorited={books[song.icy]}
-					toggleFavorited={() => toggleFavorites(song.icy)}
-					bgcmOpen={bgcmOpen}
-					toggleBgcmOpen={() => setBgcmOpen((v) => !v)}
-					addSnap={() => addSnap(song, url)}
-					favCount={Object.keys(books).length}
-					url={url}
-				/>
 
 				<ExtraComp sid={`${song.time}`} />
 				<RecentHistoryList />
 				{/* {showEmol && <LyricsBox />} */}
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
-			</Wrap>
+			</Container>
+			<SettingBox
+				song={song}
+				streamUrl={streamUrl}
+				setStreamUrl={setStreamUrl}
+				favorited={books[song.icy]}
+				toggleFavorited={() => toggleFavorites(song.icy)}
+				bgcmOpen={bgcmOpen}
+				toggleBgcmOpen={() => setBgcmOpen((v) => !v)}
+				addSnap={() => addSnap(song, url)}
+				favCount={Object.keys(books).length}
+				url={url}
+			/>
 
 			<BgChoiceModal
 				song={song}
@@ -122,11 +122,11 @@ function Home({ song, setBg }: Props) {
 				open={bgcmOpen}
 				onClose={() => setBgcmOpen(false)}
 			/>
-		</Master>
+		</Wrap>
 	)
 }
 
-const Wrap = styled.div`
+const Container = styled.div`
 	width: 50vw;
 	display: flex;
 	flex-direction: column;
@@ -148,23 +148,6 @@ const Wrap = styled.div`
 		position: absolute;
 		flex-direction: column-reverse;
 		bottom: 0;
-	}
-
-	button {
-		border-radius: 4px;
-		border: none;
-		margin: 4px;
-		min-height: 24px;
-		min-width: 36px;
-		text-align: center;
-		&.big {
-			min-width: 124px;
-		}
-		svg {
-			font-size: 0.8rem;
-			margin-right: 2px;
-			margin-left: 2px;
-		}
 	}
 
 	.moc {
@@ -211,15 +194,9 @@ const Wrap = styled.div`
 	[data-visible='false'] {
 		display: none;
 	}
-	#setting-box {
-		z-index: 1;
-		position: fixed;
-		bottom: 0;
-		right: 0;
-	}
 `
 
-const Master = styled.div<{ customTheme: string }>`
+const Wrap = styled.div<{ customTheme: string }>`
 	min-height: 100vh;
 	width: 100vw;
 	${themeStyles}
@@ -231,6 +208,23 @@ const Master = styled.div<{ customTheme: string }>`
 	button {
 		color: var(--btn-fo-color);
 		background-color: var(--btn-bg-color);
+	}
+
+	button {
+		border-radius: 4px;
+		border: none;
+		margin: 4px;
+		min-height: 24px;
+		min-width: 36px;
+		text-align: center;
+		&.big {
+			min-width: 124px;
+		}
+		svg {
+			font-size: 0.8rem;
+			margin-right: 2px;
+			margin-left: 2px;
+		}
 	}
 	[data-co] {
 		background: var(--content-bg-color);
@@ -294,6 +288,13 @@ const Master = styled.div<{ customTheme: string }>`
 		}
 	}
 	&[data-bre='true'] {
+	}
+
+	#setting-box {
+		z-index: 1;
+		position: fixed;
+		bottom: 0;
+		right: 0;
 	}
 `
 
