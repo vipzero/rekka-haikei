@@ -144,6 +144,8 @@ const Wrap = styled.div`
 	background-color: var(--content-bg-color);
 	padding: 12px;
 	border-radius: 4px;
+	overflow: hidden;
+
 	#panel-shadow {
 		// ee
 		display: none;
