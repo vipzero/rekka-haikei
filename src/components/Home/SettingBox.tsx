@@ -30,7 +30,7 @@ import {
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
-import { Song } from '../../types'
+import { Setting, Song } from '../../types'
 import { downloadImg } from '../../util'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
@@ -100,6 +100,14 @@ function SettingBox({
 		if (streamUrl) removeStream()
 		else setStreamUrl('http://')
 	}
+	const sideModeText: Record<Setting['sideMode'], string> = {
+		l: '↖︎',
+		wide: '↑︎',
+		bl: '↙︎',
+		bw: '↓︎',
+		br: '↘︎',
+		r: '︎︎↗︎',
+	}
 
 	return (
 		<Wrap
@@ -119,12 +127,13 @@ function SettingBox({
 						text={allThemesById[s.theme]?.key || allThemes[0].key}
 					/>
 					<ConfButton
-						helpText="ハーフ"
+						helpText="レイアウト: "
 						className="half"
 						areaKey="ha"
 						icon={faColumns}
 						onClick={s.toggleSideMode}
-						checked={s.sideMode !== 'wide'}
+						text={sideModeText[s.sideMode]}
+						checked={['wide', 'bw'].includes(s.sideMode)}
 					/>
 					<ConfButton
 						helpText="切替背景色: "
@@ -312,7 +321,7 @@ function SettingBox({
 const Wrap = styled.div`
 	/* height: 20vh; */
 	display: flex;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	right: 0;
 	overflow: hidden;

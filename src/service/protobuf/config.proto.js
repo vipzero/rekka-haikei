@@ -258,6 +258,9 @@ $root.config = (function() {
                 case 0:
                 case 1:
                 case 2:
+                case 3:
+                case 4:
+                case 5:
                     break;
                 }
             if (message.theme != null && message.hasOwnProperty("theme"))
@@ -307,6 +310,18 @@ $root.config = (function() {
             case "WIDE":
             case 2:
                 message.sideMode = 2;
+                break;
+            case "BL":
+            case 3:
+                message.sideMode = 3;
+                break;
+            case "BR":
+            case 4:
+                message.sideMode = 4;
+                break;
+            case "BW":
+            case 5:
+                message.sideMode = 5;
                 break;
             }
             if (object.theme != null)
@@ -397,12 +412,18 @@ $root.config = (function() {
          * @property {number} L=0 L value
          * @property {number} R=1 R value
          * @property {number} WIDE=2 WIDE value
+         * @property {number} BL=3 BL value
+         * @property {number} BR=4 BR value
+         * @property {number} BW=5 BW value
          */
         Config.SideMode = (function() {
             var valuesById = {}, values = Object.create(valuesById);
             values[valuesById[0] = "L"] = 0;
             values[valuesById[1] = "R"] = 1;
             values[valuesById[2] = "WIDE"] = 2;
+            values[valuesById[3] = "BL"] = 3;
+            values[valuesById[4] = "BR"] = 4;
+            values[valuesById[5] = "BW"] = 5;
             return values;
         })();
 

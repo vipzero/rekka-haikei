@@ -11,6 +11,9 @@ message Config {
         L = 0;
         R = 1;
         WIDE = 2;
+        BL = 3;
+        BR = 4;
+        BW = 5;
     }
 	SideMode sideMode = 5;
 	int32 theme = 6;

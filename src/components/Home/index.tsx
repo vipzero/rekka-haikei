@@ -25,10 +25,13 @@ import { themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
 import TrackTimeBitBar from './TrackTimeBitBar'
 
-const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left'> = {
+const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 	wide: 'center',
 	l: 'right',
 	r: 'left',
+	bl: 'right',
+	br: 'left',
+	bw: 'center',
 }
 
 type Props = {
@@ -125,20 +128,27 @@ function Home({ song, setBg }: Props) {
 
 const Wrap = styled.div`
 	width: 50vw;
-	&[data-side='wide'] {
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	color: white;
+
+	&[data-side='wide'],
+	&[data-side='bw'] {
 		width: 100%;
 	}
-	&[data-side='r'] {
+	&[data-side='r'],
+	&[data-side='br'] {
 		position: absolute;
 		right: 0;
 	}
-
-	min-height: 100vh;
-	display: grid;
-	/* overflow: hidden; */
-	grid-template-rows: repeat(7, max-content);
-	padding: 16px;
-	color: white;
+	&[data-side='br'],
+	&[data-side='bl'],
+	&[data-side='bw'] {
+		position: absolute;
+		flex-direction: column-reverse;
+		bottom: 0;
+	}
 
 	button {
 		border-radius: 4px;
@@ -204,6 +214,8 @@ const Wrap = styled.div`
 `
 
 const Master = styled.div<{ customTheme: string }>`
+	min-height: 100vh;
+	width: 100vw;
 	${themeStyles}
 	${exStyles}
 	&[data-theme='5'] {
@@ -218,6 +230,10 @@ const Master = styled.div<{ customTheme: string }>`
 		background: var(--content-bg-color);
 		overflow: auto;
 		white-space: nowrap;
+	}
+	#panel,
+	[data-co] {
+		width: 100%;
 	}
 	#panel,
 	[data-co] {

@@ -42,7 +42,7 @@ export const useSettings = () => {
 	const toggleLockBg = () =>
 		setSetting((v) => ({ ...v, lockBgNum: nextLockNum(v.lockBgNum) }))
 	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
-	const toggleSide = genToggle(['wide', 'l', 'r'] as const)
+	const toggleSide = genToggle(['wide', 'l', 'bl', 'bw', 'br', 'r'] as const)
 	const toggleSideMode = () =>
 		setSetting((v) => ({ ...v, sideMode: toggleSide(v.sideMode) }))
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))

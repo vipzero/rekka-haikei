@@ -142,7 +142,10 @@ export namespace config {
         enum SideMode {
             L = 0,
             R = 1,
-            WIDE = 2
+            WIDE = 2,
+            BL = 3,
+            BR = 4,
+            BW = 5
         }
     }
 }

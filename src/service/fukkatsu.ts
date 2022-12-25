@@ -31,6 +31,9 @@ export const decodeSetting = (buf: Uint8Array): Partial<Setting> => {
 			[Config.SideMode.L]: 'l',
 			[Config.SideMode.R]: 'r',
 			[Config.SideMode.WIDE]: 'wide',
+			[Config.SideMode.BL]: 'bl',
+			[Config.SideMode.BW]: 'bw',
+			[Config.SideMode.BR]: 'br',
 		} as Record<config.Config.SideMode, Setting['sideMode']>
 	)[res.sideMode]
 
