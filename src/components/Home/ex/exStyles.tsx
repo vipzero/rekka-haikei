@@ -138,6 +138,9 @@ export const exStyles = css`
 			filter: url(#wavy) blur(1px);
 			margin: -20px;
 		}
+		#panel {
+			overflow: visible;
+		}
 		#panel,
 		[data-co] {
 			p,
