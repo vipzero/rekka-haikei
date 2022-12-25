@@ -54,7 +54,7 @@ function Home({ song, setBg }: Props) {
 	const { customTheme } = useSettingsCustomTheme()
 	const { addSnap } = useSnaps()
 
-	const { moz, bre } = useLightConfig(song, () => toggleFavorites(song.icy))
+	const { moz, full } = useLightConfig(song, () => toggleFavorites(song.icy))
 
 	return (
 		<Wrap
@@ -69,7 +69,7 @@ function Home({ song, setBg }: Props) {
 			data-has-art={!!song.artworkUrl100}
 			data-theme={theme}
 			data-moz={moz}
-			data-bre={bre}
+			data-full={full}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 			customTheme={customTheme}
@@ -288,7 +288,10 @@ const Wrap = styled.div<{ customTheme: string }>`
 			filter: blur(100px);
 		}
 	}
-	&[data-bre='true'] {
+	&[data-full='true'] {
+		> :not(#bg) {
+			visibility: hidden !important;
+		}
 	}
 
 	#setting-box {

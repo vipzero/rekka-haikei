@@ -25,18 +25,17 @@ export function useKeyPress(targetKey) {
 	return keyPressed
 }
 
-export const useKeyPressChange = (targetKey, callback) => {
+export const useKeyPressToggle = (targetKey, callback) => {
 	const keyPressed = useKeyPress(targetKey)
-	// const firstUpdate = useRef(true)
-	// useLayoutEffect(() => {
-	// 	if (firstUpdate.current) {
-	// 		firstUpdate.current = false
-	// 		return
-	// 	}
-	// })
 
 	useEffect(() => {
-		if (!keyPressed) return
 		callback(keyPressed)
 	}, [keyPressed])
+}
+
+export const useKeyPressOne = (targetKey, callback) => {
+	useKeyPressToggle(targetKey, (keyPressed) => {
+		if (!keyPressed) return
+		callback(keyPressed)
+	})
 }
