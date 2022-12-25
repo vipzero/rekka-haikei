@@ -332,6 +332,11 @@ const Wrap = styled.div`
 		}
 	}
 	&[data-help='true'] {
+		@media only screen and (max-width: 600px) {
+			button {
+				font-size: 0.5rem;
+			}
+		}
 		.help-text {
 			display: block;
 		}
