@@ -211,6 +211,7 @@ export const exStyles = css`
 	&[data-ex='rakupro'] {
 		#mask {
 			display: block;
+			opacity: 0.2;
 			animation: aurora-anim 20s linear infinite alternate;
 		}
 
