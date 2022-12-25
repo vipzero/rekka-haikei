@@ -5,7 +5,9 @@ import {
 	faColumns,
 	faCompactDisc,
 	faDownload,
+	faDroplet,
 	faHistory,
+	faIcicles,
 	faLock,
 	faLockOpen,
 	faMagicWandSparkles,
@@ -228,6 +230,14 @@ function SettingBox({
 						checked={s.lockBgNum === 0}
 						onClick={s.toggleLockBg}
 					/>
+					<ConfButton
+						helpText={'Gif禁止: ' + (s.blockGif ? 'ON' : 'OFF')}
+						className="gif"
+						areaKey="la"
+						icon={s.blockGif ? faIcicles : faDroplet}
+						checked={s.blockGif}
+						onClick={s.toggleBlockGif}
+					/>
 
 					<ConfButton
 						helpText="ダウンロード"
@@ -358,7 +368,8 @@ const ButtonGrid = styled.div`
 		'vh bb bb bb bb ss'
 		'vb bb bb bb bb dd'
 		'th th fd ha ha _h'
-		'lk pp pp rr rr _d';
+		'lk lk lk la la _h'
+		'pp pp pp rr rr _d';
 `
 
 export default SettingBox

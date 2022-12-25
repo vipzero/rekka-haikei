@@ -17,6 +17,7 @@ export const defaultSetting: Setting = {
 	abyss: '#fff', // TODO: change before deploy
 	abyssEx: null,
 	showHelp: false,
+	blockGif: false,
 	eeKey: false,
 	eeSim: false,
 	ee: {},

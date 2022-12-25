@@ -167,3 +167,5 @@ export const rainbows = [
 	'blue',
 	'purple',
 ]
+
+export const isGifUrl = (url: string) => url.includes('.gif') // ゆるく

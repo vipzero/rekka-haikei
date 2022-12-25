@@ -11,6 +11,7 @@ import {
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
 import { Setting, Song } from '../../types'
+import { isGifUrl } from '../../util'
 import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
@@ -78,7 +79,7 @@ function Home({ song, setBg }: Props) {
 			</Mask>
 			<FadeBgChanger
 				sid={song.time}
-				urls={song?.imageLinks || []}
+				urls={song?.imageLinks?.filter((v) => !isGifUrl(v)) || []}
 				lockCount={lockBgNum}
 				changedUrl={setUrl}
 				px={sideMap[sideMode] || 'center'}

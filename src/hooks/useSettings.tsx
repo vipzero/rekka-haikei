@@ -31,6 +31,7 @@ export const useSettings = () => {
 			lockBgNum,
 			showHelp,
 			showTool,
+			blockGif,
 		},
 		setSetting,
 	] = useSettingsBase()
@@ -38,6 +39,7 @@ export const useSettings = () => {
 	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
 	const toggleArtwork = () => setSetting((v) => toggle(v, 'showArtwork'))
 	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
+	const toggleBlockGif = () => setSetting((v) => toggle(v, 'blockGif'))
 	const nextLockNum = (v: number) => (v === 0 ? 1 : v === 1 ? 10 : 0)
 	const toggleLockBg = () =>
 		setSetting((v) => ({ ...v, lockBgNum: nextLockNum(v.lockBgNum) }))
@@ -65,6 +67,7 @@ export const useSettings = () => {
 		lockBgNum,
 		showHelp,
 		showTool,
+		blockGif,
 		toggleSetting,
 		toggleArtwork,
 		toggleCounts,
@@ -73,6 +76,7 @@ export const useSettings = () => {
 		toggleHistory,
 		toggleSideMode,
 		toggleShowHelp,
+		toggleBlockGif,
 		closeSetting,
 		toggleTool,
 		setSetting,
