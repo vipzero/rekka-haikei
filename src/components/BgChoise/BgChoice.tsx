@@ -53,11 +53,11 @@ const Wrap = styled.div`
 		}
 	}
 	img {
+		min-width: 100px;
 		max-width: 1000px;
 		@media only screen and (max-width: 600px) {
 			max-width: min(1000px, 100%);
 		}
-		min-width: 100px;
 	}
 `
 

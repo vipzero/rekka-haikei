@@ -11,8 +11,15 @@ type Props = {
 function BgChoiceModal({ song, setBg, open, onClose }: Props) {
 	return (
 		<Dialog open={open}>
-			<button onClick={onClose}>閉じる</button>
-			<BgChoice song={song} setBg={setBg} />
+			<div className="header">
+				<button onClick={onClose}>閉じる</button>
+			</div>
+			<div style={{ marginTop: '2rem' }}>
+				<BgChoice song={song} setBg={setBg} />
+			</div>
+			<div className="footer">
+				<button onClick={onClose}>閉じる</button>
+			</div>
 		</Dialog>
 	)
 }
@@ -26,7 +33,7 @@ const Dialog = styled.dialog`
 	overflow-y: scroll;
 	overflow-x: hidden;
 	margin: 0;
-	padding: 10px 5px;
+	padding: 12px 4px;
 	border-radius: 4px;
 	border: none;
 
@@ -36,6 +43,17 @@ const Dialog = styled.dialog`
 		left: 1vh;
 		width: 96vw;
 		max-height: 80vh;
+	}
+	button {
+		border: none;
+		font-size: 1.2rem;
+		padding: 4px 12px;
+	}
+
+	.header {
+		position: fixed;
+		background: white;
+		z-index: 1;
 	}
 `
 
