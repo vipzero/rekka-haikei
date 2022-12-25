@@ -10,7 +10,7 @@ type Props = {
 }
 function BgChoiceModal({ song, setBg, open, onClose }: Props) {
 	return (
-		<Dialog open={open}>
+		<Dialog open={open} data-open={open}>
 			<div className="header">
 				<button onClick={onClose}>閉じる</button>
 			</div>
@@ -36,6 +36,13 @@ const Dialog = styled.dialog`
 	padding: 12px 4px;
 	border-radius: 4px;
 	border: none;
+	/* background: var(--content-bg-color); */
+
+	&[data-open='false'] {
+		button {
+			display: none;
+		}
+	}
 
 	/* mobile */
 	@media only screen and (max-width: 600px) {
