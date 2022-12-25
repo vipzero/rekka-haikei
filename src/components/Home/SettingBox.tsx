@@ -321,10 +321,8 @@ function SettingBox({
 const Wrap = styled.div`
 	/* height: 20vh; */
 	display: flex;
-	position: fixed;
-	bottom: 0;
-	right: 0;
 	overflow: hidden;
+
 	> div {
 		padding: 8px;
 		background: var(--setting-bg-color);

@@ -211,6 +211,12 @@ const Wrap = styled.div`
 	[data-visible='false'] {
 		display: none;
 	}
+	#setting-box {
+		z-index: 1;
+		position: fixed;
+		bottom: 0;
+		right: 0;
+	}
 `
 
 const Master = styled.div<{ customTheme: string }>`
