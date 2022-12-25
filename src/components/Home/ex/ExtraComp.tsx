@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo } from 'react'
-import { useMouse } from 'rooks'
+import { useMouse } from 'rooks/dist/cjs/hooks/useMouse'
 import { createGlobalStyle } from 'styled-components'
 import { FloatingBox, RainbowFontCool } from '../..'
 import { useSettingsEe } from '../../../hooks/useSettings'

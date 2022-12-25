@@ -11212,10 +11212,10 @@ rollup@^2.43.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rooks@5.14.1:
-  version "5.14.1"
-  resolved "https://registry.yarnpkg.com/rooks/-/rooks-5.14.1.tgz#424854e917efc951dd47c4ac9d9e0de5f7648a7e"
-  integrity sha512-ZldHmIdi6NM9zgGJlLbYrOcwvdadzX9RLw11KgfD4WuePMz7Dy50JHZzoPz9oCaKM5iTjAaBXZ3z7Gz9dvt2Hg==
+rooks@7.4.2:
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/rooks/-/rooks-7.4.2.tgz#1204005a6c2485f1b03148ef4d5245da74763c29"
+  integrity sha512-4vpjD3hGkc5hH7NZxViOUTmacwx5HhZH6CJjy0fQd4jR9zXzGjkmUncuFraqXj+vEsAC3LBq/OPHC5k1VBWbyg==
   dependencies:
     lodash.debounce "^4.0.8"
     raf "^3.4.1"
