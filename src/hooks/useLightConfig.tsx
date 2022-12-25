@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Song } from '../types'
-import { not } from '../util'
 
 import { useKeyPressOne, useKeyPressToggle } from './useKeyPress'
-import { useSettings, useSettingsEe, useSettingsShowEmol } from './useSettings'
+import { useSettings, useSettingsEe } from './useSettings'
 const mozList = ['on1', 'on2', 'off']
 
 export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
@@ -12,7 +11,6 @@ export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
 	const { openEekey } = useSettingsEe()
 
 	const s = useSettings()
-	const { toggleEmol } = useSettingsShowEmol()
 
 	const cycle = <T,>(arr: T[], cur: T) =>
 		arr[(arr.indexOf(cur) + 1) % arr.length]
@@ -24,7 +22,6 @@ export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
 	useKeyPressToggle(' ', setFull)
 	useKeyPressToggle('Shift', setFull)
 
-	useKeyPressOne('l', toggleEmol)
 	useKeyPressOne('a', s.toggleArtwork)
 	useKeyPressOne('h', s.toggleHistory)
 	useKeyPressOne('t', s.cycleTheme)

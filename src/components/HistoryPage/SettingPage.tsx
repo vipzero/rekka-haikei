@@ -8,6 +8,7 @@ import { CheckBox } from '../common/CheckBox'
 import { ConfButton } from '../Home/ConfButton'
 import { toast } from 'react-toastify'
 import { chocoTheme, defaultCustomTheme } from '../../atom/customThemes'
+import { ShortcutDescription } from './ShortcutDescription'
 
 export function SettingPage() {
 	const { enableFakeBar, toggleEnableFakeBar } = useSettingsFakeBar()
@@ -103,6 +104,7 @@ export function SettingPage() {
 					<img src="https://i.imgur.com/AUViOQB.png" />
 				</p>
 			</section>
+			<ShortcutDescription />
 		</Style>
 	)
 }
