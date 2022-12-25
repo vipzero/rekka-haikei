@@ -112,7 +112,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/一週間フレンズ|プラスティック・メモリーズ/, 'issyuukanfr'],
 	['サカサマのパテマ', 'sakasa'],
 	['ソードアート・オンライン', 'sao'],
-	['/シャドーハウス|亜人[^ち]/', 'susu'],
+	[/シャドーハウス|亜人[^ち]/, 'susu'],
 	['緋弾', 'ariascarlet'],
 	[/アマガミ/, 'amagami'],
 	['音楽少女', 'shining'],
