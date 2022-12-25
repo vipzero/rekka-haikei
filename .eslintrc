@@ -20,5 +20,5 @@
 		"jsx-a11y/alt-text": "off",
 		"react/react-in-jsx-scope": "off"
 	},
-	"ignorePatterns": ["templates/*", "functions/*", "*/protobuf/*", "**/*.d.ts"]
+	"ignorePatterns": ["templates/*", "*/protobuf/*", "**/*.d.ts"]
 }

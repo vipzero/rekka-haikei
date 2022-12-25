@@ -65,8 +65,6 @@
 		"dev": "next",
 		"build": "next build",
 		"export": "next build && next export",
-		"clean": "rimraf functions/out && mkdir -p functions/out",
-		"deploy-ssr": "yarn clean && firebase deploy --only hosting && mv out functions/out/static && firebase deploy --only functions:filter",
 		"deploy": "firebase deploy --only hosting",
 		"start": "next start",
 		"lint": "eslint --ext ts,tsx src",

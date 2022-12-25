@@ -14,8 +14,6 @@ function AudioPlayer({ src }: Props) {
 	const [volume, setVolume] = useLocalStorage<number>('player-volume', 0.5)
 
 	if (!isValidUrl(src)) return null
-	// const url = `${URL_PLAYER_API}?url=${encodeURIComponent(src)}`
-	// const url = `https://www.google.com/search?q=${encodeURIComponent(src)}`
 
 	return (
 		<ReactAudioPlayer
@@ -30,9 +28,6 @@ function AudioPlayer({ src }: Props) {
 				}
 			}}
 		/>
-		// <Style>
-		// 	<iframe src={url} />
-		// </Style>
 	)
 }
 

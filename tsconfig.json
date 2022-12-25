@@ -18,7 +18,7 @@
 		"target": "esnext",
 		"incremental": true
 	},
-	"exclude": ["node_modules", "functions"],
+	"exclude": ["node_modules"],
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",

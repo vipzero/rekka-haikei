@@ -137,6 +137,3 @@ export const URL_FEAT_REQ =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfVQE9W3DFNPG03x3rJumLAGZfQsuFpxJP2vTDg4g0ddU3V-w/viewform'
 
 export const TMP_TRACK_TIME = 4 * 60 * 1000
-
-export const URL_PLAYER_API =
-	'https://asia-northeast1-rekka-haikei.cloudfunctions.net/player'
