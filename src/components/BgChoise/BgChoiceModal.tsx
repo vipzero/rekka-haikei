@@ -36,6 +36,7 @@ const Dialog = styled.dialog`
 	padding: 12px 4px;
 	border-radius: 4px;
 	border: none;
+	z-index: 10;
 	/* background: var(--content-bg-color); */
 
 	&[data-open='false'] {
