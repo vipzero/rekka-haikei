@@ -5,10 +5,10 @@ export function ShortcutDescription() {
 		<Style>
 			<h4>ショートカットキー</h4>
 			<p>
-				<span>m</span>モザイク
+				<span>シフト,スペース</span>UIを隠す
 			</p>
 			<p>
-				<span>シフト,スペース</span>モザイク
+				<span>m</span>モザイク
 			</p>
 
 			<p>
