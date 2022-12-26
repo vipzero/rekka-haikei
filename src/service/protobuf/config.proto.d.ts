@@ -26,6 +26,9 @@ export namespace config {
 
         /** Config ee */
         ee?: (Uint8Array|null);
+
+        /** Config ee2 */
+        ee2?: (number[]|null);
     }
 
     /** Represents a Config. */
@@ -56,7 +59,13 @@ export namespace config {
         public theme: number;
 
         /** Config ee. */
-        public ee: Uint8Array;
+        public ee?: (Uint8Array|null);
+
+        /** Config ee2. */
+        public ee2: number[];
+
+        /** Config _ee. */
+        public _ee?: "ee";
 
         /**
          * Creates a new Config instance using the specified properties.

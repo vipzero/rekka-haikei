@@ -1,8 +1,24 @@
+import { eeId } from '../components/Home/Cvote/constants'
 import { Setting } from '../types'
 import { config } from './protobuf/config.proto'
 
 const { Config } = config
-const strToBytes = (s: string) => new TextEncoder().encode(s)
+const eeToBytes = (s: Setting['ee']): number[] => {
+	const b4s: number[] = []
+	Object.entries(eeId).forEach(([k, v]) => {
+		b4s[v] = s[k] || 0
+	})
+	return b4s
+	// return uint8to4(Uint8Array.from(b4s))
+}
+const bytesToEe = (ua8: number[]): Setting['ee'] => {
+	// const ua8 = uint4to8(ua)
+	const s: Setting['ee'] = {}
+	Object.entries(eeId).forEach(([k, v]) => {
+		s[k] = ua8[v] || 0
+	})
+	return s
+}
 const bytesToStr = (b: Uint8Array) => new TextDecoder().decode(b)
 
 export const encodeSetting = (setting: Setting): Uint8Array => {
@@ -15,12 +31,8 @@ export const encodeSetting = (setting: Setting): Uint8Array => {
 		r: Config.SideMode.R,
 		wide: Config.SideMode.WIDE,
 	}[setting.sideMode]
-	const eeLine = Object.entries(setting.ee)
-		.filter(([_k, v]) => v > 0)
-		.map(([k]) => k)
-		.join(',')
 
-	cauldron.ee = strToBytes(eeLine)
+	cauldron.ee2 = eeToBytes(setting.ee)
 	return Config.encode(cauldron).finish()
 }
 
@@ -37,12 +49,21 @@ export const decodeSetting = (buf: Uint8Array): Partial<Setting> => {
 		} as Record<config.Config.SideMode, Setting['sideMode']>
 	)[res.sideMode]
 
-	const ee: Setting['ee'] = {}
-	bytesToStr(res.ee)
-		.split(',')
-		.forEach((key) => {
-			ee[key] = 1
-		})
+	const makeEe = () => {
+		const ee: Setting['ee'] = {}
+		if (res.ee) {
+			bytesToStr(res.ee)
+				.split(',')
+				.forEach((key) => {
+					ee[key] = 1
+				})
+			return ee
+		} else if (res.ee2) {
+			return bytesToEe(res.ee2)
+		}
+		return ee
+	}
+	const ee: Setting['ee'] = makeEe()
 
 	return {
 		showArtwork: res.showArtwork,
@@ -69,6 +90,22 @@ export const sammonSpell = (setting: Setting): string => {
 		.map((b) => b.padEnd(codeRange, '0'))
 		.map((b) => henyoChar(parseInt(b, 2)))
 		.join('')
+}
+
+export const uint8to4 = (buf: Uint8Array): Uint8Array => {
+	return Uint8Array.from(
+		Buffer.from(buf)
+			.toString('hex')
+			.split('')
+			.map((b) => parseInt(b, 16))
+	)
+}
+
+export const uint4to8 = (buf: Uint8Array): Uint8Array => {
+	return Buffer.from(
+		[...buf].map((b) => (b % 16).toString(16)).join('') + '0',
+		'hex' // 'FF' -> 'F'
+	)
 }
 
 export const spell = (str: string): Partial<Setting> => {

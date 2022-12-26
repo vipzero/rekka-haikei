@@ -31,6 +31,7 @@ $root.config = (function() {
          * @property {config.Config.SideMode|null} [sideMode] Config sideMode
          * @property {number|null} [theme] Config theme
          * @property {Uint8Array|null} [ee] Config ee
+         * @property {Array.<number>|null} [ee2] Config ee2
          */
 
         /**
@@ -42,6 +43,7 @@ $root.config = (function() {
          * @param {config.IConfig=} [properties] Properties to set
          */
         function Config(properties) {
+            this.ee2 = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -98,11 +100,33 @@ $root.config = (function() {
 
         /**
          * Config ee.
-         * @member {Uint8Array} ee
+         * @member {Uint8Array|null|undefined} ee
          * @memberof config.Config
          * @instance
          */
-        Config.prototype.ee = $util.newBuffer([]);
+        Config.prototype.ee = null;
+
+        /**
+         * Config ee2.
+         * @member {Array.<number>} ee2
+         * @memberof config.Config
+         * @instance
+         */
+        Config.prototype.ee2 = $util.emptyArray;
+
+        // OneOf field names bound to virtual getters and setters
+        var $oneOfFields;
+
+        /**
+         * Config _ee.
+         * @member {"ee"|undefined} _ee
+         * @memberof config.Config
+         * @instance
+         */
+        Object.defineProperty(Config.prototype, "_ee", {
+            get: $util.oneOfGetter($oneOfFields = ["ee"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
 
         /**
          * Creates a new Config instance using the specified properties.
@@ -142,6 +166,12 @@ $root.config = (function() {
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.theme);
             if (message.ee != null && Object.hasOwnProperty.call(message, "ee"))
                 writer.uint32(/* id 10, wireType 2 =*/82).bytes(message.ee);
+            if (message.ee2 != null && message.ee2.length) {
+                writer.uint32(/* id 11, wireType 2 =*/90).fork();
+                for (var i = 0; i < message.ee2.length; ++i)
+                    writer.int32(message.ee2[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -204,6 +234,17 @@ $root.config = (function() {
                         message.ee = reader.bytes();
                         break;
                     }
+                case 11: {
+                        if (!(message.ee2 && message.ee2.length))
+                            message.ee2 = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.ee2.push(reader.int32());
+                        } else
+                            message.ee2.push(reader.int32());
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -239,6 +280,7 @@ $root.config = (function() {
         Config.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
+            var properties = {};
             if (message.showBookmark != null && message.hasOwnProperty("showBookmark"))
                 if (typeof message.showBookmark !== "boolean")
                     return "showBookmark: boolean expected";
@@ -266,9 +308,18 @@ $root.config = (function() {
             if (message.theme != null && message.hasOwnProperty("theme"))
                 if (!$util.isInteger(message.theme))
                     return "theme: integer expected";
-            if (message.ee != null && message.hasOwnProperty("ee"))
+            if (message.ee != null && message.hasOwnProperty("ee")) {
+                properties._ee = 1;
                 if (!(message.ee && typeof message.ee.length === "number" || $util.isString(message.ee)))
                     return "ee: buffer expected";
+            }
+            if (message.ee2 != null && message.hasOwnProperty("ee2")) {
+                if (!Array.isArray(message.ee2))
+                    return "ee2: array expected";
+                for (var i = 0; i < message.ee2.length; ++i)
+                    if (!$util.isInteger(message.ee2[i]))
+                        return "ee2: integer[] expected";
+            }
             return null;
         };
 
@@ -331,6 +382,13 @@ $root.config = (function() {
                     $util.base64.decode(object.ee, message.ee = $util.newBuffer($util.base64.length(object.ee)), 0);
                 else if (object.ee.length >= 0)
                     message.ee = object.ee;
+            if (object.ee2) {
+                if (!Array.isArray(object.ee2))
+                    throw TypeError(".config.Config.ee2: array expected");
+                message.ee2 = [];
+                for (var i = 0; i < object.ee2.length; ++i)
+                    message.ee2[i] = object.ee2[i] | 0;
+            }
             return message;
         };
 
@@ -347,6 +405,8 @@ $root.config = (function() {
             if (!options)
                 options = {};
             var object = {};
+            if (options.arrays || options.defaults)
+                object.ee2 = [];
             if (options.defaults) {
                 object.showBookmark = false;
                 object.showArtwork = false;
@@ -354,13 +414,6 @@ $root.config = (function() {
                 object.showHistory = false;
                 object.sideMode = options.enums === String ? "L" : 0;
                 object.theme = 0;
-                if (options.bytes === String)
-                    object.ee = "";
-                else {
-                    object.ee = [];
-                    if (options.bytes !== Array)
-                        object.ee = $util.newBuffer(object.ee);
-                }
             }
             if (message.showBookmark != null && message.hasOwnProperty("showBookmark"))
                 object.showBookmark = message.showBookmark;
@@ -374,8 +427,16 @@ $root.config = (function() {
                 object.sideMode = options.enums === String ? $root.config.Config.SideMode[message.sideMode] === undefined ? message.sideMode : $root.config.Config.SideMode[message.sideMode] : message.sideMode;
             if (message.theme != null && message.hasOwnProperty("theme"))
                 object.theme = message.theme;
-            if (message.ee != null && message.hasOwnProperty("ee"))
+            if (message.ee != null && message.hasOwnProperty("ee")) {
                 object.ee = options.bytes === String ? $util.base64.encode(message.ee, 0, message.ee.length) : options.bytes === Array ? Array.prototype.slice.call(message.ee) : message.ee;
+                if (options.oneofs)
+                    object._ee = "ee";
+            }
+            if (message.ee2 && message.ee2.length) {
+                object.ee2 = [];
+                for (var j = 0; j < message.ee2.length; ++j)
+                    object.ee2[j] = message.ee2[j];
+            }
             return object;
         };
 
