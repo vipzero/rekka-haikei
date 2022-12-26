@@ -31,7 +31,9 @@ it('config protbuf decode', () => {
 		  "sideMode": "L",
 		}
 	`)
-	expect(new TextDecoder().decode(res.ee)).toMatchInlineSnapshot(`"aaa,bb,c,d"`)
+	expect(res.ee && new TextDecoder().decode(res.ee)).toMatchInlineSnapshot(
+		`"aaa,bb,c,d"`
+	)
 })
 
 it('sammonSpell', () => {
