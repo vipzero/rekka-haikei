@@ -15,7 +15,7 @@ function BgChoiceModal({ song, setBg, open, onClose }: Props) {
 				<button onClick={onClose}>閉じる</button>
 			</div>
 			<div style={{ marginTop: '2rem' }}>
-				<BgChoice song={song} setBg={setBg} />
+				{open && <BgChoice song={song} setBg={setBg} />}
 			</div>
 			<div className="footer">
 				<button onClick={onClose}>閉じる</button>
