@@ -40,7 +40,7 @@ type Props = {
 	setBg: (url: string, time: number) => void
 }
 function Home({ song, setBg }: Props) {
-	const { theme, sideMode, lockBgNum, toggleSetting } = useSettings()
+	const { theme, sideMode, lockBgNum, toggleSetting, blockGif } = useSettings()
 	const { eeKey } = useSettingsEe()
 	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
@@ -79,7 +79,7 @@ function Home({ song, setBg }: Props) {
 			</Mask>
 			<FadeBgChanger
 				sid={song.time}
-				urls={song?.imageLinks?.filter((v) => !isGifUrl(v)) || []}
+				urls={song?.imageLinks?.filter((v) => !blockGif || !isGifUrl(v)) || []}
 				lockCount={lockBgNum}
 				changedUrl={setUrl}
 				px={sideMap[sideMode] || 'center'}
