@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Song } from '../../types'
+import { searchImageUrl } from '../../util'
 import BgChoice from './BgChoice'
 
 type Props = {
@@ -9,12 +10,21 @@ type Props = {
 	onClose: () => void
 }
 function BgChoiceModal({ song, setBg, open, onClose }: Props) {
+	const sUrl = searchImageUrl(song.imageSearchWord)
+
 	return (
 		<Dialog open={open} data-open={open}>
 			<div className="header">
 				<button onClick={onClose}>閉じる</button>
+				<p>{song.imageSearchWord}</p>
+				<p>
+					<a href={sUrl} target="_blank" rel="noreferrer">
+						画像検索
+					</a>
+				</p>
 			</div>
-			<div style={{ marginTop: '2rem' }}>
+
+			<div style={{ marginTop: '120px' }}>
 				{open && <BgChoice song={song} setBg={setBg} />}
 			</div>
 			<div className="footer">
@@ -60,6 +70,8 @@ const Dialog = styled.dialog`
 
 	.header {
 		position: fixed;
+		display: flex;
+		gap: 1rem;
 		background: white;
 		z-index: 1;
 	}
