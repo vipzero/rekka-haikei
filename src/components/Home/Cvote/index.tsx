@@ -155,7 +155,8 @@ const Container = styled.div`
 
 			&[data-voted='true'] {
 				border-style: double;
-				animation: var(--animation-bounce) 1s;
+				animation: var(--animation-bounce);
+				animation-iteration-count: 1;
 			}
 			&[data-voted='false'] {
 				margin: 3px;
