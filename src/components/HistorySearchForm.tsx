@@ -138,7 +138,7 @@ const Wrap = styled.form`
 		button:nth-of-type(2) {
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
-			filter: brightness(0.8);
+			filter: brightness(0.97);
 		}
 	}
 	.search-control {

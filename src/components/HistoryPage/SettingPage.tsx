@@ -15,6 +15,14 @@ export function SettingPage() {
 	const { customTheme, setCustomTheme } = useSettingsCustomTheme()
 	const { callSpell, text, onChangeText, parsed } = useSettingsSpell()
 
+	const sealdStringify = (obj: typeof parsed) => {
+		if (obj === false) return '復活不可'
+
+		return JSON.stringify(obj, (k, v) => {
+			if (k === 'ee') return '******'
+			return v
+		})
+	}
 	return (
 		<Style customTheme={customTheme}>
 			<section style={{ width: 'max-content' }}>
@@ -23,7 +31,7 @@ export function SettingPage() {
 				<input onChange={(e) => onChangeText(e.target.value)} value={text} />
 				<code>
 					<pre style={{ maxWidth: '80vw', overflow: 'scroll' }}>
-						{JSON.stringify(parsed)}
+						{sealdStringify(parsed)}
 					</pre>
 				</code>
 				<button
