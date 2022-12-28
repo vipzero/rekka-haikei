@@ -1,5 +1,5 @@
 const withImages = require('next-images')
-const withTM = require('next-transpile-modules')
+// const withTM = require('next-transpile-modules')
 const runtimeCaching = require('next-pwa/cache')
 
 const withPWA = require('next-pwa')({
@@ -10,11 +10,14 @@ const withPWA = require('next-pwa')({
 	buildExcludes: [/middleware-manifest.json$/],
 	disable: process.env.NODE_ENV === 'development',
 })
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true',
+})
 
-const transpileModules = [
-	'@fortawesome/free-regular-svg-icons',
-	'@fortawesome/free-solid-svg-icons',
-]
+// const transpileModules = [
+// 	'@fortawesome/free-regular-svg-icons',
+// 	'@fortawesome/free-solid-svg-icons',
+// ]
 
 const opt = {
 	// webpack(config) {
@@ -32,6 +35,6 @@ const opt = {
 	// transpileModules,
 }
 
-const config = withPWA(withImages(opt))
+const config = withBundleAnalyzer(withPWA(withImages(opt)))
 
 module.exports = config
