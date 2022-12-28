@@ -7,7 +7,6 @@
 		"@fortawesome/free-regular-svg-icons": "6.2.1",
 		"@fortawesome/free-solid-svg-icons": "6.2.1",
 		"@fortawesome/react-fontawesome": "0.2.0",
-		"@monarchwadia/conways-game-engine": "^1.1.0",
 		"@storybook/builder-webpack5": "^6.5.15",
 		"@storybook/manager-webpack5": "6.5.15",
 		"copy-to-clipboard": "3.3.3",

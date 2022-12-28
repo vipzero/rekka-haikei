@@ -5,7 +5,7 @@ import { RecoilRoot } from 'recoil'
 import { defaultSetting as setting } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { eekeys } from '../components/Home/Cvote/constants'
-import { Toast } from '../components/Toast'
+// import { Toast } from '../components/Toast'
 import { GlobalStyle } from '../config/init'
 import { SvgFilters } from '../config/SvgFilters'
 import { useSettings } from '../hooks/useSettings'
@@ -45,7 +45,7 @@ export default {
 				/>
 				<GlobalStyle />
 				<SvgFilters />
-				<Toast />
+				{/* <Toast /> */}
 				<RecoilRoot>
 					<div style={{}}>{s()}</div>
 				</RecoilRoot>

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
 	typescript: { reactDocgen: false },
 	stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
@@ -9,5 +11,13 @@ module.exports = {
 	framework: '@storybook/react',
 	core: {
 		builder: 'webpack5',
+	},
+	webpackFinal: async (config) => {
+		config.plugins = [
+			...config.plugins,
+			new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
+		]
+
+		return config
 	},
 }
