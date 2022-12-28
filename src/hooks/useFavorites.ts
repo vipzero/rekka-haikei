@@ -1,31 +1,6 @@
-import { incFavoritesAll } from '../service/firebase'
+import { Snap, Song } from '../types'
 import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
-import { isEnd } from '../config'
-import { useEffect } from 'react'
-import { Snap, Song } from '../types'
-
-export function useSyncFavorite() {
-	const { favorites } = useFavorites()
-	const eventId = useQeuryEid()
-	const [synced, setSynced] = useLocalStorage<boolean>(
-		`synced-favorite_${eventId}`,
-		false
-	)
-	const doSync = async (favorites: Record<string, boolean>) => {
-		if (synced) return
-
-		setSynced(true)
-		await incFavoritesAll(eventId, Object.keys(favorites))
-	}
-	useEffect(() => {
-		if (!synced && isEnd()) {
-			doSync(favorites)
-		}
-	}, [synced])
-
-	return [synced, doSync] as const
-}
 
 export const useFavorites = () => {
 	const eid = useQeuryEid()

@@ -4,12 +4,11 @@ import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
 import { FloatingBox, RainbowFontCool } from '../..'
 import { useSettingsEe } from '../../../hooks/useSettings'
-import { uaHash } from '../../../util'
+import { range, uaHash } from '../../../util'
 import CVote from '../Cvote'
 import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
 import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
-import { range } from 'lodash'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>

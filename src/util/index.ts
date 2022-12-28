@@ -169,3 +169,5 @@ export const rainbows = [
 ]
 
 export const isGifUrl = (url: string) => url.includes('.gif') // ゆるく
+
+export const range = (n) => [...Array(n).keys()]

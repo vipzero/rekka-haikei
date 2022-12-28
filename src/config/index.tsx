@@ -1,13 +1,9 @@
-import { DateTime } from 'luxon'
 import { eekeysThemetic } from '../components/Home/Cvote/constants'
 import { Event, Theme, ThemeId } from '../types'
 
 const { NODE_ENV } = process.env
 
 export const isDev = NODE_ENV === 'development'
-
-export const finishTime = +DateTime.local(2023, 1, 8, 0)
-export const isEnd = () => +new Date() >= finishTime
 
 export const events: Event[] = [
 	{ id: '2022winter', label: '2022冬', current: true },

@@ -1,6 +1,6 @@
-import { range } from 'lodash'
 import styled from 'styled-components'
 import { useTimeBar } from '../../hooks/useTimeBar'
+import { range } from '../../util'
 
 type Props = {
 	startTime: number

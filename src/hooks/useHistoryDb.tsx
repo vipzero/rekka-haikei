@@ -1,21 +1,21 @@
+import { parse } from 'csv-parse/sync'
+import groupBy from 'lodash/groupBy'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { currentEvent, events } from '../config'
 import {
+	calcG,
 	getHistoriesDb,
 	getHistoriesDbRange,
 	getHistoriesStorage,
 	loadTable,
 	saveTable,
 	toHistory,
-	calcG,
 } from '../service/firebase'
 import { Count, History, HistoryRaw, Schedule } from '../types'
 import { formatDate, formatYmdSlash, mergeArr, pad2 } from '../util'
-import { useQeuryEid } from './useQueryEid'
-import { useLocalStorage } from './useLocalStorage'
-import { currentEvent, events, finishTime } from '../config'
-import { parse } from 'csv-parse/sync'
 import { textNormalize } from '../util/serverCodeUtils'
-import groupBy from 'lodash/groupBy'
+import { useLocalStorage } from './useLocalStorage'
+import { useQeuryEid } from './useQueryEid'
 
 const fills: Record<number, boolean> = [...Array(24).keys()].reduce(
 	(p, c) => ({ ...p, [c]: false }),
@@ -291,9 +291,9 @@ const makeText = (rows: Record<string, ScheduleRow>) => {
 	]
 
 	viewDays.forEach(([row, str]) => {
-		if (row.day >= formatYmdSlash(finishTime)) {
-			return lines.push('=====終了=====')
-		}
+		// if (row.day >= formatYmdSlash(finishTime)) {
+		// 	return lines.push('=====終了=====')
+		// }
 		lines.push(str)
 		const dayLines: string[] = []
 		row.items.forEach((v) => {

@@ -1,10 +1,9 @@
 import { css, keyframes } from 'styled-components'
-import { rainbows } from '../../../util'
+import { rainbows, range } from '../../../util'
 
 const duration = 0.2
 const frequency = 10
 const interval = duration / frequency
-const range = (n: number) => [...Array(n).keys()]
 const rand = (a, b) => Math.floor((Math.random() * (b - a) + a) * 100) / 100
 
 const toPar100 = (i, total) => Math.round((100 / (total - 1)) * i)
