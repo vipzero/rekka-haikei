@@ -171,3 +171,6 @@ export const rainbows = [
 export const isGifUrl = (url: string) => url.includes('.gif') // ゆるく
 
 export const range = (n) => [...Array(n).keys()]
+const lastChar = (s: string) => s[s.length - 1]
+export const isTimeTag = (s: string) => s[0] === '[' && lastChar(s) === ']'
+export const isTimeMonthTag = (s: string) => /^\[\d\d\d\d-\d\d\]$/.test(s)

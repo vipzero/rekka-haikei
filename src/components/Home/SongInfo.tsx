@@ -3,7 +3,13 @@ import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
 import { isSongFull, Song } from '../../types'
-import { formatCount, searchImageUrl, utanetSearchUrl } from '../../util'
+import {
+	formatCount,
+	isTimeMonthTag,
+	isTimeTag,
+	searchImageUrl,
+	utanetSearchUrl,
+} from '../../util'
 import BookCount from './BookCount'
 
 function makeTitle(song: Song) {
@@ -17,7 +23,12 @@ type TagCount = { s: string; count: number }
 function tagOrder(tags: Record<string, number>): TagCount[] {
 	return Object.entries(tags)
 		.map(([s, count]) => ({ s, count }))
-		.sort((a, b) => (a.count - b.count) * 100 + a.s.localeCompare(b.s))
+		.sort((a, b) => {
+			const score1 = Number(isTimeTag(a.s)) - Number(isTimeTag(b.s))
+			const score2 = a.count - b.count
+			const score3 = a.s.localeCompare(b.s)
+			return score1 * 10000 + score2 * 100 + score3
+		})
 }
 
 type Props = { song: Song }
@@ -55,7 +66,9 @@ function SongInfo({ song }: Props) {
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()
-	const tags = tagOrder(song.wordCounts).filter(({ s }) => s !== song.icy)
+	const tags = tagOrder(song.wordCounts).filter(
+		({ s }) => s !== song.icy && !isTimeMonthTag(s)
+	)
 
 	const { singer, composer, arranger, writer } = song
 
