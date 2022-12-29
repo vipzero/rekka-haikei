@@ -98,19 +98,6 @@ const Time = ({ song }: Props) => {
 				<div className={'dnh'}>-{leftHour}</div>
 				<div className={'lfs'}>-[{leftFromSongEndStr}]</div>
 			</div>
-			<div>
-				<div>画像検索クエリ</div>
-				<div
-					style={{
-						wordWrap: 'break-word',
-						maxWidth: '212px',
-						fontSize: '0.6rem',
-					}}
-				>
-					{song.imageSearchWord}
-					<a href={`/${eid}/history?tab=2`}> (改善案募集)</a>
-				</div>
-			</div>
 			<EeSelectorConnected />
 		</Style>
 	)

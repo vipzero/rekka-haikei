@@ -215,7 +215,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 		border-radius: 4px;
 		border: none;
 		margin: 4px;
-		min-height: 24px;
+		min-height: 32px;
 		min-width: 36px;
 		text-align: center;
 		&.big {

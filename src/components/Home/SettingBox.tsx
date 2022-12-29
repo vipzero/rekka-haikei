@@ -306,21 +306,25 @@ function SettingBox({
 					</div>
 				)}
 				<div className="footer">
-					<div style={{ display: 'flex', gap: '8px' }}>
+					<div>
 						<a style={{ display: 'none' }} className="link-sao">
 							Logout
 						</a>
 						<a href={`/${eid}/history`} className="link-hist">
+							<FontAwesomeIcon icon={faHistory} size="xs" />
 							履歴
 						</a>
-						<a href={`/${eid}/book`}>ブクマ</a>
-						<a href={URL_GITHUB_REPO_URL}>コード</a>
+						<a href={`/${eid}/book`}>
+							<FontAwesomeIcon icon={faBookmark} size="xs" />
+							ブクマ
+						</a>
 					</div>
 
-					<div style={{ display: 'flex', gap: '8px' }}>
+					<div>
 						<a href="http://anison.info" rel="Anison Generation">
 							アニメ情報元
 						</a>
+						<a href={URL_GITHUB_REPO_URL}>コード</a>
 					</div>
 				</div>
 			</div>
@@ -346,6 +350,20 @@ const Wrap = styled.div`
 		label {
 			color: var(--font-color);
 			font-size: 1.2rem;
+		}
+		a {
+			background: var(--setting-bg-color);
+			padding: 2px 4px;
+			min-height: 32px;
+			width: 100%;
+			svg {
+				margin-right: 4px;
+			}
+		}
+		> div {
+			display: flex;
+			justify-content: space-evenly;
+			text-align: right;
 		}
 	}
 	&[data-help='true'] {
