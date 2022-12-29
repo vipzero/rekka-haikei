@@ -384,10 +384,10 @@ const ButtonGrid = styled.div`
 		'va bb bb bb bb ss'
 		'vt bb bb bb bb ss'
 		'vh bb bb bb bb ss'
-		'vb bb bb bb bb dd'
-		'th th fd ha ha _h'
-		'lk lk lk la la _h'
-		'pp pp pp rr rr _d';
+		'vb fd fd fd dd dd'
+		'th th th ha ha _h'
+		'pp pp lk la la _h'
+		'pp pp lk rr rr _d';
 `
 
 export default SettingBox
