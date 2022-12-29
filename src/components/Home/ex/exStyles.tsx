@@ -52,6 +52,19 @@ const randAnimsCss = [...Array(20).keys()]
 	.join('\n')
 
 export const exStyles = css`
+	&[data-ex='move'] {
+		@keyframes bpos {
+			0% {
+				background-position-x: 0;
+			}
+			100% {
+				background-position-x: 100vw;
+			}
+		}
+		#bg > div {
+			animation: bpos 30s linear infinite;
+		}
+	}
 	&[data-ex='lain'],
 	&[data-ex='psychopass'],
 	&[data-ex='kokaku'] {

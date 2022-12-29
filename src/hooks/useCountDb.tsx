@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getCounts } from '../service/firebase'
 import { WordCount } from '../types'
-import {
-	isTimeMonthTag,
-	isTimeSeasonTag,
-	isTimeTag,
-	isTimeYearTag,
-} from '../util'
+import { isTimeSeasonTag, isTimeTag, isTimeYearTag } from '../util'
 import { useQeuryEid } from './useQueryEid'
 
 export function useCountDb() {

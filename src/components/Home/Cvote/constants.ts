@@ -33,6 +33,7 @@ export const eekeysMirror = [
 	// 'break',
 	'mosaic',
 	'offline',
+	'move',
 ] as const
 export const eekeysVotic = [
 	'gotoyome',
@@ -146,7 +147,8 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/color|虹|rainbow/i, 'rainbow'],
 	[/雨([^上宮]|!?あがり)|[^a-z]rain/i, 'rain'],
 	[/�/, 'lain'],
-	[/・高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
+	[/高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
+	[/動く|moving|move/, 'move'],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
@@ -196,4 +198,5 @@ export const eeId: Record<Eekey, number> = {
 	rakupro: 42,
 	shining: 43,
 	loveplus: 44,
+	move: 45,
 }
