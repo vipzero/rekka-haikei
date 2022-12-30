@@ -2,7 +2,6 @@ import { Snap, Song } from '../types'
 import { imgCheck } from '../util'
 import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
-import pica from 'pica'
 
 export const useFavorites = () => {
 	const eid = useQeuryEid()
@@ -66,12 +65,11 @@ const packImage = async (url: string) => {
 	const [w, h, dw, dh] = isHorizonalLong
 		? [bw * dpb, (bw / rate) * dpb, bw * dp, bh - bw / rate + bh * dp]
 		: [bh * rate * dpb, bh * dpb, bw - bh * rate + bw * dp, bh * dp] // [w, h, 余白, 余白]
-	console.log({ isHorizonalLong })
-	console.log({ w, h, dw, dh })
-	console.log({ bw, bh })
 
 	//canvasに描画
-	const canvas = genCanvas(w, h)
+	const cw = tw
+	const ch = th
+	const canvas = genCanvas(cw, ch)
 	const ctx = canvas.getContext('2d')
 	if (!ctx) return false
 	const rx = Math.random()
@@ -80,12 +78,8 @@ const packImage = async (url: string) => {
 	const dx = dw * rx
 	const dy = dh * ry
 
-	ctx.drawImage(img, dx, dy, w, h, 0, 0, w, h)
-
-	const canvas2 = genCanvas(tw, th)
-
-	const res = await pica().resize(canvas, canvas2)
-	return res.toDataURL()
+	ctx.drawImage(img, dx, dy, w, h, 0, 0, cw, ch)
+	return canvas.toDataURL()
 }
 
 export const useSnaps = () => {
