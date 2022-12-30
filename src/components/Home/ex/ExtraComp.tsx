@@ -46,13 +46,13 @@ export const Lain = createGlobalStyle<{ r: number }>`
 }
 #button-grid-panel {
 	grid-template-areas:
-	'bk bk bk bk th th th'
-	'bk bk bk bk bl lk lk'
-	'bk bk bk bk bl lk lk'
-	'hl hl hl -- bl ha ha' // hl
-	'tg tg tg aw cl ha ha'
-	'tg tg tg dl dl dl dl'
-	'fd hi hi hi tl tl tl' !important
+		'fd va bb ss dd _h'
+		'fd va bb ss dd _h'
+		'fd vt _d lk la _h'
+		'vh vt _d lk la ha'
+		'vh vb rr th pp ha'
+		'vh vb rr th pp ha' !important;
+
 }
 #bg > div {
 	transform: rotate(${(p) => p.r % 360}deg)
