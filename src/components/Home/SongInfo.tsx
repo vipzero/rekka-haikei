@@ -1,3 +1,9 @@
+import {
+	faCompactDisc,
+	faFilm,
+	faTags,
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
@@ -5,7 +11,6 @@ import { useSettings } from '../../hooks/useSettings'
 import { isSongFull, Song } from '../../types'
 import {
 	formatCount,
-	isTimeMonthTag,
 	isTimeTag,
 	searchImageUrl,
 	utanetSearchUrl,
@@ -41,7 +46,7 @@ const ArtistLine = ({
 	arranger,
 	writer,
 }: Pick<Song, 'composer' | 'arranger' | 'writer'>) => (
-	<p>
+	<p className="flex-rows">
 		{composer && <span>作詞: {composer}</span>}
 		{arranger && <span>編曲: {arranger}</span>}
 		{writer && <span>作曲: {writer}</span>}
@@ -52,11 +57,15 @@ const AlbumLine = ({
 	itunesUrl,
 	copyright,
 }: Pick<Song, 'albumName' | 'itunesUrl' | 'copyright'>) => (
-	<p>
+	<p className="flex-rows">
 		{albumName && (
 			<>
-				{albumName.replace(' - Single', '')}
-				{copyright && ` (${copyright})`} <a href={itunesUrl}>iTunes</a>{' '}
+				<FontAwesomeIcon icon={faCompactDisc} />
+				<span>
+					{albumName.replace(' - Single', '')}
+					{copyright && ` (${copyright})`}
+				</span>
+				<a href={itunesUrl}>iTunes</a>
 			</>
 		)}
 	</p>
@@ -99,7 +108,9 @@ function SongInfo({ song }: Props) {
 										{song.gameType && ' ' + song.gameType}
 									</span>
 								</p>
-								<p>
+								<p className="flex-rows">
+									<FontAwesomeIcon icon={faFilm} />
+
 									<span className="date">{song.date}</span>
 									{song.chapNum && (
 										<span className="chapnum">全{song.chapNum}話</span>
@@ -120,6 +131,7 @@ function SongInfo({ song }: Props) {
 						</p>
 
 						<p className="tags">
+							<FontAwesomeIcon icon={faTags} />
 							{tags.map((tag, i) => (
 								<Link
 									prefetch={false}
@@ -176,9 +188,6 @@ const Wrap = styled.div`
 		.animetitle {
 			font-size: 0.9rem;
 		}
-		span:not(:first-child) {
-			margin-left: 0.5rem;
-		}
 	}
 
 	.tags {
@@ -211,6 +220,12 @@ const Wrap = styled.div`
 	&[data-show-tags='false'] {
 		.tags {
 			display: none;
+		}
+	}
+
+	.flex-rows {
+		> *:not(:first-child) {
+			margin-left: 4px;
 		}
 	}
 `
