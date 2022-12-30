@@ -34,6 +34,8 @@ function CountTable() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
+			<p>スナップ(β) (12/30 にリセットしました)</p>
+			<p></p>
 			<Snaps />
 
 			<Tabs items={[{ label: 'リスト' }]} onChange={setTab} />

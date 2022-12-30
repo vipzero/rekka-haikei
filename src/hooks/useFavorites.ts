@@ -62,10 +62,13 @@ const packImage = async (url: string) => {
 	const th = 200 / rate
 	const isHorizonalLong = bw < bh * rate
 	const dp = 0.1 // 余白
-	const dpb = 1 - 0.1
+	const dpb = 1 - dp
 	const [w, h, dw, dh] = isHorizonalLong
 		? [bw * dpb, (bw / rate) * dpb, bw * dp, bh - bw / rate + bh * dp]
 		: [bh * rate * dpb, bh * dpb, bw - bh * rate + bw * dp, bh * dp] // [w, h, 余白, 余白]
+	console.log({ isHorizonalLong })
+	console.log({ w, h, dw, dh })
+	console.log({ bw, bh })
 
 	//canvasに描画
 	const canvas = genCanvas(w, h)
@@ -74,7 +77,10 @@ const packImage = async (url: string) => {
 	const rx = Math.random()
 	const ry = Math.random()
 
-	ctx.drawImage(img, 0 + dw * rx, dh * ry, w + dw * rx, h + dh * ry)
+	const dx = dw * rx
+	const dy = dh * ry
+
+	ctx.drawImage(img, dx, dy, w, h, 0, 0, w, h)
 
 	const canvas2 = genCanvas(tw, th)
 

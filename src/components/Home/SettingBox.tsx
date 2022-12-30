@@ -340,6 +340,7 @@ const Wrap = styled.div`
 	/* height: 20vh; */
 	display: flex;
 	overflow: hidden;
+	min-width: 300px;
 
 	> div {
 		padding: 8px;

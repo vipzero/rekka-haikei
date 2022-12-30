@@ -55,7 +55,7 @@ function useMigration() {
 
 			setSettingsStorage({ ...settings, ee })
 		}
-		if (v < 10) {
+		if (v < 9) {
 			setSnapsStorage([])
 		}
 		setV(9)
