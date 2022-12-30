@@ -34,7 +34,7 @@ function CountTable() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
-			{/* <Snaps /> */}
+			<Snaps />
 
 			<Tabs items={[{ label: 'リスト' }]} onChange={setTab} />
 			<TabPanel value={tab} index={0}>

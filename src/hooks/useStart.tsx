@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { storageKeys } from '../config'
-import { Setting } from '../types'
+import { Setting, Snap } from '../types'
 import { useLocalStorage } from './useLocalStorage'
 
 export function useStart() {
@@ -14,6 +14,9 @@ const getSettingsStorage = () =>
 	JSON.parse(localStorage.getItem(storageKeys.setting) || '{}')
 const setSettingsStorage = (v: Partial<Setting>) =>
 	localStorage.setItem(storageKeys.setting, JSON.stringify(v))
+
+const setSnapsStorage = (v: Snap[]) =>
+	localStorage.setItem(storageKeys.snaps, JSON.stringify(v))
 
 function useMigration() {
 	const [v, setV] = useLocalStorage<number>('version', 0)
@@ -52,7 +55,10 @@ function useMigration() {
 
 			setSettingsStorage({ ...settings, ee })
 		}
-		setV(8)
+		if (v < 10) {
+			setSnapsStorage([])
+		}
+		setV(9)
 		setReady(true)
 	}, [])
 	return ready

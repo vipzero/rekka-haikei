@@ -48,7 +48,7 @@ type Props = {
 	toggleFavorited: () => void
 	bgcmOpen: boolean
 	toggleBgcmOpen: () => void
-	addSnap: () => void
+	addSnap: () => Promise<boolean>
 	streamUrl: string
 	setStreamUrl: (url: string) => void
 	favCount: number
@@ -93,10 +93,14 @@ function SettingBox({
 	}
 	const snapping = () => {
 		if (snapped) return
-		setSnapped(true)
-		addSnap()
-
-		toast.success('スナップ保存しました\nブクマから確認できます', {})
+		addSnap().then((ok) => {
+			if (ok) {
+				setSnapped(true)
+				toast.success('スナップ保存しました\nブクマから確認できます', {})
+			} else {
+				toast.error('保存失敗', {})
+			}
+		})
 	}
 	const toggleStream = () => {
 		if (streamUrl) removeStream()

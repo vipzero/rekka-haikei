@@ -24,16 +24,14 @@ export const formatTime = (time: number) => formatDate(time).split(' ')[1]
 
 export const formatCount = (n: number) => (n === 1 ? '初' : `${n}回目`)
 
-export function imgCheck(url: string) {
+export function imgCheck(url: string): Promise<HTMLImageElement> {
 	return new Promise((resolve, reject) => {
 		const bgImg = new Image()
 
-		bgImg.onload = () => {
-			resolve(true)
-		}
-		bgImg.onerror = () => {
-			reject()
-		}
+		bgImg.onload = () => resolve(bgImg)
+		bgImg.onerror = () => reject()
+
+		bgImg.crossOrigin = 'anonymous'
 		bgImg.src = url
 	})
 }

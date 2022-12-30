@@ -1,6 +1,8 @@
 import { Snap, Song } from '../types'
+import { imgCheck } from '../util'
 import { useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
+import pica from 'pica'
 
 export const useFavorites = () => {
 	const eid = useQeuryEid()
@@ -44,6 +46,42 @@ function song2Snap(song: Song, url: string): Snap {
 	}
 }
 
+const genCanvas = (w: number, h: number) => {
+	const canvas = document.createElement('canvas')
+	canvas.height = h
+	canvas.width = w
+	return canvas
+}
+const packImage = async (url: string) => {
+	const img = await imgCheck(url).catch(() => false as const)
+	if (!img) return false
+	const bw = img.naturalWidth
+	const bh = img.naturalHeight
+	const rate = 1.618
+	const tw = 200
+	const th = 200 / rate
+	const isHorizonalLong = bw < bh * rate
+	const dp = 0.1 // 余白
+	const dpb = 1 - 0.1
+	const [w, h, dw, dh] = isHorizonalLong
+		? [bw * dpb, (bw / rate) * dpb, bw * dp, bh - bw / rate + bh * dp]
+		: [bh * rate * dpb, bh * dpb, bw - bh * rate + bw * dp, bh * dp] // [w, h, 余白, 余白]
+
+	//canvasに描画
+	const canvas = genCanvas(w, h)
+	const ctx = canvas.getContext('2d')
+	if (!ctx) return false
+	const rx = Math.random()
+	const ry = Math.random()
+
+	ctx.drawImage(img, 0 + dw * rx, dh * ry, w + dw * rx, h + dh * ry)
+
+	const canvas2 = genCanvas(tw, th)
+
+	const res = await pica().resize(canvas, canvas2)
+	return res.toDataURL()
+}
+
 export const useSnaps = () => {
 	const [snaps, setSnaps] = useLocalStorage<Snap[]>(`snaps`, [])
 	const removeSnap = (i) => {
@@ -54,8 +92,12 @@ export const useSnaps = () => {
 		})
 	}
 
-	const addSnap = (snap: Song, url: string) =>
-		setSnaps((data) => [...data, song2Snap(snap, url)])
+	const addSnap = async (snap: Song, url: string) => {
+		const res = await packImage(url)
+		if (!res) return false
+		setSnaps((data) => [...data, song2Snap(snap, res)])
+		return true
+	}
 
 	return { snaps, addSnap, removeSnap }
 }
