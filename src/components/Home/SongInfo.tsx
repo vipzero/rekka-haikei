@@ -24,10 +24,10 @@ function tagOrder(tags: Record<string, number>): TagCount[] {
 	return Object.entries(tags)
 		.map(([s, count]) => ({ s, count }))
 		.sort((a, b) => {
-			const score1 = Number(isTimeTag(a.s)) - Number(isTimeTag(b.s))
+			// const score1 = Number(isTimeTag(a.s)) - Number(isTimeTag(b.s))
 			const score2 = a.count - b.count
 			const score3 = a.s.localeCompare(b.s)
-			return score1 * 10000 + score2 * 100 + score3
+			return score2 * 100 + score3
 		})
 }
 
@@ -67,7 +67,7 @@ function SongInfo({ song }: Props) {
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()
 	const tags = tagOrder(song.wordCounts).filter(
-		({ s }) => s !== song.icy && !isTimeMonthTag(s)
+		({ s }) => s !== song.icy && !isTimeTag(s)
 	)
 
 	const { singer, composer, arranger, writer } = song

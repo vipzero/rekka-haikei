@@ -95,7 +95,7 @@ function SettingBox({
 		if (snapped) return
 		addSnap().then((ok) => {
 			if (ok) {
-				setSnapped(true)
+				// setSnapped(true) 1回に制限する
 				toast.success('スナップ保存しました\nブクマから確認できます', {})
 			} else {
 				toast.error('保存失敗', {})
