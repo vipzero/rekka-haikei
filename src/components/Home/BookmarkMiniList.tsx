@@ -20,11 +20,7 @@ export function BookmarkMiniList({ books, toggleFavorites }: Props) {
 		>
 			<p>
 				■ブックマーク
-				<span
-					className="moc"
-					style={{ float: 'right' }}
-					onClick={closeBookmark}
-				>
+				<span className="moc" onClick={closeBookmark}>
 					x
 				</span>
 			</p>
@@ -37,7 +33,7 @@ export function BookmarkMiniList({ books, toggleFavorites }: Props) {
 					>
 						<FontAwesomeIcon icon={faBookmark} />
 					</span>
-					<span>{icy}</span>
+					<span style={{ marginLeft: '4px' }}>{icy}</span>
 				</p>
 			))}
 		</div>

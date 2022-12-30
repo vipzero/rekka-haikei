@@ -1,6 +1,6 @@
 import { useRecentHistoryDb } from '../../hooks/useRecentHistoryDb'
 import { useSettingsShowHistory } from '../../hooks/useSettings'
-import { formatTime } from '../../util'
+import { formatTimes } from '../../util'
 
 function RecentHistoryList() {
 	const { visible, closeHistory } = useSettingsShowHistory()
@@ -18,16 +18,29 @@ function RecentHistoryList() {
 		>
 			<p>
 				■履歴
-				<span className="moc" style={{ float: 'right' }} onClick={closeHistory}>
+				<span className="moc" onClick={closeHistory}>
 					x
 				</span>
 			</p>
-			{histories.map((hist, i) => (
-				<p key={i}>
-					<span className="mono">{formatTime(hist.time)}</span>
-					<span>{hist.title}</span>
-				</p>
-			))}
+			{histories.map((hist, i) => {
+				const { h, m, s } = formatTimes(hist.time)
+				const hs = String(Number(h)).padStart(2, '\u00A0')
+				const pHist = histories[i + 1]
+				const { h: ph } = pHist ? formatTimes(pHist.time) : { h: '--' }
+
+				return (
+					<p key={i}>
+						<span className="mono">
+							<span className="hh" style={{ opacity: ph === h ? 0.3 : 1 }}>
+								{hs}:
+							</span>
+							<span className="mm">{m}</span>
+							<span className="ss">:{s}</span>
+						</span>
+						<span style={{ marginLeft: '4px' }}>{hist.title}</span>
+					</p>
+				)
+			})}
 		</div>
 	)
 }

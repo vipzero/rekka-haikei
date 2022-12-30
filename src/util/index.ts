@@ -1,5 +1,6 @@
 export const pad2 = (num: number) => String(num).padStart(2, '0')
-export function formatDate(time: number, toHour: boolean = false) {
+
+export function formatTimes(time: number) {
 	const date = new Date(time)
 
 	const yyyy = date.getFullYear()
@@ -8,6 +9,12 @@ export function formatDate(time: number, toHour: boolean = false) {
 	const h = pad2(date.getHours())
 	const m = pad2(date.getMinutes())
 	const s = pad2(date.getSeconds())
+
+	return { yyyy, mm, dd, h, m, s }
+}
+
+export function formatDate(time: number, toHour: boolean = false) {
+	const { yyyy, mm, dd, h, m, s } = formatTimes(time)
 
 	if (toHour) return `${mm}月${dd}日${h}時`
 	return `${yyyy}-${mm}-${dd} ${h}:${m}:${s}`
@@ -20,6 +27,7 @@ export function formatYmdSlash(time: number) {
 	const dd = pad2(date.getDate())
 	return `${yyyy}/${mm}/${dd}`
 }
+
 export const formatTime = (time: number) => formatDate(time).split(' ')[1]
 
 export const formatCount = (n: number) => (n === 1 ? '初' : `${n}回目`)

@@ -153,6 +153,8 @@ const Container = styled.div`
 
 	.moc {
 		visibility: hidden;
+		position: fixed;
+		padding-left: 0.5rem;
 	}
 	.co-recenthist:hover {
 		.moc {
@@ -168,9 +170,6 @@ const Container = styled.div`
 		padding: 0.4rem 0.4rem;
 		p {
 			font-size: 0.8rem;
-			span:not(:first-child) {
-				margin-left: 4px;
-			}
 		}
 		-ms-overflow-style: none;
 	}
