@@ -201,19 +201,19 @@ const Style = styled.div`
 			opacity: 0.2;
 			background-image: repeating-linear-gradient(
 					45deg,
-					#ffffff 25%,
+					#777 25%,
 					transparent 25%,
 					transparent 75%,
-					#ffffff 75%,
-					#ffffff
+					#777 75%,
+					#777
 				),
 				repeating-linear-gradient(
 					45deg,
-					#ffffff 25%,
+					#777 25%,
 					#000000 25%,
 					#000000 75%,
-					#ffffff 75%,
-					#ffffff
+					#777 75%,
+					#777
 				);
 			background-position: 0 0, calc(var(--cw) / 2) calc(var(--cw) / 2);
 			background-size: var(--cw) var(--cw);
@@ -237,31 +237,31 @@ const Style = styled.div`
 					#000 75%,
 					#000
 				);
-			--cw: 10px;
+			--cw: 24px;
 			background-size: var(--cw) var(--cw);
 		}
 	}
 	&[data-hd='3'] {
 		.pattern {
-			background-image: radial-gradient(#ffffff 0.5px, transparent 0.5px),
-				radial-gradient(#ffffff 0.5px, #000000 0.5px);
-			background-size: 8px 8px;
-			background-position: 0 0, 10px 10px;
+			background-image: radial-gradient(#777 0.5px, transparent 0.5px),
+				radial-gradient(#777 0.5px, #000000 0.5px);
+			--cw: 10px;
+			background-size: 0 0, var(--cw) var(--cw);
 		}
 	}
 	&[data-hd='4'] {
 		.pattern {
-			background-image: linear-gradient(#ffffff 1px, transparent 1px),
-				linear-gradient(to right, #ffffff 1px, #000000 1px);
+			background-image: linear-gradient(#777 1px, transparent 1px),
+				linear-gradient(to right, #777 1px, #000000 1px);
 			background-size: 20px 20px;
 		}
 	}
 	&[data-hd='5'] {
 		.pattern {
-			background-image: linear-gradient(135deg, #ffffff 25%, transparent 25%),
-				linear-gradient(225deg, #ffffff 25%, transparent 25%),
-				linear-gradient(45deg, #ffffff 25%, transparent 25%),
-				linear-gradient(315deg, #ffffff 25%, #000000 25%);
+			background-image: linear-gradient(135deg, #555 25%, transparent 25%),
+				linear-gradient(225deg, #555 25%, transparent 25%),
+				linear-gradient(45deg, #555 25%, transparent 25%),
+				linear-gradient(315deg, #555 25%, #000000 25%);
 			background-position: 10px 0, 10px 0, 0 0, 0 0;
 			background-size: 20px 20px;
 			background-repeat: repeat;
@@ -272,8 +272,8 @@ const Style = styled.div`
 			background-size: 20px 20px;
 			background-image: repeating-linear-gradient(
 				to right,
-				#ffffff,
-				#ffffff 1px,
+				#777,
+				#777 1px,
 				#000000 1px,
 				#000000
 			);
@@ -281,7 +281,7 @@ const Style = styled.div`
 	}
 	&[data-hd='7'] {
 		.pattern {
-			background-image: linear-gradient(45deg, #ffffff 50%, #000000 50%);
+			background-image: linear-gradient(45deg, #777 50%, #000000 50%);
 			background-size: 10px 10px;
 		}
 	}
