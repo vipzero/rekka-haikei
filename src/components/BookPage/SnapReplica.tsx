@@ -43,7 +43,8 @@ export function SnapReplica({ snap, onDelete }: Props) {
 
 const Style = styled.div`
 	position: relative;
-	width: 200px;
+	width: max(10%, min(200px, 48%));
+
 	aspect-ratio: 1.618 / 1;
 	/* box-shadow: 0 -10px 20px 0px #000 inset; */
 	/* border-bottom: solid 4px; */
