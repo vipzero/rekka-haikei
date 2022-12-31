@@ -1,25 +1,12 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import styled from 'styled-components'
-import { useQeuryEid } from '../../hooks/useQueryEid'
+import { useTick } from '../../hooks/useTick'
 import { Song } from '../../types'
 import { formatTime, pad2 } from '../../util'
 import { EeSelectorConnected } from './EeSelector'
 
 type Props = {
 	song: Song
-}
-
-const useTick = () => {
-	const [now, setNow] = useState<Date>(new Date())
-	useEffect(() => {
-		const t = setInterval(() => {
-			const d = new Date()
-			d.setMilliseconds(0)
-			setNow(d)
-		}, 100)
-		return () => clearInterval(t)
-	}, [])
-	return now
 }
 
 const formatMmSs = (t: number) =>
@@ -61,7 +48,6 @@ function calcTimes(now: Date, startTime: number, trackTimeMillis) {
 const Time = ({ song }: Props) => {
 	const now = useTick()
 	const { time: startTime, trackTimeMillis } = song
-	const eid = useQeuryEid()
 
 	const cur = formatTime(+now)
 	const [

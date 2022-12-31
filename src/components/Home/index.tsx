@@ -18,6 +18,7 @@ import { BookmarkMiniList } from './BookmarkMiniList'
 import { Conways } from './ex/Coway'
 import { exStyles } from './ex/exStyles'
 import { ExtraComp } from './ex/ExtraComp'
+import { YearTimer } from './ex/YearTimer'
 import FadeBgChanger from './FadeBgChanger'
 import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
@@ -98,6 +99,7 @@ function Home({ song, setBg }: Props) {
 				</div>
 
 				<ExtraComp sid={`${song.time}`} />
+				<YearTimer />
 				<RecentHistoryList />
 				{/* {showEmol && <LyricsBox />} */}
 

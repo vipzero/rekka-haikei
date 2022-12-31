@@ -1,3 +1,4 @@
+import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo } from 'react'
 import { useMouse } from 'rooks'
@@ -6,9 +7,8 @@ import { FloatingBox, RainbowFontCool } from '../..'
 import { useSettingsEe } from '../../../hooks/useSettings'
 import { range, uaHash } from '../../../util'
 import CVote from '../Cvote'
-import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
-import { faHurricane } from '@fortawesome/free-solid-svg-icons'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
+import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
