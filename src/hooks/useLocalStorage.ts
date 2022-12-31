@@ -1,30 +1,51 @@
-import { Dispatch, SetStateAction, useState, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+
+export const updateLocalStorage = <T = unknown>(
+	key: string,
+	value: SetStateAction<T>,
+	initialValue: T
+) => saveLocalStorage(key, value, getLocalStorage(key, initialValue))
+
+export function getLocalStorage<T = unknown>(key: string, initialValue: T) {
+	if (typeof window === 'undefined') return initialValue
+	try {
+		const item = window.localStorage.getItem(key)
+
+		return item ? (JSON.parse(item) as T) : initialValue
+	} catch (error) {
+		return initialValue
+	}
+}
+
+export function saveLocalStorage<T = unknown>(
+	key: string,
+	value: SetStateAction<T>,
+	initialValue: T
+): { ok: boolean; value: T } {
+	try {
+		if (typeof window === 'undefined') return { ok: false, value: initialValue }
+		const valueToStore = value instanceof Function ? value(initialValue) : value
+
+		window.localStorage.setItem(key, JSON.stringify(valueToStore))
+		return { value: valueToStore, ok: true }
+	} catch (error) {
+		console.log(error)
+	}
+	return { ok: false, value: initialValue }
+}
 
 export function useLocalStorage<T = unknown>(
 	key: string,
 	initialValue: T
 ): [T, Dispatch<SetStateAction<T>>] {
-	const [storedValue, setStoredValue] = useState<T>(() => {
-		if (typeof window === 'undefined') return initialValue
-		try {
-			const item = window.localStorage.getItem(key)
+	const [storedValue, setStoredValue] = useState<T>(() =>
+		getLocalStorage(key, initialValue)
+	)
 
-			return item ? (JSON.parse(item) as T) : initialValue
-		} catch (error) {
-			return initialValue
-		}
-	})
-
-	const setValue = (value: unknown) => {
-		try {
-			if (typeof window === 'undefined') return
-			const valueToStore =
-				value instanceof Function ? value(storedValue) : value
-
-			setStoredValue(valueToStore)
-			window.localStorage.setItem(key, JSON.stringify(valueToStore))
-		} catch (error) {
-			console.log(error)
+	const setValue = (value: SetStateAction<T>) => {
+		const res = saveLocalStorage(key, value, storedValue)
+		if (res.ok) {
+			setStoredValue(res.value)
 		}
 	}
 	useEffect(() => {
