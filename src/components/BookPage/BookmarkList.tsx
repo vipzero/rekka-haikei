@@ -7,7 +7,7 @@ import { CopyButton } from './CopyButton'
 
 export function BookmarkList() {
 	const { favorites, toggleFavorites } = useFavorites()
-	const [mode, setMode] = useState<'normal' | 'copy' | 'txt'>('copy')
+	const [mode, setMode] = useState<'normal' | 'copy' | 'txt'>('normal')
 	const [lastCopy, setLastCopy] = useState<string>('')
 	const text = Object.keys(favorites).join('\n')
 
@@ -46,43 +46,47 @@ export function BookmarkList() {
 					<CopyButton onClick={() => copyAciton(text)} label={'コピー'} />
 				</div>
 			)}
-			{mode === 'normal' &&
-				Object.keys(favorites)
-					.map((icy) => ({ icy, units: icy.split(' - ') }))
-					.map(({ icy, units: [_icyA, _icyB] }, i) => (
-						<div key={i} className="row">
-							<div data-active={icy === lastCopy} key={icy}>
-								<span>{icy}</span>
-								<CopyButton onClick={() => copyAciton(icy)} />
-							</div>
-							<div />
-							<div />
-							<button
-								onClick={() => confirm('削除する') && toggleFavorites(icy)}
-							>
-								削除
-							</button>
-						</div>
-					))}
-			{mode === 'copy' &&
-				Object.keys(favorites)
-					.map((icy) => ({ icy, units: icy.split(' - ') }))
-					.map(({ icy, units: [icyA, icyB] }, i) => (
-						<div key={i} className="row">
-							{[icy, icyA, icyB].map((str) => (
-								<div data-active={str === lastCopy} key={str}>
-									<span>{str}</span>
-									<CopyButton onClick={() => copyAciton(str)} />
+			{mode === 'normal' && (
+				<div className="table-body">
+					{Object.keys(favorites)
+						.map((icy) => ({ icy, units: icy.split(' - ') }))
+						.map(({ icy, units: [_icyA, _icyB] }, i) => (
+							<div key={i} className="row">
+								<div data-active={icy === lastCopy} key={icy}>
+									<span>{icy}</span>
+									<CopyButton onClick={() => copyAciton(icy)} />
 								</div>
-							))}
+								<button
+									onClick={() => confirm('削除する') && toggleFavorites(icy)}
+								>
+									削除
+								</button>
+							</div>
+						))}
+				</div>
+			)}
+			{mode === 'copy' && (
+				<div>
+					{Object.keys(favorites)
+						.map((icy) => ({ icy, units: icy.split(' - ') }))
+						.map(({ icy, units: [icyA, icyB] }, i) => (
+							<div key={i} className="row-sp">
+								{[icy, icyA, icyB].map((str) => (
+									<div data-active={str === lastCopy} key={str}>
+										<span>{str}</span>
+										<CopyButton onClick={() => copyAciton(str)} />
+									</div>
+								))}
 
-							<button
-								onClick={() => confirm('削除する') && toggleFavorites(icy)}
-							>
-								削除
-							</button>
-						</div>
-					))}
+								<button
+									onClick={() => confirm('削除する') && toggleFavorites(icy)}
+								>
+									削除
+								</button>
+							</div>
+						))}
+				</div>
+			)}
 		</Style>
 	)
 }
@@ -92,18 +96,34 @@ const Style = styled.div`
 		background: #ddd;
 		padding: 12px 8px;
 	}
-	.row {
+	.table-body {
+	}
+	.row,
+	.row-sp {
 		border-bottom: solid 1px;
 		display: grid;
-		grid-template-columns: 2fr 1fr 1fr auto;
+		grid-template-columns: 2fr auto;
 		padding: 4px;
 		gap: 12px;
+		> div {
+			position: relative;
+			button {
+				display: none;
+				position: absolute;
+				bottom: 0;
+				right: 0;
+			}
+			&:hover {
+				button {
+					display: block;
+				}
+			}
+		}
 		[data-active='true'] {
 			background: #dfa;
 		}
-		/* > div {} */
-		> div button {
-			float: right;
-		}
+	}
+	.row-sp {
+		grid-template-columns: 2fr 1fr 1fr auto;
 	}
 `
