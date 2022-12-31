@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
-import { useFavorites, useSnaps } from '../../hooks/useFavorites'
+import { addSnap, useFavorites } from '../../hooks/useFavorites'
 import { useLightConfig } from '../../hooks/useLightConfig'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
 import {
@@ -52,7 +52,6 @@ function Home({ song, setBg }: Props) {
 		song.trackTimeMillis ||
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
-	const { addSnap } = useSnaps()
 
 	const { moz, full } = useLightConfig(song, () => toggleFavorites(song.icy))
 

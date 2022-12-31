@@ -1,6 +1,7 @@
+import { storageKeys } from '../config'
 import { Snap, Song } from '../types'
 import { imgCheck } from '../util'
-import { useLocalStorage } from './useLocalStorage'
+import { updateLocalStorage, useLocalStorage } from './useLocalStorage'
 import { useQeuryEid } from './useQueryEid'
 
 export const useFavorites = () => {
@@ -83,7 +84,7 @@ const packImage = async (url: string) => {
 }
 
 export const useSnaps = () => {
-	const [snaps, setSnaps] = useLocalStorage<Snap[]>(`snaps`, [])
+	const [snaps, setSnaps] = useLocalStorage<Snap[]>(storageKeys.snaps, [])
 	const removeSnap = (i) => {
 		setSnaps((data) => {
 			const newSnaps = [...data]
@@ -92,12 +93,17 @@ export const useSnaps = () => {
 		})
 	}
 
-	const addSnap = async (snap: Song, url: string) => {
-		const res = await packImage(url)
-		if (!res) return false
-		setSnaps((data) => [...data, song2Snap(snap, res)])
-		return true
-	}
+	return { snaps, removeSnap }
+}
 
-	return { snaps, addSnap, removeSnap }
+export const addSnap = async (snap: Song, url: string) => {
+	const res = await packImage(url)
+	if (!res) return false
+	updateLocalStorage<Snap[]>(
+		storageKeys.snaps,
+		(data) => [...data, song2Snap(snap, res)],
+		[]
+	)
+
+	return true
 }
