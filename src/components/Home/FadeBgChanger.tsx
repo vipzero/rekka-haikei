@@ -14,6 +14,8 @@ const transitionStyles = {
 
 const defaultStyle = {
 	transition: `opacity ${duration}ms ease-in-out`,
+	height: '100vh',
+	weight: '100vw',
 	opacity: 0,
 }
 
@@ -23,8 +25,16 @@ type Props = {
 	lockCount: number
 	px: 'right' | 'center' | 'left'
 	changedUrl: (url: string) => void
+	artwork?: string
 }
-function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
+function FadeBgChanger({
+	sid,
+	urls,
+	px,
+	lockCount,
+	changedUrl,
+	artwork,
+}: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
 
@@ -33,6 +43,7 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 	useEffect(() => {
 		changedUrl(url)
 	}, [url])
+	const transBack = artwork ? `url(${artwork})` : bgStyle
 
 	return (
 		<SuperBack id="bg" style={{ backgroundColor: abyss }}>
@@ -45,22 +56,27 @@ function FadeBgChanger({ sid, urls, px, lockCount, changedUrl }: Props) {
 				timeout={duration}
 			>
 				{(state) => (
-					<Background
-						ref={divRef}
+					<div
 						style={{
 							...defaultStyle,
 							...transitionStyles[state],
-
-							backgroundImage: bgStyle,
-							backgroundSize: 'contain',
-							backgroundPositionX: px,
-							backgroundPositionY: 'center',
 						}}
 					>
-						<div className="channel r"></div>
-						<div className="channel g"></div>
-						<div className="channel b"></div>
-					</Background>
+						<div className="clone" style={{ backgroundImage: transBack }}></div>
+						<Background
+							ref={divRef}
+							style={{
+								backgroundImage: bgStyle,
+								backgroundSize: 'contain',
+								backgroundPositionX: px,
+								backgroundPositionY: 'center',
+							}}
+						>
+							<div className="channel r"></div>
+							<div className="channel g"></div>
+							<div className="channel b"></div>
+						</Background>
+					</div>
 				)}
 			</Transition>
 		</SuperBack>
@@ -75,14 +91,26 @@ const SuperBack = styled.div`
 	top: 0;
 	z-index: -10;
 	overflow: hidden;
+	.clone {
+		position: absolute;
+		height: 100vh;
+		width: 100vw;
+		background-size: 176%;
+		background-position: 69% 38%;
+
+		top: 0;
+		left: 0;
+		z-index: -13;
+		filter: blur(1vw);
+	}
 `
 
 const Background = styled.div`
 	height: 100vh;
 	width: 100vw;
 	position: absolute;
-	left: 0;
 	top: 0;
+	left: 0;
 	z-index: -10;
 `
 

@@ -16,7 +16,6 @@ const bits = galax.map((s) =>
 		.map((i) => i.toString(2).padStart(8, '0').split(''))
 		.flat()
 )
-console.log(bits)
 
 const useLifeMap = () => {
 	const [world, setWorld] = useState<number>(0)

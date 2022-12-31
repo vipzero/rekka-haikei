@@ -428,6 +428,9 @@ export const exStyles = css`
 	}
 
 	&[data-ex='steinsgate'] #bg > div {
+		.clone {
+			display: none;
+		}
 		&::before,
 		&::after,
 		.channel {

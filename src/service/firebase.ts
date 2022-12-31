@@ -164,9 +164,9 @@ export const watchHistSong = (
 ) =>
 	onSnapshot(histSongsDoc(eid, String(id)), (snap) => {
 		if (!snap.exists()) {
-			console.error('hist not found')
-			console.error(snap.id)
-			console.error({ eid, id })
+			// console.error('hist not found')
+			// console.error(snap.id)
+			// console.error({ eid, id })
 		}
 
 		onNext(snap.data() as HistoryRaw)
