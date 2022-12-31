@@ -10,7 +10,7 @@ export const YearTimer = () => {
 	const m = Math.floor(ds / 60)
 	const s = ds % 60
 
-	const k = m >= 5 ? 'hide' : a > 0 ? 'active' : 'end'
+	const k = a > 0 ? 'active' : 'end'
 	if (a < -30 * 1000) return null
 
 	return (
