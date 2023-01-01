@@ -8,9 +8,9 @@ export const eekeysGimic = [
 	'higurashi',
 
 	'sakurasou',
-	'masshiro',
+	'masshiro', // R
 	'halowa',
-	'rain',
+	'rain', // R
 	'rainbow',
 	'gaming',
 	'subetef',
@@ -18,11 +18,12 @@ export const eekeysGimic = [
 	'gkgurashi',
 	'issyuukanfr',
 	'sao',
-	'3sha3yo',
+	'3sha3yo', //R
 	'susu',
+	'ariascarlet', //R
+	'imascd', // R
+
 	// 'codegeass',
-	'ariascarlet',
-	'imascd',
 ] as const
 // 🛑 ネタバレ注意
 export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
@@ -48,8 +49,8 @@ export const eekeysVotic = [
 	'toaru',
 	'jojo',
 	'bobo',
-	'rozen',
-	'amagami',
+	'rozen', // R
+	'amagami', // R
 	'shanimas',
 	'gabudoro',
 	// 'yamajo',
@@ -58,9 +59,10 @@ export const eekeysVotic = [
 	// 'imasmlpr',
 	// 'imasmlfa',
 	// 'imasmlan',
-	'rakupro',
-	'shining',
-	'loveplus',
+	'rakupro', // R
+	'shining', // R
+	'loveplus', // R
+	'milgram', // R
 ] as const
 export const eekeys = [
 	...eekeysGimic,
@@ -148,6 +150,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/雨([^上宮]|!?あがり)|[^a-z]rain/i, 'rain'],
 	[/�/, 'lain'],
 	[/高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
+	[/MILGRAM/, 'milgram'],
 	[/動く|moving|move/, 'move'],
 ]
 
@@ -199,4 +202,5 @@ export const eeId: Record<Eekey, number> = {
 	shining: 43,
 	loveplus: 44,
 	move: 45,
+	milgram: 45,
 }

@@ -295,4 +295,20 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'nn', name: '寧々', color: '#FF98B3' },
 		],
 	},
+	{
+		id: 'milgram',
+		chars: [
+			{ id: 'es', name: 'エス', color: '#000000' },
+			{ id: 'hr', name: 'ハルカ', color: '#0000cd' },
+			{ id: 'yn', name: 'ユノ', color: '#ff1493' },
+			{ id: 'fu', name: 'フータ', color: '#ff0000' },
+			{ id: 'mu', name: 'ムウ', color: '#ffff00' },
+			{ id: 'sd', name: 'シドウ', color: '#6495ed' },
+			{ id: 'mh', name: 'マヒル', color: '#ffa500' },
+			{ id: 'kz', name: 'カズイ', color: '#0000ff' },
+			{ id: 'am', name: 'アマネ', color: '#7fffd4' },
+			{ id: 'mk', name: 'ミコト', color: '#00008b' },
+			{ id: 'kt', name: 'コトコ', color: '#c71585' },
+		],
+	},
 ]
