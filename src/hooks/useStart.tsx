@@ -58,7 +58,15 @@ function useMigration() {
 		if (v < 9) {
 			setSnapsStorage([])
 		}
-		setV(9)
+		if (v < 10) {
+			const settings = getSettingsStorage() as Partial<Setting>
+			if (settings.ee && settings.ee['move']) {
+				settings.ee['move'] = 0
+			}
+
+			setSettingsStorage({ ...settings })
+		}
+		setV(10)
 		setReady(true)
 	}, [])
 	return ready
