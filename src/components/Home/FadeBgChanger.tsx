@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
+import { useMeasure, useSize } from 'react-use'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { useBgs } from './useBgs'
+import { fit } from 'object-fit-math'
 
 const duration = 1000
 const transitionStyles = {
@@ -36,7 +38,14 @@ function FadeBgChanger({
 	artwork,
 }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
-	const { anime, url, setAnime } = useBgs(urls, sid, lockCount)
+
+	const [ref, { width, height }] = useMeasure<HTMLDivElement>()
+	const { anime, url, setAnime, size } = useBgs(urls, sid, lockCount)
+	const bgSize = fit(
+		{ width, height },
+		{ width: size.w, height: size.h },
+		'contain'
+	)
 
 	const divRef = useRef<HTMLDivElement>(null)
 	const { abyss } = useSettingsEe()
@@ -46,7 +55,16 @@ function FadeBgChanger({
 	const transBack = artwork ? `url(${artwork})` : bgStyle
 
 	return (
-		<SuperBack id="bg" style={{ backgroundColor: abyss }}>
+		<SuperBack
+			id="bg"
+			ref={ref}
+			style={{
+				backgroundColor: abyss,
+				// @ts-ignore
+				'--bg-h': `${bgSize.height}px`,
+				'--bg-w': `${bgSize.width}px`,
+			}}
+		>
 			<Transition
 				in={anime}
 				onExited={() => {

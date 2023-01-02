@@ -3,9 +3,9 @@ import { imgCheck } from '../../util'
 
 async function enableUrl(urls: string[]) {
 	for (const url of urls) {
-		const ok = await imgCheck(url).catch(() => false)
+		const img = await imgCheck(url).catch(() => false as const)
 
-		if (ok) return url
+		if (img) return { url, img }
 	}
 	return false
 }
@@ -13,6 +13,7 @@ async function enableUrl(urls: string[]) {
 export function useBgs(urls: string[], sid: number, lockCount: number) {
 	const [anime, setAnime] = useState<boolean>(true)
 	const [url, setUrl] = useState<string>('')
+	const [size, setSize] = useState<{ w: number; h: number }>({ w: 1, h: 1 })
 	const [lock, setLock] = useState<number>(lockCount)
 
 	useEffect(() => {
@@ -25,14 +26,16 @@ export function useBgs(urls: string[], sid: number, lockCount: number) {
 		if (locked) return
 
 		enableUrl(urls)
-			.then((url) => {
-				if (url) {
+			.then((res) => {
+				if (res) {
+					const { url, img } = res
 					setUrl(url)
 					setAnime(false)
+					setSize({ w: img.naturalWidth, h: img.naturalHeight })
 					setLock((v) => v - 1)
 				}
 			})
 			.catch(() => {})
 	}, [urls[0], locked])
-	return { anime, url, setAnime }
+	return { anime, url, setAnime, size }
 }
