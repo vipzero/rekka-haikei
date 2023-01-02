@@ -55,13 +55,13 @@ export const exStyles = css`
 	&[data-ex='move'] {
 		@keyframes bpos {
 			0% {
-				background-position-x: 0;
+				background-position-x: 0vw;
 			}
 			100% {
 				background-position-x: 100vw;
 			}
 		}
-		#bg > div {
+		#bg-img {
 			animation: bpos 30s linear infinite;
 		}
 	}

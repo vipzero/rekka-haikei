@@ -17,6 +17,7 @@
 		"ky": "0.33.0",
 		"lodash": "4.17.21",
 		"next": "12.3.4",
+		"object-fit-math": "1.0.0",
 		"open-props": "^1.5.3",
 		"react": "18.2.0",
 		"react-audio-player": "0.17.0",

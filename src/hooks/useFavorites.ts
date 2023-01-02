@@ -1,3 +1,4 @@
+import { fit } from 'object-fit-math'
 import { storageKeys } from '../config'
 import { Snap, Song } from '../types'
 import { imgCheck } from '../util'
@@ -60,12 +61,18 @@ const packImage = async (url: string) => {
 	const rate = 1.618
 	const tw = 200
 	const th = 200 / rate
-	const isHorizonalLong = bw < bh * rate
 	const dp = 0.1 // 余白
 	const dpb = 1 - dp
-	const [w, h, dw, dh] = isHorizonalLong
-		? [bw * dpb, (bw / rate) * dpb, bw * dp, bh - bw / rate + bh * dp]
-		: [bh * rate * dpb, bh * dpb, bw - bh * rate + bw * dp, bh * dp] // [w, h, 余白, 余白]
+	const { width: ow, height: oh } = fit(
+		{ width: bw, height: bh },
+		{ width: tw, height: th },
+		'contain'
+	)
+
+	const w = ow * dpb
+	const h = oh * dpb
+	const dw = bw - ow * dpb
+	const dh = bh - oh * dpb
 
 	//canvasに描画
 	const cw = tw

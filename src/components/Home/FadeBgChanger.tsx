@@ -64,6 +64,7 @@ function FadeBgChanger({
 					>
 						<div className="clone" style={{ backgroundImage: transBack }}></div>
 						<Background
+							id="bg-img"
 							ref={divRef}
 							style={{
 								backgroundImage: bgStyle,
