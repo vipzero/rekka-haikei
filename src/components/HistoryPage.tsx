@@ -1,4 +1,5 @@
 import copy from 'copy-to-clipboard'
+import { resolveAny } from 'dns'
 import { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'
@@ -28,31 +29,65 @@ import { TableItem } from './HistoryPage/TableItem'
 import { HistorySearchForm } from './HistorySearchForm'
 import { Toast } from './Toast'
 
-const searchHit = (search: string, text: string, r: RegExp | false) => {
-	return (
-		(r && r.exec(text)) || text.toLowerCase().includes(search.toLowerCase())
-	)
+import * as regexpTree from 'regexp-tree'
+const getNamedGroups = (str: RegExp) => {
+	const ast = regexpTree.parse(str, {
+		// captureLocations: true,
+	})
+	let name: null | string = null
+	regexpTree.traverse(ast, {
+		Group({ node }) {
+			if (node.capturing && node.name) name = node.name
+		},
+	})
+	return name
+}
+
+const searchHit = (
+	search: string,
+	text: string,
+	r: RegExp | false
+): { hit: boolean; name?: string } => {
+	if (r) {
+		const res = r.exec(text)
+		if (res === null) return { hit: false }
+		return {
+			hit: true,
+			name: res.groups ? Object.keys(res.groups)[0] : undefined,
+		}
+		// (?<hoge>) 名前付きグループに対応する
+	}
+	return {
+		hit: text.toLowerCase().includes(search.toLowerCase()),
+	}
 }
 
 const searchFilter = (
 	searchs: string[],
 	rangedHists: History[]
-): [History[], Record<string, number> | null] => {
-	if (searchs.length === 0) return [rangedHists, null]
+): [History[], Record<string, number> | null, Record<string, string>] => {
+	if (searchs.length === 0) return [rangedHists, null, {}]
 
 	const preHists = rangedHists
 
 	const result: Record<string, number> = {}
+	const resultAlias: Record<string, string> = {}
+
 	const searchParts = searchs.map((s) => {
 		result[s] = 0
 		const ok = safeRegex(s)
-		return [s, ok && new RegExp(s, 'i')] as const
+
+		const r = new RegExp(s, 'iu')
+		const name = getNamedGroups(r)
+		if (name) resultAlias[s] = name
+		return [s, ok && r] as const
 	})
 	const histories: History[] = []
 
 	preHists.forEach((v) => {
 		const hits = searchParts.map(([s, r]) => {
-			const hit = searchHit(s, v.title, r)
+			const { hit } = searchHit(s, v.title, r)
+
 			result[s] += hit ? 1 : 0
 			return hit
 		})
@@ -68,7 +103,7 @@ const searchFilter = (
 	// 	return hits.some(Boolean)
 	// })
 
-	return [histories, result]
+	return [histories, result, resultAlias]
 }
 
 const rangeFilter = (range: Range, time: number) => {
@@ -135,7 +170,7 @@ function HistoryPageBase() {
 		return [rangeFiltered]
 	}, [sortedHists, range])
 
-	const [filteredHists, searchResult] = useMemo(() => {
+	const [filteredHists, searchResult, sAlias] = useMemo(() => {
 		performance.mark('a')
 		const res = searchFilter(searchs, rangedHists)
 		performance.mark('b')
@@ -151,12 +186,12 @@ function HistoryPageBase() {
 
 	const searchResultTexts = [
 		`履歴検索 ${eid}`,
-		...searchs.map((s) => `${s}: ${searchResult?.[s]}件`),
+		...searchs.map((s) => `${sAlias[s] || s}: ${searchResult?.[s]}件`),
 	]
 	const index2bText = (b: boolean, i: number) =>
 		b ? '済' : `${i + 1}`.padStart(2, '0')
 	const searchResultTexts2 = searchs.map(
-		(s, i) => index2bText(!!searchResult?.[s], i) + ' ' + s
+		(s, i) => index2bText(!!searchResult?.[s], i) + ' ' + (sAlias[s] || s)
 	)
 	const toggleSort = (k: 'none' | 'by_n' | 'by_b' | 'by_g') =>
 		setSort((v) => (v === k ? 'none' : k))
