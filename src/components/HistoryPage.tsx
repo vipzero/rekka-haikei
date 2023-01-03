@@ -1,5 +1,4 @@
 import copy from 'copy-to-clipboard'
-import { resolveAny } from 'dns'
 import { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
 import styled from 'styled-components'

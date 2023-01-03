@@ -173,18 +173,13 @@ export const exStyles = css`
 		}
 	}
 	&[data-ex='spin'] {
-		.album img {
+		.artwork img {
 			animation: spin 5s linear infinite;
 			&:hover {
 				animation-name: none;
 			}
 		}
 
-		&[data-has-art='true'] {
-			#bg > div {
-				animation: spin 3000s linear infinite;
-			}
-		}
 		&[data-has-art='false'] {
 			#bg > div {
 				animation: spin 60s linear infinite;
