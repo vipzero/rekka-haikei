@@ -27,7 +27,7 @@
 		"react-use": "^17.4.0",
 		"recoil": "0.7.7",
 		"regexp-tree": "^0.1.24",
-		"rooks": "7.10.0",
+		"rooks": "7.10.1",
 		"safe-regex": "2.1.1",
 		"styled-components": "5.3.9"
 	},
