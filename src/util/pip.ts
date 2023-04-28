@@ -1,8 +1,9 @@
-export const startPip = async () => {
-	const pipSource = document.querySelector<HTMLDivElement>('#bg-img')
-	if (pipSource === null) return
-
-	const url = pipSource.style.backgroundImage.replace(/url\("(.*)"\)/, '$1')
+const makeSvgUrl = async (
+	height: number,
+	width: number,
+	element: HTMLDivElement
+) => {
+	const url = element.style.backgroundImage.replace(/url\("(.*)"\)/, '$1')
 	const imgEl = document.createElement('img')
 	imgEl.src = url
 	imgEl.style.width = '100%'
@@ -18,8 +19,6 @@ export const startPip = async () => {
 	// 	)
 	// )
 
-	const { width, height } = pipSource.getBoundingClientRect()
-
 	const ns = 'http://www.w3.org/2000/svg'
 	const svg = document.createElementNS(ns, 'svg')
 	svg.setAttribute('width', String(width))
@@ -29,7 +28,7 @@ export const startPip = async () => {
 	foreignObject.setAttribute('width', String(width))
 	foreignObject.setAttribute('height', String(height))
 
-	const html = pipSource.cloneNode(true) as HTMLElement
+	const html = element.cloneNode(true) as HTMLElement
 	html.appendChild(imgEl)
 	html.style.display = 'content'
 
@@ -58,16 +57,43 @@ export const startPip = async () => {
 	const svgStr = new XMLSerializer().serializeToString(svg)
 	const svgUrl =
 		'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgStr)
+	return svgUrl
+}
 
-	// svgを画像として読み込む
-	const img = new Image(width, height)
-	img.src = svgUrl
-	await img.decode()
+export const startPip = async () => {
+	const pipSource = document.querySelector<HTMLDivElement>('#bg-img')
+	if (pipSource === null) return
+
+	// const waitingImgList = Array.from([imgEl])
+	// await Promise.all(
+	// 	waitingImgList.map(
+	// 		(el) =>
+	// 			new Promise((resolve) => {
+	// 				el.addEventListener('load', () => {
+	// 					resolve(0)
+	// 				})
+	// 			})
+	// 	)
+	// )
+
+	const { width, height } = pipSource.getBoundingClientRect()
+	let img = new Image(width, height)
+	const updateImage = async () => {
+		const svgUrl = await makeSvgUrl(width, height, pipSource)
+		if (!svgUrl) return
+
+		img = new Image(width, height)
+		img.src = svgUrl
+		await img.decode()
+	}
+	updateImage()
 
 	const canvas = document.createElement('canvas')
 	const ctx = canvas.getContext('2d')
 	canvas.width = width
 	canvas.height = height
+
+	setInterval(updateImage, 3000)
 	;(function render() {
 		if (ctx === null) return
 		ctx.clearRect(0, 0, width, height)
