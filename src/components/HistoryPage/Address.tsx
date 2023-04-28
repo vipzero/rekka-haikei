@@ -3,6 +3,7 @@ import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2023-04-28:05': 'feat PiP',
 	'2023-01-01:06': 'feat アーティストタグ追加',
 	'2023-01-01:05': 'feat 放送年シーズン統計',
 	'2023-01-01:04': 'enha 類似背景除外',

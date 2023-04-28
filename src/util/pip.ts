@@ -1,8 +1,6 @@
-const makeSvgUrl = async (
-	height: number,
-	width: number,
-	element: HTMLDivElement
-) => {
+const width = 600
+const height = 600
+const makeSvgUrl = async (element: HTMLDivElement) => {
 	const url = element.style.backgroundImage.replace(/url\("(.*)"\)/, '$1')
 	const imgEl = document.createElement('img')
 	imgEl.src = url
@@ -76,10 +74,11 @@ export const startPip = async () => {
 	// 	)
 	// )
 
-	const { width, height } = pipSource.getBoundingClientRect()
+	// const { width, height } = pipSource.getBoundingClientRect()
+	console.log(width, height)
 	let img = new Image(width, height)
 	const updateImage = async () => {
-		const svgUrl = await makeSvgUrl(width, height, pipSource)
+		const svgUrl = await makeSvgUrl(pipSource)
 		if (!svgUrl) return
 
 		img = new Image(width, height)
