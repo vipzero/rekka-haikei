@@ -6,6 +6,7 @@ import {
 	faCompactDisc,
 	faDownload,
 	faDroplet,
+	faGhost,
 	faHistory,
 	faIcicles,
 	faLock,
@@ -36,6 +37,7 @@ import { Setting, Song } from '../../types'
 import { downloadImg } from '../../util'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
+import { startPip } from '../../util/pip'
 
 const lockLabel = {
 	0: { help: `背景変更同期なし`, text: '' },
@@ -285,6 +287,13 @@ function SettingBox({
 						checked={bgcmOpen}
 						onClick={toggleBgcmOpen}
 					/>
+					<ConfButton
+						helpText="PiP"
+						className="pip"
+						areaKey="pi"
+						icon={faGhost}
+						onClick={startPip}
+					/>
 				</ButtonGrid>
 
 				<div style={{ display: streamUrl ? 'block' : 'none' }}>
@@ -392,7 +401,7 @@ const ButtonGrid = styled.div`
 		'vb fd fd fd dd dd'
 		'th th th ha ha _h'
 		'pp pp lk la la _h'
-		'pp pp lk rr rr _d';
+		'pp pp rr pi pi _d';
 `
 
 export default SettingBox
