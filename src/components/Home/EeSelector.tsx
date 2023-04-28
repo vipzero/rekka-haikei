@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { Setting } from '../../types'
 import { Eekey, eekeyGroups, EekeyState } from './Cvote/constants'
+import { EE_CHAR } from '../../config'
 
 type EeDot = {
 	get: boolean
@@ -26,8 +27,8 @@ const makeDot = (
 	hintGroup: number
 ): EeDot => {
 	const get = comps?.[key]
-	if (get === 2) return { get: true, char: '#', key, label: key }
-	if (get) return { get: true, char: '*', key, label: key }
+	if (get)
+		return { get: true, char: EE_CHAR[get] || EE_CHAR[0], key, label: key }
 	return { get: false, char: '-', key, label: hint(key, hintGroup) || '.' }
 }
 
