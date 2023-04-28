@@ -1,7 +1,8 @@
 const width = 600
 const height = 600
-const makeSvgUrl = async (element: HTMLDivElement) => {
+const makeSvgUrl = async (element: HTMLDivElement, prevurl: string) => {
 	const url = element.style.backgroundImage.replace(/url\("(.*)"\)/, '$1')
+	if (url === prevurl) return false
 	const imgEl = document.createElement('img')
 	imgEl.src = url
 	imgEl.style.width = '100%'
@@ -44,18 +45,18 @@ const makeSvgUrl = async (element: HTMLDivElement) => {
 		})
 	)
 
-	const style = document.createElement('style')
-	const css = await fetch('style.css').then((res) => res.text())
-	style.textContent = css
+	// const style = document.createElement('style')
+	// const css = await fetch('style.css').then((res) => res.text())
+	// style.textContent = css
+	// html.appendChild(style)
 
-	html.appendChild(style)
 	foreignObject.appendChild(html)
 	svg.appendChild(foreignObject)
 
 	const svgStr = new XMLSerializer().serializeToString(svg)
 	const svgUrl =
 		'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgStr)
-	return svgUrl
+	return { svgUrl, url }
 }
 
 export const startPip = async () => {
@@ -77,9 +78,12 @@ export const startPip = async () => {
 	// const { width, height } = pipSource.getBoundingClientRect()
 	console.log(width, height)
 	let img = new Image(width, height)
+	let url = ''
 	const updateImage = async () => {
-		const svgUrl = await makeSvgUrl(pipSource)
-		if (!svgUrl) return
+		const res = await makeSvgUrl(pipSource, url)
+		if (!res) return
+		const { svgUrl, url: newUrl } = res
+		url = newUrl
 
 		img = new Image(width, height)
 		img.src = svgUrl
@@ -92,7 +96,7 @@ export const startPip = async () => {
 	canvas.width = width
 	canvas.height = height
 
-	setInterval(updateImage, 3000)
+	const it = setInterval(updateImage, 3000)
 	;(function render() {
 		if (ctx === null) return
 		ctx.clearRect(0, 0, width, height)
@@ -124,6 +128,7 @@ export const startPip = async () => {
 
 	video.onleavepictureinpicture = () => {
 		video.remove()
+		clearInterval(it)
 	}
 
 	document.body.appendChild(video)
