@@ -34,7 +34,7 @@ import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Setting, Song } from '../../types'
-import { downloadImg } from '../../util'
+import { downloadImg, isMobile } from '../../util'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
 import { startPip } from '../../util/pip'
@@ -287,13 +287,15 @@ function SettingBox({
 						checked={bgcmOpen}
 						onClick={toggleBgcmOpen}
 					/>
-					<ConfButton
-						helpText="PiP"
-						className="pip"
-						areaKey="pi"
-						icon={faGhost}
-						onClick={startPip}
-					/>
+					{!isMobile() && (
+						<ConfButton
+							helpText="PiP"
+							className="pip"
+							areaKey="pi"
+							icon={faGhost}
+							onClick={startPip}
+						/>
+					)}
 				</ButtonGrid>
 
 				<div style={{ display: streamUrl ? 'block' : 'none' }}>

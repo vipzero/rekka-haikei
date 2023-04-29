@@ -182,3 +182,8 @@ export const isTimeTag = (s: string) => s[0] === '[' && lastChar(s) === ']'
 export const isTimeMonthTag = (s: string) => /^\[\d\d\d\d-\d\d\]$/.test(s)
 export const isTimeYearTag = (s: string) => /^\[\d\d\d\d\]$/.test(s)
 export const isTimeSeasonTag = (s: string) => /^\[\d\d\d\d-S\d\]$/.test(s)
+
+export const isMobile = () => {
+	if (typeof window === 'undefined') return false
+	return /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
+}
