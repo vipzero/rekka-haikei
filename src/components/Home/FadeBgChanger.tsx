@@ -1,10 +1,10 @@
+import { fit } from 'object-fit-math'
 import { useEffect, useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
-import { useMeasure, useSize } from 'react-use'
+import { useMeasure } from 'react-use'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { useBgs } from './useBgs'
-import { fit } from 'object-fit-math'
 
 const duration = 1000
 const transitionStyles = {

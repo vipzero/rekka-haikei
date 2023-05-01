@@ -8,7 +8,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings } from '../../hooks/useSettings'
-import { isSongFull, Song } from '../../types'
+import { Song, isSongFull } from '../../types'
 import {
 	formatCount,
 	isTimeTag,

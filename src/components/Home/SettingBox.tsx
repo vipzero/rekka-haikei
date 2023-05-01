@@ -27,20 +27,20 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import {
+	URL_GITHUB_REPO_URL,
 	abyssColorsEx,
 	allThemes,
 	allThemesById,
-	URL_GITHUB_REPO_URL,
 } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Setting, Song } from '../../types'
 import { downloadImg, isMobile } from '../../util'
-import { ConfButton } from './ConfButton'
-import Time from './Time'
 import { startPip } from '../../util/pip'
 import { BingoBox } from './BingoBox'
+import { ConfButton } from './ConfButton'
+import Time from './Time'
 
 const lockLabel = {
 	0: { help: `背景変更同期なし`, text: '' },
