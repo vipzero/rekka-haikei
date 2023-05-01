@@ -17,6 +17,7 @@ import {
 	faPaperclip,
 	faQuestion,
 	faRadio,
+	faScrewdriver,
 	faStar as faStarFill,
 	faTags,
 	faToolbox,
@@ -78,6 +79,7 @@ function SettingBox({
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
 	const [showBingo, setShowBingo] = useState<boolean>(false)
+	const [showDetail, setShowDetail] = useState<boolean>(false)
 
 	useEffect(() => {
 		setPressed(false)
@@ -127,6 +129,7 @@ function SettingBox({
 			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
 			data-show-bingo={showBingo}
+			data-show-detail={showDetail}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
@@ -146,14 +149,6 @@ function SettingBox({
 						onClick={s.toggleSideMode}
 						text={sideModeText[s.sideMode]}
 						checked={['wide', 'bw'].includes(s.sideMode)}
-					/>
-					<ConfButton
-						helpText="切替背景色: "
-						className="fade"
-						areaKey="fd"
-						icon={faCircleHalfStroke}
-						onClick={cycleAbyss}
-						text={abyssColorsEx[abyss]?.label || '???'}
 					/>
 
 					<ConfButton
@@ -184,26 +179,6 @@ function SettingBox({
 					/>
 
 					<ConfButton
-						helpText="タグ表示"
-						className="tags"
-						areaKey="vt"
-						icon={faTags}
-						checked={s.showCounts}
-						onClick={s.toggleCounts}
-						showToggleIcon
-					/>
-
-					<ConfButton
-						helpText="アートワーク表示"
-						className="artw"
-						areaKey="va"
-						icon={faCompactDisc}
-						checked={s.showArtwork}
-						onClick={s.toggleArtwork}
-						showToggleIcon
-					/>
-
-					<ConfButton
 						helpText="簡易履歴表示"
 						className="hist"
 						areaKey="vh"
@@ -211,42 +186,6 @@ function SettingBox({
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
 						showToggleIcon
-					/>
-
-					<ConfButton
-						helpText={`ブックマーク表示(${favCount})`}
-						className="books"
-						areaKey="vb"
-						icon={faBookmark}
-						checked={s.showBookmark}
-						onClick={s.toggleBookmark}
-						showToggleIcon
-					/>
-
-					{/* <ConfButton
-						helpText={`EMOL表示`}
-						checked={showEmol}
-						icon={faIcons}
-						onClick={toggleEmol}
-						className="emol"
-					/> */}
-
-					<ConfButton
-						helpText={lockLabel[s.lockBgNum].help}
-						className="lock"
-						areaKey="lk"
-						text={lockLabel[s.lockBgNum].text}
-						icon={s.lockBgNum === 0 ? faLock : faLockOpen}
-						checked={s.lockBgNum === 0}
-						onClick={s.toggleLockBg}
-					/>
-					<ConfButton
-						helpText={'Gif禁止: ' + (s.blockGif ? 'ON' : 'OFF')}
-						className="gif"
-						areaKey="la"
-						icon={s.blockGif ? faIcicles : faDroplet}
-						checked={s.blockGif}
-						onClick={s.toggleBlockGif}
 					/>
 
 					<ConfButton
@@ -299,6 +238,14 @@ function SettingBox({
 						checked={showBingo}
 						onClick={() => setShowBingo((v) => !v)}
 					/>
+					<ConfButton
+						helpText="詳細設定"
+						className="detail"
+						areaKey="_a"
+						icon={faScrewdriver}
+						checked={showDetail}
+						onClick={() => setShowDetail((v) => !v)}
+					/>
 
 					<div style={{ gridArea: 'bp' }} className="bingo-area">
 						<BingoBox />
@@ -312,6 +259,68 @@ function SettingBox({
 							onClick={startPip}
 						/>
 					)}
+					<DetailButtonGrid style={{ gridArea: '_c' }} id="detail-conf-area">
+						<ConfButton
+							helpText="切替背景色: "
+							className="fade"
+							areaKey="fd"
+							icon={faCircleHalfStroke}
+							onClick={cycleAbyss}
+							text={abyssColorsEx[abyss]?.label || '???'}
+						/>
+						<ConfButton
+							helpText="タグ表示"
+							className="tags"
+							areaKey="vt"
+							icon={faTags}
+							checked={s.showCounts}
+							onClick={s.toggleCounts}
+							showToggleIcon
+						/>
+						<ConfButton
+							helpText="アートワーク表示"
+							className="artw"
+							areaKey="va"
+							icon={faCompactDisc}
+							checked={s.showArtwork}
+							onClick={s.toggleArtwork}
+							showToggleIcon
+						/>
+						<ConfButton
+							helpText={`ブックマーク表示(${favCount})`}
+							className="books"
+							areaKey="vb"
+							icon={faBookmark}
+							checked={s.showBookmark}
+							onClick={s.toggleBookmark}
+							showToggleIcon
+						/>
+						<ConfButton
+							helpText={lockLabel[s.lockBgNum].help}
+							className="lock"
+							areaKey="lk"
+							text={lockLabel[s.lockBgNum].text}
+							icon={s.lockBgNum === 0 ? faLock : faLockOpen}
+							checked={s.lockBgNum === 0}
+							onClick={s.toggleLockBg}
+						/>
+						<ConfButton
+							helpText={'Gif禁止: ' + (s.blockGif ? 'ON' : 'OFF')}
+							className="gif"
+							areaKey="la"
+							icon={s.blockGif ? faIcicles : faDroplet}
+							checked={s.blockGif}
+							onClick={s.toggleBlockGif}
+						/>
+
+						{/* <ConfButton
+						helpText={`EMOL表示`}
+						checked={showEmol}
+						icon={faIcons}
+						onClick={toggleEmol}
+						className="emol"
+					/> */}
+					</DetailButtonGrid>
 				</ButtonGrid>
 
 				<div style={{ display: streamUrl ? 'block' : 'none' }}>
@@ -413,19 +422,31 @@ const Wrap = styled.div`
 			display: none;
 		}
 	}
+	&[data-show-detail='false'] {
+		#detail-conf-area {
+			display: none;
+		}
+	}
 `
 
 const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
-		'va bb bb bb bb ss'
-		'vt bb bb bb bb ss'
-		'vh bb bb bb bb ss'
-		'vb fd fd fd dd dd'
 		'bp bp bp bp bp bp'
-		'th th th ha ha _h'
-		'pp pp lk la la _h'
-		'pp pp rr pi bi _d';
+		'_c _c _c _c _c _c'
+		'vh bb bb bb bb ss'
+		'vh bb bb bb bb ss'
+		'bi bb bb bb bb ss'
+		'_a _a _a ha ha _h'
+		'pp pp th dd dd _h'
+		'pp pp rr pi pi _d';
+`
+
+const DetailButtonGrid = styled.div`
+	display: grid;
+	grid-template-areas:
+		'fd vt va'
+		'vb lk la';
 `
 
 export default SettingBox
