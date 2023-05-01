@@ -45,7 +45,7 @@ export const useBingo = () => {
 	const [{ bingo: bingoText }, setSetting] = useSettingsBase()
 	const bingo = parseBingo(bingoText)
 	const toggleItem = (name: string) => {
-		setBingoText(
+		setBingo((bingo) =>
 			encodeBingo({
 				items: bingo.items.map((v) =>
 					v.name === name ? { ...v, checked: !v.checked } : v
@@ -54,8 +54,10 @@ export const useBingo = () => {
 		)
 	}
 	const setBingoText = (bingo: string) => setSetting((v) => ({ ...v, bingo }))
+	const setBingo = (fn: (bingo: Bingo) => string) =>
+		setSetting((s) => ({ ...s, bingo: fn(parseBingo(s.bingo)) }))
 	const checkHit = (str: string) =>
-		setBingoText(
+		setBingo((bingo) =>
 			encodeBingo({
 				items: bingo.items.map((v) => ({
 					...v,
