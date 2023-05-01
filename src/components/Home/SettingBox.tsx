@@ -4,6 +4,7 @@ import {
 	faCircleHalfStroke,
 	faColumns,
 	faCompactDisc,
+	faDiceFive,
 	faDownload,
 	faDroplet,
 	faGhost,
@@ -38,6 +39,7 @@ import { downloadImg, isMobile } from '../../util'
 import { ConfButton } from './ConfButton'
 import Time from './Time'
 import { startPip } from '../../util/pip'
+import { BingoBox } from './BingoBox'
 
 const lockLabel = {
 	0: { help: `背景変更同期なし`, text: '' },
@@ -75,6 +77,7 @@ function SettingBox({
 	const eid = useQeuryEid()
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
+	const [showBingo, setShowBingo] = useState<boolean>(false)
 
 	useEffect(() => {
 		setPressed(false)
@@ -123,6 +126,7 @@ function SettingBox({
 			id="setting-box"
 			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
+			data-show-bingo={showBingo}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
@@ -287,6 +291,18 @@ function SettingBox({
 						checked={bgcmOpen}
 						onClick={toggleBgcmOpen}
 					/>
+					<ConfButton
+						helpText="ビンゴ"
+						className="bingo"
+						areaKey="bi"
+						icon={faDiceFive}
+						checked={showBingo}
+						onClick={() => setShowBingo((v) => !v)}
+					/>
+
+					<div style={{ gridArea: 'bp' }} className="bingo-area">
+						<BingoBox />
+					</div>
 					{!isMobile() && (
 						<ConfButton
 							helpText="PiP"
@@ -392,6 +408,11 @@ const Wrap = styled.div`
 			display: block;
 		}
 	}
+	&[data-show-bingo='false'] {
+		.bingo-area {
+			display: none;
+		}
+	}
 `
 
 const ButtonGrid = styled.div`
@@ -401,9 +422,10 @@ const ButtonGrid = styled.div`
 		'vt bb bb bb bb ss'
 		'vh bb bb bb bb ss'
 		'vb fd fd fd dd dd'
+		'bp bp bp bp bp bp'
 		'th th th ha ha _h'
 		'pp pp lk la la _h'
-		'pp pp rr pi pi _d';
+		'pp pp rr pi bi _d';
 `
 
 export default SettingBox

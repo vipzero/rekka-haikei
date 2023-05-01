@@ -25,6 +25,14 @@ export const defaultSetting: Setting = {
 	feedBackText: '',
 	customTheme: defaultCustomTheme,
 	showEmol: true,
+	bingo: `作品名:判定テキスト
+を:
+ここに:
+:
+:
+このすば:この素晴らしい世界に祝福を
+ハルヒ:涼宮ハルヒ
+`,
 }
 
 const localStorageEffect =

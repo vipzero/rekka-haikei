@@ -99,6 +99,7 @@ export type Setting = {
 	eeSim: boolean
 	customTheme: string
 	showEmol: boolean
+	bingo: string
 }
 
 export type Event = {

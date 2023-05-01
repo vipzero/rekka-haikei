@@ -84,7 +84,7 @@ export const useSettings = () => {
 	}
 }
 
-const useSettingsBase = () => {
+export const useSettingsBase = () => {
 	const [settingRaw, setSetting] = useRecoilState(settingState)
 	const setting: Setting = { ...defaultSetting, ...settingRaw }
 
