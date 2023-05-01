@@ -143,7 +143,7 @@ function SongInfo({ song }: Props) {
 									key={i}
 									passHref
 								>
-									<a>
+									<a data-count={tag.count}>
 										{tag.s}({formatCount(tag.count)})
 									</a>
 								</Link>
@@ -199,6 +199,9 @@ const Wrap = styled.div`
 			text-decoration: none;
 			/* background: #00000033; */
 			padding: 0px 2px;
+			&:not([data-count='1']) {
+				opacity: 0.5;
+			}
 		}
 	}
 	.icy {
