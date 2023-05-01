@@ -3,6 +3,34 @@ import { storageKeys } from '../config'
 import { Setting } from '../types'
 import { defaultCustomTheme } from './customThemes'
 
+export const defaultBingoText = `
+a:判定:
+b::
+c::
+d::
+e::
+f:
+g:
+h:
+i:
+j:
+k
+l
+m
+n
+o
+p:
+q:
+r:
+s:
+t:
+ハルヒ:涼宮ハルヒ:
+このすば:この素晴らしい世界に祝福を:
+けいおん:
+コードギアス:
+鋼錬:鋼の
+`.trim()
+
 export const defaultSetting: Setting = {
 	theme: 0,
 	showSetting: true,
@@ -25,14 +53,7 @@ export const defaultSetting: Setting = {
 	feedBackText: '',
 	customTheme: defaultCustomTheme,
 	showEmol: true,
-	bingo: `作品名:判定テキスト
-を:
-ここに:
-:
-:
-このすば:この素晴らしい世界に祝福を
-ハルヒ:涼宮ハルヒ
-`,
+	bingo: defaultBingoText,
 }
 
 const localStorageEffect =
