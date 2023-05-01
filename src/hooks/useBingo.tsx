@@ -18,7 +18,7 @@ export const parseBingo = (text: string): Bingo => {
 		.map((item): BingoItem => {
 			const [name, match, cc] = item.split(':')
 			return {
-				name: name || ':',
+				name: name || '',
 				match: match || '',
 				checked: cc === 'o',
 				setuped: !!name,
