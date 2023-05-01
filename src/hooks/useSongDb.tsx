@@ -15,6 +15,7 @@ import { currentEvent } from '../config'
 import { HistoryRaw, Song } from '../types'
 import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
+import { useBingo } from './useBingo'
 
 export function useSongDb(online = true) {
 	const [loaded, setLoaded] = useState<boolean>(false)
@@ -26,6 +27,7 @@ export function useSongDb(online = true) {
 		wordCountsAna: [],
 		imageSearchWord: '',
 	})
+	const { checkHit } = useBingo()
 
 	useEffect(() => {
 		if (!online) return
@@ -41,6 +43,7 @@ export function useSongDb(online = true) {
 			song.wordCountsAna = [...wordCountsAna].sort((a, b) => a.count - b.count)
 
 			setSong(song)
+			checkHit(song.icy + ' _ ' + song.animeTitle || '')
 			setLoaded(true)
 		})
 
