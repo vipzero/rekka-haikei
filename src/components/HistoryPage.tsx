@@ -204,12 +204,7 @@ function HistoryPageBase() {
 			<Schedule setFilter={(v) => setRange(v)} />
 			<Tabs
 				tab={tab}
-				items={[
-					{ label: '履歴' },
-					{ label: 'カウント' },
-					{ label: '背景ラボ' },
-					{ label: '設定' },
-				]}
+				items={[{ label: '履歴' }, { label: 'カウント' }, { label: '設定' }]}
 				onChange={setTab}
 			/>
 
@@ -337,9 +332,6 @@ function HistoryPageBase() {
 			</TabPanel>
 			<TabPanel value={tab} index={1}>
 				<CountsPage counts={counts} countsSong={countsSong} />
-			</TabPanel>
-			<TabPanel value={tab} index={2}>
-				<SearchQueryLab />
 			</TabPanel>
 			<TabPanel value={tab} index={3}>
 				<RecoilRoot>
