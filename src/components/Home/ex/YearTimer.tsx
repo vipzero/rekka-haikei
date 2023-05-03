@@ -1,25 +1,40 @@
+import { useMemo } from 'react'
 import styled from 'styled-components'
-import { useTick } from '../../../hooks/useTick'
+import { useTick, useTick5m } from '../../../hooks/useTick'
 
-export const YearTimer = () => {
-	const now = useTick()
-	const c = +new Date(2023, 0, 1, 0, 0, 0, 0)
+const YEAR = 2024
+const TARGET = +new Date(YEAR, 0, 1, 0, 0, 0, 0)
 
-	const a = c - +now
+const calcActive = (now: Date) => {
+	const a = TARGET - +now
 	const ds = Math.floor(a / 1000)
 	const m = Math.floor(ds / 60)
 	const s = ds % 60
 
-	const k = a > 0 ? 'active' : 'end'
-	if (a < -30 * 1000) return null
+	const before30 = a < -30 * 1000
+	const stat = a > 0 ? 'active' : 'end'
+	return { stat, m, s, before30 }
+}
+
+const YearTimerComponent = () => {
+	const now = useTick()
+
+	const { stat, m, s } = calcActive(now)
 
 	return (
-		<Style data-show={k}>
-			<div>2023 まで</div>
+		<Style data-show={stat}>
+			<div>{YEAR} まで</div>
 			{!!m && <div className="m">{m}分</div>}
 			<div className="s">{s}秒</div>
 		</Style>
 	)
+}
+export const YearTimer = () => {
+	const now = useTick5m()
+	const { before30 } = useMemo(() => calcActive(now), [now])
+	if (!before30) return null
+
+	return <YearTimerComponent />
 }
 
 const Style = styled.div`

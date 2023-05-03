@@ -340,11 +340,7 @@ function SettingBox({
 						)}
 					</div>
 				</div>
-				{s.showTool && (
-					<div>
-						<Time song={song} />
-					</div>
-				)}
+				{s.showTool && <div>{<Time song={song} />}</div>}
 				<div className="footer">
 					<div>
 						<a style={{ display: 'none' }} className="link-sao">
