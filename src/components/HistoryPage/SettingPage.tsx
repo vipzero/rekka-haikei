@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 import {
 	useSettingsCustomTheme,
 	useSettingsFakeBar,
@@ -6,7 +7,6 @@ import {
 } from '../../hooks/useSettings'
 import { CheckBox } from '../common/CheckBox'
 import { ConfButton } from '../Home/ConfButton'
-import { toast } from 'react-toastify'
 import { chocoTheme, defaultCustomTheme } from '../../atom/customThemes'
 import { ShortcutDescription } from './ShortcutDescription'
 

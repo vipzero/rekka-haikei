@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { useSettingsShowBookmark } from '../../hooks/useSettings'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { useSettingsShowBookmark } from '../../hooks/useSettings'
 
 type Props = {
 	books: Record<string, boolean>

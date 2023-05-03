@@ -18,7 +18,8 @@
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"@next/next/no-img-element": "off",
 		"jsx-a11y/alt-text": "off",
-		"react/react-in-jsx-scope": "off"
+		"react/react-in-jsx-scope": "off",
+		"import/order": ["error"]
 	},
 	"ignorePatterns": ["templates/*", "*/protobuf/*", "**/*.d.ts"]
 }

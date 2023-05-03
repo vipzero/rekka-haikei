@@ -1,7 +1,7 @@
 import { createHash } from 'crypto'
-import { Char } from '.'
 import { keyNorm } from '../../../util'
 import { imasLib, shaniLib } from './imasSongLib'
+import { Char } from '.'
 
 const meta = { len: 6, salt: 'AA' }
 const makeHash = (s) => createHash('md5').update(s).digest('base64')

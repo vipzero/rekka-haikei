@@ -1,6 +1,7 @@
 import copy from 'copy-to-clipboard'
 import { useMemo, useState } from 'react'
 import { RecoilRoot } from 'recoil'
+import * as regexpTree from 'regexp-tree'
 import styled from 'styled-components'
 import config from '../config'
 import { useFavorites } from '../hooks/useFavorites'
@@ -17,18 +18,16 @@ import { History } from '../types'
 import { formatDate } from '../util'
 import { safeRegex } from '../util/regex'
 import { CopyButton } from './BookPage/CopyButton'
-import { CheckBox } from './common/CheckBox'
-import { TabPanel, Tabs } from './common/Tab'
 import CountsPage from './CountsPage'
 import Address from './HistoryPage/Address'
 import Schedule from './HistoryPage/Schedule'
-import { SearchQueryLab } from './HistoryPage/SearchQueryLab'
 import { SettingPage } from './HistoryPage/SettingPage'
 import { TableItem } from './HistoryPage/TableItem'
 import { HistorySearchForm } from './HistorySearchForm'
 import { Toast } from './Toast'
+import { CheckBox } from './common/CheckBox'
+import { TabPanel, Tabs } from './common/Tab'
 
-import * as regexpTree from 'regexp-tree'
 const getNamedGroups = (str: RegExp) => {
 	const ast = regexpTree.parse(str, {
 		// captureLocations: true,

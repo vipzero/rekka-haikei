@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { readEmol } from '../service/firebase'
 import { Emol } from '../types'
-import { useQeuryEid } from './useQueryEid'
 import { isEmoji } from '../util'
+import { useQeuryEid } from './useQueryEid'
 
 const italicizeNonEmoji = (s: string) =>
 	[...s].map((c) => (isEmoji(c) || '\n 　'.includes(c) ? c : '|')).join('')

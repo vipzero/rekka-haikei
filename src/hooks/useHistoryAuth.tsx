@@ -1,7 +1,7 @@
-import { useLocalStorage } from './useLocalStorage'
 
 import { createHash } from 'crypto'
 import { useMemo } from 'react'
+import { useLocalStorage } from './useLocalStorage'
 
 const makeHash = (s) => createHash('md5').update(s).digest('base64')
 const makeHashC = (s, c = 10) => (c <= 0 ? s : makeHashC(makeHash(s), c - 1))

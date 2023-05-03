@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
 import { Setting } from '../../types'
-import { Eekey, eekeyGroups, EekeyState } from './Cvote/constants'
 import { EE_CHAR } from '../../config'
+import { Eekey, eekeyGroups, EekeyState } from './Cvote/constants'
 
 type EeDot = {
 	get: boolean

@@ -1,5 +1,5 @@
-import { useRouter } from 'next/dist/client/router'
 import { ParsedUrlQuery } from 'querystring'
+import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import config, { currentEvent } from '../config'
 

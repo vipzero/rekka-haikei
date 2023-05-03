@@ -2,13 +2,13 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { useNetworkState } from 'react-use'
 import { RecoilRoot } from 'recoil'
+import { toast } from 'react-toastify'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
 import { useSongDb, YoProvider } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Home from './Home'
 import { Toast } from './Toast'
-import { toast } from 'react-toastify'
 
 function HomePage() {
 	const ready = useStart()

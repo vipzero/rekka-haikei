@@ -1,5 +1,5 @@
-import { Char } from '.'
 import { Song } from '../../../types'
+import { Char } from '.'
 
 // 🛑 ネタバレ注意
 export const eekeysGimic = [
