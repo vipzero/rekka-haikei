@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify'
 import { range } from '../util'
 import { useSettingsBase } from './useSettings'
 
@@ -56,15 +57,22 @@ export const useBingo = () => {
 	const setBingoText = (bingo: string) => setSetting((v) => ({ ...v, bingo }))
 	const setBingo = (fn: (bingo: Bingo) => string) =>
 		setSetting((s) => ({ ...s, bingo: fn(parseBingo(s.bingo)) }))
-	const checkHit = (str: string) =>
-		setBingo((bingo) =>
-			encodeBingo({
-				items: bingo.items.map((v) => ({
-					...v,
-					checked: v.checked || isHit(str, v),
-				})),
+	const checkHit = (str: string) => {
+		setBingo((bingo) => {
+			const hits: string[] = []
+			const items = bingo.items.map((v) => {
+				const checked = v.checked || isHit(str, v)
+				if (checked && !v.checked) {
+					hits.push(v.name)
+				}
+				return { ...v, checked, memo: str }
 			})
-		)
+			if (hits.length > 0) {
+				toast.success(`BINGOヒット: ${hits.join(', ')}`)
+			}
+			return encodeBingo({ items })
+		})
+	}
 
 	return {
 		bingo,
