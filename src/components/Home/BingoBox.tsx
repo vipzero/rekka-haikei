@@ -33,14 +33,14 @@ const Wrap = styled.div`
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
 		.item {
-			color: var(--color-fg);
-			background: var(--color-bg);
-			border: 1px solid var(--color-bg3);
+			color: var(--font-color);
+			background: var(--bingo-bg-color);
+			padding: 2px;
 			text-align: center;
 
 			&[data-checked='true'] {
-				border: 1px solid var(--color-bg2);
-				background: var(--content-bg-color);
+				border: 1px solid var(--bingo-bg-hit-color);
+				background: var(--bingo-bg-hit-color);
 			}
 		}
 	}

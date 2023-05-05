@@ -332,7 +332,7 @@ function HistoryPageBase() {
 			<TabPanel value={tab} index={1}>
 				<CountsPage counts={counts} countsSong={countsSong} />
 			</TabPanel>
-			<TabPanel value={tab} index={3}>
+			<TabPanel value={tab} index={2}>
 				<RecoilRoot>
 					<SettingPage />
 				</RecoilRoot>

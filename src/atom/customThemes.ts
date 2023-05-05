@@ -45,6 +45,9 @@ export const chocoTheme = `
 --btn-bg-color: #ffe;        // 設定ボタン背景
 --btn-bg-checked-color: #dda; // 設定ボタン背景有効
 
+--bingo-bg-color: #333;
+--bingo-bg-hit-color: #FFe697;
+
 
 #timebar {
   .wrap {

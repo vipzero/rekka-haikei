@@ -11,6 +11,9 @@ export const themeStyles = css`
 		--sub-bg-color: #333;
 		--btn-bg-color: rgb(239, 239, 239);
 		--btn-bg-checked-color: #999;
+
+		--bingo-bg-color: #ccc;
+		--bingo-bg-hit-color: #e85;
 	}
 	&[data-theme='1'] {
 		--setting-bg-color: rgba(255, 255, 255, 0.5);
@@ -23,6 +26,8 @@ export const themeStyles = css`
 		--content-bg-color: rgba(0, 0, 0, 0.5);
 		--btn-bg-color: black;
 		--btn-bg-checked-color: #333;
+		--bingo-bg-color: #333;
+		--bingo-bg-hit-color: #88f;
 	}
 	&[data-theme='3'] {
 		#panel,
