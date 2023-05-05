@@ -7,7 +7,6 @@ import {
 	EX_PATTERNS_ICY,
 	EX_PATTERNS_JUST_ICY,
 } from '../components/Home/Cvote/constants'
-import { getIdles, isShani } from '../components/Home/Cvote/imasSong'
 import { Song } from '../types'
 import { useSettingsEe } from './useSettings'
 
@@ -36,13 +35,6 @@ export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 	const { icy } = song
 
 	if (!icy) return false
-
-	const [icy1, icy2 = ''] = icy.split(' - ')
-
-	if (isShani(icy1) || isShani(icy2)) return ['shanimas', null]
-	const im = getIdles(icy1) || getIdles(icy2)
-
-	if (im) return ['imasml', { chars: im }]
 
 	const match =
 		EX_PATTERNS_CUSTOM.find(([checker]) => checker(song))?.[1] ||
