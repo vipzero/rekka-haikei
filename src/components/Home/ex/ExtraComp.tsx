@@ -126,14 +126,14 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 				</div>
 			</div>
 		)
-	} else if (eeKey === 'imascd') {
-		return (
-			<div id="imascd">
-				<div>
-					<img src="/static/clock-hands.svg" />
-				</div>
-			</div>
-		)
+		// } else if (eeKey === 'imascd') {
+		// 	return (
+		// 		<div id="imascd">
+		// 			<div>
+		// 				<img src="/static/clock-hands.svg" />
+		// 			</div>
+		// 		</div>
+		// 	)
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -156,16 +156,12 @@ function getEx(
 ) {
 	if (!eeKey) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === eeKey)
+	const chars = (eeOpt?.id === 'cvote' && eeOpt?.chars) || cvote?.chars || []
 
 	return (
 		<>
 			{cvote && (
-				<CVote
-					animeId={eeKey}
-					sid={sid}
-					chars={eeOpt?.chars || cvote.chars || []}
-					disabled={eeSim}
-				/>
+				<CVote animeId={eeKey} sid={sid} chars={chars} disabled={eeSim} />
 			)}
 			<ExCompMain eeKey={eeKey} />
 		</>

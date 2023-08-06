@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import {
+	checkHedwig,
 	EekeyState,
 	EeOpt,
 	EX_PATTERNS_ANIME_OR_ALBUM,
@@ -35,6 +36,8 @@ export function checkEx(song: Song): false | [EekeyState, EeOpt] {
 	const { icy } = song
 
 	if (!icy) return false
+	const ch = checkHedwig(song)
+	if (ch) return ch
 
 	const match =
 		EX_PATTERNS_CUSTOM.find(([checker]) => checker(song))?.[1] ||

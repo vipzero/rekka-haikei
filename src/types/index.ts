@@ -18,6 +18,7 @@ export type SongMiss = {
 	wordCounts: Record<string, number>
 	wordCountsAna: { name: string; label: string; count: number }[]
 	imageSearchWord: string
+	hedwig: string
 }
 
 export type SongFull = SongMiss & {

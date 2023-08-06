@@ -21,7 +21,7 @@ export const eekeysGimic = [
 	'3sha3yo', //R
 	'susu',
 	'ariascarlet', //R
-	'imascd', // R
+	// 'imascd', // R
 
 	// 'codegeass',
 ] as const
@@ -60,9 +60,10 @@ export const eekeysVotic = [
 	// 'imasmlfa',
 	// 'imasmlan',
 	'rakupro', // R
-	'shining', // R
+	// 'shining', // R
 	'loveplus', // R
 	'milgram', // R
+	'mts10',
 ] as const
 export const eekeys = [
 	...eekeysGimic,
@@ -78,14 +79,17 @@ export const eekeyGroups = [
 	eekeysMirror,
 	eekeysVotic,
 ]
+const isEekeyStr = (s: string): s is EekeyStr => eekeys.includes(s as EekeyStr)
 
-export type Eekey = typeof eekeys[number]
+type EekeyStr = typeof eekeys[number]
+export type Eekey = EekeyStr
 export type EekeyState = Eekey | false
-export type EeOpt = null | { chars: Char[] }
+export type EeOptChar = { id: 'cvote'; chars: Char[] }
+export type EeOptText = { id: 'text'; s: string }
+export type EeOpt = null | EeOptChar | EeOptText
 export type ExThemeKey = typeof eekeysThemetic[number]
-export const isExTheme = (
-	theme: string | false | number
-): theme is ExThemeKey => eekeysThemetic.includes(theme as ExThemeKey)
+export const isExTheme = (theme: Eekey | false | number): theme is ExThemeKey =>
+	eekeysThemetic.includes(theme as ExThemeKey)
 
 // アルバム名・アニメ名に部分マッチ
 export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
@@ -118,9 +122,9 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/シャドーハウス|亜人[^ち]/, 'susu'],
 	['緋弾', 'ariascarlet'],
 	[/アマガミ/, 'amagami'],
-	['音楽少女', 'shining'],
+	// ['音楽少女', 'shining'],
 	['三者三葉', '3sha3yo'],
-	['シンデレラガールズ', 'imascd'],
+	// ['シンデレラガールズ', 'imascd'],
 	['楽園PROJECT', 'rakupro'],
 	// ['シャイニーカラーズ', 'shanimas'],
 	[/new game|ゲーマーズ|ハイスコア|ネトゲ/i, 'gaming'],
@@ -132,6 +136,12 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	[(song) => song.animeTitle === '人生', 'jinsei'], // 短いタイトルなのでアルバム避け
 ]
+export const checkHedwig = (song: Song): [Eekey, EeOptText] | null => {
+	if (!song.hedwig) return null
+	const [k, s] = song.hedwig.split(':')
+	if (isEekeyStr(k)) return [k, { id: 'text', s }]
+	return null
+}
 
 // icy のどちらか半分に完全一致
 export const EX_PATTERNS_JUST_ICY: [string, Eekey][] = []
@@ -144,7 +154,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	['労働', 'halowa'],
 	[/return|ウラオモテ/, 'flip'],
 	['アマガミ', 'amagami'],
-	[/シャイニング.?ピース/, 'shining'],
+	// [/シャイニング.?ピース/, 'shining'],
 	['まっしろわーるど', 'masshiro'],
 	[/color|虹|rainbow/i, 'rainbow'],
 	[/雨([^上宮]|!?あがり)|[^a-z]rain/i, 'rain'],
@@ -155,7 +165,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
-export const eeId: Record<Eekey, number> = {
+export const eeId: Record<EekeyStr, number> = {
 	nonnon: 0,
 	mia: 1,
 	higurashi: 2,
@@ -172,7 +182,7 @@ export const eeId: Record<Eekey, number> = {
 	'3sha3yo': 13,
 	susu: 14,
 	ariascarlet: 15,
-	imascd: 16,
+	// imascd: 16,
 	kokaku: 17,
 	psychopass: 18,
 	lain: 19,
@@ -199,8 +209,9 @@ export const eeId: Record<Eekey, number> = {
 	gabudoro: 40,
 	// imasml: 41,
 	rakupro: 42,
-	shining: 43,
+	// shining: 43,
 	loveplus: 44,
 	move: 45,
 	milgram: 45,
+	mts10: 46,
 }

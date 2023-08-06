@@ -137,8 +137,7 @@ export const useSettingsEe = () => {
 		const exColor = exKeyToColor(eeKey)
 
 		setAbyssEx(exColor)
-
-		setSetting((v) => ({ ...v, eeKey, eeSim: simulate, eeOpt: eeOpt }))
+		setSetting((v) => ({ ...v, eeKey, eeSim: simulate, eeOpt }))
 
 		if (eeKey === false) return
 		if (!simulate) openEekey(eeKey)

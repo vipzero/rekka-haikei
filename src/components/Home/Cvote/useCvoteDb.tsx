@@ -17,7 +17,7 @@ const normalizeVotes = (votes: AnimeVotes) => {
 export function useCvoteDb(animeId: string, sid: string, charNum: number) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const [votes, setVotes] = useState<AnimeVotes>({})
-	const [max, setMax] = useState<Number>(1)
+	const [max, setMax] = useState<number>(1)
 	const [initVotes, setInitVotes] = useState<AnimeVotes>({})
 	const [votesNorm, setVotesNorm] = useState<AnaVotes>({})
 	const [[lastVote, votedChars], setLastVote] = useLocalStorage<
