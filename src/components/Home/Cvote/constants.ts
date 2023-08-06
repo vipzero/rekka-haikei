@@ -21,6 +21,7 @@ export const eekeysGimic = [
 	'3sha3yo', //R
 	'susu',
 	'ariascarlet', //R
+	'mts10',
 	// 'imascd', // R
 
 	// 'codegeass',
@@ -63,7 +64,6 @@ export const eekeysVotic = [
 	// 'shining', // R
 	'loveplus', // R
 	'milgram', // R
-	'mts10',
 ] as const
 export const eekeys = [
 	...eekeysGimic,

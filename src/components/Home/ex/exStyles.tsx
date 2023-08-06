@@ -232,6 +232,14 @@ export const exStyles = css`
 			/* background: linear-gradient(to top, #fffa, transparent); */
 		}
 	}
+	&[data-ex='mts10'] {
+		#mts10 {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			padding: 4px;
+		}
+	}
 	&[data-ex='masshiro'] {
 		#mashiros {
 			position: absolute;

@@ -140,7 +140,11 @@ function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
 			if (!e || e.id === 'cvote') return [false]
 			return e.s.split('').map((c) => c === '1')
 		}
-		return <Trump opens={lineUp(eeOpt)} />
+		return (
+			<div id="mts10">
+				<Trump opens={lineUp(eeOpt)} />
+			</div>
+		)
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
