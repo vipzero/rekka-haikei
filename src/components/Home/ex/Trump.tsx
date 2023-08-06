@@ -1,37 +1,56 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-const cards = '🂪,🂭,🂭,🂮,🂡'.split(',')
-const cardsBack = '🂠'
+const cards = ['♠X', '♠J', '♠Q', '♠K', '♠A']
 
 type Props = {
 	opens: [boolean, boolean, boolean, boolean, boolean]
 }
+export const TrumpCard = ({ open, sign }: { open: boolean; sign: string }) => {
+	const [m, n] = [...sign]
+	return (
+		<Card data-open={open}>
+			<div>{open ? m : ''}</div>
+			<div>{open ? n : ''}</div>
+		</Card>
+	)
+}
+const Card = styled.div`
+	border: solid 1px;
+	padding: 4px;
+	width: 30px;
+	/* aspect-ratio: 9 / 16; */
+	border-radius: 2px;
+	> div {
+		line-height: 1;
+		text-align: center;
+	}
+	&[data-open='false'] {
+		/* border 模様 */
+		background: repeating-linear-gradient(
+			40deg,
+			#fff,
+			#fff 5px,
+			#aaa 5px,
+			#aaa 10px
+		);
+	}
+
+	grid-template-columns: repeat(5, 1fr);
+	gap: 2px;
+`
+
 export const Trump = (props: Props) => {
 	return (
 		<Style>
 			{props.opens.map((v, i) => (
-				<div key={i} data-v={v ? 1 : 0}>
-					{v ? cards[i] : cardsBack}
-				</div>
+				<TrumpCard key={i} open={v} sign={cards[i]} />
 			))}
 		</Style>
 	)
 }
 
 const Style = styled.div`
-	position: absolute;
-	overflow: hidden;
-	top: 0;
-	left: 0;
-	display: grid;
-
-	height: 100vmax;
-	grid-template-columns: repeat(13, 1fr);
-	filter: url(#goo);
-	mix-blend-mode: difference;
-	gap: 2px;
-
-	[data-v] {
-	}
+	display: float;
+	/* width: min */
+	gap: 4px;
 `
