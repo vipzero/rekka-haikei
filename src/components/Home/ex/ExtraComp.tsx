@@ -9,6 +9,7 @@ import { range, uaHash } from '../../../util'
 import CVote from '../Cvote'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
 import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
+import { Trump } from './Trump'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -92,7 +93,7 @@ const RainEx = () => {
 	)
 }
 
-function ExCompMain({ eeKey }: { eeKey: Eekey }) {
+function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
 	if (eeKey === 'steinsgate') {
 	} else if (eeKey === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
@@ -134,6 +135,12 @@ function ExCompMain({ eeKey }: { eeKey: Eekey }) {
 		// 			</div>
 		// 		</div>
 		// 	)
+	} else if (eeKey === 'mts10') {
+		const lineUp = (e: EeOpt) => {
+			if (!e || e.id === 'cvote') return [false]
+			return e.s.split('').map((c) => c === '1')
+		}
+		return <Trump opens={lineUp(eeOpt)} />
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -163,7 +170,7 @@ function getEx(
 			{cvote && (
 				<CVote animeId={eeKey} sid={sid} chars={chars} disabled={eeSim} />
 			)}
-			<ExCompMain eeKey={eeKey} />
+			<ExCompMain eeKey={eeKey} eeOpt={eeOpt} />
 		</>
 	)
 }

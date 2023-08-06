@@ -2,9 +2,6 @@ import styled from 'styled-components'
 
 const cards = ['♠X', '♠J', '♠Q', '♠K', '♠A']
 
-type Props = {
-	opens: [boolean, boolean, boolean, boolean, boolean]
-}
 export const TrumpCard = ({ open, sign }: { open: boolean; sign: string }) => {
 	const [m, n] = [...sign]
 	return (
@@ -19,11 +16,13 @@ const Card = styled.div`
 	padding: 4px;
 	width: 30px;
 	/* aspect-ratio: 9 / 16; */
-	border-radius: 2px;
+	border-radius: 4px;
 	> div {
 		line-height: 1;
 		text-align: center;
+		color: #ddd;
 	}
+	background: #111;
 	&[data-open='false'] {
 		/* border 模様 */
 		background: repeating-linear-gradient(
@@ -39,6 +38,9 @@ const Card = styled.div`
 	gap: 2px;
 `
 
+type Props = {
+	opens: boolean[]
+}
 export const Trump = (props: Props) => {
 	return (
 		<Style>

@@ -117,6 +117,11 @@ Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }
 export const Shiki = Template.bind({})
 Shiki.args = { setting: { ...setting, eeKey: 'subetef' } }
 
+export const Mts10 = Template.bind({})
+Mts10.args = {
+	setting: { ...setting, eeKey: 'mts10', eeOpt: { id: 'text', s: '10101' } },
+}
+
 export const ThemeClear = Template.bind({})
 ThemeClear.args = { setting: { ...setting, theme: 0 } }
 
