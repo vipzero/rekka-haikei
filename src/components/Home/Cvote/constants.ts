@@ -138,8 +138,8 @@ export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 ]
 export const checkHedwig = (song: Song): [Eekey, EeOptText] | null => {
 	if (!song.hedwig) return null
-	const [k, s] = song.hedwig.split(':')
-	if (isEekeyStr(k)) return [k, { id: 'text', s }]
+	const [k, ...s] = song.hedwig.split(':')
+	if (isEekeyStr(k)) return [k, { id: 'text', s: s.join(':') }]
 	return null
 }
 

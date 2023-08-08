@@ -119,7 +119,11 @@ Shiki.args = { setting: { ...setting, eeKey: 'subetef' } }
 
 export const Mts10 = Template.bind({})
 Mts10.args = {
-	setting: { ...setting, eeKey: 'mts10', eeOpt: { id: 'text', s: '10101' } },
+	setting: {
+		...setting,
+		eeKey: 'mts10',
+		eeOpt: { id: 'text', s: '10101:MTG' },
+	},
 }
 
 export const ThemeClear = Template.bind({})

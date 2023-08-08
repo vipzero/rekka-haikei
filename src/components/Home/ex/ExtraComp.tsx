@@ -10,6 +10,7 @@ import CVote from '../Cvote'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
 import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
 import { Trump } from './Trump'
+import { ImasMilionTl } from './ImasMilionTl'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -137,12 +138,18 @@ function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
 		// 	)
 	} else if (eeKey === 'mts10') {
 		const lineUp = (e: EeOpt) => {
-			if (!e || e.id === 'cvote') return [false]
-			return e.s.split('').map((c) => c === '1')
+			if (!e || e.id === 'cvote') return [false, false] as const
+			const [os, ss] = e.s.split(':')
+			const opens = os.split('').map((c) => c === '1')
+			return [opens, ss ? { [ss]: true } : false] as const
 		}
+		const [opens, cd] = lineUp(eeOpt)
+		console.log(opens, cd)
+		if (!opens && !cd) return null
 		return (
 			<div id="mts10">
-				<Trump opens={lineUp(eeOpt)} />
+				{opens && <Trump opens={opens} />}
+				{cd && <ImasMilionTl cd={cd} />}
 			</div>
 		)
 	} else if (eeKey === 'sakurasou') {
