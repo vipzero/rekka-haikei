@@ -1,5 +1,3 @@
-import { faHurricane } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo } from 'react'
 import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
@@ -8,9 +6,9 @@ import { useSettingsEe } from '../../../hooks/useSettings'
 import { range, uaHash } from '../../../util'
 import CVote from '../Cvote'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
-import { Eekey, EekeyState, EeOpt } from '../Cvote/constants'
-import { Trump } from './Trump'
+import { EeOpt, Eekey, EekeyState } from '../Cvote/constants'
 import { ImasMilionTl } from './ImasMilionTl'
+import { Trump } from './Trump'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -120,22 +118,6 @@ function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
 		)
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
-	} else if (eeKey === '3sha3yo') {
-		return (
-			<div className="hurricane">
-				<div className="hurricane-s">
-					<FontAwesomeIcon icon={faHurricane} />
-				</div>
-			</div>
-		)
-		// } else if (eeKey === 'imascd') {
-		// 	return (
-		// 		<div id="imascd">
-		// 			<div>
-		// 				<img src="/static/clock-hands.svg" />
-		// 			</div>
-		// 		</div>
-		// 	)
 	} else if (eeKey === 'mts10') {
 		const lineUp = (e: EeOpt) => {
 			if (!e || e.id === 'cvote') return [false, false] as const
