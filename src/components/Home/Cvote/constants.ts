@@ -36,6 +36,7 @@ export const eekeysMirror = [
 	'mosaic',
 	'offline',
 	'move',
+	'parapara',
 ] as const
 export const eekeysVotic = [
 	'gotoyome',
@@ -152,6 +153,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	[/ノルニル|スクランブル|回レ|ぐるぐる|ろーりんぐ|ローリング|回転/, 'spin'],
 	[/bull['e]/, 'ariascarlet'],
 	[/逆さま|サカサマ|サーカス/, 'sakasa'],
+	[/Sparkling Daydream/, 'parapara'],
 	['労働', 'halowa'],
 	[/return|ウラオモテ/, 'flip'],
 	// ['アマガミ', 'amagami'],
@@ -215,4 +217,5 @@ export const eeId: Record<EekeyStr, number> = {
 	move: 45,
 	// milgram: 45,
 	mts10: 46,
+	parapara: 47,
 }

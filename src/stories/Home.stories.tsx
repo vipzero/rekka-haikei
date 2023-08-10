@@ -117,6 +117,9 @@ Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }
 export const Shiki = Template.bind({})
 Shiki.args = { setting: { ...setting, eeKey: 'subetef' } }
 
+export const Parapara = Template.bind({})
+Parapara.args = { setting: { ...setting, eeKey: 'parapara' } }
+
 export const Mts10 = Template.bind({})
 Mts10.args = {
 	setting: {

@@ -41,7 +41,8 @@ type Props = {
 	setBg: (url: string, time: number) => void
 }
 function Home({ song, setBg }: Props) {
-	const { theme, sideMode, lockBgNum, toggleSetting, blockGif } = useSettings()
+	const { theme, sideMode, lockBgNum, toggleSetting, blockGif, visible } =
+		useSettings()
 	const { eeKey } = useSettingsEe()
 	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
@@ -67,6 +68,7 @@ function Home({ song, setBg }: Props) {
 			data-ex={eeKey || theme}
 			data-ex-just={eeKey}
 			data-has-art={!!song.artworkUrl100}
+			data-show-setting={visible}
 			data-theme={theme}
 			data-moz={moz}
 			data-full={full}

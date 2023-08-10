@@ -362,6 +362,18 @@ export const exStyles = css`
 			animation: trip-color 120s linear both;
 		}
 	}
+	&[data-ex='parapara'] {
+		#mask {
+			display: block;
+			width: 50vw;
+			background: black;
+		}
+		&[data-show-setting='true'] {
+			#mask {
+				left: 50vw;
+			}
+		}
+	}
 
 	&[data-ex='issyuukanfr'] {
 		#mask {
