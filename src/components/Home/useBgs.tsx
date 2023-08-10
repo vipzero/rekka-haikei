@@ -1,8 +1,25 @@
 import { useEffect, useState } from 'react'
 import { imgCheck } from '../../util'
 
+const hostPattern = process.env.NEXT_PUBLIC_IMG_HOST_PATTERN || '___invalid'
+const isHostImg = (url: string) => url.match(hostPattern)
+const isMobile = () => {
+	const screenWidth =
+		window.innerWidth ||
+		document.documentElement.clientWidth ||
+		document.body.clientWidth
+	return screenWidth <= 768 // 例えば、画面幅が768px以下ならスマートフォンと判定
+}
+const mobilePatch = (url: string) => {
+	if (!isHostImg(url) || !isMobile()) return url
+	const parts = url.split('.')
+	const ext = parts.pop()
+	return parts.join('.') + '_min.' + ext
+}
+
 async function enableUrl(urls: string[]) {
-	for (const url of urls) {
+	for (const urlPre of urls) {
+		const url = mobilePatch(urlPre)
 		const img = await imgCheck(url).catch(() => false as const)
 
 		if (img) return { url, img }

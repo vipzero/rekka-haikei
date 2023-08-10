@@ -13,7 +13,7 @@ type Bingo = {
 }
 
 export const parseBingo = (text: string): Bingo => {
-	const lines = text.split('\n')
+	const lines = (text || '').split('\n')
 	const items = range(25)
 		.map((i) => lines[i] || '')
 		.map((item): BingoItem => {
