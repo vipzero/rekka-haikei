@@ -374,6 +374,13 @@ export const exStyles = css`
 			}
 		}
 	}
+	&[data-ex='masso'] {
+		#masso {
+			position: absolute;
+			bottom: 0;
+			color: #000;
+		}
+	}
 
 	&[data-ex='issyuukanfr'] {
 		#mask {

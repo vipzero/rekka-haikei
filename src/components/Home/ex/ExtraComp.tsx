@@ -9,6 +9,7 @@ import { CVOTE_PROFILES } from '../Cvote/charProfiles'
 import { EeOpt, Eekey, EekeyState } from '../Cvote/constants'
 import { ImasMilionTl } from './ImasMilionTl'
 import { Trump } from './Trump'
+import { Masso } from './Masso'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -92,7 +93,8 @@ const RainEx = () => {
 	)
 }
 
-function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
+type ExCompProp = { eeKey: Eekey; eeOpt: EeOpt; rand: number }
+function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 	if (eeKey === 'steinsgate') {
 	} else if (eeKey === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
@@ -134,6 +136,12 @@ function ExCompMain({ eeKey, eeOpt }: { eeKey: Eekey; eeOpt: EeOpt }) {
 				{cd && <ImasMilionTl cd={cd} />}
 			</div>
 		)
+	} else if (eeKey === 'masso') {
+		return (
+			<div id="masso">
+				<Masso seed={rand} />
+			</div>
+		)
 	} else if (eeKey === 'sakurasou') {
 		return (
 			<div style={{ height: '30vh' }}>
@@ -163,7 +171,7 @@ function getEx(
 			{cvote && (
 				<CVote animeId={eeKey} sid={sid} chars={chars} disabled={eeSim} />
 			)}
-			<ExCompMain eeKey={eeKey} eeOpt={eeOpt} />
+			<ExCompMain eeKey={eeKey} eeOpt={eeOpt} rand={rand} />
 		</>
 	)
 }

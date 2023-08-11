@@ -129,6 +129,9 @@ Mts10.args = {
 	},
 }
 
+export const Masso = Template.bind({})
+Masso.args = { setting: { ...setting, eeKey: 'masso' } }
+
 export const ThemeClear = Template.bind({})
 ThemeClear.args = { setting: { ...setting, theme: 0 } }
 

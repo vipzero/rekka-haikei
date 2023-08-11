@@ -22,6 +22,7 @@ export const eekeysGimic = [
 	'susu',
 	'ariascarlet', //R
 	'mts10',
+	'masso',
 	// 'imascd', // R
 
 	// 'codegeass',
@@ -165,6 +166,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	// [/高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
 	// [/MILGRAM/, 'milgram'],
 	[/動く|moving|move/, 'move'],
+	[/マッスル|マッソー|ダンベル|ブートダンス|スポーツ/, 'masso'],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
@@ -218,4 +220,5 @@ export const eeId: Record<EekeyStr, number> = {
 	// milgram: 45,
 	mts10: 46,
 	parapara: 47,
+	masso: 48,
 }
