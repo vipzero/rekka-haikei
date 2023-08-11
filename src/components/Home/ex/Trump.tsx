@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const cards = ['♠X', '♠J', '♠Q', '♠K', '♠A']
 
 export const TrumpCard = ({ open, sign }: { open: boolean; sign: string }) => {
-	const [m, n] = [...sign]
+	const [m, n] = [...(sign || '  ')]
 	return (
 		<Card data-open={open}>
 			<div>{open ? m : ''}</div>
@@ -41,11 +41,11 @@ const Card = styled.div`
 type Props = {
 	opens: boolean[]
 }
-export const Trump = (props: Props) => {
+export const Trump = ({ opens }: Props) => {
 	return (
 		<Style>
-			{props.opens.map((v, i) => (
-				<TrumpCard key={i} open={v} sign={cards[i]} />
+			{cards.map((v, i) => (
+				<TrumpCard key={i} open={opens[i]} sign={v} />
 			))}
 		</Style>
 	)

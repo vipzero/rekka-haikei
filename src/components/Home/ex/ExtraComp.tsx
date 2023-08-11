@@ -128,7 +128,7 @@ function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 			return [opens, ss ? { [ss]: true } : false] as const
 		}
 		const [opens, cd] = lineUp(eeOpt)
-		console.log(opens, cd)
+
 		if (!opens && !cd) return null
 		return (
 			<div id="mts10">
