@@ -129,7 +129,7 @@ function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 			return {
 				opens,
 				cd: ss ? { [ss]: true } : (false as const),
-				dols: dols ? [] : dols.split(',').map(base64toBools),
+				dols: dols ? dols.split(',').map(base64toBools) : [],
 			}
 		}
 		const res = lineUp(eeOpt)

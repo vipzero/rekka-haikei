@@ -23,8 +23,8 @@ export const ImasBoard = ({ bools }: Props) => {
 const Style = styled.div`
 	width: 300px;
 	border: solid 1px;
-	font-size: 8px;
-	line-height: 8px;
+	font-size: 10px;
+	line-height: 10px;
 	background: #888;
 	opacity: 0.9;
 	/* color: transparent; */
@@ -36,7 +36,7 @@ const Style = styled.div`
 		background: #fff;
 	}
 	.row {
-		height: 5px;
+		height: 10px;
 		display: grid;
 		grid-template-columns: repeat(50, 1fr);
 	}
