@@ -26,6 +26,7 @@ export function useSongDb(online = true) {
 		wordCounts: {},
 		wordCountsAna: [],
 		imageSearchWord: '',
+		hasMinImg: false,
 	})
 	const { checkHit } = useBingo()
 

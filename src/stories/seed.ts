@@ -23,6 +23,7 @@ export const seedSong: Song = {
 		{ count: 4, label: '[小日向縁 (4回目)]', name: '小日向縁' },
 		{ count: 23, label: '[伊藤美来 (23回目)]', name: '伊藤美来' },
 	],
+	hasMinImg: false,
 }
 
 const jam = (s: string) => s.split('').reverse().join('')
