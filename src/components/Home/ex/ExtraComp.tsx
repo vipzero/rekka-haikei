@@ -3,13 +3,14 @@ import { useMouse } from 'rooks'
 import { createGlobalStyle } from 'styled-components'
 import { FloatingBox, RainbowFontCool } from '../..'
 import { useSettingsEe } from '../../../hooks/useSettings'
-import { range, uaHash } from '../../../util'
+import { base64toBools, range, uaHash } from '../../../util'
 import CVote from '../Cvote'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
 import { EeOpt, Eekey, EekeyState } from '../Cvote/constants'
 import { ImasMilionTl } from './ImasMilionTl'
 import { Trump } from './Trump'
 import { Masso } from './Masso'
+import { ImasBoard } from './ImasBoard'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -122,18 +123,24 @@ function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 		return <Lain r={uaHash()} />
 	} else if (eeKey === 'mts10') {
 		const lineUp = (e: EeOpt) => {
-			if (!e || e.id === 'cvote') return [false, false] as const
-			const [os, ss] = e.s.split(':')
-			const opens = os.split('').map((c) => c === '1')
-			return [opens, ss ? { [ss]: true } : false] as const
+			if (!e || e.id === 'cvote') return false
+			const [os, ss, dols] = e.s.split(':')
+			const opens = os ? os.split('').map((c) => c === '1') : null
+			return {
+				opens,
+				cd: ss ? { [ss]: true } : (false as const),
+				dols: dols ? [] : dols.split(',').map(base64toBools),
+			}
 		}
-		const [opens, cd] = lineUp(eeOpt)
+		const res = lineUp(eeOpt)
 
-		if (!opens && !cd) return null
+		if (!res) return null
+		const { opens, cd, dols } = res
 		return (
 			<div id="mts10">
 				{opens && <Trump opens={opens} />}
 				{cd && <ImasMilionTl cd={cd} />}
+				{dols && <ImasBoard bools={dols} />}
 			</div>
 		)
 	} else if (eeKey === 'masso') {
