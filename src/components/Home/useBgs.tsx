@@ -1,25 +1,16 @@
 import { useEffect, useState } from 'react'
 import { imgCheck } from '../../util'
 
-const hostPattern = process.env.NEXT_PUBLIC_IMG_HOST_PATTERN || '___invalid'
-const isHostImg = (url: string) => url.match(hostPattern)
-const isMobile = () => {
-	const screenWidth =
-		window.innerWidth ||
-		document.documentElement.clientWidth ||
-		document.body.clientWidth
-	return screenWidth <= 768 // 例えば、画面幅が768px以下ならスマートフォンと判定
-}
-const mobilePatch = (url: string) => {
-	if (!isHostImg(url) || !isMobile()) return url
+const mobilePatch = (url: string, hasMinImg: boolean) => {
+	if (!hasMinImg) return url
 	const parts = url.split('.')
 	const ext = parts.pop()
 	return parts.join('.') + '_min.' + ext
 }
 
-async function enableUrl(urls: string[]) {
+async function enableUrl(urls: string[], hasMinImg: boolean) {
 	for (const urlPre of urls) {
-		const url = mobilePatch(urlPre)
+		const url = mobilePatch(urlPre, hasMinImg)
 		const img = await imgCheck(url).catch(() => false as const)
 
 		if (img) return { url, img }
@@ -27,7 +18,12 @@ async function enableUrl(urls: string[]) {
 	return false
 }
 
-export function useBgs(urls: string[], sid: number, lockCount: number) {
+export function useBgs(
+	urls: string[],
+	sid: number,
+	lockCount: number,
+	hasMinImg: boolean
+) {
 	const [anime, setAnime] = useState<boolean>(true)
 	const [url, setUrl] = useState<string>('')
 	const [size, setSize] = useState<{ w: number; h: number }>({ w: 1, h: 1 })
@@ -42,7 +38,7 @@ export function useBgs(urls: string[], sid: number, lockCount: number) {
 	useEffect(() => {
 		if (locked) return
 
-		enableUrl(urls)
+		enableUrl(urls, hasMinImg)
 			.then((res) => {
 				if (res) {
 					const { url, img } = res

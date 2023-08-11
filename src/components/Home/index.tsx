@@ -81,6 +81,7 @@ function Home({ song, setBg }: Props) {
 			</Mask>
 			<FadeBgChanger
 				sid={song.time}
+				hasMinImg={song.hasMinImg}
 				urls={song?.imageLinks?.filter((v) => !blockGif || !isGifUrl(v)) || []}
 				lockCount={lockBgNum}
 				changedUrl={setUrl}
