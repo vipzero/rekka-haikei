@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react'
 import { imgCheck } from '../../util'
 
+const isMobile = () => {
+	const screenWidth =
+		window.innerWidth ||
+		document.documentElement.clientWidth ||
+		document.body.clientWidth
+	return screenWidth <= 650
+}
+
 const mobilePatch = (url: string, hasMinImg: boolean) => {
-	if (!hasMinImg) return url
+	if (!(hasMinImg && isMobile())) return url
 	const parts = url.split('.')
 	const ext = parts.pop()
 	return parts.join('.') + '_min.' + ext
