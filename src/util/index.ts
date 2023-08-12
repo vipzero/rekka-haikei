@@ -188,14 +188,17 @@ export const isMobile = () => {
 	return /iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent)
 }
 
-
 export function base64toBools(a: string) {
-  const binaryString = atob(a)
-  const boolArrayBuffer = new ArrayBuffer(binaryString.length)
-  const boolArray = new Uint8Array(boolArrayBuffer)
-  for (let i = 0; i < binaryString.length; i++) {
-    boolArray[i] = binaryString.charCodeAt(i)
-  }
-  const decodedBoolArray = Array.from(boolArray, (value) => value === 1)
-  return decodedBoolArray
+	const binaryString = atob(a)
+	const boolArrayBuffer = new ArrayBuffer(binaryString.length)
+	const boolArray = new Uint8Array(boolArrayBuffer)
+	for (let i = 0; i < binaryString.length; i++) {
+		boolArray[i] = binaryString.charCodeAt(i)
+	}
+	const decodedBoolArray = Array.from(boolArray, (value) => value === 1)
+	return decodedBoolArray
 }
+export const youtubeSearchUrl = (q: string) =>
+	`https://www.youtube.com/results?search_query=${q}`
+export const youtubeMusicSearchUrl = (q: string) =>
+	`https://music.youtube.com/search?q=${q}`

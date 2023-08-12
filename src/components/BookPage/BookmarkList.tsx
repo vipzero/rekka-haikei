@@ -3,7 +3,46 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { useFavorites } from '../../hooks/useFavorites'
 import { RadioButton } from '../Home/RadioButton'
+import { youtubeMusicSearchUrl, youtubeSearchUrl } from '../../util'
 import { CopyButton } from './CopyButton'
+
+const RichCell = ({
+	text,
+	active,
+	onAnyClick,
+}: {
+	text: string
+	active: boolean
+	onAnyClick: () => void
+}) => (
+	<div data-active={active}>
+		<span>{text}</span>
+		<div className="buttons">
+			<button
+				onClick={() => {
+					onAnyClick()
+					window.open(youtubeSearchUrl(text))
+				}}
+			>
+				YT
+			</button>
+			<button
+				onClick={() => {
+					onAnyClick()
+					window.open(youtubeMusicSearchUrl(text))
+				}}
+			>
+				YTM
+			</button>
+			<CopyButton
+				onClick={() => {
+					copy(text)
+					onAnyClick()
+				}}
+			/>
+		</div>
+	</div>
+)
 
 export function BookmarkList() {
 	const { favorites, toggleFavorites } = useFavorites()
@@ -11,10 +50,6 @@ export function BookmarkList() {
 	const [lastCopy, setLastCopy] = useState<string>('')
 	const text = Object.keys(favorites).join('\n')
 
-	const copyAciton = (s: string) => {
-		setLastCopy(s)
-		copy(s)
-	}
 	return (
 		<Style>
 			<div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
@@ -43,7 +78,7 @@ export function BookmarkList() {
 					<pre>
 						<code>{text}</code>
 					</pre>
-					<CopyButton onClick={() => copyAciton(text)} label={'コピー'} />
+					<CopyButton onClick={() => copy(text)} label={'コピー'} />
 				</div>
 			)}
 			{mode === 'normal' && (
@@ -52,10 +87,11 @@ export function BookmarkList() {
 						.map((icy) => ({ icy, units: icy.split(' - ') }))
 						.map(({ icy, units: [_icyA, _icyB] }, i) => (
 							<div key={i} className="row">
-								<div data-active={icy === lastCopy} key={icy}>
-									<span>{icy}</span>
-									<CopyButton onClick={() => copyAciton(icy)} />
-								</div>
+								<RichCell
+									text={icy}
+									active={icy === lastCopy}
+									onAnyClick={() => setLastCopy(icy)}
+								/>
 								<button
 									onClick={() => confirm('削除する') && toggleFavorites(icy)}
 								>
@@ -72,10 +108,12 @@ export function BookmarkList() {
 						.map(({ icy, units: [icyA, icyB] }, i) => (
 							<div key={i} className="row-sp">
 								{[icy, icyA, icyB].map((str) => (
-									<div data-active={str === lastCopy} key={str}>
-										<span>{str}</span>
-										<CopyButton onClick={() => copyAciton(str)} />
-									</div>
+									<RichCell
+										key={str}
+										text={str}
+										active={str === lastCopy}
+										onAnyClick={() => setLastCopy(str)}
+									/>
 								))}
 
 								<button
@@ -107,15 +145,19 @@ const Style = styled.div`
 		gap: 12px;
 		> div {
 			position: relative;
-			button {
+			.buttons {
 				display: none;
 				position: absolute;
 				bottom: 0;
 				right: 0;
+				button {
+					padding: 2px 4px;
+				}
 			}
 			&:hover {
-				button {
-					display: block;
+				.buttons {
+					display: flex;
+					justify-content: end;
 				}
 			}
 		}
