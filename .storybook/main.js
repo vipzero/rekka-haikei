@@ -1,23 +1,21 @@
-const webpack = require('webpack')
-
-module.exports = {
-	typescript: { reactDocgen: false },
-	stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+/** @type { import('@storybook/nextjs').StorybookConfig } */
+const config = {
+	stories: [
+		'../src/stories/**/*.mdx',
+		'../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+	],
 	addons: [
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
-		'storybook-addon-next-router',
+		'@storybook/addon-onboarding',
+		'@storybook/addon-interactions',
 	],
-	framework: '@storybook/react',
-	core: {
-		builder: 'webpack5',
+	framework: {
+		name: '@storybook/nextjs',
+		options: {},
 	},
-	webpackFinal: async (config) => {
-		config.plugins = [
-			...config.plugins,
-			new webpack.ProvidePlugin({ Buffer: ['buffer', 'Buffer'] }),
-		]
-
-		return config
+	docs: {
+		autodocs: 'tag',
 	},
 }
+export default config

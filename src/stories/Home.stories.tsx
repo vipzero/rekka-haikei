@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 
 import { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'

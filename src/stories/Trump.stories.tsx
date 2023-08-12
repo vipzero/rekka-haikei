@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { Trump } from '../components/Home/ex/Trump'
 import { GlobalStyle } from '../config/init'
 

@@ -1,13 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const ProtectFlash = createGlobalStyle`
+export const ProtectFlash: any = createGlobalStyle`
 body {
   background: black;
   z-index: -30;
 }
 `
 
-export const SubPageTheme = createGlobalStyle`
+export const SubPageTheme: any = createGlobalStyle`
 
 body {
 	background: var(--color-bg);
@@ -64,7 +64,7 @@ a {
 }
 `
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle: any = createGlobalStyle`
 @import "open-props/style";
 @import "open-props/animations";
 
