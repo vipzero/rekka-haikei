@@ -10,8 +10,8 @@ export const ImasBoard = ({ bools }: Props) => {
 			{bools.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((b, j) => (
-						<div key={j} className="cell" data-hit={b}>
-							{b ? '@' : '/'}
+						<div key={j} data-hit={b}>
+							{b ? '|' : '|'}
 						</div>
 					))}
 				</div>
@@ -26,6 +26,7 @@ const Style = styled.div`
 	font-size: 10px;
 	line-height: 10px;
 	background: #888;
+	display: grid;
 	opacity: 0.9;
 	/* color: transparent; */
 	text-align: center;
@@ -36,7 +37,8 @@ const Style = styled.div`
 		background: #fff;
 	}
 	.row {
-		height: 10px;
+		border-top: dotted 1px gray;
+		/* height: 10px; */
 		display: grid;
 		grid-template-columns: repeat(50, 1fr);
 	}

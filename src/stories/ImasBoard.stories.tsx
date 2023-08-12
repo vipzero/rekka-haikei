@@ -26,6 +26,7 @@ export const Full = Template.bind({})
 Full.args = {
 	bools: [
 		[true, true, true, true, true],
+		Array(150).fill(false),
 		[false, true],
 		Array(150).fill(false),
 	],
