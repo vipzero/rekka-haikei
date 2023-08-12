@@ -1,5 +1,4 @@
-import { ComponentMeta, ComponentStoryObj } from '@storybook/react'
-import Home from '../components/Home'
+import { Meta, StoryObj } from '@storybook/react'
 import { EeSelector } from '../components/Home/EeSelector'
 import { GlobalStyle } from '../config/init'
 
@@ -15,8 +14,8 @@ export default {
 		),
 	],
 	parameters: {},
-} as ComponentMeta<typeof Home>
-type Story = ComponentStoryObj<typeof EeSelector>
+} as Meta<typeof EeSelector>
+type Story = StoryObj<typeof EeSelector>
 
 export const Full: Story = {
 	parameters: { consoles: { hideNoControlsWarning: true } },

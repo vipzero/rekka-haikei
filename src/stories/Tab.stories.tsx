@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Tabs } from '../components/common/Tab'
 import { GlobalStyle } from '../config/init'
 
@@ -16,16 +16,15 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof Tabs>
+} as Meta<typeof Tabs>
 
-const Template: ComponentStory<typeof Tabs> = (args) => <Tabs {...args} />
-
-export const Full = Template.bind({})
-Full.args = {
-	items: [
-		{ label: 'リスト' },
-		{ label: '投票' },
-		{ label: '結果' },
-		{ label: 'ブックマーク' },
-	],
+export const Full = {
+	args: {
+		items: [
+			{ label: 'リスト' },
+			{ label: '投票' },
+			{ label: '結果' },
+			{ label: 'ブックマーク' },
+		],
+	},
 }

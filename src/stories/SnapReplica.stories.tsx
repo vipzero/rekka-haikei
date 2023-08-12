@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import range from 'lodash/range'
 import { SnapReplica } from '../components/BookPage/SnapReplica'
 import { GlobalStyle } from '../config/init'
@@ -18,15 +18,12 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof SnapReplica>
+} as Meta<typeof SnapReplica>
 
-const Template: ComponentStory<typeof SnapReplica> = (args) => (
-	<SnapReplica {...args} />
-)
-
-export const Snap1 = Template.bind({})
-Snap1.args = {
-	snap: snaps[0],
+export const Snap1 = {
+	args: {
+		snap: snaps[0],
+	},
 }
 
 export const Snap2 = {

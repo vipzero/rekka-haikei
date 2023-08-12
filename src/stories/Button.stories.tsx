@@ -1,6 +1,6 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { GlobalStyle, SubPageTheme } from '../config/init'
 
 const Button = (props) => <button {...props} />
@@ -20,19 +20,22 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof Button>
+} as Meta<typeof Button>
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
-const TemplateIcon: ComponentStory<typeof Button> = (args) => (
+const TemplateIcon: StoryFn<typeof Button> = (args) => (
 	<Button {...args}>
 		<FontAwesomeIcon icon={faCopy} />
 	</Button>
 )
 
-export const Button1 = Template.bind({})
-Button1.args = { children: 'button' }
+export const Button1 = {
+	args: { children: 'button' },
+}
 
-export const CopyButton = TemplateIcon.bind({})
+export const CopyButton = {
+	render: TemplateIcon,
+}
 
-export const Disabled = Template.bind({})
-Disabled.args = { disabled: true, children: 'disabled' }
+export const Disabled = {
+	args: { disabled: true, children: 'disabled' },
+}

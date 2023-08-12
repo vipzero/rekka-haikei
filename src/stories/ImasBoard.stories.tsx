@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { ImasBoard } from '../components/Home/ex/ImasBoard'
 import { GlobalStyle } from '../config/init'
 
@@ -16,19 +16,16 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof ImasBoard>
+} as Meta<typeof ImasBoard>
 
-const Template: ComponentStory<typeof ImasBoard> = (args) => (
-	<ImasBoard {...args} />
-)
-
-export const Full = Template.bind({})
-Full.args = {
-	bools: [
-		[true, true, true, true, true],
-		Array(111).fill(false),
-		[false, true],
-		Array(111).fill(false),
-		Array(39).fill(false),
-	],
+export const Full = {
+	args: {
+		bools: [
+			[true, true, true, true, true],
+			Array(111).fill(false),
+			[false, true],
+			Array(111).fill(false),
+			Array(39).fill(false),
+		],
+	},
 }

@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { Masso } from '../components/Home/ex/Masso'
 import { GlobalStyle } from '../config/init'
 
@@ -16,16 +16,16 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof Masso>
+} as Meta<typeof Masso>
 
-const Template: ComponentStory<typeof Masso> = (args) => <Masso {...args} />
-
-export const Full = Template.bind({})
-Full.args = {
-	seed: 0,
+export const Full = {
+	args: {
+		seed: 0,
+	},
 }
 
-export const Half = Template.bind({})
-Half.args = {
-	seed: 100,
+export const Half = {
+	args: {
+		seed: 100,
+	},
 }

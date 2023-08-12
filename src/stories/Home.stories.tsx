@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 
 import { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
@@ -61,89 +61,89 @@ export default {
 		},
 	},
 	args: { song },
-} as ComponentMeta<typeof Home>
+} as Meta<typeof HomeRecoil>
 
-const Template: ComponentStory<typeof HomeRecoil> = (args) => (
-	<HomeRecoil {...args} />
-)
-
-export const Full = Template.bind({})
-Full.args = {
-	song,
-	setting,
-}
-
-export const Lain = Template.bind({})
-Lain.args = { setting: { ...setting, eeKey: 'lain' } }
-
-export const SteinsGate = Template.bind({})
-SteinsGate.args = { setting: { ...setting, eeKey: 'steinsgate' } }
-
-export const Shadow = Template.bind({})
-Shadow.args = { setting: { ...setting, eeKey: 'susu' } }
-
-// export const Toaru = Template.bind({})
-// Toaru.args = { setting: { ...setting, eeKey: 'toaru' } }
-
-export const Kokaku = Template.bind({})
-Kokaku.args = { setting: { ...setting, eeKey: 'kokaku' } }
-
-export const Psychopass = Template.bind({})
-
-Psychopass.args = { setting: { ...setting, eeKey: 'psychopass' } }
-
-export const Patema = Template.bind({})
-
-Patema.args = { setting: { ...setting, eeKey: 'sakasa' } }
-
-export const Sao = Template.bind({})
-
-Sao.args = { setting: { ...setting, eeKey: 'sao' } }
-
-export const Flip = Template.bind({})
-
-Flip.args = { setting: { ...setting, eeKey: 'flip' } }
-
-export const Aria = Template.bind({})
-
-Aria.args = { setting: { ...setting, eeKey: 'ariascarlet' } }
-
-// export const Shani = Template.bind({})
-// Shani.args = { setting: { ...setting, eeKey: 'shanimas' } }
-
-// export const Delemas = Template.bind({})
-// Delemas.args = { setting: { ...setting, eeKey: 'imascd' } }
-
-export const Shiki = Template.bind({})
-Shiki.args = { setting: { ...setting, eeKey: 'subetef' } }
-
-export const Parapara = Template.bind({})
-Parapara.args = { setting: { ...setting, eeKey: 'parapara' } }
-
-export const Mts10 = Template.bind({})
-Mts10.args = {
-	setting: {
-		...setting,
-		eeKey: 'mts10',
-		eeOpt: { id: 'text', s: '10101:MTG' },
+export const Full = {
+	args: {
+		song,
+		setting,
 	},
 }
 
-export const Masso = Template.bind({})
-Masso.args = { setting: { ...setting, eeKey: 'masso' } }
+export const Lain = {
+	args: { setting: { ...setting, eeKey: 'lain' } },
+}
 
-export const ThemeClear = Template.bind({})
-ThemeClear.args = { setting: { ...setting, theme: 0 } }
+export const SteinsGate = {
+	args: { setting: { ...setting, eeKey: 'steinsgate' } },
+}
 
-export const ThemeWhite = Template.bind({})
+export const Shadow = {
+	args: { setting: { ...setting, eeKey: 'susu' } },
+}
 
-ThemeWhite.args = { setting: { ...setting, theme: 1 } }
+export const Kokaku = {
+	args: { setting: { ...setting, eeKey: 'kokaku' } },
+}
 
-export const ThemeBlack = Template.bind({})
-ThemeBlack.args = { setting: { ...setting, theme: 2 } }
+export const Psychopass = {
+	args: { setting: { ...setting, eeKey: 'psychopass' } },
+}
 
-export const ThemeEmpty = Template.bind({})
-ThemeEmpty.args = { setting: { ...setting, theme: 3 } }
+export const Patema = {
+	args: { setting: { ...setting, eeKey: 'sakasa' } },
+}
 
-export const ThemeSingl = Template.bind({})
-ThemeSingl.args = { setting: { ...setting, theme: 4 } }
+export const Sao = {
+	args: { setting: { ...setting, eeKey: 'sao' } },
+}
+
+export const Flip = {
+	args: { setting: { ...setting, eeKey: 'flip' } },
+}
+
+export const Aria = {
+	args: { setting: { ...setting, eeKey: 'ariascarlet' } },
+}
+
+export const Shiki = {
+	args: { setting: { ...setting, eeKey: 'subetef' } },
+}
+
+export const Parapara = {
+	args: { setting: { ...setting, eeKey: 'parapara' } },
+}
+
+export const Mts10 = {
+	args: {
+		setting: {
+			...setting,
+			eeKey: 'mts10',
+			eeOpt: { id: 'text', s: '10101:MTG' },
+		},
+	},
+}
+
+export const Masso = {
+	args: { setting: { ...setting, eeKey: 'masso' } },
+}
+
+export const ThemeClear = {
+	args: { setting: { ...setting, theme: 0 } },
+}
+
+export const ThemeWhite = {
+	args: { setting: { ...setting, theme: 1 } },
+}
+
+export const ThemeBlack = {
+	args: { setting: { ...setting, theme: 2 } },
+}
+
+export const ThemeEmpty = {
+	args: { setting: { ...setting, theme: 3 } },
+}
+
+export const ThemeSingl = {
+	args: { setting: { ...setting, theme: 4 } },
+}

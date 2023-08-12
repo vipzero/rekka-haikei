@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import TrackTimeBitBar from '../components/Home/TrackTimeBitBar'
 import { GlobalStyle } from '../config/init'
 
@@ -16,14 +16,11 @@ export default {
 	],
 	parameters: {},
 	args: {},
-} as ComponentMeta<typeof TrackTimeBitBar>
+} as Meta<typeof TrackTimeBitBar>
 
-const Template: ComponentStory<typeof TrackTimeBitBar> = (args) => (
-	<TrackTimeBitBar {...args} />
-)
-
-export const Full = Template.bind({})
-Full.args = {
-	startTime: +Date.now(),
-	size: 100000,
+export const Full = {
+	args: {
+		startTime: +Date.now(),
+		size: 100000,
+	},
 }
