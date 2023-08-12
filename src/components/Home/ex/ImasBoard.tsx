@@ -46,9 +46,9 @@ const Style = styled.div`
 	/* color: transparent; */
 	text-align: center;
 	[data-hit='true'] {
-		background: #444 !important;
 	}
 	[data-hit='false'] {
+		background: #fff !important;
 	}
 	.row {
 		border-top: dotted 1px gray;
