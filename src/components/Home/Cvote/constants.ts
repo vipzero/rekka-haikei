@@ -167,7 +167,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	// [/MILGRAM/, 'milgram'],
 	[/動く|moving|move/, 'move'],
 	[
-		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動/,
+		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動|muscle/,
 		'masso',
 	],
 ]
