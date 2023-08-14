@@ -83,13 +83,13 @@ export const eekeyGroups = [
 ]
 const isEekeyStr = (s: string): s is EekeyStr => eekeys.includes(s as EekeyStr)
 
-type EekeyStr = typeof eekeys[number]
+type EekeyStr = (typeof eekeys)[number]
 export type Eekey = EekeyStr
 export type EekeyState = Eekey | false
 export type EeOptChar = { id: 'cvote'; chars: Char[] }
 export type EeOptText = { id: 'text'; s: string }
 export type EeOpt = null | EeOptChar | EeOptText
-export type ExThemeKey = typeof eekeysThemetic[number]
+export type ExThemeKey = (typeof eekeysThemetic)[number]
 export const isExTheme = (theme: Eekey | false | number): theme is ExThemeKey =>
 	eekeysThemetic.includes(theme as ExThemeKey)
 
@@ -166,7 +166,10 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	// [/高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
 	// [/MILGRAM/, 'milgram'],
 	[/動く|moving|move/, 'move'],
-	[/マッスル|マッソー|ダンベル|ブートダンス|スポーツ/, 'masso'],
+	[
+		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動/,
+		'masso',
+	],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
