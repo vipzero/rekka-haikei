@@ -49,14 +49,14 @@ export function useBgs(
 
 		enableUrl(urls, hasMinImg)
 			.then((res) => {
-				if (res) {
-					const { url, img } = res
-					setUrl(url)
-					onChangeUrl?.(url)
-					setAnime(false)
-					setSize({ w: img.naturalWidth, h: img.naturalHeight })
-					setLock((v) => v - 1)
-				}
+				if (!res) return
+
+				const { url, img } = res
+				setUrl(url)
+				onChangeUrl?.(url)
+				setAnime(false)
+				setSize({ w: img.naturalWidth, h: img.naturalHeight })
+				setLock((v) => v - 1)
 			})
 			.catch(() => {})
 	}, [urls[0], locked])

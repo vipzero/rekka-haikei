@@ -1,5 +1,5 @@
 import { fit } from 'object-fit-math'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Transition } from 'react-transition-group'
 import { useMeasure } from 'react-use'
 import styled from 'styled-components'
