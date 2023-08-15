@@ -195,7 +195,7 @@ export const useSettingsTheme = () => {
 		...t,
 		selected: t.id === theme,
 	}))
-	return { setTheme, themes }
+	return { setTheme, themes, theme }
 }
 
 export const useSettingsShowEmol = () => {

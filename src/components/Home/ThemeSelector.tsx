@@ -1,8 +1,19 @@
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
 import { useSettingsTheme } from '../../hooks/useSettings'
 
 export const ThemeSelector = () => {
-	const { setTheme, themes } = useSettingsTheme()
+	const { setTheme, themes, theme } = useSettingsTheme()
+	const [animate, setAnimate] = useState(false)
+
+	useEffect(() => {
+		if (animate) return
+		setAnimate(true)
+		setTimeout(() => {
+			setAnimate(false)
+		}, 3000)
+	}, [theme])
+
 	return (
 		<Style>
 			{themes.map((t) => (
@@ -39,9 +50,19 @@ const Style = styled.div`
 		}
 		text-align: center;
 		&[data-opened='true'] {
-			color: transparent;
 			&[data-name='CLEAR'] {
-				background-color: #aaa;
+				background-color: #888;
+				background-image: linear-gradient(
+					0deg,
+					transparent 40%,
+					#aaa 40%,
+					#aaa 60%,
+					transparent 60%,
+					transparent
+				);
+				background-color: white;
+				--cw: 16px;
+				background-size: var(--cw) var(--cw);
 			}
 			&[data-name='WHITE'] {
 				background-color: #fff;
@@ -84,6 +105,38 @@ const Style = styled.div`
 			}
 			&[data-name='CUSTM'] {
 				background-color: #321515;
+			}
+			&[data-name='PSYCH'] {
+				background-image: repeating-linear-gradient(
+					45deg,
+					#15353b,
+					#15353b 50%,
+					#13e0ad 50%,
+					#13e0ad 100%
+				);
+			}
+			&[data-name='KOKAK'] {
+				background-image: repeating-linear-gradient(
+					45deg,
+					#0385f4,
+					#0385f4 50%,
+					#b8deff 50%,
+					#b8deff 100%
+				);
+			}
+			&[data-name='ID___'] {
+				background-image: repeating-linear-gradient(
+					45deg,
+					#373f4f,
+					#373f4f 50%,
+					#9eece4 50%,
+					#9eece4 100%
+				);
+			}
+		}
+		&[data-active='false'] {
+			span {
+				color: transparent !important;
 			}
 		}
 		&[data-active='true'] {
