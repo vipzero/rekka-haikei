@@ -33,17 +33,14 @@ import {
 	allThemesById,
 } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
-import {
-	useSettings,
-	useSettingsEe,
-	useSettingsTheme,
-} from '../../hooks/useSettings'
+import { useSettings, useSettingsEe } from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Setting, Song } from '../../types'
 import { downloadImg, isMobile } from '../../util'
 import { startPip } from '../../util/pip'
 import { BingoBox } from './BingoBox'
 import { ConfButton } from './ConfButton'
+import { ThemeSelector } from './ThemeSelector'
 import Time from './Time'
 
 const lockLabel = {
@@ -431,25 +428,6 @@ const Wrap = styled.div`
 		}
 	}
 `
-
-const ThemeSelector = () => {
-	const { setTheme, themes } = useSettingsTheme()
-	return (
-		<div style={{ display: 'grid', gridAutoFlow: 'column' }}>
-			{themes.map((t) => (
-				<button
-					key={t.key}
-					data-active={t.selected}
-					onClick={() => {
-						if (t.visible) setTheme(t.id)
-					}}
-				>
-					{t.visible ? t.key[0] : '?'}
-				</button>
-			))}
-		</div>
-	)
-}
 
 const ButtonGrid = styled.div`
 	display: grid;

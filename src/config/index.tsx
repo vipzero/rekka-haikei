@@ -49,11 +49,12 @@ export const normalThemes: Theme[] = [
 	{ id: 5, key: 'CUSTM' },
 ]
 
-export type ExTheme = Theme & { id: typeof eekeysThemetic[number] }
+export type ExTheme = Theme & { id: (typeof eekeysThemetic)[number] }
 export const extThemes: ExTheme[] = [
 	{ id: 'kokaku', key: 'KOKAK' },
 	{ id: 'lain', key: 'LAIN_' },
 	{ id: 'psychopass', key: 'PSYCH' },
+	{ id: 'yojitsu', key: 'ID___' },
 ]
 export const allThemes: Theme[] = [...normalThemes, ...extThemes]
 export const allThemesById = allThemes.reduce(
@@ -68,7 +69,7 @@ const pink = '#fde'
 const red = '#f00'
 
 const abyssList = [white, black, gray, pink, red] as const
-export type Abyss = typeof abyssList[number]
+export type Abyss = (typeof abyssList)[number]
 
 const abyssListConf: Abyss[] = [white, black, gray]
 // const abyssListEx: Abyss[] = [pink, red]
