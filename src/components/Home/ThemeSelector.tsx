@@ -124,6 +124,15 @@ const Style = styled.div`
 					#b8deff 100%
 				);
 			}
+			&[data-name='LAIN_'] {
+				background-image: repeating-linear-gradient(
+					45deg,
+					#310d0d,
+					#310d0d 50%,
+					#880000 50%,
+					#880000
+				);
+			}
 			&[data-name='ID___'] {
 				background-image: repeating-linear-gradient(
 					45deg,
