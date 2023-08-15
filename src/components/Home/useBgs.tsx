@@ -30,7 +30,8 @@ export function useBgs(
 	urls: string[],
 	sid: number,
 	lockCount: number,
-	hasMinImg: boolean
+	hasMinImg: boolean,
+	onChangeUrl?: (url: string) => void
 ) {
 	const [anime, setAnime] = useState<boolean>(true)
 	const [url, setUrl] = useState<string>('')
@@ -51,6 +52,7 @@ export function useBgs(
 				if (res) {
 					const { url, img } = res
 					setUrl(url)
+					onChangeUrl?.(url)
 					setAnime(false)
 					setSize({ w: img.naturalWidth, h: img.naturalHeight })
 					setLock((v) => v - 1)

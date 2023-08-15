@@ -26,8 +26,8 @@ type Props = {
 	sid: number
 	lockCount: number
 	px: 'right' | 'center' | 'left'
-	changedUrl: (url: string) => void
 	hasMinImg: boolean
+	onChangeUrl?: (url: string) => void
 	artwork?: string
 }
 function FadeBgChanger({
@@ -35,14 +35,20 @@ function FadeBgChanger({
 	urls,
 	px,
 	lockCount,
-	changedUrl,
+	onChangeUrl,
 	hasMinImg,
 	artwork,
 }: Props) {
 	const [bgStyle, setBg] = useState<string>('')
 
 	const [ref, { width, height }] = useMeasure<HTMLDivElement>()
-	const { anime, url, setAnime, size } = useBgs(urls, sid, lockCount, hasMinImg)
+	const { anime, url, setAnime, size } = useBgs(
+		urls,
+		sid,
+		lockCount,
+		hasMinImg,
+		onChangeUrl
+	)
 	const bgSize = fit(
 		{ width, height },
 		{ width: size.w, height: size.h },
@@ -51,9 +57,6 @@ function FadeBgChanger({
 
 	const divRef = useRef<HTMLDivElement>(null)
 	const { abyss } = useSettingsEe()
-	useEffect(() => {
-		changedUrl(url)
-	}, [url])
 	const transBack = artwork ? `url(${artwork})` : bgStyle
 
 	return (

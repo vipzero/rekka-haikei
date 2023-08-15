@@ -45,7 +45,7 @@ const Dialog = styled.dialog`
 	margin: 0;
 	padding: 12px 4px;
 	border-radius: 4px;
-	border: none;
+	border: solid gray;
 	z-index: 10;
 	/* background: var(--content-bg-color); */
 
@@ -66,6 +66,7 @@ const Dialog = styled.dialog`
 		border: none;
 		font-size: 1.2rem;
 		padding: 4px 12px;
+		height: 20px;
 	}
 
 	.header {

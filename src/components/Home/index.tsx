@@ -84,7 +84,7 @@ function Home({ song, setBg }: Props) {
 				hasMinImg={song.hasMinImg}
 				urls={song?.imageLinks?.filter((v) => !blockGif || !isGifUrl(v)) || []}
 				lockCount={lockBgNum}
-				changedUrl={setUrl}
+				onChangeUrl={setUrl}
 				px={sideMap[sideMode] || 'center'}
 			/>
 			{eeKey && eeKey === 'subetef' ? (
