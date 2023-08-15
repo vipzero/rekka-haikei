@@ -24,8 +24,8 @@ type Props = {
 	seed: number
 }
 export const Masso = ({ seed }: Props) => {
-	console.log(seed)
-	const training = trainings[Math.floor(seed || 0) % trainings.length]
+	const training =
+		trainings[Math.floor((seed || 0) * trainings.length) % trainings.length]
 	return (
 		<div style={{ position: 'relative' }}>
 			<StyledRoulette>
