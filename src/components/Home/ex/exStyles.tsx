@@ -141,19 +141,19 @@ export const exStyles = css`
 		${randAnimsCss}
 	}
 	&[data-ex='yojitsu'] {
-		--font-color: black;
-		--panel-fo-color: #75eade;
+		--font-color: white;
+		--panel-fo-color: white;
 		--panel-fo-shadow-color: transparent;
-		--btn-fo-color: black;
-		/* --setting-bg-color: #54fff6; */
+		--btn-fo-color: white;
+		--setting-bg-color: #373f4f;
 		/* #616F84 */
 		--content-bg-color: #373f4f;
 		--sub-bg-color: #9eece4;
-		--btn-bg-color: rgb(239, 239, 239);
-		--btn-bg-checked-color: #999;
+		--btn-bg-color: #373f4f;
+		--btn-bg-checked-color: #616f84;
 
 		--bingo-bg-color: #ccc;
-		/* --bingo-bg-hit-color: #e85; */
+		--bingo-bg-hit-color: #9eece4;
 		#panel {
 			box-shadow: 0 0 0 4px #b4ece6, 0 0 0 20px #616f84;
 			border-radius: 0;
@@ -162,16 +162,22 @@ export const exStyles = css`
 		[data-co] {
 			p,
 			a {
-				text-shadow: 0 0 1px var(--sub-bg-color), 0 0 6px var(--sub-bg-color);
+				text-shadow: 0 0 2px white;
 			}
 
-			.details {
-				p,
-				a {
-					color: #eee;
-					text-shadow: 0 0 2px white;
-				}
+			.titles {
+				color: #75eade;
+				text-shadow: 0 0 1px var(--sub-bg-color), 0 0 6px var(--sub-bg-color);
 			}
+		}
+		#setting-box {
+			button {
+				border-radius: 0;
+				border: solid 1px #b4ece6;
+			}
+		}
+		#main-box {
+			gap: 2rem;
 		}
 		#yrings {
 			position: absolute;

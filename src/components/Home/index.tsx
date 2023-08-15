@@ -95,7 +95,7 @@ function Home({ song, setBg }: Props) {
 			) : (
 				<TrackTimeBar startTime={song.time} size={timeBarSize} />
 			)}
-			<Container data-side={sideMode}>
+			<Container id="main-box" data-side={sideMode}>
 				<SongInfo song={song} />
 				<div id="player-box" data-visible={!!streamUrl}>
 					<AudioPlayer src={streamUrl}></AudioPlayer>
