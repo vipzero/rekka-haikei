@@ -24,10 +24,13 @@ export const ThemeSelector = () => {
 
 const Style = styled.div`
 	display: grid;
-	grid-auto-flow: column;
+	grid-template-columns: repeat(6, 1fr);
+
 	button {
 		cursor: pointer;
-		/* height: 1rem; */
+		min-height: 20px;
+		min-width: 20px;
+		margin: 2px;
 		aspect-ratio: 1;
 		border-radius: 50%;
 		&[data-opened='false'] {
