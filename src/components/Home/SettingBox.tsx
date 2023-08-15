@@ -80,12 +80,19 @@ function SettingBox({
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
 	const [showBingo, setShowBingo] = useState<boolean>(false)
+	const [showThemer, setShowThemer] = useState<boolean>(false)
 	const [showDetail, setShowDetail] = useState<boolean>(false)
 
 	useEffect(() => {
 		setPressed(false)
 		setSnapped(false)
 	}, [song.time])
+	useEffect(() => {
+		if (!s.visible) setShowThemer(false)
+	}, [s.visible])
+	useEffect(() => {
+		setShowThemer(true)
+	}, [s.theme])
 
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
@@ -130,11 +137,12 @@ function SettingBox({
 			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
 			data-show-bingo={showBingo}
+			data-show-themer={showThemer}
 			data-show-detail={showDetail}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
-					<div style={{ gridArea: 'ts' }}>
+					<div style={{ gridArea: 'ts' }} className="themer-area">
 						<ThemeSelector />
 					</div>
 					<ConfButton
@@ -427,6 +435,11 @@ const Wrap = styled.div`
 			display: none;
 		}
 	}
+	&[data-show-themer='false'] {
+		.themer-area {
+			display: none;
+		}
+	}
 `
 
 const ButtonGrid = styled.div`
@@ -434,11 +447,11 @@ const ButtonGrid = styled.div`
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c'
+		'ts ts ts ts ts ss'
 		'vh bb bb bb bb ss'
 		'vh bb bb bb bb ss'
 		'bi bb bb bb bb ss'
 		'_a _a _a ha ha _h'
-		'ts ts ts ts ts _h'
 		'pp pp th dd dd _h'
 		'pp pp rr pi pi _d';
 `

@@ -148,4 +148,10 @@ li {
 	font-family: 'Roboto Mono', monospace;
 }
 
+button {
+	user-select: none;
+	span {
+		user-select: none;
+	}
+}
 `

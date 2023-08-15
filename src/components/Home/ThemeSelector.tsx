@@ -43,7 +43,7 @@ const Style = styled.div`
 		min-width: 20px;
 		margin: 2px;
 		aspect-ratio: 1;
-		border-radius: 50%;
+		border-radius: 50% !important;
 		&[data-opened='false'] {
 			cursor: not-allowed;
 			opacity: 0.5;
@@ -149,9 +149,9 @@ const Style = styled.div`
 			}
 		}
 		&[data-active='true'] {
-			border-end-end-radius: 0%;
-			border-top: 2px solid;
-			border-left: 2px solid;
+			/* border-end-end-radius: 0%; */
+			/* border-top: 2px solid;
+			border-left: 2px solid; */
 			span {
 				opacity: 1;
 				color: black;
