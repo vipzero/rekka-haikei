@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { ImasMilionTl } from '../components/Home/ex/ImasMilionTl'
 import { GlobalStyle } from '../config/init'
 

@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import TrackTimeBar from '../components/Home/TrackTimeBar'
 import { GlobalStyle } from '../config/init'
 

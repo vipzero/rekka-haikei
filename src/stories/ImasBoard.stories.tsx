@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { ImasBoard } from '../components/Home/ex/ImasBoard'
 import { GlobalStyle } from '../config/init'
 

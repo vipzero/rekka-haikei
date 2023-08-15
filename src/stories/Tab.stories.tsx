@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import { Tabs } from '../components/common/Tab'
 import { GlobalStyle } from '../config/init'
 

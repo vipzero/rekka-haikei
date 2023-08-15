@@ -1,4 +1,4 @@
-import { Meta, StoryFn } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import range from 'lodash/range'
 import { SnapReplica } from '../components/BookPage/SnapReplica'
 import { GlobalStyle } from '../config/init'
