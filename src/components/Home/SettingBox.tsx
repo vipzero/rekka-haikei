@@ -33,7 +33,11 @@ import {
 	allThemesById,
 } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
-import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import {
+	useSettings,
+	useSettingsEe,
+	useSettingsTheme,
+} from '../../hooks/useSettings'
 import { useBookCountDb } from '../../hooks/useSongDb'
 import { Setting, Song } from '../../types'
 import { downloadImg, isMobile } from '../../util'
@@ -133,6 +137,9 @@ function SettingBox({
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
+					<div style={{ gridArea: 'ts' }}>
+						<ThemeSelector />
+					</div>
 					<ConfButton
 						helpText={'テーマ: '}
 						className="theme"
@@ -425,6 +432,25 @@ const Wrap = styled.div`
 	}
 `
 
+const ThemeSelector = () => {
+	const { setTheme, themes } = useSettingsTheme()
+	return (
+		<div style={{ display: 'grid', gridAutoFlow: 'column' }}>
+			{themes.map((t) => (
+				<button
+					key={t.key}
+					data-active={t.selected}
+					onClick={() => {
+						if (t.visible) setTheme(t.id)
+					}}
+				>
+					{t.visible ? t.key[0] : '?'}
+				</button>
+			))}
+		</div>
+	)
+}
+
 const ButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
@@ -434,6 +460,7 @@ const ButtonGrid = styled.div`
 		'vh bb bb bb bb ss'
 		'bi bb bb bb bb ss'
 		'_a _a _a ha ha _h'
+		'ts ts ts ts ts _h'
 		'pp pp th dd dd _h'
 		'pp pp rr pi pi _d';
 `

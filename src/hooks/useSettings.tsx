@@ -7,9 +7,16 @@ import {
 	EekeyState,
 	isExTheme,
 } from '../components/Home/Cvote/constants'
-import { Abyss, EE_SEASON, nextAbyss, normalThemes } from '../config'
+import {
+	Abyss,
+	EE_SEASON,
+	allThemes,
+	extThemes,
+	nextAbyss,
+	normalThemes,
+} from '../config'
 import { sammonSpell, spellCatch } from '../service/fukkatsu'
-import { Setting, ThemeId } from '../types'
+import { Setting, Theme, ThemeId } from '../types'
 import { toggle, genToggle } from '../util'
 
 function exKeyToColor(exkey: EekeyState) {
@@ -52,8 +59,8 @@ export const useSettings = () => {
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	const nextTheme = (v: ThemeId) =>
 		typeof v !== 'number' ? 0 : (v + 1) % normalThemes.length
-	const cycleTheme = () =>
-		setSetting((v) => ({ ...v, theme: nextTheme(v.theme) }))
+	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
+	const cycleTheme = () => setTheme(nextTheme(theme))
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 
 	return {
@@ -81,6 +88,7 @@ export const useSettings = () => {
 		toggleTool,
 		setSetting,
 		cycleTheme,
+		setTheme,
 	}
 }
 
@@ -173,6 +181,21 @@ export const useSettingsEe = () => {
 		toggleEekeySimulate,
 		setSetting,
 	}
+}
+
+type ThemeOpen = Theme & { visible: boolean; selected: boolean }
+export const useSettingsTheme = () => {
+	const { setTheme, theme } = useSettings()
+	const { ee } = useSettingsEe()
+
+	const themes: ThemeOpen[] = [
+		...normalThemes.map((v) => ({ ...v, visible: true })),
+		...extThemes.map((v) => ({ ...v, visible: ee[v.id] > 0 })),
+	].map((t) => ({
+		...t,
+		selected: t.id === theme,
+	}))
+	return { setTheme, themes }
 }
 
 export const useSettingsShowEmol = () => {
