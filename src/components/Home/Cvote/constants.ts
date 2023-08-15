@@ -28,7 +28,12 @@ export const eekeysGimic = [
 	// 'codegeass',
 ] as const
 // 🛑 ネタバレ注意
-export const eekeysThemetic = ['kokaku', 'psychopass', 'lain'] as const
+export const eekeysThemetic = [
+	'kokaku',
+	'psychopass',
+	'yojitsu',
+	'lain',
+] as const
 export const eekeysMirror = [
 	'spin',
 	'flip',
@@ -103,6 +108,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	['experiments lain', 'lain'],
 	['攻殻機動隊', 'kokaku'],
 	['PSYCHO-PASS', 'psychopass'],
+	['ようこそ実力', 'yojitsu'],
 	['廻って', 'spin'],
 	['Steins;Gate', 'steinsgate'],
 	['五等分の花嫁', 'gotoyome'],
@@ -167,7 +173,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	// [/MILGRAM/, 'milgram'],
 	[/動く|moving|move/, 'move'],
 	[
-		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動|muscle/,
+		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動|muscle/i,
 		'masso',
 	],
 ]
@@ -224,4 +230,5 @@ export const eeId: Record<EekeyStr, number> = {
 	mts10: 46,
 	parapara: 47,
 	masso: 48,
+	yojitsu: 49,
 }

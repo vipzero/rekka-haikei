@@ -140,6 +140,45 @@ export const exStyles = css`
 
 		${randAnimsCss}
 	}
+	&[data-ex='yojitsu'] {
+		--font-color: black;
+		--panel-fo-color: #75eade;
+		--panel-fo-shadow-color: transparent;
+		--btn-fo-color: black;
+		/* --setting-bg-color: #54fff6; */
+		/* #616F84 */
+		--content-bg-color: #373f4f;
+		--sub-bg-color: #9eece4;
+		--btn-bg-color: rgb(239, 239, 239);
+		--btn-bg-checked-color: #999;
+
+		--bingo-bg-color: #ccc;
+		/* --bingo-bg-hit-color: #e85; */
+		#panel {
+			box-shadow: 0 0 0 4px #b4ece6, 0 0 0 20px #616f84;
+			border-radius: 0;
+		}
+		#panel,
+		[data-co] {
+			p,
+			a {
+				text-shadow: 0 0 1px var(--sub-bg-color), 0 0 6px var(--sub-bg-color);
+			}
+
+			.details {
+				p,
+				a {
+					color: #eee;
+					text-shadow: 0 0 2px white;
+				}
+			}
+		}
+		#yrings {
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
 	&[data-ex='sakasa'] {
 		transform: rotateX(180deg);
 	}

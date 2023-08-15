@@ -11,6 +11,7 @@ import { ImasMilionTl } from './ImasMilionTl'
 import { Trump } from './Trump'
 import { Masso } from './Masso'
 import { ImasBoard } from './ImasBoard'
+import { Yrings } from './Yrings'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -42,7 +43,7 @@ const KokakuEx = () => {
 	)
 }
 
-export const Lain = createGlobalStyle<{ r: number }>`
+export const Lain: any = createGlobalStyle<{ r: number }>`
 * {
 	color: hsla(0,50%,50%) !important;
 }
@@ -117,6 +118,12 @@ function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 						</a>
 					</RainbowFontCool>
 				))}
+			</div>
+		)
+	} else if (eeKey === 'yojitsu') {
+		return (
+			<div id="yrings">
+				<Yrings />
 			</div>
 		)
 	} else if (eeKey === 'lain') {

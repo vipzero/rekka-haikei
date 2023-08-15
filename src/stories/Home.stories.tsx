@@ -74,6 +74,10 @@ export const Lain = {
 	args: { setting: { ...setting, eeKey: 'lain' } },
 }
 
+export const Yojitsu = {
+	args: { setting: { ...setting, eeKey: 'yojitsu' } },
+}
+
 export const SteinsGate = {
 	args: { setting: { ...setting, eeKey: 'steinsgate' } },
 }

@@ -77,7 +77,7 @@
 		"coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
 		"gen:env": "cp templates/temp.env .env.development.local && cp templates/temp.env .env.production.local",
 		"test": "jest",
-		"storybook": "storybook dev -s./public -p 6006",
+		"storybook": "storybook dev -p 6006",
 		"build-storybook": "build-storybook",
 		"protogen": "pbjs -t static-module -w commonjs -o src/service/protobuf/config.proto.js proto/user-config.proto && pbts -o src/service/protobuf/config.proto.d.ts src/service/protobuf/config.proto.js"
 	},
