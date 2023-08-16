@@ -15,6 +15,7 @@ const Card = styled.div`
 	border: solid 1px;
 	padding: 4px;
 	width: 30px;
+	height: 42px;
 	/* aspect-ratio: 9 / 16; */
 	border-radius: 4px;
 	> div {
