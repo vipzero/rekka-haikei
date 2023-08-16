@@ -190,6 +190,32 @@ export const exStyles = css`
 			top: 0;
 		}
 	}
+	&[data-ex='choco'] {
+		--font-color: #ffc627;
+		--panel-fo-color: #ffe697;
+		--panel-fo-shadow-color: #000;
+		--btn-fo-color: black;
+		--setting-bg-color: #311;
+		--content-bg-color: #795548ee;
+		--deb-bg-color: #795548ee;
+		--btn-bg-color: #ffe;
+		--btn-bg-checked-color: #dda;
+
+		--bingo-bg-color: #333;
+		--bingo-bg-hit-color: #ffe697;
+
+		#timebar {
+			.wrap {
+				background: #ffa;
+			}
+			.fill {
+				background-color: var(--setting-bg-color);
+			}
+			.pointer {
+				background-color: green;
+			}
+		}
+	}
 	&[data-ex='lain'] {
 		* {
 			color: hsla(0, 50%, 50%) !important;

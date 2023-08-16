@@ -33,6 +33,7 @@ export const eekeysThemetic = [
 	'psychopass',
 	'yojitsu',
 	'lain',
+	'choco',
 ] as const
 export const eekeysMirror = [
 	'spin',
@@ -176,6 +177,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 		/マッスル|マッソー|ダンベル|ブートダンス|スポーツ|筋肉|エクササイズ|運.動|muscle/i,
 		'masso',
 	],
+	[/ちょこ|チョコ|choco/i, 'choco'],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
@@ -231,4 +233,5 @@ export const eeId: Record<EekeyStr, number> = {
 	parapara: 47,
 	masso: 48,
 	yojitsu: 49,
+	choco: 50,
 }

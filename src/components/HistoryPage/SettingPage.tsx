@@ -1,13 +1,13 @@
-import styled from 'styled-components'
 import { toast } from 'react-toastify'
+import styled from 'styled-components'
+import { defaultCustomTheme } from '../../atom/customThemes'
 import {
 	useSettingsCustomTheme,
 	useSettingsFakeBar,
 	useSettingsSpell,
 } from '../../hooks/useSettings'
-import { CheckBox } from '../common/CheckBox'
 import { ConfButton } from '../Home/ConfButton'
-import { chocoTheme, defaultCustomTheme } from '../../atom/customThemes'
+import { CheckBox } from '../common/CheckBox'
 import { ShortcutDescription } from './ShortcutDescription'
 
 export function SettingPage() {
@@ -73,7 +73,6 @@ export function SettingPage() {
 					<button onClick={() => setCustomTheme(defaultCustomTheme)}>
 						デフォルトに戻す
 					</button>
-					{/* <button onClick={() => setCustomTheme(chocoTheme)}>チョコ</button> */}
 				</div>
 				<p>プレビュー</p>
 				<div className="preview">

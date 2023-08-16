@@ -55,6 +55,7 @@ export const extThemes: ExTheme[] = [
 	{ id: 'lain', key: 'LAIN_' },
 	{ id: 'psychopass', key: 'PSYCH' },
 	{ id: 'yojitsu', key: 'ID___' },
+	{ id: 'choco', key: 'CHOCO' },
 ]
 export const allThemes: Theme[] = [...normalThemes, ...extThemes]
 export const allThemesById = allThemes.reduce(

@@ -128,13 +128,10 @@ const Style = styled.div`
 				${halfBallBg('#310d0d', '#880000')}
 			}
 			&[data-name='ID___'] {
-				background-image: repeating-linear-gradient(
-					45deg,
-					#373f4f,
-					#373f4f 50%,
-					#9eece4 50%,
-					#9eece4 100%
-				);
+				${halfBallBg('#373f4f', '#9eece4')}
+			}
+			&[data-name='CHOCO'] {
+				${halfBallBg('#310d0d', '#ffe697')}
 			}
 		}
 		&[data-active='false'] {
