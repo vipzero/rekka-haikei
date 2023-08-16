@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useEffect, useState } from 'react'
 import { useSettingsTheme } from '../../hooks/useSettings'
 
@@ -33,6 +33,16 @@ export const ThemeSelector = () => {
 		</Style>
 	)
 }
+
+const halfBallBg = (main: string, sub: string) => css`
+	background-image: repeating-linear-gradient(
+		45deg,
+		${main},
+		${main} 50%,
+		${sub} 50%,
+		${sub} 100%
+	);
+`
 
 const Style = styled.div`
 	display: grid;
@@ -109,31 +119,13 @@ const Style = styled.div`
 				background-color: #321515;
 			}
 			&[data-name='PSYCH'] {
-				background-image: repeating-linear-gradient(
-					45deg,
-					#15353b,
-					#15353b 50%,
-					#13e0ad 50%,
-					#13e0ad 100%
-				);
+				${halfBallBg('#15353b', '#13e0ad')}
 			}
 			&[data-name='KOKAK'] {
-				background-image: repeating-linear-gradient(
-					45deg,
-					#0385f4,
-					#0385f4 50%,
-					#b8deff 50%,
-					#b8deff 100%
-				);
+				${halfBallBg('#0385f4', '#b8deff')}
 			}
 			&[data-name='LAIN_'] {
-				background-image: repeating-linear-gradient(
-					45deg,
-					#310d0d,
-					#310d0d 50%,
-					#880000 50%,
-					#880000
-				);
+				${halfBallBg('#310d0d', '#880000')}
 			}
 			&[data-name='ID___'] {
 				background-image: repeating-linear-gradient(

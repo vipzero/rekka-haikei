@@ -387,9 +387,12 @@ const Wrap = styled.div`
 	min-width: 300px;
 
 	> div {
-		transition: background-color 0.5s ease-out;
 		padding: 8px;
 		background-color: var(--setting-bg-color);
+	}
+	button,
+	> div {
+		transition: background-color 0.5s ease-out;
 	}
 	color: black;
 	a {

@@ -73,7 +73,7 @@ export function SettingPage() {
 					<button onClick={() => setCustomTheme(defaultCustomTheme)}>
 						デフォルトに戻す
 					</button>
-					<button onClick={() => setCustomTheme(chocoTheme)}>チョコ</button>
+					{/* <button onClick={() => setCustomTheme(chocoTheme)}>チョコ</button> */}
 				</div>
 				<p>プレビュー</p>
 				<div className="preview">

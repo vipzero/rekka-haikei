@@ -44,31 +44,30 @@ const KokakuEx = () => {
 }
 
 export const Lain: any = createGlobalStyle<{ r: number }>`
-* {
-	color: hsla(0,50%,50%) !important;
-}
 #button-grid-panel {
 	grid-template-areas:
+		'bp bp bp bp bp bp'
+		'_c _c _c _c _c _c' 
 		'fd va bb ss dd _h'
 		'fd va bb ss dd _h'
 		'fd vt _d lk la _h'
 		'vh vt _d lk la ha'
 		'vh vb rr th pp ha'
-		'vh vb rr th pp ha' !important;
+		'vh vb rr th pp ha'
+		'_a _a _a _a pi bi'
+		'ts ts ts ts ts ts' !important;
 
+}
+
+* {
+	color: hsla(0, 50%, 50%) !important;
 }
 #bg > div {
-	transform: rotate(${(p) => p.r % 360}deg)
-
+	transform: rotate(${(p) => p.r % 360}deg);
 }
 #mask {
-	display: block;
-	background: hsla(${(p) => p.r % 256},50%,50%,0.4);
+	background: hsla(${(p) => p.r % 256}, 50%, 50%, 0.4);
 }
-/* *:focus {
-	background: red !important;
-	border: solid blue 8px !important;
-} */
 `
 
 const workLinks: ([string] | [string, string])[] = [

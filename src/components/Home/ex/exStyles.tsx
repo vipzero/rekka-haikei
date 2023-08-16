@@ -74,7 +74,7 @@ export const exStyles = css`
 
 		span,
 		a {
-			width: max-content;
+			/* width: max-content; */
 			animation-name: noise;
 			animation-direction: alternate;
 			animation-timing-function: ease-in-out;
@@ -88,9 +88,11 @@ export const exStyles = css`
 			--btn-fo-color: var(--ex-color);
 			--btn-bg-color: white;
 			--btn-bg-checked-color: #b8deff;
+			--setting-bg-color: rgba(255, 255, 255, 0.5);
 
 			div {
 				border-bottom: solid 1px var(--ex-color);
+				margin-bottom: -1px;
 				background: #a2c0c033;
 			}
 
@@ -125,9 +127,12 @@ export const exStyles = css`
 			--btn-fo-color: var(--ex-color);
 			--btn-bg-color: #15353b;
 			--btn-bg-checked-color: black;
+			--font-color: white;
+			--setting-bg-color: rgba(0, 0, 0, 0.5);
 
 			div {
 				border-bottom: solid 1px var(--ex-color);
+				margin-bottom: -1px;
 				background: #092b0933;
 			}
 			p,
@@ -183,6 +188,14 @@ export const exStyles = css`
 			position: absolute;
 			right: 0;
 			top: 0;
+		}
+	}
+	&[data-ex='lain'] {
+		* {
+			color: hsla(0, 50%, 50%) !important;
+		}
+		#mask {
+			display: block;
 		}
 	}
 	&[data-ex='sakasa'] {
