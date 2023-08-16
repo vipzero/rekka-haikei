@@ -43,7 +43,6 @@ export default {
 					rel="stylesheet"
 					href="https://unpkg.com/open-props/animations.min.css"
 				/>
-				<GlobalStyle />
 				<SvgFilters />
 				{/* <Toast /> */}
 				<RecoilRoot>

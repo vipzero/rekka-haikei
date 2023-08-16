@@ -1,4 +1,5 @@
 import React from 'react'
+import { GlobalStyle } from '../src/config/init'
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -12,5 +13,13 @@ const preview = {
 		},
 	},
 }
+export const decorators = [
+	(Story) => (
+		<>
+			<GlobalStyle />
+			<Story />
+		</>
+	),
+]
 
 export default preview

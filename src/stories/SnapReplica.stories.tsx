@@ -1,23 +1,11 @@
 import { Meta } from '@storybook/react'
 import range from 'lodash/range'
 import { SnapReplica } from '../components/BookPage/SnapReplica'
-import { GlobalStyle } from '../config/init'
 import { snaps } from './seed'
 
 export default {
 	title: 'SnapReplica',
 	component: SnapReplica,
-	argTypes: {},
-	decorators: [
-		(s) => (
-			<>
-				<GlobalStyle />
-				{s()}
-			</>
-		),
-	],
-	parameters: {},
-	args: {},
 } as Meta<typeof SnapReplica>
 
 export const Snap1 = {

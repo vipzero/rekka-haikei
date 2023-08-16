@@ -1,22 +1,7 @@
 import { Meta } from '@storybook/react'
 import { Masso } from '../components/Home/ex/Masso'
-import { GlobalStyle } from '../config/init'
 
-export default {
-	title: 'Masso',
-	component: Masso,
-	argTypes: {},
-	decorators: [
-		(s) => (
-			<>
-				<GlobalStyle />
-				{s()}
-			</>
-		),
-	],
-	parameters: {},
-	args: {},
-} as Meta<typeof Masso>
+export default { title: 'Masso', component: Masso } as Meta<typeof Masso>
 
 export const Full = {
 	args: {

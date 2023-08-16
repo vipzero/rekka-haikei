@@ -8,18 +8,6 @@ const Button = (props) => <button {...props} />
 const meta = {
 	title: 'Button',
 	component: Button,
-	argTypes: {},
-	decorators: [
-		(s) => (
-			<>
-				<GlobalStyle />
-				<SubPageTheme />
-				{s()}
-			</>
-		),
-	],
-	parameters: {},
-	args: {},
 } satisfies Meta<typeof Button>
 
 export default meta

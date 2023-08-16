@@ -5,14 +5,6 @@ import { GlobalStyle } from '../config/init'
 export default {
 	title: 'EeSelector',
 	component: EeSelector,
-	decorators: [
-		(s) => (
-			<>
-				<GlobalStyle />
-				{s()}
-			</>
-		),
-	],
 	parameters: {},
 } as Meta<typeof EeSelector>
 type Story = StoryObj<typeof EeSelector>
