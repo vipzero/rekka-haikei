@@ -2,22 +2,15 @@ import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
 import {
-	Eekey,
 	EeOpt,
+	Eekey,
 	EekeyState,
 	isExTheme,
 } from '../components/Home/Cvote/constants'
-import {
-	Abyss,
-	EE_SEASON,
-	allThemes,
-	extThemes,
-	nextAbyss,
-	normalThemes,
-} from '../config'
+import { Abyss, EE_SEASON, extThemes, nextAbyss, normalThemes } from '../config'
 import { sammonSpell, spellCatch } from '../service/fukkatsu'
 import { Setting, Theme, ThemeId } from '../types'
-import { toggle, genToggle } from '../util'
+import { genToggle, toggle } from '../util'
 
 function exKeyToColor(exkey: EekeyState) {
 	if (exkey === 'higurashi' || exkey === 'mia') return '#f00'

@@ -34,9 +34,9 @@ export const ThemeSelector = () => {
 	)
 }
 
-const halfBallBg = (main: string, sub: string) => css`
+const halfBallBg = (main: string, sub: string, deg = '45deg') => css`
 	background-image: repeating-linear-gradient(
-		45deg,
+		${deg},
 		${main},
 		${main} 50%,
 		${sub} 50%,
@@ -116,7 +116,7 @@ const Style = styled.div`
 				background-color: white;
 			}
 			&[data-name='CUSTM'] {
-				background-color: #321515;
+				${halfBallBg('#87DFD6', '#FBFD8A', '0deg')}
 			}
 			&[data-name='PSYCH'] {
 				${halfBallBg('#15353b', '#13e0ad')}

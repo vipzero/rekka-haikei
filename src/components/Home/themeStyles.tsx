@@ -8,7 +8,7 @@ export const themeStyles = css`
 		--btn-fo-color: black;
 		--setting-bg-color: #aaa;
 		--content-bg-color: transparent;
-		--sub-bg-color: #333;
+		--deb-bg-color: #333;
 		--btn-bg-color: rgb(239, 239, 239);
 		--btn-bg-checked-color: #999;
 

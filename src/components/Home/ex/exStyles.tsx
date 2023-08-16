@@ -153,7 +153,7 @@ export const exStyles = css`
 		--setting-bg-color: #373f4f;
 		/* #616F84 */
 		--content-bg-color: #373f4f;
-		--sub-bg-color: #9eece4;
+		--deb-bg-color: #373f4f;
 		--btn-bg-color: #373f4f;
 		--btn-bg-checked-color: #616f84;
 
@@ -172,7 +172,7 @@ export const exStyles = css`
 
 			.titles {
 				color: #75eade;
-				text-shadow: 0 0 1px var(--sub-bg-color), 0 0 6px var(--sub-bg-color);
+				text-shadow: 0 0 1px #9eece4, 0 0 6px var(--deb-bg-color);
 			}
 		}
 		#setting-box {

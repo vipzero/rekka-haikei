@@ -91,9 +91,9 @@ const Time = ({ song }: Props) => {
 
 const Style = styled.div`
 	font-family: monospace;
-	background: #6b6b6b;
+	background: var(--deb-bg-color);
 	color: #fff;
-	border: solid var(--sub-bg-color);
+	border: solid #333;
 	padding: 0 4px;
 	a {
 		color: white;
