@@ -17,7 +17,7 @@ export const defaultCustomTheme = `
 
 #timebar {
   .wrap {
-    background: orange;
+    background-color: orange;
   }
   .fill {
     background-color: purple;

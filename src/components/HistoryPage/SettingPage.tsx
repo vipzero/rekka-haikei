@@ -157,7 +157,7 @@ const Style = styled.div<{ customTheme: string }>`
 		}
 		#setting-box {
 			padding: 8px;
-			background: var(--setting-bg-color);
+			background-color: var(--setting-bg-color);
 		}
 
 		button {

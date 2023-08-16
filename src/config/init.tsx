@@ -148,7 +148,7 @@ li {
 	font-family: 'Roboto Mono', monospace;
 }
 
-button {
+button, .footer a {
 	user-select: none;
 	span {
 		user-select: none;

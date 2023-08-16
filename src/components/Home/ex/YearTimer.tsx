@@ -43,7 +43,7 @@ const Style = styled.div`
 	left: 1rem;
 	padding: 1rem;
 	font-size: 2rem;
-	background: var(--setting-bg-color);
+	background-color: var(--setting-bg-color);
 	color: var(--font-color);
 	display: flex;
 	transition: all 5s ease-in;

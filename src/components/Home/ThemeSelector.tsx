@@ -19,6 +19,7 @@ export const ThemeSelector = () => {
 			{themes.map((t) => (
 				<button
 					key={t.key}
+					className="theme-btn"
 					data-active={t.selected}
 					data-opened={t.visible}
 					data-name={t.key}
@@ -36,8 +37,9 @@ export const ThemeSelector = () => {
 const Style = styled.div`
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
+	transition: background-color 2s ease-out;
 
-	button {
+	button.theme-btn {
 		cursor: pointer;
 		min-height: 20px;
 		min-width: 20px;

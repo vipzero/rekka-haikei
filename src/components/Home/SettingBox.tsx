@@ -387,8 +387,9 @@ const Wrap = styled.div`
 	min-width: 300px;
 
 	> div {
+		transition: background-color 0.5s ease-out;
 		padding: 8px;
-		background: var(--setting-bg-color);
+		background-color: var(--setting-bg-color);
 	}
 	color: black;
 	a {
@@ -401,7 +402,7 @@ const Wrap = styled.div`
 			font-size: 1.2rem;
 		}
 		a {
-			background: var(--setting-bg-color);
+			background-color: var(--setting-bg-color);
 			padding: 2px 4px;
 			min-height: 32px;
 			width: 100%;
