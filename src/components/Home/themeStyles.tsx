@@ -20,13 +20,15 @@ export const themeStyles = css`
 	}
 	&[data-theme='1'] {
 		--content-bg-color: #eee;
-		--content-bg-color-alpha: #eee0;
+		--content-bg-color-alpha: #eee8;
+		--setting-bg-color-alpha: #aaaa;
 	}
 	&[data-theme='2'] {
 		--font-color: #fff;
 		--btn-fo-color: #fff;
 		--content-bg-color: #000;
-		--content-bg-color-alpha: #0000;
+		--content-bg-color-alpha: #0008;
+		--btn-bg-color: #000;
 		--btn-bg-checked-color: #333;
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #88f;
@@ -55,21 +57,19 @@ export const themeStyles = css`
 	/* pre setup */
 	& {
 		--setting-bg-color: var(--setting-bg-color, --content-bg-color);
-		--setting-bg-color-alpha: var(--setting-bg-color-alpha, --setting-bg-color);
-		--content-bg-color-alpha: var(--content-bg-color-alpha, --content-bg-color);
-		--btn-bg-color: var(--btn-bg-color, --content-bg-color);
-		--btn-bg-color-alpha: var(--btn-bg-color-alpha, --btn-bg-color);
 
-		--co-bg: color-mix(
-			in srgb,
-			var(--content-bg-color),
-			var(--content-bg-color-alpha)
+		/* --content-bg-color-alpha: var(--content-bg-color-alpha, --content-bg-color); */
+		/* --setting-bg-color-alpha: var(
+			--setting-bg-color-alpha,
+			--content-bg-color-alpha
+		); */
+
+		--co-bg: var(--content-bg-color-alpha, --content-bg-color);
+		--sb-bg: var(
+			--setting-bg-color-alpha,
+			var(--content-bg-color-alpha, --setting-bg-color)
 		);
-		--sb-bg: color-mix(
-			in srgb,
-			var(--setting-bg-color),
-			var(--setting-bg-color-alpha)
-		);
+		--btn-bg: var(--btn-bg-color);
 	}
 	&[data-shape='0'] {
 	}

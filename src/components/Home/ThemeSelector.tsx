@@ -134,20 +134,36 @@ const Style = styled.div`
 				${halfBallBg('#310d0d', '#ffe697')}
 			}
 		}
+		@keyframes changeSelect {
+			0% {
+				transform: scale(0.8);
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
 		&[data-active='false'] {
 			span {
 				color: transparent !important;
+				transform: scale(0.1) rotate(1000deg);
 			}
+		}
+		span {
+			transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s, color 0.5s;
 		}
 		&[data-active='true'] {
 			/* border-end-end-radius: 0%; */
 			/* border-top: 2px solid;
 			border-left: 2px solid; */
 			span {
+				display: inline-block;
 				opacity: 1;
 				color: black;
 				mix-blend-mode: difference;
 				filter: invert(1);
+				transform: scale(1.2) rotate(0deg);
 			}
 		}
 	}

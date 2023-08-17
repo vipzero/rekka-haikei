@@ -162,7 +162,7 @@ const Style = styled.div<{ customTheme: string }>`
 		button {
 			border-radius: 4px;
 			color: var(--btn-fo-color);
-			background-color: var(--btn-bg-color);
+			background-color: var(--btn-bg);
 			&[data-checked='true'] {
 				background: var(--btn-bg-checked-color) !important;
 			}

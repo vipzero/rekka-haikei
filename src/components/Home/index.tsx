@@ -205,14 +205,15 @@ const Container = styled.div`
 const Wrap = styled.div<{ customTheme: string }>`
 	min-height: 100vh;
 	width: 100vw;
-	${themeStyles}
+
 	&[data-theme='5'] {
 		${(p) => p.customTheme}
 	}
+	${themeStyles}
 
 	button {
 		color: var(--btn-fo-color);
-		background-color: rgba(var(--btn-bg-color), var(--alpha));
+		background-color: var(--btn-bg);
 	}
 
 	button {

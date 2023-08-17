@@ -402,7 +402,7 @@ const Wrap = styled.div`
 	}
 	button,
 	> div {
-		transition: background-color 0.5s ease-out;
+		transition: background-color 0.2s ease-out;
 	}
 	color: black;
 	a {
