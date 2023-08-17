@@ -48,8 +48,8 @@ export const Lain: any = createGlobalStyle<{ r: number }>`
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c' 
-		'fd va bb ss dd _h'
-		'fd va bb ss dd _h'
+		'fd sh bb ss dd _h'
+		'fd sh bb ss dd _h'
 		'fd vt _d lk la _h'
 		'vh vt _d lk la ha'
 		'vh vb rr th pp ha'

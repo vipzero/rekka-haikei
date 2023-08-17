@@ -1,6 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { EeSelector } from '../components/Home/EeSelector'
-import { GlobalStyle } from '../config/init'
 
 export default {
 	title: 'EeSelector',

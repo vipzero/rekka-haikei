@@ -1,7 +1,6 @@
 import { faCopy } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Meta, StoryObj } from '@storybook/react'
-import { GlobalStyle, SubPageTheme } from '../config/init'
 
 const Button = (props) => <button {...props} />
 

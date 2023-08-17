@@ -13,7 +13,6 @@ import {
 	faIcicles,
 	faLock,
 	faLockOpen,
-	faMagic,
 	faMagicWandSparkles,
 	faPalette,
 	faPaperclip,

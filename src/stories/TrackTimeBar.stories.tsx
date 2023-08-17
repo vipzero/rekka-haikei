@@ -1,6 +1,5 @@
 import { Meta } from '@storybook/react'
 import TrackTimeBar from '../components/Home/TrackTimeBar'
-import { GlobalStyle } from '../config/init'
 
 export default {
 	title: 'TrackTimeBar',

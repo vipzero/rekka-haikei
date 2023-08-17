@@ -33,6 +33,7 @@ t:
 
 export const defaultSetting: Setting = {
 	theme: 0,
+	shape: 0,
 	showSetting: true,
 	showArtwork: true,
 	showBookmark: false,
