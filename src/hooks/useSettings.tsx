@@ -106,6 +106,13 @@ export const useSettingsFakeBar = () => {
 	}
 }
 
+const updateMtsMemo = (p: string | undefined, c: string) => {
+	if (!p) return c
+	const [ct, _cs, ci] = c.split(':')
+	const [pt, _ps, pi] = p.split(':')
+	return [ct || pt, '', ci || pi].join(':')
+}
+
 export const useSettingsCustomTheme = () => {
 	const [{ customTheme }, setSetting] = useSettingsBase()
 	const setCustomTheme = (customTheme: string) =>
@@ -117,7 +124,7 @@ export const useSettingsCustomTheme = () => {
 }
 
 export const useSettingsEe = () => {
-	const [{ abyss, abyssEx, ee, eeKey, eeSim, eeOpt }, setSetting] =
+	const [{ abyss, abyssEx, ee, eeKey, eeSim, eeOpt, eeMemo }, setSetting] =
 		useSettingsBase()
 
 	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
@@ -146,7 +153,14 @@ export const useSettingsEe = () => {
 		if (simulate && isExTheme(eeKey)) {
 			setTheme(eeKey)
 		}
+		if (eeKey === 'mts10' && eeOpt?.id === 'text') {
+			setSetting((v) => {
+				const mts10 = updateMtsMemo(v?.eeMemo?.mts10, eeOpt.s)
+				return { ...v, eeMemo: { ...v.eeMemo, mts10 } }
+			})
+		}
 	}
+
 	const setEekeySimulate = (eeKey: Eekey) => setEekey(eeKey, true)
 	const toggleEekeySimulate = (eeKeyNew: Eekey) => {
 		if (eeKeyNew === eeKey) {
@@ -167,6 +181,7 @@ export const useSettingsEe = () => {
 		eeKey,
 		eeOpt,
 		eeSim,
+		eeMemo,
 		setAbyss,
 		cycleAbyss,
 		openEekey,

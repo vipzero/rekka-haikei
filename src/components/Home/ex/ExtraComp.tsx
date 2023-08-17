@@ -7,10 +7,10 @@ import { base64toBools, range, uaHash } from '../../../util'
 import CVote from '../Cvote'
 import { CVOTE_PROFILES } from '../Cvote/charProfiles'
 import { EeOpt, Eekey, EekeyState } from '../Cvote/constants'
-import { ImasMilionTl } from './ImasMilionTl'
-import { Trump } from './Trump'
-import { Masso } from './Masso'
 import { ImasBoard } from './ImasBoard'
+import { ImasMilionTl } from './ImasMilionTl'
+import { Masso } from './Masso'
+import { Trump } from './Trump'
 import { Yrings } from './Yrings'
 
 const EmbedWindow = ({ url }: { url: string }) => (
@@ -94,8 +94,37 @@ const RainEx = () => {
 	)
 }
 
-type ExCompProp = { eeKey: Eekey; eeOpt: EeOpt; rand: number }
-function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
+const MtsEx = ({ s }: { s: string }) => {
+	if (s === '') return null
+	const lineUp = (s: string) => {
+		if (s === '') return false
+		const [os, ss, dols] = s.split(':')
+		const opens = os ? os.split('').map((c) => c === '1') : null
+		return {
+			opens,
+			cd: ss ? { [ss]: true } : (false as const),
+			dols: dols ? dols.split(',').map(base64toBools) : [],
+		}
+	}
+	const res = lineUp(s)
+
+	if (!res) return null
+	const { opens, cd, dols } = res
+	return (
+		<div id="mts10">
+			{opens && <Trump opens={opens} />}
+			{cd && <ImasMilionTl cd={cd} />}
+			{dols && <ImasBoard bools={dols} />}
+		</div>
+	)
+}
+type ExCompProp = {
+	eeKey: Eekey
+	eeOpt: EeOpt
+	rand: number
+	eeMemo: Record<string, string>
+}
+function ExCompMain({ eeKey, rand, eeOpt, eeMemo }: ExCompProp) {
 	if (eeKey === 'steinsgate') {
 	} else if (eeKey === 'nonnon') {
 		return <EmbedWindow url="https://nyanpass.com/" />
@@ -128,27 +157,7 @@ function ExCompMain({ eeKey, eeOpt, rand }: ExCompProp) {
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
 	} else if (eeKey === 'mts10') {
-		const lineUp = (e: EeOpt) => {
-			if (!e || e.id === 'cvote') return false
-			const [os, ss, dols] = e.s.split(':')
-			const opens = os ? os.split('').map((c) => c === '1') : null
-			return {
-				opens,
-				cd: ss ? { [ss]: true } : (false as const),
-				dols: dols ? dols.split(',').map(base64toBools) : [],
-			}
-		}
-		const res = lineUp(eeOpt)
-
-		if (!res) return null
-		const { opens, cd, dols } = res
-		return (
-			<div id="mts10">
-				{opens && <Trump opens={opens} />}
-				{cd && <ImasMilionTl cd={cd} />}
-				{dols && <ImasBoard bools={dols} />}
-			</div>
-		)
+		return <MtsEx s={eeOpt?.id !== 'text' ? eeMemo['mts10'] : eeOpt.s || ''} />
 	} else if (eeKey === 'masso') {
 		return (
 			<div id="masso">
@@ -173,7 +182,8 @@ function getEx(
 	sid: string,
 	rand: number,
 	eeSim: boolean,
-	eeOpt: EeOpt
+	eeOpt: EeOpt,
+	eeMemo: Record<string, string>
 ) {
 	if (!eeKey) return null
 	const cvote = CVOTE_PROFILES.find((p) => p.id === eeKey)
@@ -184,7 +194,7 @@ function getEx(
 			{cvote && (
 				<CVote animeId={eeKey} sid={sid} chars={chars} disabled={eeSim} />
 			)}
-			<ExCompMain eeKey={eeKey} eeOpt={eeOpt} rand={rand} />
+			<ExCompMain eeKey={eeKey} eeOpt={eeOpt} rand={rand} eeMemo={eeMemo} />
 		</>
 	)
 }
@@ -192,10 +202,10 @@ type Props = {
 	sid: string
 }
 export function ExtraComp({ sid }: Props) {
-	const { eeKey, eeSim, eeOpt } = useSettingsEe()
+	const { eeKey, eeSim, eeOpt, eeMemo } = useSettingsEe()
 
 	return useMemo(
-		() => getEx(eeKey, sid, Math.random(), eeSim, eeOpt),
+		() => getEx(eeKey, sid, Math.random(), eeSim, eeOpt, eeMemo),
 		[eeKey, sid]
 	)
 }

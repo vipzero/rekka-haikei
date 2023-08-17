@@ -50,6 +50,7 @@ export const defaultSetting: Setting = {
 	eeSim: false,
 	ee: {},
 	eeOpt: null,
+	eeMemo: {},
 	feedBackText: '',
 	customTheme: defaultCustomTheme,
 	showEmol: true,

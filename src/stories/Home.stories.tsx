@@ -117,12 +117,26 @@ export const Parapara = {
 	args: { setting: { ...setting, eeKey: 'parapara' } },
 }
 
-export const Mts10 = {
+export const Mts10A = {
 	args: {
 		setting: {
 			...setting,
 			eeKey: 'mts10',
-			eeOpt: { id: 'text', s: '10101:MTG' },
+			eeMemo: {
+				mts10: '11000:MTG:AAAAAAAAAAAAAAAAAA==,AAAAAAAAAAAAAAAAAA==',
+			},
+		},
+	},
+}
+
+export const Mts10B = {
+	args: {
+		setting: {
+			...setting,
+			eeKey: 'mts10',
+			eeMemo: {
+				mts10: '01010:MTG:AAAAAAAAAAAAAAAAAA==,AAAAAAAAAAAAAAAAAA==',
+			},
 		},
 	},
 }
