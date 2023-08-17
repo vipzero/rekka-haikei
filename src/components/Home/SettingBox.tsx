@@ -266,7 +266,10 @@ function SettingBox({
 						areaKey="_a"
 						icon={faScrewdriver}
 						checked={showDetail}
-						onClick={() => setShowDetail((v) => !v)}
+						onClick={() => {
+							setShowDetail((v) => !v)
+							setShowThemer(true)
+						}}
 					/>
 
 					<div style={{ gridArea: 'bp' }} className="bingo-area">

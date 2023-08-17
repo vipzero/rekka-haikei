@@ -48,11 +48,14 @@ const Style = styled.div`
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	transition: background-color 2s ease-out;
+	/* flex-wrap: wrap; */
 
 	button.theme-btn {
 		cursor: pointer;
-		min-height: 20px;
-		min-width: 20px;
+		min-height: 30px;
+		min-width: 30px;
+		height: 30px;
+		width: 30px;
 		margin: 2px;
 		aspect-ratio: 1;
 		border-radius: 50% !important;
