@@ -215,7 +215,7 @@ export const exStyles = css`
 				background: #ffa;
 			}
 			.fill {
-				background-color: var(--setting-bg-color);
+				background-color: var(--sb-bg);
 			}
 			.pointer {
 				background-color: green;

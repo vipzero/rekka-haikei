@@ -15,17 +15,16 @@ import { isGifUrl } from '../../util'
 import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
-import { Conways } from './ex/Coway'
-import { exStyles } from './ex/exStyles'
-import { ExtraComp } from './ex/ExtraComp'
-import { YearTimer } from './ex/YearTimer'
 import FadeBgChanger from './FadeBgChanger'
 import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
-import { shapeStyles, themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
 import TrackTimeBitBar from './TrackTimeBitBar'
+import { Conways } from './ex/Coway'
+import { ExtraComp } from './ex/ExtraComp'
+import { YearTimer } from './ex/YearTimer'
+import { shapeStyles, themeStyles } from './themeStyles'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 	wide: 'center',
@@ -207,7 +206,6 @@ const Wrap = styled.div<{ customTheme: string }>`
 	min-height: 100vh;
 	width: 100vw;
 	${themeStyles}
-	${exStyles}
 	&[data-theme='5'] {
 		${(p) => p.customTheme}
 	}
@@ -234,7 +232,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 		}
 	}
 	[data-co] {
-		background: var(--content-bg-color);
+		background-color: var(--co-bg);
 		overflow: auto;
 		white-space: nowrap;
 	}

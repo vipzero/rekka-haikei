@@ -398,7 +398,7 @@ const Wrap = styled.div`
 
 	> div {
 		padding: 8px;
-		background-color: var(--setting-bg-color);
+		background-color: var(--sb-bg);
 	}
 	button,
 	> div {
@@ -415,7 +415,7 @@ const Wrap = styled.div`
 			font-size: 1.2rem;
 		}
 		a {
-			background-color: var(--setting-bg-color);
+			background-color: var(--sb-bg);
 			padding: 2px 4px;
 			min-height: 32px;
 			width: 100%;

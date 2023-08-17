@@ -150,13 +150,13 @@ const Style = styled.div<{ customTheme: string }>`
 		}
 
 		#panel {
-			background-color: var(--content-bg-color);
+			background-color: var(--sb-bg);
 			padding: 12px 4px;
 			margin: 4px;
 		}
 		#setting-box {
 			padding: 8px;
-			background-color: var(--setting-bg-color);
+			background-color: var(--sb-bg);
 		}
 
 		button {
