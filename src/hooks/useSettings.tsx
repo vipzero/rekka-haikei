@@ -60,8 +60,13 @@ export const useSettings = () => {
 	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
 	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
+	const next = <T,>(a: T[], id: T) => a[(a.indexOf(id) + 1) % a.length]
 	const nextTheme = (v: ThemeId) =>
-		typeof v !== 'number' ? 0 : (v + 1) % normalThemes.length
+		next(
+			normalThemes.map((t) => t.id),
+			v
+		)
+
 	const nextShape = (v: ShapeId) => (v + 1) % allShapes.length
 	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
 	const setShape = (shape: ShapeId) => setSetting((v) => ({ ...v, shape }))

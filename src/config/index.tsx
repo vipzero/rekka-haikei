@@ -48,8 +48,8 @@ export const normalThemes: Theme[] = [
 	{ id: 0, key: 'CLEAR' },
 	{ id: 1, key: 'WHITE' },
 	{ id: 2, key: 'BLACK' },
-	{ id: 3, key: 'EMPTY' },
-	{ id: 4, key: 'SINGL' },
+	// { id: 3, key: 'EMPTY' },
+	// { id: 4, key: 'SINGL' },
 	{ id: 5, key: 'CUSTM' },
 ]
 
@@ -73,6 +73,8 @@ export const allThemesById = allThemes.reduce(
 export const shapes: Shape[] = [
 	{ id: 0, key: 'BASI' },
 	{ id: 1, key: 'SHAR' },
+	{ id: 2, key: 'EMPT' },
+	{ id: 3, key: 'LINE' },
 ]
 export const allShapes = shapes
 export const allShapesById = allShapes.reduce(

@@ -66,7 +66,19 @@ function useMigration() {
 
 			setSettingsStorage({ ...settings })
 		}
-		setV(10)
+		if (v < 11) {
+			const settings = getSettingsStorage() as Partial<Setting>
+			if (settings.theme == 3) {
+				settings.theme = 0
+				settings.shape = 2 // theme:single -> shape:line
+			} else if (settings.theme == 4) {
+				settings.theme = 0
+				settings.shape = 3 // thmee:empty -> shape:empt
+			}
+
+			setSettingsStorage({ ...settings })
+		}
+		setV(11)
 		setReady(true)
 	}, [])
 	return ready

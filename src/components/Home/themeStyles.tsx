@@ -81,8 +81,9 @@ export const shapeStyles = css`
 	&[data-shape='0'] {
 	}
 	&[data-shape='1'] {
+		.animetitle,
 		#title {
-			font-size: 1rem;
+			font-size: 0.8rem;
 
 			/* color: var(--panel-fo-color); */
 			text-shadow: none;
