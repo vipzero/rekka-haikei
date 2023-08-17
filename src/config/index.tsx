@@ -71,10 +71,10 @@ export const allThemesById = allThemes.reduce(
 )
 
 export const shapes: Shape[] = [
-	{ id: 0, key: 'BASI' },
-	{ id: 1, key: 'SHAR' },
-	{ id: 2, key: 'EMPT' },
-	{ id: 3, key: 'LINE' },
+	{ id: 0, key: 'BASIC' },
+	{ id: 1, key: 'SHARP' },
+	{ id: 2, key: 'SINGL' },
+	{ id: 3, key: 'EMPTY' },
 ]
 export const allShapes = shapes
 export const allShapesById = allShapes.reduce(

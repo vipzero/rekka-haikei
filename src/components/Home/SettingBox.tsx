@@ -461,6 +461,7 @@ const Wrap = styled.div`
 
 const ButtonGrid = styled.div`
 	display: grid;
+	min-width: 295px;
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c'
@@ -468,9 +469,8 @@ const ButtonGrid = styled.div`
 		'_a sh sh sh th th'
 		'vh bb bb bb bb ss'
 		'vh bb bb bb bb ss'
-		'bi bb bb bb bb ss'
-		'ha ha ha ha ha _h'
-		'pp pp dd dd dd _h'
+		'ha bb bb bb bb ss'
+		'pp pp dd dd bi _h'
 		'pp pp rr pi pi _d';
 `
 

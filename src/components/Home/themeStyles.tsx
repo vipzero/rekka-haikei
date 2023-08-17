@@ -36,25 +36,6 @@ export const themeStyles = css`
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #88f;
 	}
-	&[data-theme='3'] {
-		#panel,
-		[data-co] {
-			visibility: hidden;
-		}
-	}
-	&[data-theme='4'] {
-		[data-co] {
-			visibility: hidden;
-		}
-		#panel {
-			> * {
-				visibility: hidden;
-			}
-			#title {
-				visibility: visible;
-			}
-		}
-	}
 	${exStyles}
 
 	/* pre setup */
@@ -114,6 +95,25 @@ export const shapeStyles = css`
 		p,
 		a {
 			text-shadow: none;
+		}
+	}
+	&[data-shape='2'] {
+		[data-co] {
+			visibility: hidden;
+		}
+		#panel {
+			> * {
+				visibility: hidden;
+			}
+			#title {
+				visibility: visible;
+			}
+		}
+	}
+	&[data-shape='3'] {
+		#panel,
+		[data-co] {
+			visibility: hidden;
 		}
 	}
 `
