@@ -202,7 +202,8 @@ export const exStyles = css`
 		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--setting-bg-color: #311;
-		--content-bg-color: #795548ee;
+		--content-bg-color: #795548;
+		--content-bg-color-alpha: #795548ee;
 		--deb-bg-color: #795548ee;
 		--btn-bg-color: #ffe;
 		--btn-bg-checked-color: #dda;
@@ -265,7 +266,7 @@ export const exStyles = css`
 		}
 	}
 	&[data-ex='spin'] {
-		.artwork img {
+		#artwork img {
 			animation: spin 5s linear infinite;
 			&:hover {
 				animation-name: none;

@@ -8,12 +8,14 @@ export const themeStyles = css`
 		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--content-bg-color: #aaa;
+		--setting-bg-color: #aaa;
 		--deb-bg-color: #333;
 		--btn-bg-color: #efefef;
 		--btn-bg-checked-color: #999;
 
 		--bingo-bg-color: #ccc;
 		--bingo-bg-hit-color: #e85;
+		--co-pad: 12px;
 	}
 	&[data-theme='0'] {
 		--content-bg-color: transparent;
@@ -22,6 +24,7 @@ export const themeStyles = css`
 		--content-bg-color: #eee;
 		--content-bg-color-alpha: #eee8;
 		--setting-bg-color-alpha: #aaaa;
+		--panel-fo-color-non-shadow: #58585a;
 	}
 	&[data-theme='2'] {
 		--font-color: #fff;
@@ -56,40 +59,21 @@ export const themeStyles = css`
 
 	/* pre setup */
 	& {
-		--setting-bg-color: var(--setting-bg-color, --content-bg-color);
-
-		/* --content-bg-color-alpha: var(--content-bg-color-alpha, --content-bg-color); */
-		/* --setting-bg-color-alpha: var(
-			--setting-bg-color-alpha,
-			--content-bg-color-alpha
-		); */
-
 		--co-bg: var(--content-bg-color-alpha, --content-bg-color);
 		--sb-bg: var(
 			--setting-bg-color-alpha,
-			var(--content-bg-color-alpha, --setting-bg-color)
+			var(--setting-bg-color, --content-bg-color-alpha)
 		);
 		--btn-bg: var(--btn-bg-color);
 	}
 	&[data-shape='0'] {
 	}
 	&[data-shape='1'] {
-		#title {
-			font-size: 1rem;
+		--co-bg: var(--content-bg-color);
+		--sb-bg: var(--setting-bg-color, --content-bg-color-alpha);
 
-			/* color: var(--panel-fo-color); */
-			text-shadow: none;
-		}
-		#panel {
-			p,
-			a {
-				text-shadow: none;
-			}
-		}
-		p,
-		a {
-			text-shadow: none;
-		}
+		--co-pad: 4px 8px;
+		--panel-fo-color: var(--panel-fo-color-non-shadow, --panel-fo-color);
 	}
 `
 
@@ -102,6 +86,23 @@ export const shapeStyles = css`
 
 			/* color: var(--panel-fo-color); */
 			text-shadow: none;
+		}
+		#artwork img {
+			margin-top: 4px;
+			width: 100px;
+		}
+		#panel {
+			border-radius: 0;
+			.songinfo-icon {
+				display: none;
+				filter: none;
+			}
+		}
+		.flex-rows > *:not(:first-child) {
+			margin-left: 0;
+		}
+		[data-co] {
+			width: max-content;
 		}
 		#panel {
 			p,

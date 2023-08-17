@@ -45,13 +45,14 @@ const ArtistLine = ({
 	composer,
 	arranger,
 	writer,
-}: Pick<Song, 'composer' | 'arranger' | 'writer'>) => (
-	<p className="flex-rows">
-		{composer && <span>作詞: {composer}</span>}
-		{arranger && <span>編曲: {arranger}</span>}
-		{writer && <span>作曲: {writer}</span>}
-	</p>
-)
+}: Pick<Song, 'composer' | 'arranger' | 'writer'>) =>
+	[composer, arranger, writer].every(Boolean) ? (
+		<p className="flex-rows">
+			{composer && <span>作詞: {composer}</span>}
+			{arranger && <span>編曲: {arranger}</span>}
+			{writer && <span>作曲: {writer}</span>}
+		</p>
+	) : null
 const AlbumLine = ({
 	albumName,
 	itunesUrl,
@@ -60,7 +61,9 @@ const AlbumLine = ({
 	<p className="flex-rows">
 		{albumName && (
 			<>
-				<FontAwesomeIcon icon={faCompactDisc} />
+				<span className="songinfo-icon">
+					<FontAwesomeIcon icon={faCompactDisc} />
+				</span>
 				<span>
 					{albumName.replace(' - Single', '')}
 					{copyright && ` (${copyright})`}
@@ -109,7 +112,9 @@ function SongInfo({ song }: Props) {
 									</span>
 								</p>
 								<p className="flex-rows">
-									<FontAwesomeIcon icon={faFilm} />
+									<span className="songinfo-icon">
+										<FontAwesomeIcon icon={faFilm} />
+									</span>
 
 									<span className="date">{song.date}</span>
 									{song.chapNum && (
@@ -131,7 +136,9 @@ function SongInfo({ song }: Props) {
 						</p>
 
 						<p className="tags">
-							<FontAwesomeIcon icon={faTags} />
+							<span className="songinfo-icon">
+								<FontAwesomeIcon icon={faTags} />
+							</span>
 							{tags.map((tag, i) => (
 								<Link
 									prefetch={false}
@@ -152,7 +159,7 @@ function SongInfo({ song }: Props) {
 						</p>
 					</div>
 					<div>
-						<div className="artwork">
+						<div id="artwork">
 							<img src={song.artworkUrl100} />
 						</div>
 					</div>
@@ -167,7 +174,7 @@ const Wrap = styled.div`
 	position: relative;
 
 	background-color: var(--co-bg);
-	padding: 12px;
+	padding: var(--co-pad);
 	border-radius: 4px;
 	overflow: hidden;
 
@@ -209,14 +216,14 @@ const Wrap = styled.div`
 		text-align: right;
 		font-size: 0.5rem;
 	}
-	.artwork {
+	#artwork {
 		img {
 			margin-top: 12px;
 			width: 150px;
 		}
 	}
 	&[data-show-artwark='false'] {
-		.artwork {
+		#artwork {
 			display: none;
 		}
 	}

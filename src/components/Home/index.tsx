@@ -253,7 +253,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 				1px -1px 1px var(--panel-fo-shadow-color);
 			margin: 0;
 		}
-		svg {
+		.songinfo-icon {
 			filter: drop-shadow(0px 0px 1px var(--panel-fo-shadow-color));
 		}
 	}
