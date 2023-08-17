@@ -65,9 +65,7 @@ export const exStyles = css`
 			animation: bpos 20s linear infinite;
 		}
 	}
-	&[data-ex='lain'],
-	&[data-ex='psychopass'],
-	&[data-ex='kokaku'] {
+	&[data-theme='lain'] {
 		div {
 			/* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
 		}
@@ -81,20 +79,34 @@ export const exStyles = css`
 			animation-iteration-count: infinite;
 			animation-duration: 8s;
 		}
+	}
 
-		&[data-ex='kokaku'] {
-			--ex-color: #0385f4;
-			--font-color: #b8deff;
-			--btn-fo-color: var(--ex-color);
-			--btn-bg-color: white;
-			--btn-bg-checked-color: #b8deff;
-			--setting-bg-color: rgba(255, 255, 255, 0.5);
+	&[data-theme='kokaku'] {
+		--ex-color: #0385f4;
+		--font-color: #b8deff;
+		--btn-fo-color: var(--ex-color);
+		--btn-bg-color: white;
+		--btn-bg-checked-color: #b8deff;
+		--setting-bg-color: rgba(255, 255, 255, 0.5);
 
-			div {
-				border-bottom: solid 1px var(--ex-color);
-				margin-bottom: -1px;
-				background: #a2c0c033;
+		div {
+			border-bottom: solid 1px var(--ex-color);
+			margin-bottom: -1px;
+			background: #a2c0c033;
+		}
+
+		#setting-box {
+			p,
+			span,
+			a {
+				color: var(--ex-color);
 			}
+		}
+
+		/* cursor: url(/static/sac-min.png) 25 25, auto; */
+		&[data-ex='kokaku'] {
+			/* ee が発動している */
+			cursor: none;
 
 			p,
 			span,
@@ -102,39 +114,34 @@ export const exStyles = css`
 				animation-name: noiseBlink;
 			}
 
-			#setting-box {
-				p,
-				span,
-				a {
-					color: var(--ex-color);
-				}
+			#kokaku-pointer {
+				pointer-events: none;
+				animation: spin 10s linear infinite;
 			}
+		}
+	}
 
-			/* cursor: url(/static/sac-min.png) 25 25, auto; */
-			&[data-ex-just='kokaku'] {
-				cursor: none;
+	&[data-theme='psychopass'] {
+		--ex-color: #13e0ad;
+		--font-color: var(--ex-color);
+		--btn-fo-color: var(--ex-color);
+		--btn-bg-color: #15353b;
+		--btn-bg-checked-color: black;
+		--font-color: white;
+		--setting-bg-color: rgba(0, 0, 0, 0.5);
 
-				#kokaku-pointer {
-					pointer-events: none;
-					animation: spin 10s linear infinite;
-				}
-			}
+		div {
+			border-bottom: solid 1px var(--ex-color);
+			margin-bottom: -1px;
+			background: #092b0933;
+		}
+		p,
+		span,
+		a {
+			color: var(--ex-color);
 		}
 
 		&[data-ex='psychopass'] {
-			--ex-color: #13e0ad;
-			--font-color: var(--ex-color);
-			--btn-fo-color: var(--ex-color);
-			--btn-bg-color: #15353b;
-			--btn-bg-checked-color: black;
-			--font-color: white;
-			--setting-bg-color: rgba(0, 0, 0, 0.5);
-
-			div {
-				border-bottom: solid 1px var(--ex-color);
-				margin-bottom: -1px;
-				background: #092b0933;
-			}
 			p,
 			span,
 			a {
@@ -142,10 +149,9 @@ export const exStyles = css`
 				animation-name: noiseBlink;
 			}
 		}
-
-		${randAnimsCss}
 	}
-	&[data-ex='yojitsu'] {
+
+	&[data-theme='yojitsu'] {
 		--font-color: white;
 		--panel-fo-color: white;
 		--panel-fo-shadow-color: transparent;
@@ -190,7 +196,7 @@ export const exStyles = css`
 			top: 0;
 		}
 	}
-	&[data-ex='choco'] {
+	&[data-theme='choco'] {
 		--font-color: #ffc627;
 		--panel-fo-color: #ffe697;
 		--panel-fo-shadow-color: #000;
@@ -216,7 +222,7 @@ export const exStyles = css`
 			}
 		}
 	}
-	&[data-ex='lain'] {
+	&[data-theme='lain'] {
 		* {
 			color: hsla(0, 50%, 50%) !important;
 		}
@@ -224,6 +230,8 @@ export const exStyles = css`
 			display: block;
 		}
 	}
+	${randAnimsCss}
+
 	&[data-ex='sakasa'] {
 		transform: rotateX(180deg);
 	}

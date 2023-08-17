@@ -1,4 +1,8 @@
-import { eekeysThemetic } from '../components/Home/Cvote/constants'
+import {
+	Eekey,
+	EekeyState,
+	eekeysThemetic,
+} from '../components/Home/Cvote/constants'
 import { Event, Theme, ThemeId } from '../types'
 
 const { NODE_ENV } = process.env
@@ -57,6 +61,9 @@ export const extThemes: ExTheme[] = [
 	{ id: 'yojitsu', key: 'ID___' },
 	{ id: 'choco', key: 'CHOCO' },
 ]
+export const isExtTheme = (s: Eekey) => extThemes.some((v) => v.id === s)
+export const decideTheme = (s: ThemeId, eeKey: EekeyState) =>
+	eeKey && isExtTheme(eeKey) ? eeKey : s
 export const allThemes: Theme[] = [...normalThemes, ...extThemes]
 export const allThemesById = allThemes.reduce(
 	(p, c) => ({ ...p, [c.id]: c }),

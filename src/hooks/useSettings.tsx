@@ -7,7 +7,14 @@ import {
 	EekeyState,
 	isExTheme,
 } from '../components/Home/Cvote/constants'
-import { Abyss, EE_SEASON, extThemes, nextAbyss, normalThemes } from '../config'
+import {
+	Abyss,
+	EE_SEASON,
+	decideTheme,
+	extThemes,
+	nextAbyss,
+	normalThemes,
+} from '../config'
 import { sammonSpell, spellCatch } from '../service/fukkatsu'
 import { Setting, Theme, ThemeId } from '../types'
 import { genToggle, toggle } from '../util'
@@ -32,6 +39,7 @@ export const useSettings = () => {
 			showHelp,
 			showTool,
 			blockGif,
+			eeKey,
 		},
 		setSetting,
 	] = useSettingsBase()
@@ -55,6 +63,7 @@ export const useSettings = () => {
 	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
 	const cycleTheme = () => setTheme(nextTheme(theme))
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
+	const appliedTheme = decideTheme(theme, eeKey)
 
 	return {
 		theme,
@@ -68,6 +77,7 @@ export const useSettings = () => {
 		showHelp,
 		showTool,
 		blockGif,
+		appliedTheme,
 		toggleSetting,
 		toggleArtwork,
 		toggleCounts,

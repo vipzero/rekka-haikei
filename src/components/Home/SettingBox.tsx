@@ -132,7 +132,7 @@ function SettingBox({
 
 	return (
 		<Wrap
-			data-theme={s.theme}
+			data-theme={s.appliedTheme}
 			id="setting-box"
 			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}

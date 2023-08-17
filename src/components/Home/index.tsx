@@ -41,8 +41,14 @@ type Props = {
 	setBg: (url: string, time: number) => void
 }
 function Home({ song, setBg }: Props) {
-	const { theme, sideMode, lockBgNum, toggleSetting, blockGif, visible } =
-		useSettings()
+	const {
+		appliedTheme,
+		sideMode,
+		lockBgNum,
+		toggleSetting,
+		blockGif,
+		visible,
+	} = useSettings()
 	const { eeKey } = useSettingsEe()
 	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
@@ -65,15 +71,13 @@ function Home({ song, setBg }: Props) {
 			}}
 			// @ts-ignore
 			style={{ '--song-time': `${song.trackTimeMillis / 1000}s` }}
-			data-ex={eeKey || theme}
-			data-ex-just={eeKey}
+			data-ex={eeKey}
 			data-has-art={!!song.artworkUrl100}
 			data-show-setting={visible}
-			data-theme={theme}
+			data-theme={appliedTheme}
 			data-moz={moz}
 			data-full={full}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
-			className={theme === 2 ? 'dark-theme' : 'light-theme'}
 			customTheme={customTheme}
 		>
 			<Mask id="mask">
