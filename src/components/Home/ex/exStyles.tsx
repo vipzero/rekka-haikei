@@ -85,7 +85,7 @@ export const exStyles = css`
 		--ex-color: #0385f4;
 		--font-color: #b8deff;
 		--btn-fo-color: var(--ex-color);
-		--btn-bg-color: white;
+		--btn-bg-color: #fff;
 		--btn-bg-checked-color: #b8deff;
 		--setting-bg-color: rgba(255, 255, 255, 0.5);
 
@@ -176,7 +176,7 @@ export const exStyles = css`
 				text-shadow: 0 0 2px white;
 			}
 
-			.titles {
+			#title {
 				color: #75eade;
 				text-shadow: 0 0 1px #9eece4, 0 0 6px var(--deb-bg-color);
 			}

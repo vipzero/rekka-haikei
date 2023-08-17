@@ -3,7 +3,7 @@ import {
 	EekeyState,
 	eekeysThemetic,
 } from '../components/Home/Cvote/constants'
-import { Event, Theme, ThemeId } from '../types'
+import { Event, Shape, ShapeId, Theme, ThemeId } from '../types'
 
 const { NODE_ENV } = process.env
 
@@ -68,6 +68,16 @@ export const allThemes: Theme[] = [...normalThemes, ...extThemes]
 export const allThemesById = allThemes.reduce(
 	(p, c) => ({ ...p, [c.id]: c }),
 	{} as Record<ThemeId, Theme>
+)
+
+export const shapes: Shape[] = [
+	{ id: 0, key: 'BASI' },
+	{ id: 1, key: 'CLAS' },
+]
+export const allShapes = shapes
+export const allShapesById = allShapes.reduce(
+	(p, c) => ({ ...p, [c.id]: c }),
+	{} as Record<ShapeId, Shape>
 )
 
 const white = '#fff'

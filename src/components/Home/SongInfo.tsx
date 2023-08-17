@@ -92,7 +92,7 @@ function SongInfo({ song }: Props) {
 			data-show-tags={showCounts}
 		>
 			<div id="panel-shadow" />
-			<p className="titles">{titles}</p>
+			<p id="title">{titles}</p>
 			<div className="details">
 				<div style={{ display: 'flex' }}>
 					<div style={{ flex: 1 }}>

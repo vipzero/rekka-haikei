@@ -23,7 +23,7 @@ import FadeBgChanger from './FadeBgChanger'
 import RecentHistoryList from './RecentHistoryList'
 import SettingBox from './SettingBox'
 import SongInfo from './SongInfo'
-import { themeStyles } from './themeStyles'
+import { shapeStyles, themeStyles } from './themeStyles'
 import TrackTimeBar from './TrackTimeBar'
 import TrackTimeBitBar from './TrackTimeBitBar'
 
@@ -43,6 +43,7 @@ type Props = {
 function Home({ song, setBg }: Props) {
 	const {
 		appliedTheme,
+		shape,
 		sideMode,
 		lockBgNum,
 		toggleSetting,
@@ -75,6 +76,7 @@ function Home({ song, setBg }: Props) {
 			data-has-art={!!song.artworkUrl100}
 			data-show-setting={visible}
 			data-theme={appliedTheme}
+			data-shape={shape}
 			data-moz={moz}
 			data-full={full}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
@@ -181,11 +183,8 @@ const Container = styled.div`
 		}
 		-ms-overflow-style: none;
 	}
-	.titles {
+	#title {
 		font-size: 1.1rem;
-	}
-	.titles-single {
-		display: none;
 	}
 
 	@keyframes flash {
@@ -215,7 +214,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 
 	button {
 		color: var(--btn-fo-color);
-		background-color: var(--btn-bg-color);
+		background-color: rgba(var(--btn-bg-color), var(--alpha));
 	}
 
 	button {
@@ -310,6 +309,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 		bottom: 0;
 		right: 0;
 	}
+	${shapeStyles}
 `
 
 const Mask = styled.div`

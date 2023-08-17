@@ -10,13 +10,14 @@ import {
 import {
 	Abyss,
 	EE_SEASON,
+	allShapes,
 	decideTheme,
 	extThemes,
 	nextAbyss,
 	normalThemes,
 } from '../config'
 import { sammonSpell, spellCatch } from '../service/fukkatsu'
-import { Setting, Theme, ThemeId } from '../types'
+import { Setting, ShapeId, Theme, ThemeId } from '../types'
 import { genToggle, toggle } from '../util'
 
 function exKeyToColor(exkey: EekeyState) {
@@ -29,6 +30,7 @@ export const useSettings = () => {
 	const [
 		{
 			theme,
+			shape,
 			showSetting: visible,
 			showArtwork,
 			showCounts,
@@ -60,13 +62,17 @@ export const useSettings = () => {
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	const nextTheme = (v: ThemeId) =>
 		typeof v !== 'number' ? 0 : (v + 1) % normalThemes.length
+	const nextShape = (v: ShapeId) => (v + 1) % allShapes.length
 	const setTheme = (theme: ThemeId) => setSetting((v) => ({ ...v, theme }))
+	const setShape = (shape: ShapeId) => setSetting((v) => ({ ...v, shape }))
 	const cycleTheme = () => setTheme(nextTheme(theme))
+	const cycleShape = () => setShape(nextShape(shape))
 	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 	const appliedTheme = decideTheme(theme, eeKey)
 
 	return {
 		theme,
+		shape,
 		visible,
 		showCounts,
 		showArtwork,
@@ -92,6 +98,7 @@ export const useSettings = () => {
 		setSetting,
 		cycleTheme,
 		setTheme,
+		cycleShape,
 	}
 }
 

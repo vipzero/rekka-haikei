@@ -4,6 +4,7 @@ import {
 	faCircleHalfStroke,
 	faColumns,
 	faCompactDisc,
+	faCube,
 	faDiceFive,
 	faDownload,
 	faDroplet,
@@ -12,6 +13,7 @@ import {
 	faIcicles,
 	faLock,
 	faLockOpen,
+	faMagic,
 	faMagicWandSparkles,
 	faPalette,
 	faPaperclip,
@@ -29,6 +31,7 @@ import styled from 'styled-components'
 import {
 	URL_GITHUB_REPO_URL,
 	abyssColorsEx,
+	allShapesById,
 	allThemes,
 	allThemesById,
 } from '../../config'
@@ -132,7 +135,6 @@ function SettingBox({
 
 	return (
 		<Wrap
-			data-theme={s.appliedTheme}
 			id="setting-box"
 			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
@@ -152,6 +154,14 @@ function SettingBox({
 						icon={faPalette}
 						onClick={s.cycleTheme}
 						text={allThemesById[s.theme]?.key || allThemes[0].key}
+					/>
+					<ConfButton
+						helpText={'型: '}
+						className="shape"
+						areaKey="sh"
+						icon={faCube}
+						onClick={s.cycleShape}
+						text={allShapesById[s.shape]?.key || allShapesById[0].key}
 					/>
 					<ConfButton
 						helpText="レイアウト: "
@@ -451,12 +461,13 @@ const ButtonGrid = styled.div`
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c'
-		'ts ts ts ts ts ss'
+		'ts ts ts ts th th'
+		'_a sh sh sh th th'
 		'vh bb bb bb bb ss'
 		'vh bb bb bb bb ss'
 		'bi bb bb bb bb ss'
-		'_a _a _a ha ha _h'
-		'pp pp th dd dd _h'
+		'ha ha ha ha ha _h'
+		'pp pp dd dd dd _h'
 		'pp pp rr pi pi _d';
 `
 

@@ -73,14 +73,20 @@ export type BookCount = {
 	count: number
 }
 
+export type ShapeId = number
 export type ThemeId = number | string
 export type Theme = {
 	id: ThemeId
 	key: string
 }
+export type Shape = {
+	id: ShapeId
+	key: string
+}
 
 export type Setting = {
 	theme: ThemeId
+	shape: ShapeId
 	showSetting: boolean
 	showBookmark: boolean
 	showArtwork: boolean
