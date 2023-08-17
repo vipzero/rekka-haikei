@@ -134,6 +134,10 @@ li {
 	border-radius: 4px;
 	transition: opacity 0.3s ease-in;
 }
+.tooltip-text[data-tooltip-pos='top'] {
+	top: -30px;
+	bottom: auto;
+}
 
 .tooltip:hover .tooltip-text {
 	opacity: 1;

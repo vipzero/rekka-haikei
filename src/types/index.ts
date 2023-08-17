@@ -99,6 +99,7 @@ export type Setting = {
 	eeKey: EekeyState
 	eeOpt: EeOpt
 	eeSim: boolean
+	eeMts10: string
 	customTheme: string
 	showEmol: boolean
 	bingo: string
