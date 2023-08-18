@@ -247,7 +247,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 		p,
 		a {
 			font-weight: bold;
-			color: var(--panel-fo-color);
+			color: var(--panel-fo);
 			text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
 				-1px -1px 1px var(--panel-fo-shadow-color),
 				-1px 1px 1px var(--panel-fo-shadow-color),

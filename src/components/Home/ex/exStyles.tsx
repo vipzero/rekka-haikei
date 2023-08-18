@@ -155,7 +155,7 @@ export const exStyles = css`
 
 	&[data-theme='yojitsu'] {
 		--font-color: white;
-		--panel-fo-color: white;
+		--panel-fo: white;
 		--panel-fo-shadow-color: transparent;
 		--btn-fo-color: white;
 		--setting-bg-color: #373f4f;
@@ -200,7 +200,7 @@ export const exStyles = css`
 	}
 	&[data-theme='choco'] {
 		--font-color: #ffc627;
-		--panel-fo-color: #ffe697;
+		--panel-fo: #ffe697;
 		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--setting-bg-color: #311;

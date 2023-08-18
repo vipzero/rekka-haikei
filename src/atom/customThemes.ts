@@ -6,7 +6,7 @@ export const defaultCustomTheme = `
  * ↓色変数 値だけ変えれば反映される
  */
 --font-color: #fff;                // 文字色
---panel-fo-color: #FBFD8A;            // パネル文字
+--panel-fo: #FBFD8A;            // パネル文字
 --panel-fo-shadow-color: #000;        // パネル文字縁
 --btn-fo-color: #fff;                 // ボタン文字
 --setting-bg-color: #086972;        // 設定背景

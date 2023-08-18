@@ -4,7 +4,7 @@ import { exStyles } from './ex/exStyles'
 export const themeStyles = css`
 	& {
 		--font-color: black;
-		--panel-fo-color: #eee;
+		--panel-fo: #eee;
 		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--content-bg-color: #aaa;
@@ -26,7 +26,7 @@ export const themeStyles = css`
 		--content-bg-color: #eee;
 		--content-bg-color-alpha: #eee8;
 		--setting-bg-color-alpha: #aaaa;
-		--panel-fo-color-non-shadow: #58585a;
+		--panel-fo-non-shadow: #58585a;
 	}
 	&[data-theme='2'] {
 		--font-color: #fff;
@@ -57,10 +57,10 @@ export const themeStyles = css`
 	}
 	&[data-shape='1'] {
 		--co-bg: var(--content-bg-color);
-		--sb-bg: var(--setting-bg-color, --content-bg-color-alpha);
+		--sb-bg: var(--setting-bg-color, var(--content-bg-color-alpha));
 
 		--co-pad: 4px 8px;
-		--panel-fo-color: var(--panel-fo-color-non-shadow, var(--panel-fo-color));
+		--panel-fo: var(--panel-fo-non-shadow);
 	}
 `
 
@@ -72,7 +72,7 @@ export const shapeStyles = css`
 		#title {
 			font-size: 0.8rem;
 
-			/* color: var(--panel-fo-color); */
+			/* color: var(--panel-fo); */
 		}
 		#main-box {
 			padding: 8px;
