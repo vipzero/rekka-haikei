@@ -82,6 +82,7 @@ export type Theme = {
 export type Shape = {
 	id: ShapeId
 	key: string
+	detailOptLock?: boolean
 }
 
 export type Setting = {

@@ -13,6 +13,7 @@ type Props = {
 	icon?: IconDefinition
 	children?: ReactNode
 	showToggleIcon?: boolean
+	disabled?: boolean
 	areaKey: string // grid-area用一意な2文字
 }
 
@@ -25,6 +26,7 @@ export const ConfButton = ({
 	areaKey,
 	checked = undefined,
 	showToggleIcon = false,
+	disabled = false,
 	text = '',
 }: Props) => {
 	return (
@@ -32,6 +34,7 @@ export const ConfButton = ({
 			className={`${className} `}
 			onClick={onClick}
 			data-checked={checked}
+			data-disabled={disabled}
 			style={{ gridArea: areaKey }}
 		>
 			{icon && (
@@ -76,5 +79,11 @@ const Style = styled.button`
 			animation: var(--animation-bounce);
 			animation-iteration-count: 1;
 		}
+	}
+
+	&[data-disabled='true'] {
+		/* background-blend-mode: multiply; */
+		opacity: 0.2;
+		cursor: default;
 	}
 `

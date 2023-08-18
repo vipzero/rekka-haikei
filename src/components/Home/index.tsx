@@ -143,7 +143,7 @@ const Container = styled.div`
 	padding: 16px;
 	color: white;
 
-	overflow: hidden;
+	/* overflow: hidden; */
 	&[data-side='wide'],
 	&[data-side='bw'] {
 		width: 100%;

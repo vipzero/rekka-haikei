@@ -4,7 +4,7 @@ import { exStyles } from './ex/exStyles'
 export const themeStyles = css`
 	& {
 		--font-color: black;
-		--panel-fo-color: #ccc;
+		--panel-fo-color: #eee;
 		--panel-fo-shadow-color: #000;
 		--btn-fo-color: black;
 		--content-bg-color: #aaa;
@@ -69,7 +69,6 @@ export const shapeStyles = css`
 			font-size: 0.8rem;
 
 			/* color: var(--panel-fo-color); */
-			text-shadow: none;
 		}
 		#main-box {
 			padding: 8px;
@@ -90,29 +89,33 @@ export const shapeStyles = css`
 		}
 		[data-co] {
 			width: max-content;
-			width: max-width;
+			max-width: calc(100vw - 8px * 2);
+			background: var(--content-bg-color-alpha);
 		}
-		#panel {
+		&:not([data-theme='0']) {
+			#title,
+			#panel {
+				p,
+				a {
+					text-shadow: none;
+				}
+			}
 			p,
 			a {
 				text-shadow: none;
 			}
 		}
-		p,
-		a {
-			text-shadow: none;
-		}
 	}
 	&[data-shape='2'] {
 		[data-co] {
-			visibility: hidden;
+			display: none;
 		}
 		#panel {
 			> * {
-				visibility: hidden;
+				display: none;
 			}
 			#title {
-				visibility: visible;
+				display: block;
 			}
 		}
 	}

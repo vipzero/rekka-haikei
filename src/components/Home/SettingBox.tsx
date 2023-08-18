@@ -131,6 +131,9 @@ function SettingBox({
 		br: '↘︎',
 		r: '︎︎↗︎',
 	}
+	const { shape: shapeId } = s
+	const shape = allShapesById[shapeId] || allShapesById[0]
+	const emptyMode = shapeId === 3
 
 	return (
 		<Wrap
@@ -160,7 +163,7 @@ function SettingBox({
 						areaKey="sh"
 						icon={faCube}
 						onClick={s.cycleShape}
-						text={allShapesById[s.shape]?.key || allShapesById[0].key}
+						text={shape.key}
 					/>
 					<ConfButton
 						helpText="レイアウト: "
@@ -170,6 +173,7 @@ function SettingBox({
 						onClick={s.toggleSideMode}
 						text={sideModeText[s.sideMode]}
 						checked={['wide', 'bw'].includes(s.sideMode)}
+						disabled={emptyMode}
 					/>
 
 					<ConfButton
@@ -207,6 +211,7 @@ function SettingBox({
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
 						showToggleIcon
+						disabled={emptyMode}
 					/>
 
 					<ConfButton
@@ -300,6 +305,7 @@ function SettingBox({
 							checked={s.showCounts}
 							onClick={s.toggleCounts}
 							showToggleIcon
+							disabled={shape.detailOptLock}
 						/>
 						<ConfButton
 							helpText="アートワーク表示"
@@ -309,6 +315,7 @@ function SettingBox({
 							checked={s.showArtwork}
 							onClick={s.toggleArtwork}
 							showToggleIcon
+							disabled={shape.detailOptLock}
 						/>
 						<ConfButton
 							helpText={`ブックマーク表示(${favCount})`}
@@ -318,6 +325,7 @@ function SettingBox({
 							checked={s.showBookmark}
 							onClick={s.toggleBookmark}
 							showToggleIcon
+							disabled={emptyMode}
 						/>
 						<ConfButton
 							helpText={lockLabel[s.lockBgNum].help}
