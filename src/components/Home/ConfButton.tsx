@@ -9,25 +9,27 @@ type Props = {
 	onClick: () => void
 	className?: string
 	text?: string
-	helpText: string
+	helpText?: string
 	icon?: IconDefinition
 	children?: ReactNode
 	showToggleIcon?: boolean
 	disabled?: boolean
-	areaKey: string // grid-area用一意な2文字
+	areaKey?: string // grid-area用一意な2文字
+	mini?: boolean
 }
 
 export const ConfButton = ({
 	onClick,
 	children,
 	className,
-	helpText,
 	icon,
 	areaKey,
+	helpText = '',
 	checked = undefined,
 	showToggleIcon = false,
 	disabled = false,
 	text = '',
+	mini = false,
 }: Props) => {
 	return (
 		<Style
@@ -35,6 +37,7 @@ export const ConfButton = ({
 			onClick={onClick}
 			data-checked={checked}
 			data-disabled={disabled}
+			data-mini={mini}
 			style={{ gridArea: areaKey }}
 		>
 			{icon && (
@@ -55,7 +58,7 @@ export const ConfButton = ({
 }
 
 const IconWrap = styled.span`
-	width: 1.3rem;
+	/* width: 1.3rem; */
 `
 const Style = styled.button`
 	display: flex;
@@ -85,5 +88,9 @@ const Style = styled.button`
 		/* background-blend-mode: multiply; */
 		opacity: 0.2;
 		cursor: default;
+	}
+
+	&[data-mini='true'] {
+		margin: 0;
 	}
 `

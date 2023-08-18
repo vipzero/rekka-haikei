@@ -140,11 +140,11 @@ function SettingBox({
 	return (
 		<Wrap
 			id="setting-box"
-			style={{ visibility: s.visible ? 'visible' : 'hidden' }}
 			data-help={s.showHelp}
 			data-show-bingo={showBingo}
 			data-show-themer={showThemer}
 			data-show-detail={showDetail}
+			data-visible={s.visible}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
@@ -376,25 +376,52 @@ function SettingBox({
 				</div>
 				{s.showTool && <div>{<Time song={song} />}</div>}
 				<div className="footer">
-					<div>
+					<div className="sub">
 						<a style={{ display: 'none' }} className="link-sao">
 							Logout
 						</a>
-						<a href={`/${eid}/history`} className="link-hist">
-							<FontAwesomeIcon icon={faHistory} size="xs" />
-							履歴
+						<a href="http://anison.info" rel="Anison Generation">
+							アニメ情報元
 						</a>
+						<a href={URL_GITHUB_REPO_URL}>コード</a>
 						<a href={`/${eid}/book`}>
 							<FontAwesomeIcon icon={faBookmark} size="xs" />
 							ブクマ
 						</a>
 					</div>
-
 					<div>
-						<a href="http://anison.info" rel="Anison Generation">
-							アニメ情報元
+						<div className="mini-ui">
+							{!emptyMode && (
+								<ConfButton
+									icon={faHistory}
+									checked={s.showHistory}
+									onClick={s.toggleHistory}
+									showToggleIcon
+									disabled={emptyMode}
+									mini
+								/>
+							)}
+							<ConfButton
+								icon={faMagicWandSparkles}
+								checked={bgcmOpen}
+								onClick={toggleBgcmOpen}
+								mini
+							/>
+							<ConfButton
+								icon={favorited ? faStarFill : faStar}
+								onClick={book}
+								checked={favorited}
+								mini
+							/>
+						</div>
+						<a
+							href={`/${eid}/history`}
+							className="link-hist"
+							style={{ minWidth: '50px' }}
+						>
+							<FontAwesomeIcon icon={faHistory} size="xs" />
+							履歴
 						</a>
-						<a href={URL_GITHUB_REPO_URL}>コード</a>
 					</div>
 				</div>
 			</div>
@@ -407,6 +434,18 @@ const Wrap = styled.div`
 	display: flex;
 	overflow: hidden;
 	min-width: 300px;
+	&[data-visible='false'] {
+		> div > div:not(.footer),
+		.footer .sub {
+			display: none;
+		}
+	}
+	&[data-visible='true'] {
+		.footer .mini-ui {
+			display: none;
+			visibility: hidden;
+		}
+	}
 
 	> div {
 		padding: 8px;
@@ -424,21 +463,27 @@ const Wrap = styled.div`
 		a,
 		label {
 			color: var(--font-color);
-			font-size: 1.2rem;
+			font-size: 1rem;
 		}
 		a {
 			background-color: var(--sb-bg);
-			padding: 2px 4px;
-			min-height: 32px;
-			width: 100%;
+			/* min-height: 32px; */
+			/* width: 100%; */
 			svg {
 				margin-right: 4px;
 			}
 		}
 		> div {
 			display: flex;
-			justify-content: space-evenly;
-			text-align: right;
+			justify-content: flex-end;
+			gap: 1rem;
+			align-items: flex-end;
+		}
+		.mini-ui {
+			display: grid;
+			grid-auto-flow: column;
+			width: 100%;
+			gap: 4px;
 		}
 	}
 	&[data-help='true'] {
@@ -471,6 +516,7 @@ const Wrap = styled.div`
 const ButtonGrid = styled.div`
 	display: grid;
 	min-width: 295px;
+	margin: -4px -4px 4px; // ><
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c'
