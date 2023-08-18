@@ -6,8 +6,10 @@ import {
 	faCompactDisc,
 	faCube,
 	faDiceFive,
+	faDownLeftAndUpRightToCenter,
 	faDownload,
 	faDroplet,
+	faGear,
 	faGhost,
 	faHistory,
 	faIcicles,
@@ -18,7 +20,6 @@ import {
 	faPaperclip,
 	faQuestion,
 	faRadio,
-	faScrewdriver,
 	faStar as faStarFill,
 	faTags,
 	faToolbox,
@@ -94,7 +95,8 @@ function SettingBox({
 	}, [s.visible])
 	useEffect(() => {
 		setShowThemer(true)
-	}, [s.theme])
+		setShowDetail(true)
+	}, [s.theme, s.shape])
 
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
@@ -268,11 +270,11 @@ function SettingBox({
 						helpText="詳細設定"
 						className="detail"
 						areaKey="_a"
-						icon={faScrewdriver}
+						icon={showDetail ? faDownLeftAndUpRightToCenter : faGear}
 						checked={showDetail}
 						onClick={() => {
-							setShowDetail((v) => !v)
-							setShowThemer(true)
+							setShowDetail(!showDetail)
+							setShowThemer(!showDetail)
 						}}
 					/>
 
@@ -472,7 +474,7 @@ const ButtonGrid = styled.div`
 	grid-template-areas:
 		'bp bp bp bp bp bp'
 		'_c _c _c _c _c _c'
-		'ts ts ts ts th th'
+		'_a ts ts ts ts ts'
 		'_a sh sh sh th th'
 		'vh bb bb bb bb ss'
 		'vh bb bb bb bb ss'
