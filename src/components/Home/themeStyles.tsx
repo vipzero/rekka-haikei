@@ -30,6 +30,8 @@ export const themeStyles = css`
 		--font-color: #fff;
 		--btn-fo-color: #fff;
 		--content-bg-color: #000;
+		--setting-bg-color-alpha: #0008;
+		--setting-bg-color: #888;
 		--content-bg-color-alpha: #0008;
 		--btn-bg-color: #000;
 		--btn-bg-checked-color: #333;
@@ -69,6 +71,9 @@ export const shapeStyles = css`
 			/* color: var(--panel-fo-color); */
 			text-shadow: none;
 		}
+		#main-box {
+			padding: 8px;
+		}
 		#artwork img {
 			margin-top: 4px;
 			width: 100px;
@@ -85,6 +90,7 @@ export const shapeStyles = css`
 		}
 		[data-co] {
 			width: max-content;
+			width: max-width;
 		}
 		#panel {
 			p,

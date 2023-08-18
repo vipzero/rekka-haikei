@@ -23,7 +23,7 @@ export const ImasBoard = ({ bools }: Props) => {
 	const rowNum = bools.map((row) => Math.ceil(row.length / colNum)).reduce(sum)
 
 	return (
-		<Style data-open={open}>
+		<Style data-open={open} onClick={(e) => e.stopPropagation()}>
 			{bools.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((b, j) => (
