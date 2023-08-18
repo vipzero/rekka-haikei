@@ -88,6 +88,7 @@ export const exStyles = css`
 		--btn-bg-color: #fff;
 		--btn-bg-checked-color: #b8deff;
 		--setting-bg-color: rgba(255, 255, 255, 0.5);
+		--deb-fo: #0385f4; // デバッグ背景
 
 		div {
 			border-bottom: solid 1px var(--ex-color);
@@ -129,6 +130,7 @@ export const exStyles = css`
 		--btn-bg-checked-color: black;
 		--font-color: white;
 		--setting-bg-color: rgba(0, 0, 0, 0.5);
+		--deb-fo: #13e0ad; // デバッグ背景
 
 		div {
 			border-bottom: solid 1px var(--ex-color);
@@ -159,7 +161,7 @@ export const exStyles = css`
 		--setting-bg-color: #373f4f;
 		/* #616F84 */
 		--content-bg-color: #373f4f;
-		--deb-bg-color: #373f4f;
+		--deb-bg: #373f4f;
 		--btn-bg-color: #373f4f;
 		--btn-bg-checked-color: #616f84;
 
@@ -178,7 +180,7 @@ export const exStyles = css`
 
 			#title {
 				color: #75eade;
-				text-shadow: 0 0 1px #9eece4, 0 0 6px var(--deb-bg-color);
+				text-shadow: 0 0 1px #9eece4, 0 0 6px var(--deb-bg);
 			}
 		}
 		#setting-box {
@@ -204,12 +206,13 @@ export const exStyles = css`
 		--setting-bg-color: #311;
 		--content-bg-color: #795548;
 		--content-bg-color-alpha: #795548ee;
-		--deb-bg-color: #795548ee;
+		--deb-bg: #795548ee;
 		--btn-bg-color: #ffe;
 		--btn-bg-checked-color: #dda;
 
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #ffe697;
+		--deb-fo: #dda; // デバッグ背景
 
 		#timebar {
 			.wrap {

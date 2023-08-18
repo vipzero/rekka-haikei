@@ -11,9 +11,11 @@ export const defaultCustomTheme = `
 --btn-fo-color: #fff;                 // ボタン文字
 --setting-bg-color: #086972;        // 設定背景
 --content-bg-color: #086972;        // パネル背景
---deb-bg-color: orange;            // デバッグ背景
 --btn-bg-color: #87DFD6;              // 設定ボタン背景
 --btn-bg-checked-color: #01A9B4;    // 設定ボタン背景有効
+
+--deb-bg: #064750;            // デバッグ背景
+--deb-fo: #66dfd3;            // デバッグ背景
 
 #timebar {
   .wrap {

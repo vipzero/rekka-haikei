@@ -9,13 +9,15 @@ export const themeStyles = css`
 		--btn-fo-color: black;
 		--content-bg-color: #aaa;
 		--setting-bg-color: #aaa;
-		--deb-bg-color: #333;
 		--btn-bg-color: #efefef;
 		--btn-bg-checked-color: #999;
 
 		--bingo-bg-color: #ccc;
 		--bingo-bg-hit-color: #e85;
 		--co-pad: 12px;
+
+		--deb-bg: #eee;
+		--deb-fo: #333;
 	}
 	&[data-theme='0'] {
 		--content-bg-color: transparent;
@@ -37,15 +39,17 @@ export const themeStyles = css`
 		--btn-bg-checked-color: #333;
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #88f;
+		--deb-bg: #111;
+		--deb-fo: #eee;
 	}
 	${exStyles}
 
 	/* pre setup */
 	& {
-		--co-bg: var(--content-bg-color-alpha, --content-bg-color);
+		--co-bg: var(--content-bg-color-alpha, var(--content-bg-color));
 		--sb-bg: var(
 			--setting-bg-color-alpha,
-			var(--setting-bg-color, --content-bg-color-alpha)
+			var(--setting-bg-color, var(--content-bg-color-alpha))
 		);
 		--btn-bg: var(--btn-bg-color);
 	}
@@ -56,7 +60,7 @@ export const themeStyles = css`
 		--sb-bg: var(--setting-bg-color, --content-bg-color-alpha);
 
 		--co-pad: 4px 8px;
-		--panel-fo-color: var(--panel-fo-color-non-shadow, --panel-fo-color);
+		--panel-fo-color: var(--panel-fo-color-non-shadow, var(--panel-fo-color));
 	}
 `
 
@@ -90,7 +94,7 @@ export const shapeStyles = css`
 		[data-co] {
 			width: max-content;
 			max-width: calc(100vw - 8px * 2);
-			background: var(--content-bg-color-alpha);
+			background: var(--content-bg-color-alpha, var(--content-bg-color));
 		}
 		&:not([data-theme='0']) {
 			#title,
