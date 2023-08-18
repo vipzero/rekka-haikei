@@ -24,14 +24,13 @@ export const eekeysGimic = [
 	'mts10',
 	'masso',
 	// 'imascd', // R
-
-	// 'codegeass',
 ] as const
 // 🛑 ネタバレ注意
 export const eekeysThemetic = [
 	'kokaku',
 	'psychopass',
 	'yojitsu',
+	// 'codegeass',
 	'lain',
 	'choco',
 ] as const
@@ -234,4 +233,5 @@ export const eeId: Record<EekeyStr, number> = {
 	masso: 48,
 	yojitsu: 49,
 	choco: 50,
+	// codegeass: 51,
 }

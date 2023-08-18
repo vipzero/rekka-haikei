@@ -21,6 +21,7 @@ export const ThemeSelector = () => {
 					key={t.key}
 					className="theme-btn"
 					data-active={t.selected}
+					// data-opened={true}
 					data-opened={t.visible}
 					data-name={t.key}
 					onClick={() => {
@@ -135,6 +136,9 @@ const Style = styled.div`
 			}
 			&[data-name='CHOCO'] {
 				${halfBallBg('#310d0d', '#ffe697')}
+			}
+			&[data-name='CODEG'] {
+				${halfBallBg('#140d51', '#3c13e0')}
 			}
 		}
 		@keyframes changeSelect {

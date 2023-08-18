@@ -411,6 +411,7 @@ function SettingBox({
 								icon={favorited ? faStarFill : faStar}
 								onClick={book}
 								checked={favorited}
+								className="book"
 								mini
 							/>
 						</div>

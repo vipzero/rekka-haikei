@@ -153,6 +153,28 @@ export const exStyles = css`
 		}
 	}
 
+	&[data-theme='codegeass'] {
+		--ex-color: #3c13e0;
+		--font-color: #6f5dbb;
+		--btn-fo-color: #dcd3ff;
+		--btn-bg-color: #140d51;
+		--btn-bg-checked-color: black;
+		--font-color: white;
+		--content-bg-color: #050033;
+		--setting-bg-color: var(--content-bg-color);
+		--content-bg-color-alpha: #1a0245bb;
+		--setting-bg-color-alpha: var(--setting-bg-color-alpha);
+		--panel-fo-color: black;
+		--panel-fo-shadow-color: #6f5dbb;
+		/* --deb-fo: #fff; // デバッグ背景 */
+		button.book {
+			color: red;
+		}
+		#panel {
+			/* background-image: linear-gradient(326deg, #67084bbb 0%, #1a0245bb 74%); */
+		}
+	}
+
 	&[data-theme='yojitsu'] {
 		--font-color: white;
 		--panel-fo: white;
@@ -192,12 +214,15 @@ export const exStyles = css`
 		#main-box {
 			gap: 2rem;
 		}
-		#yrings {
-			position: absolute;
-			right: 0;
-			top: 0;
+		&[data-ex='yojitsu'] {
+			#yrings {
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
 		}
 	}
+
 	&[data-theme='choco'] {
 		--font-color: #ffc627;
 		--panel-fo: #ffe697;

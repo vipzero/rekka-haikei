@@ -58,6 +58,7 @@ export const extThemes: ExTheme[] = [
 	{ id: 'kokaku', key: 'KOKAK' },
 	{ id: 'lain', key: 'LAIN_' },
 	{ id: 'psychopass', key: 'PSYCH' },
+	// { id: 'codegeass', key: 'CODEG' },
 	{ id: 'yojitsu', key: 'ID___' },
 	{ id: 'choco', key: 'CHOCO' },
 ]

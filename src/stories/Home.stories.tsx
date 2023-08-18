@@ -156,10 +156,10 @@ export const ThemeBlack = {
 	args: { setting: { ...setting, theme: 2 } },
 }
 
-export const ThemeEmpty = {
-	args: { setting: { ...setting, theme: 3 } },
-}
-
 export const ThemeSingl = {
 	args: { setting: { ...setting, theme: 4 } },
+}
+
+export const ThemeCodeGeass = {
+	args: { setting: { ...setting, theme: 'codegeass' } },
 }
