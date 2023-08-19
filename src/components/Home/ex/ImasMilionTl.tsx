@@ -46,7 +46,7 @@ export const ImasMilionTl = ({ cd }: Props) => {
 			</div>
 			<div className="ml2">
 				{cells2.map((c, i) => (
-					<div key={i} className={c.label}>
+					<div key={i} className={c.label} data-hit={!!cd[c.label]}>
 						{c.label}
 					</div>
 				))}
