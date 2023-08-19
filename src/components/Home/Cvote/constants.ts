@@ -30,7 +30,7 @@ export const eekeysThemetic = [
 	'kokaku',
 	'psychopass',
 	'yojitsu',
-	// 'codegeass',
+	'codegeass',
 	'lain',
 	'choco',
 ] as const
@@ -139,7 +139,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	// [/ラブプラス/i, 'loveplus'],
 	// ['極黒のブリュンヒルデ', 'bryunhild'],
 	// [/山田.*魔女/, 'yamajo'],
-	// ['コードギアス', 'codegeass'],
+	['コードギアス', 'codegeass'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	// [ (song) => song.animeTitle === '人生', 'jinsei' ],
@@ -233,5 +233,5 @@ export const eeId: Record<EekeyStr, number> = {
 	masso: 48,
 	yojitsu: 49,
 	choco: 50,
-	// codegeass: 51,
+	codegeass: 51,
 }

@@ -173,7 +173,7 @@ function SongInfo({ song }: Props) {
 const Wrap = styled.div`
 	position: relative;
 
-	background-color: var(--co-bg);
+	background: var(--co-bg);
 	padding: var(--co-pad);
 	border-radius: 4px;
 	overflow: hidden;

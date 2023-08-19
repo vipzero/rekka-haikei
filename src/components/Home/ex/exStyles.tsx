@@ -163,6 +163,12 @@ export const exStyles = css`
 		--content-bg-color: #050033;
 		--setting-bg-color: var(--content-bg-color);
 		--content-bg-color-alpha: #1a0245bb;
+		--content-bg-color-alpha: linear-gradient(
+			123deg,
+			#1a0245ff 0%,
+			#67084b88 40%,
+			#67084b00 74%
+		);
 		--setting-bg-color-alpha: var(--setting-bg-color-alpha);
 		--panel-fo-color: black;
 		--panel-fo-shadow-color: #6f5dbb;
