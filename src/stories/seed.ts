@@ -9,7 +9,8 @@ export const seedSong: Song = {
 	animeTitle: '普通の女子校生が【ろこどる】やってみた。',
 	title: '流川ガールズソング ',
 	imageLinks: [
-		'https://cs1.anime.dmkt-sp.jp/anime_kv/img/11/37/1/11371_1_9_8b.png?1551176652000',
+		'https://storage.googleapis.com/rekka-haikei-img/img/2023gw/1683471228240_3.jpg',
+		'https://storage.googleapis.com/rekka-haikei-img/img/2023gw/1683470974956_2.jpg',
 	],
 	icy: '宇佐美奈々子(CV.伊藤美来)・小日向縁(CV.三澤紗千香) - 流川ガールズソング ',
 	singer: '宇佐美奈々子(伊藤美来)/小日向縁(三澤紗千香)',

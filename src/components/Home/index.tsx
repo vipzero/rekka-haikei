@@ -234,7 +234,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 		}
 	}
 	.co-panel {
-		background-color: var(--co-bg);
+		background-color: var(--co-bg-alpha);
 		overflow: auto;
 		white-space: nowrap;
 	}

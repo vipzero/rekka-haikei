@@ -9,6 +9,7 @@ export const themeStyles = css`
 		--btn-fo-color: black;
 		--content-bg-color: #aaa;
 		--setting-bg-color: #aaa;
+		--content-bg-color-alpha: #aaaa;
 		--btn-bg-color: #efefef;
 		--btn-bg-checked-color: #999;
 
@@ -47,6 +48,7 @@ export const themeStyles = css`
 	/* pre setup */
 	& {
 		--co-bg: var(--content-bg-color-alpha, var(--content-bg-color));
+		--co-bg-alpha: var(--content-bg-color-alpha, var(--content-bg-color));
 		--sb-bg: var(
 			--setting-bg-color-alpha,
 			var(--setting-bg-color, var(--content-bg-color-alpha))

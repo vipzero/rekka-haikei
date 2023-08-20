@@ -190,6 +190,7 @@ export const exStyles = css`
 		--setting-bg-color: #373f4f;
 		/* #616F84 */
 		--content-bg-color: #373f4f;
+		--content-bg-color-alpha: #373f4faa;
 		--deb-bg: #373f4f;
 		--btn-bg-color: #373f4f;
 		--btn-bg-checked-color: #616f84;

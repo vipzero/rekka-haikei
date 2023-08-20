@@ -4,7 +4,7 @@ import { ComponentProps, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 import { defaultSetting as setting } from '../atom/SettingAtom'
 import Home from '../components/Home'
-import { eekeys } from '../components/Home/Cvote/constants'
+import { Eekey, ExThemeKey, eekeys } from '../components/Home/Cvote/constants'
 // import { Toast } from '../components/Toast'
 import { SvgFilters } from '../config/SvgFilters'
 import { useSettings } from '../hooks/useSettings'
@@ -67,55 +67,20 @@ export const Full = {
 		setting,
 	},
 }
+const eeArgs = (eeKey: Eekey) => ({ args: { setting: { ...setting, eeKey } } })
 
-export const Lain = {
-	args: { setting: { ...setting, eeKey: 'lain' } },
-}
-
-export const Yojitsu = {
-	args: { setting: { ...setting, eeKey: 'yojitsu' } },
-}
-
-export const SteinsGate = {
-	args: { setting: { ...setting, eeKey: 'steinsgate' } },
-}
-
-export const Shadow = {
-	args: { setting: { ...setting, eeKey: 'susu' } },
-}
-
-export const Kokaku = {
-	args: { setting: { ...setting, eeKey: 'kokaku' } },
-}
-
-export const Psychopass = {
-	args: { setting: { ...setting, eeKey: 'psychopass' } },
-}
-
-export const Patema = {
-	args: { setting: { ...setting, eeKey: 'sakasa' } },
-}
-
-export const Sao = {
-	args: { setting: { ...setting, eeKey: 'sao' } },
-}
-
-export const Flip = {
-	args: { setting: { ...setting, eeKey: 'flip' } },
-}
-
-export const Aria = {
-	args: { setting: { ...setting, eeKey: 'ariascarlet' } },
-}
-
-export const Shiki = {
-	args: { setting: { ...setting, eeKey: 'subetef' } },
-}
-
-export const Parapara = {
-	args: { setting: { ...setting, eeKey: 'parapara' } },
-}
-
+export const Lain = eeArgs('lain')
+export const Yojitsu = eeArgs('yojitsu')
+export const SteinsGate = eeArgs('steinsgate')
+export const Shadow = eeArgs('susu')
+export const Kokaku = eeArgs('kokaku')
+export const Psychopass = eeArgs('psychopass')
+export const Patema = eeArgs('sakasa')
+export const Sao = eeArgs('sao')
+export const Flip = eeArgs('flip')
+export const Aria = eeArgs('ariascarlet')
+export const Shiki = eeArgs('subetef')
+export const Parapara = eeArgs('parapara')
 export const Mts10A = {
 	args: {
 		setting: {
@@ -140,30 +105,15 @@ export const Mts10B = {
 	},
 }
 
-export const Masso = {
-	args: { setting: { ...setting, eeKey: 'masso' } },
-}
+export const Masso = eeArgs('masso')
 
-export const ThemeClear = {
-	args: { setting: { ...setting, theme: 0 } },
-}
+const themeArgs = (theme: number | ExThemeKey) => ({
+	args: { setting: { ...setting, theme } },
+})
 
-export const ThemeWhite = {
-	args: { setting: { ...setting, theme: 1 } },
-}
-
-export const ThemeBlack = {
-	args: { setting: { ...setting, theme: 2 } },
-}
-
-export const ThemeSingl = {
-	args: { setting: { ...setting, theme: 4 } },
-}
-
-export const ThemeCodeGeass = {
-	args: { setting: { ...setting, theme: 'codegeass' } },
-}
-
-export const ThemeYojitsu = {
-	args: { setting: { ...setting, theme: 'yojitsu' } },
-}
+export const ThemeClear = themeArgs(0)
+export const ThemeWhite = themeArgs(1)
+export const ThemeBlack = themeArgs(2)
+export const ThemeCodeGeass = themeArgs('codegeass')
+export const ThemeYojitsu = themeArgs('yojitsu')
+export const ThemePhycopass = themeArgs('psychopass')
