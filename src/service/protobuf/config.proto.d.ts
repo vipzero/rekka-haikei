@@ -24,6 +24,9 @@ export namespace config {
         /** Config theme */
         theme?: (number|null);
 
+        /** Config shape */
+        shape?: (number|null);
+
         /** Config ee */
         ee?: (Uint8Array|null);
 
@@ -57,6 +60,9 @@ export namespace config {
 
         /** Config theme. */
         public theme: number;
+
+        /** Config shape. */
+        public shape: number;
 
         /** Config ee. */
         public ee?: (Uint8Array|null);

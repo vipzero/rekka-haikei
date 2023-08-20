@@ -30,6 +30,7 @@ $root.config = (function() {
          * @property {boolean|null} [showHistory] Config showHistory
          * @property {config.Config.SideMode|null} [sideMode] Config sideMode
          * @property {number|null} [theme] Config theme
+         * @property {number|null} [shape] Config shape
          * @property {Uint8Array|null} [ee] Config ee
          * @property {Array.<number>|null} [ee2] Config ee2
          */
@@ -99,6 +100,14 @@ $root.config = (function() {
         Config.prototype.theme = 0;
 
         /**
+         * Config shape.
+         * @member {number} shape
+         * @memberof config.Config
+         * @instance
+         */
+        Config.prototype.shape = 0;
+
+        /**
          * Config ee.
          * @member {Uint8Array|null|undefined} ee
          * @memberof config.Config
@@ -164,6 +173,8 @@ $root.config = (function() {
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sideMode);
             if (message.theme != null && Object.hasOwnProperty.call(message, "theme"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.theme);
+            if (message.shape != null && Object.hasOwnProperty.call(message, "shape"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.shape);
             if (message.ee != null && Object.hasOwnProperty.call(message, "ee"))
                 writer.uint32(/* id 10, wireType 2 =*/82).bytes(message.ee);
             if (message.ee2 != null && message.ee2.length) {
@@ -228,6 +239,10 @@ $root.config = (function() {
                     }
                 case 6: {
                         message.theme = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.shape = reader.int32();
                         break;
                     }
                 case 10: {
@@ -308,6 +323,9 @@ $root.config = (function() {
             if (message.theme != null && message.hasOwnProperty("theme"))
                 if (!$util.isInteger(message.theme))
                     return "theme: integer expected";
+            if (message.shape != null && message.hasOwnProperty("shape"))
+                if (!$util.isInteger(message.shape))
+                    return "shape: integer expected";
             if (message.ee != null && message.hasOwnProperty("ee")) {
                 properties._ee = 1;
                 if (!(message.ee && typeof message.ee.length === "number" || $util.isString(message.ee)))
@@ -377,6 +395,8 @@ $root.config = (function() {
             }
             if (object.theme != null)
                 message.theme = object.theme | 0;
+            if (object.shape != null)
+                message.shape = object.shape | 0;
             if (object.ee != null)
                 if (typeof object.ee === "string")
                     $util.base64.decode(object.ee, message.ee = $util.newBuffer($util.base64.length(object.ee)), 0);
@@ -414,6 +434,7 @@ $root.config = (function() {
                 object.showHistory = false;
                 object.sideMode = options.enums === String ? "L" : 0;
                 object.theme = 0;
+                object.shape = 0;
             }
             if (message.showBookmark != null && message.hasOwnProperty("showBookmark"))
                 object.showBookmark = message.showBookmark;
@@ -427,6 +448,8 @@ $root.config = (function() {
                 object.sideMode = options.enums === String ? $root.config.Config.SideMode[message.sideMode] === undefined ? message.sideMode : $root.config.Config.SideMode[message.sideMode] : message.sideMode;
             if (message.theme != null && message.hasOwnProperty("theme"))
                 object.theme = message.theme;
+            if (message.shape != null && message.hasOwnProperty("shape"))
+                object.shape = message.shape;
             if (message.ee != null && message.hasOwnProperty("ee")) {
                 object.ee = options.bytes === String ? $util.base64.encode(message.ee, 0, message.ee.length) : options.bytes === Array ? Array.prototype.slice.call(message.ee) : message.ee;
                 if (options.oneofs)
