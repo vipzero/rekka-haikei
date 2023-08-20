@@ -11,8 +11,7 @@ function RecentHistoryList() {
 
 	return (
 		<div
-			className="co-recenthist"
-			data-co
+			className="co-recenthist co-panel"
 			onClick={(e) => e.stopPropagation()}
 			style={{ display: visible ? 'block' : 'none' }}
 		>

@@ -163,3 +163,7 @@ export const ThemeSingl = {
 export const ThemeCodeGeass = {
 	args: { setting: { ...setting, theme: 'codegeass' } },
 }
+
+export const ThemeYojitsu = {
+	args: { setting: { ...setting, theme: 'yojitsu' } },
+}

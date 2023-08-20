@@ -176,7 +176,7 @@ const Container = styled.div`
 			visibility: visible;
 		}
 	}
-	[data-co] {
+	.co-panel {
 		padding: 0.4rem 0.4rem;
 		p {
 			font-size: 0.8rem;
@@ -233,17 +233,17 @@ const Wrap = styled.div<{ customTheme: string }>`
 			margin-left: 2px;
 		}
 	}
-	[data-co] {
+	.co-panel {
 		background-color: var(--co-bg);
 		overflow: auto;
 		white-space: nowrap;
 	}
 	#panel,
-	[data-co] {
+	.co-panel {
 		width: 100%;
 	}
 	#panel,
-	[data-co] {
+	.co-panel {
 		p,
 		a {
 			font-weight: bold;

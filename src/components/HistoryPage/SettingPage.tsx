@@ -168,7 +168,7 @@ const Style = styled.div<{ customTheme: string }>`
 			}
 		}
 		#panel,
-		[data-co] {
+		.co-panel {
 			p,
 			a {
 				font-weight: bold;

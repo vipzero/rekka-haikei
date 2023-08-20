@@ -177,6 +177,7 @@ export const exStyles = css`
 			color: red;
 		}
 		#panel {
+			border-radius: 0;
 			/* background-image: linear-gradient(326deg, #67084bbb 0%, #1a0245bb 74%); */
 		}
 	}
@@ -200,7 +201,7 @@ export const exStyles = css`
 			border-radius: 0;
 		}
 		#panel,
-		[data-co] {
+		.co-panel {
 			p,
 			a {
 				text-shadow: 0 0 2px white;
@@ -281,7 +282,7 @@ export const exStyles = css`
 			overflow: visible;
 		}
 		#panel,
-		[data-co] {
+		.co-panel {
 			p,
 			a {
 				text-shadow: 4px 4px 0 #000, 1px 1px 1px var(--panel-fo-shadow-color),

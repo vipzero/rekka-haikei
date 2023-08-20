@@ -13,8 +13,7 @@ export function BookmarkMiniList({ books, toggleFavorites }: Props) {
 
 	return (
 		<div
-			className="co-books"
-			data-co
+			className="co-books co-panel"
 			onClick={(e) => e.stopPropagation()}
 			style={{ display: visible ? 'block' : 'none' }}
 		>

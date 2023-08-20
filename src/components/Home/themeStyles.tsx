@@ -91,7 +91,7 @@ export const shapeStyles = css`
 		.flex-rows > *:not(:first-child) {
 			margin-left: 0;
 		}
-		[data-co] {
+		.co-panel {
 			width: max-content;
 			max-width: calc(100vw - 8px * 2);
 			background: var(--content-bg-color-alpha, var(--content-bg-color));
@@ -111,7 +111,7 @@ export const shapeStyles = css`
 		}
 	}
 	&[data-shape='2'] {
-		[data-co] {
+		.co-panel {
 			display: none;
 		}
 		#panel {
@@ -125,7 +125,7 @@ export const shapeStyles = css`
 	}
 	&[data-shape='3'] {
 		#panel,
-		[data-co] {
+		.co-panel {
 			visibility: hidden;
 		}
 	}
