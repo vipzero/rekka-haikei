@@ -1,5 +1,4 @@
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons'
-import { faToggleOff, faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
@@ -12,7 +11,6 @@ type Props = {
 	helpText?: string
 	icon?: IconDefinition
 	children?: ReactNode
-	showToggleIcon?: boolean
 	disabled?: boolean
 	areaKey?: string // grid-area用一意な2文字
 	mini?: boolean
@@ -27,7 +25,6 @@ export const ConfButton = ({
 	areaKey,
 	helpText = '',
 	checked = `none`,
-	showToggleIcon = false,
 	disabled = false,
 	text = '',
 	mini = false,
@@ -49,11 +46,6 @@ export const ConfButton = ({
 					<FontAwesomeIcon icon={icon} />
 				</IconWrap>
 			)}
-			{/* {showToggleIcon && (
-				<IconWrap>
-					<FontAwesomeIcon icon={checked ? faToggleOn : faToggleOff} />
-				</IconWrap>
-			)} */}
 			{children}
 			<span className="help-text">{helpText}</span>
 			{text}

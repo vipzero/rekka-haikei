@@ -216,7 +216,6 @@ function SettingBox({
 						icon={faHistory}
 						checked={s.showHistory}
 						onClick={s.toggleHistory}
-						showToggleIcon
 						disabled={emptyMode}
 					/>
 
@@ -313,7 +312,6 @@ function SettingBox({
 							icon={faTags}
 							checked={s.showCounts}
 							onClick={s.toggleCounts}
-							showToggleIcon
 							disabled={shape.detailOptLock}
 						/>
 						<ConfButton
@@ -323,7 +321,6 @@ function SettingBox({
 							icon={faCompactDisc}
 							checked={s.showArtwork}
 							onClick={s.toggleArtwork}
-							showToggleIcon
 							disabled={shape.detailOptLock}
 						/>
 						<ConfButton
@@ -333,7 +330,6 @@ function SettingBox({
 							icon={faBookmark}
 							checked={s.showBookmark}
 							onClick={s.toggleBookmark}
-							showToggleIcon
 							disabled={emptyMode}
 						/>
 						<ConfButton
@@ -403,7 +399,6 @@ function SettingBox({
 									icon={faHistory}
 									checked={s.showHistory}
 									onClick={s.toggleHistory}
-									showToggleIcon
 									disabled={emptyMode}
 									mini
 								/>
