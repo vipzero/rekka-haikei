@@ -39,6 +39,7 @@ it('config protbuf decode', () => {
 it('sammonSpell', () => {
 	const spell = sammonSpell({
 		theme: '',
+		shape: 1,
 		showSetting: false,
 		showBookmark: false,
 		showArtwork: false,
@@ -59,6 +60,8 @@ it('sammonSpell', () => {
 		customTheme: '',
 		showEmol: false,
 		blockGif: false,
+		eeMemo: {},
+		bingo: '',
 	})
 	expect(spell).toMatchInlineSnapshot(
 		`"ꔈꔀꔐꔀꔘꔀꔨꔁꕚꔱꔀꔀꔀꔂꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔁꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀ"`
