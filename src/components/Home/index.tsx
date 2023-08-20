@@ -117,7 +117,7 @@ function Home({ song, setBg }: Props) {
 				song={song}
 				streamUrl={streamUrl}
 				setStreamUrl={setStreamUrl}
-				favorited={books[song.icy]}
+				favorited={!!books[song.icy]}
 				toggleFavorited={() => toggleFavorites(song.icy)}
 				bgcmOpen={bgcmOpen}
 				toggleBgcmOpen={() => setBgcmOpen((v) => !v)}

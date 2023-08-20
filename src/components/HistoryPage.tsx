@@ -316,7 +316,7 @@ function HistoryPageBase() {
 							<TableItem
 								key={reco.time}
 								reco={reco}
-								favorited={favorites[reco.title]}
+								favorited={!!favorites[reco.title]}
 								toggleFavorites={() => toggleFavorites(reco.title)}
 							/>
 						))}

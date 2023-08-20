@@ -158,6 +158,7 @@ function SettingBox({
 						icon={faPalette}
 						onClick={s.cycleTheme}
 						text={allThemesById[s.theme]?.key || allThemes[0].key}
+						variant="cycle"
 					/>
 					<ConfButton
 						helpText={'型: '}
@@ -166,6 +167,7 @@ function SettingBox({
 						icon={faCube}
 						onClick={s.cycleShape}
 						text={shape.key}
+						variant="cycle"
 					/>
 					<ConfButton
 						helpText="レイアウト: "
@@ -176,6 +178,7 @@ function SettingBox({
 						text={sideModeText[s.sideMode]}
 						checked={['wide', 'bw'].includes(s.sideMode)}
 						disabled={emptyMode}
+						variant="cycle"
 					/>
 
 					<ConfButton
@@ -203,6 +206,7 @@ function SettingBox({
 						icon={favorited ? faStarFill : faStar}
 						onClick={book}
 						checked={favorited}
+						variant="action"
 					/>
 
 					<ConfButton
@@ -229,8 +233,9 @@ function SettingBox({
 						className="snap"
 						areaKey="ss"
 						icon={faPaperclip}
-						checked={snapped}
+						// checked={snapped}
 						onClick={snapping}
+						variant="action"
 					/>
 
 					<ConfButton
@@ -257,6 +262,7 @@ function SettingBox({
 						icon={faMagicWandSparkles}
 						checked={bgcmOpen}
 						onClick={toggleBgcmOpen}
+						variant="action"
 					/>
 					<ConfButton
 						helpText="ビンゴ"
@@ -298,6 +304,7 @@ function SettingBox({
 							icon={faCircleHalfStroke}
 							onClick={cycleAbyss}
 							text={abyssColorsEx[abyss]?.label || '???'}
+							variant="cycle"
 						/>
 						<ConfButton
 							helpText="タグ表示"

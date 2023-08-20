@@ -194,6 +194,8 @@ export const exStyles = css`
 		--deb-bg: #373f4f;
 		--btn-bg-color: #373f4f;
 		--btn-bg-checked-color: #616f84;
+		--btn-bo: #cacaca;
+		--btn-bo-checked: #848484;
 
 		--bingo-bg-color: #ccc;
 		--bingo-bg-hit-color: #9eece4;
