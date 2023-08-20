@@ -17,7 +17,6 @@ export const Base: Story = {
 		icon: faCompactDisc,
 		checked: false,
 		onClick: () => {},
-		showToggleIcon: true,
 		disabled: false,
 	},
 }

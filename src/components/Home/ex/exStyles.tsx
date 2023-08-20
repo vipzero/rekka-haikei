@@ -90,6 +90,9 @@ export const exStyles = css`
 		--setting-bg-color: rgba(255, 255, 255, 0.5);
 		--deb-fo: #0385f4; // デバッグ背景
 
+		--btn-bo: var(--ex-color);
+		--btn-bo-checked: var(--ex-color);
+
 		div {
 			border-bottom: solid 1px var(--ex-color);
 			margin-bottom: -1px;
@@ -132,6 +135,9 @@ export const exStyles = css`
 		--setting-bg-color: rgba(0, 0, 0, 0.5);
 		--deb-fo: #13e0ad; // デバッグ背景
 
+		--btn-bo: var(--ex-color);
+		--btn-bo-checked: var(--ex-color);
+
 		div {
 			border-bottom: solid 1px var(--ex-color);
 			margin-bottom: -1px;
@@ -172,6 +178,10 @@ export const exStyles = css`
 		--setting-bg-color-alpha: var(--setting-bg-color-alpha);
 		--panel-fo-color: black;
 		--panel-fo-shadow-color: #6f5dbb;
+
+		--btn-bo: var(--ex-color);
+		--btn-bo-checked: var(--ex-color);
+
 		/* --deb-fo: #fff; // デバッグ背景 */
 		button.book {
 			color: red;
@@ -199,6 +209,10 @@ export const exStyles = css`
 
 		--bingo-bg-color: #ccc;
 		--bingo-bg-hit-color: #9eece4;
+
+		--btn-bo: transparent;
+		--btn-bo-checked: transparent;
+
 		#panel {
 			box-shadow: 0 0 0 4px #b4ece6, 0 0 0 20px #616f84;
 			border-radius: 0;
@@ -234,6 +248,7 @@ export const exStyles = css`
 	}
 
 	&[data-theme='choco'] {
+		--ex-color: #311;
 		--font-color: #ffc627;
 		--panel-fo: #ffe697;
 		--panel-fo-shadow-color: #000;
@@ -248,6 +263,9 @@ export const exStyles = css`
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #ffe697;
 		--deb-fo: #dda; // デバッグ背景
+
+		--btn-bo: var(--ex-color);
+		--btn-bo-checked: var(--ex-color);
 
 		#timebar {
 			.wrap {

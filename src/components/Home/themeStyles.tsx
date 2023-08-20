@@ -45,6 +45,8 @@ export const themeStyles = css`
 		--bingo-bg-hit-color: #88f;
 		--deb-bg: #111;
 		--deb-fo: #eee;
+		--btn-bo: #464646;
+		--btn-bo-checked: #595959;
 	}
 	${exStyles}
 
