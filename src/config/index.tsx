@@ -31,6 +31,7 @@ export const EE_CHAR: Record<number, string> = {
 	3: '/',
 	4: '!',
 	5: ':',
+	6: '❆',
 }
 
 export const currentEvent = events.find((v) => v.current)
