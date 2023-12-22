@@ -4,30 +4,48 @@ import { range } from '../../../util'
 type Props = {
 	cd: Record<string, boolean>
 }
+
+type Cell = {
+	label: string
+	y: number
+}
+
 const cells1 = [
-	{ label: '' },
-	{ label: 'LTP' },
-	{ label: 'LTH' },
-	{ label: 'LTD' },
-	{ label: 'LTF' },
-	{ label: 'MTG' },
-	{ label: 'MTW' },
-	{ label: 'MTS' },
-	{ label: '' },
+	{ label: '', y: 2013 },
+	{ label: 'LTP', y: 2013.6 },
+	{ label: 'LTH', y: 2014.6 },
+	{ label: 'LTD', y: 2015.6 },
+	{ label: 'LTF', y: 2016.6 },
+	{ label: 'MTG', y: 2017.5 },
+	{ label: 'MTW', y: 2019.4 },
+	{ label: 'MTS', y: 2021.4 },
+	{ label: ' ', y: 2023.3 },
+	{ label: 'MAT', y: 2023.6 },
+	{ label: ' ', y: 2024.4 },
 ]
 const cells2 = [
-	{ label: '' },
-	{ label: 'TA' },
-	{ label: '' },
-	{ label: 'MS' },
-	{ label: 'TB' },
-	{ label: '' },
-	{ label: 'TC' },
-	{ label: '' },
-	{ label: 'MS2' },
-	{ label: '' },
+	{ label: '', y: 2013 },
+	{ label: 'TA', y: 2016.3 },
+	{ label: '', y: 2016.8 },
+	{ label: 'MS', y: 2017.3 },
+	{ label: 'TB', y: 2018.2 },
+	{ label: '', y: 2018.7 },
+	{ label: 'TC', y: 2019.6 },
+	{ label: '', y: 2020.5 },
+	{ label: 'MS2', y: 2022 },
+	{ label: 'MC', y: 2023.7 },
+	{ label: '', y: 2024.3 },
 ]
-const years = range(2023 - 2013 + 1).map((i) => 2013 + i)
+const startYear = 2013
+const endYear = 2024
+const rangeYear = endYear - startYear + 1
+const years = range(rangeYear).map((i) => startYear + i)
+
+const toCellColumns = (years: Cell[]) =>
+	years
+		.map((a, i) => (years[i + 1] ? years[i + 1].y : endYear + 1) - a.y)
+		.map((v) => `${((v * 100) / rangeYear).toFixed(2)}%`)
+		.join(' ')
 
 export const ImasMilionTl = ({ cd }: Props) => {
 	return (
@@ -88,12 +106,12 @@ const Style = styled.div`
 	.ml1 {
 		display: grid;
 		width: 100%;
-		grid-template-columns: 5% 9% 9% 10% 8% 17% 18% 17% 5%;
+		grid-template-columns: ${toCellColumns(cells1)};
 	}
 	.ml2 {
 		display: grid;
 		width: 100%;
-		grid-template-columns: 29% 5% 5% 8% 6% 7% 8% 14% 10%;
+		grid-template-columns: ${toCellColumns(cells2)};
 	}
 	/* width: min */
 `

@@ -95,7 +95,7 @@ const RainEx = () => {
 }
 
 const MtsEx = ({ s }: { s: string }) => {
-	if (s === '') return null
+	if (!s) return null
 	const lineUp = (s: string) => {
 		if (s === '') return false
 		const [os, ss, dols] = s.split(':')
@@ -157,7 +157,9 @@ function ExCompMain({ eeKey, rand, eeOpt, eeMemo }: ExCompProp) {
 	} else if (eeKey === 'lain') {
 		return <Lain r={uaHash()} />
 	} else if (eeKey === 'mts10') {
-		return <MtsEx s={eeOpt?.id !== 'text' ? eeMemo['mts10'] : eeOpt.s || ''} />
+		return (
+			<MtsEx s={(eeOpt?.id !== 'text' ? eeMemo['mts10'] : eeOpt.s) || ''} />
+		)
 	} else if (eeKey === 'masso') {
 		return (
 			<div id="masso">
