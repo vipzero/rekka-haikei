@@ -22,7 +22,7 @@ export const events: Event[] = [
 	{ id: '2021gw', label: '2021GW' },
 	{ id: '2020nematu', label: '2020冬' },
 ]
-export const EE_SEASON = 4
+export const EE_SEASON = 5
 
 export const EE_CHAR: Record<number, string> = {
 	0: '.',
@@ -30,8 +30,7 @@ export const EE_CHAR: Record<number, string> = {
 	2: '#',
 	3: '/',
 	4: '!',
-	5: ':',
-	6: '❆',
+	5: '❆',
 }
 
 export const currentEvent = events.find((v) => v.current)
