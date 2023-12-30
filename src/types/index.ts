@@ -19,6 +19,7 @@ export type SongMiss = {
 	wordCounts: Record<string, number>
 	wordCountsAna: { name: string; label: string; count: number }[]
 	imageSearchWord: string
+	frontVersion?: { ver: number; msg: string }
 	hedwig?: string
 }
 

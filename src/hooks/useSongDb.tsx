@@ -5,13 +5,14 @@ import {
 	useEffect,
 	useState,
 } from 'react'
+import { toast } from 'react-toastify'
 import {
 	incSongBookCount,
 	readSong,
 	saveSongBg,
 	watchHistSong,
 } from '../service/firebase'
-import { currentEvent } from '../config'
+import { currentEvent, featcherVersion } from '../config'
 import { HistoryRaw, Song } from '../types'
 import { formatCount } from '../util'
 import { useQeuryEid } from './useQueryEid'
@@ -44,6 +45,12 @@ export function useSongDb(online = true) {
 			song.wordCountsAna = [...wordCountsAna].sort((a, b) => a.count - b.count)
 
 			setSong(song)
+			if (song.frontVersion && song.frontVersion.ver > featcherVersion) {
+				const { msg } = song.frontVersion
+				setTimeout(() => {
+					toast.info(msg, { autoClose: false })
+				}, 1000)
+			}
 			checkHit(song.icy + ' _ ' + song.animeTitle || '')
 			setLoaded(true)
 		})
