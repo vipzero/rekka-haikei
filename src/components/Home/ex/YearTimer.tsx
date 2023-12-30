@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import styled from 'styled-components'
 import { useTick, useTick5m } from '../../../hooks/useTick'
 
-const YEAR = 2025
+const YEAR = new Date(+new Date() - 1000 * 60 * 60).getFullYear() + 1
 const TARGET = +new Date(YEAR, 0, 1, 0, 0, 0, 0)
 
 const calcActive = (now: Date) => {
