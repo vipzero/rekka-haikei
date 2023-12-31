@@ -11,6 +11,7 @@ export const themeStyles = css`
 		--setting-bg-color: #aaa;
 		--content-bg-color-alpha: #aaaa;
 		--btn-bg-color: #efefef;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: #999;
 		--btn-bo: #cacaca;
 		--btn-bo-checked: #848484;
@@ -40,6 +41,7 @@ export const themeStyles = css`
 		--setting-bg-color: #888;
 		--content-bg-color-alpha: #0008;
 		--btn-bg-color: #000;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: #333;
 		--bingo-bg-color: #333;
 		--bingo-bg-hit-color: #88f;

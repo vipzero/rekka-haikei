@@ -111,6 +111,7 @@ const Style = styled.button`
 	}
 
 	&[data-checked='true'] {
+		color: var(--btn-fo-checked-color) !important;
 		background: var(--btn-bg-checked-color) !important;
 		svg {
 			animation: var(--animation-bounce);

@@ -150,13 +150,13 @@ const Style = styled.div<{ customTheme: string }>`
 		}
 
 		#panel {
-			background-color: var(--sb-bg);
+			background: var(--sb-bg);
 			padding: 12px 4px;
 			margin: 4px;
 		}
 		#setting-box {
 			padding: 8px;
-			background-color: var(--sb-bg);
+			background: var(--sb-bg);
 		}
 
 		button {
@@ -164,6 +164,7 @@ const Style = styled.div<{ customTheme: string }>`
 			color: var(--btn-fo-color);
 			background-color: var(--btn-bg);
 			&[data-checked='true'] {
+				color: var(--btn-fo-checked-color) !important;
 				background: var(--btn-bg-checked-color) !important;
 			}
 		}

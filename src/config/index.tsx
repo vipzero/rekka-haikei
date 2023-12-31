@@ -65,6 +65,7 @@ export const extThemes: ExTheme[] = [
 	{ id: 'codegeass', key: 'CODEG' },
 	{ id: 'yojitsu', key: 'ID___' },
 	{ id: 'choco', key: 'CHOCO' },
+	{ id: 'cyberpunk', key: 'CYBPK' },
 ]
 export const isExtTheme = (s: Eekey) => extThemes.some((v) => v.id === s)
 export const decideTheme = (s: ThemeId, eeKey: EekeyState) =>

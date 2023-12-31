@@ -86,6 +86,7 @@ export const exStyles = css`
 		--font-color: #b8deff;
 		--btn-fo-color: var(--ex-color);
 		--btn-bg-color: #fff;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: #b8deff;
 		--setting-bg-color: rgba(255, 255, 255, 0.5);
 		--deb-fo: #0385f4; // デバッグ背景
@@ -130,6 +131,7 @@ export const exStyles = css`
 		--font-color: var(--ex-color);
 		--btn-fo-color: var(--ex-color);
 		--btn-bg-color: #15353b;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: black;
 		--font-color: white;
 		--setting-bg-color: rgba(0, 0, 0, 0.5);
@@ -164,6 +166,7 @@ export const exStyles = css`
 		--font-color: #6f5dbb;
 		--btn-fo-color: #dcd3ff;
 		--btn-bg-color: #140d51;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: black;
 		--font-color: white;
 		--content-bg-color: #050033;
@@ -175,7 +178,6 @@ export const exStyles = css`
 			#67084b88 40%,
 			#67084b00 74%
 		);
-		--setting-bg-color-alpha: var(--setting-bg-color-alpha);
 		--panel-fo-color: black;
 		--panel-fo-shadow-color: #6f5dbb;
 
@@ -203,6 +205,7 @@ export const exStyles = css`
 		--content-bg-color-alpha: #373f4faa;
 		--deb-bg: #373f4f;
 		--btn-bg-color: #373f4f;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: #616f84;
 		--btn-bo: #cacaca;
 		--btn-bo-checked: #848484;
@@ -258,6 +261,7 @@ export const exStyles = css`
 		--content-bg-color-alpha: #795548ee;
 		--deb-bg: #795548ee;
 		--btn-bg-color: #ffe;
+		--btn-fo-checked-color: var(--btn-fo-color);
 		--btn-bg-checked-color: #dda;
 
 		--bingo-bg-color: #333;
@@ -272,13 +276,49 @@ export const exStyles = css`
 				background: #ffa;
 			}
 			.fill {
-				background-color: var(--sb-bg);
+				background: var(--sb-bg);
 			}
 			.pointer {
 				background-color: green;
 			}
 		}
 	}
+
+	&[data-theme='cyberpunk'] {
+		--ex-color: #faee51;
+		--font-color: #2b4e34;
+		--btn-fo-color: var(--ex-color);
+		--btn-bg-color: black;
+		--btn-fo-checked-color: #000;
+		--btn-bg-checked-color: #82db6bff;
+		--font-color: #000;
+		--content-bg-color-alpha: linear-gradient(
+			326deg,
+			#080f1bee 10%,
+			#15283aee 90%
+		);
+		--content-bg-color: #091624;
+		/* --setting-bg-color: #fff; */
+		--setting-bg-color: linear-gradient(to bottom, #faee51 40%, #faee5100 100%);
+		--content-bg-color-alpha: #15283aaa;
+		--panel-fo: #faee51;
+		--panel-fo-color: #82db6bff;
+		--panel-fo-shadow-color: #00790b;
+
+		--btn-bo: var(--ex-color);
+		--btn-bo-checked: var(--ex-color);
+
+		--deb-fo: #b70000;
+		/* dark red great gradation  */
+		--deb-bg: radial-gradient(circle at 50% 50%, #220000bf 0%, #530000 100%);
+		button.book {
+		}
+		#panel {
+			border-radius: 0;
+			/* background-image: linear-gradient(326deg, #67084bbb 0%, #1a0245bb 74%); */
+		}
+	}
+
 	&[data-theme='lain'] {
 		* {
 			color: hsla(0, 50%, 50%) !important;

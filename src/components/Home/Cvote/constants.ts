@@ -33,6 +33,7 @@ export const eekeysThemetic = [
 	'codegeass',
 	'lain',
 	'choco',
+	'cyberpunk',
 ] as const
 export const eekeysMirror = [
 	'spin',
@@ -177,6 +178,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 		'masso',
 	],
 	[/ちょこ|チョコ|choco/i, 'choco'],
+	[/サイバーパンク|cyberpunk/i, 'cyberpunk'],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
@@ -234,4 +236,5 @@ export const eeId: Record<EekeyStr, number> = {
 	yojitsu: 49,
 	choco: 50,
 	codegeass: 51,
+	cyberpunk: 52,
 }

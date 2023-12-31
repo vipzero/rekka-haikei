@@ -452,7 +452,7 @@ const Wrap = styled.div`
 
 	> div {
 		padding: 8px;
-		background-color: var(--sb-bg);
+		background: var(--sb-bg);
 	}
 	button,
 	> div {
@@ -469,7 +469,7 @@ const Wrap = styled.div`
 			font-size: 1rem;
 		}
 		a {
-			background-color: var(--sb-bg);
+			background: var(--sb-bg);
 			/* min-height: 32px; */
 			/* width: 100%; */
 			svg {
