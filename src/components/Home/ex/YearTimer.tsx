@@ -5,13 +5,13 @@ import { useTick, useTick5m } from '../../../hooks/useTick'
 const YEAR = new Date(+new Date() - 1000 * 60 * 60).getFullYear() + 1
 const TARGET = +new Date(YEAR, 0, 1, 0, 0, 0, 0)
 
-const calcActive = (now: Date) => {
+const calcActive = (now) => {
 	const a = TARGET - +now
 	const ds = Math.floor(a / 1000)
 	const m = Math.floor(ds / 60)
 	const s = ds % 60
 
-	const before30 = a < -30 * 1000
+	const before30 = a < 30 * 1000
 	const stat = a > 0 ? 'active' : 'end'
 	return { stat, m, s, before30 }
 }
