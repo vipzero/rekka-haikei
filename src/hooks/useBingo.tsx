@@ -1,4 +1,6 @@
 import { toast } from 'react-toastify'
+import { useState } from 'react'
+import { set } from 'lodash'
 import { range } from '../util'
 import { useSettingsBase } from './useSettings'
 
@@ -14,7 +16,7 @@ type Bingo = {
 
 export const parseBingo = (text: string): Bingo => {
 	const lines = (text || '').split('\n')
-	const items = range(25)
+	const items = range(16)
 		.map((i) => lines[i] || '')
 		.map((item): BingoItem => {
 			const [name, match, cc] = item.split(':')
@@ -40,6 +42,28 @@ export const isHit = (str: string, bingoItem: BingoItem) => {
 	if (!setuped || !matcher) return false
 
 	return !!new RegExp(matcher).exec(str)
+}
+export const useBingoEdit = (
+	bingo: Bingo,
+	setBingo: (bingo: Bingo) => void
+) => {
+	const [mode, setMode] = useState<{ id: 'edit'; i: number } | { id: 'view' }>({
+		id: 'view',
+	})
+	const changeItem = (i: number, text: string) => {
+		const items = bingo.items.map((v, j) =>
+			i === j ? { ...v, name: text, match: text } : v
+		)
+		setBingo({ items })
+	}
+	const startEdit = (i: number) => {
+		setMode({ id: 'edit', i })
+	}
+	const endEdit = () => {
+		setMode({ id: 'view' })
+	}
+
+	return { mode, setMode, changeItem, startEdit, endEdit }
 }
 
 export const useBingo = () => {
@@ -77,6 +101,7 @@ export const useBingo = () => {
 	return {
 		bingo,
 		toggleItem,
+		setBingo: (bingo: Bingo) => setBingo(() => encodeBingo(bingo)),
 		checkHit,
 		bingoText,
 		setBingoText,
