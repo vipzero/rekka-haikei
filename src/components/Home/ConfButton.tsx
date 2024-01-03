@@ -109,6 +109,10 @@ const Style = styled.button`
 			border: dashed 1px var(--btn-bo);
 		}
 	}
+	&:hover {
+		/* background: var(--btn-bg-checked-color) !important; */
+		filter: brightness(0.8) invert(0.1);
+	}
 
 	&[data-checked='true'] {
 		color: var(--btn-fo-checked-color) !important;

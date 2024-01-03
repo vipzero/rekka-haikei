@@ -1,6 +1,5 @@
-import { toast } from 'react-toastify'
 import { useState } from 'react'
-import { set } from 'lodash'
+import { toast } from 'react-toastify'
 import { range } from '../util'
 import { useSettingsBase } from './useSettings'
 
