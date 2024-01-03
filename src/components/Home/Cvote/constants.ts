@@ -167,7 +167,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	// ['アマガミ', 'amagami'],
 	// [/シャイニング.?ピース/, 'shining'],
 	['まっしろわーるど', 'masshiro'],
-	[/colorful|虹|rainbow/i, 'rainbow'],
+	[/colorful|虹($|色|[\p{scx=Hiragana}])|rainbow/iu, 'rainbow'],
 	[/雨([^上宮]|!?あがり)|[^a-z]rain/i, 'rain'],
 	[/�/, 'lain'],
 	// [/高嶺 ?愛花|小早川 ?凛子|姉ヶ崎 ?寧々/, 'loveplus'],
