@@ -197,6 +197,11 @@ async function getHistories(
 		)
 		.reverse()
 }
+const whereHistory = (h: History, { fetchN = false }: { fetchN: boolean }) => {
+	if (fetchN) return h.n !== null
+	// n を取得していない部分までは再取得する
+	return true
+}
 
 export function useHistoryDb() {
 	const eventId = useQeuryEid()
@@ -207,16 +212,15 @@ export function useHistoryDb() {
 	const [countsSong, setCountsSong] = useState<Count[]>([])
 
 	useEffect(() => {
-		let any = false
-		// n を取得していない部分までは再取得する
-		const histOld = histories.filter((h) => {
-			if (any) return true
-			const b = h.n !== null
-			any = b
-			return b
-		})
+		const oldIndex = histories.findIndex((h) =>
+			whereHistory(h, { fetchN: false })
+		)
 
-		getHistories(eventId, histOld[0]?.time || 0, histOld).then((hists) => {
+		getHistories(
+			eventId,
+			histories[oldIndex]?.time || 0,
+			histories.splice(oldIndex + 1)
+		).then((hists) => {
 			setHists(hists)
 
 			const counts = makeCounts(hists)
