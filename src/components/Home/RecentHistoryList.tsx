@@ -35,8 +35,9 @@ function RecentHistoryList() {
 							</span>
 							<span className="mm">{m}</span>
 							<span className="ss">:{s}</span>
+							&nbsp;
 						</span>
-						<span style={{ marginLeft: '4px' }}>{hist.title}</span>
+						<span>{hist.title}</span>
 					</p>
 				)
 			})}
