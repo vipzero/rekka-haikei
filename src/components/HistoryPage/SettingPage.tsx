@@ -9,6 +9,7 @@ import {
 import { ConfButton } from '../Home/ConfButton'
 import { CheckBox } from '../common/CheckBox'
 import { ShortcutDescription } from './ShortcutDescription'
+import { StreamerIcyTagDescription } from './StreamerIcyTagDescription'
 
 export function SettingPage() {
 	const { enableFakeBar, toggleEnableFakeBar } = useSettingsFakeBar()
@@ -110,6 +111,9 @@ export function SettingPage() {
 				<p>
 					<img src="https://i.imgur.com/AUViOQB.png" />
 				</p>
+			</section>
+			<section>
+				<StreamerIcyTagDescription />
 			</section>
 			<ShortcutDescription />
 		</Style>
