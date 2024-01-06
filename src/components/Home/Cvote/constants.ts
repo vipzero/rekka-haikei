@@ -11,6 +11,7 @@ export const eekeysGimic = [
 	'masshiro', // R
 	'halowa',
 	'rain', // R
+	'bkbk',
 	'rainbow',
 	'gaming',
 	'subetef',
@@ -141,6 +142,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	// ['極黒のブリュンヒルデ', 'bryunhild'],
 	// [/山田.*魔女/, 'yamajo'],
 	['コードギアス', 'codegeass'],
+	[/サイバーパンク|cyberpunk/i, 'cyberpunk'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	// [ (song) => song.animeTitle === '人生', 'jinsei' ],
@@ -179,6 +181,7 @@ export const EX_PATTERNS_ICY: [string | RegExp, Eekey][] = [
 	],
 	[/ちょこ|チョコ|choco/i, 'choco'],
 	[/サイバーパンク|cyberpunk/i, 'cyberpunk'],
+	[/シュワシュワ|シークヮーサー|ソーダ|サイダー|ビタミン/i, 'bkbk'],
 ]
 
 // protobuf 逆引き用, 再割り当てと欠落不可
@@ -237,4 +240,5 @@ export const eeId: Record<EekeyStr, number> = {
 	choco: 50,
 	codegeass: 51,
 	cyberpunk: 52,
+	bkbk: 53,
 }

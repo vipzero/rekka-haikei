@@ -81,6 +81,7 @@ export const Flip = eeArgs('flip')
 export const Aria = eeArgs('ariascarlet')
 export const Shiki = eeArgs('subetef')
 export const Parapara = eeArgs('parapara')
+export const Bkbk = eeArgs('bkbk')
 export const Mts10A = {
 	args: {
 		setting: {

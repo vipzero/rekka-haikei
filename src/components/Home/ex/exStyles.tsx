@@ -80,6 +80,47 @@ export const exStyles = css`
 			animation-duration: 8s;
 		}
 	}
+	&[data-ex='bkbk'] {
+		#bkbk {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 100vw;
+			height: 100vh;
+			border: solid 1px orange;
+			/* Bubbles */
+			.bubbles {
+				position: absolute;
+				bottom: 0;
+				/* z-index: 5; */
+				margin-right: 50px;
+				background-color: white;
+				border-radius: 50%;
+				/* opacity: 0.5; */
+				width: 40px;
+				height: 40px;
+				animation: up 4s infinite;
+			}
+
+			/* Bubbles Animation */
+			@keyframes up {
+				100% {
+					transform: translateY(-100vh);
+				}
+			}
+		}
+		@keyframes plasma {
+			0% {
+				transform: scale(6) translate3d(20px, 0, 0);
+			}
+			50% {
+				transform: scale(1) translate3d(-60px, 0, 0);
+			}
+			100% {
+				transform: scale(6) translate3d(20px, 0, 0);
+			}
+		}
+	}
 
 	&[data-theme='kokaku'] {
 		--ex-color: #0385f4;
