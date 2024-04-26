@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps<{}>) => (
 			/>
 			<link
 				rel="shortcut icon"
-				href="/icons/icon-512x512.png"
+				href="/icons/icon-512w.png"
 				key="shortcutIcon"
 			/>
 			<link rel="manifest" href="/manifest.json" />
@@ -35,7 +35,7 @@ const App = ({ Component, pageProps }: AppProps<{}>) => (
 			<link
 				rel="apple-touch-icon"
 				sizes="192x192"
-				href="/icons/icon-maskable-192x192.png"
+				href="/icons/icon-192w.png"
 			/>
 		</Head>
 		<Component {...pageProps} />
