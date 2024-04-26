@@ -1,6 +1,9 @@
 import { toast } from 'react-toastify'
 import styled from 'styled-components'
-import { defaultCustomTheme } from '../../atom/customThemes'
+import {
+	customThemeVarDescs,
+	defaultCustomTheme,
+} from '../../atom/customThemes'
 import {
 	useSettingsCustomTheme,
 	useSettingsFakeBar,
@@ -71,6 +74,21 @@ export function SettingPage() {
 					/>
 				</div>
 				<div>
+					<div
+						style={{
+							fontSize: '0.8rem',
+							display: 'grid',
+							gridTemplateColumns: '1fr 1fr',
+							justifyContent: 'start',
+						}}
+					>
+						{customThemeVarDescs.map((v) => (
+							<div key={v.var}>
+								{v.var}: {v.name}
+							</div>
+						))}
+					</div>
+					<p>※SHARP の曲名は例外で --font-color が使われます</p>
 					<button onClick={() => setCustomTheme(defaultCustomTheme)}>
 						デフォルトに戻す
 					</button>
