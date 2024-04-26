@@ -61,12 +61,15 @@ function Home({ song, setBg }: Props) {
 		(enableFakeBar === 'on' ? TMP_TRACK_TIME : undefined)
 	const { customTheme } = useSettingsCustomTheme()
 
-	const { moz, full } = useLightConfig(song, () => toggleFavorites(song.icy))
+	const { moz, maxlay, layoff } = useLightConfig(song, () =>
+		toggleFavorites(song.icy)
+	)
 
 	return (
 		<Wrap
 			onClick={() => {
 				toggleSetting()
+				layoff()
 				setBgcmOpen(false)
 			}}
 			// @ts-ignore
@@ -77,7 +80,7 @@ function Home({ song, setBg }: Props) {
 			data-theme={appliedTheme}
 			data-shape={shape}
 			data-moz={moz}
-			data-full={full}
+			data-maxlay={maxlay}
 			data-time-bar-fake={!song.trackTimeMillis && enableFakeBar === 'on'}
 			customTheme={customTheme}
 		>
@@ -297,7 +300,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 			filter: blur(100px);
 		}
 	}
-	&[data-full='true'] {
+	&[data-maxlay='true'] {
 		> :not(#bg) {
 			visibility: hidden !important;
 		}

@@ -6,8 +6,8 @@ import { useSettings, useSettingsEe } from './useSettings'
 const mozList = ['on1', 'on2', 'off']
 
 export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
-	const [moz, setMoz] = useState<typeof mozList[number]>('off')
-	const [full, setFull] = useState<boolean>(false)
+	const [moz, setMoz] = useState<(typeof mozList)[number]>('off')
+	const [maxlay, setMaxlay] = useState<boolean>(false)
 	const { openEekey } = useSettingsEe()
 
 	const s = useSettings()
@@ -19,8 +19,8 @@ export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
 		setMoz((v) => cycle(mozList, v))
 		openEekey('mosaic')
 	})
-	useKeyPressToggle(' ', setFull)
-	useKeyPressToggle('Shift', setFull)
+	useKeyPressToggle(' ', setMaxlay)
+	useKeyPressToggle('Shift', setMaxlay)
 
 	useKeyPressOne('a', s.toggleArtwork)
 	useKeyPressOne('h', s.toggleHistory)
@@ -30,5 +30,5 @@ export const useLightConfig = (song: Song, toggleFavorites: () => void) => {
 	useEffect(() => {
 		setMoz('off')
 	}, [song.icy])
-	return { moz, full }
+	return { moz, maxlay, layoff: () => setMaxlay(false) }
 }
