@@ -145,6 +145,7 @@ function SettingBox({
 			data-show-themer={showThemer}
 			data-show-detail={showDetail}
 			data-visible={s.visible}
+			data-footer-enabled={false}
 		>
 			<div style={{ width: '100%' }} onClick={(e) => e.stopPropagation()}>
 				<ButtonGrid id="button-grid-panel">
@@ -438,6 +439,9 @@ const Wrap = styled.div`
 	overflow: hidden;
 	min-width: 300px;
 	&[data-visible='false'] {
+		&[data-footer-enabled='false'] {
+			display: none;
+		}
 		> div > div:not(.footer),
 		.footer .sub {
 			display: none;
