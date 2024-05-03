@@ -140,6 +140,9 @@ const Style = styled.div`
 			&[data-name='CODEG'] {
 				${halfBallBg('#140d51', '#3c13e0')}
 			}
+			&[data-name='CYBPK'] {
+				${halfBallBg('#faee51', '#82db6bff')}
+			}
 		}
 		@keyframes changeSelect {
 			0% {
