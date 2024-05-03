@@ -287,26 +287,9 @@ function HistoryPageBase() {
 							<div>タイトル</div>
 							<div className="non-copy">ブ</div>
 							<div className="non-copy">
-								<div className="link-like" onClick={() => toggleSort('by_n')}>
-									<div className="tooltip">
-										<span className="tooltip-text">勢い</span>N
-									</div>
-								</div>
-							</div>
-							<div className="non-copy">
 								<div className="link-like" onClick={() => toggleSort('by_b')}>
 									<div className="tooltip">
 										<span className="tooltip-text">ブクマ数</span>★
-									</div>
-								</div>
-							</div>
-							<div className="non-copy">
-								<div className="link-like" onClick={() => toggleSort('by_g')}>
-									<div className="tooltip">
-										<span className="tooltip-text">
-											(ブクマ数 ^ 2)/(勢い + {BRate})
-										</span>
-										%
 									</div>
 								</div>
 							</div>
@@ -375,7 +358,7 @@ const Wrap = styled.div`
 		.hist-row {
 			width: max(96vw, 600px);
 			display: grid;
-			grid-template-columns: 188px 1fr 1.5rem 2rem 2rem 2rem;
+			grid-template-columns: 188px 1fr 1.5rem 2rem;
 		}
 
 		.hist-row {

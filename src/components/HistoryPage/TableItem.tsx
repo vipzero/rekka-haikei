@@ -42,16 +42,6 @@ export const TableItem = ({
 				className={'non-copy'}
 				data-prog-cell
 				style={{
-					background: `linear-gradient(90deg, #ff9b49 0%, #ff9b49 ${reco.n}%, #fff ${reco.n}%, #fff 100%)`,
-					textAlign: 'right',
-				}}
-			>
-				{reco.n ?? '-'}
-			</div>
-			<div
-				className={'non-copy'}
-				data-prog-cell
-				style={{
 					background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
 						reco.b ?? 0
 					}%, #fff ${reco.b ?? 0}%, #fff 100%)`,
@@ -59,18 +49,6 @@ export const TableItem = ({
 				}}
 			>
 				{reco.b || '-'}
-			</div>
-			<div
-				className={'non-copy'}
-				data-prog-cell
-				style={{
-					background: `linear-gradient(90deg, #9b49ff 0%, #9b49ff ${
-						reco.g
-					}%, #fff ${reco.g ?? 0}%, #fff 100%)`,
-					textAlign: 'right',
-				}}
-			>
-				{reco.g?.toFixed(1)}
 			</div>
 		</ColorTr>
 	)
