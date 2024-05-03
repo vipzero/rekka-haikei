@@ -143,6 +143,9 @@ const Style = styled.div`
 			&[data-name='CYBPK'] {
 				${halfBallBg('#faee51', '#82db6bff')}
 			}
+			&[data-name='DOITY'] {
+				${halfBallBg('#F47D4C', '#3CB2E5')}
+			}
 		}
 		@keyframes changeSelect {
 			0% {

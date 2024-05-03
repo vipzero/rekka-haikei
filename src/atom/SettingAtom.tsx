@@ -57,6 +57,7 @@ export const defaultSetting: Setting = {
 		lain: 1,
 		choco: 1,
 		cyberpunk: 1,
+		diy: 1,
 	},
 	eeOpt: null,
 	eeMemo: {},

@@ -35,6 +35,7 @@ export const eekeysThemetic = [
 	'lain',
 	'choco',
 	'cyberpunk',
+	'diy',
 ] as const
 export const eekeysMirror = [
 	'spin',
@@ -143,6 +144,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	// [/山田.*魔女/, 'yamajo'],
 	['コードギアス', 'codegeass'],
 	[/サイバーパンク|cyberpunk/i, 'cyberpunk'],
+	[/Do It Yourself!!/i, 'diy'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	// [ (song) => song.animeTitle === '人生', 'jinsei' ],
@@ -241,4 +243,5 @@ export const eeId: Record<EekeyStr, number> = {
 	codegeass: 51,
 	cyberpunk: 52,
 	bkbk: 53,
+	diy: 54,
 }

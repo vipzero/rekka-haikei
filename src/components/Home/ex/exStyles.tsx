@@ -360,6 +360,52 @@ export const exStyles = css`
 		}
 	}
 
+	&[data-theme='diy'] {
+		--ex-color: #3cb2e5;
+		--font-color: #f47d4c;
+		--btn-fo-color: var(--ex-color);
+		--btn-bg-color: black;
+		--btn-fo-checked-color: #000;
+		--btn-bg-checked-color: #3cb2e5;
+		--font-color: #000;
+		--content-bg-color-alpha: linear-gradient(
+			326deg,
+			#080f1bee 10%,
+			#15283aee 90%
+		);
+		--content-bg-color: #091624;
+		/* --setting-bg-color: #fff; */
+		--setting-bg-color: linear-gradient(to bottom, #f47d4c 40%, #faee5100 100%);
+		--content-bg-color-alpha: #15283aaa;
+		--panel-fo: #f47d4c;
+		--panel-fo-color: #fff;
+		--panel-fo-shadow-color: #fff;
+
+		--btn-bo: #fff;
+		--btn-bo-checked: var(--ex-color);
+
+		/* --deb-fo: #b70000;
+		/* dark red great gradation  */
+		--deb-bg: radial-gradient(circle at 50% 50%, #220000bf 0%, #530000 100%);
+		*/ button.book {
+		}
+		#panel {
+			font-family: 'Yusei Magic', -apple-system, BlinkMacSystemFont,
+				'Helvetica Neue', 'Segoe UI', 'Noto Sans Japanese',
+				'ヒラギノ角ゴ ProN W3', Meiryo, sans-serif;
+		}
+		#panel #title {
+			border-radius: 0;
+
+			text-shadow: 1px 1px 1px var(--panel-fo-shadow-color),
+				-1px -1px 1px var(--panel-fo-shadow-color),
+				-1px 1px 1px var(--panel-fo-shadow-color),
+				1px -1px 1px var(--panel-fo-shadow-color), 4px 4px 1px var(--ex-color);
+
+			/* background-image: linear-gradient(326deg, #67084bbb 0%, #1a0245bb 74%); */
+		}
+	}
+
 	&[data-theme='lain'] {
 		* {
 			color: hsla(0, 50%, 50%) !important;
