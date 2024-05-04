@@ -112,6 +112,23 @@ const BkbkEx = () => (
 		))}
 	</div>
 )
+const BirthdayEx = ({ s }: { s: string }) => {
+	if (!s) return null
+	const [dayKey, name, title] = s.split(':')
+	const [m, d] = [dayKey.substring(0, 2), dayKey.substring(2, 4)].map(Number)
+	return (
+		<div id="birth">
+			<div style={{ display: 'flex', alignItems: 'flex-end' }}>
+				<div className="grad">🎉Happy Birthday🎂</div>
+				<div className="dayKey">
+					{m}月{d}日
+				</div>
+			</div>
+			<div className="name">{name}</div>
+			{title.trim() && <div className="title">{title}</div>}
+		</div>
+	)
+}
 
 const MtsEx = ({ s }: { s: string }) => {
 	if (!s) return null
@@ -178,6 +195,12 @@ function ExCompMain({ eeKey, rand, eeOpt, eeMemo }: ExCompProp) {
 	} else if (eeKey === 'mts10') {
 		return (
 			<MtsEx s={(eeOpt?.id !== 'text' ? eeMemo['mts10'] : eeOpt.s) || ''} />
+		)
+	} else if (eeKey === 'birth') {
+		return (
+			<BirthdayEx
+				s={(eeOpt?.id !== 'text' ? eeMemo['birth'] : eeOpt.s) || ''}
+			/>
 		)
 	} else if (eeKey === 'masso') {
 		return (

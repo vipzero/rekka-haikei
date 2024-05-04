@@ -107,6 +107,17 @@ export const Mts10B = {
 }
 
 export const Masso = eeArgs('masso')
+export const Birth = {
+	args: {
+		setting: {
+			...setting,
+			eeKey: 'birth',
+			eeMemo: {
+				birth: '0505:nakano nino:五等分の花嫁',
+			},
+		},
+	},
+}
 
 const themeArgs = (theme: number | ExThemeKey) => ({
 	args: { setting: { ...setting, theme } },

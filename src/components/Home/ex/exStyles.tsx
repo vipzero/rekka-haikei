@@ -523,6 +523,35 @@ export const exStyles = css`
 			padding: 4px;
 		}
 	}
+	&[data-ex='birth'] {
+		#birth {
+			background: white;
+			color: black;
+			position: absolute;
+			padding: 16px;
+			bottom: 0;
+			left: 0;
+			padding: 4px;
+			border-radius: 4px;
+			.dayKey {
+				font-size: 0.5rem;
+				border-radius: 0.5rem;
+				padding: 0 0.4rem;
+				margin-right: 0.4rem;
+				border: solid 1px gray;
+			}
+			.title {
+				font-size: 0.8rem;
+			}
+			.name {
+				font-size: 1.2rem;
+			}
+			.grad {
+				font-size: 0.5rem;
+				text-align: center;
+			}
+		}
+	}
 	&[data-ex='masshiro'] {
 		#mashiros {
 			position: absolute;

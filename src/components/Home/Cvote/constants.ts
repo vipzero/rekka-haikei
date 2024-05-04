@@ -24,6 +24,7 @@ export const eekeysGimic = [
 	'ariascarlet', //R
 	'mts10',
 	'masso',
+	'birth',
 	// 'imascd', // R
 ] as const
 // 🛑 ネタバレ注意
@@ -153,7 +154,12 @@ export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 export const checkHedwig = (song: Song): [Eekey, EeOptText] | null => {
 	if (!song.hedwig) return null
 	const [k, ...s] = song.hedwig.split(':')
-	if (isEekeyStr(k)) return [k, { id: 'text', s: s.join(':') }]
+	if (k === 'mts10') {
+		return [k, { id: 'text', s: s.join(':') }]
+	}
+	if (k === 'birth') {
+		return [k, { id: 'text', s: s.join(':') }]
+	}
 	return null
 }
 
@@ -244,4 +250,5 @@ export const eeId: Record<EekeyStr, number> = {
 	cyberpunk: 52,
 	bkbk: 53,
 	diy: 54,
+	birth: 55,
 }
