@@ -115,7 +115,7 @@ const BkbkEx = () => (
 const BirthdayEx = ({ s }: { s: string }) => {
 	if (!s) return null
 	const [dayKey, name, title] = s.split(':')
-	const [m, d] = [dayKey.substring(0, 2), dayKey.substring(2, 4)].map(Number)
+	const [m, d] = [dayKey.substring(0, 2), dayKey.substring(3, 5)].map(Number)
 	return (
 		<div id="birth">
 			<div style={{ display: 'flex', alignItems: 'flex-end' }}>

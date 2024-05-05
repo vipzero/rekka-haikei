@@ -113,7 +113,7 @@ export const Birth = {
 			...setting,
 			eeKey: 'birth',
 			eeMemo: {
-				birth: '0505:nakano nino:五等分の花嫁',
+				birth: '05/05:nakano nino:五等分の花嫁',
 			},
 		},
 	},
