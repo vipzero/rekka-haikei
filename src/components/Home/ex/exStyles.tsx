@@ -525,8 +525,8 @@ export const exStyles = css`
 	}
 	&[data-ex='birth'] {
 		#birth {
-			background: white;
-			color: black;
+			background: radial-gradient(#f588d8, #c0a3e5);
+			color: white;
 			position: absolute;
 			padding: 16px;
 			bottom: 0;
@@ -538,7 +538,7 @@ export const exStyles = css`
 				border-radius: 0.5rem;
 				padding: 0 0.4rem;
 				margin-right: 0.4rem;
-				border: solid 1px gray;
+				border: solid 1px #ddd;
 			}
 			.title {
 				font-size: 0.8rem;
@@ -547,7 +547,7 @@ export const exStyles = css`
 				font-size: 1.2rem;
 			}
 			.grad {
-				font-size: 0.5rem;
+				font-size: 1rem;
 				text-align: center;
 			}
 		}
