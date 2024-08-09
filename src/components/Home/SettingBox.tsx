@@ -41,6 +41,7 @@ import { useBookCountDb } from '../../hooks/useSongDb'
 import { Setting, Song } from '../../types'
 import { downloadImg, isMobile } from '../../util'
 import { startPip } from '../../util/pip'
+import { useStreamUrl } from '../../hooks/useStreamUrl'
 import { BingoBox } from './BingoBox'
 import { ConfButton } from './ConfButton'
 import { ThemeSelector } from './ThemeSelector'
@@ -58,28 +59,25 @@ type Props = {
 	bgcmOpen: boolean
 	toggleBgcmOpen: () => void
 	addSnap: () => Promise<boolean>
-	streamUrl: string
-	setStreamUrl: (url: string) => void
 	favCount: number
 	song: Song
-	url: string
+	bgUrl: string
 }
 
 function SettingBox({
 	favorited,
 	toggleFavorited,
 	addSnap,
-	streamUrl,
-	setStreamUrl,
 	bgcmOpen,
 	toggleBgcmOpen,
 	favCount,
 	song,
-	url,
+	bgUrl,
 }: Props) {
 	const s = useSettings()
 	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()
+	const [streamUrl, setStreamUrl] = useStreamUrl()
 	const [pressed, setPressed] = useState<boolean>(false)
 	const [snapped, setSnapped] = useState<boolean>(false)
 	const [showBingo, setShowBingo] = useState<boolean>(false)
@@ -100,7 +98,7 @@ function SettingBox({
 
 	const removeStream = () => setStreamUrl('')
 	const handleDownload = () => {
-		downloadImg(url, song.icy)
+		downloadImg(bgUrl, song.icy)
 	}
 	const { addCount } = useBookCountDb(song.time)
 	// const { showEmol, toggleEmol } = useSettingsShowEmol()

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { TMP_TRACK_TIME } from '../../config'
 import { addSnap, useFavorites } from '../../hooks/useFavorites'
 import { useLightConfig } from '../../hooks/useLightConfig'
-import { useLocalStorage } from '../../hooks/useLocalStorage'
 import {
 	useSettings,
 	useSettingsCustomTheme,
@@ -53,8 +52,7 @@ function Home({ song, setBg }: Props) {
 	const [bgcmOpen, setBgcmOpen] = useState<boolean>(false) // bg choice modal
 
 	const { favorites: books, toggleFavorites } = useFavorites()
-	const [streamUrl, setStreamUrl] = useLocalStorage<string>('stream-url', '')
-	const [url, setUrl] = useState<string>('')
+	const [bgUrl, setBgUrl] = useState<string>('')
 	const { enableFakeBar } = useSettingsFakeBar()
 	const timeBarSize =
 		song.trackTimeMillis ||
@@ -92,7 +90,7 @@ function Home({ song, setBg }: Props) {
 				hasMinImg={song.hasMinImg}
 				urls={song?.imageLinks?.filter((v) => !blockGif || !isGifUrl(v)) || []}
 				lockCount={lockBgNum}
-				onChangeUrl={setUrl}
+				onChangeUrl={setBgUrl}
 				px={sideMap[sideMode] || 'center'}
 			/>
 			{eeKey && eeKey === 'subetef' ? (
@@ -105,9 +103,8 @@ function Home({ song, setBg }: Props) {
 			)}
 			<Container id="main-box" data-side={sideMode}>
 				<SongInfo song={song} />
-				<div id="player-box" data-visible={!!streamUrl}>
-					<AudioPlayer src={streamUrl}></AudioPlayer>
-				</div>
+
+				<AudioPlayer />
 
 				<ExtraComp sid={`${song.time}`} />
 				<YearTimer />
@@ -118,15 +115,13 @@ function Home({ song, setBg }: Props) {
 			</Container>
 			<SettingBox
 				song={song}
-				streamUrl={streamUrl}
-				setStreamUrl={setStreamUrl}
 				favorited={!!books[song.icy]}
 				toggleFavorited={() => toggleFavorites(song.icy)}
 				bgcmOpen={bgcmOpen}
 				toggleBgcmOpen={() => setBgcmOpen((v) => !v)}
-				addSnap={() => addSnap(song, url)}
+				addSnap={() => addSnap(song, bgUrl)}
 				favCount={Object.keys(books).length}
-				url={url}
+				bgUrl={bgUrl}
 			/>
 
 			<BgChoiceModal

@@ -2,6 +2,7 @@ import { atom } from 'recoil'
 import { storageKeys } from '../config'
 import { Setting } from '../types'
 import { defaultCustomTheme } from './customThemes'
+import { localStorageEffect } from './effects'
 
 export const defaultBingoText = `
 a:判定:
@@ -66,19 +67,6 @@ export const defaultSetting: Setting = {
 	showEmol: true,
 	bingo: defaultBingoText,
 }
-
-const localStorageEffect =
-	(key) =>
-	({ setSelf, onSet }) => {
-		const savedValue = localStorage.getItem(key)
-		if (savedValue != null) {
-			setSelf(JSON.parse(savedValue))
-		}
-
-		onSet((newValue) => {
-			localStorage.setItem(key, JSON.stringify(newValue))
-		})
-	}
 
 export const settingState = atom<Setting>({
 	key: storageKeys.setting,

@@ -43,6 +43,7 @@ export const EE_SEASON = Number(Object.keys(EE_CHAR).pop())
 export const currentEvent = events.find((v) => v.current)
 export const storageKeys = {
 	setting: 'setting',
+	streamUrl: 'stream-url',
 	snaps: 'snaps',
 }
 
