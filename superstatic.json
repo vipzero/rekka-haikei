@@ -2,8 +2,7 @@
 	"rewrites": [
 		{ "source": "/**/bg", "destination": "[eid]/bg.html" },
 		{ "source": "/**/history", "destination": "[eid]/history.html" },
-		{ "source": "/**/book", "destination": "[eid]/book.html" },
-		{ "source": "/**/choice", "destination": "[eid]/choice.html" }
+		{ "source": "/**/book", "destination": "[eid]/book.html" }
 	],
 	"cleanUrls": true
 }
