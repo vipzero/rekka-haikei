@@ -1,32 +1,27 @@
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
-import { currentEvent, featcherVersion } from '../config'
+import { featcherVersion } from '../config'
 import {
 	incSongBookCount,
 	readSong,
 	saveSongBg,
 	watchHistSong,
 } from '../service/firebase'
-import { HistoryRaw, Song } from '../types'
+import { HistoryRaw } from '../types'
 import { formatCount } from '../util'
 import { useBingo } from './useBingo'
 import { useQeuryEid } from './useQueryEid'
+import { useSong } from './useSongAtom'
 
 export function useSongDb(online = true) {
 	const [loaded, setLoaded] = useState<boolean>(false)
 	const eventId = useQeuryEid()
-	const [song, setSong] = useState<Song>({
-		icy: (currentEvent?.label || '') + ' - loading',
-		time: 0,
-		wordCounts: {},
-		wordCountsAna: [],
-		imageSearchWord: '',
-		hasMinImg: false,
-	})
+	const [song, setSong] = useSong()
 	const { checkHit } = useBingo()
 
 	useEffect(() => {
 		if (!online) return
+
 		const si = readSong(eventId, (song) => {
 			const wordCountsAna = Object.entries(song.wordCounts)
 				.filter(([k]) => k !== song.icy)
@@ -49,7 +44,9 @@ export function useSongDb(online = true) {
 			setLoaded(true)
 		})
 
-		return () => si()
+		return () => {
+			si()
+		}
 	}, [eventId, online])
 
 	const setBg = async (url, sid) => {
@@ -57,11 +54,6 @@ export function useSongDb(online = true) {
 	}
 
 	return [loaded, song, setBg] as const
-}
-
-const defaultConfig = {
-	bookCount: 0,
-	addCount: () => {},
 }
 
 export function useBookCountDb(songId: number | undefined) {

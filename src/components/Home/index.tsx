@@ -12,6 +12,7 @@ import {
 import { Setting, Song } from '../../types'
 import { isGifUrl } from '../../util'
 import BgChoiceModal from '../BgChoise/BgChoiceModal'
+import { useSongDb } from '../../hooks/useSongDb'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
 import FadeBgChanger from './FadeBgChanger'
@@ -39,6 +40,7 @@ type Props = {
 	setBg: (url: string, time: number) => void
 }
 function Home({ song, setBg }: Props) {
+	useSongDb(true)
 	const {
 		appliedTheme,
 		shape,

@@ -12,7 +12,7 @@ import { seedSong as song } from './seed'
 
 type Props = ComponentProps<typeof Home> & { setting: Setting }
 
-const HomeRecoil = ({ setting, ...props }: Props) => {
+const HomeConnect = ({ setting, ...props }: Props) => {
 	const { setSetting } = useSettings()
 	useEffect(() => {
 		setSetting(setting)
@@ -22,7 +22,7 @@ const HomeRecoil = ({ setting, ...props }: Props) => {
 
 export default {
 	title: 'Home',
-	component: HomeRecoil,
+	component: HomeConnect,
 	argTypes: {
 		['setting.eeKey']: {
 			control: {
@@ -58,7 +58,7 @@ export default {
 		},
 	},
 	args: { song },
-} as Meta<typeof HomeRecoil>
+} as Meta<typeof HomeConnect>
 
 export const Full = {
 	args: {

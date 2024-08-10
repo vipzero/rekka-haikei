@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { useAtom } from 'jotai'
+import { useState } from 'react'
 import { defaultSetting, settingAtom } from '../atom/SettingAtom'
 import {
 	EeOpt,
@@ -46,19 +46,13 @@ export const useSettings = () => {
 		setSetting,
 	] = useSettingsBase()
 
-	const toggleCounts = () => setSetting((v) => toggle(v, 'showCounts'))
-	const toggleArtwork = () => setSetting((v) => toggle(v, 'showArtwork'))
-	const toggleBookmark = () => setSetting((v) => toggle(v, 'showBookmark'))
-	const toggleBlockGif = () => setSetting((v) => toggle(v, 'blockGif'))
+	const toggleKey = (k: keyof Setting) => () => setSetting((v) => toggle(v, k))
 	const nextLockNum = (v: number) => (v === 0 ? 1 : v === 1 ? 10 : 0)
 	const toggleLockBg = () =>
 		setSetting((v) => ({ ...v, lockBgNum: nextLockNum(v.lockBgNum) }))
-	const toggleHistory = () => setSetting((v) => toggle(v, 'showHistory'))
 	const toggleSide = genToggle(['wide', 'l', 'bl', 'bw', 'br', 'r'] as const)
 	const toggleSideMode = () =>
 		setSetting((v) => ({ ...v, sideMode: toggleSide(v.sideMode) }))
-	const toggleShowHelp = () => setSetting((v) => toggle(v, 'showHelp'))
-	const toggleTool = () => setSetting((v) => toggle(v, 'showTool'))
 	const closeSetting = () => setSetting((v) => ({ ...v, showSetting: false }))
 	const next = <T,>(a: T[], id: T) => a[(a.indexOf(id) + 1) % a.length]
 	const nextTheme = (v: ThemeId) =>
@@ -72,7 +66,6 @@ export const useSettings = () => {
 	const setShape = (shape: ShapeId) => setSetting((v) => ({ ...v, shape }))
 	const cycleTheme = () => setTheme(nextTheme(theme))
 	const cycleShape = () => setShape(nextShape(shape))
-	const toggleSetting = () => setSetting((v) => toggle(v, 'showSetting'))
 	const appliedTheme = decideTheme(theme, eeKey)
 
 	return {
@@ -89,21 +82,21 @@ export const useSettings = () => {
 		showTool,
 		blockGif,
 		appliedTheme,
-		toggleSetting,
-		toggleArtwork,
-		toggleCounts,
-		toggleBookmark,
-		toggleLockBg,
-		toggleHistory,
-		toggleSideMode,
-		toggleShowHelp,
-		toggleBlockGif,
 		closeSetting,
-		toggleTool,
 		setSetting,
 		cycleTheme,
 		setTheme,
 		cycleShape,
+		toggleSetting: toggleKey('showSetting'),
+		toggleArtwork: toggleKey('showArtwork'),
+		toggleCounts: toggleKey('showCounts'),
+		toggleBookmark: toggleKey('showBookmark'),
+		toggleLockBg,
+		toggleHistory: toggleKey('showHistory'),
+		toggleSideMode,
+		toggleShowHelp: toggleKey('showHelp'),
+		toggleBlockGif: toggleKey('blockGif'),
+		toggleTool: toggleKey('showTool'),
 	}
 }
 
