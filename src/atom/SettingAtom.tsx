@@ -67,7 +67,7 @@ export const defaultSetting: Setting = {
 	bingo: defaultBingoText,
 }
 
-export const settingState = atomWithStorage<Setting>(
+export const settingAtom = atomWithStorage<Setting>(
 	storageKeys.setting,
 	defaultSetting
 )

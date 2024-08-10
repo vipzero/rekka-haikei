@@ -1,8 +1,7 @@
 import { Meta } from '@storybook/react'
 
 import { ComponentProps, useEffect } from 'react'
-import { RecoilRoot } from 'recoil'
-import { defaultSetting as setting } from '../atom/SettingAtom'
+import { defaultSetting } from '../atom/SettingAtom'
 import Home from '../components/Home'
 import { Eekey, ExThemeKey, eekeys } from '../components/Home/Cvote/constants'
 // import { Toast } from '../components/Toast'
@@ -44,12 +43,12 @@ export default {
 				/>
 				<SvgFilters />
 				{/* <Toast /> */}
-				<RecoilRoot>
-					<div style={{}}>{s()}</div>
-				</RecoilRoot>
+
+				<div style={{}}>{s()}</div>
 			</>
 		),
 	],
+
 	parameters: {
 		layout: 'fullscreen',
 		nextRouter: {
@@ -64,10 +63,9 @@ export default {
 export const Full = {
 	args: {
 		song,
-		setting,
 	},
 }
-const eeArgs = (eeKey: Eekey) => ({ args: { setting: { ...setting, eeKey } } })
+const eeArgs = (eeKey: Eekey) => ({ args: { setting: { eeKey } } })
 
 export const Lain = eeArgs('lain')
 export const Yojitsu = eeArgs('yojitsu')
@@ -85,7 +83,7 @@ export const Bkbk = eeArgs('bkbk')
 export const Mts10A = {
 	args: {
 		setting: {
-			...setting,
+			...defaultSetting,
 			eeKey: 'mts10',
 			eeMemo: {
 				mts10: '11000:MTG:AAAAAAAAAAAAAAAAAA==,AAAAAAAAAAAAAAAAAA==',
@@ -97,7 +95,7 @@ export const Mts10A = {
 export const Mts10B = {
 	args: {
 		setting: {
-			...setting,
+			...defaultSetting,
 			eeKey: 'mts10',
 			eeMemo: {
 				mts10: '01010:MTG:AAAAAAAAAAAAAAAAAA==,AAAAAAAAAAAAAAAAAA==',
@@ -110,7 +108,7 @@ export const Masso = eeArgs('masso')
 export const Birth = {
 	args: {
 		setting: {
-			...setting,
+			...defaultSetting,
 			eeKey: 'birth',
 			eeMemo: {
 				birth: '05/05:nakano nino:五等分の花嫁',
@@ -120,7 +118,7 @@ export const Birth = {
 }
 
 const themeArgs = (theme: number | ExThemeKey) => ({
-	args: { setting: { ...setting, theme } },
+	args: { setting: { ...defaultSetting, theme } },
 })
 
 export const ThemeClear = themeArgs(0)
