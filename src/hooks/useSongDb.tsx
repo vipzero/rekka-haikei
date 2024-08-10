@@ -1,22 +1,16 @@
-import {
-	createContext,
-	PropsWithChildren,
-	useContext,
-	useEffect,
-	useState,
-} from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { currentEvent, featcherVersion } from '../config'
 import {
 	incSongBookCount,
 	readSong,
 	saveSongBg,
 	watchHistSong,
 } from '../service/firebase'
-import { currentEvent, featcherVersion } from '../config'
 import { HistoryRaw, Song } from '../types'
 import { formatCount } from '../util'
-import { useQeuryEid } from './useQueryEid'
 import { useBingo } from './useBingo'
+import { useQeuryEid } from './useQueryEid'
 
 export function useSongDb(online = true) {
 	const [loaded, setLoaded] = useState<boolean>(false)
@@ -87,15 +81,3 @@ export function useBookCountDb(songId: number | undefined) {
 
 	return { bookCount: yo?.b || 0, addCount }
 }
-
-export type YoState = ReturnType<typeof useBookCountDb>
-
-const YoContext = createContext<YoState>(defaultConfig)
-
-export const YoProvider = ({ children }: PropsWithChildren<{}>) => {
-	const state = useYo()
-
-	return <YoContext.Provider value={state}>{children}</YoContext.Provider>
-}
-
-export const useYo = () => useContext(YoContext)

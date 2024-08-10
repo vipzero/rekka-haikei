@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useNetworkState } from 'react-use'
-import { RecoilRoot } from 'recoil'
+
 import { toast } from 'react-toastify'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
-import { useSongDb, YoProvider } from '../hooks/useSongDb'
+import { useSongDb } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Home from './Home'
 import { Toast } from './Toast'
@@ -45,12 +45,6 @@ function HomePageBase() {
 	)
 }
 
-const RecoilHome = () => (
-	<RecoilRoot>
-		<YoProvider>
-			<HomePage />
-		</YoProvider>
-	</RecoilRoot>
-)
+const HomeWrap = () => <HomePage />
 
-export default RecoilHome
+export default HomeWrap

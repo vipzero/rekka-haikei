@@ -1,8 +1,7 @@
-import { atom } from 'recoil'
+import { atomWithStorage } from 'jotai/utils'
 import { storageKeys } from '../config'
 import { Setting } from '../types'
 import { defaultCustomTheme } from './customThemes'
-import { localStorageEffect } from './effects'
 
 export const defaultBingoText = `
 a:判定:
@@ -68,8 +67,7 @@ export const defaultSetting: Setting = {
 	bingo: defaultBingoText,
 }
 
-export const settingState = atom<Setting>({
-	key: storageKeys.setting,
-	default: defaultSetting,
-	effects: [localStorageEffect(storageKeys.setting)],
-})
+export const settingState = atomWithStorage<Setting>(
+	storageKeys.setting,
+	defaultSetting
+)

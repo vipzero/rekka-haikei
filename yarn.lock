@@ -8233,6 +8233,11 @@ jiti@^1.18.2:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.19.1.tgz#fa99e4b76a23053e0e7cde098efe1704a14c16f1"
   integrity sha512-oVhqoRDaBXf7sjkll95LHVS6Myyyb1zaunVwk4Z0+WPSW4gjS0pl01zYKHScTuyEhQsFxV5L4DR5r+YqSyqyyg==
 
+jotai@2.9.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.9.2.tgz#0b1036bc1672d02ea7cf73c6b01728de461d6ecf"
+  integrity sha512-jIBXEadOHCziOuMY6HAy2KQcHipGhnsbF+twqh8Lcmcz/Yei0gdBtW5mOYdKmbQxGqkvfvXM3w/oHtJ2WNGSFg==
+
 js-cookie@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
@@ -10736,6 +10741,11 @@ store2@^2.14.2:
   version "2.14.2"
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.14.2.tgz#56138d200f9fe5f582ad63bc2704dbc0e4a45068"
   integrity sha512-siT1RiqlfQnGqgT/YzXVUNsom9S0H1OX+dpdGN1xkyYATo4I6sep5NmsRD/40s3IIOvlCq6akxkqG82urIZW1w==
+
+storybook-addon-jotai@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/storybook-addon-jotai/-/storybook-addon-jotai-0.0.6.tgz#caaa79256baa862d95a6062c5bcaddf479fad168"
+  integrity sha512-rXPT1ztdHrEJoCh9S0Vtecm+FC3WJ5jYLWT58jhoRpUGnFCOyuxgv3M/gVI7SndZmj5tZyrWR1E0/NRiE4Cevw==
 
 storybook@^7.3.0-alpha.0:
   version "7.3.0-alpha.0"

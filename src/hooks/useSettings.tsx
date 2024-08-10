@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { defaultSetting, settingState } from '../atom/SettingAtom'
 import {
 	EeOpt,
@@ -108,7 +108,7 @@ export const useSettings = () => {
 }
 
 export const useSettingsBase = () => {
-	const [settingRaw, setSetting] = useRecoilState(settingState)
+	const [settingRaw, setSetting] = useAtom(settingState)
 	const setting: Setting = { ...defaultSetting, ...settingRaw }
 
 	return [setting, setSetting] as const

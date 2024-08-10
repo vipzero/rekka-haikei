@@ -1,6 +1,5 @@
 import copy from 'copy-to-clipboard'
 import { useMemo, useState } from 'react'
-import { RecoilRoot } from 'recoil'
 import * as regexpTree from 'regexp-tree'
 import styled from 'styled-components'
 import config from '../config'
@@ -13,7 +12,6 @@ import {
 	useQueryInit,
 } from '../hooks/useQueryEid'
 import { useStart } from '../hooks/useStart'
-import { BRate } from '../service/firebase'
 import { History } from '../types'
 import { formatDate } from '../util'
 import { safeRegex } from '../util/regex'
@@ -316,9 +314,7 @@ function HistoryPageBase() {
 				<CountsPage counts={counts} countsSong={countsSong} />
 			</TabPanel>
 			<TabPanel value={tab} index={2}>
-				<RecoilRoot>
-					<SettingPage />
-				</RecoilRoot>
+				<SettingPage />
 			</TabPanel>
 
 			<Address />
