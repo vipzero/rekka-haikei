@@ -73,7 +73,7 @@ function SettingBox({
 	favCount,
 	bgUrl,
 }: Props) {
-	const [song] = useSong()
+	const song = useSong()
 	const s = useSettings()
 	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()

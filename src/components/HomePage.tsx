@@ -5,6 +5,7 @@ import { useNetworkState } from 'react-use'
 import { toast } from 'react-toastify'
 import { useEx } from '../hooks/useEx'
 import { useSettingsCustomTheme, useSettingsEe } from '../hooks/useSettings'
+import { useSong } from '../hooks/useSongAtom'
 import { useSongDb } from '../hooks/useSongDb'
 import { useStart } from '../hooks/useStart'
 import Home from './Home'
@@ -20,7 +21,8 @@ function HomePage() {
 function HomePageBase() {
 	const network = useNetworkState()
 
-	const { song } = useSongDb(Boolean(network.online))
+	useSongDb(Boolean(network.online))
+	const song = useSong()
 	const { abyss, setEekey } = useSettingsEe()
 	const { customTheme } = useSettingsCustomTheme()
 

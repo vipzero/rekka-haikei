@@ -75,7 +75,7 @@ const AlbumLine = ({
 
 type Props = {}
 function SongInfo({}: Props) {
-	const [song] = useSong()
+	const song = useSong()
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()

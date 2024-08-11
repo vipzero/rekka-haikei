@@ -7,18 +7,20 @@ import { Eekey, ExThemeKey, eekeys } from '../components/Home/Cvote/constants'
 // import { Toast } from '../components/Toast'
 import { SvgFilters } from '../config/SvgFilters'
 import { useSettings } from '../hooks/useSettings'
+import { useLoadedManage, useSongManage } from '../hooks/useSongAtom'
 import { Setting } from '../types'
-import { useSong } from '../hooks/useSongAtom'
 import { seedSong as song } from './seed'
 
 type Props = ComponentProps<typeof Home> & { setting: Setting }
 
 const HomeConnect = ({ setting, ...props }: Props) => {
 	const { setSetting } = useSettings()
-	const [, setSong] = useSong()
+	const [, setSong] = useSongManage()
+	const [, setLoaded] = useLoadedManage()
 	useEffect(() => {
 		setSetting(setting)
 		setSong(song)
+		setLoaded(true)
 	}, [])
 	return <Home {...props} />
 }

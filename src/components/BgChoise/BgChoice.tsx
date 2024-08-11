@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { Song } from '../../types'
+import { useSong } from '../../hooks/useSongAtom'
 import { useBg } from '../../hooks/useSongDb'
 
-type Props = {
-	song: Song
-}
-function BgChoice({ song }: Props) {
+type Props = {}
+function BgChoice({}: Props) {
 	const { setBg } = useBg()
+	const song = useSong()
 	return (
 		<Wrap>
 			{song.imageLinks?.map((link, i) => (

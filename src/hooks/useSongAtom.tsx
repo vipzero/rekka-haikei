@@ -1,16 +1,20 @@
-import { atom, useAtom } from 'jotai'
+import { atom, useAtom, useAtomValue } from 'jotai'
 import { Song } from '../types'
 import { currentEvent } from '../config'
 
-const songAtom = atom<Song>({
+const initialSong: Song = {
 	icy: (currentEvent?.label || '') + ' - loading',
 	time: 0,
 	wordCounts: {},
 	wordCountsAna: [],
 	imageSearchWord: '',
 	hasMinImg: false,
-})
+}
 
-export const useSong = () => useAtom(songAtom)
+const songAtom = atom<Song>(initialSong)
+export const useSongManage = () => useAtom(songAtom)
+export const useSong = () => useAtomValue(songAtom)
+
 const loadedAtom = atom(false)
-export const useLoaded = () => useAtom(loadedAtom)
+export const useLoadedManage = () => useAtom(loadedAtom)
+export const useLoaded = () => useAtomValue(loadedAtom)

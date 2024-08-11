@@ -10,12 +10,12 @@ import { updateCheck, wordCount } from '../util/song'
 import { useBingo } from './useBingo'
 import { useFetcher } from './useFetch'
 import { useQeuryEid } from './useQueryEid'
-import { useLoaded, useSong } from './useSongAtom'
+import { useLoadedManage, useSongManage } from './useSongAtom'
 
 export function useSongDb(online = true) {
-	const [loaded, setLoaded] = useLoaded()
+	const [, setLoaded] = useLoadedManage()
 	const eventId = useQeuryEid()
-	const [song, setSong] = useSong()
+	const [, setSong] = useSongManage()
 	const { checkHit } = useBingo()
 	const main = useFetcher()
 
@@ -35,8 +35,6 @@ export function useSongDb(online = true) {
 			si()
 		}
 	}, [eventId, online, main])
-
-	return { loaded, song } as const
 }
 
 export const useBg = () => {

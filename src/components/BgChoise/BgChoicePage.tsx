@@ -1,8 +1,10 @@
+import { useLoaded } from '../../hooks/useSongAtom'
 import { useSongDb } from '../../hooks/useSongDb'
 import BgChoice from './BgChoice'
 
 function Page() {
-	const { loaded, song } = useSongDb()
+	useSongDb()
+	const loaded = useLoaded()
 
 	if (!loaded) return <p>ちょっとまってね</p>
 
@@ -11,7 +13,7 @@ function Page() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
-			<BgChoice song={song} />
+			<BgChoice />
 		</>
 	)
 }

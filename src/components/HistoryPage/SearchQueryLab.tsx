@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { URL_MAKE_SEARCH_CODE } from '../../config'
 import { useLocalStorage } from '../../hooks/useLocalStorage'
+import { useLoaded, useSong } from '../../hooks/useSongAtom'
 import { useSongDb } from '../../hooks/useSongDb'
 import { searchImageUrl } from '../../util'
 
@@ -33,7 +34,9 @@ ${WORDS.map((w) => `{anime} AND ${w}`).join('\n')}
 `
 
 export function SearchQueryLab() {
-	const { loaded, song } = useSongDb()
+	useSongDb()
+	const loaded = useLoaded()
+	const song = useSong()
 	const [text, setText] = useLocalStorage<string>('sq_lab', defaultText)
 	if (!loaded) return <p>ロード中</p>
 	const anime = song.animeTitle?.replace('-', ' ') || 'のんのんびより'

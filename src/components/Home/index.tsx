@@ -9,11 +9,10 @@ import {
 	useSettingsEe,
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
-import { Setting, Song } from '../../types'
+import { useSong } from '../../hooks/useSongAtom'
+import { Setting } from '../../types'
 import { isGifUrl } from '../../util'
 import BgChoiceModal from '../BgChoise/BgChoiceModal'
-import { useSongDb } from '../../hooks/useSongDb'
-import { useSong } from '../../hooks/useSongAtom'
 import AudioPlayer from './AudioPlayer'
 import { BookmarkMiniList } from './BookmarkMiniList'
 import FadeBgChanger from './FadeBgChanger'
@@ -37,7 +36,7 @@ const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 }
 
 function Home() {
-	const [song] = useSong()
+	const song = useSong()
 	const {
 		appliedTheme,
 		shape,

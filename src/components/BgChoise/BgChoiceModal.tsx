@@ -8,7 +8,7 @@ type Props = {
 	onClose: () => void
 }
 function BgChoiceModal({ open, onClose }: Props) {
-	const [song] = useSong()
+	const song = useSong()
 	const sUrl = searchImageUrl(song.imageSearchWord)
 
 	return (
@@ -23,9 +23,7 @@ function BgChoiceModal({ open, onClose }: Props) {
 				</p>
 			</div>
 
-			<div style={{ marginTop: '120px' }}>
-				{open && <BgChoice song={song} />}
-			</div>
+			<div style={{ marginTop: '120px' }}>{open && <BgChoice />}</div>
 			<div className="footer">
 				<button onClick={onClose}>閉じる</button>
 			</div>
