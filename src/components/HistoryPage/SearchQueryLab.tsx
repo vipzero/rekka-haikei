@@ -33,7 +33,7 @@ ${WORDS.map((w) => `{anime} AND ${w}`).join('\n')}
 `
 
 export function SearchQueryLab() {
-	const [loaded, song] = useSongDb()
+	const { loaded, song } = useSongDb()
 	const [text, setText] = useLocalStorage<string>('sq_lab', defaultText)
 	if (!loaded) return <p>ロード中</p>
 	const anime = song.animeTitle?.replace('-', ' ') || 'のんのんびより'

@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-import { featcherVersion } from '../config'
 import {
 	incSongBookCount,
 	readSong,
@@ -8,38 +6,27 @@ import {
 	watchHistSong,
 } from '../service/firebase'
 import { HistoryRaw } from '../types'
-import { formatCount } from '../util'
+import { updateCheck, wordCount } from '../util/song'
 import { useBingo } from './useBingo'
+import { useFetcher } from './useFetch'
 import { useQeuryEid } from './useQueryEid'
-import { useSong } from './useSongAtom'
+import { useLoaded, useSong } from './useSongAtom'
 
 export function useSongDb(online = true) {
-	const [loaded, setLoaded] = useState<boolean>(false)
+	const [loaded, setLoaded] = useLoaded()
 	const eventId = useQeuryEid()
 	const [song, setSong] = useSong()
 	const { checkHit } = useBingo()
+	const main = useFetcher()
 
 	useEffect(() => {
+		if (!main) return
 		if (!online) return
 
 		const si = readSong(eventId, (song) => {
-			const wordCountsAna = Object.entries(song.wordCounts)
-				.filter(([k]) => k !== song.icy)
-				.map(([name, count]) => ({
-					name,
-					count,
-					label: `[${name} (${formatCount(count)})]`,
-				}))
+			setSong({ ...song, wordCountsAna: wordCount(song) })
+			updateCheck(song)
 
-			song.wordCountsAna = [...wordCountsAna].sort((a, b) => a.count - b.count)
-
-			setSong(song)
-			if (song.frontVersion && song.frontVersion.ver > featcherVersion) {
-				const { msg } = song.frontVersion
-				setTimeout(() => {
-					toast.info(msg, { autoClose: false })
-				}, 1000)
-			}
 			checkHit(song.icy + ' _ ' + song.animeTitle || '')
 			setLoaded(true)
 		})
@@ -47,13 +34,19 @@ export function useSongDb(online = true) {
 		return () => {
 			si()
 		}
-	}, [eventId, online])
+	}, [eventId, online, main])
 
-	const setBg = async (url, sid) => {
-		saveSongBg(url, eventId, sid)
+	return { loaded, song } as const
+}
+
+export const useBg = () => {
+	const eventId = useQeuryEid()
+
+	return {
+		setBg: async (url: string, sid: number) => {
+			saveSongBg(url, eventId, sid)
+		},
 	}
-
-	return [loaded, song, setBg] as const
 }
 
 export function useBookCountDb(songId: number | undefined) {

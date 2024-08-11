@@ -1,15 +1,14 @@
 import styled from 'styled-components'
-import { Song } from '../../types'
+import { useSong } from '../../hooks/useSongAtom'
 import { searchImageUrl } from '../../util'
 import BgChoice from './BgChoice'
 
 type Props = {
-	song: Song
-	setBg: (url: string, time: number) => void
 	open: boolean
 	onClose: () => void
 }
-function BgChoiceModal({ song, setBg, open, onClose }: Props) {
+function BgChoiceModal({ open, onClose }: Props) {
+	const [song] = useSong()
 	const sUrl = searchImageUrl(song.imageSearchWord)
 
 	return (
@@ -25,7 +24,7 @@ function BgChoiceModal({ song, setBg, open, onClose }: Props) {
 			</div>
 
 			<div style={{ marginTop: '120px' }}>
-				{open && <BgChoice song={song} setBg={setBg} />}
+				{open && <BgChoice song={song} />}
 			</div>
 			<div className="footer">
 				<button onClick={onClose}>閉じる</button>

@@ -2,7 +2,7 @@ import { atom, useAtom } from 'jotai'
 import { Song } from '../types'
 import { currentEvent } from '../config'
 
-export const songAtom = atom<Song>({
+const songAtom = atom<Song>({
 	icy: (currentEvent?.label || '') + ' - loading',
 	time: 0,
 	wordCounts: {},
@@ -12,3 +12,5 @@ export const songAtom = atom<Song>({
 })
 
 export const useSong = () => useAtom(songAtom)
+const loadedAtom = atom(false)
+export const useLoaded = () => useAtom(loadedAtom)

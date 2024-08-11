@@ -15,6 +15,7 @@ import {
 	searchImageUrl,
 	utanetSearchUrl,
 } from '../../util'
+import { useSong } from '../../hooks/useSongAtom'
 import BookCount from './BookCount'
 
 function makeTitle(song: Song) {
@@ -35,8 +36,6 @@ function tagOrder(tags: Record<string, number>): TagCount[] {
 			return score2 * 100 + score3
 		})
 }
-
-type Props = { song: Song }
 
 const SingerLine = ({ singer }: { singer?: string }) => (
 	<>{singer && <p>歌手: {singer}</p>}</>
@@ -74,7 +73,9 @@ const AlbumLine = ({
 	</p>
 )
 
-function SongInfo({ song }: Props) {
+type Props = {}
+function SongInfo({}: Props) {
+	const [song] = useSong()
 	const titles = makeTitle(song)
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()

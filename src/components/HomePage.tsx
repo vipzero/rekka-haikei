@@ -20,7 +20,7 @@ function HomePage() {
 function HomePageBase() {
 	const network = useNetworkState()
 
-	const [_loaded, song, setBg] = useSongDb(Boolean(network.online))
+	const { song } = useSongDb(Boolean(network.online))
 	const { abyss, setEekey } = useSettingsEe()
 	const { customTheme } = useSettingsCustomTheme()
 
@@ -40,7 +40,7 @@ function HomePageBase() {
 			</Head>
 			<style>{customTheme}</style>
 			<Toast />
-			<Home song={song} setBg={setBg} />
+			<Home />
 		</>
 	)
 }

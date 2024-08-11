@@ -2,7 +2,7 @@ import { useSongDb } from '../../hooks/useSongDb'
 import BgChoice from './BgChoice'
 
 function Page() {
-	const [loaded, song, setBg] = useSongDb()
+	const { loaded, song } = useSongDb()
 
 	if (!loaded) return <p>ちょっとまってね</p>
 
@@ -11,7 +11,7 @@ function Page() {
 			<p>
 				<a href="./bg">戻る</a>
 			</p>
-			<BgChoice song={song} setBg={setBg} />
+			<BgChoice song={song} />
 		</>
 	)
 }

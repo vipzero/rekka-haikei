@@ -37,11 +37,12 @@ import {
 } from '../../config'
 import { useQeuryEid } from '../../hooks/useQueryEid'
 import { useSettings, useSettingsEe } from '../../hooks/useSettings'
+import { useSong } from '../../hooks/useSongAtom'
 import { useBookCountDb } from '../../hooks/useSongDb'
-import { Setting, Song } from '../../types'
+import { useStreamUrl } from '../../hooks/useStreamUrl'
+import { Setting } from '../../types'
 import { downloadImg, isMobile } from '../../util'
 import { startPip } from '../../util/pip'
-import { useStreamUrl } from '../../hooks/useStreamUrl'
 import { BingoBox } from './BingoBox'
 import { ConfButton } from './ConfButton'
 import { ThemeSelector } from './ThemeSelector'
@@ -60,7 +61,6 @@ type Props = {
 	toggleBgcmOpen: () => void
 	addSnap: () => Promise<boolean>
 	favCount: number
-	song: Song
 	bgUrl: string
 }
 
@@ -71,9 +71,9 @@ function SettingBox({
 	bgcmOpen,
 	toggleBgcmOpen,
 	favCount,
-	song,
 	bgUrl,
 }: Props) {
+	const [song] = useSong()
 	const s = useSettings()
 	const { abyss, cycleAbyss } = useSettingsEe()
 	const eid = useQeuryEid()
