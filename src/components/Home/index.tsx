@@ -10,7 +10,7 @@ import {
 	useSettingsFakeBar,
 } from '../../hooks/useSettings'
 import { useSong } from '../../hooks/useSongAtom'
-import { Setting } from '../../types'
+import { isSongFull, Setting } from '../../types'
 import { isGifUrl } from '../../util'
 import BgChoiceModal from '../BgChoise/BgChoiceModal'
 import AudioPlayer from './AudioPlayer'
@@ -25,6 +25,7 @@ import { Conways } from './ex/Coway'
 import { ExtraComp } from './ex/ExtraComp'
 import { YearTimer } from './ex/YearTimer'
 import { shapeStyles, themeStyles } from './themeStyles'
+import { AgeBar } from './YearMeter'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 	wide: 'center',
@@ -110,6 +111,7 @@ function Home() {
 				{/* {showEmol && <LyricsBox />} */}
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
+				{isSongFull(song) && <AgeBar ymd={song.date} />}
 			</Container>
 			<SettingBox
 				favorited={!!books[song.icy]}

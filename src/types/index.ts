@@ -32,7 +32,7 @@ export type SongFull = SongMiss & {
 	category: string
 	gameType: string
 	chapNum: number
-	date: string
+	date: string // yyyy-mm-dd
 }
 
 export type Song = SongFull | SongMiss
@@ -94,6 +94,7 @@ export type Setting = {
 	showArtwork: boolean
 	showCounts: boolean
 	showHistory: boolean
+	showAgebar: boolean
 	blockGif: boolean
 	sideMode: 'r' | 'l' | 'wide' | 'br' | 'bl' | 'bw'
 	lockBgNum: 0 | 1 | 10

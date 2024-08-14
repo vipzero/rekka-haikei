@@ -22,6 +22,7 @@ import {
 	faRadio,
 	faStar as faStarFill,
 	faTags,
+	faTimeline,
 	faToolbox,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -332,6 +333,15 @@ function SettingBox({
 							disabled={emptyMode}
 						/>
 						<ConfButton
+							helpText={`年メーター表示`}
+							className="agebar"
+							areaKey="vy"
+							icon={faTimeline}
+							checked={s.showAgebar}
+							onClick={s.toggleAgebar}
+							disabled={emptyMode}
+						/>
+						<ConfButton
 							helpText={lockLabel[s.lockBgNum].help}
 							className="lock"
 							areaKey="lk"
@@ -538,7 +548,8 @@ const DetailButtonGrid = styled.div`
 	display: grid;
 	grid-template-areas:
 		'fd vt va'
-		'vb lk la';
+		'vb lk la'
+		'vy -- --';
 `
 
 export default SettingBox

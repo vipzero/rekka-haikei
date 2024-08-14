@@ -37,6 +37,7 @@ export const defaultSetting: Setting = {
 	showSetting: true,
 	showArtwork: true,
 	showBookmark: false,
+	showAgebar: false,
 	showCounts: true,
 	showHistory: false,
 	sideMode: 'wide',

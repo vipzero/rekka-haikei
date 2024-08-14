@@ -45,6 +45,7 @@ it('sammonSpell', () => {
 		showArtwork: false,
 		showCounts: false,
 		showHistory: false,
+		showAgebar: false,
 		sideMode: 'r',
 		lockBgNum: 0,
 		showTool: false,
@@ -64,7 +65,7 @@ it('sammonSpell', () => {
 		bingo: '',
 	})
 	expect(spell).toMatchInlineSnapshot(
-		`"ꔈꔀꔐꔀꔘꔀꔨꔁꕚꔱꔀꔀꔀꔂꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔁꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀ"`
+		`"ꔈꔀꔐꔀꔘꔀꔨꔁꕚꔹꔀꔀꔀꔂꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔁꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀ"`
 	)
 	// `"ꔈꔀꔐꔀꔘꔀꔨꔁꕚꕚꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀꔀ"`
 })
@@ -74,7 +75,13 @@ it('spell', () => {
 		{
 		  "ee": {
 		    "ariascarlet": 0,
+		    "birth": 0,
+		    "bkbk": 0,
 		    "bobo": 0,
+		    "choco": 0,
+		    "codegeass": 0,
+		    "cyberpunk": 0,
+		    "diy": 0,
 		    "flip": 0,
 		    "gaming": 0,
 		    "gkgurashi": 0,
@@ -100,6 +107,7 @@ it('spell', () => {
 		    "psychopass": 0,
 		    "rain": 0,
 		    "rainbow": 0,
+		    "roshidere": 0,
 		    "rozen": 0,
 		    "sakasa": 0,
 		    "sakurasou": 2,
@@ -108,6 +116,7 @@ it('spell', () => {
 		    "steinsgate": 0,
 		    "subetef": 0,
 		    "susu": 1,
+		    "yojitsu": 0,
 		  },
 		  "showArtwork": false,
 		  "showBookmark": false,

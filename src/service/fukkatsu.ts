@@ -68,6 +68,7 @@ export const decodeSetting = (buf: Uint8Array): Partial<Setting> => {
 	return {
 		showArtwork: res.showArtwork,
 		showBookmark: res.showBookmark,
+		// showAgebar: res.showAgebar,
 		showCounts: res.showCounts,
 		sideMode: sideMode || 'l',
 		ee,
