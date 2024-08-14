@@ -25,7 +25,7 @@ import { Conways } from './ex/Coway'
 import { ExtraComp } from './ex/ExtraComp'
 import { YearTimer } from './ex/YearTimer'
 import { shapeStyles, themeStyles } from './themeStyles'
-import { AgeBar } from './YearMeter'
+import { AgeBar } from './AgeBar'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 	wide: 'center',

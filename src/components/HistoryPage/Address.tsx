@@ -3,6 +3,7 @@ import { URL_FEAT_REQ, URL_TOHYO_REQ, URL_USE_REQ } from '../../config'
 import { EventLinks } from '../EventLinks'
 
 const notes: Record<string, string> = {
+	'2024-08-12:08': 'feat Agebar追加',
 	'2023-08-12:08': 'feat ブクマ検索ボタン追加',
 	'2023-08-08:08': 'feat 画像のレスポンシブ対応',
 	'2023-05-05:05': 'feat BINGO',
