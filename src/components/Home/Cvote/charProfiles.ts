@@ -2,7 +2,7 @@ import { eekeysVotic } from './constants'
 import { Char } from './index'
 
 type CvoteProfile = {
-	id: typeof eekeysVotic[number]
+	id: (typeof eekeysVotic)[number]
 	chars: Char[]
 }
 
@@ -81,6 +81,14 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'mk', name: '真紅', color: '#d70035' },
 			{ id: 'hi', name: '雛苺', color: '#ff66cc' },
 			{ id: 'br', name: '薔薇水', color: '#cab8d9' },
+		],
+	},
+	{
+		id: 'roshidere',
+		chars: [
+			{ id: 'ar', name: 'アーリャ', color: '#E5DEE1' },
+			{ id: 'yk', name: '有希', color: '#655963' },
+			{ id: 'ms', name: 'マーシャ', color: '#BF9681' },
 		],
 	},
 ]
