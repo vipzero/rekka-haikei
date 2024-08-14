@@ -203,6 +203,10 @@ const Style = styled.div<{ customTheme: string }>`
 				margin: 0;
 			}
 		}
+		.co-panel::-webkit-scrollbar {
+			display: none;
+		}
+
 		.typography {
 			color: var(--font-color);
 		}
