@@ -32,7 +32,7 @@ export type SongFull = SongMiss & {
 	category: string
 	gameType: string
 	chapNum: number
-	date: string // yyyy-mm-dd
+	date?: string // yyyy-mm-dd
 }
 
 export type Song = SongFull | SongMiss

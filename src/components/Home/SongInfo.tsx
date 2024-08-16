@@ -113,11 +113,14 @@ function SongInfo({}: Props) {
 									</span>
 								</p>
 								<p className="flex-rows">
-									<span className="songinfo-icon">
-										<FontAwesomeIcon icon={faFilm} />
-									</span>
-
-									<span className="date">{song.date}</span>
+									{song.date && (
+										<>
+											<span className="songinfo-icon">
+												<FontAwesomeIcon icon={faFilm} />
+											</span>
+											<span className="date">{song.date}</span>
+										</>
+									)}
 									{song.chapNum && (
 										<span className="chapnum">全{song.chapNum}話</span>
 									)}

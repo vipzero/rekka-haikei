@@ -111,7 +111,7 @@ function Home() {
 				{/* {showEmol && <LyricsBox />} */}
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
-				{isSongFull(song) && <AgeBar ymd={song.date} />}
+				{isSongFull(song) && song.date && <AgeBar ymd={song.date} />}
 			</Container>
 			<SettingBox
 				favorited={!!books[song.icy]}

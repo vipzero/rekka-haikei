@@ -36,7 +36,8 @@ export const EE_CHAR: Record<number, string> = {
 	4: '!',
 	5: '❆',
 	6: '✿',
-	7: '❖',
+	7: '𖣖',
+	// 𖣋 𖥑 𖧼
 }
 export const EE_SEASON = Number(Object.keys(EE_CHAR).pop())
 
