@@ -13,26 +13,22 @@ const elapsedYourMonth = (ymd: string) => {
 	}
 }
 
-type Props = {
-	ymd: string // yyyy-mm-dd
-}
+const divmod = (a: number, b: number) => [Math.floor(a / b), a % b]
 
-export const AgeBar = ({ ymd }: Props) => {
-	const { showAgebar: visible } = useSettings()
-	const { y, m } = elapsedYourMonth(ymd)
+export const AgeBar = ({ y, m }: { y: number; m: number }) => {
+	const [oy, my] = divmod(y, 10)
 
 	return (
-		<Style
-			className="co-agebar co-panel"
-			onClick={(e) => e.stopPropagation()}
-			style={{ display: visible ? 'block' : 'none' }}
-		>
+		<Style className="co-agebar co-panel" onClick={(e) => e.stopPropagation()}>
 			<p>
 				{y}
 				<span>年</span>
 				{m}
 				<span>ヶ月前</span>
-				{range(y).map((i) => (
+				{range(oy).map((i) => (
+					<progress className="ten" key={i} value={12} max={12} />
+				))}
+				{range(my).map((i) => (
 					<progress key={i} value={12} max={12} />
 				))}
 				<progress value={m} max={12} />
@@ -40,6 +36,25 @@ export const AgeBar = ({ ymd }: Props) => {
 		</Style>
 	)
 }
+
+const validFormat = (s: string) => s.match(/^\d{4}-\d{2}-\d{2}$/)
+
+type Props = {
+	ymd: string // yyyy-mm-dd
+}
+
+export const AgeBarContainer = ({ ymd }: Props) => {
+	const { showAgebar: visible } = useSettings()
+	const { y, m } = elapsedYourMonth(ymd)
+	if (!validFormat(ymd)) return null
+
+	return (
+		<Style style={{ display: visible ? 'block' : 'none' }}>
+			<AgeBar y={y} m={m} />
+		</Style>
+	)
+}
+
 const Style = styled.div`
 	p {
 		font-size: 0.8rem !important;
@@ -51,17 +66,22 @@ const Style = styled.div`
 		appearance: none;
 		margin-left: 0.2rem;
 		/* filter: invert(1); */
-		border-radius: 5px;
 
 		height: 0.4rem;
 		width: 1rem;
 
+		&.ten {
+			height: 0.5rem;
+			width: 7rem;
+		}
+
 		&::-webkit-progress-bar {
-			background-color: var(--font-color);
-			border-radius: 5px;
+			background-color: var(--font-color, #aaa);
+			border-radius: 4px;
 		}
 		&::-webkit-progress-value {
-			background-color: var(--co-bg);
+			background-color: var(--co-bg, #444);
+			border-radius: 4px;
 		}
 	}
 `

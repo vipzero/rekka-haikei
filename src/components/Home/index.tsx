@@ -25,7 +25,7 @@ import { Conways } from './ex/Coway'
 import { ExtraComp } from './ex/ExtraComp'
 import { YearTimer } from './ex/YearTimer'
 import { shapeStyles, themeStyles } from './themeStyles'
-import { AgeBar } from './AgeBar'
+import { AgeBarContainer } from './AgeBar'
 
 const sideMap: Record<Setting['sideMode'], 'right' | 'center' | 'left' | ''> = {
 	wide: 'center',
@@ -111,7 +111,7 @@ function Home() {
 				{/* {showEmol && <LyricsBox />} */}
 
 				<BookmarkMiniList books={books} toggleFavorites={toggleFavorites} />
-				{isSongFull(song) && song.date && <AgeBar ymd={song.date} />}
+				{isSongFull(song) && song.date && <AgeBarContainer ymd={song.date} />}
 			</Container>
 			<SettingBox
 				favorited={!!books[song.icy]}
