@@ -76,6 +76,7 @@ export const eekeysVotic = [
 	// 'loveplus', // R
 	// 'milgram', // R
 	'roshidere',
+	'makein',
 ] as const
 export const eekeys = [
 	...eekeysGimic,
@@ -148,6 +149,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/サイバーパンク|cyberpunk/i, 'cyberpunk'],
 	[/Do It Yourself!!/i, 'diy'],
 	[/ロシア語でデレる/i, 'roshidere'],
+	[/負けヒロイン/i, 'makein'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	// [ (song) => song.animeTitle === '人生', 'jinsei' ],
@@ -254,4 +256,5 @@ export const eeId: Record<EekeyStr, number> = {
 	diy: 54,
 	birth: 55,
 	roshidere: 56,
+	makein: 57,
 }

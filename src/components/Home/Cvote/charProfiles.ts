@@ -91,4 +91,12 @@ export const CVOTE_PROFILES: CvoteProfile[] = [
 			{ id: 'ms', name: 'マーシャ', color: '#BF9681' },
 		],
 	},
+	{
+		id: 'makein',
+		chars: [
+			{ id: 'yn', name: '八奈見', color: '#4AC1F0' },
+			{ id: 'ys', name: '焼塩', color: '#8FC31E' },
+			{ id: 'km', name: '小鞠', color: '#DD4F4D' },
+		],
+	},
 ]
