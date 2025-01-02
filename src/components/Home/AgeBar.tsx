@@ -17,22 +17,27 @@ const divmod = (a: number, b: number) => [Math.floor(a / b), a % b]
 
 export const AgeBar = ({ y, m }: { y: number; m: number }) => {
 	const [oy, my] = divmod(y, 10)
+	const comingSoon = y < 0
 
 	return (
 		<Style className="co-agebar co-panel" onClick={(e) => e.stopPropagation()}>
-			<p>
-				{y}
-				<span>年</span>
-				{m}
-				<span>ヶ月前</span>
-				{range(oy).map((i) => (
-					<progress className="ten" key={i} value={12} max={12} />
-				))}
-				{range(my).map((i) => (
-					<progress key={i} value={12} max={12} />
-				))}
-				<progress value={m} max={12} />
-			</p>
+			{comingSoon ? (
+				<span>放送予定</span>
+			) : (
+				<p>
+					{y}
+					<span>年</span>
+					{m}
+					<span>ヶ月前</span>
+					{range(oy).map((i) => (
+						<progress className="ten" key={i} value={12} max={12} />
+					))}
+					{range(my).map((i) => (
+						<progress key={i} value={12} max={12} />
+					))}
+					<progress value={m} max={12} />
+				</p>
+			)}
 		</Style>
 	)
 }
