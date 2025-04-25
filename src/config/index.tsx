@@ -13,7 +13,9 @@ export const isDev = NODE_ENV === 'development'
 export const featcherVersion = 5
 
 export const events: Event[] = [
-	{ id: '2024winter', label: '2024冬', current: true },
+	{ id: '2025gw', label: '2025GW', current: true },
+	// { id: '2024winter_after', label: '2024冬後'},
+	{ id: '2024winter', label: '2024冬' },
 	{ id: '2024obon', label: '2024盆' },
 	{ id: '2024gw', label: '2024GW' },
 	{ id: '2023winter', label: '2023冬' },
@@ -39,8 +41,8 @@ export const EE_CHAR: Record<number, string> = {
 	6: '✿',
 	7: '𖣖',
 	8: '𖥑',
-	// 9: '𖧼',
-	//
+	9: '✦',
+	// 10: '𖧼',
 }
 export const EE_SEASON = Number(Object.keys(EE_CHAR).pop())
 
