@@ -9,6 +9,7 @@ import {
 } from '../components/Home/Cvote/constants'
 import {
 	Abyss,
+	DEBUG_EE,
 	EE_SEASON,
 	allShapes,
 	decideTheme,
@@ -216,7 +217,7 @@ export const useSettingsTheme = () => {
 
 	const themes: ThemeOpen[] = [
 		...normalThemes.map((v) => ({ ...v, visible: true })),
-		...extThemes.map((v) => ({ ...v, visible: ee[v.id] > 0 })),
+		...extThemes.map((v) => ({ ...v, visible: DEBUG_EE || ee[v.id] > 0 })),
 	].map((t) => ({
 		...t,
 		selected: t.id === theme,

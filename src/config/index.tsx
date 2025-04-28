@@ -78,6 +78,7 @@ export const extThemes: ExTheme[] = [
 	{ id: 'choco', key: 'CHOCO' },
 	{ id: 'cyberpunk', key: 'CYBPK' },
 	{ id: 'diy', key: 'DOITY' },
+	{ id: 'eightysix', key: 'EIGHT' },
 ]
 export const isExtTheme = (s: Eekey) => extThemes.some((v) => v.id === s)
 export const decideTheme = (s: ThemeId, eeKey: EekeyState) =>
@@ -185,3 +186,4 @@ export const URL_FEAT_REQ =
 	'https://docs.google.com/forms/d/e/1FAIpQLSfVQE9W3DFNPG03x3rJumLAGZfQsuFpxJP2vTDg4g0ddU3V-w/viewform'
 
 export const TMP_TRACK_TIME = 4 * 60 * 1000
+export const DEBUG_EE = process.env.NEXT_PUBLIC_DEBUG_EE === 'true'

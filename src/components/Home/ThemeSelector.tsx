@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { useEffect, useState } from 'react'
 import { useSettingsTheme } from '../../hooks/useSettings'
+import { DEBUG_EE } from '../../config'
 
 export const ThemeSelector = () => {
 	const { setTheme, themes, theme } = useSettingsTheme()
@@ -21,11 +22,10 @@ export const ThemeSelector = () => {
 					key={t.key}
 					className="theme-btn"
 					data-active={t.selected}
-					// data-opened={true}
-					data-opened={t.visible}
+					data-opened={DEBUG_EE || t.visible}
 					data-name={t.key}
 					onClick={() => {
-						if (t.visible) setTheme(t.id)
+						if (DEBUG_EE || t.visible) setTheme(t.id)
 					}}
 				>
 					<span>{t.visible ? '✦' : '?'}</span>
@@ -145,6 +145,9 @@ const Style = styled.div`
 			}
 			&[data-name='DOITY'] {
 				${halfBallBg('#F47D4C', '#3CB2E5')}
+			}
+			&[data-name='EIGHT'] {
+				${halfBallBg('#fff', '#e63946')}
 			}
 		}
 		@keyframes changeSelect {
