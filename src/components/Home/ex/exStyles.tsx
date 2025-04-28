@@ -451,6 +451,7 @@ export const exStyles = css`
 				var(--co-bg);
 			background-size: cover, cover, cover;
 			background-blend-mode: overlay, overlay, normal;
+			border-radius: 0 !important;
 			padding: 1.5rem;
 			overflow: hidden;
 			z-index: 0;
@@ -460,9 +461,9 @@ export const exStyles = css`
 			content: '';
 			position: absolute;
 			width: 10px;
-			height: calc(100% - 8px); /* 上下に少し余白を作る */
-			top: 4px;
-			bottom: 4px;
+			height: calc(100% - 0px);
+			top: 0px;
+			bottom: 0px;
 			background: none;
 		}
 
