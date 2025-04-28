@@ -47,6 +47,7 @@ export const eekeysMirror = [
 	'mosaic',
 	'offline',
 	'move',
+	'chimaru',
 	'parapara',
 ] as const
 export const eekeysVotic = [
@@ -152,6 +153,7 @@ export const EX_PATTERNS_ANIME_OR_ALBUM: [string | RegExp, Eekey][] = [
 	[/ロシア語でデレる/i, 'roshidere'],
 	[/負けヒロイン/i, 'makein'],
 	[/エイティシックス/i, 'eightysix'],
+	[/^チ。/i, 'chimaru'],
 ]
 export const EX_PATTERNS_CUSTOM: [(_song: Song) => boolean, Eekey][] = [
 	// [ (song) => song.animeTitle === '人生', 'jinsei' ],
@@ -260,4 +262,5 @@ export const eeId: Record<EekeyStr, number> = {
 	roshidere: 56,
 	makein: 57,
 	eightysix: 58,
+	chimaru: 59,
 }

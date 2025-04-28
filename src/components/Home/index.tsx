@@ -69,8 +69,10 @@ function Home() {
 				layoff()
 				setBgcmOpen(false)
 			}}
-			// @ts-ignore
-			style={{ '--song-time': `${song.trackTimeMillis / 1000}s` }}
+			style={{
+				// @ts-ignore
+				'--song-time': `${(song.trackTimeMillis || TMP_TRACK_TIME) / 1000}s`,
+			}}
 			data-ex={eeKey}
 			data-has-art={!!song.artworkUrl100}
 			data-show-setting={visible}
