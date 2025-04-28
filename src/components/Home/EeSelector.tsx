@@ -13,7 +13,7 @@ type EeDot = {
 }
 
 const hint = (s: string, group: number) => {
-	const full = s.replace(/./, '.')
+	const full = s.replace(/^.{3}/, '...')
 	const head = s[0] + '~'
 	// const tails = '~' + s[s.length - 1]
 	const stripe = s.replace(/(.).?/g, '$1.')
