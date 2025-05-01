@@ -4,6 +4,7 @@ import { Transition } from 'react-transition-group'
 import { useMeasure } from 'react-use'
 import styled from 'styled-components'
 import { useSettingsEe } from '../../hooks/useSettings'
+import { zIndex } from '../../config'
 import { useBgs } from './useBgs'
 
 const duration = 1000
@@ -124,7 +125,7 @@ const SuperBack = styled.div`
 
 		top: 0;
 		left: 0;
-		z-index: -13;
+		z-index: ${zIndex.layerBack - 3};
 		filter: blur(1vw);
 	}
 `
@@ -135,7 +136,7 @@ const Background = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: -10;
+	z-index: ${zIndex.layerBack};
 `
 
 export default FadeBgChanger

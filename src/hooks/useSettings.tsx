@@ -197,7 +197,7 @@ export const useSettingsEe = () => {
 		abyss: abyssEx || abyss,
 		fadeAbyssColor: abyss,
 		ee,
-		eeKey: DEBUG_EE ? ('chimaru' as Eekey) : eeKey,
+		eeKey: DEBUG_EE ? ('rain' as Eekey) : eeKey,
 		eeOpt,
 		eeSim,
 		eeMemo,

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { TMP_TRACK_TIME } from '../../config'
+import { TMP_TRACK_TIME, zIndex } from '../../config'
 import { addSnap, useFavorites } from '../../hooks/useFavorites'
 import { useLightConfig } from '../../hooks/useLightConfig'
 import {
@@ -136,6 +136,7 @@ const Container = styled.div`
 	flex-direction: column;
 	padding: 16px;
 	color: white;
+	z-index: ${zIndex.layerFront};
 
 	/* overflow: hidden; */
 	&[data-side='wide'],
@@ -298,7 +299,7 @@ const Wrap = styled.div<{ customTheme: string }>`
 	}
 
 	#setting-box {
-		z-index: 1;
+		z-index: ${zIndex.layerFront};
 		position: fixed;
 		bottom: 0;
 		right: 0;

@@ -16,6 +16,7 @@ import {
 	utanetSearchUrl,
 } from '../../util'
 import { useSong } from '../../hooks/useSongAtom'
+import { zIndex } from '../../config'
 import BookCount from './BookCount'
 
 function makeTitle(song: Song) {
@@ -181,6 +182,7 @@ const Wrap = styled.div`
 	padding: var(--co-pad);
 	border-radius: 4px;
 	overflow: hidden;
+	z-index: ${zIndex.layerFront};
 
 	#panel-shadow {
 		// ee

@@ -187,3 +187,10 @@ export const URL_FEAT_REQ =
 
 export const TMP_TRACK_TIME = 4 * 60 * 1000
 export const DEBUG_EE = process.env.NEXT_PUBLIC_DEBUG_EE === 'true'
+
+export const zIndex = {
+	layerBack: -10, // bg
+	layerDeco: 5, // bg の装飾
+	layerFront: 10, // ui
+	layerTop: 100,
+}

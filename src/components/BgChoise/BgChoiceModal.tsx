@@ -43,7 +43,7 @@ const Dialog = styled.dialog`
 	padding: 12px 4px;
 	border-radius: 4px;
 	border: solid gray;
-	z-index: 10;
+	z-index: 4;
 	/* background: var(--content-bg-color); */
 
 	&[data-open='false'] {

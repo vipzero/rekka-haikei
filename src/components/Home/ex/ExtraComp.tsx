@@ -12,6 +12,7 @@ import { ImasMilionTl } from './ImasMilionTl'
 import { Masso } from './Masso'
 import { Trump } from './Trump'
 import { Yrings } from './Yrings'
+import RainCanvas from './RainCh'
 
 const EmbedWindow = ({ url }: { url: string }) => (
 	<div style={{ height: '50vh' }}>
@@ -85,11 +86,7 @@ const workLinks: ([string] | [string, string])[] = [
 const RainEx = () => {
 	return (
 		<div id="rains-box">
-			<div className="rains">
-				{range(20).map((i) => (
-					<span key={i} />
-				))}
-			</div>
+			<RainCanvas />
 		</div>
 	)
 }
