@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const mtsExStyles = css`
+export const cyberExStyles = css`
 	&[data-theme='cyberpunk'] {
 		--ex-color: #faee51;
 		--font-color: #2b4e34;

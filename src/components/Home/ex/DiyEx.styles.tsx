@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const rainExStyles = css`
+export const diyExStyles = css`
 	&[data-theme='diy'] {
 		--ex-color: #3cb2e5;
 		--font-color: #f47d4c;

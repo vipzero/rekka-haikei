@@ -1,5 +1,6 @@
 import { css, keyframes } from 'styled-components'
 import { rainbows, range } from '../../../util'
+import { sakasaStyles } from './SakasaEx.styles'
 
 const duration = 0.2
 const frequency = 10
@@ -206,6 +207,7 @@ export const exStyles = css`
 			}
 		}
 	}
+	${sakasaStyles}
 
 	&[data-ex='3sha3yo'] {
 		.hurricane {

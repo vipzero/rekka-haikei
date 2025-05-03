@@ -29,7 +29,7 @@ const noise = keyframes`
 
 export const Lain: any = createGlobalStyle<{ r: number }>`
   /* Styles moved from exStyles.tsx for data-theme='lain' */
-  body[data-theme='lain'] {
+  [data-theme='lain'] {
     * {
       color: hsla(0, 50%, 50%) !important;
     }

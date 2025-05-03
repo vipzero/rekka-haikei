@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const psychopassExStyles = css`
+export const codegeassExStyles = css`
 	&[data-theme='codegeass'] {
 		--ex-color: #3c13e0;
 		--font-color: #6f5dbb;

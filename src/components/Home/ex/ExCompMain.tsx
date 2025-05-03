@@ -24,7 +24,6 @@ import { ParaparaEx } from './ParaparaEx'
 import { PsychopassEx } from './PsychopassEx'
 import { RainbowEx } from './RainbowEx'
 import { RainEx } from './RainEx'
-import { SakasaEx } from './SakasaEx'
 import { SpinEx } from './SpinEx'
 import { SteinsGateEx } from './SteinsGateEx'
 import { SusuEx } from './SusuEx'
@@ -167,8 +166,6 @@ export const ExCompMain = ({ eeKey, rand, eeOpt, eeMemo }: ExCompMainProps) => {
 		return <BkbkEx />
 	} else if (eeKey === 'chimaru') {
 		return <ChimaruEx />
-	} else if (eeKey === 'sakasa') {
-		return <SakasaEx />
 	} else if (eeKey === 'susu') {
 		return <SusuEx />
 	} else if (eeKey === 'flip') {

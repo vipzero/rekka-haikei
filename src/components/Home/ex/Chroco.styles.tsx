@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const birthdayExStyles = css`
+export const chocoExStyles = css`
 	&[data-theme='choco'] {
 		--ex-color: #311;
 		--font-color: #ffc627;

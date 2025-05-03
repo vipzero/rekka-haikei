@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const rainChStyles = css`
+export const eightysixExStyles = css`
 	&[data-theme='eightysix'] {
 		--ex-color: #222; /* 深い黒、純黒より柔らかい */
 		--font-color: #f5f5f5; /* 柔らかい白（真っ白すぎず） */

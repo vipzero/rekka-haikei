@@ -1,5 +1,13 @@
 import { css } from 'styled-components'
 import { exStyles } from './ex/exStyles'
+import { chocoExStyles } from './ex/Chroco.styles'
+import { kokakuExStyles } from './ex/KokakuEx.styles'
+import { cyberExStyles } from './ex/Cyberpunk.styles'
+import { codegeassExStyles } from './ex/CodegeassEx.styles'
+import { diyExStyles } from './ex/DiyEx.styles'
+import { yojitsuExStyles } from './ex/YojitsuEx.styles'
+import { eightysixExStyles } from './ex/EightySixEx.styles'
+import { pcyhopassExStyles } from './ex/PcyhopassEx.styles'
 
 export const themeStyles = css`
 	& {
@@ -50,6 +58,30 @@ export const themeStyles = css`
 		--btn-bo: #464646;
 		--btn-bo-checked: #595959;
 	}
+	&[data-theme='lain'] {
+		div {
+			/* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
+		}
+
+		span,
+		a {
+			/* width: max-content; */
+			animation-name: noise;
+			animation-direction: alternate;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: infinite;
+			animation-duration: 8s;
+		}
+	}
+	${chocoExStyles}
+	${kokakuExStyles}
+	${cyberExStyles}
+	${codegeassExStyles}
+	${diyExStyles}
+	${yojitsuExStyles}
+	${eightysixExStyles}
+	${pcyhopassExStyles}
+
 	${exStyles}
 
 	/* pre setup */

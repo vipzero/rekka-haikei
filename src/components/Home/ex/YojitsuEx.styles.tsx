@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const masshiroExStyles = css`
+export const yojitsuExStyles = css`
 	&[data-theme='yojitsu'] {
 		--font-color: white;
 		--panel-fo: white;
