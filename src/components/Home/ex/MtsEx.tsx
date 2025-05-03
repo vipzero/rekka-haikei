@@ -1,8 +1,16 @@
 import React from 'react'
+import styled from 'styled-components'
 import { base64toBools } from '../../../util'
 import { ImasBoard } from './ImasBoard'
 import { ImasMilionTl } from './ImasMilionTl'
 import { Trump } from './Trump'
+
+const MtsStyle = styled.div`
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 4px;
+`
 
 export const MtsEx = ({ s }: { s: string }) => {
 	if (!s) return null
@@ -21,11 +29,11 @@ export const MtsEx = ({ s }: { s: string }) => {
 	if (!res) return null
 	const { opens, cd, dols } = res
 	return (
-		<div id="mts10">
+		<MtsStyle>
 			{opens && <Trump opens={opens} />}
 			{cd && <ImasMilionTl cd={cd} />}
 			{dols && <ImasBoard bools={dols} />}
-		</div>
+		</MtsStyle>
 	)
 }
 
