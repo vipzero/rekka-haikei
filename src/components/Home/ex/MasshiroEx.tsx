@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import { zIndex } from '../../../config'
 
 const skipping = keyframes`
 	0% {
@@ -74,7 +75,7 @@ const MashiroB = styled(MashiroImage)`
 
 export const MasshiroEx = () => (
 	<MasshiroExContainer>
-		<div>
+		<div style={{ zIndex: zIndex.layerFrontEx }}>
 			<MashiroA id="mashiro-a" src="/static/mashiro-a.png" />
 			<MashiroB id="mashiro-b" src="/static/mashiro-b.png" />
 		</div>

@@ -1,4 +1,5 @@
 import { RainbowFontCool } from '../..'
+import { zIndex } from '../../../config'
 
 // 求人サイトのリンク
 const workLinks: ([string] | [string, string])[] = [
@@ -15,7 +16,7 @@ const workLinks: ([string] | [string, string])[] = [
 
 export const HalowaEx = () => {
 	return (
-		<div style={{ display: 'grid' }}>
+		<div style={{ display: 'grid', zIndex: zIndex.layerFrontEx }}>
 			{workLinks.map(([link, label]) => (
 				<RainbowFontCool key={link}>
 					<a href={link} target="_blank" rel="noreferrer">

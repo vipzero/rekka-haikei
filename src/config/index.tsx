@@ -196,6 +196,7 @@ export const zIndex = {
 	layerBackPreview: 50, // bg preview
 	layerDeco: 200, // bg の装飾
 	layerBase: 500, // 標準
+	layerFrontEx: 510, // ex
 	layerFront: 600, // ui
 	layerTop: 700,
 	layerModal: 800,

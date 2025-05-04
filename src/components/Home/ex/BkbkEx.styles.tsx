@@ -1,4 +1,5 @@
 import { css, keyframes } from 'styled-components'
+import { zIndex } from '../../../config'
 
 const up = keyframes`
   100% {
@@ -17,6 +18,7 @@ export const bkbkStyles = css`
 
 	/* Bubbles */
 	.bubbles {
+		zindex: ${zIndex.layerFrontEx};
 		position: absolute;
 		bottom: 0;
 		/* z-index: 5; */
