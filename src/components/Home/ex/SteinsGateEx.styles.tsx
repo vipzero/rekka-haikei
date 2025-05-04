@@ -13,13 +13,7 @@ const rgbShiftB = genAnimationRgbShift()
 const glitchBefore = genAnimationGlitch()
 
 export const steinsGateStyles = css`
-	#timebar > .wrap {
-		transform-origin: 0 0;
-		animation: spin-y 10s cubic-bezier(0.28, 1.61, 0.7, -0.71) infinite
-			alternate;
-	}
-
-	#bg > div {
+	&[data-ex='steinsgate'] #bg > div {
 		.clone {
 			display: none;
 		}
@@ -72,6 +66,68 @@ export const steinsGateStyles = css`
 		&::after,
 		.channel {
 			animation-delay: ${animStart - 3}s;
+		}
+
+		#timebar > .wrap {
+			transform-origin: 0 0;
+			animation: spin-y 10s cubic-bezier(0.28, 1.61, 0.7, -0.71) infinite
+				alternate;
+		}
+
+		#bg > div {
+			.clone {
+				display: none;
+			}
+			&::before,
+			&::after,
+			.channel {
+				background: inherit;
+				bottom: 0;
+				left: 0;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+			&::before {
+				animation: ${glitchBefore} 3s linear infinite alternate both;
+				content: '';
+			}
+			.channel {
+				mix-blend-mode: screen;
+				&::before {
+					bottom: 0;
+					content: '';
+					display: block;
+					mix-blend-mode: multiply;
+					position: absolute;
+					left: 0;
+					right: 0;
+					top: 0;
+				}
+			}
+			.r {
+				animation: ${rgbShiftR} 3s steps(1, jump-end) infinite alternate both;
+				&::before {
+					background: #f00;
+				}
+			}
+			.g {
+				animation: ${rgbShiftG} 3s steps(1, jump-end) infinite alternate both;
+				&::before {
+					background: #0f0;
+				}
+			}
+			.b {
+				animation: ${rgbShiftB} 3s steps(1, jump-end) infinite alternate both;
+				::before {
+					background: #00f;
+				}
+			}
+			&::before,
+			&::after,
+			.channel {
+				animation-delay: ${animStart - 3}s;
+			}
 		}
 	}
 `

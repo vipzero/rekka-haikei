@@ -17,24 +17,26 @@ export const chimaruStyles = css`
 			transform: translateX(0%);
 		}
 	}
-	#bg-img {
-		animation: bpos var(--song-time) linear infinite;
-	}
-	#main-box {
-		position: absolute;
-		animation: bposc var(--song-time) linear infinite;
-	}
+	&[data-ex='chimaru'] {
+		#bg-img {
+			animation: bpos var(--song-time) linear infinite;
+		}
+		#main-box {
+			position: absolute;
+			animation: bposc var(--song-time) linear infinite;
+		}
 
-	#timebar {
-		.wrap {
-			height: 8px;
-		}
-		.fill {
-			background: #222288;
-			width: 50vw !important;
-		}
-		.pointer {
-			background: #ff0 !important;
+		#timebar {
+			.wrap {
+				height: 8px;
+			}
+			.fill {
+				background: #222288;
+				width: 50vw !important;
+			}
+			.pointer {
+				background: #ff0 !important;
+			}
 		}
 	}
 `

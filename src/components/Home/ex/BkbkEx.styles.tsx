@@ -6,20 +6,6 @@ const up = keyframes`
   }
 `
 
-// plasma keyframes seems unused in the original #bkbk style block,
-// but including it here for completeness if needed later.
-const plasma = keyframes`
-  0% {
-    transform: scale(6) translate3d(20px, 0, 0);
-  }
-  50% {
-    transform: scale(1) translate3d(-60px, 0, 0);
-  }
-  100% {
-    transform: scale(6) translate3d(20px, 0, 0);
-  }
-`
-
 export const bkbkStyles = css`
 	/* from exStyles.tsx: &[data-ex='bkbk'] */
 	position: absolute;
@@ -27,7 +13,6 @@ export const bkbkStyles = css`
 	top: 0;
 	width: 100vw;
 	height: 100vh;
-	border: solid 1px orange; /* Keep or remove border? */
 	overflow: hidden; /* Added to contain bubbles */
 
 	/* Bubbles */
