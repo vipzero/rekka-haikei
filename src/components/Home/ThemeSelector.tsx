@@ -128,9 +128,6 @@ const Style = styled.div`
 			&[data-name='KOKAK'] {
 				${halfBallBg('#0385f4', '#b8deff')}
 			}
-			&[data-name='LAIN_'] {
-				${halfBallBg('#310d0d', '#880000')}
-			}
 			&[data-name='ID___'] {
 				${halfBallBg('#373f4f', '#9eece4')}
 			}

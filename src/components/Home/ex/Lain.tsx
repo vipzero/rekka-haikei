@@ -66,6 +66,20 @@ export const Lain: any = createGlobalStyle<{ r: number }>`
         '_a _a _a _a pi bi'
         'ts ts ts ts ts ts' !important;
     }
+
+    div {
+      /* background: linear-gradient(#0000, #1008, #0008, #1000) !important; */
+    }
+
+    span,
+    a {
+      /* width: max-content; */
+      animation-name: noise;
+      animation-direction: alternate;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 8s;
+    }
   }
 `
 
