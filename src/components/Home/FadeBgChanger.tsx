@@ -114,7 +114,7 @@ const SuperBack = styled.div`
 	position: absolute;
 	left: 0;
 	top: 0;
-	z-index: -10;
+	z-index: ${zIndex.layerBackDeep3};
 	overflow: hidden;
 	.clone {
 		position: absolute;
@@ -125,7 +125,7 @@ const SuperBack = styled.div`
 
 		top: 0;
 		left: 0;
-		z-index: ${zIndex.layerBack - 3};
+		z-index: ${zIndex.layerBackDeep2};
 		filter: blur(1vw);
 	}
 `

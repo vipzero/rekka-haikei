@@ -30,11 +30,11 @@ function BgChoiceModal({ open }: Props) {
 
 const Dialog = styled.dialog`
 	position: absolute;
-	top: 50vh;
 	left: 8px;
 	right: 20px;
 	width: calc(100% - 16px);
-	height: calc(50vh - 8px);
+	top: 75vh;
+	height: calc(25vh - 8px);
 	overflow-y: hidden;
 	overflow-x: scroll;
 	margin: 0;
@@ -56,8 +56,6 @@ const Dialog = styled.dialog`
 
 	/* mobile */
 	@media only screen and (max-width: 600px) {
-		top: 70vh;
-		height: calc(30vh - 8px);
 	}
 	button {
 		border: none;

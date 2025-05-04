@@ -315,7 +315,7 @@ const Mask = styled.div`
 	left: 0;
 	height: 100vh;
 	width: 100vw;
-	z-index: -5;
+	z-index: ${zIndex.layerBackMask};
 `
 
 export default Home

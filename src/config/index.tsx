@@ -189,9 +189,14 @@ export const TMP_TRACK_TIME = 4 * 60 * 1000
 export const DEBUG_EE = process.env.NEXT_PUBLIC_DEBUG_EE === 'true'
 
 export const zIndex = {
-	layerBack: -10, // bg
-	layerDeco: 5, // bg の装飾
-	layerFront: 10, // ui
-	layerTop: 100,
-	layerModal: 200,
+	layerBackDeep3: 6,
+	layerBackDeep2: 8,
+	layerBack: 10, // bg
+	layerBackMask: 20,
+	layerBackPreview: 50, // bg preview
+	layerDeco: 200, // bg の装飾
+	layerBase: 500, // 標準
+	layerFront: 600, // ui
+	layerTop: 700,
+	layerModal: 800,
 }

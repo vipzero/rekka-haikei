@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { createGlobalStyle, css } from 'styled-components'
+import { useState } from 'react'
 import { useSong } from '../../hooks/useSongAtom'
 import { useBg } from '../../hooks/useSongDb'
 
@@ -6,6 +7,8 @@ type Props = {}
 function BgChoice({}: Props) {
 	const { setBg } = useBg()
 	const song = useSong()
+	const [preview, setPreview] = useState<string | null>(null)
+
 	return (
 		<Wrap>
 			{song.imageLinks?.map((link, i) => (
@@ -13,9 +16,15 @@ function BgChoice({}: Props) {
 					key={`${song.time}_${link}`}
 					onClick={() => {
 						if (i === 0) return
-						if (!confirm('背景を変更しますか？')) return
+						setPreview(link)
+						if (!confirm('背景を変更しますか？')) {
+							return
+						}
+						setPreview(null)
 						setBg(link, song.time)
 					}}
+					onMouseEnter={() => setPreview(link)}
+					onMouseLeave={() => setPreview(null)}
 				>
 					<img
 						src={link}
@@ -26,18 +35,17 @@ function BgChoice({}: Props) {
 					/>
 				</div>
 			))}
+			{preview && <MaskStyle bg={preview} />}
 		</Wrap>
 	)
 }
 
 const Wrap = styled.div`
-	padding: 16px;
 	display: flex;
 	height: 100%;
 	width: 200%;
 
 	div {
-		margin: 4px;
 		padding: 2px;
 		border: solid black 1px;
 		cursor: pointer;
@@ -52,13 +60,22 @@ const Wrap = styled.div`
 	}
 	img {
 		/* transform-origin: top left; */
-		width: 100%;
-		max-width: 30vw;
-		max-height: 40vh;
+		width: min(20vw, 20vh);
+		height: min(20vw, 20vh);
+		object-fit: cover;
 		@media only screen and (max-width: 600px) {
 			// max-width: min(1000px, 100%);
 			max-height: 30vh;
 		}
+	}
+}
+`
+const MaskStyle: any = createGlobalStyle<{ bg: string }>`
+	#mask {
+		display: block;
+		background: url(${(p) => p.bg});
+		opacity: 0.9;
+		clip-path: polygon(0 0, 90% 0, 60% 100%, 0 100%);
 	}
 `
 
