@@ -33,20 +33,14 @@ function BgChoice({}: Props) {
 const Wrap = styled.div`
 	padding: 16px;
 	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
+	height: 100%;
+	width: 200%;
 
 	div {
 		margin: 4px;
 		padding: 2px;
 		border: solid black 1px;
 		cursor: pointer;
-
-		zoom: 0.4;
-		max-width: 1000px;
-		@media only screen and (max-width: 600px) {
-			zoom: 0.2;
-		}
 
 		&:first-child {
 			border-color: red;
@@ -59,9 +53,11 @@ const Wrap = styled.div`
 	img {
 		/* transform-origin: top left; */
 		width: 100%;
-		max-width: 1000px;
+		max-width: 30vw;
+		max-height: 40vh;
 		@media only screen and (max-width: 600px) {
-			max-width: min(1000px, 100%);
+			// max-width: min(1000px, 100%);
+			max-height: 30vh;
 		}
 	}
 `

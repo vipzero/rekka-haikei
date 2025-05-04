@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { zIndex } from '../../config'
 import { useSong } from '../../hooks/useSongAtom'
 import { searchImageUrl } from '../../util'
 import BgChoice from './BgChoice'
@@ -7,14 +8,13 @@ type Props = {
 	open: boolean
 	onClose: () => void
 }
-function BgChoiceModal({ open, onClose }: Props) {
+function BgChoiceModal({ open }: Props) {
 	const song = useSong()
 	const sUrl = searchImageUrl(song.imageSearchWord)
 
 	return (
 		<Dialog open={open} data-open={open}>
 			<div className="header">
-				<button onClick={onClose}>閉じる</button>
 				<p>{song.imageSearchWord}</p>
 				<p>
 					<a href={sUrl} target="_blank" rel="noreferrer">
@@ -23,27 +23,25 @@ function BgChoiceModal({ open, onClose }: Props) {
 				</p>
 			</div>
 
-			<div style={{ marginTop: '120px' }}>{open && <BgChoice />}</div>
-			<div className="footer">
-				<button onClick={onClose}>閉じる</button>
-			</div>
+			<div style={{ marginTop: '8px' }}>{open && <BgChoice />}</div>
 		</Dialog>
 	)
 }
 
 const Dialog = styled.dialog`
 	position: absolute;
-	top: 5vh;
-	left: 5vh;
-	width: 90vw;
-	max-height: 80vh;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	top: 50vh;
+	left: 8px;
+	right: 20px;
+	width: calc(100% - 16px);
+	height: calc(50vh - 8px);
+	overflow-y: hidden;
+	overflow-x: scroll;
 	margin: 0;
 	padding: 12px 4px;
 	border-radius: 4px;
 	border: solid gray;
-	z-index: 4;
+	z-index: ${zIndex.layerModal};
 	/* background: var(--content-bg-color); */
 
 	&[data-open='false'] {
@@ -51,13 +49,15 @@ const Dialog = styled.dialog`
 			display: none;
 		}
 	}
+	p {
+		padding: 0;
+		margin: 0;
+	}
 
 	/* mobile */
 	@media only screen and (max-width: 600px) {
-		top: 5vh;
-		left: 1vh;
-		width: 96vw;
-		max-height: 80vh;
+		top: 70vh;
+		height: calc(30vh - 8px);
 	}
 	button {
 		border: none;
@@ -67,7 +67,6 @@ const Dialog = styled.dialog`
 	}
 
 	.header {
-		position: fixed;
 		display: flex;
 		gap: 1rem;
 		background: white;

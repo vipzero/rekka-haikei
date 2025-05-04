@@ -193,4 +193,5 @@ export const zIndex = {
 	layerDeco: 5, // bg の装飾
 	layerFront: 10, // ui
 	layerTop: 100,
+	layerModal: 200,
 }
