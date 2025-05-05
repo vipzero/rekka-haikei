@@ -172,6 +172,7 @@ const Container = styled.div`
 		}
 	}
 	.co-panel {
+		z-index: ${zIndex.layerFront};
 		padding: 0.4rem 0.4rem;
 		p {
 			font-size: 0.8rem;

@@ -18,10 +18,9 @@ export const bkbkStyles = css`
 
 	/* Bubbles */
 	.bubbles {
-		zindex: ${zIndex.layerFrontEx};
+		z-index: ${zIndex.layerFrontEx};
 		position: absolute;
 		bottom: 0;
-		/* z-index: 5; */
 		margin-right: 50px; /* This might need adjustment */
 		background-color: white;
 		border-radius: 50%;

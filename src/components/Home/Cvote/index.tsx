@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { zIndex } from '../../../config'
 import { AnaVotes, AnimeVotes, useCvoteDb } from './useCvoteDb'
 
 export type Char = {
@@ -43,7 +44,7 @@ const TOTL_MODE = 'totl'
 const PLUS_MODE = 'plus'
 const HIDE_MODE = 'hide'
 const modes = [PLUS_MODE, TOTL_MODE, HIDE_MODE] as const
-type Mode = typeof modes[number]
+type Mode = (typeof modes)[number]
 const modeLabel: Record<Mode, string> = {
 	plus: '投票',
 	totl: '投票(合計)',
@@ -133,6 +134,7 @@ const Bar = ({ cvotes }: { cvotes: CharVote[] }) => {
 }
 
 const Container = styled.div`
+	z-index: ${zIndex.layerFrontEx};
 	.btn-main {
 		font-size: 0.6rem;
 		border-bottom: solid 4px gray;
