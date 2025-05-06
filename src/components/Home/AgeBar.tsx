@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { useSettings } from '../../hooks/useSettings'
 import { range } from '../../util'
+import { zIndex } from '../../config'
 
 const elapsedYourMonth = (ymd: string) => {
 	const [y, m] = ymd.split('-').map(Number)
@@ -61,6 +62,7 @@ export const AgeBarContainer = ({ ymd }: Props) => {
 }
 
 const Style = styled.div`
+	z-index: ${zIndex.layerFront};
 	p {
 		font-size: 0.8rem !important;
 		span {
