@@ -89,6 +89,7 @@ function SongInfo({}: Props) {
 	const { albumName, copyright, itunesUrl } = song
 	const sUrl = searchImageUrl(song.imageSearchWord)
 	const uUrl = utanetSearchUrl(song.icy)
+	const artistUrl = song.singer ? searchImageUrl(song.singer + ' キャラ') : null
 
 	return (
 		<Wrap
@@ -138,6 +139,11 @@ function SongInfo({}: Props) {
 							<a href={sUrl} target="_blank" rel="noreferrer">
 								画像検索
 							</a>
+							{artistUrl && (
+								<a href={artistUrl} target="_blank" rel="noreferrer">
+									キャラ画像検索
+								</a>
+							)}
 						</p>
 
 						<p className="tags">
