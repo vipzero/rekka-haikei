@@ -19,12 +19,16 @@ import { useSong } from '../../hooks/useSongAtom'
 import { zIndex } from '../../config'
 import BookCount from './BookCount'
 
-function makeTitle(song: Song) {
-	if (isSongFull(song)) return `${song.title} - ${song.artist}`
+function parseTitle(song: Song): { line: string; artist: string | null } {
+	if (isSongFull(song))
+		return { line: `${song.title} - ${song.artist}`, artist: song.artist }
 	const [artist, title] = song.icy.split(' - ')
 
-	if (!artist) return song.icy
-	return `${title} - ${artist}`
+	if (!artist) return { line: song.icy, artist: null }
+	return {
+		line: title ? `${title} - ${artist}` : song.icy,
+		artist,
+	}
 }
 type TagCount = { s: string; count: number }
 function tagOrder(tags: Record<string, number>): TagCount[] {
@@ -77,7 +81,7 @@ const AlbumLine = ({
 type Props = {}
 function SongInfo({}: Props) {
 	const song = useSong()
-	const titles = makeTitle(song)
+	const { line: titles, artist } = parseTitle(song)
 	const eid = useQeuryEid()
 	const { showArtwork, showCounts } = useSettings()
 	const tags = tagOrder(song.wordCounts).filter(
@@ -89,7 +93,7 @@ function SongInfo({}: Props) {
 	const { albumName, copyright, itunesUrl } = song
 	const sUrl = searchImageUrl(song.imageSearchWord)
 	const uUrl = utanetSearchUrl(song.icy)
-	const artistUrl = song.singer ? searchImageUrl(song.singer + ' キャラ') : null
+	const artistUrl = artist ? searchImageUrl(artist + ' キャラ') : null
 
 	return (
 		<Wrap
