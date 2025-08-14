@@ -5,7 +5,7 @@ import { zIndex } from '../../../config'
 const BirthStyle = styled.div`
 	background: radial-gradient(#f588d8, #c0a3e5);
 	color: white;
-	x-index: ${zIndex.layerFront};
+	z-index: ${zIndex.layerFrontEx};
 	position: absolute;
 	padding: 16px;
 	bottom: 0;

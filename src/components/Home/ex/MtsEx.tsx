@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { base64toBools } from '../../../util'
+import { zIndex } from '../../../config'
 import { ImasBoard } from './ImasBoard'
 import { ImasMilionTl } from './ImasMilionTl'
 import { Trump } from './Trump'
@@ -10,6 +11,7 @@ const MtsStyle = styled.div`
 	bottom: 0;
 	left: 0;
 	padding: 4px;
+	z-index: ${zIndex.layerFrontEx};
 `
 
 export const MtsEx = ({ s }: { s: string }) => {

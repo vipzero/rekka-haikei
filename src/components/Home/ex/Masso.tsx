@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import { zIndex } from '../../../config'
 
 const trainings = `
 プッシュアップ,大胸筋,手の平とつま先を地面につけて体を持ち上げる動作。胸筋（大胸筋）を鍛えるトップクラスの自重トレーニングです。
@@ -27,7 +28,7 @@ export const Masso = ({ seed }: Props) => {
 	const training =
 		trainings[Math.floor((seed || 0) * trainings.length) % trainings.length]
 	return (
-		<div style={{ position: 'relative' }}>
+		<div style={{ position: 'relative', zIndex: zIndex.layerFrontEx }}>
 			<StyledRoulette>
 				<Arrow />
 			</StyledRoulette>

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components'
+import { zIndex } from '../../../config'
 
 export const RingsSvg = (props) => {
 	return (
@@ -175,6 +176,7 @@ const spinnerReverse = keyframes`
 
 export const Yrings = styled(RingsSvg)`
 	display: block;
+	z-index: ${zIndex.layerFrontEx};
 	width: 300px;
 	height: 300px;
 	filter: drop-shadow(0px 0px 0.5rem rgba(0, 200, 240, 1));
