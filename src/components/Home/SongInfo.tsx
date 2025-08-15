@@ -174,7 +174,10 @@ function SongInfo({}: Props) {
 						</p>
 					</div>
 					<div>
-						<div id="artwork">
+						<div
+							id="artwork"
+							style={{ display: song.artworkUrl100 ? 'block' : 'none' }}
+						>
 							<img src={song.artworkUrl100} />
 						</div>
 					</div>

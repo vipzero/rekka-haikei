@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useTimeBar } from '../../hooks/useTimeBar'
+import { zIndex } from '../../config'
 
 type Props = {
 	startTime: number
@@ -27,6 +28,7 @@ function TrackTimeBar({ startTime, size }: Props) {
 }
 const Style = styled.div`
 	.wrap {
+		z-index: ${zIndex.layerFront};
 		display: flex;
 		position: absolute;
 		width: 100vw;
