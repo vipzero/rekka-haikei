@@ -88,6 +88,6 @@
 		"not op_mini all"
 	],
 	"engines": {
-		"node": "18"
+		"node": ">=20"
 	}
 }
