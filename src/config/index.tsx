@@ -10,7 +10,7 @@ const { NODE_ENV } = process.env
 export const isDev = NODE_ENV === 'development'
 
 // update を促したい時に使う
-export const featcherVersion = 5
+export const featcherVersion = 6
 
 export const events: Event[] = [
 	{ id: '2025winter', label: '2025冬', current: true },
