@@ -48,22 +48,24 @@ const YearTimerComponent = () => {
 					<span className="unit">秒</span>
 				</div>
 			</Style>
-			<Confetti data-show={stat}>
-				{confettiItems.map((item, i) => (
-					<span
-						key={i}
-						style={
-							{
-								'--start-x': `${item.x}%`,
-								'--drift': `${item.drift}px`,
-								animationDelay: `${item.delay}s`,
-							} as React.CSSProperties
-						}
-					>
-						{item.emoji}
-					</span>
-				))}
-			</Confetti>
+			{stat === 'end' && (
+				<Confetti>
+					{confettiItems.map((item, i) => (
+						<span
+							key={i}
+							style={
+								{
+									'--start-x': `${item.x}%`,
+									'--drift': `${item.drift}px`,
+									animationDelay: `${item.delay}s`,
+								} as React.CSSProperties
+							}
+						>
+							{item.emoji}
+						</span>
+					))}
+				</Confetti>
+			)}
 		</>
 	)
 }
@@ -152,10 +154,6 @@ const Confetti = styled.div`
 		bottom: 0;
 		left: var(--start-x);
 		font-size: 4rem;
-		opacity: 0;
-	}
-
-	&[data-show='end'] span {
 		animation:
 			launchX 4s linear forwards,
 			launchY 4s cubic-bezier(0.33, 1, 0.68, 1) forwards;
