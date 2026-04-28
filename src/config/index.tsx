@@ -13,7 +13,8 @@ export const isDev = NODE_ENV === 'development'
 export const featcherVersion = 6
 
 export const events: Event[] = [
-	{ id: '2025winter', label: '2025冬', current: true },
+	{ id: '2026gw', label: '2026GW', current: true },
+	{ id: '2025winter', label: '2025冬' },
 	{ id: '2025obon', label: '2025盆' },
 	{ id: '2025gw', label: '2025GW' },
 	// { id: '2024winter_after', label: '2024冬後'},
